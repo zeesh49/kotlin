@@ -278,7 +278,7 @@ public final class JsAstUtils {
     @NotNull
     public static JsFunction createPackage(@NotNull List<JsStatement> to, @NotNull JsScope scope) {
         JsFunction packageBlockFunction = createFunctionWithEmptyBody(scope);
-        to.add(new JsInvocation(EMPTY_REF, new JsInvocation(packageBlockFunction)).makeStmt());
+        to.add((new JsInvocation(packageBlockFunction)).makeStmt());
         return packageBlockFunction;
     }
 }
