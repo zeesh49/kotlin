@@ -19,6 +19,7 @@ package org.jetbrains.k2js.generate;
 import com.google.dart.compiler.backend.js.JsSourceGenerationVisitor;
 import com.google.dart.compiler.backend.js.ast.JsProgram;
 import com.google.dart.compiler.util.TextOutputImpl;
+import com.google.gwt.dev.js.ClosureJsRunner;
 import org.jetbrains.annotations.NotNull;
 
 public final class CodeGenerator {
@@ -30,6 +31,10 @@ public final class CodeGenerator {
         TextOutputImpl output = new TextOutputImpl();
         JsSourceGenerationVisitor sourceGenerator = new JsSourceGenerationVisitor(output);
         program.traverse(sourceGenerator, null);
-        return output.toString();
+
+        String[] js = new String[program.getFragmentCount()];
+        new ClosureJsRunner().compile(program, js);
+        //return output.toString();
+        return js[0];
     }
 }
