@@ -16,7 +16,7 @@
 
 package org.jetbrains.k2js.test.rhino;
 
-import closurecompiler.internal.com.google.common.collect.Maps;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.intellij.openapi.util.io.FileUtil;
 import org.jetbrains.annotations.NotNull;
@@ -44,7 +44,7 @@ public final class RhinoUtils {
     private static final NativeObject JSHINT_OPTIONS = new NativeObject();
     
     @NotNull
-    private static final Map<EcmaVersion, ScriptableObject> versionToScope = Maps.newHashMap();    
+    private static final Map<EcmaVersion, ScriptableObject> versionToScope = Maps.newHashMap();
 
     static {
         // don't read JS, use kotlin and idea debugger ;)

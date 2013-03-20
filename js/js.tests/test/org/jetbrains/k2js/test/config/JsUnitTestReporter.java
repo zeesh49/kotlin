@@ -16,8 +16,8 @@
 
 package org.jetbrains.k2js.test.config;
 
-import closurecompiler.internal.com.google.common.collect.Lists;
-import closurecompiler.internal.com.google.common.collect.Maps;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

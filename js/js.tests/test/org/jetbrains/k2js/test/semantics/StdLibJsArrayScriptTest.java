@@ -16,14 +16,13 @@
 
 package org.jetbrains.k2js.test.semantics;
 
-import closurecompiler.internal.com.google.common.collect.Maps;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.jetbrains.k2js.config.EcmaVersion;
 import org.jetbrains.k2js.test.rhino.CompositeRhinoResultsChecker;
 import org.jetbrains.k2js.test.rhino.RhinoFunctionResultChecker;
 import org.jetbrains.k2js.test.rhino.RhinoResultChecker;
 
-import java.io.File;
 import java.util.EnumSet;
 import java.util.Map;
 

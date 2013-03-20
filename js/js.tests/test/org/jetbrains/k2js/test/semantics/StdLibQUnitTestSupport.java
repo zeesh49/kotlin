@@ -17,7 +17,7 @@
  */
 package org.jetbrains.k2js.test.semantics;
 
-import closurecompiler.internal.com.google.common.collect.Maps;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Lists;
 import org.jetbrains.k2js.config.EcmaVersion;
 import org.jetbrains.k2js.test.rhino.RhinoQUnitResultChecker;
