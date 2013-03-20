@@ -19,7 +19,10 @@
         <fileset dir="${basedir}/dependencies" includes="jline.jar"/>
         <fileset dir="${basedir}/dependencies" includes="jansi.jar"/>
         <fileset dir="${basedir}/dependencies" includes="jetbrains-asm-util-4.0.jar"/>
-        <fileset dir="${basedir}/js/js.translator/lib" includes="*.jar"/>
+        <!--<fileset dir="${basedir}/js/js.translator/lib" includes="*.jar"/>-->
+        <fileset dir="${basedir}/../closure-compiler/build/" includes="compiler.jar"/>
+        <fileset dir="${basedir}/../closure-compiler/build/lib" includes="rhino.jar"/>
+        <fileset dir="${basedir}/../closure-compiler/build/lib/rhino1_7R5pre" includes="js.jar"/>
     </path>
 
     <dirset id="compilerSources.dirset" dir="${basedir}/">
@@ -183,7 +186,10 @@
         </jar>
         <java classname="com.google.javascript.jscomp.CommandLineRunner" failonerror="true">
             <classpath>
-                <pathelement location="${basedir}\js\js.tests\testLib\closure-compiler.jar"/>
+                <!--<pathelement location="${basedir}\js\js.tests\testLib\closure-compiler.jar"/>-->
+                <pathelement location="${basedir}/../closure-compiler/build/compiler.jar"/>
+                <pathelement location="${basedir}/../closure-compiler/build/lib/rhino.jar"/>
+                <pathelement location="${basedir}/../closure-compiler/build/lib/rhino1_7R5pre/js.jar"/>
             </classpath>
             <arg value="--formatting"/>
             <arg value="PRETTY_PRINT"/>
@@ -202,7 +208,10 @@
         </java>
         <java classname="com.google.javascript.jscomp.CommandLineRunner" failonerror="true">
             <classpath>
-                <pathelement location="${basedir}/js/js.tests/testLib/closure-compiler.jar"/>
+                <!--<pathelement location="${basedir}/js/js.tests/testLib/closure-compiler.jar"/>-->
+                <pathelement location="${basedir}/../closure-compiler/build/compiler.jar"/>
+                <pathelement location="${basedir}/../closure-compiler/build/lib/rhino.jar"/>
+                <pathelement location="${basedir}/../closure-compiler/build/lib/rhino1_7R5pre/js.jar"/>
             </classpath>
             <arg value="--formatting"/>
             <arg value="PRETTY_PRINT"/>
@@ -239,7 +248,10 @@
             <zipgroupfileset dir="${basedir}/ideaSDK/core" includes="*.jar" excludes="util.jar"/>
             <zipgroupfileset dir="${basedir}/ideaSDK/lib" includes="jna-utils.jar"/>
             <zipgroupfileset dir="${basedir}/ideaSDK/lib" includes="oromatcher.jar"/>
-            <zipgroupfileset dir="${basedir}/js/js.translator/lib" includes="*.jar"/>
+            <!--<zipgroupfileset dir="${basedir}/js/js.translator/lib" includes="*.jar"/>-->
+            <zipgroupfileset dir="${basedir}/../closure-compiler/build/" includes="compiler.jar"/>
+            <zipgroupfileset dir="${basedir}/../closure-compiler/build/lib" includes="rhino.jar"/>
+            <zipgroupfileset dir="${basedir}/../closure-compiler/build/lib/rhino1_7R5pre" includes="js.jar"/>
             <zipgroupfileset dir="${basedir}/dependencies" includes="jline.jar"/>
             <zipgroupfileset dir="${basedir}/dependencies" includes="jetbrains-asm-analysis-4.0.jar"/>
 
