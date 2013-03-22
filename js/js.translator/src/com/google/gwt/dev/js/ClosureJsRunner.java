@@ -389,7 +389,7 @@ public class ClosureJsRunner {
     options.labelRenaming = true;
     options.removeDeadCode = true;
     options.optimizeArgumentsArray = true;
-//    options.collapseObjectLiterals = true;
+    options.setCollapseObjectLiterals(true);
     options.setShadowVariables(true);
 
     // All the advance optimizations.
@@ -426,13 +426,13 @@ public class ClosureJsRunner {
     options.setWarningLevel(DiagnosticGroups.NON_STANDARD_JSDOC, CheckLevel.OFF);
 
     //z
-    //options.setInferTypes(true); //???
-    //options.setCheckSymbols(true);
-    //options.setAggressiveVarCheck(CheckLevel.WARNING); // todo
-    //options.setCheckSuspiciousCode(true);
-    //options.setCheckControlStructures(true);
-    //options.setCheckTypes(true);
-    //options.setReportUnknownTypes(CheckLevel.WARNING); // todo
+    //  options.setInferTypes(true); //???
+    //  options.setCheckSymbols(true);
+    //  options.setAggressiveVarCheck(CheckLevel.WARNING); // todo
+    //  options.setCheckSuspiciousCode(true);
+    //  options.setCheckControlStructures(true);
+    //  options.setCheckTypes(true);
+    //  options.setReportUnknownTypes(CheckLevel.WARNING); // todo
     //
     //  /** More aggressive function inlining */
     //  options.setAssumeClosuresOnlyCaptureReferences(true);
@@ -449,6 +449,7 @@ public class ClosureJsRunner {
     //  /** Removes code associated with unused global names */
     //  options.smartNameRemoval = true;
     //
+    //  already used
     //  /** Removes code that will never execute */
     //  options.removeDeadCode = true;
     //
