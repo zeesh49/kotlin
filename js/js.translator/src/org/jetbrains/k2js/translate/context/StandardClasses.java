@@ -24,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.jet.lang.descriptors.DeclarationDescriptor;
 import org.jetbrains.jet.lang.resolve.name.FqNameUnsafe;
 import org.jetbrains.jet.lang.resolve.name.Name;
+import org.jetbrains.jet.lang.types.lang.PrimitiveType;
 
 import java.util.Map;
 
@@ -97,14 +98,25 @@ public final class StandardClasses {
         return standardClasses;
     }
 
+    private static void declareProgression(@NotNull StandardClasses standardClasses, PrimitiveType type) {
+        standardClasses.declare().forFQ("jet." + type.getTypeName() + "Progression").kotlinClass("NumberProgression")
+                .methods("iterator", "contains").properties("start", "end", "increment");
+    }
+
     private static void declareJetObjects(@NotNull StandardClasses standardClasses) {
         standardClasses.declare().forFQ("jet.Iterator").kotlinClass("Iterator").methods("next").properties("hasNext");
 
+        standardClasses.declare().forFQ("jet.Collection").kotlinClass("Collection")
+                .methods("size", "isEmpty", "contains", "iterator", "toArray", "containsAll");
+
+        standardClasses.declare().forFQ("jet.Range").kotlinClass("NumberRange")
+                .methods("iterator", "contains").properties("start", "end", "increment");
         standardClasses.declare().forFQ("jet.IntRange").kotlinClass("NumberRange")
                 .methods("iterator", "contains").properties("start", "end", "increment");
 
-        standardClasses.declare().forFQ("jet.IntProgression").kotlinClass("NumberProgression")
-                .methods("iterator", "contains").properties("start", "end", "increment");
+        for (PrimitiveType type : PrimitiveType.NUMBER_TYPES) {
+            declareProgression(standardClasses, type);
+        }
 
         standardClasses.declare().forFQ("jet.Any.toString").kotlinFunction("toString");
     }

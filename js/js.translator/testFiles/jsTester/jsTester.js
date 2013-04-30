@@ -26,6 +26,12 @@ var JsTests = (function () {
         }
     };
 
+    var specialEquals = function (expected, actual) {
+        function isNaN(val) { return val != val; }
+
+        return isNaN(expected) && isNaN(actual);
+    };
+
     var test = function (testName, testFun) {
         reporter.testStart(testName);
         try {
@@ -42,7 +48,8 @@ var JsTests = (function () {
     };
     return {
         test:test,
-        assert:assert
+        assert:assert,
+        specialEquals: specialEquals
     }
 })();
 

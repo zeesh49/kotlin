@@ -104,7 +104,8 @@ public abstract class Config {
             "/stdlib/domCode.kt",
             "/stdlib/jutilCode.kt",
             "/stdlib/JUMapsCode.kt",
-            "/stdlib/testCode.kt"
+            "/stdlib/testCode.kt",
+            "/stdlib/Progressions.kt"
     );
 
     public static final String LIBRARIES_LOCATION = "js/js.libraries/src";
@@ -122,8 +123,10 @@ public abstract class Config {
             "/kotlin/Maps.kt",
             "/kotlin/Exceptions.kt",
             "/kotlin/IterablesSpecial.kt",
+            "/kotlin/Ranges.kt",
             "/generated/_Arrays.kt",
             "/generated/_Collections.kt",
+            "/generated/_DownTo.kt",
             "/generated/_Iterables.kt",
             "/generated/_Iterators.kt",
             "/generated/_IteratorsCommon.kt",

@@ -40,7 +40,12 @@ public class JsConfiguration implements ModuleConfiguration {
     @NotNull
     public static final List<ImportPath> DEFAULT_IMPORT_PATHS = ImmutableList.of(
             new ImportPath("js.*"),
-            new ImportPath("java.lang.*"),
+            //new ImportPath("java.lang.*"),
+            new ImportPath("java.lang.Exception"),
+            new ImportPath("java.lang.RuntimeException"),
+            new ImportPath("java.lang.IllegalArgumentException"),
+            new ImportPath("java.lang.UnsupportedOperationException"),
+            new ImportPath("java.lang.Appendable"),
             new ImportPath(KotlinBuiltIns.getInstance().getBuiltInsPackageFqName(), true),
             new ImportPath("kotlin.*"));
 

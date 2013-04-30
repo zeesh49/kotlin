@@ -10,7 +10,7 @@ public class JsTestsAsserter(): Asserter {
         assert(actual, message)
     }
     public override fun assertEquals(message: String, expected: Any?, actual: Any?) {
-        assert(actual == expected, "$message. Expected <$expected> actual <$actual>")
+        assert(specialEquals(expected, actual) || actual == expected, "$message. Expected <$expected> actual <$actual>")
     }
     public override fun assertNotNull(message: String, actual: Any?) {
         assert(actual != null, message)
@@ -25,3 +25,7 @@ public class JsTestsAsserter(): Asserter {
 
 native("JsTests.assert")
 public fun assert(value: Boolean, message: String): Unit = js.noImpl
+
+// todo fix workaround
+native("JsTests.specialEquals")
+public fun specialEquals(expected: Any?, actual: Any?): Boolean = js.noImpl

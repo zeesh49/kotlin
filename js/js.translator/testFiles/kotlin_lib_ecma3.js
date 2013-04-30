@@ -37,6 +37,10 @@ var Kotlin = {};
         };
     }
 
+    if (typeof Number.isNaN != "function") {
+        Number.isNaN = function (number) { return number != number; };
+    }
+
     Kotlin.keys = Object.keys || function (o) {
         var result = [];
         var i = 0;

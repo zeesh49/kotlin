@@ -22,15 +22,6 @@ public inline fun <T> List<T>.equals(that: List<T>): Boolean {
     return false
 }
 
-/** Returns a new ArrayList with a variable number of initial elements */
-public inline fun arrayList<T>(vararg values: T) : ArrayList<T> {
-    val list = ArrayList<T>()
-    for (value in values) {
-        list.add(value)
-    }
-    return list
-}
-
 /** Returns a new HashSet with a variable number of initial elements */
 public inline fun hashSet<T>(vararg values: T) : HashSet<T> {
     val list = HashSet<T>()

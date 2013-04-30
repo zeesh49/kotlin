@@ -68,7 +68,7 @@ var kotlin = {set:function (receiver, key, value) {
     };
 
     Kotlin.intDownto = function (from, to) {
-        return Kotlin.$new(Kotlin.Progression)(from, to, -1);
+        return Kotlin.$new(Kotlin.NumberProgression)(from, to, -1);
     };
 
     Kotlin.modules = {};
@@ -358,19 +358,13 @@ var kotlin = {set:function (receiver, key, value) {
         get_end: function () {
             return this.$end;
         },
-        get_i: function () {
-            return this.$i;
-        },
-        set_i: function (tmp$0) {
-            this.$i = tmp$0;
-        },
         next: function () {
             var value = this.$i;
-            this.set_i(this.$i + this.$increment);
+            this.$i += this.$increment;
             return value;
         },
-        get_hasNext: function () {
-            return this.$increment > 0 ? this.$next <= this.$end : this.$next >= this.$end;
+        hasNext: function () {
+            return this.$increment > 0 ? this.$i <= this.$end : this.$i >= this.$end;
         }
     });
 
@@ -392,11 +386,11 @@ var kotlin = {set:function (receiver, key, value) {
             return this.$start <= number && number <= this.$end;
         },
         iterator: function () {
-            return Kotlin.$new(Kotlin.RangeIterator)(this.get_start(), this.get_end());
+            return Kotlin.$new(Kotlin.RangeIterator)(this.get_start(), this.get_end(), this.get_increment());
         }
     });
 
-    Kotlin.Progression = Kotlin.$createClass({
+    Kotlin.NumberProgression = Kotlin.$createClass({
         initialize: function (start, end, increment) {
             this.$start = start;
             this.$end = end;

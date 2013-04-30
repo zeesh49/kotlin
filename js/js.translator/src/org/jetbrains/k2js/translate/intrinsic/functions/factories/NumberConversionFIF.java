@@ -45,7 +45,7 @@ public final class NumberConversionFIF extends CompositeFIF {
         Set<Name> supportedConversions = Sets.newHashSet(NUMBER_CONVERSIONS);
         //TODO: support longs and chars
         supportedConversions.remove(CHAR);
-        supportedConversions.remove(LONG);
+        //supportedConversions.remove(LONG);
         SUPPORTED_CONVERSIONS = new NamePredicate(supportedConversions);
     }
 
@@ -53,7 +53,7 @@ public final class NumberConversionFIF extends CompositeFIF {
     private static final NamePredicate FLOATING_POINT_CONVERSIONS = new NamePredicate(OperatorConventions.FLOAT, OperatorConventions.DOUBLE);
 
     @NotNull
-    private static final NamePredicate INTEGER_CONVERSIONS = new NamePredicate(OperatorConventions.INT, OperatorConventions.SHORT,
+    private static final NamePredicate INTEGER_CONVERSIONS = new NamePredicate(OperatorConventions.LONG, OperatorConventions.INT, OperatorConventions.SHORT,
                                                                            OperatorConventions.BYTE);
 
     @NotNull
