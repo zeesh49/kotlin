@@ -94,7 +94,7 @@ var Kotlin = {};
         return members === null ? {} : members;
     };
 
-    Kotlin.createClass = (function () {
+    Kotlin.createClass0 = (function () {
         function subclass() {
         }
 
@@ -140,6 +140,8 @@ var Kotlin = {};
                 klass.prototype.initialize = emptyFunction;
             }
 
+            klass.initialize = klass.prototype.initialize;
+
             klass.prototype.constructor = klass;
             return klass;
         }
@@ -151,6 +153,58 @@ var Kotlin = {};
 
         return create;
     })();
+
+    Kotlin.createClass1 = (function () {
+        function create() {
+            var parent = null;
+            var shiftArguments = Array.prototype.shift.bind(arguments);
+            if (typeof (arguments[0]) == "function") {
+                parent = shiftArguments();
+            }
+
+            var initialize = null;
+            if (arguments.length > 0 && typeof (arguments[0].initialize) == "function") {
+                initialize = arguments[0].initialize;
+            }
+            else {
+                initialize = function () {};
+            }
+
+            var klass = initialize;
+
+            klass.addMethods = addMethods;
+            klass.prototype = Object.create(parent && parent.prototype);
+            klass.superclass = parent;
+
+            klass.addMethods({get_class: function () {
+                return klass;
+            }});
+
+            if (parent !== null) {
+                klass.prototype.super_init = function () {
+                    var t = this.constructor.superclass;
+                    this.constructor = t;
+                    t.apply(this, arguments);
+                };
+            }
+
+            for (var i = 0, length = arguments.length; i < length; i++) {
+                klass.addMethods(arguments[i]);
+            }
+
+            klass.prototype.constructor = klass;
+            return klass;
+        }
+
+        function addMethods(source) {
+            copyProperties(this.prototype, source);
+            return this;
+        }
+
+        return create;
+    })();
+
+    Kotlin.createClass = Kotlin.createClass0;
 
     Kotlin.$createClass = Kotlin.createClass;
 
