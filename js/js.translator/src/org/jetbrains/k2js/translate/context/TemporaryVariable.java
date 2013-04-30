@@ -16,6 +16,7 @@
 
 package org.jetbrains.k2js.translate.context;
 
+import com.google.dart.compiler.backend.js.ast.JsBinaryOperation;
 import com.google.dart.compiler.backend.js.ast.JsExpression;
 import com.google.dart.compiler.backend.js.ast.JsName;
 import com.google.dart.compiler.backend.js.ast.JsNameRef;
@@ -32,6 +33,12 @@ public class TemporaryVariable {
     /*package*/ TemporaryVariable(@NotNull JsName temporaryName, @Nullable JsExpression initExpression) {
         this.variableName = temporaryName;
         this.assignmentExpression = initExpression == null ? null : JsAstUtils.assignment(variableName.makeRef(), initExpression);
+    }
+
+    /*package*/ TemporaryVariable(@NotNull JsNameRef temporaryName, @NotNull JsExpression assignmentExpression) {
+        assert assignmentExpression instanceof JsBinaryOperation && ((JsBinaryOperation) assignmentExpression).getOperator().isAssignment();
+        this.variableName = temporaryName.getName();
+        this.assignmentExpression = assignmentExpression;
     }
 
     @NotNull

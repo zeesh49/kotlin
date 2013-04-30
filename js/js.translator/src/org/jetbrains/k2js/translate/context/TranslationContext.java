@@ -178,6 +178,18 @@ public class TranslationContext {
     }
 
     @NotNull
+    public TemporaryVariable declareTemporaryWithReuseVariable(@NotNull JsExpression expression) {
+        if (expression instanceof JsBinaryOperation) {
+            JsBinaryOperation operation = ((JsBinaryOperation) expression);
+            if (operation.getOperator().isAssignment() && operation.getArg1() instanceof JsNameRef) {
+                return new TemporaryVariable((JsNameRef) operation.getArg1(), expression);
+            }
+        }
+
+        return declareTemporary(expression);
+    }
+
+    @NotNull
     public Namer namer() {
         return staticContext.getNamer();
     }
