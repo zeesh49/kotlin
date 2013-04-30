@@ -27,17 +27,16 @@ import org.jetbrains.jet.lang.psi.JetSafeQualifiedExpression;
 import org.jetbrains.k2js.translate.context.TemporaryVariable;
 import org.jetbrains.k2js.translate.context.TranslationContext;
 
-import static org.jetbrains.k2js.translate.utils.TranslationUtils.notNullConditionalTestExpression;
+import static org.jetbrains.k2js.translate.utils.TranslationUtils.isNotNullCheck;
 
 public enum CallType {
     SAFE {
         @NotNull
         @Override
-        JsExpression constructCall(@Nullable JsExpression receiver, @NotNull CallConstructor constructor,
+        JsExpression constructCall(@NotNull JsExpression receiver, @NotNull CallConstructor constructor,
                                    @NotNull TranslationContext context) {
-            assert receiver != null;
-            TemporaryVariable cachedValue = context.declareTemporary(receiver);
-            return new JsConditional(notNullConditionalTestExpression(cachedValue), constructor.construct(cachedValue.reference()), JsLiteral.NULL);
+            TemporaryVariable cachedValue = context.declareTemporaryWithReuseVariable(receiver);
+            return new JsConditional(isNotNullCheck(cachedValue.assignmentExpression()), constructor.construct(cachedValue.reference()), JsLiteral.NULL);
         }
     },
     //TODO: bang qualifier is not implemented in frontend for now
