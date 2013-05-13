@@ -317,6 +317,7 @@ var kotlin = {set:function (receiver, key, value) {
             }
         };
         var println = function (obj) {
+            console.log(obj);
             this.print(obj);
             output += "\n";
         };
