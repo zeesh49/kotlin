@@ -41,12 +41,12 @@ public final class InitializerUtils {
     public static JsStatement generateInitializerForProperty(@NotNull TranslationContext context,
             @NotNull PropertyDescriptor descriptor,
             @NotNull JsExpression value) {
-        if (context.isEcma5()) {
-            return JsAstUtils.definePropertyDataDescriptor(descriptor, value, context).makeStmt();
-        }
-        else {
+        //if (context.isEcma5()) {
+        //    return JsAstUtils.definePropertyDataDescriptor(descriptor, value, context).makeStmt();
+        //}
+        //else {
             return assignmentToBackingField(context, descriptor, value).makeStmt();
-        }
+        //}
     }
 
     public static void generate(@NotNull JetObjectDeclaration declaration,
