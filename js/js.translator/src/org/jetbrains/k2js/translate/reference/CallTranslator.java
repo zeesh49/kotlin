@@ -264,8 +264,8 @@ public final class CallTranslator extends AbstractTranslator {
     }
 
     private boolean isDirectPropertyAccess() {
-        return descriptor instanceof PropertyAccessorDescriptor &&
-               (context().isEcma5() || isObjectAccessor((PropertyAccessorDescriptor) descriptor));
+        return descriptor instanceof PropertyAccessorDescriptor;
+               //&& (context().isEcma5() || isObjectAccessor((PropertyAccessorDescriptor) descriptor));
     }
 
     private boolean isObjectAccessor(@NotNull PropertyAccessorDescriptor propertyAccessorDescriptor) {

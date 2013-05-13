@@ -55,7 +55,7 @@ public final class PropertyTranslator extends AbstractTranslator {
             @Nullable JetProperty declaration,
             @NotNull List<JsPropertyInitializer> result,
             @NotNull TranslationContext context) {
-        if (context.isEcma5() && !JsDescriptorUtils.isAsPrivate(descriptor)) {
+        if (/*context.isEcma5() && */!JsDescriptorUtils.isAsPrivate(descriptor)) {
             return;
         }
 
@@ -71,7 +71,7 @@ public final class PropertyTranslator extends AbstractTranslator {
 
     private void translate(@NotNull List<JsPropertyInitializer> result) {
         List<JsPropertyInitializer> to;
-        if (context().isEcma5() && !JsDescriptorUtils.isExtension(descriptor)) {
+        if (/*context().isEcma5() && */!JsDescriptorUtils.isExtension(descriptor)) {
             to = new SmartList<JsPropertyInitializer>();
             result.add(new JsPropertyInitializer(context().nameToLiteral(descriptor), new JsObjectLiteral(to, true)));
         }
@@ -176,6 +176,6 @@ public final class PropertyTranslator extends AbstractTranslator {
     @NotNull
     private JsPropertyInitializer translateCustomAccessor(@NotNull JetPropertyAccessor expression) {
         FunctionTranslator translator = Translation.functionTranslator(expression, context());
-        return context().isEcma5() ? translator.translateAsEcma5PropertyDescriptor() : translator.translateAsMethod();
+        return /*context().isEcma5() ?*/ translator.translateAsEcma5PropertyDescriptor()/* : translator.translateAsMethod()*/;
     }
 }

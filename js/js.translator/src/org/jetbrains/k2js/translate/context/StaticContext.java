@@ -171,7 +171,7 @@ public final class StaticContext {
             // ecma 5 property name never declares as obfuscatable:
             // 1) property cannot be overloaded, so, name collision is not possible
             // 2) main reason: if property doesn't have any custom accessor, value holder will have the same name as accessor, so, the same name will be declared more than once
-            return isEcma5() ? scope.declareName(name) : scope.declareFreshName(name);
+            return /*isEcma5() ? */scope.declareName(name)/* : scope.declareFreshName(name)*/;
         }
 
         public NameGenerator() {
@@ -231,7 +231,7 @@ public final class StaticContext {
 
                     boolean isGetter = descriptor instanceof PropertyGetterDescriptor;
                     String accessorName = Namer.getNameForAccessor(propertyName, isGetter,
-                                                                   accessorDescriptor.getReceiverParameter() == null && isEcma5());
+                                                                   accessorDescriptor.getReceiverParameter() == null/* && isEcma5()*/);
                     return declareName(descriptor, accessorName);
                 }
             };
@@ -258,7 +258,7 @@ public final class StaticContext {
                     }
 
                     String name = descriptor.getName().getName();
-                    if (!isEcma5() || JsDescriptorUtils.isAsPrivate((PropertyDescriptor) descriptor)) {
+                    if (/*!isEcma5() || */JsDescriptorUtils.isAsPrivate((PropertyDescriptor) descriptor)) {
                         name = Namer.getKotlinBackingFieldName(name);
                     }
 

@@ -16,6 +16,8 @@
 
 package org.jetbrains.k2js.test.semantics;
 
+import com.google.common.collect.Lists;
+import org.jetbrains.k2js.config.EcmaVersion;
 import org.jetbrains.k2js.translate.context.Namer;
 import org.mozilla.javascript.JavaScriptException;
 
@@ -198,5 +200,9 @@ public final class MiscTest extends AbstractExpressionTest {
         fooBoxTest();
     }
 
-
+    public void testAccessors() throws Exception {
+        //fooBoxTest();
+        checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v3));
+        //checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v5));
+    }
 }
