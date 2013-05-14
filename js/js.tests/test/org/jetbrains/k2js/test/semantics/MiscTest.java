@@ -200,6 +200,12 @@ public final class MiscTest extends AbstractExpressionTest {
         fooBoxTest();
     }
 
+    public void test_v5_init_fields_bug() throws Exception {
+        //fooBoxTest();
+        //checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v3));
+        checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v5));
+    }
+
     public void testAccessors() throws Exception {
         //fooBoxTest();
         //checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v3));
