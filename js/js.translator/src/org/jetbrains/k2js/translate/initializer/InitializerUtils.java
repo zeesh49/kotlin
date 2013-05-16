@@ -25,7 +25,6 @@ import org.jetbrains.jet.lang.descriptors.PropertyDescriptor;
 import org.jetbrains.jet.lang.psi.JetObjectDeclaration;
 import org.jetbrains.k2js.translate.context.TranslationContext;
 import org.jetbrains.k2js.translate.declaration.ClassTranslator;
-import org.jetbrains.k2js.translate.utils.JsAstUtils;
 
 import java.util.List;
 
@@ -65,18 +64,18 @@ public final class InitializerUtils {
 
     public static JsStatement create(Named named, JsExpression value, TranslationContext context) {
         JsExpression expression;
-        if (context.isEcma5()) {
-            expression = JsAstUtils.defineProperty(named.getName().getName(), JsAstUtils.createDataDescriptor(value), context);
-        }
-        else {
+        //if (context.isEcma5()) {
+        //    expression = JsAstUtils.defineProperty(named.getName().getName(), JsAstUtils.createDataDescriptor(value), context);
+        //}
+        //else {
             expression = assignment(new JsNameRef(named.getName().getName(), JsLiteral.THIS), value);
-        }
+        //}
         return expression.makeStmt();
     }
 
 
     public static JsExpression toDataDescriptor(JsExpression value, TranslationContext context) {
-        return context.isEcma5() ? JsAstUtils.createDataDescriptor(value) : value;
+        return /*context.isEcma5() ? JsAstUtils.createDataDescriptor(value) : */value;
     }
 
     public static JsPropertyInitializer createPropertyInitializer(Named named, JsExpression value, TranslationContext context) {

@@ -26,7 +26,6 @@ import org.jetbrains.jet.lang.resolve.DescriptorUtils;
 import org.jetbrains.k2js.translate.context.Namer;
 import org.jetbrains.k2js.translate.context.TranslationContext;
 import org.jetbrains.k2js.translate.general.AbstractTranslator;
-import org.jetbrains.k2js.translate.utils.JsAstUtils;
 
 import java.util.*;
 
@@ -116,12 +115,12 @@ public final class NamespaceDeclarationTranslator extends AbstractTranslator {
 
     private JsVar getDeclaration(@NotNull JsObjectLiteral rootNamespaceDefinition) {
         JsExpression packageMapValue;
-        if (context().isEcma5()) {
-            packageMapValue = new JsInvocation(JsAstUtils.CREATE_OBJECT, JsLiteral.NULL, rootNamespaceDefinition);
-        }
-        else {
+        //if (context().isEcma5()) {
+        //    packageMapValue = new JsInvocation(JsAstUtils.CREATE_OBJECT, JsLiteral.NULL, rootNamespaceDefinition);
+        //}
+        //else {
             packageMapValue = rootNamespaceDefinition;
-        }
+        //}
         return new JsVar(context().scope().declareName(Namer.getRootNamespaceName()), packageMapValue);
     }
 }

@@ -28,20 +28,17 @@ var Kotlin = Object.create(null);
     };
 
     // as separated function to reduce scope
-    function createConstructor() {
-        return function $fun() {
-            var o = Object.create($fun.proto);
-            var initializer = $fun.initializer;
-            if (initializer != null) {
-                if (initializer.length == 0) {
-                    initializer.call(o);
-                }
-                else {
-                    initializer.apply(o, arguments);
-                }
-            }
+    function createConstructorWithoutInitializer() {
+        return function $constructor() {
+            return Object.create($constructor.proto);
+        };
+    }
 
-            Object.seal(o);
+    // as separated function to reduce scope
+    function createConstructorWithInitializer() {
+        return function $constructor() {
+            var o = Object.create($constructor.proto);
+            $constructor.initializer.apply(o, arguments);
             return o;
         };
     }
@@ -94,16 +91,23 @@ var Kotlin = Object.create(null);
         return o;
     };
 
+    function extendWithoutCheckOwn(obj1, obj2) {
+        for (var v in obj2) {
+            obj1[v] = obj2[v];
+        }
+        return obj1;
+    }
+
     function createClass(bases, initializer, properties, isClass) {
         var proto;
         var baseInitializer;
         if (bases === null) {
             baseInitializer = null;
-            proto = !isClass && properties === null ? null : Object.create(null, properties || undefined);
+            proto = !isClass && properties === null ? null : extendWithoutCheckOwn(Object.create(null), properties);
         }
         else if (!Array.isArray(bases)) {
             baseInitializer = bases.initializer;
-            proto = !isClass && properties === null ? bases.proto : Object.create(bases.proto, properties || undefined);
+            proto = !isClass && properties === null ? bases.proto : extendWithoutCheckOwn(Object.create(bases.proto), properties);
         }
         else {
             // first is superclass, other are traits
@@ -115,27 +119,30 @@ var Kotlin = Object.create(null);
             }
         }
 
-        var constructor = createConstructor();
-        Object.defineProperty(constructor, "proto", {value: proto});
-        Object.defineProperty(constructor, "properties", {value: properties || null});
+        var constructor;
+        if (initializer != null) {
+            constructor = createConstructorWithInitializer();
+            constructor.initializer = initializer;
+        }
+        else {
+            constructor = createConstructorWithoutInitializer();
+        }
+        constructor.proto = proto;
+        constructor.properties = properties;
         if (isClass) {
-            Object.defineProperty(constructor, "initializer", {value: initializer});
-
-            Object.defineProperty(initializer, "baseInitializer", {value: baseInitializer});
-            Object.freeze(initializer);
+            initializer.baseInitializer = baseInitializer;
         }
 
-        Object.freeze(constructor);
         return constructor;
     }
 
     Kotlin.definePackage = function (initializer, members) {
-        var definition = Object.create(null, members === null ? undefined : members);
-        if (initializer === null) {
-            return {value: definition};
+        //var definition = Object.create(null, members === null ? undefined : members);
+        if (initializer == null) {
+            return {value: members};
         }
         else {
-            var getter = createPackageGetter(definition, initializer);
+            var getter = createPackageGetter(members, initializer);
             Object.freeze(getter);
             return {get: getter};
         }

@@ -207,12 +207,18 @@ public final class MiscTest extends AbstractExpressionTest {
     }
 
     public void testAccessors() throws Exception {
+        fooBoxTest();
+        //checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v3));
+        //checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v5));
+    }
+
+    public void test_Richards() throws Exception {
         //fooBoxTest();
         //checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v3));
         checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v5));
     }
 
-    public void test_Richards() throws Exception {
+    public void test_experement() throws Exception {
         //fooBoxTest();
         //checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v3));
         checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v5));
