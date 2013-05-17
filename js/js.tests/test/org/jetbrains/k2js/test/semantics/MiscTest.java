@@ -213,9 +213,9 @@ public final class MiscTest extends AbstractExpressionTest {
     }
 
     public void test_Richards() throws Exception {
-        //fooBoxTest();
+        fooBoxTest();
         //checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v3));
-        checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v5));
+        //checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v5));
     }
 
     public void test_experement() throws Exception {

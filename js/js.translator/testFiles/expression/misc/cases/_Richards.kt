@@ -1,3 +1,5 @@
+package foo.bar.baz
+
 import js.Date
 import js.println
 
