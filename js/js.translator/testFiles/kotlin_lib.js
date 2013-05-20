@@ -36,8 +36,8 @@ var kotlin = {set:function (receiver, key, value) {
 
 (function () {
     Kotlin.equals = function (obj1, obj2) {
-        if (obj1 === null || obj1 === undefined) {
-            return obj2 === null;
+        if (obj1 == null) {
+            return obj2 == null;
         }
 
         if (obj1 instanceof Array) {
@@ -52,7 +52,7 @@ var kotlin = {set:function (receiver, key, value) {
             return true;
         }
 
-        if (typeof obj1 == "object" && obj1.equals !== undefined) {
+        if (typeof obj1 === "object" && typeof obj1.equals === "function") {
             return obj1.equals(obj2);
         }
 
@@ -196,6 +196,47 @@ var kotlin = {set:function (receiver, key, value) {
             return this.toArray();
         }
     });
+
+    function LinkedList() {
+        this.elms = [];
+    }
+
+    LinkedList.prototype.add = function (elm) {
+        this.elms.push(elm);
+    };
+
+    LinkedList.prototype.get = function (index) {
+        return this.elms[index];
+    };
+
+    LinkedList.prototype.size = function () {
+        return this.elms.length;
+    };
+
+    LinkedList.prototype.removeLast = function () {
+        return this.elms.pop();
+    };
+
+    LinkedList.prototype.remove = function (elm) {
+        var index = 0, skipped = 0;
+        for (var i = 0; i < this.elms.length; i++) {
+            var value = this.elms[i];
+            if (value != elm) {
+                this.elms[index] = value;
+                index++;
+            } else {
+                skipped++;
+            }
+        }
+        for (var i = 0; i < skipped; i++)
+            this.elms.pop();
+    };
+
+    LinkedList.prototype.iterator = function () {
+        return new ArrayIterator(this.elms);
+    };
+
+    Kotlin.LinkedList = LinkedList;
 
     //TODO: should be JS Array-like (https://developer.mozilla.org/en-US/docs/JavaScript/Guide/Predefined_Core_Objects#Working_with_Array-like_objects)
     Kotlin.ArrayList = Kotlin.$createClass(Kotlin.AbstractList, {

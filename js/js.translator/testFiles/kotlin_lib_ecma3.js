@@ -204,7 +204,7 @@ var Kotlin = {};
         return create;
     })();
 
-    Kotlin.createClass = Kotlin.createClass0;
+    Kotlin.createClass = Kotlin.createClass1;
 
     Kotlin.$createClass = Kotlin.createClass;
 

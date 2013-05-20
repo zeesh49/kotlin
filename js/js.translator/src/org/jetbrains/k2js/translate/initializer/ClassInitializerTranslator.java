@@ -17,15 +17,13 @@
 package org.jetbrains.k2js.translate.initializer;
 
 import com.google.dart.compiler.backend.js.ast.*;
+import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.jet.lang.descriptors.ConstructorDescriptor;
 import org.jetbrains.jet.lang.descriptors.DeclarationDescriptor;
 import org.jetbrains.jet.lang.descriptors.PropertyDescriptor;
-import org.jetbrains.jet.lang.psi.JetClassOrObject;
-import org.jetbrains.jet.lang.psi.JetDelegationSpecifier;
-import org.jetbrains.jet.lang.psi.JetDelegatorToSuperCall;
-import org.jetbrains.jet.lang.psi.JetParameter;
+import org.jetbrains.jet.lang.psi.*;
 import org.jetbrains.k2js.translate.context.Namer;
 import org.jetbrains.k2js.translate.context.TranslationContext;
 import org.jetbrains.k2js.translate.general.AbstractTranslator;
@@ -87,8 +85,18 @@ public final class ClassInitializerTranslator extends AbstractTranslator {
             initializerStatements.add(call.makeStmt());
         }
         else {
-            JsName superMethodName = context().scope().declareName(Namer.superMethodName());
-            initializerStatements.add(convertToStatement(new JsInvocation(new JsNameRef(superMethodName, JsLiteral.THIS), arguments)));
+            JetReferenceExpression constructorReferenceExpression = superCall.getCalleeExpression().getConstructorReferenceExpression();
+            assert constructorReferenceExpression != null;
+            PsiElement baseClass = constructorReferenceExpression.getFirstChild();
+            String baseClassName = baseClass.getText();
+
+            ConstructorDescriptor primaryConstructor = getConstructor(bindingContext(), classDeclaration);
+            JsFunction result = context().getFunctionObject(primaryConstructor);
+            JsNameRef qualifier = context().getQualifierForDescriptor(primaryConstructor);
+
+            arguments.add(0, JsLiteral.THIS);
+            //JsName superMethodName = context().scope().declareName(Namer.superMethodName());
+            initializerStatements.add(convertToStatement(new JsInvocation(new JsNameRef("call", new JsNameRef(baseClassName, qualifier)), arguments)));
         }
     }
 
