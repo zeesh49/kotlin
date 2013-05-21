@@ -99,6 +99,7 @@ public open class LinkedList<E>(): AbstractList<E>() {
     public fun poll(): E? = js.noImpl
     public fun peek(): E? = js.noImpl
     public fun offer(e: E): Boolean = js.noImpl
+    public fun removeLast(): E = js.noImpl
 }
 
 library
