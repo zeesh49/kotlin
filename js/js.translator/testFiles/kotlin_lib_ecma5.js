@@ -161,10 +161,6 @@ var Kotlin = Object.create(null);
         };
     }
 
-    Kotlin.$new = function (f) {
-        return f;
-    };
-
     Kotlin.$createClass = function (parent, properties) {
         if (parent !== null && typeof (parent) != "function") {
             properties = parent;
@@ -206,7 +202,7 @@ var Kotlin = Object.create(null);
 
     Kotlin.defineModule = function (id, module) {
         if (id in Kotlin.modules) {
-            throw Kotlin.$new(Kotlin.IllegalArgumentException)();
+            throw new Kotlin.IllegalArgumentException();
         }
 
         Object.freeze(module);

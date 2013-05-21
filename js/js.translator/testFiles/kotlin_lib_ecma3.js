@@ -206,20 +206,12 @@ var Kotlin = {};
 
     Kotlin.createClass = Kotlin.createClass1;
 
-    Kotlin.$createClass = Kotlin.createClass;
+    Kotlin.$createClass = Kotlin.createClass1;
 
     Kotlin.createObjectWithPrototype = function (prototype) {
         function C() {}
         C.prototype = prototype;
         return new C();
-    };
-
-    Kotlin.$new = function (f) {
-        var o = Kotlin.createObjectWithPrototype(f.prototype);
-        return function () {
-            f.apply(o, arguments);
-            return o;
-        };
     };
 
     Kotlin.createObject = function () {
@@ -229,7 +221,7 @@ var Kotlin = {};
 
     Kotlin.defineModule = function (id, module) {
         if (id in Kotlin.modules) {
-            throw Kotlin.$new(Kotlin.IllegalArgumentException)();
+            throw new Kotlin.IllegalArgumentException();
         }
 
         Kotlin.modules[id] = module;

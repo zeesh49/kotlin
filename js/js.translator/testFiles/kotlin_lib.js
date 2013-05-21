@@ -36,8 +36,8 @@ var kotlin = {set:function (receiver, key, value) {
 
 (function () {
     Kotlin.equals = function (obj1, obj2) {
-        if (obj1 == null) {
-            return obj2 == null;
+        if (obj1 === obj2) {
+            return true;
         }
 
         if (obj1 instanceof Array) {
@@ -56,7 +56,7 @@ var kotlin = {set:function (receiver, key, value) {
             return obj1.equals(obj2);
         }
 
-        return obj1 === obj2;
+        return false;
     };
 
     Kotlin.array = function (args) {
@@ -64,11 +64,11 @@ var kotlin = {set:function (receiver, key, value) {
     };
 
     Kotlin.intUpto = function (from, to) {
-        return Kotlin.$new(Kotlin.NumberRange)(from, to);
+        return new Kotlin.NumberRange(from, to);
     };
 
     Kotlin.intDownto = function (from, to) {
-        return Kotlin.$new(Kotlin.Progression)(from, to, -1);
+        return new Kotlin.Progression(from, to, -1);
     };
 
     Kotlin.modules = {};
@@ -84,7 +84,7 @@ var kotlin = {set:function (receiver, key, value) {
     Kotlin.IOException = Kotlin.$createClass(Kotlin.Exception);
 
     Kotlin.throwNPE = function () {
-        throw Kotlin.$new(Kotlin.NullPointerException)();
+        throw new Kotlin.NullPointerException();
     };
 
     function throwAbstractFunctionInvocationError(funName) {
@@ -115,9 +115,6 @@ var kotlin = {set:function (receiver, key, value) {
         next: function () {
             return this.array[this.index++];
         },
-        get_hasNext: function () {
-            return this.index < this.size;
-        },
         hasNext: function () {
             return this.index < this.size;
         }
@@ -141,16 +138,23 @@ var kotlin = {set:function (receiver, key, value) {
 
     Kotlin.AbstractList = Kotlin.$createClass(Kotlin.Collection, {
         iterator: function () {
-            return Kotlin.$new(ListIterator)(this);
+            return new ListIterator(this);
         },
         isEmpty: function () {
             return this.size() === 0;
         },
         addAll: function (collection) {
-            var it = collection.iterator();
-            var i = this.$size;
-            while (i-- > 0) {
-                this.add(it.next());
+            if (collection instanceof Array) {
+                this.array.push.apply(this.array, collection)
+            }
+            else if (collection.array instanceof Array) {
+                this.array.push.apply(this.array, collection.array)
+            } else {
+                var it = collection.iterator();
+                var i = this.array.length;
+                while (i-- > 0) {
+                    this.add(it.next());
+                }
             }
         },
         remove: function (o) {
@@ -163,23 +167,13 @@ var kotlin = {set:function (receiver, key, value) {
             return this.indexOf(o) !== -1;
         },
         equals: function (o) {
-            if (this.$size === o.$size) {
-                var iterator1 = this.iterator();
-                var iterator2 = o.iterator();
-                var i = this.$size;
-                while (i-- > 0) {
-                    if (!Kotlin.equals(iterator1.next(), iterator2.next())) {
-                        return false;
-                    }
-                }
-            }
-            return true;
+            return Kotlin.equals(this.array, o.array);
         },
         toString: function () {
             var builder = "[";
             var iterator = this.iterator();
             var first = true;
-            var i = this.$size;
+            var i = this.array.length;
             while (i-- > 0) {
                 if (first) {
                     first = false;
@@ -197,43 +191,52 @@ var kotlin = {set:function (receiver, key, value) {
         }
     });
 
+    //todo make full implementation
     function LinkedList() {
-        this.elms = [];
+        this.array = [];
     }
 
-    LinkedList.prototype.add = function (elm) {
-        this.elms.push(elm);
+    LinkedList.prototype = Object.create(Kotlin.AbstractList.prototype);
+    LinkedList.constructor = LinkedList;
+
+    LinkedList.prototype.add = function (element) {
+        this.array.push(element);
     };
 
+    //todo check range everywhere
     LinkedList.prototype.get = function (index) {
-        return this.elms[index];
+        return this.array[index];
+    };
+
+    LinkedList.prototype.set = function (index, value) {
+        this.array[index] = value;
     };
 
     LinkedList.prototype.size = function () {
-        return this.elms.length;
+        return this.array.length;
     };
 
     LinkedList.prototype.removeLast = function () {
-        return this.elms.pop();
+        return this.array.pop();
     };
 
     LinkedList.prototype.remove = function (elm) {
         var index = 0, skipped = 0;
-        for (var i = 0; i < this.elms.length; i++) {
-            var value = this.elms[i];
+        for (var i = 0; i < this.array.length; i++) {
+            var value = this.array[i];
             if (value != elm) {
-                this.elms[index] = value;
+                this.array[index] = value;
                 index++;
             } else {
                 skipped++;
             }
         }
         for (var i = 0; i < skipped; i++)
-            this.elms.pop();
+            this.array.pop();
     };
 
     LinkedList.prototype.iterator = function () {
-        return new ArrayIterator(this.elms);
+        return new ArrayIterator(this.array);
     };
 
     Kotlin.LinkedList = LinkedList;
@@ -242,7 +245,6 @@ var kotlin = {set:function (receiver, key, value) {
     Kotlin.ArrayList = Kotlin.$createClass(Kotlin.AbstractList, {
         initialize: function () {
             this.array = [];
-            this.$size = 0;
         },
         get: function (index) {
             this.checkRange(index);
@@ -253,40 +255,29 @@ var kotlin = {set:function (receiver, key, value) {
             this.array[index] = value;
         },
         toArray: function () {
-            return this.array.slice(0, this.$size);
+            return this.array.slice(0);
         },
         size: function () {
-            return this.$size;
+            return this.array.length;
         },
         iterator: function () {
-            return Kotlin.arrayIterator(this.array);
+            return new ArrayIterator(this.array);
         },
         add: function (element) {
-            this.array[this.$size++] = element;
+            this.array.push(element);
         },
         addAt: function (index, element) {
             this.array.splice(index, 0, element);
-            this.$size++;
-        },
-        addAll: function (collection) {
-            var it = collection.iterator();
-            for (var i = this.$size, n = collection.size(); n-- > 0;) {
-                this.array[i++] = it.next();
-            }
-
-            this.$size += collection.size();
         },
         removeAt: function (index) {
             this.checkRange(index);
-            this.$size--;
             return this.array.splice(index, 1)[0];
         },
         clear: function () {
             this.array.length = 0;
-            this.$size = 0;
         },
         indexOf: function (o) {
-            for (var i = 0, n = this.$size; i < n; ++i) {
+            for (var i = 0, n = this.array.length; i < n; ++i) {
                 if (Kotlin.equals(this.array[i], o)) {
                     return i;
                 }
@@ -300,7 +291,7 @@ var kotlin = {set:function (receiver, key, value) {
             return this.array;
         },
         checkRange: function(index) {
-            if (index < 0 || index >= this.$size) {
+            if (index < 0 || index >= this.array.length) {
                 throw new Kotlin.IndexOutOfBoundsException();
             }
         }
@@ -433,7 +424,7 @@ var kotlin = {set:function (receiver, key, value) {
             return this.$start <= number && number <= this.$end;
         },
         iterator: function () {
-            return Kotlin.$new(Kotlin.RangeIterator)(this.get_start(), this.get_end());
+            return new Kotlin.RangeIterator(this.get_start(), this.get_end());
         }
     });
 
@@ -453,7 +444,7 @@ var kotlin = {set:function (receiver, key, value) {
             return this.$increment;
         },
         iterator: function () {
-            return Kotlin.$new(Kotlin.RangeIterator)(this.get_start(), this.get_end(), this.get_increment());
+            return new Kotlin.RangeIterator(this.get_start(), this.get_end(), this.get_increment());
         }
     });
 
@@ -470,7 +461,7 @@ var kotlin = {set:function (receiver, key, value) {
     });
 
     Kotlin.comparator = function (f) {
-        return Kotlin.$new(ComparatorImpl)(f);
+        return new ComparatorImpl(f);
     };
 
     Kotlin.collectionsMax = function (col, comp) {
@@ -562,11 +553,7 @@ var kotlin = {set:function (receiver, key, value) {
     };
 
     Kotlin.arrayIndices = function (arr) {
-        return Kotlin.$new(Kotlin.NumberRange)(0, arr.length - 1);
-    };
-
-    Kotlin.arrayIterator = function (array) {
-        return Kotlin.$new(ArrayIterator)(array);
+        return new Kotlin.NumberRange(0, arr.length - 1);
     };
 
     Kotlin.toString = function (obj) {

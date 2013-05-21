@@ -37,14 +37,22 @@
                         };
 
     function hashObject(obj) {
-        var hashCode;
-        if (typeof obj == "string") {
+        if (obj == null)
+            return obj;
+
+        var objType = typeof obj;
+        //`objType === "number"` is performance optimization
+        if (objType === "string" || objType === "number") {
             return obj;
         }
+        //else if (objType === "number") {
+        //    return String(obj)
+        //}
         else if (typeof obj.hashCode == FUNCTION) {
             // Check the hashCode method really has returned a string
-            hashCode = obj.hashCode();
-            return (typeof hashCode == "string") ? hashCode : hashObject(hashCode);
+            var hashCode = obj.hashCode();
+            var hashCodeType = typeof hashCode;
+            return (hashCodeType === "string" || hashCodeType === "number") ? hashCode : hashObject(hashCode);
         }
         else if (typeof obj.toString == FUNCTION) {
             return obj.toString();
@@ -72,11 +80,8 @@
 
     function createKeyValCheck(kvStr) {
         return function (kv) {
-            if (kv === null) {
-                throw new Error("null is not a valid " + kvStr);
-            }
-            else if (typeof kv == "undefined") {
-                throw new Error(kvStr + " must not be undefined");
+            if (kv == null) {
+                throw new Error("'" + kv + "' is not a valid " + kvStr);
             }
         };
     }
@@ -199,6 +204,7 @@
 
     var Hashtable = function (hashingFunctionParam, equalityFunctionParam) {
         var that = this;
+        var size = 0;
         var buckets = [];
         var bucketsByHash = {};
 
@@ -231,6 +237,7 @@
                 buckets[buckets.length] = bucket;
                 bucketsByHash[hash] = bucket;
             }
+            if (oldValue == null) size++;
             return oldValue;
         };
 
@@ -274,12 +281,13 @@
         };
 
         this.clear = function () {
+            size = 0;
             buckets.length = 0;
             bucketsByHash = {};
         };
 
         this.isEmpty = function () {
-            return !buckets.length;
+            return !size;
         };
 
         var createBucketAggregator = function (bucketFuncName) {
@@ -298,8 +306,8 @@
 
         this.values = function () {
             var values = this._values();
-            var i = values.length
-            var result = Kotlin.$new(Kotlin.ArrayList)();
+            var i = values.length;
+            var result = new Kotlin.ArrayList();
             while (i--) {
                 result.add(values[i]);
             }
@@ -318,6 +326,7 @@
                 // Remove entry from this bucket for this key
                 oldValue = bucket.removeEntryForKey(key);
                 if (oldValue !== null) {
+                    size--;
                     // Entry was removed, so check if bucket is empty
                     if (!bucket.entries.length) {
                         // Bucket is empty, so remove it from the bucket collections
@@ -331,11 +340,7 @@
         };
 
         this.size = function () {
-            var total = 0, i = buckets.length;
-            while (i--) {
-                total += buckets[i].entries.length;
-            }
-            return total;
+            return size;
         };
 
         this.each = function (callback) {
@@ -371,7 +376,125 @@
         };
 
         this.keySet = function () {
-            var res = Kotlin.$new(Kotlin.HashSet)();
+            var res = new Kotlin.HashSet();
+            var keys = this._keys();
+            var i = keys.length;
+            while (i--) {
+                res.add(keys[i]);
+            }
+            return res;
+        };
+    };
+
+    var Hashtable2 = function (hashingFunctionParam) {
+        var that = this;
+        var size = 0;
+        var map = Object.create(null);
+
+        var hashingFunction = (typeof hashingFunctionParam == FUNCTION) ? hashingFunctionParam : hashObject;
+
+        this.put = function (key, value) {
+            checkKey(key);
+            checkValue(value);
+            var hash = hashingFunction(key);
+            var oldValue = map[hash];
+            map[hash] = value;
+
+            if (oldValue == null) {
+                size++;
+                return null; // because `oldValue == null` is `true` when `oldValue` contains `undefined` too
+            }
+
+            return oldValue;
+        };
+
+        this.get = function (key) {
+            checkKey(key);
+
+            var hash = hashingFunction(key);
+            var value = map[hash];
+
+            return value == undefined ? null : value;
+        };
+
+        this.containsKey = function (key) {
+            checkKey(key);
+            var hash = hashingFunction(key);
+            return map[hash] != null;
+        };
+
+        this.containsValue = function (value) {
+            checkValue(value);
+            var keys = Object.getOwnPropertyNames(map);
+            for (var key in keys) {
+                if (Kotlin.equals(map[key], value)) return true;
+                //if (map[key] == value) return true;
+                //todo call equals
+                //else if
+            }
+            return false;
+        };
+
+        this.clear = function () {
+            size = 0;
+            map = Object.create(null);
+        };
+
+        this.isEmpty = function () {
+            return !size;
+        };
+
+        this.values = function () {
+            var keys = Object.getOwnPropertyNames(map);
+            var result = new Kotlin.ArrayList();
+            for (var key in keys) {
+                result.add(map[key]);
+            }
+            return result;
+        };
+
+        this.remove = function (key) {
+            checkKey(key);
+            var hash = hashingFunction(key);
+            var oldValue = map[hash];
+            if (oldValue != null) {
+                size--;
+                delete map[hash];
+            }
+
+            return oldValue;
+        };
+
+        this.size = function () {
+            return size;
+        };
+
+        this.each = function (callback) {
+            var keys = Object.getOwnPropertyNames(map);
+            for (var key in keys) {
+                callback(key, map[key]);
+            }
+        };
+
+
+        this.putAll = function (hashtable, conflictCallback) {
+            var keys = Object.getOwnPropertyNames(hashtable.map);
+            for (var key in keys) {
+                var thisValue = map[key];
+                var value = hashtable[key]
+                if (thisValue != null) value = conflictCallback(key, thisValue, value);
+                that.put(key, value);
+            }
+        };
+
+        this.clone = function () {
+            var clone = new Hashtable2();
+            clone.putAll(that);
+            return clone;
+        };
+
+        this.keySet = function () {
+            var res = new Kotlin.HashSet();
             var keys = this._keys();
             var i = keys.length;
             while (i--) {
@@ -382,13 +505,13 @@
     };
 
 
-    Kotlin.HashTable = Hashtable;
+    Kotlin.HashTable = Hashtable2;
 })();
 
 Kotlin.Map = Kotlin.$createClass();
 
 Kotlin.HashMap = Kotlin.$createClass(Kotlin.Map, {initialize: function () {
-    Kotlin.HashTable.call(this);
+    Kotlin.HashTable.apply(this, arguments);
 }});
 
 Kotlin.ComplexHashMap = Kotlin.HashMap;
@@ -414,7 +537,7 @@ Kotlin.ComplexHashMap = Kotlin.HashMap;
             this.map = map;
         },
         iterator: function () {
-            return Kotlin.$new(PrimitiveHashMapValuesIterator)(this.map.map, Kotlin.keys(this.map.map));
+            return new PrimitiveHashMapValuesIterator(this.map.map, Kotlin.keys(this.map.map));
         },
         isEmpty: function () {
             return this.map.$size === 0;
@@ -472,10 +595,10 @@ Kotlin.ComplexHashMap = Kotlin.HashMap;
             this.map = {};
         },
         putAll: function (fromMap) {
-            throw Kotlin.$new(Kotlin.UnsupportedOperationException)();
+            throw new Kotlin.UnsupportedOperationException();
         },
         keySet: function () {
-            var result = Kotlin.$new(Kotlin.HashSet)();
+            var result = new Kotlin.HashSet();
             var map = this.map;
             for (var key in map) {
                 if (map.hasOwnProperty(key)) {
@@ -486,7 +609,7 @@ Kotlin.ComplexHashMap = Kotlin.HashMap;
             return result;
         },
         values: function () {
-            return Kotlin.$new(PrimitiveHashMapValues)(this);
+            return new PrimitiveHashMapValues(this);
         },
         toJSON: function () {
             return this.map;
