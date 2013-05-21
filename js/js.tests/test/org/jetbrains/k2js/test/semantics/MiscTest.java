@@ -224,7 +224,19 @@ public final class MiscTest extends AbstractExpressionTest {
         //checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v5));
     }
 
-    public void test_experement() throws Exception {
+    public void test_Havlak() throws Exception {
+        fooBoxTest();
+        //checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v3));
+        //checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v5));
+    }
+
+    public void test_Havlak_like_dart() throws Exception {
+        fooBoxTest();
+        //checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v3));
+        //checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v5));
+    }
+
+    public void test_experiment() throws Exception {
         //fooBoxTest();
         //checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v3));
         checkFooBoxIsTrue(getTestName(true) + ".kt", Lists.newArrayList(EcmaVersion.v5));
