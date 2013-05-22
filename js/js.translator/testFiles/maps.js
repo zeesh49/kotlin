@@ -36,6 +36,22 @@
                             }
                         };
 
+    var HASH_CODE = 0;
+    function nextHashCode() {
+        var hash = HASH_CODE;
+        HASH_CODE = (HASH_CODE + 1) | 0;
+        return hash;
+    }
+
+    // var MAX_INT = Math.pow(2, 53);
+    // var MAX_INT = 0xFFFF;
+    // MIN_INT = -MAX_INT;
+    // COUNT_INT = 2 * MAX_INT
+    // function nextHashCode() {
+    //     return Math.floor(Math.random() * MAX_INT);
+    // }
+
+
     function hashObject(obj) {
         if (obj == null)
             return obj;
@@ -54,19 +70,26 @@
             var hashCodeType = typeof hashCode;
             return (hashCodeType === "string" || hashCodeType === "number") ? hashCode : hashObject(hashCode);
         }
-        else if (typeof obj.toString == FUNCTION) {
-            return obj.toString();
+        else if (obj.$hashCode != undefined) {
+            return obj.$hashCode;
         }
         else {
-            try {
-                return String(obj);
-            }
-            catch (ex) {
-                // For host objects (such as ActiveObjects in IE) that have no toString() method and throw an error when
-                // passed to String()
-                return Object.prototype.toString.call(obj);
-            }
+            obj.$hashCode = nextHashCode();
+            return obj.$hashCode
         }
+        // else if (typeof obj.toString == FUNCTION) {
+        //     return obj.toString();
+        // }
+        // else {
+        //     try {
+        //         return String(obj);
+        //     }
+        //     catch (ex) {
+        //         // For host objects (such as ActiveObjects in IE) that have no toString() method and throw an error when
+        //         // passed to String()
+        //         return Object.prototype.toString.call(obj);
+        //     }
+        // }
     }
 
     function equals_fixedValueHasEquals(fixedValue, variableValue) {
@@ -390,50 +413,96 @@
         var that = this;
         var size = 0;
         var map = Object.create(null);
+        this.map = map;
 
         var hashingFunction = (typeof hashingFunctionParam == FUNCTION) ? hashingFunctionParam : hashObject;
+
+        // var cachedBucketIds;
+        
+        // var getBucketIds = getCachedBucketIdsWhithUpdate;
+
+        // function getCachedBucketIdsWhithUpdate() {
+        //     cachedBucketIds = Object.getOwnPropertyNames(map);
+        //     getBucketIds = getUncheckCachedBucketIds;
+        //     return cachedBucketIds;
+        // }
+
+        // function getUncheckCachedBucketIds() {
+        //     return cachedBucketIds;
+        // }
+
+        // function bucketsChanged() {
+        //     getBucketIds = getCachedBucketIdsWhithUpdate;            
+        // }
 
         this.put = function (key, value) {
             checkKey(key);
             checkValue(value);
-            var hash = hashingFunction(key);
-            var oldValue = map[hash];
-            map[hash] = value;
 
-            if (oldValue == null) {
+            var hash = hashingFunction(key);
+            var bucket = map[hash];
+
+            if (bucket == null) {
+                map[hash] = [[key], [value]];
                 size++;
-                return null; // because `oldValue == null` is `true` when `oldValue` contains `undefined` too
+                // bucketsChanged()
+            }
+            else {
+                var keys = bucket[0];
+                var values = bucket[1];
+                for(var i = 0, l = keys.length; i < l; i++) {
+                    if (Kotlin.equals(keys[i], key)) {
+                        var oldValue = values[i];
+                        values[i] = value;
+                        return oldValue;
+                    }
+                }
+                keys.push(key);
+                values.push(value);
+                size++;
             }
 
-            return oldValue;
+            return null;
         };
 
         this.get = function (key) {
             checkKey(key);
 
             var hash = hashingFunction(key);
-            var value = map[hash];
+            var bucket = map[hash];
 
-            return value == undefined ? null : value;
+            if (bucket == null) {
+                return null;
+            }
+            else {
+                var keys = bucket[0];
+                var values = bucket[1];
+                for(var i = 0, l = keys.length; i < l; i++) {
+                    if (Kotlin.equals(keys[i], key)) {
+                        return values[i];
+                    }
+                }
+            }
+
+            return null;
         };
 
         this.containsKey = function (key) {
             checkKey(key);
-            var hash = hashingFunction(key);
-            return map[hash] != null;
+            return this.get(key) != null;
         };
 
-        this.containsValue = function (value) {
-            checkValue(value);
-            var keys = Object.getOwnPropertyNames(map);
-            for (var key in keys) {
-                if (Kotlin.equals(map[key], value)) return true;
-                //if (map[key] == value) return true;
-                //todo call equals
-                //else if
-            }
-            return false;
-        };
+        // this.containsValue = function (value) {
+        //     checkValue(value);
+        //     var keys = Object.getOwnPropertyNames(map);
+        //     for (var key in keys) {
+        //         if (Kotlin.equals(map[key], value)) return true;
+        //         //if (map[key] == value) return true;
+        //         //todo call equals
+        //         //else if
+        //     }
+        //     return false;
+        // };
 
         this.clear = function () {
             size = 0;
@@ -445,63 +514,100 @@
         };
 
         this.values = function () {
-            var keys = Object.getOwnPropertyNames(map);
             var result = new Kotlin.ArrayList();
-            for (var key in keys) {
-                result.add(map[key]);
-            }
+
+            // var buckets = Object.getOwnPropertyNames(map);
+            // for (var b in buckets) {
+            //     var bucket = map[b];
+            //     if (bucket == null) continue;
+
+            //     for(var i = 0, l = bucket.length; i < l; i++) {
+            //         result.add(bucket[i]);
+            //     }
+            // }
+
+
+            this.each(result.add.bind(result));
+
             return result;
         };
 
-        this.remove = function (key) {
-            checkKey(key);
-            var hash = hashingFunction(key);
-            var oldValue = map[hash];
-            if (oldValue != null) {
-                size--;
-                delete map[hash];
-            }
+        // this.remove = function (key) {
+        //     checkKey(key);
+        //     var hash = hashingFunction(key);
+        //     var oldValue = map[hash];
+        //     if (oldValue != null) {
+        //         size--;
+        //         delete map[hash];
+        //     }
 
-            return oldValue;
-        };
+        //     return oldValue;
+        // };
 
         this.size = function () {
             return size;
         };
 
         this.each = function (callback) {
-            var keys = Object.getOwnPropertyNames(map);
-            for (var key in keys) {
-                callback(key, map[key]);
+            var buckets = Object.getOwnPropertyNames(map);
+            // var buckets = getBucketIds();
+
+            for (var b in buckets) {
+                var bucket = map[b];
+                if (bucket == null) continue;
+
+                var keys = bucket[0];
+                var values = bucket[1];
+
+                for(var i = 0, l = keys.length; i < l; i++) {
+                    callback(values[i]);
+                }
             }
         };
 
 
-        this.putAll = function (hashtable, conflictCallback) {
-            var keys = Object.getOwnPropertyNames(hashtable.map);
-            for (var key in keys) {
-                var thisValue = map[key];
-                var value = hashtable[key]
-                if (thisValue != null) value = conflictCallback(key, thisValue, value);
-                that.put(key, value);
-            }
-        };
+        // this.putAll = function (hashtable, conflictCallback) {
+        //     var buckets = Object.getOwnPropertyNames(hashtable.map);
+        //     for (var b in buckets) {
+        //         var bucket = hashtable.map[b];
+        //         for(var i = 0, l = bucket.length; i < l; i++) {
+        //             var thisBucket = map[b];
+        //             if (thisBucket == null) {
+        //                 thisBucket = [];
+        //                 for (var j = 0; j < bucket.length; j++) {
+        //                     thisBucket[j] = bucket[j];
+        //                 };
+        //                 map[b] = thisBucket;
+        //             }
+        //             else {
+        //                 var value = bucket[i];
+        //                 for (var j = 0; j < thisBucket.length; j++) {
+        //                     if (Kotlin.equals(thisBucket[j], value)) {
+        //                         thisBucket[j] = conflictCallback(key, thisValue, value);
+        //                     }
+        //                 };
+        //                 thisBucket.push(value);
+        //                 size++;
+        //             }
+        //         }
+        //     }
+        // };
 
-        this.clone = function () {
-            var clone = new Hashtable2();
-            clone.putAll(that);
-            return clone;
-        };
+        // this.clone = function () {
+        //     var clone = new Hashtable2();
+        //     clone.putAll(that);
+        //     return clone;
+        // };
 
-        this.keySet = function () {
-            var res = new Kotlin.HashSet();
-            var keys = this._keys();
-            var i = keys.length;
-            while (i--) {
-                res.add(keys[i]);
-            }
-            return res;
-        };
+        // this.keySet = function () {
+        //     var res = new Kotlin.HashSet();
+        //     var keys = this._keys();
+        //     var i = keys.length;
+        //     while (i--) {
+        //         res.add(keys[i]);
+        //     }
+        //     return res;
+        // };
     };
 
 
@@ -527,7 +633,7 @@ Kotlin.ComplexHashMap = Kotlin.HashMap;
         next: function () {
             return this.map[this.keys[this.index++]];
         },
-        get_hasNext: function () {
+        hasNext: function () {
             return this.index < this.size;
         }
     });
