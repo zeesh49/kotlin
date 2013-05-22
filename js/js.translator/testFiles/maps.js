@@ -44,9 +44,9 @@
     }
 
     // var MAX_INT = Math.pow(2, 53);
-    // var MAX_INT = 0xFFFF;
-    // MIN_INT = -MAX_INT;
-    // COUNT_INT = 2 * MAX_INT
+    // // var MAX_INT = 0xFFFF;
+    // // MIN_INT = -MAX_INT;
+    // // COUNT_INT = 2 * MAX_INT
     // function nextHashCode() {
     //     return Math.floor(Math.random() * MAX_INT);
     // }
@@ -656,7 +656,7 @@ Kotlin.ComplexHashMap = Kotlin.HashMap;
     Kotlin.PrimitiveHashMap = Kotlin.$createClass(Kotlin.Map, {
         initialize: function () {
             this.$size = 0;
-            this.map = {};
+            this.map = Object.create(null);
         },
         size: function () {
             return this.$size;
@@ -678,7 +678,8 @@ Kotlin.ComplexHashMap = Kotlin.HashMap;
             return false;
         },
         get: function (key) {
-            return this.map[key];
+            var value = this.map[key];
+            return value === undefined ? null : value;
         },
         put: function (key, value) {
             var prevValue = this.map[key];
@@ -698,7 +699,7 @@ Kotlin.ComplexHashMap = Kotlin.HashMap;
         },
         clear: function () {
             this.$size = 0;
-            this.map = {};
+            this.map = Object.create(null);
         },
         putAll: function (fromMap) {
             throw new Kotlin.UnsupportedOperationException();

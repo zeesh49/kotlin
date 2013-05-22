@@ -144,10 +144,10 @@ var kotlin = {set:function (receiver, key, value) {
             return this.size() === 0;
         },
         addAll: function (collection) {
-            if (collection instanceof Array) {
+            if (collection.constructor === Array) {
                 this.array.push.apply(this.array, collection)
             }
-            else if (collection.array instanceof Array) {
+            else if (collection.array.constructor === Array) {
                 this.array.push.apply(this.array, collection.array)
             } else {
                 var it = collection.iterator();
