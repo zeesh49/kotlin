@@ -70,13 +70,13 @@
             var hashCodeType = typeof hashCode;
             return (hashCodeType === "string" || hashCodeType === "number") ? hashCode : hashObject(hashCode);
         }
-        else if (obj.$hashCode != undefined) {
-            return obj.$hashCode;
-        }
-        else {
+        
+        if (obj.$hashCode === undefined) {
             obj.$hashCode = nextHashCode();
-            return obj.$hashCode
         }
+
+        return obj.$hashCode;
+
         // else if (typeof obj.toString == FUNCTION) {
         //     return obj.toString();
         // }
@@ -417,24 +417,6 @@
 
         var hashingFunction = (typeof hashingFunctionParam == FUNCTION) ? hashingFunctionParam : hashObject;
 
-        // var cachedBucketIds;
-        
-        // var getBucketIds = getCachedBucketIdsWhithUpdate;
-
-        // function getCachedBucketIdsWhithUpdate() {
-        //     cachedBucketIds = Object.getOwnPropertyNames(map);
-        //     getBucketIds = getUncheckCachedBucketIds;
-        //     return cachedBucketIds;
-        // }
-
-        // function getUncheckCachedBucketIds() {
-        //     return cachedBucketIds;
-        // }
-
-        // function bucketsChanged() {
-        //     getBucketIds = getCachedBucketIdsWhithUpdate;            
-        // }
-
         this.put = function (key, value) {
             checkKey(key);
             checkValue(value);
@@ -445,7 +427,6 @@
             if (bucket == null) {
                 map[hash] = [[key], [value]];
                 size++;
-                // bucketsChanged()
             }
             else {
                 var keys = bucket[0];
@@ -549,10 +530,9 @@
         };
 
         this.each = function (callback) {
-            var buckets = Object.getOwnPropertyNames(map);
-            // var buckets = getBucketIds();
+            for (var b in map) {
+                if (!map.hasOwnProperty(b)) continue;
 
-            for (var b in buckets) {
                 var bucket = map[b];
                 if (bucket == null) continue;
 
@@ -653,10 +633,13 @@ Kotlin.ComplexHashMap = Kotlin.HashMap;
         }
     });
 
+    function id (v) { return v; }
+
     Kotlin.PrimitiveHashMap = Kotlin.$createClass(Kotlin.Map, {
-        initialize: function () {
+        initialize: function (hashingFunction) {
             this.$size = 0;
             this.map = Object.create(null);
+            this.hashingFunction = typeof hashingFunction === "function" ? hashingFunction : id;
         },
         size: function () {
             return this.$size;
@@ -665,7 +648,8 @@ Kotlin.ComplexHashMap = Kotlin.HashMap;
             return this.$size === 0;
         },
         containsKey: function (key) {
-            return this.map[key] !== undefined;
+            var hash = this.hashingFunction(key);
+            return this.map[hash] !== undefined;
         },
         containsValue: function (value) {
             var map = this.map;
@@ -678,21 +662,24 @@ Kotlin.ComplexHashMap = Kotlin.HashMap;
             return false;
         },
         get: function (key) {
-            var value = this.map[key];
+            var hash = this.hashingFunction(key);
+            var value = this.map[hash];
             return value === undefined ? null : value;
         },
         put: function (key, value) {
-            var prevValue = this.map[key];
-            this.map[key] = value === undefined ? null : value;
+            var hash = this.hashingFunction(key);
+            var prevValue = this.map[hash];
+            this.map[hash] = value === undefined ? null : value;
             if (prevValue === undefined) {
                 this.$size++;
             }
             return prevValue;
         },
         remove: function (key) {
-            var prevValue = this.map[key];
+            var hash = this.hashingFunction(key);
+            var prevValue = this.map[hash];
             if (prevValue !== undefined) {
-                delete this.map[key];
+                delete this.map[hash];
                 this.$size--;
             }
             return prevValue;
