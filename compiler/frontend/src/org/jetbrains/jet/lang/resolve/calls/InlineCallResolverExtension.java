@@ -250,7 +250,8 @@ public class InlineCallResolverExtension implements CallResolverExtension {
     private static boolean isEffectivelyPublicApi(DeclarationDescriptorWithVisibility descriptor) {
         DeclarationDescriptorWithVisibility parent = descriptor;
         while (parent != null) {
-            if (!parent.getVisibility().isPublicAPI()) {
+            Visibility visibility = parent.getVisibility();
+            if (visibility != Visibilities.LOCAL && !visibility.isPublicAPI()) {
                 return false;
             }
             parent = DescriptorUtils.getParentOfType(parent, DeclarationDescriptorWithVisibility.class);

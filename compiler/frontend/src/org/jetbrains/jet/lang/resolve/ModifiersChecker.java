@@ -309,6 +309,9 @@ public class ModifiersChecker {
         if (kind == ClassKind.CLASS_OBJECT) {
             return ((ClassDescriptor) descriptor.getContainingDeclaration()).getVisibility();
         }
+        if (DescriptorUtils.isLocal(descriptor)) {
+            return Visibilities.LOCAL;
+        }
         return Visibilities.INTERNAL;
     }
 
