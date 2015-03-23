@@ -174,7 +174,23 @@ public class JetPositionManager(private val myDebugProcess: DebugProcess) : Mult
     override fun getAllClasses(sourcePosition: SourcePosition): List<ReferenceType> {
         val psiFile = sourcePosition.getFile()
         if (psiFile is JetFile) {
+            val start2 = System.currentTimeMillis()
             val names = classNameForPositionAndInlinedOnes(sourcePosition)
+            val duration2 = System.currentTimeMillis() - start2
+
+            val start = System.currentTimeMillis()
+            val newClassNames = myDebugProcess.getAllClasses(sourcePosition)
+            val duration = System.currentTimeMillis() - start
+
+
+            if (duration2 - duration > 10 || duration2 - duration < -10) {
+                println("DIFF: ${sourcePosition.getFile()}:${sourcePosition.getLine()} ${duration2 - duration}")
+            }
+
+            return newClassNames
+
+
+
             val result = ArrayList<ReferenceType>()
             for (name in names) {
                 result.addAll(myDebugProcess.getVirtualMachineProxy().classesByName(name))
@@ -358,7 +374,7 @@ public class JetPositionManager(private val myDebugProcess: DebugProcess) : Mult
                     "Couldn't find element at breakpoint for library file " + file.getName() +
                          (if (notPositionedElement == null) "" else ", notPositionedElement = " + notPositionedElement.getElementTextWithContext())
                 }
-                return PositionedElement(findPackagePartInternalNameForLibraryFile(elementAtForLibraryFile!!), elementAtForLibraryFile)
+                return PositionedElement(findPackagePartInternalNameForLibraryFile(PsiTreeUtil.getTopmostParentOfType(elementAtForLibraryFile, javaClass<JetDeclaration>())), elementAtForLibraryFile)
             }
 
             return PositionedElement(PackagePartClassUtils.getPackagePartInternalName(file), element)

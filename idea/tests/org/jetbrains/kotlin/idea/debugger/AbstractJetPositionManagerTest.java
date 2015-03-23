@@ -33,6 +33,8 @@ import com.intellij.psi.PsiDocumentManager;
 import com.intellij.testFramework.PsiTestUtil;
 import com.sun.jdi.Location;
 import com.sun.jdi.ReferenceType;
+import jet.runtime.typeinfo.JetValueParameter;
+import kotlin.Function1;
 import kotlin.KotlinPackage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.kotlin.backend.common.output.OutputFile;
@@ -55,7 +57,7 @@ import java.util.regex.Pattern;
 public abstract class AbstractJetPositionManagerTest extends KotlinMultiFileTestCase {
     // Breakpoint is given as a line comment on a specific line, containing the regexp to match the name of the class where that line
     // can be found. This pattern matches against these line comments and saves the class name in the first group
-    private static final Pattern BREAKPOINT_PATTERN = Pattern.compile("^.*//\\s*(.+)\\s*$");
+    public static final Pattern BREAKPOINT_PATTERN = Pattern.compile("^.*//\\s*(.+)\\s*$");
 
     @NotNull
     @Override
@@ -142,7 +144,7 @@ public abstract class AbstractJetPositionManagerTest extends KotlinMultiFileTest
         super.tearDown();
     }
 
-    private static Collection<Breakpoint> extractBreakpointsInfo(JetFile file, String fileContent) {
+    public static Collection<Breakpoint> extractBreakpointsInfo(JetFile file, String fileContent) {
         Collection<Breakpoint> breakpoints = Lists.newArrayList();
         String[] lines = StringUtil.convertLineSeparators(fileContent).split("\n");
 
@@ -181,11 +183,11 @@ public abstract class AbstractJetPositionManagerTest extends KotlinMultiFileTest
         };
     }
 
-    private static void assertBreakpointIsHandledCorrectly(Breakpoint breakpoint, PositionManager positionManager) throws NoDataException {
+    public static void assertBreakpointIsHandledCorrectly(Breakpoint breakpoint, PositionManager positionManager) throws NoDataException {
         SourcePosition position = SourcePosition.createFromLine(breakpoint.file, breakpoint.lineNumber);
         List<ReferenceType> classes = positionManager.getAllClasses(position);
         assertNotNull(classes);
-        assertEquals(1, classes.size());
+        assertEquals("Couldn't find class for " + (breakpoint.lineNumber + 1), 1, classes.size());
         ReferenceType type = classes.get(0);
         assertTrue("Type name " + type.name() + " doesn't match " + breakpoint.classNameRegexp + " for line " + (breakpoint.lineNumber + 1),
                    type.name().matches(breakpoint.classNameRegexp));
@@ -200,10 +202,10 @@ public abstract class AbstractJetPositionManagerTest extends KotlinMultiFileTest
         assertEquals(position.getLine(), actualPosition.getLine());
     }
 
-    private static class Breakpoint {
-        private final JetFile file;
-        private final int lineNumber; // 0-based
-        private final String classNameRegexp;
+    public static class Breakpoint {
+        public final JetFile file;
+        public final int lineNumber; // 0-based
+        public final String classNameRegexp;
 
         private Breakpoint(JetFile file, int lineNumber, String classNameRegexp) {
             this.file = file;
@@ -218,6 +220,11 @@ public abstract class AbstractJetPositionManagerTest extends KotlinMultiFileTest
         private MockVirtualMachineProxy(DebugProcessEvents debugProcess, Map<String, ReferenceType> referencesByName) {
             super(debugProcess, new MockVirtualMachine());
             this.referencesByName = referencesByName;
+        }
+
+        @Override
+        public List<ReferenceType> nestedTypes(ReferenceType refType) {
+            throw new AssertionError("This method doesn't work in this test. Use AbstractJetPositionManagerWithDebugProcessTest instead");
         }
 
         @Override

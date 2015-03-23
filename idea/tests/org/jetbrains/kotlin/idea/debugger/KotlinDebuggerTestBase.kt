@@ -16,6 +16,7 @@
 
 package org.jetbrains.kotlin.idea.debugger
 
+import com.intellij.debugger.PositionManager
 import com.intellij.debugger.engine.DebugProcessImpl
 import com.intellij.debugger.engine.SuspendContextImpl
 import com.intellij.debugger.engine.MethodFilter
@@ -27,12 +28,17 @@ import org.jetbrains.kotlin.idea.test.JetJdkAndLibraryProjectDescriptor
 import com.intellij.openapi.roots.JdkOrderEntry
 import com.intellij.openapi.util.io.FileUtil
 import com.intellij.debugger.SourcePosition
+import com.intellij.debugger.engine.DebuggerUtils
 import com.intellij.debugger.settings.DebuggerSettings
 import kotlin.properties.Delegates
 import org.jetbrains.kotlin.test.InTextDirectivesUtils.findStringWithPrefixes
 import kotlin.properties.Delegates
 import com.intellij.debugger.engine.evaluation.EvaluationContextImpl
 import com.intellij.debugger.impl.DebuggerContextImpl
+import com.intellij.util.ExceptionUtil
+import org.jetbrains.kotlin.psi.JetFile
+import org.jetbrains.kotlin.utils.join
+import kotlin.test.assertEquals
 
 abstract class KotlinDebuggerTestBase : KotlinDebuggerTestCase() {
     private var oldSettings: DebuggerSettings by Delegates.notNull()
@@ -118,10 +124,38 @@ abstract class KotlinDebuggerTestBase : KotlinDebuggerTestCase() {
             if (this.getFrameProxy() == null) {
                 return@runReadAction println("Context thread is null", ProcessOutputTypes.SYSTEM)
             }
-
-            val sourcePosition = PositionUtil.getSourcePosition(this)
-            println(renderSourcePosition(sourcePosition), ProcessOutputTypes.SYSTEM)
+            try {
+                val sourcePosition = PositionUtil.getSourcePosition(this)
+                val classNames = renderClassNames(sourcePosition)
+                if (classNames.isNotEmpty()) {
+                    println(classNames, ProcessOutputTypes.STDERR)
+                }
+                println(renderSourcePosition(sourcePosition), ProcessOutputTypes.SYSTEM)
+            } catch(e: Throwable) {
+                println(ExceptionUtil.getThrowableText(e), ProcessOutputTypes.STDERR)
+            }
         }
+    }
+
+    private fun renderClassNames(sourcePosition: SourcePosition?): String {
+        if (sourcePosition == null || sourcePosition.getFile() !is JetFile) {
+            return ""
+        }
+
+        val positionManager = JetPositionManager(myDebugProcess)
+        val classes = positionManager.getAllClasses(sourcePosition).map { it.name() }
+        val classNames = classes.joinToString(", "/*, prefix = ":"*/)
+
+
+        val oldClassName = JetPositionManager(myDebugProcess).classNameForPosition(sourcePosition)?.replaceAll("/", ".") ?: "null"
+        if (classes.size() != 1) {
+            return "newClassNames were calculated incorrectly for line ${sourcePosition.getLine()}: \nexpected = $oldClassName\nactual  = ${classNames}"
+        }
+        if (oldClassName != classes.get(0)) {
+            return "newClassName was calculated incorrectly for line ${sourcePosition.getLine()}:\nexpected = $oldClassName\nactual  = ${classes.get(0)}"
+        }
+
+        return ""
     }
 
     protected fun renderSourcePosition(sourcePosition: SourcePosition?): String {

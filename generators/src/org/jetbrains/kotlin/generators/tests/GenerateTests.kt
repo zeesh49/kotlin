@@ -55,6 +55,7 @@ import org.jetbrains.kotlin.idea.conversion.copy.AbstractJavaToKotlinCopyPasteCo
 import org.jetbrains.kotlin.idea.coverage.AbstractKotlinCoverageOutputFilesTest
 import org.jetbrains.kotlin.idea.debugger.AbstractJetPositionManagerTest
 import org.jetbrains.kotlin.idea.debugger.AbstractKotlinSteppingTest
+import org.jetbrains.kotlin.idea.debugger.AbstractJetPositionManagerWithDebugProcessTest
 import org.jetbrains.kotlin.idea.debugger.AbstractSmartStepIntoTest
 import org.jetbrains.kotlin.idea.debugger.evaluate.*
 import org.jetbrains.kotlin.idea.decompiler.navigation.AbstractNavigateToLibrarySourceTest
@@ -610,6 +611,10 @@ fun main(args: Array<String>) {
         testClass(javaClass<AbstractKotlinEvaluateExpressionTest>()) {
             model("debugger/tinyApp/src/evaluate/singleBreakpoint", testMethod = "doSingleBreakpointTest")
             model("debugger/tinyApp/src/evaluate/multipleBreakpoints", testMethod = "doMultipleBreakpointsTest")
+        }
+
+        testClass(javaClass<AbstractJetPositionManagerWithDebugProcessTest>()) {
+            model("debugger/tinyApp/src/positionManager")
         }
 
         testClass(javaClass<AbstractStubBuilderTest>()) {

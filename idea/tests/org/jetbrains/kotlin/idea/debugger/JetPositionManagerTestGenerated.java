@@ -37,27 +37,9 @@ public class JetPositionManagerTestGenerated extends AbstractJetPositionManagerT
             JetTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("idea/testData/debugger/positionManager"), Pattern.compile("^(.+)\\.kt$"), false);
         }
 
-        @TestMetadata("anonymousFunction.kt")
-        public void testAnonymousFunction() throws Exception {
-            String fileName = JetTestUtils.navigationMetadata("idea/testData/debugger/positionManager/anonymousFunction.kt");
-            doTest(fileName);
-        }
-
-        @TestMetadata("anonymousNamedFunction.kt")
-        public void testAnonymousNamedFunction() throws Exception {
-            String fileName = JetTestUtils.navigationMetadata("idea/testData/debugger/positionManager/anonymousNamedFunction.kt");
-            doTest(fileName);
-        }
-
         @TestMetadata("class.kt")
         public void testClass() throws Exception {
             String fileName = JetTestUtils.navigationMetadata("idea/testData/debugger/positionManager/class.kt");
-            doTest(fileName);
-        }
-
-        @TestMetadata("classObject.kt")
-        public void testClassObject() throws Exception {
-            String fileName = JetTestUtils.navigationMetadata("idea/testData/debugger/positionManager/classObject.kt");
             doTest(fileName);
         }
 
@@ -73,39 +55,15 @@ public class JetPositionManagerTestGenerated extends AbstractJetPositionManagerT
             doTest(fileName);
         }
 
-        @TestMetadata("functionLiteral.kt")
-        public void testFunctionLiteral() throws Exception {
-            String fileName = JetTestUtils.navigationMetadata("idea/testData/debugger/positionManager/functionLiteral.kt");
-            doTest(fileName);
-        }
-
-        @TestMetadata("functionLiteralInVal.kt")
-        public void testFunctionLiteralInVal() throws Exception {
-            String fileName = JetTestUtils.navigationMetadata("idea/testData/debugger/positionManager/functionLiteralInVal.kt");
-            doTest(fileName);
-        }
-
         @TestMetadata("innerClass.kt")
         public void testInnerClass() throws Exception {
             String fileName = JetTestUtils.navigationMetadata("idea/testData/debugger/positionManager/innerClass.kt");
             doTest(fileName);
         }
 
-        @TestMetadata("localFunction.kt")
-        public void testLocalFunction() throws Exception {
-            String fileName = JetTestUtils.navigationMetadata("idea/testData/debugger/positionManager/localFunction.kt");
-            doTest(fileName);
-        }
-
         @TestMetadata("objectDeclaration.kt")
         public void testObjectDeclaration() throws Exception {
             String fileName = JetTestUtils.navigationMetadata("idea/testData/debugger/positionManager/objectDeclaration.kt");
-            doTest(fileName);
-        }
-
-        @TestMetadata("objectExpression.kt")
-        public void testObjectExpression() throws Exception {
-            String fileName = JetTestUtils.navigationMetadata("idea/testData/debugger/positionManager/objectExpression.kt");
             doTest(fileName);
         }
 

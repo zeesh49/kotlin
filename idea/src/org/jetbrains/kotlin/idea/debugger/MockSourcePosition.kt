@@ -30,7 +30,7 @@ class MockSourcePosition(
 ): SourcePosition() {
     override fun getFile() = _file ?: throw UnsupportedOperationException("Parameter file isn't set for MockSourcePosition")
     override fun getElementAt() = _elementAt ?: throw UnsupportedOperationException("Parameter elementAt isn't set for MockSourcePosition")
-    override fun getLine() = _line ?: throw UnsupportedOperationException("Parameter line isn't set for MockSourcePosition")
+    override fun getLine() = _line ?: -1
     override fun getOffset() = _offset ?: throw UnsupportedOperationException("Parameter offset isn't set for MockSourcePosition")
     override fun openEditor(requestFocus: Boolean) = _editor ?: throw UnsupportedOperationException("Parameter editor isn't set for MockSourcePosition")
 

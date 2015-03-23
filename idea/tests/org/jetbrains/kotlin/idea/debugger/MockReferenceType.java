@@ -87,7 +87,7 @@ public class MockReferenceType implements ReferenceType {
 
     @Override
     public boolean isPrepared() {
-        throw new UnsupportedOperationException();
+        return true;
     }
 
     @Override
@@ -172,7 +172,7 @@ public class MockReferenceType implements ReferenceType {
 
     @Override
     public List<Location> allLineLocations() throws AbsentInformationException {
-        throw new UnsupportedOperationException();
+        throw new AbsentInformationException();
     }
 
     @Override

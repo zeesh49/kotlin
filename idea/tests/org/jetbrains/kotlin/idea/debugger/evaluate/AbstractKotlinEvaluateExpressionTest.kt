@@ -36,6 +36,14 @@ import com.intellij.debugger.ui.tree.StackFrameDescriptor
 import com.intellij.debugger.ui.tree.StaticDescriptor
 import com.intellij.execution.process.ProcessOutputTypes
 import com.intellij.openapi.application.ModalityState
+import com.intellij.debugger.settings.NodeRendererSettings
+import com.intellij.debugger.SourcePosition
+import com.intellij.debugger.engine.SourcePositionProvider
+import com.intellij.debugger.engine.evaluation.TextWithImports
+import com.intellij.debugger.ui.impl.watch.WatchItemDescriptor
+import com.intellij.util.ExceptionUtil
+import org.jetbrains.kotlin.idea.util.application.runReadAction
+import java.util.regex.Matcher
 import com.intellij.openapi.util.Disposer
 import com.intellij.openapi.util.io.FileUtil
 import com.intellij.psi.PsiDocumentManager
@@ -339,6 +347,9 @@ public abstract class AbstractKotlinEvaluateExpressionTest : KotlinDebuggerTestB
             }
             catch (e: EvaluateException) {
                 Assert.assertTrue("Evaluate expression throws wrong exception for $text:\nexpected = $expectedResult\nactual   = ${e.getMessage()}\n", expectedResult == e.getMessage()?.replaceFirst("id=[0-9]*", "id=ID"))
+            }
+            catch(e: Throwable) {
+                println(ExceptionUtil.getThrowableText(e), ProcessOutputTypes.STDERR)
             }
         }
     }
