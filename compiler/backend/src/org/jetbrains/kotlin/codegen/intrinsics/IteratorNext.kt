@@ -17,6 +17,7 @@
 package org.jetbrains.kotlin.codegen.intrinsics
 
 import org.jetbrains.kotlin.builtins.KotlinBuiltIns.BUILT_INS_PACKAGE_FQ_NAME
+import org.jetbrains.kotlin.codegen.AsmUtil
 import org.jetbrains.kotlin.codegen.Callable
 import org.jetbrains.kotlin.codegen.CallableMethod
 import org.jetbrains.kotlin.codegen.ExpressionCodegen
@@ -46,7 +47,7 @@ public class IteratorNext : IntrinsicMethod() {
 
 
     override fun toCallable(fd: FunctionDescriptor, isSuper: Boolean, resolvedCall: ResolvedCall<*>, codegen: ExpressionCodegen): Callable {
-        val type = codegen.getState().getTypeMapper().mapReturnType(fd)
+        val type = AsmUtil.unboxType(codegen.getState().getTypeMapper().mapReturnType(fd))
         return object: IntrinsicCallable(type, listOf(), AsmTypes.OBJECT_TYPE, null) {
             override fun invokeIntrinsic(v: InstructionAdapter) {
                 val name = getIteratorName(returnType)
