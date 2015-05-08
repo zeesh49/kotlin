@@ -34,7 +34,7 @@ public class IdeDescriptorRenderers {
     public static final Function1<JetType, JetType> APPROXIMATE_FLEXIBLE_TYPES_IN_ARGUMENTS = new Function1<JetType, JetType>() {
         @Override
         public JetType invoke(JetType type) {
-            return UtilPackage.approximateFlexibleTypes(type, false);
+            return UtilPackage.approximateFlexibleTypes(type, true); // experiment
         }
     };
 
