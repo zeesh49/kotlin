@@ -288,7 +288,7 @@ public class ReplInterpreter {
         GenerationState state = new GenerationState(psiFile.getProject(), ClassBuilderFactories.BINARIES,
                                                     module, trace.getBindingContext(), Collections.singletonList(psiFile));
 
-        compileScript(psiFile.getScript(), scriptClassType, earlierScripts, state, CompilationErrorHandler.THROW_EXCEPTION);
+        compileScript(earlierScripts, state, CompilationErrorHandler.THROW_EXCEPTION);
 
         for (OutputFile outputFile : state.getFactory().asList()) {
             classLoader.addClass(JvmClassName.byInternalName(outputFile.getRelativePath().replaceFirst("\\.class$", "")), outputFile.asByteArray());
@@ -403,22 +403,13 @@ public class ReplInterpreter {
     }
 
     public static void compileScript(
-            @NotNull JetScript script,
-            @NotNull Type classType,
             @NotNull List<Pair<ScriptDescriptor, Type>> earlierScripts,
             @NotNull GenerationState state,
             @NotNull CompilationErrorHandler errorHandler
     ) {
         registerEarlierScripts(state, earlierScripts);
-        registerClassNameForScript(state.getBindingTrace(), script, classType);
 
-        state.beforeCompile();
-        KotlinCodegenFacade.generatePackage(
-                state,
-                script.getContainingJetFile().getPackageFqName(),
-                Collections.singleton(script.getContainingJetFile()),
-                errorHandler
-        );
+        KotlinCodegenFacade.compileCorrectFiles(state, errorHandler);
     }
 
     private static class ScriptMutableDeclarationProviderFactory implements DeclarationProviderFactory {
