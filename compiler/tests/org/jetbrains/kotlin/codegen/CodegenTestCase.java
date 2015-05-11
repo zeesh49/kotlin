@@ -31,6 +31,7 @@ import org.jetbrains.kotlin.test.ConfigurationKind;
 import org.jetbrains.kotlin.test.JetTestUtils;
 import org.jetbrains.kotlin.utils.UtilsPackage;
 import org.jetbrains.org.objectweb.asm.ClassReader;
+import org.jetbrains.org.objectweb.asm.Opcodes;
 import org.jetbrains.org.objectweb.asm.tree.ClassNode;
 import org.jetbrains.org.objectweb.asm.tree.MethodNode;
 import org.jetbrains.org.objectweb.asm.tree.analysis.Analyzer;
@@ -201,9 +202,10 @@ public abstract class CodegenTestCase extends UsefulTestCase {
     protected ClassFileFactory generateClassesInFile() {
         if (classFileFactory == null) {
             try {
-                classFileFactory = generateFiles(myEnvironment, myFiles, getPlatformVersion());
+                JavaPlatformVersion version = getPlatformVersion();
+                classFileFactory = generateFiles(myEnvironment, myFiles, version);
 
-                if (DxChecker.RUN_DX_CHECKER) {
+                if (DxChecker.RUN_DX_CHECKER && version.getClassVersion() == Opcodes.V1_6) {
                     DxChecker.check(classFileFactory);
                 }
             }
