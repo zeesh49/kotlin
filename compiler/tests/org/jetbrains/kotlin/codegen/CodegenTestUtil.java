@@ -28,6 +28,7 @@ import org.jetbrains.kotlin.codegen.forTestCompile.ForTestCompileRuntime;
 import org.jetbrains.kotlin.codegen.state.GenerationState;
 import org.jetbrains.kotlin.codegen.state.Progress;
 import org.jetbrains.kotlin.config.CompilerConfiguration;
+import org.jetbrains.kotlin.java.JavaPlatformVersion;
 import org.jetbrains.kotlin.resolve.AnalyzingUtils;
 import org.jetbrains.kotlin.resolve.BindingTraceContext;
 import org.jetbrains.kotlin.resolve.lazy.JvmResolveUtil;
@@ -49,7 +50,11 @@ public class CodegenTestUtil {
     private CodegenTestUtil() {}
 
     @NotNull
-    public static ClassFileFactory generateFiles(@NotNull KotlinCoreEnvironment environment, @NotNull CodegenTestFiles files) {
+    public static ClassFileFactory generateFiles(
+            @NotNull KotlinCoreEnvironment environment,
+            @NotNull CodegenTestFiles files,
+            @NotNull JavaPlatformVersion platformVersion
+    ) {
         AnalysisResult analysisResult = JvmResolveUtil.analyzeFilesWithJavaIntegrationAndCheckForErrors(
                 environment.getProject(),
                 files.getPsiFiles()
@@ -69,7 +74,8 @@ public class CodegenTestUtil {
                 null,
                 null,
                 forExtraDiagnostics,
-                null
+                null,
+                platformVersion
         );
         KotlinCodegenFacade.compileCorrectFiles(state, CompilationErrorHandler.THROW_EXCEPTION);
 

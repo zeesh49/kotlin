@@ -43,6 +43,7 @@ import org.jetbrains.kotlin.config.CompilerConfiguration;
 import org.jetbrains.kotlin.context.ContextPackage;
 import org.jetbrains.kotlin.descriptors.impl.ModuleDescriptorImpl;
 import org.jetbrains.kotlin.idea.MainFunctionDetector;
+import org.jetbrains.kotlin.java.JavaPlatformVersion;
 import org.jetbrains.kotlin.load.kotlin.PackageClassUtils;
 import org.jetbrains.kotlin.load.kotlin.incremental.cache.IncrementalCache;
 import org.jetbrains.kotlin.load.kotlin.incremental.cache.IncrementalCacheProvider;
@@ -382,7 +383,8 @@ public class KotlinToJVMBytecodeCompiler {
                 packagesWithObsoleteParts,
                 moduleId,
                 diagnosticHolder,
-                outputDirectory
+                outputDirectory,
+                getPlatformVersion()
         );
         KotlinCodegenFacade.compileCorrectFiles(generationState, CompilationErrorHandler.THROW_EXCEPTION);
         AnalyzerWithCompilerReport.reportDiagnostics(
@@ -393,5 +395,9 @@ public class KotlinToJVMBytecodeCompiler {
                 environment.getConfiguration().get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
         );
         return generationState;
+    }
+
+    public static JavaPlatformVersion getPlatformVersion() {
+        return JavaPlatformVersion.Companion.getDefault();
     }
 }

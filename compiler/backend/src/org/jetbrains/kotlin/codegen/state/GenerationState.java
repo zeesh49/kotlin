@@ -27,6 +27,7 @@ import org.jetbrains.kotlin.codegen.when.MappingsClassesForWhenByEnum;
 import org.jetbrains.kotlin.descriptors.ModuleDescriptor;
 import org.jetbrains.kotlin.descriptors.ScriptDescriptor;
 import org.jetbrains.kotlin.diagnostics.DiagnosticSink;
+import org.jetbrains.kotlin.java.JavaPlatformVersion;
 import org.jetbrains.kotlin.name.FqName;
 import org.jetbrains.kotlin.psi.JetClassOrObject;
 import org.jetbrains.kotlin.psi.JetFile;
@@ -132,6 +133,9 @@ public class GenerationState {
     @Nullable
     private final String moduleId; // for PackageCodegen in incremental compilation mode
 
+    @NotNull
+    private final JavaPlatformVersion platformVersion;
+
     @Nullable
     private final File outDirectory; // TODO: temporary hack, see JetTypeMapperWithOutDirectory state for details
 
@@ -143,7 +147,7 @@ public class GenerationState {
             @NotNull List<JetFile> files
     ) {
         this(project, builderFactory, Progress.DEAF, module, bindingContext, files, true, true, GenerateClassFilter.GENERATE_ALL,
-             false, false, null, null, DiagnosticSink.DO_NOTHING, null);
+             false, false, null, null, DiagnosticSink.DO_NOTHING, null, JavaPlatformVersion.Companion.getDefault());
     }
 
     public GenerationState(
@@ -161,13 +165,15 @@ public class GenerationState {
             @Nullable Collection<FqName> packagesWithObsoleteParts,
             @Nullable String moduleId,
             @NotNull DiagnosticSink diagnostics,
-            @Nullable File outDirectory
+            @Nullable File outDirectory,
+            @NotNull JavaPlatformVersion platformVersion
     ) {
         this.project = project;
         this.progress = progress;
         this.module = module;
         this.files = files;
         this.moduleId = moduleId;
+        this.platformVersion = platformVersion;
         this.packagesWithObsoleteParts = packagesWithObsoleteParts == null ? Collections.<FqName>emptySet() : packagesWithObsoleteParts;
         this.classBuilderMode = builderFactory.getClassBuilderMode();
         this.disableInline = disableInline;
@@ -326,5 +332,10 @@ public class GenerationState {
     @Nullable
     public File getOutDirectory() {
         return outDirectory;
+    }
+
+    @NotNull
+    public JavaPlatformVersion getPlatformVersion() {
+        return platformVersion;
     }
 }

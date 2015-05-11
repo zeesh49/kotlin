@@ -42,7 +42,8 @@ public class TraitImplBodyCodegen extends ClassBodyCodegen {
 
     @Override
     protected void generateDeclaration() {
-        v.defineClass(myClass, V1_6,
+        v.defineClass(myClass,
+                      state.getPlatformVersion().getClassVersion(),
                       ACC_PUBLIC | ACC_FINAL,
                       typeMapper.mapTraitImpl(descriptor).getInternalName(),
                       null,

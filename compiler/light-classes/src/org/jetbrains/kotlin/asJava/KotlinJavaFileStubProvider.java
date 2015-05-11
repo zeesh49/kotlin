@@ -48,6 +48,7 @@ import org.jetbrains.kotlin.codegen.binding.CodegenBinding;
 import org.jetbrains.kotlin.codegen.state.GenerationState;
 import org.jetbrains.kotlin.codegen.state.Progress;
 import org.jetbrains.kotlin.descriptors.ClassDescriptor;
+import org.jetbrains.kotlin.java.JavaPlatformVersion;
 import org.jetbrains.kotlin.name.FqName;
 import org.jetbrains.kotlin.psi.JetClassOrObject;
 import org.jetbrains.kotlin.psi.JetFile;
@@ -346,7 +347,8 @@ public class KotlinJavaFileStubProvider<T extends WithFileStubAndExtraDiagnostic
                     null,
                     null,
                     forExtraDiagnostics,
-                    null
+                    null,
+                    JavaPlatformVersion.Companion.getDefault()
             );
             KotlinCodegenFacade.prepareForCompilation(state);
 

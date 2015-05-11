@@ -64,6 +64,7 @@ import org.jetbrains.kotlin.idea.util.DebuggerUtils
 import org.jetbrains.kotlin.idea.util.application.runReadAction
 import org.jetbrains.kotlin.idea.util.attachment.attachmentByPsiFile
 import org.jetbrains.kotlin.idea.util.attachment.mergeAttachments
+import org.jetbrains.kotlin.java.JavaPlatformVersion
 import org.jetbrains.kotlin.load.java.structure.impl.JavaClassImpl
 import org.jetbrains.kotlin.load.kotlin.PackageClassUtils
 import org.jetbrains.kotlin.name.FqName
@@ -334,7 +335,8 @@ class KotlinEvaluator(val codeFragment: JetCodeFragment,
                         false, false,
                         null, null,
                         DiagnosticSink.DO_NOTHING,
-                        null)
+                        null,
+                        JavaPlatformVersion.getDefault())
 
                 val frameVisitor = FrameVisitor(context)
 

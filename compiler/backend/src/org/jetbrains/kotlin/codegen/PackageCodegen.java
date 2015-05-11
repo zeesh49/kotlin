@@ -101,7 +101,8 @@ public class PackageCodegen {
                         PackageFacade(packageFragment == null ? compiledPackageFragment : packageFragment),
                         packageClassType, PackagePartClassUtils.getPackageFilesWithCallables(files)
                 );
-                v.defineClass(sourceFile, V1_6,
+                v.defineClass(sourceFile,
+                              PackageCodegen.this.state.getPlatformVersion().getClassVersion(),
                               ACC_PUBLIC | ACC_FINAL,
                               packageClassType.getInternalName(),
                               null,

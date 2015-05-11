@@ -50,6 +50,7 @@ import org.jetbrains.kotlin.idea.util.DebuggerUtils;
 import org.jetbrains.kotlin.idea.util.InfinitePeriodicalTask;
 import org.jetbrains.kotlin.idea.util.LongRunningReadTask;
 import org.jetbrains.kotlin.idea.util.ProjectRootsUtil;
+import org.jetbrains.kotlin.java.JavaPlatformVersion;
 import org.jetbrains.kotlin.psi.JetClassOrObject;
 import org.jetbrains.kotlin.psi.JetFile;
 import org.jetbrains.kotlin.psi.JetScript;
@@ -238,7 +239,7 @@ public class KotlinBytecodeToolWindow extends JPanel implements Disposable {
                                         toProcess, !enableAssertions, !enableAssertions,
                                         generateClassFilter,
                                         !enableInline, !enableOptimization, null, null,
-                                        DiagnosticSink.DO_NOTHING, null);
+                                        DiagnosticSink.DO_NOTHING, null, JavaPlatformVersion.Companion.getDefault());
             KotlinCodegenFacade.compileCorrectFiles(state, CompilationErrorHandler.THROW_EXCEPTION);
         }
         catch (ProcessCanceledException e) {

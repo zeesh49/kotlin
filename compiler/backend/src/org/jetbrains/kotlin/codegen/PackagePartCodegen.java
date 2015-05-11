@@ -47,7 +47,8 @@ public class PackagePartCodegen extends MemberCodegen<JetFile> {
 
     @Override
     protected void generateDeclaration() {
-        v.defineClass(element, V1_6,
+        v.defineClass(element,
+                      state.getPlatformVersion().getClassVersion(),
                       ACC_PUBLIC | ACC_FINAL,
                       packagePartType.getInternalName(),
                       null,

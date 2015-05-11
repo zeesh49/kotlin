@@ -201,7 +201,8 @@ public class ImplementationBodyCodegen extends ClassBodyCodegen {
             access |= ACC_ENUM;
         }
         List<String> interfaces = signature.getInterfaces();
-        v.defineClass(myClass, V1_6,
+        v.defineClass(myClass,
+                      state.getPlatformVersion().getClassVersion(),
                       access,
                       signature.getName(),
                       signature.getJavaGenericSignature(),

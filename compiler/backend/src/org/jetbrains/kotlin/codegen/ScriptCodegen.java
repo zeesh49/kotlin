@@ -95,7 +95,7 @@ public class ScriptCodegen extends MemberCodegen<JetScript> {
         Type classType = typeMapper.mapClass(context.getContextDescriptor());
 
         v.defineClass(scriptDeclaration,
-                      V1_6,
+                      state.getPlatformVersion().getClassVersion(),
                       ACC_PUBLIC,
                       classType.getInternalName(),
                       null,

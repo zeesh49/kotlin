@@ -85,7 +85,7 @@ public class SamWrapperCodegen {
 
         ClassBuilder cv = state.getFactory().newVisitor(OtherOrigin(erasedInterfaceFunction), asmType, file);
         cv.defineClass(file,
-                       V1_6,
+                       state.getPlatformVersion().getClassVersion(),
                        ACC_FINAL,
                        asmType.getInternalName(),
                        null,

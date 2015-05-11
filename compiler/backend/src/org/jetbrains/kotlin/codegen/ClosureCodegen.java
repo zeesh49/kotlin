@@ -136,7 +136,7 @@ public class ClosureCodegen extends MemberCodegen<JetElement> {
         }
 
         v.defineClass(element,
-                      V1_6,
+                      state.getPlatformVersion().getClassVersion(),
                       ACC_FINAL | ACC_SUPER | visibilityFlag,
                       asmType.getInternalName(),
                       sw.makeJavaGenericSignature(),

@@ -24,6 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.kotlin.backend.common.output.OutputFile;
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment;
 import org.jetbrains.kotlin.codegen.forTestCompile.ForTestCompileRuntime;
+import org.jetbrains.kotlin.java.JavaPlatformVersion;
 import org.jetbrains.kotlin.load.kotlin.PackagePartClassUtils;
 import org.jetbrains.kotlin.name.FqName;
 import org.jetbrains.kotlin.test.ConfigurationKind;
@@ -164,7 +165,7 @@ public abstract class CodegenTestCase extends UsefulTestCase {
     @NotNull
     protected String generateToText() {
         if (classFileFactory == null) {
-            classFileFactory = generateFiles(myEnvironment, myFiles);
+            classFileFactory = generateFiles(myEnvironment, myFiles, getPlatformVersion());
         }
         return classFileFactory.createText();
     }
@@ -192,11 +193,15 @@ public abstract class CodegenTestCase extends UsefulTestCase {
         }
     }
 
+    protected JavaPlatformVersion getPlatformVersion() {
+        return JavaPlatformVersion.Companion.getDefault();
+    }
+
     @NotNull
     protected ClassFileFactory generateClassesInFile() {
         if (classFileFactory == null) {
             try {
-                classFileFactory = generateFiles(myEnvironment, myFiles);
+                classFileFactory = generateFiles(myEnvironment, myFiles, getPlatformVersion());
 
                 if (DxChecker.RUN_DX_CHECKER) {
                     DxChecker.check(classFileFactory);
