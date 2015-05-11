@@ -14,10 +14,16 @@
  * limitations under the License.
  */
 
-package org.jetbrains.kotlin.codegen.generated;
+package org.jetbrains.kotlin.codegen.generated.target8;
 
 
-public abstract class AbstractBlackBoxCodegenJava8Test extends AbstractBlackBoxCodegenTest {
+import org.jetbrains.kotlin.codegen.generated.AbstractBlackBoxCodegenTest;
+import org.jetbrains.kotlin.java.JavaPlatformVersion;
 
+public abstract class AbstractTarget8BlackBoxCodegenTest extends AbstractBlackBoxCodegenTest {
 
+    @Override
+    protected JavaPlatformVersion getPlatformVersion() {
+        return JavaPlatformVersion.JAVA_8.INSTANCE$;
+    }
 }

@@ -31,6 +31,7 @@ import org.jetbrains.kotlin.codegen.defaultConstructor.AbstractDefaultArgumentsR
 import org.jetbrains.kotlin.codegen.flags.AbstractWriteFlagsTest
 import org.jetbrains.kotlin.codegen.generated.AbstractBlackBoxCodegenTest
 import org.jetbrains.kotlin.codegen.generated.AbstractBlackBoxInlineCodegenTest
+import org.jetbrains.kotlin.codegen.generated.target8.AbstractTarget8BlackBoxCodegenTest
 import org.jetbrains.kotlin.findUsages.AbstractJetFindUsagesTest
 import org.jetbrains.kotlin.formatter.AbstractJetFormatterTest
 import org.jetbrains.kotlin.formatter.AbstractJetTypingIndentationTestBase
@@ -306,8 +307,12 @@ fun main(args: Array<String>) {
     }
 
     testGroup("compiler/java8-tests/tests", "compiler/testData") {
-        testClass(javaClass<AbstractBlackBoxCodegenTest>(), "BlackBoxWithJava8CodegenTestGenerated") {
-            model("codegen/java8/boxWithJava", testMethod = "doTestWithJava", extension = null, recursive = true, excludeParentDirs = true)
+        testClass(javaClass<AbstractBlackBoxCodegenTest>(), "BlackBoxAgainstJava8CodegenTestGenerated") {
+            model("codegen/java8/target6/boxWithJava", testMethod = "doTestWithJava", extension = null, recursive = true, excludeParentDirs = true)
+        }
+
+        testClass(javaClass<AbstractTarget8BlackBoxCodegenTest>()) {
+            model("codegen/box")
         }
     }
 
