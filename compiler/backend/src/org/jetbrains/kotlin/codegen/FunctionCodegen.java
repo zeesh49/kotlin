@@ -26,7 +26,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.kotlin.backend.common.bridges.Bridge;
 import org.jetbrains.kotlin.backend.common.bridges.BridgesPackage;
-import org.jetbrains.kotlin.builtins.KotlinBuiltIns;
 import org.jetbrains.kotlin.codegen.context.CodegenContext;
 import org.jetbrains.kotlin.codegen.context.MethodContext;
 import org.jetbrains.kotlin.codegen.context.PackageContext;
@@ -107,7 +106,7 @@ public class FunctionCodegen {
         assert functionDescriptor != null : "No descriptor for function " + function.getText() + "\n" +
                                             "in " + function.getContainingFile().getVirtualFile();
 
-        if (owner.getContextKind() != OwnerKind.TRAIT_IMPL || function.hasBody()) {
+        if (!AsmUtil.isTarget6TraitImpl(owner, state) || function.hasBody()) {
             generateMethod(OtherOrigin(function, functionDescriptor), functionDescriptor,
                            new FunctionGenerationStrategy.FunctionDefault(state, functionDescriptor, function));
         }

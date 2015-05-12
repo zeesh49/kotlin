@@ -21,5 +21,7 @@ public enum OwnerKind {
 
     IMPLEMENTATION,
 
-    TRAIT_IMPL
+    TRAIT_IMPL,
+
+    JAVA8_INTERFACE
 }

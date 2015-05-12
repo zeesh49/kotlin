@@ -164,7 +164,7 @@ public class AsmUtil {
     public static boolean isAbstractMethod(@NotNull FunctionDescriptor functionDescriptor, @NotNull OwnerKind kind) {
         return functionDescriptor.getModality() == Modality.ABSTRACT
                 || JvmCodegenUtil.isAnnotation(functionDescriptor.getContainingDeclaration()) ||
-               (JvmCodegenUtil.isInterface(functionDescriptor.getContainingDeclaration()) && !isStaticKind(kind));
+               (JvmCodegenUtil.isInterface(functionDescriptor.getContainingDeclaration()) && !isStaticKind(kind) && !isJava8Kind(kind));
     }
 
     public static boolean isStaticMethod(OwnerKind kind, CallableMemberDescriptor functionDescriptor) {
@@ -175,6 +175,10 @@ public class AsmUtil {
 
     public static boolean isStaticKind(OwnerKind kind) {
         return kind == OwnerKind.PACKAGE || kind == OwnerKind.TRAIT_IMPL;
+    }
+
+    public static boolean isJava8Kind(OwnerKind kind) {
+        return kind == OwnerKind.JAVA8_INTERFACE;
     }
 
     public static int getMethodAsmFlags(FunctionDescriptor functionDescriptor, OwnerKind kind) {
