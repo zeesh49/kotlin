@@ -164,7 +164,7 @@ public class AsmUtil {
     public static boolean isAbstractMethod(@NotNull FunctionDescriptor functionDescriptor, @NotNull OwnerKind kind) {
         return functionDescriptor.getModality() == Modality.ABSTRACT
                 || JvmCodegenUtil.isAnnotation(functionDescriptor.getContainingDeclaration()) ||
-               (JvmCodegenUtil.isInterface(functionDescriptor.getContainingDeclaration()) && !isStaticMethod(kind, functionDescriptor));
+               (JvmCodegenUtil.isInterface(functionDescriptor.getContainingDeclaration()) && !isStaticKind(kind));
     }
 
     public static boolean isStaticMethod(OwnerKind kind, CallableMemberDescriptor functionDescriptor) {
