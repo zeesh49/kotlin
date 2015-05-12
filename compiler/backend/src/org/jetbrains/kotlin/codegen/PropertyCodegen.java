@@ -47,7 +47,7 @@ import org.jetbrains.org.objectweb.asm.commons.Method;
 import java.util.List;
 
 import static org.jetbrains.kotlin.codegen.AsmUtil.*;
-import static org.jetbrains.kotlin.codegen.JvmCodegenUtil.isInterface;
+import static org.jetbrains.kotlin.codegen.JvmCodegenUtil.isInterfaceOrAnnotation;
 import static org.jetbrains.kotlin.codegen.JvmSerializationBindings.*;
 import static org.jetbrains.kotlin.resolve.DescriptorUtils.isCompanionObject;
 import static org.jetbrains.kotlin.resolve.DescriptorUtils.isTrait;
@@ -191,7 +191,7 @@ public class PropertyCodegen {
     }
 
     private boolean generateBackingField(@NotNull JetNamedDeclaration p, @NotNull PropertyDescriptor descriptor) {
-        if (isInterface(descriptor.getContainingDeclaration()) || kind == OwnerKind.TRAIT_IMPL) {
+        if (isInterfaceOrAnnotation(descriptor.getContainingDeclaration()) || kind == OwnerKind.TRAIT_IMPL) {
             return false;
         }
 

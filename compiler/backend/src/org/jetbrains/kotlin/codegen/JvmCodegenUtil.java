@@ -58,13 +58,25 @@ public class JvmCodegenUtil {
     public static boolean isInterface(DeclarationDescriptor descriptor) {
         if (descriptor instanceof ClassDescriptor) {
             ClassKind kind = ((ClassDescriptor) descriptor).getKind();
-            return kind == ClassKind.INTERFACE || kind == ClassKind.ANNOTATION_CLASS;
+            return kind == ClassKind.INTERFACE;
         }
         return false;
     }
 
-    public static boolean isInterface(JetType type) {
-        return isInterface(type.getConstructor().getDeclarationDescriptor());
+    public static boolean isAnnotation(DeclarationDescriptor descriptor) {
+        if (descriptor instanceof ClassDescriptor) {
+            ClassKind kind = ((ClassDescriptor) descriptor).getKind();
+            return kind == ClassKind.ANNOTATION_CLASS;
+        }
+        return false;
+    }
+
+    public static boolean isInterfaceOrAnnotation(DeclarationDescriptor descriptor) {
+        return isInterface(descriptor) || isAnnotation(descriptor);
+    }
+
+    public static boolean isInterfaceOrAnnotation(JetType type) {
+        return isInterfaceOrAnnotation(type.getConstructor().getDeclarationDescriptor());
     }
 
     public static boolean isConst(@NotNull CalculatedClosure closure) {

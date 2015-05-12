@@ -293,7 +293,7 @@ public class ImplementationBodyCodegen extends ClassBodyCodegen {
         for (JetDelegationSpecifier specifier : myClass.getDelegationSpecifiers()) {
             JetType superType = bindingContext.get(BindingContext.TYPE, specifier.getTypeReference());
             assert superType != null : "No supertype for class: " + myClass.getText();
-            if (isInterface(superType.getConstructor().getDeclarationDescriptor())) {
+            if (isInterfaceOrAnnotation(superType.getConstructor().getDeclarationDescriptor())) {
                 interfaceSupertypes.add(superType);
             }
         }
@@ -330,7 +330,7 @@ public class ImplementationBodyCodegen extends ClassBodyCodegen {
                 if (!(classifierDescriptor instanceof ClassDescriptor)) continue;
 
                 ClassDescriptor superClassDescriptor = (ClassDescriptor) classifierDescriptor;
-                if (!isInterface(superClassDescriptor)) {
+                if (!isInterfaceOrAnnotation(superClassDescriptor)) {
                     superClassType = superType;
                     superClassAsmType = typeMapper.mapClass(superClassDescriptor);
                 }

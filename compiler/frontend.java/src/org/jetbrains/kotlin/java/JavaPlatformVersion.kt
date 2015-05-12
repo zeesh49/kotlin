@@ -24,6 +24,8 @@ public open class JavaPlatformVersion(val classVersion: Int) {
 
     object JAVA_8 : JavaPlatformVersion(Opcodes.V1_8)
 
+    fun isJava6() = this == JAVA_6
+
     companion  object {
         fun getDefault(): JavaPlatformVersion {
             return JAVA_6

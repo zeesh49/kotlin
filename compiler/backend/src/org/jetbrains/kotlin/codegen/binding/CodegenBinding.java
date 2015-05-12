@@ -40,7 +40,7 @@ import org.jetbrains.org.objectweb.asm.Type;
 
 import java.util.*;
 
-import static org.jetbrains.kotlin.codegen.JvmCodegenUtil.isInterface;
+import static org.jetbrains.kotlin.codegen.JvmCodegenUtil.isInterfaceOrAnnotation;
 import static org.jetbrains.kotlin.resolve.BindingContext.*;
 import static org.jetbrains.kotlin.resolve.DescriptorToSourceUtils.descriptorToDeclaration;
 import static org.jetbrains.kotlin.resolve.calls.callUtil.CallUtilPackage.getResolvedCall;

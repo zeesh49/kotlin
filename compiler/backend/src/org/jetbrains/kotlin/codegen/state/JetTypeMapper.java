@@ -557,14 +557,14 @@ public class JetTypeMapper {
             ClassDescriptor currentOwner = (ClassDescriptor) functionParent;
             ClassDescriptor declarationOwner = (ClassDescriptor) declarationFunctionDescriptor.getContainingDeclaration();
 
-            boolean originalIsInterface = isInterface(declarationOwner);
-            boolean currentIsInterface = isInterface(currentOwner);
+            boolean originalIsInterface = isInterfaceOrAnnotation(declarationOwner);
+            boolean currentIsInterface = isInterfaceOrAnnotation(currentOwner);
 
             boolean isInterface = currentIsInterface && originalIsInterface;
 
             ClassDescriptor ownerForDefault = (ClassDescriptor) findBaseDeclaration(functionDescriptor).getContainingDeclaration();
             ownerForDefaultParam = mapClass(ownerForDefault);
-            ownerForDefaultImpl = isInterface(ownerForDefault) ? mapTraitImpl(ownerForDefault) : ownerForDefaultParam;
+            ownerForDefaultImpl = isInterfaceOrAnnotation(ownerForDefault) ? mapTraitImpl(ownerForDefault) : ownerForDefaultParam;
 
             if (isInterface && superCall) {
                 thisClass = mapClass(currentOwner);
@@ -879,7 +879,7 @@ public class JetTypeMapper {
 
             for (JetType jetType : typeParameterDescriptor.getUpperBounds()) {
                 if (jetType.getConstructor().getDeclarationDescriptor() instanceof ClassDescriptor) {
-                    if (!isInterface(jetType)) {
+                    if (!isInterfaceOrAnnotation(jetType)) {
                         mapType(jetType, sw, JetTypeMapperMode.TYPE_PARAMETER);
                         break classBound;
                     }
@@ -896,7 +896,7 @@ public class JetTypeMapper {
         for (JetType jetType : typeParameterDescriptor.getUpperBounds()) {
             ClassifierDescriptor classifier = jetType.getConstructor().getDeclarationDescriptor();
             if (classifier instanceof ClassDescriptor) {
-                if (isInterface(jetType)) {
+                if (isInterfaceOrAnnotation(jetType)) {
                     sw.writeInterfaceBound();
                     mapType(jetType, sw, JetTypeMapperMode.TYPE_PARAMETER);
                     sw.writeInterfaceBoundEnd();

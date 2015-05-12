@@ -59,7 +59,6 @@ import java.util.Set;
 
 import static org.jetbrains.kotlin.builtins.KotlinBuiltIns.isBoolean;
 import static org.jetbrains.kotlin.builtins.KotlinBuiltIns.isPrimitiveClass;
-import static org.jetbrains.kotlin.codegen.JvmCodegenUtil.isInterface;
 import static org.jetbrains.kotlin.load.java.JvmAnnotationNames.ABI_VERSION_FIELD_NAME;
 import static org.jetbrains.kotlin.load.java.JvmAnnotationNames.KotlinSyntheticClass;
 import static org.jetbrains.kotlin.resolve.DescriptorUtils.*;
@@ -162,9 +161,9 @@ public class AsmUtil {
         return new Method(name, Type.getMethodDescriptor(returnType, parameterTypes));
     }
 
-    public static boolean isAbstractMethod(FunctionDescriptor functionDescriptor, OwnerKind kind) {
+    public static boolean isAbstractMethod(@NotNull FunctionDescriptor functionDescriptor, @NotNull OwnerKind kind) {
         return (functionDescriptor.getModality() == Modality.ABSTRACT
-                || isInterface(functionDescriptor.getContainingDeclaration()))
+                || JvmCodegenUtil.isInterfaceOrAnnotation(functionDescriptor.getContainingDeclaration()))
                && !isStaticMethod(kind, functionDescriptor);
     }
 
@@ -305,7 +304,7 @@ public class AsmUtil {
     @Nullable
     private static Integer specialCaseVisibility(@NotNull MemberDescriptor memberDescriptor) {
         DeclarationDescriptor containingDeclaration = memberDescriptor.getContainingDeclaration();
-        if (isInterface(containingDeclaration)) {
+        if (JvmCodegenUtil.isInterfaceOrAnnotation(containingDeclaration)) {
             return ACC_PUBLIC;
         }
         Visibility memberVisibility = memberDescriptor.getVisibility();
@@ -845,4 +844,19 @@ public class AsmUtil {
         //Trait always should have this descriptor
         return kind != OwnerKind.TRAIT_IMPL && isStaticMethod(kind, descriptor) ? 0 : 1;
     }
+
+    public static boolean isTarget6TraitImpl(@NotNull CodegenContext owner, @NotNull GenerationState state) {
+        return isTarget6TraitImpl(owner.getContextKind(), state);
+    }
+
+    public static boolean isTarget6TraitImpl(@NotNull OwnerKind kind, @NotNull GenerationState state) {
+        //TODO assert for target 8 traitImpl
+        return kind == OwnerKind.TRAIT_IMPL && state.getPlatformVersion().isJava6();
+    }
+
+    public static boolean isTarget6Trait(@Nullable DeclarationDescriptor descriptor, @NotNull GenerationState state) {
+        //TODO assert for target 8 traitImpl
+        return DescriptorUtils.isTrait(descriptor) && state.getPlatformVersion().isJava6();
+    }
+
 }
