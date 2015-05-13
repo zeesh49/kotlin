@@ -100,9 +100,6 @@ public class PropertyCodegen {
             @Nullable JetPropertyAccessor getter,
             @Nullable JetPropertyAccessor setter
     ) {
-        assert kind == OwnerKind.PACKAGE || kind == OwnerKind.IMPLEMENTATION || kind == OwnerKind.TRAIT_IMPL
-                : "Generating property with a wrong kind (" + kind + "): " + descriptor;
-
         if (context instanceof PackageFacadeContext) {
             Type ownerType = ((PackageFacadeContext) context).getDelegateToClassType();
             v.getSerializationBindings().put(IMPL_CLASS_NAME_FOR_CALLABLE, descriptor, shortNameByAsmType(ownerType));
