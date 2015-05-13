@@ -1092,7 +1092,10 @@ public class ImplementationBodyCodegen extends ClassBodyCodegen {
                                        constructorDescriptor, constructorContext,
                                        new FunctionGenerationStrategy.CodegenBased<ConstructorDescriptor>(state, constructorDescriptor) {
                                            @Override
-                                           public void doGenerateBody(@NotNull ExpressionCodegen codegen, @NotNull JvmMethodSignature signature) {
+                                           public void doGenerateBody(
+                                                   @NotNull ExpressionCodegen codegen,
+                                                   @NotNull JvmMethodSignature signature
+                                           ) {
                                                generateSecondaryConstructorImpl(callableDescriptor, codegen);
                                            }
                                        }
@@ -1408,11 +1411,14 @@ public class ImplementationBodyCodegen extends ClassBodyCodegen {
     private void generateTraitMethods() {
         if (JetPsiUtil.isTrait(myClass)) return;
 
-        for (Map.Entry<FunctionDescriptor, FunctionDescriptor> entry : CodegenUtil.getTraitMethods(descriptor).entrySet()) {
-            FunctionDescriptor traitFun = entry.getKey();
-            //skip java 8 default methods
-            if (!(traitFun instanceof JavaCallableMemberDescriptor)) {
-                generateDelegationToTraitImpl(traitFun, entry.getValue());
+        if (state.getPlatformVersion().isJava6()) {
+            //TODO check deserialized
+            for (Map.Entry<FunctionDescriptor, FunctionDescriptor> entry : CodegenUtil.getTraitMethods(descriptor).entrySet()) {
+                FunctionDescriptor traitFun = entry.getKey();
+                //skip java 8 default methods
+                if (!(traitFun instanceof JavaCallableMemberDescriptor)) {
+                    generateDelegationToTraitImpl(traitFun, entry.getValue());
+                }
             }
         }
     }
