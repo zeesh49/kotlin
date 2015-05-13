@@ -268,12 +268,6 @@ public class Target8BlackBoxCodegenTestGenerated extends AbstractTarget8BlackBox
             doTest(fileName);
         }
 
-        @TestMetadata("divisionByZero.kt")
-        public void testDivisionByZero() throws Exception {
-            String fileName = JetTestUtils.navigationMetadata("compiler/testData/codegen/box/binaryOp/divisionByZero.kt");
-            doTest(fileName);
-        }
-
         @TestMetadata("infixCall.kt")
         public void testInfixCall() throws Exception {
             String fileName = JetTestUtils.navigationMetadata("compiler/testData/codegen/box/binaryOp/infixCall.kt");
