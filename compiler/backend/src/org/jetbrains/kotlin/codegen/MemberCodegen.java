@@ -200,9 +200,9 @@ public abstract class MemberCodegen<T extends JetElement/* TODO: & JetDeclaratio
         Type classType = state.getTypeMapper().mapClass(descriptor);
         ClassBuilder classBuilder =
                 state.getFactory().newVisitor(OtherOrigin(aClass, descriptor), classType, aClass.getContainingFile());
-        ClassContext classContext = parentContext.intoClass(descriptor, isInterface && state.getPlatformVersion().isJava6()
-                                                                        ? OwnerKind.IMPLEMENTATION
-                                                                        : OwnerKind.JAVA8_INTERFACE, state);
+        ClassContext classContext = parentContext.intoClass(descriptor, isInterface && !state.getPlatformVersion().isJava6()
+                                                                        ? OwnerKind.JAVA8_INTERFACE
+                                                                        : OwnerKind.IMPLEMENTATION, state);
         new ImplementationBodyCodegen(aClass, classContext, classBuilder, state, parentCodegen).generate();
 
         if (isInterface && state.getPlatformVersion().isJava6()) {
