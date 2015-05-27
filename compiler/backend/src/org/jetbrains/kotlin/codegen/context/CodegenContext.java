@@ -166,12 +166,17 @@ public abstract class CodegenContext<T extends DeclarationDescriptor> {
 
     @NotNull
     public MethodContext intoFunction(FunctionDescriptor descriptor) {
-        return new MethodContext(descriptor, getContextKind(), this, null, false);
+        return new MethodContext(descriptor, getContextKind(), this, null, MethodContext.Kind.DEFAULT);
+    }
+
+    @NotNull
+    public MethodContext intoFunction(@NotNull FunctionDescriptor descriptor, @NotNull MethodContext.Kind compilationKind) {
+        return new MethodContext(descriptor, getContextKind(), this, null, compilationKind);
     }
 
     @NotNull
     public MethodContext intoInlinedLambda(FunctionDescriptor descriptor) {
-        return new MethodContext(descriptor, getContextKind(), this, null, true);
+        return new MethodContext(descriptor, getContextKind(), this, null, MethodContext.Kind.INLINING_LAMBDA);
     }
 
     @NotNull
@@ -354,12 +359,15 @@ public abstract class CodegenContext<T extends DeclarationDescriptor> {
     private MemberDescriptor accessibleDescriptorIfNeeded(CallableMemberDescriptor descriptor, boolean fromOutsideContext) {
         CallableMemberDescriptor unwrappedDescriptor = DescriptorUtils.unwrapFakeOverride(descriptor);
         int flag = getAccessFlags(unwrappedDescriptor);
-        if ((flag & ACC_PRIVATE) == 0 && (flag & ACC_PROTECTED) == 0) {
+        boolean isProtected = (flag & ACC_PROTECTED) != 0;
+        boolean isPrivate = (flag & ACC_PRIVATE) != 0;
+        if (!isPrivate && !isProtected) {
             return descriptor;
         }
 
         CodegenContext descriptorContext = null;
-        if (!fromOutsideContext || getClassOrPackageParentContext().getContextDescriptor() != descriptor.getContainingDeclaration()) {
+        boolean callingFromSameContext = getClassOrPackageParentContext().getContextDescriptor() == descriptor.getContainingDeclaration();
+        if (!fromOutsideContext || !callingFromSameContext) {
             DeclarationDescriptor enclosed = descriptor.getContainingDeclaration();
             boolean isCompanionObjectMember = DescriptorUtils.isCompanionObject(enclosed);
             //go upper
@@ -387,10 +395,15 @@ public abstract class CodegenContext<T extends DeclarationDescriptor> {
         }
 
         if (descriptorContext == null) {
+            if (callingFromSameContext && generateAccessorInAnyCase(descriptor, this)) {
+                descriptorContext = getClassOrPackageParentContext();
+                return (MemberDescriptor) descriptorContext.getAccessor(descriptor);
+            }
+
             return descriptor;
         }
 
-        if ((flag & ACC_PROTECTED) != 0) {
+        if (isProtected) {
             PackageFragmentDescriptor unwrappedDescriptorPackage =
                     DescriptorUtils.getParentOfType(unwrappedDescriptor, PackageFragmentDescriptor.class, false);
             PackageFragmentDescriptor contextDescriptorPackage =
@@ -427,5 +440,9 @@ public abstract class CodegenContext<T extends DeclarationDescriptor> {
 
     private static boolean isStaticField(@NotNull StackValue value) {
         return value instanceof StackValue.Field && ((StackValue.Field) value).isStaticPut;
+    }
+
+    protected boolean generateAccessorInAnyCase(@NotNull CallableDescriptor descriptor, @NotNull CodegenContext fromContext) {
+        return false;
     }
 }

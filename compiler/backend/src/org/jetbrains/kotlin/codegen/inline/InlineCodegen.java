@@ -218,7 +218,12 @@ public class InlineCodegen extends CallGenerator {
 
             //for maxLocals calculation
             MethodVisitor maxCalcAdapter = InlineCodegenUtil.wrapWithMaxLocalCalc(node);
-            MethodContext methodContext = context.getParentContext().intoFunction(functionDescriptor);
+            boolean inliningInSameClass = codegen.getContext().getClassOrPackageParentContext() ==
+                        functionDescriptor.getContainingDeclaration();
+            MethodContext methodContext = context.getParentContext().intoFunction(functionDescriptor,
+                                                                                       inliningInSameClass
+                                                                                       ? MethodContext.Kind.INLINING_FUN_IN_SAME_CLASS
+                                                                                       : MethodContext.Kind.DEFAULT);
 
             SMAP smap;
             if (callDefault) {
@@ -576,6 +581,7 @@ public class InlineCodegen extends CallGenerator {
         activeLambda = null;
     }
 
+    @NotNull
     public static CodegenContext getContext(DeclarationDescriptor descriptor, GenerationState state) {
         if (descriptor instanceof PackageFragmentDescriptor) {
             return new PackageContext((PackageFragmentDescriptor) descriptor, null, null);

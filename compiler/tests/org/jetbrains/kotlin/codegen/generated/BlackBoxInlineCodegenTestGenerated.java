@@ -1013,6 +1013,33 @@ public class BlackBoxInlineCodegenTestGenerated extends AbstractBlackBoxInlineCo
         }
     }
 
+    @TestMetadata("compiler/testData/codegen/boxInline/syntheticAccessors")
+    @TestDataPath("$PROJECT_ROOT")
+    @RunWith(JUnit3RunnerWithInners.class)
+    public static class SyntheticAccessors extends AbstractBlackBoxInlineCodegenTest {
+        @TestMetadata("accessInternalMembers.1.kt")
+        public void testAccessInternalMembers() throws Exception {
+            String fileName = JetTestUtils.navigationMetadata("compiler/testData/codegen/boxInline/syntheticAccessors/accessInternalMembers.1.kt");
+            doTestMultiFileWithInlineCheck(fileName);
+        }
+
+        @TestMetadata("accessPrivateMembers.1.kt")
+        public void testAccessPrivateMembers() throws Exception {
+            String fileName = JetTestUtils.navigationMetadata("compiler/testData/codegen/boxInline/syntheticAccessors/accessPrivateMembers.1.kt");
+            doTestMultiFileWithInlineCheck(fileName);
+        }
+
+        @TestMetadata("accessProtectedMembers.1.kt")
+        public void testAccessProtectedMembers() throws Exception {
+            String fileName = JetTestUtils.navigationMetadata("compiler/testData/codegen/boxInline/syntheticAccessors/accessProtectedMembers.1.kt");
+            doTestMultiFileWithInlineCheck(fileName);
+        }
+
+        public void testAllFilesPresentInSyntheticAccessors() throws Exception {
+            JetTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/codegen/boxInline/syntheticAccessors"), Pattern.compile("^(.+)\\.1.kt$"), true);
+        }
+    }
+
     @TestMetadata("compiler/testData/codegen/boxInline/trait")
     @TestDataPath("$PROJECT_ROOT")
     @RunWith(JUnit3RunnerWithInners.class)
