@@ -21,13 +21,11 @@ import com.android.ide.common.rendering.RenderSecurityManager;
 import com.android.tools.idea.rendering.PsiProjectListener;
 import com.intellij.facet.FacetManager;
 import com.intellij.facet.ModifiableFacetModel;
-import com.intellij.ide.startup.impl.StartupManagerImpl;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ModuleRootModificationUtil;
-import com.intellij.openapi.startup.StartupManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess;
 import com.intellij.testFramework.builders.JavaModuleFixtureBuilder;
@@ -146,7 +144,7 @@ public abstract class KotlinAndroidTestCase extends KotlinAndroidTestCaseBase {
             RenderSecurityManager.sEnabled = false;
         }
 
-        ((StartupManagerImpl) StartupManager.getInstance(getProject())).runPostStartupActivities();
+        //((StartupManagerImpl) StartupManager.getInstance(getProject())).runPostStartupActivities();
 
         kotlinInternalModeOriginalValue = KotlinInternalMode.Instance.getEnabled();
         KotlinInternalMode.Instance.setEnabled(true);

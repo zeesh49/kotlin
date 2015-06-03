@@ -17,8 +17,6 @@
 package org.jetbrains.kotlin.idea.kdoc;
 
 import com.intellij.codeInsight.TargetElementUtilBase;
-import com.intellij.ide.startup.impl.StartupManagerImpl;
-import com.intellij.openapi.startup.StartupManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.refactoring.rename.RenameProcessor;
 import com.intellij.testFramework.LightCodeInsightTestCase;
@@ -43,7 +41,7 @@ public class KdocRenameTest extends LightCodeInsightTestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        ((StartupManagerImpl) StartupManager.getInstance(getProject())).runPostStartupActivities();
+        //((StartupManagerImpl) StartupManager.getInstance(getProject())).runPostStartupActivities();
     }
 
     private void doTest(String newName) throws Exception {

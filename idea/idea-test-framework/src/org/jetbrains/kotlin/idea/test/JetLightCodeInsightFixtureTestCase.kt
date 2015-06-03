@@ -47,7 +47,7 @@ public abstract class JetLightCodeInsightFixtureTestCase : LightCodeInsightFixtu
 
     override fun setUp() {
         super.setUp()
-        (StartupManager.getInstance(getProject()) as StartupManagerImpl).runPostStartupActivities()
+//        (StartupManager.getInstance(getProject()) as StartupManagerImpl).runPostStartupActivities()
         VfsRootAccess.allowRootAccess(JetTestUtils.getHomeDirectory())
 
         kotlinInternalModeOriginalValue = KotlinInternalMode.enabled
@@ -74,7 +74,7 @@ public abstract class JetLightCodeInsightFixtureTestCase : LightCodeInsightFixtu
         unInvalidateBuiltinsAndStdLib(getProject()) {
             super.tearDown()
         }
-
+        
         if (exceptions.isNotEmpty()) {
             exceptions.forEach { it.printStackTrace() }
             throw AssertionError("Exceptions in other threads happened")

@@ -21,12 +21,10 @@ import com.intellij.codeInsight.daemon.quickFix.QuickFixTestCase;
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.codeInspection.SuppressIntentionAction;
 import com.intellij.codeInspection.SuppressableProblemGroup;
-import com.intellij.ide.startup.impl.StartupManagerImpl;
 import com.intellij.lang.annotation.ProblemGroup;
 import com.intellij.openapi.command.CommandProcessor;
 import com.intellij.openapi.projectRoots.JavaSdk;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.startup.StartupManager;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
@@ -62,7 +60,7 @@ public abstract class AbstractQuickFixTest extends KotlinLightQuickFixTestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        ((StartupManagerImpl) StartupManager.getInstance(getProject())).runPostStartupActivities();
+        //((StartupManagerImpl) StartupManager.getInstance(getProject())).runPostStartupActivities();
     }
 
     protected void doTest(@NotNull String beforeFileName) throws Exception {

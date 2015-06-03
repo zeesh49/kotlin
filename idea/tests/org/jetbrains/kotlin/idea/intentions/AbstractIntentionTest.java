@@ -18,8 +18,6 @@ package org.jetbrains.kotlin.idea.intentions;
 
 import com.google.common.collect.Lists;
 import com.intellij.codeInsight.intention.IntentionAction;
-import com.intellij.ide.startup.impl.StartupManagerImpl;
-import com.intellij.openapi.startup.StartupManager;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
@@ -193,7 +191,7 @@ public abstract class AbstractIntentionTest extends KotlinCodeInsightTestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        ((StartupManagerImpl) StartupManager.getInstance(getProject())).runPostStartupActivities();
+        //((StartupManagerImpl) StartupManager.getInstance(getProject())).runPostStartupActivities();
     }
 
     @NotNull
