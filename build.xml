@@ -516,6 +516,181 @@
         <pack-compiler jarfile="${kotlin-home}/lib/kotlin-compiler.jar" compress="false"/>
     </target>
 
+    <target name="formatter">
+        <delete file="out/artifacts/internal/formatter-all.jar" failonerror="false"/>
+        <delete file="out/artifacts/internal/formatter-all-before.jar" failonerror="false"/>
+
+        <zip destfile="out/artifacts/internal/formatter-all-before.jar" duplicate="preserve">
+            <zipfileset src="ideaSDK/lib/openapi.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/core-analysis/intellij-core-analysis.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/core/annotations.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/core/asm-all.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/core/guava-17.0.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/core/jdom.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/core/jna.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/core/jsr166e.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/core/log4j.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/core/picocontainer.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/core/trove4j.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/core/util.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/core/xpp3-1.1.4-min.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/core/xstream-1.4.3.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/plugins/gradle/lib/jsr305-1.3.9.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/automaton.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jna-utils.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jps-model.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/snappy-in-java-0.3.1.jar" includes="**/*.java **/*.class"/>
+        </zip>
+
+        <taskdef resource="proguard/ant/task.properties" classpath="${dependencies.dir}/proguard.jar"/>
+
+        <available property="rtjar" value="${java.home}/lib/rt.jar" file="${java.home}/lib/rt.jar"/>
+        <available property="rtjar" value="${java.home}/../Classes/classes.jar" file="${java.home}/../Classes/classes.jar"/>
+
+        <available property="jssejar" value="${java.home}/lib/jsse.jar" file="${java.home}/lib/jsse.jar"/>
+        <available property="jssejar" value="${java.home}/../Classes/jsse.jar" file="${java.home}/../Classes/jsse.jar"/>
+
+        <proguard configuration="idea/formatter/formatter.pro"/>
+    </target>
+
+    <target name="junit">
+        <delete file="out/artifacts/internal/junit-all.jar" failonerror="false"/>
+
+        <taskdef resource="proguard/ant/task.properties" classpath="${dependencies.dir}/proguard.jar"/>
+
+        <available property="rtjar" value="${java.home}/lib/rt.jar" file="${java.home}/lib/rt.jar"/>
+        <available property="rtjar" value="${java.home}/../Classes/classes.jar" file="${java.home}/../Classes/classes.jar"/>
+
+        <available property="jssejar" value="${java.home}/lib/jsse.jar" file="${java.home}/lib/jsse.jar"/>
+        <available property="jssejar" value="${java.home}/../Classes/jsse.jar" file="${java.home}/../Classes/jsse.jar"/>
+
+        <proguard configuration="idea/formatter/junit.pro"/>
+    </target>
+
+    <target name="idea">
+        <delete file="out/artifacts/internal/idea-all.jar" failonerror="false"/>
+
+        <echo message="${java.home}"/>
+
+        <!--
+        <zip destfile="out/artifacts/internal/idea-big.jar" duplicate="preserve">
+            <zipfileset src="ideaSDK/lib/annotations.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="dependencies/ant-1.8/lib/ant.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/asm-all.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/asm-commons.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/asm.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/asm4-all.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/automaton.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/boot.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/bootstrap.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/cglib-2.2.2.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/cli-parser-1.1.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/commons-codec-1.8.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/commons-httpclient-3.1-patched.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/commons-logging-1.1.3.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/commons-net-3.3.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/ecj-4.4.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/extensions.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/fluent-hc-4.3.6.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/forms_rt.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/freemarker.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/groovy-all-2.3.9.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/gson-2.3.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/guava-17.0.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/hamcrest-core-1.3.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/hamcrest-library-1.3.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/httpclient-4.3.6.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/httpcore-4.3.3.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/httpmime-4.3.6.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/icons.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/idea.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/idea_rt.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/isorelax.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/javac2.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jaxen-1.1.3.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jayatana-1.2.4.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jcip-annotations.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jdkAnnotations.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jdom.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jgoodies-common-1.2.1.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jgoodies-forms.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jgoodies-looks-2.4.2.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jh.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jing.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jna-utils.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jna.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jps-launcher.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jps-model.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jps-server.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jsch-0.1.51.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jsch.agentproxy.connector-factory.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jsch.agentproxy.core.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jsch.agentproxy.pageant.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jsch.agentproxy.sshagent.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jsch.agentproxy.usocket-jna.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jsch.agentproxy.usocket-nc.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jsr166e.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jsr173_1.0_api.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/junit-4.11.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/jzlib-1.1.1.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/log4j.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/markdown4j-2.2.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/markdownj-core-0.4.2-SNAPSHOT.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/microba.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/miglayout-swing.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/nanoxml-2.2.3.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/nekohtml-1.9.14.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/netty-all-4.1.0.Beta4.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/openapi.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/optimizedFileManager.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/oromatcher.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/picocontainer.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/protobuf-2.5.0.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/proxy-vole_20131209.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/pty4j-0.4.15.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/purejavacomm.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/resolver.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/resources.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/resources_en.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/rhino-js-1_7R4.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/rngom-20051226-patched.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/sanselan-0.98-snapshot.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/serviceMessages.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/slf4j-api-1.7.10.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/slf4j-log4j12-1.7.10.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/snappy-in-java-0.3.1.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/swingx-core-1.6.2.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/trang-core.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/trove4j.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/util.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/velocity.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/winp-1.21-patched.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/xbean.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/xerces.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/xmlrpc-2.0.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/xpp3-1.1.4-min.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/xstream-1.4.3.jar" includes="**/*.java **/*.class"/>
+            <zipfileset src="ideaSDK/lib/xpp3-1.1.4-min.jar" includes="**/*.java **/*.class"/>
+
+            <zipfileset src="out/artifacts/internal/formatter.jar" includes="**/*.java **/*.class"/>
+        </zip>
+    -->
+
+
+        <taskdef resource="proguard/ant/task.properties" classpath="${dependencies.dir}/proguard.jar"/>
+
+        <available property="rtjar" value="${java.home}/lib/rt.jar" file="${java.home}/lib/rt.jar"/>
+        <available property="rtjar" value="${java.home}/../Classes/classes.jar" file="${java.home}/../Classes/classes.jar"/>
+
+        <available property="jssejar" value="${java.home}/lib/jsse.jar" file="${java.home}/lib/jsse.jar"/>
+        <available property="jssejar" value="${java.home}/../Classes/jsse.jar" file="${java.home}/../Classes/jsse.jar"/>
+
+        <available property="toolsjar" value="${java.home}/../lib/tools.jar" file="${java.home}/../lib/tools.jar"/>
+        <available property="toolsjar" value="${java.home}/../Classes/tools.jar" file="${java.home}/../Classes/tools.jar"/>
+
+        <proguard configuration="idea/formatter/idea.pro"/>
+    </target>
+
     <target name="compiler">
         <taskdef resource="proguard/ant/task.properties">
             <classpath>
