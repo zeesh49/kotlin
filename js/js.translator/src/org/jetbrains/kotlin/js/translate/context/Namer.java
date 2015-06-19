@@ -95,6 +95,7 @@ public final class Namer {
     private static final String COMPANION_OBJECT_INITIALIZER = "object_initializer$";
     private static final String PROTOTYPE_NAME = "prototype";
     public static final String CAPTURED_VAR_FIELD = "v";
+    public static final JsNameRef IS_ARRAY_FUN_REF = new JsNameRef("isArray", "Array");
 
     public static final JsNameRef CREATE_INLINE_FUNCTION = new JsNameRef("defineInlineFunction", KOTLIN_OBJECT_REF);
 

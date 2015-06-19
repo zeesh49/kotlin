@@ -42,6 +42,7 @@ import org.jetbrains.kotlin.resolve.DescriptorUtils;
 import org.jetbrains.kotlin.types.JetType;
 
 import static org.jetbrains.kotlin.builtins.KotlinBuiltIns.isAnyOrNullableAny;
+import static org.jetbrains.kotlin.builtins.KotlinBuiltIns.isArray;
 import static org.jetbrains.kotlin.builtins.KotlinBuiltIns.isFunctionOrExtensionFunctionType;
 import static org.jetbrains.kotlin.js.descriptorUtils.DescriptorUtilsPackage.getNameIfStandardType;
 import static org.jetbrains.kotlin.js.translate.utils.JsAstUtils.equality;
@@ -129,6 +130,8 @@ public final class PatternTranslator extends AbstractTranslator {
         if (isAnyOrNullableAny(type)) return namer().isAny();
 
         if (isFunctionOrExtensionFunctionType(type)) return namer().isTypeOf(program().getStringLiteral("function"));
+
+        if (isArray(type)) return Namer.IS_ARRAY_FUN_REF;
 
         JsExpression builtinCheck = getIsTypeCheckCallableForBuiltin(type);
         if (builtinCheck != null) return builtinCheck;
