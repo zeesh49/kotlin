@@ -493,7 +493,7 @@ var Kotlin = {};
 
     Kotlin.orNull = function (fn) {
         return function (object) {
-            return object === null || fn(object);
+            return object == null || fn(object);
         }
     };
 
