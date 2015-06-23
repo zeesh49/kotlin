@@ -413,7 +413,7 @@ public final class Namer {
     }
 
     @NotNull
-    public JsExpression invokeFunctionAndSetTypeCheckMetadata(
+    private JsExpression invokeFunctionAndSetTypeCheckMetadata(
             @NotNull String functionName,
             @Nullable JsExpression argument,
             @NotNull TypeCheck metadata
