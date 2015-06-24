@@ -17,7 +17,6 @@
 package org.jetbrains.kotlin.js.translate.expression;
 
 import com.google.dart.compiler.backend.js.ast.*;
-import com.google.dart.compiler.backend.js.ast.metadata.MetadataPackage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.kotlin.JetNodeTypes;
@@ -83,9 +82,7 @@ public final class PatternTranslator extends AbstractTranslator {
             onFail = new JsInvocation(throwCCEFunRef);
         }
 
-        JsConditional conditional = new JsConditional(isCheck, temporary.reference(), onFail);
-        MetadataPackage.setIsCastExpression(conditional, true);
-        return conditional;
+        return new JsConditional(isCheck, temporary.reference(), onFail);
     }
 
     @NotNull
