@@ -41,9 +41,7 @@ import org.jetbrains.kotlin.psi.JetTypeReference;
 import org.jetbrains.kotlin.resolve.DescriptorUtils;
 import org.jetbrains.kotlin.types.JetType;
 
-import static org.jetbrains.kotlin.builtins.KotlinBuiltIns.isAnyOrNullableAny;
-import static org.jetbrains.kotlin.builtins.KotlinBuiltIns.isArray;
-import static org.jetbrains.kotlin.builtins.KotlinBuiltIns.isFunctionOrExtensionFunctionType;
+import static org.jetbrains.kotlin.builtins.KotlinBuiltIns.*;
 import static org.jetbrains.kotlin.js.descriptorUtils.DescriptorUtilsPackage.getNameIfStandardType;
 import static org.jetbrains.kotlin.js.translate.utils.JsAstUtils.equality;
 import static org.jetbrains.kotlin.js.translate.utils.JsAstUtils.negated;
@@ -106,8 +104,11 @@ public final class PatternTranslator extends AbstractTranslator {
     public JsExpression translateIsCheck(@NotNull JsExpression subject, @NotNull JetTypeReference typeReference) {
         JetType type = BindingUtils.getTypeByReference(bindingContext(), typeReference);
         JsExpression checkFunReference = doGetIsTypeCheckCallable(type);
+        boolean isReifiedType = isReifiedTypeParameter(type);
 
-        if (isReifiedTypeParameter(type) && findChildByType(typeReference, JetNodeTypes.NULLABLE_TYPE) != null) {
+        if (!isReifiedType && isNullableType(type) ||
+            isReifiedType && findChildByType(typeReference, JetNodeTypes.NULLABLE_TYPE) != null
+        ) {
             checkFunReference = namer().orNull(checkFunReference);
         }
 
@@ -142,7 +143,7 @@ public final class PatternTranslator extends AbstractTranslator {
                 return getIsTypeCheckCallableForReifiedType(typeParameterDescriptor);
             }
 
-            return namer().isAny();
+            return doGetIsTypeCheckCallable(typeParameterDescriptor.getUpperBoundsAsType());
         }
 
         JsNameRef typeName = getClassNameReference(type);
