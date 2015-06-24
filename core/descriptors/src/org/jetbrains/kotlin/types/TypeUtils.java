@@ -766,7 +766,7 @@ public class TypeUtils {
         return typeParameterDescriptor != null && typeParameterDescriptor.isReified();
     }
 
-    public static boolean isNonReifiedTypeParemeter(@NotNull JetType type) {
+    public static boolean isNonReifiedTypeParameter(@NotNull JetType type) {
         TypeParameterDescriptor typeParameterDescriptor = getTypeParameterDescriptorOrNull(type);
         return typeParameterDescriptor != null && !typeParameterDescriptor.isReified();
     }
