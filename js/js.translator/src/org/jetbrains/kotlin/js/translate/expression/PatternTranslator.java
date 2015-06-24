@@ -25,6 +25,7 @@ import org.jetbrains.kotlin.descriptors.ClassDescriptor;
 import org.jetbrains.kotlin.descriptors.DeclarationDescriptor;
 import org.jetbrains.kotlin.descriptors.TypeParameterDescriptor;
 import org.jetbrains.kotlin.js.patterns.NamePredicate;
+import org.jetbrains.kotlin.js.patterns.typePredicates.TypePredicatesPackage;
 import org.jetbrains.kotlin.js.translate.context.Namer;
 import org.jetbrains.kotlin.js.translate.context.TemporaryVariable;
 import org.jetbrains.kotlin.js.translate.context.TranslationContext;
@@ -125,13 +126,10 @@ public final class PatternTranslator extends AbstractTranslator {
 
     @NotNull
     private JsExpression doGetIsTypeCheckCallable(@NotNull JetType type) {
-        if (isAnyOrNullableAny(type)) return namer().isAny();
-
-        if (isFunctionOrExtensionFunctionType(type)) return namer().isTypeOf(program().getStringLiteral("function"));
-
-        if (isArray(type)) return Namer.IS_ARRAY_FUN_REF;
-
         JsExpression builtinCheck = getIsTypeCheckCallableForBuiltin(type);
+        if (builtinCheck != null) return builtinCheck;
+
+        builtinCheck = getIsTypeCheckCallableForPrimitiveBuiltin(type);
         if (builtinCheck != null) return builtinCheck;
 
         TypeParameterDescriptor typeParameterDescriptor = getTypeParameterDescriptorOrNull(type);
@@ -149,6 +147,19 @@ public final class PatternTranslator extends AbstractTranslator {
 
     @Nullable
     private JsExpression getIsTypeCheckCallableForBuiltin(@NotNull JetType type) {
+        if (isAnyOrNullableAny(type)) return namer().isAny();
+
+        if (isFunctionOrExtensionFunctionType(type)) return namer().isTypeOf(program().getStringLiteral("function"));
+
+        if (isArray(type)) return Namer.IS_ARRAY_FUN_REF;
+
+        if (TypePredicatesPackage.getCOMPARABLE().apply(type)) return namer().isComparable();
+
+        return null;
+    }
+
+    @Nullable
+    private JsExpression getIsTypeCheckCallableForPrimitiveBuiltin(@NotNull JetType type) {
         Name typeName = getNameIfStandardType(type);
 
         if (NamePredicate.STRING.apply(typeName)) {
