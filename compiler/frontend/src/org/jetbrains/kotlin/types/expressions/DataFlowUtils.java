@@ -54,7 +54,7 @@ public class DataFlowUtils {
 
     @NotNull
     public static DataFlowInfo extractDataFlowInfoFromCondition(
-            @Nullable JetExpression condition,
+            @Nullable final JetExpression condition,
             final boolean conditionValue,
             final ExpressionTypingContext context
     ) {
@@ -63,9 +63,16 @@ public class DataFlowUtils {
         condition.accept(new JetVisitorVoid() {
             @Override
             public void visitIsExpression(@NotNull JetIsExpression expression) {
+                context.typeInfoOperationChecker.checkIsExpression(expression, context.trace);
+
                 if (conditionValue && !expression.isNegated() || !conditionValue && expression.isNegated()) {
                     result.set(context.trace.get(BindingContext.DATAFLOW_INFO_AFTER_CONDITION, expression));
                 }
+            }
+
+            @Override
+            public void visitBinaryWithTypeRHSExpression(@NotNull JetBinaryExpressionWithTypeRHS expression) {
+                context.typeInfoOperationChecker.checkBinaryExpressionWithTypeRHS(expression, context.trace);
             }
 
             @Override

@@ -63,7 +63,8 @@ public object KotlinJvmCheckerProvider : AdditionalCheckerProvider(
                                         JavaAnnotationMethodCallChecker(), TraitDefaultMethodCallChecker()),
 
         additionalTypeCheckers = listOf(JavaNullabilityWarningsChecker()),
-        additionalSymbolUsageValidators = listOf()
+        additionalSymbolUsageValidators = listOf(),
+        additionalTypeInfoOperationChecker = listOf()
 )
 
 public class LocalFunInlineChecker : DeclarationChecker {

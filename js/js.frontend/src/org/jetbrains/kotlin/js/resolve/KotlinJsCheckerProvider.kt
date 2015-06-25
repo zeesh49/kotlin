@@ -23,5 +23,6 @@ public object KotlinJsCheckerProvider : AdditionalCheckerProvider(
         additionalDeclarationCheckers = listOf(NativeInvokeChecker(), NativeGetterChecker(), NativeSetterChecker(), ClassDeclarationChecker()),
         additionalCallCheckers = listOf(JsCallChecker()),
         additionalTypeCheckers = listOf(),
-        additionalSymbolUsageValidators = listOf()
+        additionalSymbolUsageValidators = listOf(),
+        additionalTypeInfoOperationChecker = listOf()
 )
