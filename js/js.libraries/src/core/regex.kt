@@ -56,7 +56,7 @@ public class Regex(pattern: String, options: Set<RegexOption>) {
     public fun matches(input: CharSequence): Boolean {
         nativePattern.reset()
         val match = nativePattern.exec(input.toString())
-        return match != null && (match as RegExpMatch).index == 0 && nativePattern.lastIndex == input.length()
+        return match != null && match.index == 0 && nativePattern.lastIndex == input.length()
     }
 
     /** Indicates whether the regular expression can find at least a match in the specified [input]. */
@@ -168,8 +168,7 @@ private fun RegExp.findNext(input: String, from: Int): MatchResult? {
     this.lastIndex = from
     val match = exec(input)
     if (match == null) return null
-    val reMatch = match as RegExpMatch
-    val range = reMatch.index..lastIndex-1
+    val range = match.index..lastIndex-1
 
     return object : MatchResult {
         override val range: IntRange = range
@@ -177,7 +176,7 @@ private fun RegExp.findNext(input: String, from: Int): MatchResult? {
             get() = match[0]!!
 
         override val groups: MatchGroupCollection = object : MatchGroupCollection {
-            override fun size(): Int = match.size()
+            override fun size(): Int = match.length
             override fun isEmpty(): Boolean = size() == 0
 
             override fun contains(o: Any?): Boolean = this.any { it == o }

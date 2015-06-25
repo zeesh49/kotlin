@@ -57,12 +57,12 @@ class RegExpTest {
         var re = RegExp("""(\w\d)(\w\d)""", "g")
         val m1 = re.exec(string)!!
         assertEquals(array("R2D2", "R2", "D2"), m1)
-        assertEquals(0, (m1 as RegExpMatch).index)
+        assertEquals(0, m1.index)
         assertEquals(4, re.lastIndex)
 
         val m2 = re.exec(string)!!
         assertEquals(array("A5D5", "A5", "D5"), m2)
-        assertEquals(string.indexOf(m2[0]!!), (m2 as RegExpMatch).index)
+        assertEquals(string.indexOf(m2[0]!!), m2.index)
 
         val noMatch = re.exec(string)
         assertEquals(null, noMatch)
