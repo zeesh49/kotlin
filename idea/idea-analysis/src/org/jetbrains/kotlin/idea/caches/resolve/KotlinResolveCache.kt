@@ -38,6 +38,7 @@ import org.jetbrains.kotlin.psi.psiUtil.parentsWithSelf
 import org.jetbrains.kotlin.resolve.*
 import org.jetbrains.kotlin.resolve.lazy.BodyResolveMode
 import org.jetbrains.kotlin.resolve.lazy.ResolveSession
+import org.jetbrains.kotlin.utils.Profiler
 import java.util.*
 
 internal class PerFileAnalysisCache(val file: KtFile, val componentProvider: ComponentProvider) {
@@ -146,6 +147,7 @@ private object KotlinResolveDataProvider {
     }
 
     fun analyze(project: Project, componentProvider: ComponentProvider, analyzableElement: KtElement): AnalysisResult {
+        val profiler = Profiler.create("KotlinResolveDataProvider.analyze: " + analyzableElement.hashCode())
         try {
             val module = componentProvider.get<ModuleDescriptor>()
             if (analyzableElement is KtCodeFragment) {
@@ -192,6 +194,9 @@ private object KotlinResolveDataProvider {
             LOG.error(e)
 
             return AnalysisResult.error(BindingContext.EMPTY, e)
+        }
+        finally {
+            profiler.end()
         }
     }
 
