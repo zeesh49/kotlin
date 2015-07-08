@@ -529,11 +529,17 @@ public class CallResolver {
         Call call = context.call;
         if (CallResolverUtilKt.isInvokeCallOnVariable(call)) return;
 
-        DelegatingBindingTrace deltasTraceToCacheResolve = new DelegatingBindingTrace(
+        DelegatingBindingTrace deltasTraceToCacheResolve = new DeltaDelegationTrace(
                 BindingContext.EMPTY, "delta trace for caching resolve of", context.call);
         traceToResolveCall.addOwnDataTo(deltasTraceToCacheResolve);
 
         context.resolutionResultsCache.record(call, results, context, tracing, deltasTraceToCacheResolve);
+    }
+
+    private static class DeltaDelegationTrace extends DelegatingBindingTrace {
+        public DeltaDelegationTrace(BindingContext parentContext, String debugName, Call call) {
+            super(parentContext, debugName, call);
+        }
     }
 
     private <D extends CallableDescriptor> OverloadResolutionResultsImpl<D> checkArgumentTypesAndFail(BasicCallResolutionContext context) {
