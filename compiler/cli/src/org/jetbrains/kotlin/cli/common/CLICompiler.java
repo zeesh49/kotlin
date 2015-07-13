@@ -147,8 +147,7 @@ public abstract class CLICompiler<A extends CommonCompilerArguments> {
             messageCollector = new FilteringMessageCollector(messageCollector, not(equalTo(CompilerMessageSeverity.WARNING)));
         }
 
-        messageCollector = new UniqueMessageCollector(messageCollector);
-        MessageSeverityCollector severityCollector = new MessageSeverityCollector(messageCollector);
+        GroupingMessageCollector groupingCollector = new GroupingMessageCollector(messageCollector);
         try {
             ExitCode exitCode = OK;
 
@@ -170,6 +169,7 @@ public abstract class CLICompiler<A extends CommonCompilerArguments> {
                 }
                 Disposable rootDisposable = Disposer.newDisposable();
                 try {
+                    MessageSeverityCollector severityCollector = new MessageSeverityCollector(groupingCollector);
                     ExitCode code = doExecute(arguments, services, severityCollector, rootDisposable);
                     exitCode = severityCollector.anyReported(CompilerMessageSeverity.ERROR) ? COMPILATION_ERROR : code;
                 }
@@ -195,9 +195,12 @@ public abstract class CLICompiler<A extends CommonCompilerArguments> {
             return exitCode;
         }
         catch (Throwable t) {
-            severityCollector.report(CompilerMessageSeverity.EXCEPTION, OutputMessageUtil.renderException(t),
+            groupingCollector.report(CompilerMessageSeverity.EXCEPTION, OutputMessageUtil.renderException(t),
                                      CompilerMessageLocation.NO_LOCATION);
             return INTERNAL_ERROR;
+        }
+        finally {
+            groupingCollector.flush();
         }
     }
 
