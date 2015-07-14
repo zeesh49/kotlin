@@ -42,6 +42,7 @@ import org.jetbrains.kotlin.js.analyze.TopDownAnalyzerFacadeForJS
 import com.intellij.openapi.Disposable
 import org.jetbrains.kotlin.cli.jvm.compiler.CliLightClassGenerationSupport
 import org.jetbrains.kotlin.context.ModuleContext
+import org.jetbrains.kotlin.progress.Progress
 
 private val ANALYZE_PACKAGE_ROOTS_FOR_JVM = listOf("kotlin")
 private val ANALYZE_PACKAGE_ROOTS_FOR_JS = listOf("kotlin", "jquery", "html5")
@@ -126,7 +127,8 @@ class NoInternalVisibilityInStdLibTest {
 
             TopDownAnalyzerFacadeForJVM.analyzeFilesWithJavaIntegrationWithCustomContext(
                     TopDownAnalyzerFacadeForJVM.createContextWithSealedModule(environment.project),
-                    environment.getSourceFiles(), CliLightClassGenerationSupport.NoScopeRecordCliBindingTrace(), null, null
+                    environment.getSourceFiles(), CliLightClassGenerationSupport.NoScopeRecordCliBindingTrace(), null, null,
+                    Progress.DEAF
             ).moduleDescriptor
 
         }
