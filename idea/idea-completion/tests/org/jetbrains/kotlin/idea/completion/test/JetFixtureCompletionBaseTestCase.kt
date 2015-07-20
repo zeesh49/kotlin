@@ -42,7 +42,7 @@ public abstract class JetFixtureCompletionBaseTestCase : JetLightCodeInsightFixt
 
     protected open fun setUpFixture(testPath: String) {
         //TODO: this is a hacky workaround for js second completion tests failing with PsiInvalidElementAccessException
-        LibraryModificationTracker.getInstance(getProject()).incModificationCount()
+        // LibraryModificationTracker.getInstance(getProject()).incModificationCount()
 
         myFixture.configureByFile(testPath)
     }
