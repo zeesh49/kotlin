@@ -2511,6 +2511,12 @@ public class JavaToKotlinConverterForWebDemoTestGenerated extends AbstractJavaTo
             String fileName = KotlinTestUtils.navigationMetadata("j2k/testData/fileOrElement/importStatement/simpleImport.java");
             doTest(fileName);
         }
+
+        @TestMetadata("staticImport.java")
+        public void testStaticImport() throws Exception {
+            String fileName = JetTestUtils.navigationMetadata("j2k/testData/fileOrElement/importStatement/staticImport.java");
+            doTest(fileName);
+        }
     }
 
     @TestMetadata("j2k/testData/fileOrElement/inheritance")

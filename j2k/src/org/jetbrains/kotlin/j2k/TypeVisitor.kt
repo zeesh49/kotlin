@@ -72,6 +72,15 @@ class TypeVisitor(
             val kotlinClassName = (if (mutability.isMutable(converter.settings)) toKotlinMutableTypesMap[javaClassName] else null)
                                   ?: toKotlinTypesMap[javaClassName]
             if (kotlinClassName != null) {
+//                val fqName = FqName(kotlinClassName)
+//                val identifier = Identifier(fqName.shortName().identifier, imports = listOf(fqName)).assignNoPrototype()
+                 if (classType is PsiClassReferenceType) {
+                     val nestedClassIdentifier = converter.constructNestedClassReferenceIdentifier(psiClass, classType.reference)
+                     if (nestedClassIdentifier != null) {
+                         return ReferenceElement(nestedClassIdentifier, typeArgs).assignNoPrototype()
+                     }
+                 }
+
                 return ReferenceElement(Identifier(getShortName(kotlinClassName)).assignNoPrototype(), typeArgs).assignNoPrototype()
             }
 
@@ -141,14 +150,16 @@ class TypeVisitor(
                 CommonClassNames.JAVA_UTIL_LIST to "kotlin.List",
                 CommonClassNames.JAVA_UTIL_COLLECTION to "kotlin.Collection",
                 CommonClassNames.JAVA_UTIL_SET to "kotlin.Set",
-                CommonClassNames.JAVA_UTIL_MAP to "kotlin.Map"
+                CommonClassNames.JAVA_UTIL_MAP to "kotlin.Map",
+                CommonClassNames.JAVA_UTIL_MAP_ENTRY to "kotlin.Map.Entry"
         )
 
         val toKotlinMutableTypesMap: Map<String, String> = mapOf(
                 CommonClassNames.JAVA_UTIL_LIST to "kotlin.MutableList",
                 CommonClassNames.JAVA_UTIL_COLLECTION to "kotlin.MutableCollection",
                 CommonClassNames.JAVA_UTIL_SET to "kotlin.MutableSet",
-                CommonClassNames.JAVA_UTIL_MAP to "kotlin.MutableMap"
+                CommonClassNames.JAVA_UTIL_MAP to "kotlin.MutableMap",
+                CommonClassNames.JAVA_UTIL_MAP_ENTRY to "kotlin.MutableMap.MutableEntry"
         )
     }
 }

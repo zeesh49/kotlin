@@ -612,7 +612,7 @@ class Converter private constructor(
         }
     }
 
-    private fun constructNestedClassReferenceIdentifier(psiClass: PsiClass, context: PsiElement): Identifier? {
+    fun constructNestedClassReferenceIdentifier(psiClass: PsiClass, context: PsiElement): Identifier? {
         val outerClass = psiClass.containingClass
         if (outerClass != null
                 && !PsiTreeUtil.isAncestor(outerClass, context, true)
