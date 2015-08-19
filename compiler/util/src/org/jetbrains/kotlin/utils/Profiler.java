@@ -65,7 +65,10 @@ public class Profiler {
     private final Logger log;
     private long start = Long.MAX_VALUE;
     private long cumulative = 0;
+
     private boolean paused = true;
+    private long lastPausedResult = 0;
+
     private StackTraceElement[] stackTrace;
     private boolean mute;
 
@@ -156,9 +159,18 @@ public class Profiler {
         return this;
     }
 
+    public long lastResult() {
+        return lastPausedResult;
+    }
+
+    public long result() {
+        return cumulative;
+    }
+
     public Profiler pause() {
         if (!paused) {
-            cumulative += System.nanoTime() - start;
+            lastPausedResult = System.nanoTime() - start;
+            cumulative += lastPausedResult;
             paused = true;
         }
         return this;

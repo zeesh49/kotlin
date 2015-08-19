@@ -25,8 +25,11 @@ import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.util.io.URLUtil
 import org.jetbrains.kotlin.idea.util.application.runReadAction
 import java.util.concurrent.atomic.AtomicBoolean
+import org.jetbrains.kotlin.utils.Profiler
 
 public object JarUserDataManager {
+    val profiler = Profiler.create("JarUserDataManager")
+
     enum class State {
         INIT,
         HAS_FILE,
@@ -49,6 +52,9 @@ public object JarUserDataManager {
             if (localJarFile.timeStamp == stored.timestamp) {
                 return stored.hasFileWithProperty
             }
+            else {
+                println("Invalid user data: $localJarFile")
+            }
         }
 
         if (stored == null && fileAttributeService != null) {
@@ -59,7 +65,11 @@ public object JarUserDataManager {
                 storeUserData(counter, localJarFile, hasFileWithProperty, savedData.timeStamp)
 
                 if (localJarFile.timeStamp == savedData.timeStamp) {
+                    println("$localJarFile $counter *** ${Thread.currentThread().name} $hasFileWithProperty")
                     return hasFileWithProperty
+                }
+                else {
+                    println("Invalid attribute $localJarFile")
                 }
             }
         }
@@ -72,28 +82,49 @@ public object JarUserDataManager {
 
     private fun scheduleJarProcessing(counter: JarBooleanPropertyCounter, jarFile: VirtualFile, localJarFile: VirtualFile) {
         val userData = localJarFile.getUserData(counter.key)
-        if (userData != null && localJarFile.timeStamp == userData.timestamp) return
+        if (userData != null && localJarFile.timeStamp == userData.timestamp) {
+            return
+        }
+        else {
+            if (userData != null) {
+                println("$localJarFile $counter xxx ${Thread.currentThread().name} ${localJarFile.timeStamp} ${userData.timestamp}")
+            }
+        }
 
         storeUserData(counter, localJarFile, null)
+        println("$localJarFile $counter --> ${Thread.currentThread().name}")
 
         ApplicationManager.getApplication().executeOnPooledThread {
             runReadAction {
-                val data = localJarFile.getUserData(counter.key)
-                if (data != null &&
-                        ((data.hasFileWithProperty != null && localJarFile.timeStamp == data.timestamp) || !data.isProcessStarted.compareAndSet(false, true))) {
-                    // Processing has started in some other thread or is already finished
-                    return@runReadAction
+                try {
+                    profiler.start()
+
+                    println("$localJarFile $counter +++ ${Thread.currentThread().name}")
+
+                    val data = localJarFile.getUserData(counter.key)
+                    if (data != null &&
+                            ((data.hasFileWithProperty != null && localJarFile.timeStamp == data.timestamp) || !data.isProcessStarted.compareAndSet(false, true))) {
+                        // Processing has started in some other thread or is already finished
+                        println("$localJarFile $counter !!! ${Thread.currentThread().name}")
+                        return@runReadAction
+                    }
+
+                    val hasFileWithProperty = !VfsUtilCore.processFilesRecursively(jarFile) { file ->
+                        !counter.hasProperty(file)
+                    }
+
+                    val state = if (hasFileWithProperty) State.HAS_FILE else State.NO_FILE
+
+                    val savedData = fileAttributeService?.writeAttribute(counter.key.toString(), localJarFile, state)
+
+                    profiler.pause()
+                    println("$localJarFile $counter <-- ${Thread.currentThread().name} $hasFileWithProperty ${profiler.lastResult()} ${profiler.result()}")
+
+                    storeUserData(counter, localJarFile, hasFileWithProperty, (savedData?.timeStamp ?: localJarFile.timeStamp))
                 }
-
-                val hasFileWithProperty = !VfsUtilCore.processFilesRecursively(jarFile) { file ->
-                    !counter.hasProperty(file)
+                finally {
+                    profiler.pause()
                 }
-
-                val state = if (hasFileWithProperty) State.HAS_FILE else State.NO_FILE
-
-                val savedData = fileAttributeService?.writeAttribute(counter.key.toString(), localJarFile, state)
-
-                storeUserData(counter, localJarFile, hasFileWithProperty, (savedData?.timeStamp ?: localJarFile.timeStamp))
             }
         }
     }
@@ -103,8 +134,11 @@ public object JarUserDataManager {
         assert(localJarFile.isInLocalFileSystem)
         assert((timestamp == null) == (hasFileWithProperty == null)) { "Using empty timestamp is only allowed for storing not counted value" }
 
-        localJarFile.putUserData(counter.key,
-                                 PropertyData(hasFileWithProperty, timestamp ?: localJarFile.timeStamp, isProcessStarted = AtomicBoolean(false)))
+        val propertyData = PropertyData(hasFileWithProperty, timestamp ?: localJarFile.timeStamp, isProcessStarted = AtomicBoolean(false))
+
+        println("$localJarFile $counter === ${Thread.currentThread().name} $propertyData")
+
+        localJarFile.putUserData(counter.key, propertyData)
     }
 
     object JarFileSystemUtil {
