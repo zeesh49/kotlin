@@ -13,23 +13,42 @@
     <property name="bootstrap.runtime" location="${dependencies.dir}/bootstrap-compiler/Kotlin/kotlinc/lib/kotlin-runtime.jar"/>
     <property name="bootstrap.reflect" location="${dependencies.dir}/bootstrap-compiler/Kotlin/kotlinc/lib/kotlin-reflect.jar"/>
 
-    <target name="force-enable-kotlin-plugin">
-        <property name="disable_plugins.file.path" location="${basedir}/../ideaSDK/config-idea/disabled_plugins.txt"/>
-        <available property="disable_plugins.found" file="${disable_plugins.file.path}"/>
+    <macrodef name="enable-kotlin-plugin-in-file">
+        <attribute name="disable.plugins.file.path"/>
 
-        <sequential if:set="disable_plugins.found">
-            <!--suppress AntResolveInspection -->
-            <loadfile property="disabled_plugins.text" srcFile="${disable_plugins.file.path}">
-                <filterchain>
-                    <linecontains negate="true">
-                        <contains value="org.jetbrains.kotlin"/>
-                    </linecontains>
-                </filterchain>
-            </loadfile>
-            <property name="disabled_plugins.text" value=""/>
+        <sequential>
+            <echo message="Enable for @{disable.plugins.file.path}"/>
 
-            <echo file="${disable_plugins.file.path}" message="${disabled_plugins.text}"/>
+            <available property="disable_plugins.found" file="@{disable.plugins.file.path}"/>
+
+            <sequential if:set="disable_plugins.found">
+                <!--suppress AntResolveInspection -->
+                <loadfile property="disabled_plugins.text" srcFile="@{disable.plugins.file.path}">
+                    <filterchain>
+                        <linecontains negate="true">
+                            <contains value="org.jetbrains.kotlin"/>
+                        </linecontains>
+                    </filterchain>
+                </loadfile>
+                <property name="disabled_plugins.text" value=""/>
+
+                <echo file="@{disable.plugins.file.path}" message="${disabled_plugins.text}"/>
+            </sequential>
         </sequential>
+    </macrodef>
+
+    <target name="force-enable-kotlin-plugin">
+        <enable-kotlin-plugin-in-file disable.plugins.file.path="${basedir}/../ideaSDK/config-idea/disabled_plugins.txt"/>
+    </target>
+
+    <target name="force-enable-kotlin-plugin-in-ultimate">
+        <enable-kotlin-plugin-in-file disable.plugins.file.path="${basedir}/../idea-ultimate-runner/config-idea/disabled_plugins.txt"/>
+    </target>
+
+    <target name="copy-plugin-to-ultimate">
+        <copy todir="${basedir}/../idea-ultimate-runner/config-idea/Kotlin">
+            <fileset dir="${basedir}/../out/artifacts/Kotlin"/>
+        </copy>
     </target>
 
     <target name="copy-runtime-for-idea-plugin">
