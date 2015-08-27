@@ -225,7 +225,7 @@ public class KotlinIntroduceVariableHandler extends KotlinIntroduceHandlerBase {
                                     KotlinVariableInplaceIntroducer variableIntroducer =
                                             new KotlinVariableInplaceIntroducer(property,
                                                                                 reference.get(),
-                                                                                references.toArray(new JetExpression[references.size()]),
+                                                                                filterValidReferences(references),
                                                                                 suggestedNames,
                                                                                 /*todo*/ false,
                                                                                 /*todo*/ false,
@@ -251,6 +251,16 @@ public class KotlinIntroduceVariableHandler extends KotlinIntroduceHandlerBase {
         else {
             callback.pass(OccurrencesChooser.ReplaceChoice.ALL);
         }
+    }
+
+    private static JetExpression[] filterValidReferences(ArrayList<JetExpression> references) {
+        final List<JetExpression> result = new ArrayList<JetExpression>();
+        for (JetExpression reference : references) {
+            if (reference.isValid()) {
+                result.add(reference);
+            }
+        }
+        return result.toArray(new JetExpression[result.size()]);
     }
 
     private static Runnable introduceVariable(
