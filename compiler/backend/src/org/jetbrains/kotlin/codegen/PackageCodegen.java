@@ -107,7 +107,7 @@ public class PackageCodegen {
                         packageClassType, PackagePartClassUtils.getFilesWithCallables(files)
                 );
                 v.defineClass(sourceFile, V1_6,
-                              ACC_PUBLIC | ACC_FINAL,
+                              ACC_PUBLIC | ACC_FINAL | ACC_DEPRECATED,
                               packageClassType.getInternalName(),
                               null,
                               "java/lang/Object",
@@ -272,6 +272,10 @@ public class PackageCodegen {
             @NotNull JvmSerializationBindings bindings,
             @NotNull final Collection<CallableMemberDescriptor> relevantCallables
     ) {
+
+        AnnotationVisitor av = v.newAnnotation(asmDescByFqNameWithoutInnerClasses(new FqName("java.lang.Deprecated")), true);
+        av.visitEnd();
+
         if (state.getClassBuilderMode() != ClassBuilderMode.FULL) {
             return;
         }
@@ -299,7 +303,7 @@ public class PackageCodegen {
         NameResolver nameResolver = new NameResolver(strings.serializeSimpleNames(), strings.serializeQualifiedNames());
         PackageData data = new PackageData(nameResolver, packageProto);
 
-        AnnotationVisitor av = v.newAnnotation(asmDescByFqNameWithoutInnerClasses(JvmAnnotationNames.KOTLIN_PACKAGE), true);
+        av = v.newAnnotation(asmDescByFqNameWithoutInnerClasses(JvmAnnotationNames.KOTLIN_PACKAGE), true);
         av.visit(JvmAnnotationNames.ABI_VERSION_FIELD_NAME, JvmAbi.VERSION);
         AnnotationVisitor array = av.visitArray(JvmAnnotationNames.DATA_FIELD_NAME);
         for (String string : BitEncoding.encodeBytes(SerializationUtil.serializePackageData(data))) {

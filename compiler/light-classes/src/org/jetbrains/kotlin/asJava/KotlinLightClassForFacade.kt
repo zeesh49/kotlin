@@ -127,7 +127,7 @@ public class KotlinLightClassForFacade private constructor(
 
     override fun hasModifierProperty(NonNls name: String) = modifierList.hasModifierProperty(name)
 
-    override fun isDeprecated() = false
+    override fun isDeprecated() = true
 
     override fun isInterface() = false
 

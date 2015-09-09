@@ -1,3 +1,7 @@
+/**
+ * @deprecated
+ */
+@java.lang.Deprecated
 public final class _DefaultPackage {
     @org.jetbrains.annotations.NotNull
     public static final java.lang.String getNotNullVal() { /* compiled code */ }
