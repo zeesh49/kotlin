@@ -670,8 +670,11 @@
     <macrodef name="new-kotlinc">
         <attribute name="output"/>
         <attribute name="moduleName"/>
+
         <element name="src"/>
         <element name="class-path"/>
+
+        <attribute name="multifilePackageFacades" default="false"/>
 
         <sequential>
             <cleandir dir="@{output}"/>
@@ -706,6 +709,7 @@
                 <arg value="${toString:classpath.path}"/>
                 <arg value="-module-name"/>
                 <arg value="@{moduleName}"/>
+                <arg value="-Xmultifile-package-facades" if:true="@{multifilePackageFacades}"/>
             </java>
 
             <javac2 srcdir="${toString:src.dirset}" destdir="@{output}" debug="true" debuglevel="lines,vars,source"
@@ -734,7 +738,7 @@
     </target>
 
     <target name="stdlib">
-        <new-kotlinc output="${output}/classes/stdlib" moduleName="kotlin-stdlib">
+        <new-kotlinc output="${output}/classes/stdlib" moduleName="kotlin-stdlib" multifilePackageFacades="true">
             <src>
                 <include name="libraries/stdlib/src"/>
             </src>
