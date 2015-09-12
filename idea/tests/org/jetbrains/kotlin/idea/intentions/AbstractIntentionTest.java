@@ -117,12 +117,12 @@ public abstract class AbstractIntentionTest extends KotlinCodeInsightTestCase {
 
         try {
             if (isWithRuntime) {
-                ConfigLibraryUtil.configureKotlinRuntimeAndSdk(getModule(), PluginTestCaseBase.mockJdk());
+                ConfigLibraryUtil.configureKotlinRuntimeAndSdk(myFixture.getModule(), PluginTestCaseBase.mockJdk());
             }
 
             DirectiveBasedActionUtils.INSTANCE$.checkForUnexpectedErrors((KtFile) getFile());
 
-            doTestFor(pathToFile, intentionAction, fileText);
+            doTestFor(Lists.newArrayList(pathToFile.keySet()), intentionAction, fileText);
 
             if (InTextDirectivesUtils.isDirectiveDefined(fileText, "// CHECK_ERRORS_AFTER")) {
                 DirectiveBasedActionUtils.INSTANCE$.checkForUnexpectedErrors((KtFile) getFile());
@@ -130,7 +130,7 @@ public abstract class AbstractIntentionTest extends KotlinCodeInsightTestCase {
         }
         finally {
             if (isWithRuntime) {
-                ConfigLibraryUtil.unConfigureKotlinRuntimeAndSdk(getModule(), getTestProjectJdk());
+                ConfigLibraryUtil.unConfigureKotlinRuntimeAndSdk(myFixture.getModule(), PluginTestCaseBase.mockJdk());
             }
         }
     }
