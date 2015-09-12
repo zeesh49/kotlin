@@ -16,6 +16,8 @@
 
 package org.jetbrains.kotlin.utils.concurrent.block
 
+import java.io.Serializable
+
 public class LockedClearableLazyValue<T: Any>(val lock: Any, val init: () -> T) {
     @Volatile private var value: T? = null
 
@@ -47,3 +49,32 @@ public class LockedClearableLazyValue<T: Any>(val lock: Any, val init: () -> T) 
     }
 }
 
+public fun volatileLazy<T>(initializer: () -> T): VolatileLazyImpl<T> = VolatileLazyImpl(initializer)
+public fun <T> VolatileLazyImpl<T>.get(thisRef: Any?, property: PropertyMetadata): T = value
+
+private open class VolatileLazyImpl<out T>(initializer: () -> T) : Serializable {
+    object UNINITIALIZED_VALUE
+
+    private @Volatile var _initializer: (() -> T)? = initializer
+    private @Volatile var _value: Any? = UNINITIALIZED_VALUE
+
+    val value: T get() {
+        if (_value !== UNINITIALIZED_VALUE) {
+            @Suppress("UNCHECKED_CAST")
+            return _value as T
+        }
+
+        val initializer = _initializer
+        if (initializer != null) {
+            _value = initializer()
+            _initializer = null
+        }
+
+        @Suppress("UNCHECKED_CAST")
+        return _value as T
+    }
+
+    fun isInitialized(): Boolean = _value !== UNINITIALIZED_VALUE
+
+    override fun toString(): String = if (isInitialized()) value.toString() else "Lazy value not initialized yet."
+}
