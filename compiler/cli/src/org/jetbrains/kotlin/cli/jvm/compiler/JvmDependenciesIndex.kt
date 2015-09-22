@@ -42,7 +42,7 @@ public data class JavaRoot(public val file: VirtualFile, public val type: JavaRo
 public class JvmDependenciesIndex(_roots: List<JavaRoot>) {
 
     //these fields are computed based on _roots passed to constructor which are filled in later
-    private val roots: List<JavaRoot> by lazy { _roots.toList() }
+    private val roots: List<JavaRoot> by lazy(LazyThreadSafetyMode.NONE) { _roots.toList() }
 
     private val maxIndex: Int
         get() = roots.size()
@@ -60,7 +60,7 @@ public class JvmDependenciesIndex(_roots: List<JavaRoot>) {
     }
 
     // root "Cache" object corresponds to DefaultPackage which exists in every root
-    private val rootCache: Cache by lazy {
+    private val rootCache: Cache by lazy(LazyThreadSafetyMode.NONE) {
         with(Cache()) {
             roots.indices.forEach {
                 rootIndices.add(it)

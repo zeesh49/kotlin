@@ -19,6 +19,9 @@
     -->
     <!--<property name="override.version.disabled" value="true"/>-->
 
+    <property name="new.build.version" value=""/>
+    <property name="new.build.counter" value=""/>
+    
     <condition property="isWindows">
         <os family="windows"/>
     </condition>
@@ -883,5 +886,9 @@
 
             <echo message="##teamcity[buildNumber '${updated.version.number}']"/>
         </sequential>
+    </target>
+
+    <target name="redeclare_build_parameters">
+        <echo message="flir3dN"
     </target>
 </project>

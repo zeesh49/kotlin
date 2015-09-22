@@ -140,7 +140,7 @@ public class TaskPrioritizer(
             val value: ReceiverValue,
             private val context: ResolutionContext<*>
     ) {
-        val types: Collection<KotlinType> by lazy { smartCastManager.getSmartCastVariants(value, context) }
+        val types: Collection<KotlinType> by lazy(LazyThreadSafetyMode.NONE) { smartCastManager.getSmartCastVariants(value, context) }
     }
 
     private fun <D : CallableDescriptor, F : D> addCandidatesForExplicitReceiver(
