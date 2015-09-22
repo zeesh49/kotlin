@@ -55,6 +55,7 @@ import java.io.File;
 
 import static org.jetbrains.kotlin.descriptors.Modality.ABSTRACT;
 import static org.jetbrains.kotlin.descriptors.Modality.FINAL;
+import static org.jetbrains.kotlin.resolve.DescriptorUtils.isTrait;
 
 public class JvmCodegenUtil {
 
@@ -270,5 +271,9 @@ public class JvmCodegenUtil {
 
         // TODO: drop after some time
         av.visit(JvmAnnotationNames.OLD_ABI_VERSION_FIELD_NAME, JvmAbi.VERSION.getMinor());
+    }
+
+    public static boolean isInterfacePrivateMember(MemberDescriptor descriptor) {
+        return descriptor.getVisibility() == Visibilities.PRIVATE && isTrait(descriptor.getContainingDeclaration());
     }
 }

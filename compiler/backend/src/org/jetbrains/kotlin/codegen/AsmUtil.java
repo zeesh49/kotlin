@@ -61,6 +61,7 @@ import java.util.Set;
 import static org.jetbrains.kotlin.builtins.KotlinBuiltIns.isBoolean;
 import static org.jetbrains.kotlin.builtins.KotlinBuiltIns.isPrimitiveClass;
 import static org.jetbrains.kotlin.codegen.JvmCodegenUtil.isInterface;
+import static org.jetbrains.kotlin.codegen.JvmCodegenUtil.isInterfacePrivateMember;
 import static org.jetbrains.kotlin.load.java.JvmAnnotationNames.KotlinSyntheticClass;
 import static org.jetbrains.kotlin.resolve.DescriptorUtils.*;
 import static org.jetbrains.kotlin.resolve.jvm.AsmTypes.*;
@@ -311,7 +312,7 @@ public class AsmUtil {
     private static Integer specialCaseVisibility(@NotNull MemberDescriptor memberDescriptor) {
         DeclarationDescriptor containingDeclaration = memberDescriptor.getContainingDeclaration();
         if (isInterface(containingDeclaration)) {
-            return ACC_PUBLIC;
+            return isInterfacePrivateMember(memberDescriptor) ? NO_FLAG_PACKAGE_PRIVATE : ACC_PUBLIC;
         }
 
         Visibility memberVisibility = memberDescriptor.getVisibility();
