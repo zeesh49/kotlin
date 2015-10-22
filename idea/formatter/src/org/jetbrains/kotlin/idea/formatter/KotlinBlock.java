@@ -29,6 +29,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.kotlin.KtNodeTypes;
 import org.jetbrains.kotlin.idea.KotlinLanguage;
 import org.jetbrains.kotlin.idea.core.formatter.KotlinCodeStyleSettings;
 import org.jetbrains.kotlin.kdoc.lexer.KDocTokens;
@@ -41,9 +42,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.jetbrains.kotlin.KtNodeTypes.*;
 import static org.jetbrains.kotlin.idea.formatter.NodeIndentStrategy.strategy;
-import static org.jetbrains.kotlin.lexer.KtTokens.*;
 
 /**
  * @see Block for good JavaDoc documentation
@@ -57,15 +56,15 @@ public class KotlinBlock extends AbstractBlock {
 
     private List<Block> mySubBlocks;
 
-    private static final TokenSet BINARY_EXPRESSIONS = TokenSet.create(BINARY_EXPRESSION, BINARY_WITH_TYPE, IS_EXPRESSION);
-    private static final TokenSet QUALIFIED_OPERATION = TokenSet.create(DOT, SAFE_ACCESS);
+    private static final TokenSet BINARY_EXPRESSIONS = TokenSet.create(KtNodeTypes.BINARY_EXPRESSION, KtNodeTypes.BINARY_WITH_TYPE, KtNodeTypes.IS_EXPRESSION);
+    private static final TokenSet QUALIFIED_OPERATION = TokenSet.create(KtTokens.DOT, KtTokens.SAFE_ACCESS);
     private static final TokenSet ALIGN_FOR_BINARY_OPERATIONS =
-            TokenSet.create(MUL, DIV, PERC, PLUS, MINUS, ELVIS, LT, GT, LTEQ, GTEQ, ANDAND, OROR);
+            TokenSet.create(KtTokens.MUL, KtTokens.DIV, KtTokens.PERC, KtTokens.PLUS, KtTokens.MINUS, KtTokens.ELVIS, KtTokens.LT, KtTokens.GT, KtTokens.LTEQ, KtTokens.GTEQ, KtTokens.ANDAND, KtTokens.OROR);
 
     private static final TokenSet CODE_BLOCKS = TokenSet.create(
-            BLOCK,
-            CLASS_BODY,
-            FUNCTION_LITERAL);
+            KtNodeTypes.BLOCK,
+            KtNodeTypes.CLASS_BODY,
+            KtNodeTypes.FUNCTION_LITERAL);
 
     private static final TokenSet KDOC_CONTENT = TokenSet.create(KDocTokens.KDOC,
                                                                  KDocElementTypes.KDOC_SECTION,
@@ -98,7 +97,7 @@ public class KotlinBlock extends AbstractBlock {
         if (mySubBlocks == null) {
             List<Block> nodeSubBlocks = buildSubBlocks();
 
-            if (getNode().getElementType() == DOT_QUALIFIED_EXPRESSION || getNode().getElementType() == SAFE_ACCESS_EXPRESSION) {
+            if (getNode().getElementType() == KtNodeTypes.DOT_QUALIFIED_EXPRESSION || getNode().getElementType() == KtNodeTypes.SAFE_ACCESS_EXPRESSION) {
                 int operationBlockIndex = findNodeBlockIndex(nodeSubBlocks, QUALIFIED_OPERATION);
                 if (operationBlockIndex != -1) {
                     // Create fake ".something" or "?.something" block here, so child indentation will be
@@ -151,7 +150,7 @@ public class KotlinBlock extends AbstractBlock {
         Wrap wrap = wrappingStrategy.getWrap(child.getElementType());
 
         // Skip one sub-level for operators, so type of block node is an element type of operator
-        if (child.getElementType() == OPERATION_REFERENCE) {
+        if (child.getElementType() == KtNodeTypes.OPERATION_REFERENCE) {
             ASTNode operationNode = child.getFirstChildNode();
             if (operationNode != null) {
                 return new KotlinBlock(operationNode, alignmentStrategy, createChildIndent(child), wrap, mySettings, mySpacingBuilder);
@@ -189,22 +188,22 @@ public class KotlinBlock extends AbstractBlock {
     public ChildAttributes getChildAttributes(int newChildIndex) {
         IElementType type = getNode().getElementType();
         if (CODE_BLOCKS.contains(type) ||
-            type == WHEN ||
-            type == IF ||
-            type == FOR ||
-            type == WHILE ||
-            type == DO_WHILE) {
+            type == KtNodeTypes.WHEN ||
+            type == KtNodeTypes.IF ||
+            type == KtNodeTypes.FOR ||
+            type == KtNodeTypes.WHILE ||
+            type == KtNodeTypes.DO_WHILE) {
 
             return new ChildAttributes(Indent.getNormalIndent(), null);
         }
-        else if (type == TRY) {
+        else if (type == KtNodeTypes.TRY) {
             // In try - try BLOCK catch BLOCK finally BLOCK
             return new ChildAttributes(Indent.getNoneIndent(), null);
         }
-        else if (type == DOT_QUALIFIED_EXPRESSION || type == SAFE_ACCESS_EXPRESSION) {
+        else if (type == KtNodeTypes.DOT_QUALIFIED_EXPRESSION || type == KtNodeTypes.SAFE_ACCESS_EXPRESSION) {
             return new ChildAttributes(Indent.getContinuationWithoutFirstIndent(), null);
         }
-        else if (type == VALUE_PARAMETER_LIST || type == VALUE_ARGUMENT_LIST) {
+        else if (type == KtNodeTypes.VALUE_PARAMETER_LIST || type == KtNodeTypes.VALUE_ARGUMENT_LIST) {
             // Child index 1 - cursor is after ( - parameter alignment should be recreated
             // Child index 0 - before expression - know nothing about it
             if (newChildIndex != 1 && newChildIndex != 0 && newChildIndex < getSubBlocks().size()) {
@@ -213,11 +212,11 @@ public class KotlinBlock extends AbstractBlock {
             }
             return new ChildAttributes(Indent.getContinuationIndent(), null);
         }
-        else if (type == DOC_COMMENT) {
+        else if (type == KtTokens.DOC_COMMENT) {
             return new ChildAttributes(Indent.getSpaceIndent(KDOC_COMMENT_INDENT), null);
         }
 
-        if (type == PARENTHESIZED) {
+        if (type == KtNodeTypes.PARENTHESIZED) {
             return super.getChildAttributes(newChildIndex);
         }
 
@@ -254,13 +253,13 @@ public class KotlinBlock extends AbstractBlock {
         CommonCodeStyleSettings commonSettings = mySettings.getCommonSettings(KotlinLanguage.INSTANCE);
         IElementType elementType = myNode.getElementType();
 
-        if (elementType == VALUE_ARGUMENT_LIST) {
-            return getWrappingStrategyForItemList(commonSettings.CALL_PARAMETERS_WRAP, VALUE_ARGUMENT);
+        if (elementType == KtNodeTypes.VALUE_ARGUMENT_LIST) {
+            return getWrappingStrategyForItemList(commonSettings.CALL_PARAMETERS_WRAP, KtNodeTypes.VALUE_ARGUMENT);
         }
-        if (elementType == VALUE_PARAMETER_LIST) {
+        if (elementType == KtNodeTypes.VALUE_PARAMETER_LIST) {
             IElementType parentElementType = myNode.getTreeParent().getElementType();
-            if (parentElementType == FUN || parentElementType == CLASS) {
-                return getWrappingStrategyForItemList(commonSettings.METHOD_PARAMETERS_WRAP, VALUE_PARAMETER);
+            if (parentElementType == KtNodeTypes.FUN || parentElementType == KtNodeTypes.CLASS) {
+                return getWrappingStrategyForItemList(commonSettings.METHOD_PARAMETERS_WRAP, KtNodeTypes.VALUE_PARAMETER);
             }
         }
 
@@ -273,20 +272,20 @@ public class KotlinBlock extends AbstractBlock {
 
         // Redefine list of strategies for some special elements
         IElementType parentType = myNode.getElementType();
-        if (parentType == VALUE_PARAMETER_LIST) {
+        if (parentType == KtNodeTypes.VALUE_PARAMETER_LIST) {
             return getAlignmentForChildInParenthesis(
-                    jetCommonSettings.ALIGN_MULTILINE_PARAMETERS, VALUE_PARAMETER, COMMA,
-                    jetCommonSettings.ALIGN_MULTILINE_METHOD_BRACKETS, LPAR, RPAR);
+                    jetCommonSettings.ALIGN_MULTILINE_PARAMETERS, KtNodeTypes.VALUE_PARAMETER, KtTokens.COMMA,
+                    jetCommonSettings.ALIGN_MULTILINE_METHOD_BRACKETS, KtTokens.LPAR, KtTokens.RPAR);
         }
-        else if (parentType == VALUE_ARGUMENT_LIST) {
+        else if (parentType == KtNodeTypes.VALUE_ARGUMENT_LIST) {
             return getAlignmentForChildInParenthesis(
-                    jetCommonSettings.ALIGN_MULTILINE_PARAMETERS_IN_CALLS, VALUE_ARGUMENT, COMMA,
-                    jetCommonSettings.ALIGN_MULTILINE_METHOD_BRACKETS, LPAR, RPAR);
+                    jetCommonSettings.ALIGN_MULTILINE_PARAMETERS_IN_CALLS, KtNodeTypes.VALUE_ARGUMENT, KtTokens.COMMA,
+                    jetCommonSettings.ALIGN_MULTILINE_METHOD_BRACKETS, KtTokens.LPAR, KtTokens.RPAR);
         }
-        else if (parentType == WHEN) {
+        else if (parentType == KtNodeTypes.WHEN) {
             return getAlignmentForCaseBranch(jetSettings.ALIGN_IN_COLUMNS_CASE_BRANCH);
         }
-        else if (parentType == WHEN_ENTRY) {
+        else if (parentType == KtNodeTypes.WHEN_ENTRY) {
             // Propagate when alignment for ->
             return myAlignmentStrategy;
         }
@@ -294,11 +293,11 @@ public class KotlinBlock extends AbstractBlock {
             return NodeAlignmentStrategy.fromTypes(AlignmentStrategy.wrap(
                     createAlignment(jetCommonSettings.ALIGN_MULTILINE_BINARY_OPERATION, getAlignment())));
         }
-        else if (parentType == DELEGATION_SPECIFIER_LIST || parentType == INITIALIZER_LIST) {
+        else if (parentType == KtNodeTypes.DELEGATION_SPECIFIER_LIST || parentType == KtNodeTypes.INITIALIZER_LIST) {
             return NodeAlignmentStrategy.fromTypes(AlignmentStrategy.wrap(
                     createAlignment(jetCommonSettings.ALIGN_MULTILINE_EXTENDS_LIST, getAlignment())));
         }
-        else if (parentType == PARENTHESIZED) {
+        else if (parentType == KtNodeTypes.PARENTHESIZED) {
             return new NodeAlignmentStrategy() {
                 Alignment bracketsAlignment = jetCommonSettings.ALIGN_MULTILINE_BINARY_OPERATION ? Alignment.createAlignment() : null;
 
@@ -312,7 +311,7 @@ public class KotlinBlock extends AbstractBlock {
                         return bracketsAlignment;
                     }
 
-                    if (childNodeType == LPAR || childNodeType == RPAR) {
+                    if (childNodeType == KtTokens.LPAR || childNodeType == KtTokens.RPAR) {
                         return bracketsAlignment;
                     }
 
@@ -358,7 +357,7 @@ public class KotlinBlock extends AbstractBlock {
     private static NodeAlignmentStrategy getAlignmentForCaseBranch(boolean shouldAlignInColumns) {
         if (shouldAlignInColumns) {
             return NodeAlignmentStrategy.fromTypes(
-                    AlignmentStrategy.createAlignmentPerTypeStrategy(Arrays.asList((IElementType) ARROW), WHEN_ENTRY, true));
+                    AlignmentStrategy.createAlignmentPerTypeStrategy(Arrays.asList((IElementType) KtTokens.ARROW), KtNodeTypes.WHEN_ENTRY, true));
         }
         else {
             return NodeAlignmentStrategy.getNullStrategy();
@@ -367,49 +366,49 @@ public class KotlinBlock extends AbstractBlock {
 
     private static final NodeIndentStrategy[] INDENT_RULES = new NodeIndentStrategy[] {
             strategy("No indent for braces in blocks")
-                    .in(BLOCK, CLASS_BODY, FUNCTION_LITERAL)
-                    .forType(RBRACE, LBRACE)
+                    .in(KtNodeTypes.BLOCK, KtNodeTypes.CLASS_BODY, KtNodeTypes.FUNCTION_LITERAL)
+                    .forType(KtTokens.RBRACE, KtTokens.LBRACE)
                     .set(Indent.getNoneIndent()),
 
             strategy("Indent for block content")
-                    .in(BLOCK, CLASS_BODY, FUNCTION_LITERAL)
-                    .notForType(RBRACE, LBRACE, BLOCK)
+                    .in(KtNodeTypes.BLOCK, KtNodeTypes.CLASS_BODY, KtNodeTypes.FUNCTION_LITERAL)
+                    .notForType(KtTokens.RBRACE, KtTokens.LBRACE, KtNodeTypes.BLOCK)
                     .set(Indent.getNormalIndent(false)),
 
             strategy("Indent for property accessors")
-                    .in(PROPERTY)
-                    .forType(PROPERTY_ACCESSOR)
+                    .in(KtNodeTypes.PROPERTY)
+                    .forType(KtNodeTypes.PROPERTY_ACCESSOR)
                     .set(Indent.getNormalIndent()),
 
             strategy("For a single statement in 'for'")
-                    .in(BODY)
-                    .notForType(BLOCK)
+                    .in(KtNodeTypes.BODY)
+                    .notForType(KtNodeTypes.BLOCK)
                     .set(Indent.getNormalIndent()),
 
             strategy("For the entry in when")
-                    .forType(WHEN_ENTRY)
+                    .forType(KtNodeTypes.WHEN_ENTRY)
                     .set(Indent.getNormalIndent()),
 
             strategy("For single statement in THEN and ELSE")
-                    .in(THEN, ELSE)
-                    .notForType(BLOCK)
+                    .in(KtNodeTypes.THEN, KtNodeTypes.ELSE)
+                    .notForType(KtNodeTypes.BLOCK)
                     .set(Indent.getNormalIndent()),
 
             strategy("Indent for parts")
-                    .in(PROPERTY, FUN, MULTI_VARIABLE_DECLARATION)
-                    .notForType(BLOCK, FUN_KEYWORD, VAL_KEYWORD, VAR_KEYWORD)
+                    .in(KtNodeTypes.PROPERTY, KtNodeTypes.FUN, KtNodeTypes.MULTI_VARIABLE_DECLARATION)
+                    .notForType(KtNodeTypes.BLOCK, KtTokens.FUN_KEYWORD, KtTokens.VAL_KEYWORD, KtTokens.VAR_KEYWORD)
                     .set(Indent.getContinuationWithoutFirstIndent()),
 
             strategy("Chained calls")
-                    .in(DOT_QUALIFIED_EXPRESSION, SAFE_ACCESS_EXPRESSION)
+                    .in(KtNodeTypes.DOT_QUALIFIED_EXPRESSION, KtNodeTypes.SAFE_ACCESS_EXPRESSION)
                     .set(Indent.getContinuationWithoutFirstIndent(false)),
 
             strategy("Delegation list")
-                    .in(DELEGATION_SPECIFIER_LIST, INITIALIZER_LIST)
+                    .in(KtNodeTypes.DELEGATION_SPECIFIER_LIST, KtNodeTypes.INITIALIZER_LIST)
                     .set(Indent.getContinuationIndent(false)),
 
             strategy("Indices")
-                    .in(INDICES)
+                    .in(KtNodeTypes.INDICES)
                     .set(Indent.getContinuationIndent(false)),
 
             strategy("Binary expressions")
@@ -417,7 +416,7 @@ public class KotlinBlock extends AbstractBlock {
                     .set(Indent.getContinuationWithoutFirstIndent(false)),
 
             strategy("Parenthesized expression")
-                    .in(PARENTHESIZED)
+                    .in(KtNodeTypes.PARENTHESIZED)
                     .set(Indent.getContinuationWithoutFirstIndent(false)),
 
             strategy("KDoc comment indent")
@@ -426,8 +425,8 @@ public class KotlinBlock extends AbstractBlock {
                     .set(Indent.getSpaceIndent(KDOC_COMMENT_INDENT)),
 
             strategy("Block in when entry")
-                    .in(WHEN_ENTRY)
-                    .notForType(BLOCK, WHEN_CONDITION_EXPRESSION, WHEN_CONDITION_IN_RANGE, WHEN_CONDITION_IS_PATTERN, ELSE_KEYWORD, ARROW)
+                    .in(KtNodeTypes.WHEN_ENTRY)
+                    .notForType(KtNodeTypes.BLOCK, KtNodeTypes.WHEN_CONDITION_EXPRESSION, KtNodeTypes.WHEN_CONDITION_IN_RANGE, KtNodeTypes.WHEN_CONDITION_IS_PATTERN, KtTokens.ELSE_KEYWORD, KtTokens.ARROW)
                     .set(Indent.getNormalIndent()),
     };
 
@@ -436,8 +435,9 @@ public class KotlinBlock extends AbstractBlock {
         ASTNode childParent = child.getTreeParent();
         IElementType childType = child.getElementType();
 
+        // SCRIPT: Avoid indenting script top BLOCK contents
         if (childParent != null && childParent.getTreeParent() != null) {
-            if (childParent.getElementType() == BLOCK && childParent.getTreeParent().getElementType() == SCRIPT) {
+            if (childParent.getElementType() == KtNodeTypes.BLOCK && childParent.getTreeParent().getElementType() == KtNodeTypes.SCRIPT) {
                 return Indent.getNoneIndent();
             }
         }
@@ -461,16 +461,16 @@ public class KotlinBlock extends AbstractBlock {
         if (childParent != null) {
             IElementType parentType = childParent.getElementType();
 
-            if (parentType == VALUE_PARAMETER_LIST || parentType == VALUE_ARGUMENT_LIST) {
+            if (parentType == KtNodeTypes.VALUE_PARAMETER_LIST || parentType == KtNodeTypes.VALUE_ARGUMENT_LIST) {
                 ASTNode prev = getPrevWithoutWhitespace(child);
-                if (childType == RPAR && (prev == null || prev.getElementType() != TokenType.ERROR_ELEMENT)) {
+                if (childType == KtTokens.RPAR && (prev == null || prev.getElementType() != TokenType.ERROR_ELEMENT)) {
                     return Indent.getNoneIndent();
                 }
 
                 return Indent.getContinuationWithoutFirstIndent();
             }
 
-            if (parentType == TYPE_PARAMETER_LIST || parentType == TYPE_ARGUMENT_LIST) {
+            if (parentType == KtNodeTypes.TYPE_PARAMETER_LIST || parentType == KtNodeTypes.TYPE_ARGUMENT_LIST) {
                 return Indent.getContinuationWithoutFirstIndent();
             }
         }
@@ -505,7 +505,7 @@ public class KotlinBlock extends AbstractBlock {
 
     @Nullable
     private static IElementType getOperationType(ASTNode node) {
-        ASTNode operationNode = node.findChildByType(OPERATION_REFERENCE);
+        ASTNode operationNode = node.findChildByType(KtNodeTypes.OPERATION_REFERENCE);
         return operationNode != null ? operationNode.getFirstChildNode().getElementType() : null;
     }
 }
