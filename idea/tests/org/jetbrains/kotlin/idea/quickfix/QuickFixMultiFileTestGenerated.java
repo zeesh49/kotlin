@@ -359,12 +359,6 @@ public class QuickFixMultiFileTestGenerated extends AbstractQuickFixMultiFileTes
             doTestWithExtraFile(fileName);
         }
 
-        @TestMetadata("onPlusAssign.before.Main.kt")
-        public void testOnPlusAssign() throws Exception {
-            String fileName = JetTestUtils.navigationMetadata("idea/testData/quickfix/autoImports/onPlusAssign.before.Main.kt");
-            doTestWithExtraFile(fileName);
-        }
-
         @TestMetadata("packageClass.before.Main.kt")
         public void testPackageClass() throws Exception {
             String fileName = JetTestUtils.navigationMetadata("idea/testData/quickfix/autoImports/packageClass.before.Main.kt");
