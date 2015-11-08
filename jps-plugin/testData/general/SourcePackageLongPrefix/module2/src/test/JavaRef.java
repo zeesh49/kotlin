@@ -1,9 +1,9 @@
 package test;
 
-import good.prefix.JavaTest;
+//import good.prefix.JavaTest;
 
 public class JavaRef {
-    public void foo(JavaTest javaTest) {
+    public void foo(/*JavaTest javaTest*/) {
         
     }
 }
