@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.incremental.storage.BasicStringMap
 import org.jetbrains.kotlin.incremental.storage.StringCollectionExternalizer
 import org.jetbrains.kotlin.incremental.storage.StringToLongMapExternalizer
 import org.jetbrains.kotlin.inline.inlineFunctionsJvmNames
-import org.jetbrains.kotlin.jps.build.KotlinBuilder
+import org.jetbrains.kotlin.jps.builder.KotlinBuilder
 import org.jetbrains.kotlin.jps.incremental.storages.PathCollectionExternalizer
 import org.jetbrains.kotlin.jps.incremental.storages.PathFunctionPair
 import org.jetbrains.kotlin.jps.incremental.storages.PathFunctionPairKeyDescriptor

@@ -17,7 +17,7 @@
 package org.jetbrains.kotlin.jvm.compiler
 
 import org.jetbrains.jps.builders.java.JavaModuleBuildTargetType
-import org.jetbrains.kotlin.build.JvmSourceRoot
+import org.jetbrains.kotlin.modules.JvmSourceRoot
 import org.jetbrains.kotlin.modules.KotlinModuleXmlBuilder
 import org.jetbrains.kotlin.test.KotlinTestUtils
 import org.jetbrains.kotlin.test.MockLibraryUtil

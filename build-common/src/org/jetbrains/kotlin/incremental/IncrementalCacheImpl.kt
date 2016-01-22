@@ -22,7 +22,7 @@ import com.intellij.util.SmartList
 import com.intellij.util.io.BooleanDataDescriptor
 import com.intellij.util.io.EnumeratorStringDescriptor
 import org.jetbrains.annotations.TestOnly
-import org.jetbrains.kotlin.build.GeneratedJvmClass
+import org.jetbrains.kotlin.builder.GeneratedJvmClass
 import org.jetbrains.kotlin.config.IncrementalCompilation
 import org.jetbrains.kotlin.incremental.storage.*
 import org.jetbrains.kotlin.load.kotlin.ModuleMapping
