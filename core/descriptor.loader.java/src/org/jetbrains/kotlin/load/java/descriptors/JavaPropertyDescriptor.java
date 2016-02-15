@@ -110,6 +110,6 @@ public class JavaPropertyDescriptor extends PropertyDescriptorImpl implements Ja
 
     @Override
     public boolean isConst() {
-        return isStaticFinal && ConstUtil.canBeUsedForConstVal(getType());
+        return isStaticFinal && ConstUtil.canBeUsedForConstVal(getOriginal().getType());
     }
 }
