@@ -1,3 +1,6 @@
+enum class EClass {
+    VALUE
+}
 object KoKobject {
     @JvmField
     val JvmStatic: Int = 1
@@ -24,13 +27,11 @@ fun test() {
 
     "res2: " + JClass.BoxedInt
     "res3: " + JClass.NonFinal
-
     "res4: " + JClass().NonStatic
-
     "res5: " + KoKobject.JvmStatic
-
     "res6: " + KoKobject.JvmStaticString
-
+    "res7: " + EClass.VALUE
+    "res8: " + EClass::class
 }
 
 // @TestKt.class:
@@ -40,3 +41,5 @@ fun test() {
 // 1 LDC "res4: "
 // 1 LDC "res5: "
 // 1 LDC "res6: "
+// 1 LDC "res7: "
+// 1 LDC "res8: "
