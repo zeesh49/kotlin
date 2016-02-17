@@ -71,6 +71,8 @@ public class MethodInliner {
 
     private int lambdasFinallyBlocks;
 
+    private final boolean skipSmap;
+
     /*
      *
      * @param node
@@ -98,6 +100,7 @@ public class MethodInliner {
         this.inlineCallSiteInfo = inlineCallSiteInfo;
         this.typeMapper = inliningContext.state.getTypeMapper();
         this.result = InlineResult.create();
+        skipSmap = inliningContext instanceof RootInliningContext && ((RootInliningContext) inliningContext).skipSmap;
     }
 
     public InlineResult doInline(
@@ -338,6 +341,8 @@ public class MethodInliner {
         node.instructions.resetLabels();
         MethodNode transformedNode = new MethodNode(InlineCodegenUtil.API, node.access, node.name, Type.getMethodDescriptor(returnType, allTypes), node.signature, null) {
 
+            private final boolean GENERATE_DEBUG_INFO = InlineCodegenUtil.GENERATE_SMAP && !skipSmap;
+
             private final boolean isInliningLambda = nodeRemapper.isInsideInliningLambda();
 
             private int getNewIndex(int var) {
@@ -361,7 +366,7 @@ public class MethodInliner {
 
             @Override
             public void visitLineNumber(int line, @NotNull Label start) {
-                if(isInliningLambda || InlineCodegenUtil.GENERATE_SMAP) {
+                if(isInliningLambda || GENERATE_DEBUG_INFO) {
                     super.visitLineNumber(line, start);
                 }
             }
@@ -370,7 +375,7 @@ public class MethodInliner {
             public void visitLocalVariable(
                     @NotNull String name, @NotNull String desc, String signature, @NotNull Label start, @NotNull Label end, int index
             ) {
-                if (isInliningLambda || InlineCodegenUtil.GENERATE_SMAP) {
+                if (isInliningLambda || GENERATE_DEBUG_INFO) {
                     String varSuffix = inliningContext.isRoot() &&
                                        !((RootInliningContext) inliningContext).isDefaultCompilation &&
                                        !InlineCodegenUtil.isFakeLocalVariableForInline(name) ?
