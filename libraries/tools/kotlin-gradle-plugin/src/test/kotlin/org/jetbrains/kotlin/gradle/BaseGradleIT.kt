@@ -57,7 +57,14 @@ abstract class BaseGradleIT {
             println("Stopping gradle daemon v$ver")
             val wrapperDir = File(resourcesRootFile, "GradleWrapper-$ver")
             val cmd = createGradleCommand(arrayListOf("-stop"))
-            createProcess(cmd, wrapperDir).waitFor()
+            val process = createProcess(cmd, wrapperDir)
+            val (output, resultCode) = readOutput(process)
+
+            if (resultCode != 0) {
+                throw IllegalStateException("""Stopping gradle daemon was unsuccessful:
+                'gradlew --stop' returned exit code:$resultCode
+                output: $output""".trimIndent())
+            }
         }
 
         fun createProcess(cmd: List<String>, projectDir: File): Process {
@@ -221,22 +228,6 @@ abstract class BaseGradleIT {
 
     private fun String.normalize() = this.lineSequence().joinToString(SYSTEM_LINE_SEPARATOR)
 
-    private fun readOutput(process: Process): Pair<String, Int> {
-        fun InputStream.readFully(): String {
-            val text = reader().readText()
-            close()
-            return text
-        }
-
-        val stdout = process.inputStream!!.readFully()
-        System.out.println(stdout)
-        val stderr = process.errorStream!!.readFully()
-        System.err.println(stderr)
-
-        val result = process.waitFor()
-        return stdout to result
-    }
-
     fun copyRecursively(source: File, target: File) {
         assertTrue(target.isDirectory)
         val targetFile = File(target, source.name)
@@ -268,4 +259,20 @@ abstract class BaseGradleIT {
         }
         f.delete()
     }
+}
+
+private fun readOutput(process: Process): Pair<String, Int> {
+    fun InputStream.readFully(): String {
+        val text = reader().readText()
+        close()
+        return text
+    }
+
+    val stdout = process.inputStream!!.readFully()
+    System.out.println(stdout)
+    val stderr = process.errorStream!!.readFully()
+    System.err.println(stderr)
+
+    val result = process.waitFor()
+    return stdout to result
 }
