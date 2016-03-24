@@ -175,6 +175,12 @@ public class ExperimentalIncrementalJpsTestGenerated extends AbstractExperimenta
             doTest(fileName);
         }
 
+        @TestMetadata("addClass")
+        public void testAddClass() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("jps-plugin/testData/incremental/pureKotlin/addClass/");
+            doTest(fileName);
+        }
+
         @TestMetadata("allConstants")
         public void testAllConstants() throws Exception {
             String fileName = KotlinTestUtils.navigationMetadata("jps-plugin/testData/incremental/pureKotlin/allConstants/");
@@ -740,6 +746,24 @@ public class ExperimentalIncrementalJpsTestGenerated extends AbstractExperimenta
         @TestMetadata("propertyRedeclaration")
         public void testPropertyRedeclaration() throws Exception {
             String fileName = KotlinTestUtils.navigationMetadata("jps-plugin/testData/incremental/pureKotlin/propertyRedeclaration/");
+            doTest(fileName);
+        }
+
+        @TestMetadata("removeClass")
+        public void testRemoveClass() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("jps-plugin/testData/incremental/pureKotlin/removeClass/");
+            doTest(fileName);
+        }
+
+        @TestMetadata("removeClassInDefaultPackage")
+        public void testRemoveClassInDefaultPackage() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("jps-plugin/testData/incremental/pureKotlin/removeClassInDefaultPackage/");
+            doTest(fileName);
+        }
+
+        @TestMetadata("renameClass")
+        public void testRenameClass() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("jps-plugin/testData/incremental/pureKotlin/renameClass/");
             doTest(fileName);
         }
 

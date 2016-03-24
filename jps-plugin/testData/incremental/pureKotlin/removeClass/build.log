@@ -1,25 +1,24 @@
 ================ Step #1 =================
 
 Cleaning output files:
-  out/production/module/TheClass.class
+  out/production/module/foo/A.class
 End of files
 Compiling files:
-  src/TheClass.kt
 End of files
-Marked as dirty by Kotlin:
-  src/usageInKotlin.kt
 Exit code: ADDITIONAL_PASS_REQUIRED
 ------------------------------------------
 Cleaning output files:
   out/production/module/META-INF/module.kotlin_module
-  out/production/module/Usage.class
-  out/production/module/UsageInKotlinKt.class
+  out/production/module/foo/DummyKt.class
+  out/production/module/other/OtherKt.class
+  out/production/module/use/UseAKt.class
 End of files
 Compiling files:
-  src/usageInKotlin.kt
+  src/dummy.kt
+  src/other.kt
+  src/useA.kt
 End of files
-Exit code: OK
+Exit code: ABORT
 ------------------------------------------
-Compiling files:
-  src/Usage.java
-End of files
+COMPILATION FAILED
+Unresolved reference: A
