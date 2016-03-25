@@ -181,6 +181,12 @@ public class ExperimentalIncrementalJpsTestGenerated extends AbstractExperimenta
             doTest(fileName);
         }
 
+        @TestMetadata("addFileWithFunctionOverload")
+        public void testAddFileWithFunctionOverload() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("jps-plugin/testData/incremental/pureKotlin/addFileWithFunctionOverload/");
+            doTest(fileName);
+        }
+
         @TestMetadata("allConstants")
         public void testAllConstants() throws Exception {
             String fileName = KotlinTestUtils.navigationMetadata("jps-plugin/testData/incremental/pureKotlin/allConstants/");
@@ -758,6 +764,12 @@ public class ExperimentalIncrementalJpsTestGenerated extends AbstractExperimenta
         @TestMetadata("removeClassInDefaultPackage")
         public void testRemoveClassInDefaultPackage() throws Exception {
             String fileName = KotlinTestUtils.navigationMetadata("jps-plugin/testData/incremental/pureKotlin/removeClassInDefaultPackage/");
+            doTest(fileName);
+        }
+
+        @TestMetadata("removeFileWithFunctionOverload")
+        public void testRemoveFileWithFunctionOverload() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("jps-plugin/testData/incremental/pureKotlin/removeFileWithFunctionOverload/");
             doTest(fileName);
         }
 
