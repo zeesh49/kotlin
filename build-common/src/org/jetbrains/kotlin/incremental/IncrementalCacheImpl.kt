@@ -209,7 +209,7 @@ open class IncrementalCacheImpl<Target>(
         debugLog("$className is changed: $this")
     }
 
-    fun computeChanges(className: JvmClassName, createChangeInfo: (FqName, Collection<String>) -> ChangeInfo): List<ChangeInfo> {
+    private fun computeChanges(className: JvmClassName, createChangeInfo: (FqName, Collection<String>) -> ChangeInfo): List<ChangeInfo> {
         fun <T> T.getNonPrivateNames(nameResolver: NameResolver, vararg members: T.() -> List<MessageLite>): Set<String> =
                 members.flatMap { this.it().filterNot { it.isPrivate }.names(nameResolver) }.toSet()
 
