@@ -67,9 +67,21 @@ public class ExperimentalIncrementalJpsTestGenerated extends AbstractExperimenta
             doTest(fileName);
         }
 
+        @TestMetadata("classRemoved")
+        public void testClassRemoved() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("jps-plugin/testData/incremental/multiModule/classRemoved/");
+            doTest(fileName);
+        }
+
         @TestMetadata("constantValueChanged")
         public void testConstantValueChanged() throws Exception {
             String fileName = KotlinTestUtils.navigationMetadata("jps-plugin/testData/incremental/multiModule/constantValueChanged/");
+            doTest(fileName);
+        }
+
+        @TestMetadata("copyFileToAnotherModule")
+        public void testCopyFileToAnotherModule() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("jps-plugin/testData/incremental/multiModule/copyFileToAnotherModule/");
             doTest(fileName);
         }
 
@@ -1239,6 +1251,12 @@ public class ExperimentalIncrementalJpsTestGenerated extends AbstractExperimenta
         @TestMetadata("classRemoved")
         public void testClassRemoved() throws Exception {
             String fileName = KotlinTestUtils.navigationMetadata("jps-plugin/testData/incremental/classHierarchyAffected/classRemoved/");
+            doTest(fileName);
+        }
+
+        @TestMetadata("classRemovedAndRestored")
+        public void testClassRemovedAndRestored() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("jps-plugin/testData/incremental/classHierarchyAffected/classRemovedAndRestored/");
             doTest(fileName);
         }
 
