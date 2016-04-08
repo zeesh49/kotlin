@@ -797,12 +797,6 @@ public class ExperimentalIncrementalJpsTestGenerated extends AbstractExperimenta
             doTest(fileName);
         }
 
-        @TestMetadata("removeClassWithMembers")
-        public void testRemoveClassWithMembers() throws Exception {
-            String fileName = KotlinTestUtils.navigationMetadata("jps-plugin/testData/incremental/pureKotlin/removeClassWithMembers/");
-            doTest(fileName);
-        }
-
         @TestMetadata("removeFileWithFunctionOverload")
         public void testRemoveFileWithFunctionOverload() throws Exception {
             String fileName = KotlinTestUtils.navigationMetadata("jps-plugin/testData/incremental/pureKotlin/removeFileWithFunctionOverload/");
@@ -1221,12 +1215,6 @@ public class ExperimentalIncrementalJpsTestGenerated extends AbstractExperimenta
         @TestMetadata("bridgeGenerated")
         public void testBridgeGenerated() throws Exception {
             String fileName = KotlinTestUtils.navigationMetadata("jps-plugin/testData/incremental/classHierarchyAffected/bridgeGenerated/");
-            doTest(fileName);
-        }
-
-        @TestMetadata("classAdded")
-        public void testClassAdded() throws Exception {
-            String fileName = KotlinTestUtils.navigationMetadata("jps-plugin/testData/incremental/classHierarchyAffected/classAdded/");
             doTest(fileName);
         }
 

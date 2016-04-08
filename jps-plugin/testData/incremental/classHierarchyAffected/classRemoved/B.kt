@@ -1,5 +1,5 @@
 package foo
 
-class B : A() {
+open class B : A() {
     fun bar() {}
 }

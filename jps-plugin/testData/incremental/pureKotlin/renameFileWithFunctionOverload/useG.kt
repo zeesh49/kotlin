@@ -2,6 +2,6 @@ package use
 
 import foo.*
 
-fun useA() {
-    A()
+fun useG() {
+    g(1)
 }

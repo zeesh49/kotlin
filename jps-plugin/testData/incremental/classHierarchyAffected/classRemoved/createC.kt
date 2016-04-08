@@ -2,6 +2,4 @@ package use
 
 import foo.*
 
-fun useA() {
-    A()
-}
+fun createC() = C()
