@@ -166,6 +166,19 @@
     <target name="init">
         <mkdir dir="${kotlin-home}"/>
         <mkdir dir="${kotlin-home}/lib"/>
+
+        <taskdef name="jarjar" classname="com.tonicsystems.jarjar.JarJarTask" classpath="dependencies/jarjar.jar"/>
+        <zip destfile="dependencies/asm-5.1/asm-all.jar">
+            <zipgroupfileset dir="dependencies/asm-5.1/lib/" includes="*.jar"/>
+        </zip>
+
+        <jarjar destfile="dependencies/asm-all.jar" filesonly="true">
+            <zipfileset src="dependencies/asm-5.1/asm-all.jar" />
+            <rule pattern="org.objectweb.asm.**" result="org.jetbrains.org.objectweb.asm.@1" />
+        </jarjar>
+
+        <delete file="${basedir}/ideaSDK/lib/asm-all.jar" />
+        <copy file="dependencies/asm-all.jar" tofile="${basedir}/ideaSDK/lib/asm-all.jar"/>
     </target>
 
     <target name="prepare-dist">
