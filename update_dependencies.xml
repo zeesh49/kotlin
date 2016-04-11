@@ -230,14 +230,13 @@
         <!-- Guava 17 sources-->
         <get-maven-library prefix="com/google/guava" lib="guava" version="17.0" bin="false"/>
 
+        <!--<get src="http://download.forge.ow2.org/asm/asm-5.1-bin.zip"-->
+             <!--dest="dependencies/asm-5.1-bin.zip"/>-->
         <!-- ASM -->
         <get src="https://raw.github.com/JetBrains/intellij-community/master/lib/src/asm5-src.zip"
              dest="${dependencies}/asm5-src.zip"/>
         <!-- <get-asm-sources-and-rename-packages asm.version="5.0.1"/> -->
-        <get src="http://download.forge.ow2.org/asm/asm-5.1-bin.zip"
-             dest="dependencies/asm-5.1-bin.zip"/>
 
-        <unzip src="dependencies/asm-5.1-bin.zip" dest="dependencies/"/>
 
         <!-- Junit Sources -->
         <get-maven-library prefix="junit" lib="junit" version="4.12" bin="false"/>
@@ -983,8 +982,8 @@
         </sequential>
     </target>
 
-    <!--<target name="123">
-        <taskdef name="jarjar" classname="com.tonicsystems.jarjar.JarJarTask" classpath="dependencies/jarjar.jar"/>
+    <target name="123">
+        <!--<taskdef name="jarjar" classname="com.tonicsystems.jarjar.JarJarTask" classpath="dependencies/jarjar.jar"/>
         <zip destfile="dependencies/asm-5.1/asm-all.jar">
             <zipgroupfileset dir="dependencies/asm-5.1/lib/" includes="*.jar"/>
         </zip>
@@ -995,6 +994,19 @@
         </jarjar>
 
         <delete file="${idea.dir}/lib/asm-all.jar" />
-        <copy file="dependencies/asm-all.jar" tofile="${idea.dir}/lib/asm-all.jar"/>
-    </target>-->
+        <copy file="dependencies/asm-all.jar" tofile="${idea.dir}/lib/asm-all.jar"/>-->
+
+        <taskdef name="jarjar" classname="com.tonicsystems.jarjar.JarJarTask" classpath="dependencies/jarjar.jar"/>
+
+        <jarjar destfile="dependencies/asm-all.jar" filesonly="true">
+            <zipfileset src="asm-all.jar" />
+            <rule pattern="org.objectweb.asm.**" result="org.jetbrains.org.objectweb.asm.@1" />
+        </jarjar>
+
+        <delete file="${basedir}/ideaSDK/lib/asm-all.jar" />
+        <copy file="dependencies/asm-all.jar" tofile="${basedir}/ideaSDK/lib/asm-all.jar"/>
+
+        <delete file="${basedir}/ideaSDK/core/asm-all.jar" />
+        <copy file="dependencies/asm-all.jar" tofile="${basedir}/ideaSDK/core/asm-all.jar"/>
+    </target>
 </project>
