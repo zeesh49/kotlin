@@ -225,7 +225,7 @@ public abstract class KotlinWithGradleConfigurator implements KotlinProjectConfi
         if (ConfigureKotlinInProjectUtilsKt.isSnapshot(version)) {
             wasModified |= addLastExpressionInBlockIfNeeded(SNAPSHOT_REPOSITORY, buildScriptRepositoriesBlock);
         }
-        if (ConfigureKotlinInProjectUtilsKt.isEap(version)) {
+        else if (ConfigureKotlinInProjectUtilsKt.isEap(version)) {
             wasModified |= addLastExpressionInBlockIfNeeded(EAP_REPOSITORY, buildScriptRepositoriesBlock);
         }
         else if (!isRepositoryConfigured(buildScriptRepositoriesBlock)) {
@@ -271,7 +271,7 @@ public abstract class KotlinWithGradleConfigurator implements KotlinProjectConfi
         if (ConfigureKotlinInProjectUtilsKt.isSnapshot(version)) {
             wasModified |= addLastExpressionInBlockIfNeeded(SNAPSHOT_REPOSITORY, repositoriesBlock);
         }
-        if (ConfigureKotlinInProjectUtilsKt.isEap(version)) {
+        else if (ConfigureKotlinInProjectUtilsKt.isEap(version)) {
             wasModified |= addLastExpressionInBlockIfNeeded(EAP_REPOSITORY, repositoriesBlock);
         }
         else if (!isRepositoryConfigured(repositoriesBlock)) {
