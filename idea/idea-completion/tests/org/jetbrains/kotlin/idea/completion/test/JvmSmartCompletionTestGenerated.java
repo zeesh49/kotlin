@@ -269,6 +269,12 @@ public class JvmSmartCompletionTestGenerated extends AbstractJvmSmartCompletionT
         doTest(fileName);
     }
 
+    @TestMetadata("InvokeForExpression.kt")
+    public void testInvokeForExpression() throws Exception {
+        String fileName = KotlinTestUtils.navigationMetadata("idea/idea-completion/testData/smart/InvokeForExpression.kt");
+        doTest(fileName);
+    }
+
     @TestMetadata("InvokeFunctionVariable.kt")
     public void testInvokeFunctionVariable() throws Exception {
         String fileName = KotlinTestUtils.navigationMetadata("idea/idea-completion/testData/smart/InvokeFunctionVariable.kt");
