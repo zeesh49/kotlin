@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.checkers.*
 import org.jetbrains.kotlin.cli.AbstractCliTest
 import org.jetbrains.kotlin.codegen.*
 import org.jetbrains.kotlin.codegen.defaultConstructor.AbstractDefaultArgumentsReflectionTest
-import org.jetbrains.kotlin.codegen.flags.AbstractWriteFlagsTest
+import org.jetbrains.kotlin.codegen.flags.AbstractWriteFlagsAndSignatureTest
 import org.jetbrains.kotlin.findUsages.AbstractFindUsagesTest
 import org.jetbrains.kotlin.findUsages.AbstractKotlinFindUsagesWithLibraryTest
 import org.jetbrains.kotlin.formatter.AbstractFormatterTest
@@ -228,8 +228,8 @@ fun main(args: Array<String>) {
             model("checkLocalVariablesTable")
         }
 
-        testClass<AbstractWriteFlagsTest>() {
-            model("writeFlags")
+        testClass<AbstractWriteFlagsAndSignatureTest>() {
+            model("writeFlagsAndSignature")
         }
 
         testClass<AbstractDefaultArgumentsReflectionTest>() {

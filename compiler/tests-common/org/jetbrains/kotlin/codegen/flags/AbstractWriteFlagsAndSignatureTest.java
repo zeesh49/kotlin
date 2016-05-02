@@ -24,6 +24,7 @@ import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment;
 import org.jetbrains.kotlin.codegen.GenerationUtils;
 import org.jetbrains.kotlin.psi.KtFile;
 import org.jetbrains.kotlin.test.ConfigurationKind;
+import org.jetbrains.kotlin.test.InTextDirectivesUtils;
 import org.jetbrains.kotlin.test.KotlinTestUtils;
 import org.jetbrains.kotlin.test.testFramework.KtUsefulTestCase;
 import org.jetbrains.org.objectweb.asm.*;
@@ -53,7 +54,7 @@ import static org.jetbrains.kotlin.test.InTextDirectivesUtils.findStringWithPref
  * TESTED_OBJECTS: Test, prop$delegate
  * FLAGS: ACC_STATIC, ACC_FINAL, ACC_PRIVATE
  */
-public abstract class AbstractWriteFlagsTest extends KtUsefulTestCase {
+public abstract class AbstractWriteFlagsAndSignatureTest extends KtUsefulTestCase {
 
     private KotlinCoreEnvironment jetCoreEnvironment;
 
@@ -110,8 +111,16 @@ public abstract class AbstractWriteFlagsTest extends KtUsefulTestCase {
             assertEquals("Wrong object existence state: " + testedObject, isObjectExists, classVisitor.isExists());
 
             if (isObjectExists) {
-                assertEquals("Wrong access flag for " + testedObject + " \n" + outputFile.asText(),
-                             getExpectedFlags(testedObject.textData), classVisitor.getAccess());
+                if (InTextDirectivesUtils.isDirectiveDefined(testedObject.textData, "FLAGS:")) {
+                    assertEquals("Wrong access flag for " + testedObject + " \n" + outputFile.asText(),
+                                 getExpectedFlags(testedObject.textData), classVisitor.getAccess());
+                }
+
+                if (InTextDirectivesUtils.isDirectiveDefined(testedObject.textData, "// SIGNATURE:")) {
+                    String signature = classVisitor.getSignature();
+                    assertEquals("Wrong access flag for " + testedObject + " \n" + outputFile.asText(),
+                                 getExpectedSignature(testedObject.textData), signature == null ? "ABSENT" : signature);
+                }
             }
         }
     }
@@ -183,12 +192,20 @@ public abstract class AbstractWriteFlagsTest extends KtUsefulTestCase {
     protected static abstract class TestClassVisitor extends ClassVisitor {
 
         protected boolean isExists;
+        protected int access;
+        protected String genericSignature;
 
         public TestClassVisitor() {
             super(Opcodes.ASM5);
         }
 
-        abstract public int getAccess();
+        public int getAccess() {
+            return access;
+        }
+
+        public String getSignature() {
+            return genericSignature;
+        }
 
         public boolean isExists() {
             return isExists;
@@ -214,23 +231,21 @@ public abstract class AbstractWriteFlagsTest extends KtUsefulTestCase {
         return expectedAccess;
     }
 
-    private static class ClassFlagsVisitor extends TestClassVisitor {
-        private int access = 0;
+    private static String getExpectedSignature(String text) {
+        return findStringWithPrefixes(text, "// SIGNATURE:");
+    }
 
+    private static class ClassFlagsVisitor extends TestClassVisitor {
         @Override
         public void visit(int version, int access, @NotNull String name, String signature, String superName, String[] interfaces) {
             this.access = access;
+            this.genericSignature  = signature;
             isExists = true;
         }
 
-        @Override
-        public int getAccess() {
-            return access;
-        }
     }
 
     private static class FunctionFlagsVisitor extends TestClassVisitor {
-        private int access = 0;
         private final String funName;
         private final boolean allowSynthetic;
 
@@ -244,6 +259,7 @@ public abstract class AbstractWriteFlagsTest extends KtUsefulTestCase {
             if (name.equals(funName)) {
                 if (!allowSynthetic && (access & Opcodes.ACC_SYNTHETIC) != 0) return null;
                 this.access = access;
+                this.genericSignature = signature;
                 isExists = true;
             }
             return null;
@@ -256,7 +272,6 @@ public abstract class AbstractWriteFlagsTest extends KtUsefulTestCase {
     }
 
     private static class PropertyFlagsVisitor extends TestClassVisitor {
-        private int access = 0;
         private final String propertyName;
 
         public PropertyFlagsVisitor(String name) {
@@ -267,6 +282,7 @@ public abstract class AbstractWriteFlagsTest extends KtUsefulTestCase {
         public FieldVisitor visitField(int access, @NotNull String name, @NotNull String desc, String signature, Object value) {
             if (name.equals(propertyName)) {
                 this.access = access;
+                this.genericSignature = signature;
                 isExists = true;
             }
             return null;
@@ -279,7 +295,6 @@ public abstract class AbstractWriteFlagsTest extends KtUsefulTestCase {
     }
 
     private static class InnerClassFlagsVisitor extends TestClassVisitor {
-        private int access = 0;
         private final String innerClassName;
 
         public InnerClassFlagsVisitor(String name) {
