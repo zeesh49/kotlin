@@ -127,7 +127,7 @@ public class CodegenTestsOnAndroidGenerator {
         p.println("}");
 
         String testSourceFilePath =
-                pathManager.getSrcFolderInAndroidTmpFolder() + "/" + testClassPackage.replace(".", "/") + "/" + testClassName + ".java";
+                pathManager.getTestSrcFolderInAndroidTmpFolder() + "/" + testClassPackage.replace(".", "/") + "/" + testClassName + ".java";
         FileUtil.writeToFile(new File(testSourceFilePath), out.toString());
     }
 
