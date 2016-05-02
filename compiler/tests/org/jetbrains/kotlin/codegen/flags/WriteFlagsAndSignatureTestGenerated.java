@@ -370,6 +370,21 @@ public class WriteFlagsAndSignatureTestGenerated extends AbstractWriteFlagsAndSi
             KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/writeFlagsAndSignature/delegatedProperty"), Pattern.compile("^(.+)\\.kt$"), true);
         }
 
+        @TestMetadata("compiler/testData/writeFlagsAndSignature/delegatedProperty/signature")
+        @TestDataPath("$PROJECT_ROOT")
+        @RunWith(JUnit3RunnerWithInners.class)
+        public static class Signature extends AbstractWriteFlagsAndSignatureTest {
+            public void testAllFilesPresentInSignature() throws Exception {
+                KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/writeFlagsAndSignature/delegatedProperty/signature"), Pattern.compile("^(.+)\\.kt$"), true);
+            }
+
+            @TestMetadata("noSignatureForDelegatedBackingField.kt")
+            public void testNoSignatureForDelegatedBackingField() throws Exception {
+                String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/writeFlagsAndSignature/delegatedProperty/signature/noSignatureForDelegatedBackingField.kt");
+                doTest(fileName);
+            }
+        }
+
         @TestMetadata("compiler/testData/writeFlagsAndSignature/delegatedProperty/visibility")
         @TestDataPath("$PROJECT_ROOT")
         @RunWith(JUnit3RunnerWithInners.class)
