@@ -17,10 +17,10 @@
 package org.jetbrains.kotlin.android.tests;
 
 import com.google.common.collect.Lists;
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.io.FileUtilRt;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.testFramework.UsefulTestCase;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.kotlin.backend.common.output.OutputFileCollection;
 import org.jetbrains.kotlin.cli.common.output.outputUtils.OutputUtilsKt;
@@ -45,7 +45,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CodegenTestsOnAndroidGenerator extends UsefulTestCase {
+public class CodegenTestsOnAndroidGenerator {
+
+    private final Disposable myTestRootDisposable = new Disposable() {
+        @Override
+        public void dispose() { }
+
+        @Override
+        public String toString() {
+            return "CodegenTestsOnAndroidGenerator";
+        }
+    };
+
 
     private final PathManager pathManager;
     private static final String testClassPackage = "org.jetbrains.kotlin.android.tests";
