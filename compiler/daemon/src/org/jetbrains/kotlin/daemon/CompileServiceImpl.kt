@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2015 JetBrains s.r.o.
+ * Copyright 2010-2016 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -415,8 +415,8 @@ class CompileServiceImpl(
                 compilationsCounter.incrementAndGet()
                 val rpcProfiler = if (daemonOptions.reportPerf) WallAndThreadTotalProfiler() else DummyProfiler()
                 val eventManger = EventMangerImpl()
-                val compilerMessagesStream = PrintStream(BufferedOutputStream(RemoteOutputStreamClient(compilerMessagesStreamProxy, rpcProfiler), 4096))
-                val serviceOutputStream = PrintStream(BufferedOutputStream(RemoteOutputStreamClient(serviceOutputStreamProxy, rpcProfiler), 4096))
+                val compilerMessagesStream = createPrintStream(compilerMessagesStreamProxy, rpcProfiler)
+                val serviceOutputStream = createPrintStream(serviceOutputStreamProxy, rpcProfiler)
                 try {
                     checkedCompile(args, serviceOutputStream, rpcProfiler) {
                         val res = body(compilerMessagesStream, eventManger, rpcProfiler).code
@@ -431,6 +431,13 @@ class CompileServiceImpl(
                     operationsTracer?.after("compile")
                 }
             }
+
+    fun createPrintStream(remoteOutputStream: RemoteOutputStream, profiler: Profiler) =
+            PrintStream(
+                    BufferedOutputStream(RemoteOutputStreamClient(remoteOutputStream, profiler), 4096),
+                    /*autoFlush =*/ false,
+                    Charsets.UTF_8.toString()
+            )
 
     private fun createCompileServices(facade: CompilerCallbackServicesFacade, eventManger: EventManger, rpcProfiler: Profiler): Services {
         val builder = Services.Builder()
