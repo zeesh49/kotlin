@@ -672,7 +672,13 @@ public abstract class StackValue {
                 @NotNull CallableMethod getter,
                 @Nullable CallableMethod setter
         ) {
-            super(type, false, false, new Receiver(OBJECT_TYPE, delegateValue, constant(null, OBJECT_TYPE), metadataValue), false);
+            super(type, false, false, new Receiver(OBJECT_TYPE, delegateValue, constant(null, OBJECT_TYPE), metadataValue) {
+                @Override
+                public void dup(@NotNull InstructionAdapter v, boolean withReceiver) {
+                    //dup 3
+                    AsmUtil.dup(v, Type.LONG_TYPE, Type.INT_TYPE);
+                }
+            }, false);
             this.delegateValue = delegateValue;
             this.metadataValue = metadataValue;
             this.getter = getter;
