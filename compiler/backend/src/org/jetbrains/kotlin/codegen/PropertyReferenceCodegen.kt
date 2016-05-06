@@ -138,16 +138,18 @@ class PropertyReferenceCodegen(
         }
 
         val getterParameters = (1..receiverCount).map { OBJECT_TYPE }.toTypedArray()
-        generateAccessor(method("get", OBJECT_TYPE, *getterParameters)) { value ->
-            value.put(OBJECT_TYPE, this)
-        }
+        if (target !is LocalVariableDescriptor) {
+            generateAccessor(method("get", OBJECT_TYPE, *getterParameters)) { value ->
+                value.put(OBJECT_TYPE, this)
+            }
 
-        if (!target.isVar) return
+            if (!target.isVar) return
 
-        val setterParameters = (getterParameters + arrayOf(OBJECT_TYPE))
-        generateAccessor(method("set", Type.VOID_TYPE, *setterParameters)) { value ->
-            // Number of receivers (not size) is safe here because there's only java/lang/Object in the signature, no double/long parameters
-            value.store(StackValue.local(receiverCount + 1, OBJECT_TYPE), this)
+            val setterParameters = (getterParameters + arrayOf(OBJECT_TYPE))
+            generateAccessor(method("set", Type.VOID_TYPE, *setterParameters)) { value ->
+                // Number of receivers (not size) is safe here because there's only java/lang/Object in the signature, no double/long parameters
+                value.store(StackValue.local(receiverCount + 1, OBJECT_TYPE), this)
+            }
         }
     }
 
