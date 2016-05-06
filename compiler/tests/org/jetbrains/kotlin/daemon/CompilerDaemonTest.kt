@@ -116,6 +116,7 @@ class CompilerDaemonTest : KotlinIntegrationTestBase() {
 
     fun testCodeWithNonAsciiSymbols() {
         fun pathToTestFile(extension: String) = getTestDataPathBase() + "/launcher/withNonAsciiSymbols.$extension"
+        fun String.normalize() = replace('/', File.separatorChar)
 
         withFlagFile(getTestName(true), ".alive") { flagFile ->
             val daemonOptions = DaemonOptions(runFilesPath = File(tmpdir, getTestName(true)).absolutePath, verbose = true)
@@ -141,7 +142,7 @@ class CompilerDaemonTest : KotlinIntegrationTestBase() {
                 KotlinCompilerClient.shutdownCompileService(compilerId, daemonOptions)
                 daemonShotDown = true
 
-                assertEquals(File(pathToTestFile("out")).readText(), result.out)
+                assertEquals(File(pathToTestFile("out")).readText().normalize(), result.out)
             }
             finally {
                 if (!daemonShotDown) {
