@@ -436,7 +436,7 @@ class CompileServiceImpl(
             PrintStream(
                     BufferedOutputStream(RemoteOutputStreamClient(remoteOutputStream, profiler), 4096),
                     /*autoFlush =*/ false,
-                    Charsets.UTF_8.toString()
+                    Charsets.UTF_8.name()
             )
 
     private fun createCompileServices(facade: CompilerCallbackServicesFacade, eventManger: EventManger, rpcProfiler: Profiler): Services {
