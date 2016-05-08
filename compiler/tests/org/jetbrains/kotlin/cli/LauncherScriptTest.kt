@@ -24,6 +24,7 @@ import org.jetbrains.kotlin.test.KotlinTestUtils
 import org.jetbrains.kotlin.test.TestCaseWithTmpdir
 import org.jetbrains.kotlin.utils.PathUtil
 import java.io.File
+import java.nio.charset.Charset
 
 class LauncherScriptTest : TestCaseWithTmpdir() {
     private fun runProcess(
@@ -75,9 +76,7 @@ class LauncherScriptTest : TestCaseWithTmpdir() {
     }
 
     fun testWithNonAsciiSymbols() {
-        val ENCODING_PROPERTY_NAME = "file.encoding"
-        val encoding = System.getProperty(ENCODING_PROPERTY_NAME)
-        System.setProperty(ENCODING_PROPERTY_NAME, Charsets.UTF_8.name())
+        val old = resetDefaultCharset(Charsets.UTF_8.name())
 
         fun pathToTestFile(extension: String) = "$testDataDirectory/withNonAsciiSymbols.$extension"
         fun String.normalize() = replace('/', File.separatorChar).replace("\r\n", "\n")
@@ -90,7 +89,7 @@ class LauncherScriptTest : TestCaseWithTmpdir() {
                 expectedExitCode = ExitCode.COMPILATION_ERROR
         )
 
-        System.setProperty(ENCODING_PROPERTY_NAME, encoding)
+        resetDefaultCharset(old)
     }
 
     fun testKotlincJsSimple() {
@@ -101,4 +100,19 @@ class LauncherScriptTest : TestCaseWithTmpdir() {
                 "-output", File(tmpdir, "out.js").path
         )
     }
+}
+
+fun resetDefaultCharset(newDefault: String?): String? {
+    if (newDefault == null) return null
+
+    System.setProperty("file.encoding", newDefault)
+
+    val charset = Charset::class.java.getDeclaredField("defaultCharset")
+    charset.isAccessible = true
+
+    val prev = charset.get(null) as String?
+
+    charset.set(null, null)
+
+    return prev
 }

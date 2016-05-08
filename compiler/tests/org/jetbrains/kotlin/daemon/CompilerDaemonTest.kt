@@ -17,6 +17,7 @@
 package org.jetbrains.kotlin.daemon
 
 import org.jetbrains.kotlin.cli.AbstractCliTest
+import org.jetbrains.kotlin.cli.resetDefaultCharset
 import org.jetbrains.kotlin.daemon.client.DaemonReportingTargets
 import org.jetbrains.kotlin.daemon.client.KotlinCompilerClient
 import org.jetbrains.kotlin.daemon.common.*
@@ -115,9 +116,7 @@ class CompilerDaemonTest : KotlinIntegrationTestBase() {
     }
 
     fun testCodeWithNonAsciiSymbols() {
-        val ENCODING_PROPERTY_NAME = "file.encoding"
-        val encoding = System.getProperty(ENCODING_PROPERTY_NAME)
-        System.setProperty(ENCODING_PROPERTY_NAME, Charsets.UTF_8.name())
+        val old = resetDefaultCharset(Charsets.UTF_8.name())
 
         fun pathToTestFile(extension: String) = getTestDataPathBase() + "/launcher/withNonAsciiSymbols.$extension"
         fun String.normalize() = replace('/', File.separatorChar)
@@ -153,7 +152,7 @@ class CompilerDaemonTest : KotlinIntegrationTestBase() {
                     KotlinCompilerClient.shutdownCompileService(compilerId, daemonOptions)
                 }
 
-                System.setProperty(ENCODING_PROPERTY_NAME, encoding)
+                resetDefaultCharset(old)
             }
         }
     }
