@@ -25,6 +25,7 @@ import org.jetbrains.kotlin.integration.KotlinIntegrationTestBase
 import org.jetbrains.kotlin.test.KotlinTestUtils.getTestDataPathBase
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.util.*
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import kotlin.concurrent.thread
@@ -145,7 +146,8 @@ class CompilerDaemonTest : KotlinIntegrationTestBase() {
                 KotlinCompilerClient.shutdownCompileService(compilerId, daemonOptions)
                 daemonShotDown = true
 
-                assertEquals(File(pathToTestFile("out")).readText().normalize(), result.out)
+                val b = Arrays.equals(File(pathToTestFile("out")).readText().normalize().toByteArray(), result.out.toByteArray())
+                assertTrue(b)
             }
             finally {
                 if (!daemonShotDown) {
