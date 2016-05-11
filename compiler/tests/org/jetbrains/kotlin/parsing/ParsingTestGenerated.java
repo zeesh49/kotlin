@@ -2648,6 +2648,18 @@ public class ParsingTestGenerated extends AbstractParsingTest {
                 String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/psi/secondaryConstructors/recoveryWrongDelegationName.kt");
                 doParsingTest(fileName);
             }
+
+            @TestMetadata("veryBasic.kt")
+            public void testVeryBasic() throws Exception {
+                String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/psi/secondaryConstructors/veryBasic.kt");
+                doParsingTest(fileName);
+            }
+
+            @TestMetadata("veryBasicWithComment.kt")
+            public void testVeryBasicWithComment() throws Exception {
+                String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/psi/secondaryConstructors/veryBasicWithComment.kt");
+                doParsingTest(fileName);
+            }
         }
 
         @TestMetadata("compiler/testData/psi/stringTemplates")
