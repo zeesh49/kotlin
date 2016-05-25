@@ -1,6 +1,6 @@
 import utils.*
 
-// CHECK_CONTAINS_NO_CALLS: test
+// CHECK_CONTAINS_NO_CALLS: test_0
 
 internal fun test(a: A, y: Int): Int = a.plus(y)
 

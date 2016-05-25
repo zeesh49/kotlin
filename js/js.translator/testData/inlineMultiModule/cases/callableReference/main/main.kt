@@ -1,6 +1,6 @@
 import utils.*
 
-// CHECK_CONTAINS_NO_CALLS: test
+// CHECK_CONTAINS_NO_CALLS: test_0
 
 internal fun multiplyBy2(x: Int): Int = x * 2
 
