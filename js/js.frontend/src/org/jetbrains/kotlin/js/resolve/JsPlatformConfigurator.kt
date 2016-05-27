@@ -19,7 +19,9 @@ package org.jetbrains.kotlin.js.resolve
 import org.jetbrains.kotlin.container.StorageComponentContainer
 import org.jetbrains.kotlin.container.useImpl
 import org.jetbrains.kotlin.container.useInstance
+import org.jetbrains.kotlin.js.naming.FQNGenerator
 import org.jetbrains.kotlin.js.resolve.diagnostics.JsCallChecker
+import org.jetbrains.kotlin.js.resolve.diagnostics.JsNameChecker
 import org.jetbrains.kotlin.js.resolve.diagnostics.NativeInnerClassChecker
 import org.jetbrains.kotlin.resolve.IdentifierChecker
 import org.jetbrains.kotlin.resolve.OverloadFilter
@@ -44,5 +46,6 @@ object JsPlatformConfigurator : PlatformConfigurator(
         container.useImpl<JsCallChecker>()
         container.useInstance(SyntheticScopes.Empty)
         container.useInstance(JsTypeSpecificityComparator)
+        container.useInstance(JsNameChecker())
     }
 }
