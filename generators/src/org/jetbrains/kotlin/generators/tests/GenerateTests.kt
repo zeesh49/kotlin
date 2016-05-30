@@ -1148,6 +1148,10 @@ fun main(args: Array<String>) {
         testClass<AbstractLightReflectionTest>() {
             model("reflection/light/cases")
         }
+
+        testClass<AbstractJsNameTest>() {
+            model("jsName/cases")
+        }
     }
 
     testGroup("js/js.tests/test", "compiler/testData") {
