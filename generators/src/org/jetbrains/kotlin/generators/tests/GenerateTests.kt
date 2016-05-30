@@ -1121,6 +1121,10 @@ fun main(args: Array<String>) {
         testClass<AbstractCastTest>() {
             model("expression/cast/cases")
         }
+
+        testClass<AbstractJsNameTest>() {
+            model("jsName/cases")
+        }
     }
 
     testGroup("js/js.tests/test", "compiler/testData") {

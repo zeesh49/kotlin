@@ -16,7 +16,11 @@
 
 package org.jetbrains.kotlin.js.test.semantics
 
+import com.google.common.collect.Lists
+import org.jetbrains.kotlin.js.JavaScript
+import org.jetbrains.kotlin.js.config.EcmaVersion
 import org.jetbrains.kotlin.js.test.*
+import java.io.File
 
 abstract class AbstractBlackBoxTest(d: String) : SingleFileTranslationTest(d) {
     override fun doTest(filename: String) = checkBlackBoxIsOkByPath(filename)
@@ -60,6 +64,8 @@ abstract class AbstractLocalClassesTest : AbstractBlackBoxTest("localClasses/")
 
 abstract class AbstractNonLocalReturnsTest : KotlinJSMultiFileTest("inline.generated/nonLocalReturns/")
 
-public abstract class AbstractRttiTest : SingleFileTranslationTest("rtti/")
+abstract class AbstractRttiTest : SingleFileTranslationTest("rtti/")
 
-public abstract class AbstractCastTest : SingleFileTranslationTest("expression/cast/")
+abstract class AbstractCastTest : SingleFileTranslationTest("expression/cast/")
+
+abstract class AbstractJsNameTest : SingleFileTranslationTest("jsName/")
