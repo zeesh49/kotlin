@@ -36,4 +36,12 @@ public final class MultiFileTest extends MultipleFilesTranslationTest {
     public void testClassOfTheSameNameInAnotherPackage() throws Exception {
         checkFooBoxIsTrue("classOfTheSameNameInAnotherPackage");
     }
+
+    public void testPackageAndMangledMethodDoNotClash() throws Exception {
+        checkFooBoxIsTrue("packageAndMangledMethodDoNotClash");
+    }
+
+    public void testPackageAndPrivateDeclarationDoNotClash() throws Exception {
+        checkFooBoxIsTrue("packageAndPrivateDeclarationDoNotClash");
+    }
 }

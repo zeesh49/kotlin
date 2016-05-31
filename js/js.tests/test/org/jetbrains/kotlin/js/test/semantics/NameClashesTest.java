@@ -19,8 +19,6 @@ package org.jetbrains.kotlin.js.test.semantics;
 import org.jetbrains.kotlin.js.test.SingleFileTranslationTest;
 
 public final class NameClashesTest extends SingleFileTranslationTest {
-
-
     public NameClashesTest() {
         super("nameClashes/");
     }
@@ -42,6 +40,26 @@ public final class NameClashesTest extends SingleFileTranslationTest {
     }
 
     public void testExtensionFunctionAndProperty() throws Exception {
+        checkFooBoxIsOk();
+    }
+
+    public void testExtensionPropertiesWithDifferentReceivers() throws Exception {
+        checkFooBoxIsOk();
+    }
+
+    public void testExtensionPropertyAndMethod() throws Exception {
+        checkFooBoxIsOk();
+    }
+
+    public void testJsNameAndPrivate() throws Exception {
+        checkFooBoxIsOk();
+    }
+
+    public void testMethodAndPrivateProperty() throws Exception {
+        checkFooBoxIsOk();
+    }
+
+    public void testPropertyAndNativeMethod() throws Exception {
         checkFooBoxIsOk();
     }
 }
