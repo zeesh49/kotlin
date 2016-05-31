@@ -588,8 +588,12 @@ public class AsmUtil {
     }
 
     public static void swap(InstructionAdapter v, Type stackTop, Type afterTop) {
-        if (stackTop.getSize() == 1) {
-            if (afterTop.getSize() == 1) {
+        swap(v, stackTop.getSize(), afterTop.getSize());
+    }
+
+    public static void swap(InstructionAdapter v, int stackTopSize, int afterTopSize) {
+        if (stackTopSize == 1) {
+            if (afterTopSize == 1) {
                 v.swap();
             }
             else {
@@ -598,7 +602,7 @@ public class AsmUtil {
             }
         }
         else {
-            if (afterTop.getSize() == 1) {
+            if (afterTopSize == 1) {
                 v.dup2X1();
             }
             else {

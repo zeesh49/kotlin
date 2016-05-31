@@ -13694,6 +13694,75 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
         }
     }
 
+    @TestMetadata("compiler/testData/codegen/box/stackClean")
+    @TestDataPath("$PROJECT_ROOT")
+    @RunWith(JUnit3RunnerWithInners.class)
+    public static class StackClean extends AbstractBlackBoxCodegenTest {
+        public void testAllFilesPresentInStackClean() throws Exception {
+            KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/codegen/box/stackClean"), Pattern.compile("^(.+)\\.kt$"), true);
+        }
+
+        @TestMetadata("pop2BeforeAReturn.kt")
+        public void testPop2BeforeAReturn() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/stackClean/pop2BeforeAReturn.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("pop2BeforeLReturn.kt")
+        public void testPop2BeforeLReturn() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/stackClean/pop2BeforeLReturn.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("pop2BeforeReturn.kt")
+        public void testPop2BeforeReturn() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/stackClean/pop2BeforeReturn.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("pop3BeforeAReturn.kt")
+        public void testPop3BeforeAReturn() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/stackClean/pop3BeforeAReturn.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("pop3BeforeLReturn.kt")
+        public void testPop3BeforeLReturn() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/stackClean/pop3BeforeLReturn.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("popBeforeAReturn.kt")
+        public void testPopBeforeAReturn() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/stackClean/popBeforeAReturn.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("popBeforeLReturn.kt")
+        public void testPopBeforeLReturn() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/stackClean/popBeforeLReturn.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("popBeforeReturn.kt")
+        public void testPopBeforeReturn() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/stackClean/popBeforeReturn.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("popLBeforeLReturn.kt")
+        public void testPopLBeforeLReturn() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/stackClean/popLBeforeLReturn.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("popLBeforeReturn.kt")
+        public void testPopLBeforeReturn() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/stackClean/popLBeforeReturn.kt");
+            doTest(fileName);
+        }
+    }
+
     @TestMetadata("compiler/testData/codegen/box/statics")
     @TestDataPath("$PROJECT_ROOT")
     @RunWith(JUnit3RunnerWithInners.class)
