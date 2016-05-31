@@ -62,4 +62,8 @@ public final class NameClashesTest extends SingleFileTranslationTest {
     public void testPropertyAndNativeMethod() throws Exception {
         checkFooBoxIsOk();
     }
+
+    public void testClassAndCompanionObjectMembers() throws Exception {
+        checkFooBoxIsOk();
+    }
 }
