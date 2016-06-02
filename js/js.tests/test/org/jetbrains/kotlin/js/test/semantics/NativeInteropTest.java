@@ -159,4 +159,8 @@ public final class NativeInteropTest extends SingleFileTranslationTest {
     public void testJsName() throws Exception {
         checkFooBoxIsOk();
     }
+
+    public void testJsNamePropertyAccessors() throws Exception {
+        checkFooBoxIsOk();
+    }
 }
