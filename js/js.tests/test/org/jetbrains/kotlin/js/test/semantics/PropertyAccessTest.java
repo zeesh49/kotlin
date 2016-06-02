@@ -106,6 +106,18 @@ public final class PropertyAccessTest extends SingleFileTranslationTest {
         checkFooBoxIsOk();
     }
 
+    public void testAccessorsWithJsName() throws Exception {
+        checkFooBoxIsOk();
+    }
+
+    public void testStaticAccessorsWithJsName() throws Exception {
+        checkFooBoxIsOk();
+    }
+
+    public void testSubclassAccessorsWithJsNameInSuper() throws Exception {
+        checkFooBoxIsOk();
+    }
+
     @Override
     @NotNull
     protected List<String> additionalJsFiles(@NotNull EcmaVersion ecmaVersion) {
