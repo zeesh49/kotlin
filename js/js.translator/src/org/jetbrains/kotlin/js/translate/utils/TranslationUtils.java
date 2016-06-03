@@ -35,7 +35,6 @@ import org.jetbrains.kotlin.resolve.DescriptorUtils;
 import org.jetbrains.kotlin.types.KotlinType;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static com.google.dart.compiler.backend.js.ast.JsBinaryOperator.*;

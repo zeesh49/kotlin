@@ -16,11 +16,10 @@
 
 package org.jetbrains.kotlin.js.test.semantics
 
-import com.google.common.collect.Lists
-import org.jetbrains.kotlin.js.JavaScript
-import org.jetbrains.kotlin.js.config.EcmaVersion
-import org.jetbrains.kotlin.js.test.*
-import java.io.File
+import org.jetbrains.kotlin.js.test.AbstractSingleFileTranslationWithDirectivesTest
+import org.jetbrains.kotlin.js.test.KotlinJSMultiFileTest
+import org.jetbrains.kotlin.js.test.MultipleModulesTranslationTest
+import org.jetbrains.kotlin.js.test.SingleFileTranslationTest
 
 abstract class AbstractBlackBoxTest(d: String) : SingleFileTranslationTest(d) {
     override fun doTest(filename: String) = checkBlackBoxIsOkByPath(filename)
