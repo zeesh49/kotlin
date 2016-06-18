@@ -972,7 +972,7 @@ public class DescriptorResolver {
         }
         else if (property.isVar()) {
             Annotations setterAnnotations = annotationSplitter.getAnnotationsForTarget(PROPERTY_SETTER);
-            setterDescriptor = DescriptorFactory.createSetter(propertyDescriptor, setterAnnotations, !property.hasDelegate(),
+            setterDescriptor = DescriptorFactory.createSetter(propertyDescriptor, setterAnnotations, property.getSetter() == null,
                                                               /* isExternal = */ false, propertyDescriptor.getSource());
         }
 
@@ -1014,7 +1014,7 @@ public class DescriptorResolver {
         }
         else {
             Annotations getterAnnotations = annotationSplitter.getAnnotationsForTarget(PROPERTY_GETTER);
-            getterDescriptor = DescriptorFactory.createGetter(propertyDescriptor, getterAnnotations, !property.hasDelegate(),
+            getterDescriptor = DescriptorFactory.createGetter(propertyDescriptor, getterAnnotations, property.getGetter() == null,
                                                               /* isExternal = */ false);
             getterDescriptor.initialize(propertyDescriptor.getType());
         }

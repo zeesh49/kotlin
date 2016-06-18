@@ -30,13 +30,17 @@ import org.jetbrains.kotlin.lexer.KtTokens;
 import org.jetbrains.kotlin.psi.*;
 import org.jetbrains.kotlin.psi.psiUtil.PsiUtilsKt;
 import org.jetbrains.kotlin.resolve.BindingContext;
+import org.jetbrains.kotlin.resolve.DescriptorToSourceUtils;
 import org.jetbrains.kotlin.resolve.DescriptorUtils;
 import org.jetbrains.kotlin.resolve.calls.callUtil.CallUtilKt;
 import org.jetbrains.kotlin.resolve.calls.context.ResolutionContext;
 import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall;
 import org.jetbrains.kotlin.resolve.calls.smartcasts.DataFlowValue.Kind;
 import org.jetbrains.kotlin.resolve.descriptorUtil.DescriptorUtilsKt;
-import org.jetbrains.kotlin.resolve.scopes.receivers.*;
+import org.jetbrains.kotlin.resolve.scopes.receivers.ExpressionReceiver;
+import org.jetbrains.kotlin.resolve.scopes.receivers.ImplicitReceiver;
+import org.jetbrains.kotlin.resolve.scopes.receivers.ReceiverValue;
+import org.jetbrains.kotlin.resolve.scopes.receivers.TransientReceiver;
 import org.jetbrains.kotlin.types.KotlinType;
 import org.jetbrains.kotlin.types.TypeUtils;
 import org.jetbrains.kotlin.types.expressions.ExpressionTypingUtils;
@@ -468,6 +472,23 @@ public class DataFlowValueFactory {
 
     private static boolean hasDefaultGetter(PropertyDescriptor propertyDescriptor) {
         PropertyGetterDescriptor getter = propertyDescriptor.getGetter();
-        return getter == null || getter.isDefault();
+        if (getter == null) {
+            return true;
+        }
+
+        PsiElement declaration = DescriptorToSourceUtils.descriptorToDeclaration(propertyDescriptor);
+        if (!(declaration instanceof KtProperty)) {
+            return getter.isDefault();
+        }
+
+        KtProperty ktProperty = (KtProperty) declaration;
+
+        if (getter.isDefault()) {
+            return !ktProperty.hasDelegate();
+        }
+        else {
+            KtPropertyAccessor ktPropertyGetter = ktProperty.getGetter();
+            return ktPropertyGetter == null || !ktPropertyGetter.hasBody();
+        }
     }
 }

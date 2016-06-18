@@ -36,6 +36,7 @@ import org.jetbrains.kotlin.load.kotlin.*;
 import org.jetbrains.kotlin.psi.Call;
 import org.jetbrains.kotlin.psi.KtFile;
 import org.jetbrains.kotlin.psi.KtFunction;
+import org.jetbrains.kotlin.psi.KtProperty;
 import org.jetbrains.kotlin.psi.codeFragmentUtil.CodeFragmentUtilKt;
 import org.jetbrains.kotlin.resolve.BindingContext;
 import org.jetbrains.kotlin.resolve.DescriptorToSourceUtils;
@@ -186,21 +187,6 @@ public class JvmCodegenUtil {
                 // Unless we are evaluating expression in debugger context, only properties of the same class can be directly accessed
                 return false;
             }
-            else {
-                // In debugger we want to access through accessors if they are generated
-
-                // Non default accessors must always be generated
-                for (PropertyAccessorDescriptor accessorDescriptor : property.getAccessors()) {
-                    if (!accessorDescriptor.isDefault()) {
-                        if (forGetter == accessorDescriptor instanceof PropertyGetterDescriptor) {
-                            return false;
-                        }
-                    }
-                }
-
-                // If property overrides something, accessors must be generated too
-                if (!property.getOverriddenDescriptors().isEmpty()) return false;
-            }
         }
 
         // Delegated and extension properties have no backing fields
@@ -210,6 +196,15 @@ public class JvmCodegenUtil {
         if (DescriptorUtils.isCompanionObject(property.getContainingDeclaration())) return false;
 
         PropertyAccessorDescriptor accessor = forGetter ? property.getGetter() : property.getSetter();
+
+        if (isDebuggerContext(context)) {
+            // If property overrides something, accessors must be generated and we should use them
+            if (!property.getOverriddenDescriptors().isEmpty()) return false;
+
+            // For delegated property there can be no backing field and accessor must be used
+            PsiElement ktProperty = DescriptorToSourceUtils.descriptorToDeclaration(property);
+            if (ktProperty instanceof KtProperty && ((KtProperty) ktProperty).hasDelegate()) return false;
+        }
 
         // If there's no accessor declared we can use direct access
         if (accessor == null) return true;
