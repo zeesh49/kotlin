@@ -266,3 +266,15 @@ fun inForLoop(x: Any?) {
     }
     for (i in <error descr="[ITERATOR_MISSING] For-loop range must have an 'iterator()' method">x</error>) {}
 }
+
+class ExplicitAccessorForAnnotation {
+    val tt: String? = "good"
+        <info descr="null">get</info>
+
+    fun foo(): String {
+        if (tt is String) {
+            return <info descr="Smart cast to kotlin.String">tt</info>
+        }
+        return ""
+    }
+}
