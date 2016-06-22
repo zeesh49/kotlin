@@ -77,7 +77,7 @@ class DelegationTranslator(
             if (field.generateField) {
                 val expression = specifier.delegateExpression!!
                 val delegateInitExpr = Translation.translateAsExpression(expression, context())
-                val lhs = JsAstUtils.fqnWithoutSideEffects(field.name, JsLiteral.THIS)
+                val lhs = JsAstUtils.pureFqn(field.name, JsLiteral.THIS)
                 statements += JsAstUtils.assignment(lhs, delegateInitExpr).makeStmt()
             }
         }
