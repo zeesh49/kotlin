@@ -19,7 +19,7 @@ package org.jetbrains.kotlin.js.resolve.diagnostics
 import org.jetbrains.kotlin.config.LanguageFeatureSettings
 import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.diagnostics.DiagnosticSink
-import org.jetbrains.kotlin.js.naming.FQNGenerator
+import org.jetbrains.kotlin.js.naming.NameSuggestion
 import org.jetbrains.kotlin.js.translate.utils.AnnotationsUtils
 import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtProperty
@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.isExtension
 import org.jetbrains.kotlin.resolve.scopes.MemberScope
 
 class JsNameClashChecker : DeclarationChecker {
-    private val fqnGenerator = FQNGenerator()
+    private val nameSuggestion = NameSuggestion()
     private val scopes = mutableMapOf<DeclarationDescriptor, MutableMap<String, DeclarationDescriptor>>()
     private val clashedFakeOverrides = mutableMapOf<DeclarationDescriptor, Pair<DeclarationDescriptor, DeclarationDescriptor>>()
     private val clashedDescriptors = mutableSetOf<DeclarationDescriptor>()
@@ -48,12 +48,12 @@ class JsNameClashChecker : DeclarationChecker {
     }
 
     private fun checkDescriptor(descriptor: DeclarationDescriptor, declaration: KtDeclaration, diagnosticHolder: DiagnosticSink) {
-        val fqn = fqnGenerator.generate(descriptor)!!
-        if (fqn.shared && fqn.scope is ClassOrPackageFragmentDescriptor && isOpaque(fqn.descriptor)) {
-            val scope = getScope(fqn.scope)
-            val name = fqn.names.last()
+        val suggested = nameSuggestion.suggest(descriptor)!!
+        if (suggested.stable && suggested.scope is ClassOrPackageFragmentDescriptor && isOpaque(suggested.descriptor)) {
+            val scope = getScope(suggested.scope)
+            val name = suggested.names.last()
             val existing = scope[name]
-            if (existing != null && existing != fqn.descriptor) {
+            if (existing != null && existing != suggested.descriptor) {
                 diagnosticHolder.report(ErrorsJs.JS_NAME_CLASH.on(declaration, name, existing))
                 val existingDeclaration = existing.findPsi() ?: declaration
                 if (clashedDescriptors.add(existing) && existingDeclaration is KtDeclaration && existingDeclaration != declaration) {
@@ -62,13 +62,13 @@ class JsNameClashChecker : DeclarationChecker {
             }
         }
 
-        val fqnDescriptor = fqn.descriptor
+        val fqnDescriptor = suggested.descriptor
         if (fqnDescriptor is ClassDescriptor) {
             val fakeOverrides = fqnDescriptor.defaultType.memberScope.getContributedDescriptors().asSequence()
                     .mapNotNull { it as? CallableMemberDescriptor }
                     .filter { it.kind == CallableMemberDescriptor.Kind.FAKE_OVERRIDE }
             for (override in fakeOverrides) {
-                val overrideFqn = fqnGenerator.generate(override)!!
+                val overrideFqn = nameSuggestion.suggest(override)!!
                 val scope = getScope(overrideFqn.scope)
                 val name = overrideFqn.names.last()
                 val existing = scope[name]
@@ -116,8 +116,8 @@ class JsNameClashChecker : DeclarationChecker {
             }
         }
 
-        val fqn = fqnGenerator.generate(descriptor) ?: return
-        if (fqn.shared && isOpaque(fqn.descriptor)) {
+        val fqn = nameSuggestion.suggest(descriptor) ?: return
+        if (fqn.stable && isOpaque(fqn.descriptor)) {
             target[fqn.names.last()] = fqn.descriptor
             (fqn.descriptor as? CallableMemberDescriptor)?.let { checkOverrideClashes(it, target) }
         }
@@ -127,8 +127,8 @@ class JsNameClashChecker : DeclarationChecker {
         var overridden = descriptor.overriddenDescriptors
         while (overridden.isNotEmpty()) {
             for (overridenDescriptor in overridden) {
-                val overriddenFqn = fqnGenerator.generate(overridenDescriptor)!!
-                if (overriddenFqn.shared) {
+                val overriddenFqn = nameSuggestion.suggest(overridenDescriptor)!!
+                if (overriddenFqn.stable) {
                     val existing = target[overriddenFqn.names.last()]
                     if (existing != null) {
                         if (existing != descriptor && descriptor.kind == CallableMemberDescriptor.Kind.FAKE_OVERRIDE) {
