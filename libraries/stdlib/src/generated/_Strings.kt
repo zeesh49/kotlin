@@ -9,10 +9,6 @@ package kotlin.text
 //
 
 import kotlin.comparisons.*
-import java.util.*
-
-import java.util.Collections // TODO: it's temporary while we have java.util.Collections in js
-
 /**
  * Returns a character at the given [index] or throws an [IndexOutOfBoundsException] if the [index] is out of bounds of this char sequence.
  */

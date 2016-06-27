@@ -4,7 +4,6 @@
 @file:Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN", "DeprecatedCallableAddReplaceWith")
 package kotlin
 
-
 /**
  * Returns an array of stack trace elements representing the stack trace
  * pertaining to this throwable.
