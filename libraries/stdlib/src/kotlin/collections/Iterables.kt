@@ -50,7 +50,7 @@ internal fun <T> Iterable<T>.collectionSizeOrNull(): Int? = if (this is Collecti
 internal fun <T> Iterable<T>.collectionSizeOrDefault(default: Int): Int = if (this is Collection<*>) this.size else default
 
 /** Returns true when it's safe to convert this collection to a set without changing contains method behavior. */
-private fun <T> Collection<T>.safeToConvertToSet() = size > 2 && this is ArrayList
+private fun <T> Collection<T>.safeToConvertToSet() = size > 2 && this is ArrayList<T>
 
 /** Converts this collection to a set, when it's worth so and it doesn't change contains method behavior. */
 internal fun <T> Iterable<T>.convertToSetForSetOperationWith(source: Iterable<T>): Collection<T> =

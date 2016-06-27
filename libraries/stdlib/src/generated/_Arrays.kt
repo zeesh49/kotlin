@@ -9,10 +9,6 @@ package kotlin.collections
 //
 
 import kotlin.comparisons.*
-import java.util.*
-
-import java.util.Collections // TODO: it's temporary while we have java.util.Collections in js
-
 /**
  * Returns 1st *element* from the collection.
  */
@@ -6476,7 +6472,7 @@ public fun CharArray.toList(): List<Char> {
  * Returns a [MutableList] filled with all elements of this array.
  */
 public fun <T> Array<out T>.toMutableList(): MutableList<T> {
-    return ArrayList(this.asCollection())
+    return ArrayList<T>(this.asCollection())
 }
 
 /**
