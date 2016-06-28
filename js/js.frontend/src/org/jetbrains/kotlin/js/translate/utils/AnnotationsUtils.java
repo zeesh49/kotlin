@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Set;
 
 public final class AnnotationsUtils {
+    private static final FqName JS_MODULE_ANNOTATION = new FqName("kotlin.js.JsModule");
 
     private AnnotationsUtils() {
     }
@@ -148,5 +149,15 @@ public final class AnnotationsUtils {
         }
         ClassDescriptor containingClass = DescriptorUtils.getContainingClass(descriptor);
         return containingClass != null && hasAnnotationOrInsideAnnotatedClass(containingClass, fqName);
+    }
+
+    @Nullable
+    public static String getModuleName(@NotNull DeclarationDescriptor declaration) {
+        AnnotationDescriptor annotation = declaration.getAnnotations().findAnnotation(JS_MODULE_ANNOTATION);
+        if (annotation == null) return null;
+
+        ConstantValue<?> importValue = annotation.getAllValueArguments().values().iterator().next();
+        assert importValue != null : "JsModule annotation should have at least one argument";
+        return (String) importValue.getValue();
     }
 }

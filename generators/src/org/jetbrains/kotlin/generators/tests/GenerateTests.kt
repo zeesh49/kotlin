@@ -1145,6 +1145,10 @@ fun main(args: Array<String>) {
             model("expression/cast/cases")
         }
 
+        testClass<AbstractJsModuleTest>() {
+            model("jsModule/cases")
+        }
+
         testClass<AbstractLightReflectionTest>() {
             model("reflection/light/cases")
         }
