@@ -32,30 +32,42 @@ import java.util.regex.Pattern;
 @RunWith(JUnit3RunnerWithInners.class)
 public class JsModuleTestGenerated extends AbstractJsModuleTest {
     public void testAllFilesPresentInCases() throws Exception {
-        KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("js/js.translator/testData/jsModule/cases"), Pattern.compile("^(.+)\\.kt$"), true);
+        KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("js/js.translator/testData/jsModule/cases"), Pattern.compile("^([^\\.]+)$"), false);
     }
 
-    @TestMetadata("externalClass.kt")
+    @TestMetadata("externalClass")
     public void testExternalClass() throws Exception {
-        String fileName = KotlinTestUtils.navigationMetadata("js/js.translator/testData/jsModule/cases/externalClass.kt");
+        String fileName = KotlinTestUtils.navigationMetadata("js/js.translator/testData/jsModule/cases/externalClass/");
         doTest(fileName);
     }
 
-    @TestMetadata("externalFunction.kt")
+    @TestMetadata("externalFunction")
     public void testExternalFunction() throws Exception {
-        String fileName = KotlinTestUtils.navigationMetadata("js/js.translator/testData/jsModule/cases/externalFunction.kt");
+        String fileName = KotlinTestUtils.navigationMetadata("js/js.translator/testData/jsModule/cases/externalFunction/");
         doTest(fileName);
     }
 
-    @TestMetadata("externalObject.kt")
+    @TestMetadata("externalObject")
     public void testExternalObject() throws Exception {
-        String fileName = KotlinTestUtils.navigationMetadata("js/js.translator/testData/jsModule/cases/externalObject.kt");
+        String fileName = KotlinTestUtils.navigationMetadata("js/js.translator/testData/jsModule/cases/externalObject/");
         doTest(fileName);
     }
 
-    @TestMetadata("externalProperty.kt")
+    @TestMetadata("externalPackage")
+    public void testExternalPackage() throws Exception {
+        String fileName = KotlinTestUtils.navigationMetadata("js/js.translator/testData/jsModule/cases/externalPackage/");
+        doTest(fileName);
+    }
+
+    @TestMetadata("externalPackageInDifferentFile")
+    public void testExternalPackageInDifferentFile() throws Exception {
+        String fileName = KotlinTestUtils.navigationMetadata("js/js.translator/testData/jsModule/cases/externalPackageInDifferentFile/");
+        doTest(fileName);
+    }
+
+    @TestMetadata("externalProperty")
     public void testExternalProperty() throws Exception {
-        String fileName = KotlinTestUtils.navigationMetadata("js/js.translator/testData/jsModule/cases/externalProperty.kt");
+        String fileName = KotlinTestUtils.navigationMetadata("js/js.translator/testData/jsModule/cases/externalProperty/");
         doTest(fileName);
     }
 }

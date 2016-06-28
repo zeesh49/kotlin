@@ -89,6 +89,7 @@ public final class K2JSTranslator {
         ProgressIndicatorAndCompilationCanceledStatus.checkCanceled();
 
         List<String> importedModules = new ArrayList<String>(context.getImportedModules().keySet());
-        return new TranslationResult.Success(config, files, program, diagnostics, importedModules, moduleDescriptor);
+        return new TranslationResult.Success(config, files, program, diagnostics, importedModules, moduleDescriptor,
+                                             bindingTrace.getBindingContext());
     }
 }

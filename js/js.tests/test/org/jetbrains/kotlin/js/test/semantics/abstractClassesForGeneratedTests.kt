@@ -26,7 +26,7 @@ abstract class AbstractBlackBoxTest(d: String) : SingleFileTranslationTest(d) {
     override fun doTest(filename: String) = checkBlackBoxIsOkByPath(filename)
 }
 
-abstract class AbstractJsModuleTest : SingleFileTranslationTest("jsModule/") {
+abstract class AbstractJsModuleTest : MultipleFilesTranslationTest("jsModule/") {
     override fun setupConfig(configuration: CompilerConfiguration) {
         super.setupConfig(configuration)
         configuration.put(JSConfigurationKeys.MODULE_KIND, ModuleKind.AMD)

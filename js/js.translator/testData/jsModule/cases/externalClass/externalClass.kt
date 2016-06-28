@@ -8,5 +8,6 @@ fun box(): String {
     val a = A(23)
     assertEquals(23, a.x)
     assertEquals(65, a.foo(42))
+
     return "OK"
 }

@@ -55,6 +55,10 @@ class MultiModuleWrappersTest() : MultipleModulesTranslationTest("multiModuleWra
         runTest("moduleWithNonIdentifierName")
     }
 
+    @WithModuleKind(ModuleKind.AMD) fun testJsModuleOnPackage() {
+        runTest("jsModuleOnPackage")
+    }
+
     fun runTest(name: String) {
         overriddenTestName = name
         doTest("${pathToTestDir()}/cases/$name")
