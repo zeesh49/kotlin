@@ -15,6 +15,8 @@ package foo
 
 @native val bar: Int = noImpl
 
+@native var mbar: Int = noImpl
+
 fun box(): String {
     val a = A(23)
     assertEquals(23, a.x)
@@ -25,6 +27,9 @@ fun box(): String {
 
     assertEquals(365, foo(42))
     assertEquals(423, bar)
+
+    mbar = 523
+    assertEquals(523, mbar)
 
     return "OK"
 }
