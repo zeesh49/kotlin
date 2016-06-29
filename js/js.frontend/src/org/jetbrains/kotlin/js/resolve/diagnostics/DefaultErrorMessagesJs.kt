@@ -37,6 +37,8 @@ private val DIAGNOSTIC_FACTORY_TO_RENDERER by lazy {
         put(ErrorsJs.REFERENCE_TO_BUILTIN_MEMBERS_NOT_SUPPORTED, "Callable references for builtin members are not supported yet: ''{0}''", RenderFirstLineOfElementText)
         put(ErrorsJs.JSCODE_NO_JAVASCRIPT_PRODUCED, "Argument must be non-empty JavaScript code")
         put(ErrorsJs.NATIVE_INNER_CLASS_PROHIBITED, "Native inner classes are prohibited")
+        put(ErrorsJs.JS_MODULE_PROHIBITED_ON_VAR, "@JsModule annotation prohibited for 'var' declarations. Use 'val' instead.")
+        put(ErrorsJs.JS_MODULE_PROHIBITED_ON_NON_NATIVE, "@JsModule annotation prohibited for non-@native declarations.")
 
         this
     }
