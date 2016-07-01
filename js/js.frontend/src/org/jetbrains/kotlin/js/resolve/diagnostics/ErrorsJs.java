@@ -16,6 +16,7 @@
 
 package org.jetbrains.kotlin.js.resolve.diagnostics;
 
+import com.intellij.psi.PsiElement;
 import org.jetbrains.kotlin.diagnostics.DiagnosticFactory0;
 import org.jetbrains.kotlin.diagnostics.DiagnosticFactory1;
 import org.jetbrains.kotlin.diagnostics.DiagnosticFactory2;
@@ -45,6 +46,8 @@ public interface ErrorsJs {
     DiagnosticFactory0<KtExpression> NATIVE_INNER_CLASS_PROHIBITED = DiagnosticFactory0.create(ERROR);
     DiagnosticFactory0<KtElement> JS_MODULE_PROHIBITED_ON_VAR = DiagnosticFactory0.create(ERROR, DECLARATION_SIGNATURE_OR_DEFAULT);
     DiagnosticFactory0<KtElement> JS_MODULE_PROHIBITED_ON_NON_NATIVE = DiagnosticFactory0.create(ERROR, DECLARATION_SIGNATURE_OR_DEFAULT);
+    DiagnosticFactory0<PsiElement> CALL_TO_JS_MODULE_WITHOUT_MODULE_SYSTEM = DiagnosticFactory0.create(ERROR, DEFAULT);
+    DiagnosticFactory0<PsiElement> CALL_TO_JS_NON_MODULE_WITH_MODULE_SYSTEM = DiagnosticFactory0.create(ERROR, DEFAULT);
 
     @SuppressWarnings("UnusedDeclaration")
     Object _initializer = new Object() {

@@ -51,3 +51,7 @@ public annotation class marker
 @Retention(AnnotationRetention.BINARY)
 @Target(CLASS, PROPERTY, FUNCTION, FILE)
 annotation class JsModule(val import: String)
+
+@Retention(AnnotationRetention.BINARY)
+@Target(CLASS, PROPERTY, FUNCTION, FILE)
+annotation class JsNonModule

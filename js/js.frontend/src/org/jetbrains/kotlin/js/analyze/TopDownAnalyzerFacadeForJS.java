@@ -27,6 +27,7 @@ import org.jetbrains.kotlin.descriptors.impl.ModuleDescriptorImpl;
 import org.jetbrains.kotlin.frontend.js.di.InjectionKt;
 import org.jetbrains.kotlin.js.analyzer.JsAnalysisResult;
 import org.jetbrains.kotlin.js.config.JsConfig;
+import org.jetbrains.kotlin.js.resolve.BindingContextSlicesJsKt;
 import org.jetbrains.kotlin.js.resolve.JsPlatform;
 import org.jetbrains.kotlin.name.Name;
 import org.jetbrains.kotlin.psi.KtFile;
@@ -38,6 +39,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import static org.jetbrains.kotlin.js.resolve.BindingContextSlicesJsKt.MODULE_KIND;
 
 public final class TopDownAnalyzerFacadeForJS {
     private TopDownAnalyzerFacadeForJS() {
@@ -51,6 +54,7 @@ public final class TopDownAnalyzerFacadeForJS {
                 ContextKt.ProjectContext(config.getProject()), Name.special("<" + config.getModuleId() + ">"), JsPlatform.INSTANCE,
                 JsPlatform.INSTANCE.getBuiltIns()
         );
+        trace.record(MODULE_KIND, newModuleContext.getModule(), config.getModuleKind());
         newModuleContext.setDependencies(computeDependencies(newModuleContext.getModule(), config));
         return analyzeFilesWithGivenTrace(files, trace, newModuleContext, config);
     }

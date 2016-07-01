@@ -41,6 +41,7 @@ import java.util.Set;
 
 public final class AnnotationsUtils {
     private static final FqName JS_MODULE_ANNOTATION = new FqName("kotlin.js.JsModule");
+    private static final FqName JS_NON_MODULE_ANNOTATION = new FqName("kotlin.js.JsNonModule");
 
     private AnnotationsUtils() {
     }
@@ -179,6 +180,24 @@ public final class AnnotationsUtils {
         return null;
     }
 
+    public static boolean isNonModule(@NotNull DeclarationDescriptor declaration) {
+        return declaration.getAnnotations().findAnnotation(JS_NON_MODULE_ANNOTATION) != null;
+    }
+
+    public static boolean isFromNonModuleFile(@NotNull BindingContext bindingContext, @NotNull DeclarationDescriptor declaration) {
+        for (AnnotationDescriptor annotation : getContainingFileAnnotations(bindingContext, declaration)) {
+            DeclarationDescriptor annotationType = annotation.getType().getConstructor().getDeclarationDescriptor();
+            if (annotationType == null) continue;
+
+            FqNameUnsafe fqName = DescriptorUtils.getFqName(annotation.getType().getConstructor().getDeclarationDescriptor());
+            if (fqName.equals(JS_NON_MODULE_ANNOTATION.toUnsafe())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     @NotNull
     private static String extractJsModuleName(@NotNull AnnotationDescriptor annotation) {
         ConstantValue<?> importValue = annotation.getAllValueArguments().values().iterator().next();
@@ -201,7 +220,9 @@ public final class AnnotationsUtils {
             List<AnnotationDescriptor> annotations = new ArrayList<AnnotationDescriptor>();
             for (KtAnnotationEntry psiAnnotation : kotlinFile.getAnnotationEntries()) {
                 AnnotationDescriptor annotation = bindingContext.get(BindingContext.ANNOTATION, psiAnnotation);
-                annotations.add(annotation);
+                if (annotation != null) {
+                    annotations.add(annotation);
+                }
             }
             return annotations;
         }

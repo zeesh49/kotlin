@@ -20,6 +20,7 @@ import org.jetbrains.kotlin.container.StorageComponentContainer
 import org.jetbrains.kotlin.container.useImpl
 import org.jetbrains.kotlin.container.useInstance
 import org.jetbrains.kotlin.js.resolve.diagnostics.JsCallChecker
+import org.jetbrains.kotlin.js.resolve.diagnostics.JsModuleCallChecker
 import org.jetbrains.kotlin.js.resolve.diagnostics.JsModuleChecker
 import org.jetbrains.kotlin.js.resolve.diagnostics.NativeInnerClassChecker
 import org.jetbrains.kotlin.resolve.IdentifierChecker
@@ -32,7 +33,7 @@ object JsPlatformConfigurator : PlatformConfigurator(
         DynamicTypesAllowed(),
         additionalDeclarationCheckers = listOf(NativeInvokeChecker(), NativeGetterChecker(), NativeSetterChecker(),
                                                NativeInnerClassChecker(), JsModuleChecker),
-        additionalCallCheckers = listOf(),
+        additionalCallCheckers = listOf(JsModuleCallChecker),
         additionalTypeCheckers = listOf(),
         additionalClassifierUsageCheckers = listOf(),
         additionalAnnotationCheckers = listOf(),

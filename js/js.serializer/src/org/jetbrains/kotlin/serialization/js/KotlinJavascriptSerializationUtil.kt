@@ -19,7 +19,6 @@ package org.jetbrains.kotlin.serialization.js
 import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.protobuf.ByteString
-import org.jetbrains.kotlin.protobuf.CodedOutputStream
 import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.resolve.descriptorUtil.classId
@@ -187,20 +186,20 @@ object KotlinJavascriptSerializationUtil {
 
     private fun serializeFiles(fileRegistry: KotlinFileRegistry, bindingContext: BindingContext,
                                serializer: AnnotationSerializer): ByteArray {
-        return ByteArrayOutputStream().use { rawOut ->
-            val out = CodedOutputStream.newInstance(rawOut)
-            out.writeInt32NoTag(fileRegistry.files.size)
-            for ((id, file) in fileRegistry.files.withIndex()) {
-                val fileProto = JsProtoBuf.File.newBuilder()
-                fileProto.id = id
-                for (annotationPsi in file.annotationEntries) {
-                    val annotation = bindingContext[BindingContext.ANNOTATION, annotationPsi]!!
-                    fileProto.addAnnotation(serializer.serializeAnnotation(annotation))
-                }
-                fileProto.build().writeTo(out)
+        val filesProto = JsProtoBuf.Files.newBuilder()
+        for ((id, file) in fileRegistry.files.withIndex()) {
+            val fileProto = JsProtoBuf.File.newBuilder()
+            fileProto.id = id
+            for (annotationPsi in file.annotationEntries) {
+                val annotation = bindingContext[BindingContext.ANNOTATION, annotationPsi]!!
+                fileProto.addAnnotation(serializer.serializeAnnotation(annotation))
             }
-            out.flush()
-            rawOut
+            filesProto.addFile(fileProto)
+        }
+
+        return ByteArrayOutputStream().use { out ->
+            filesProto.build().writeTo(out)
+            out
         }.toByteArray()
     }
 
