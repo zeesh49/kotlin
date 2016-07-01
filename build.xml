@@ -369,6 +369,14 @@
 
     <target name="js-stdlib">
         <property environment="env"/>
+        <sequential unless:set="env.JDK_17">
+            <sequential unless:set="env.JDK_18">
+                <fail>Requiring environment variable JDK_17 to be set to point to JDK 1.7 installation</fail>
+            </sequential>
+        </sequential>
+        <condition property="jdk17" value="${env.JDK_17}" else="${env.JDK_18}">
+            <isset property="env.JDK_17" />
+        </condition>
         <kotlin-pp src="libraries/stdlib/src" output="${intermediate-sources}/stdlib/js" profile="JS" />
 
         <new-kotlin2js output="${js.stdlib.output.dir}/tmp/kotlin.js">
@@ -383,9 +391,6 @@
         <move file="${js.stdlib.output.dir}/tmp/kotlin" todir="${js.stdlib.output.dir}" />
         <move file="${js.stdlib.output.dir}/tmp/${compiled.stdlib.meta.js}" tofile="${js.stdlib.output.dir}/${compiled.stdlib.meta.js}" />
 
-        <condition property="jdk17" value="${env.JDK_17}" else="${env.JAVA_HOME}">
-            <isset property="env.JDK_17" />
-        </condition>
         <java classname="org.apache.tools.ant.launch.Launcher"
               fork="true"
               failonerror="true"
