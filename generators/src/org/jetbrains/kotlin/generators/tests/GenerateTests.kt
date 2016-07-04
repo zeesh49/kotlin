@@ -1145,8 +1145,12 @@ fun main(args: Array<String>) {
             model("expression/cast/cases")
         }
 
-        testClass<AbstractJsModuleTest>() {
-            model("jsModule/cases", extension = null, recursive = false)
+        testClass<AbstractAmdModuleTest>() {
+            model("jsModule/amd/cases", extension = null, recursive = false, testClassName = "AMDModuleTestGenerated")
+        }
+
+        testClass<AbstractPlainModuleTest>() {
+            model("jsModule/plain/cases", extension = null, recursive = false, testClassName = "PlainModuleTestGenerated")
         }
 
         testClass<AbstractLightReflectionTest>() {

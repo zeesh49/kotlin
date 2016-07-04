@@ -26,10 +26,12 @@ abstract class AbstractBlackBoxTest(d: String) : SingleFileTranslationTest(d) {
     override fun doTest(filename: String) = checkBlackBoxIsOkByPath(filename)
 }
 
-abstract class AbstractJsModuleTest : MultipleFilesTranslationTest("jsModule/") {
+// TODO: eliminate when refactoring to single-file annotated tests
+abstract class AbstractJsModuleTest(private val moduleKind: ModuleKind, name: String) :
+        MultipleFilesTranslationTest("jsModule/$name") {
     override fun setupConfig(configuration: CompilerConfiguration) {
         super.setupConfig(configuration)
-        configuration.put(JSConfigurationKeys.MODULE_KIND, ModuleKind.AMD)
+        configuration.put(JSConfigurationKeys.MODULE_KIND, moduleKind)
     }
 
     override fun additionalJsFiles(ecmaVersion: EcmaVersion): MutableList<String> {
@@ -39,6 +41,10 @@ abstract class AbstractJsModuleTest : MultipleFilesTranslationTest("jsModule/") 
         )
     }
 }
+
+abstract class AbstractAmdModuleTest : AbstractJsModuleTest(ModuleKind.AMD, "amd/")
+
+abstract class AbstractPlainModuleTest : AbstractJsModuleTest(ModuleKind.PLAIN, "plain/")
 
 abstract class AbstractBridgeTest : AbstractBlackBoxTest("bridges/")
 

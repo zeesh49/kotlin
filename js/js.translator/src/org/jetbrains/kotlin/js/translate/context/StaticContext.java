@@ -40,6 +40,7 @@ import org.jetbrains.kotlin.resolve.BindingContext;
 import org.jetbrains.kotlin.resolve.BindingTrace;
 import org.jetbrains.kotlin.resolve.DescriptorUtils;
 import org.jetbrains.kotlin.resolve.calls.util.FakeCallableDescriptorForObject;
+import org.jetbrains.kotlin.serialization.js.ModuleKind;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -263,6 +264,7 @@ public final class StaticContext {
                 @Nullable
                 @Override
                 public JsName apply(@NotNull DeclarationDescriptor descriptor) {
+                    if (config.getModuleKind() == ModuleKind.PLAIN) return null;
                     String moduleName = AnnotationsUtils.getModuleName(descriptor);
                     return moduleName != null ? getModuleInternalName(moduleName) : null;
                 }
@@ -531,6 +533,7 @@ public final class StaticContext {
                 @Override
                 public JsExpression apply(@NotNull DeclarationDescriptor descriptor) {
                     if (!AnnotationsUtils.isNativeObject(descriptor)) return null;
+                    if (config.getModuleKind() == ModuleKind.PLAIN) return null;
 
                     String moduleName = AnnotationsUtils.getFileModuleName(getBindingContext(), descriptor);
                     return moduleName != null ? getModuleReference(moduleName) : null;
