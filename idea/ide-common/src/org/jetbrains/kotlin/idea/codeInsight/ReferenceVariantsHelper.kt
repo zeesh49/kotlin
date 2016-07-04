@@ -320,7 +320,14 @@ class ReferenceVariantsHelper(
             constructorFilter: (ClassDescriptor) -> Boolean
     ) {
         for (receiverType in receiverTypes) {
-            addNonExtensionCallablesAndConstructors(receiverType.memberScope.memberScopeAsImportingScope(), kindFilter, nameFilter, constructorFilter)
+            addNonExtensionCallablesAndConstructors(receiverType.memberScope.memberScopeAsImportingScope(), kindFilter, nameFilter,
+                                                    constructorFilter = { false }) // will be processed below
+
+            val classDescriptor = receiverType.constructor.declarationDescriptor as? ClassDescriptor
+            if (classDescriptor != null) {
+                val innerClassesScope = classDescriptor.unsubstitutedInnerClassesScope.memberScopeAsImportingScope()
+                addNonExtensionCallablesAndConstructors(innerClassesScope, kindFilter, nameFilter, constructorFilter)
+            }
         }
     }
 
