@@ -21,6 +21,7 @@
         }
         modules[moduleId] = body.apply(null, resolvedDependencies);
     }
+    define.amd = {};
 
     global.require = require;
     global.define = define;

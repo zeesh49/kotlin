@@ -27,7 +27,7 @@ abstract class AbstractBlackBoxTest(d: String) : SingleFileTranslationTest(d) {
 }
 
 // TODO: eliminate when refactoring to single-file annotated tests
-abstract class AbstractJsModuleTest(private val moduleKind: ModuleKind, name: String) :
+abstract class AbstractJsModuleTest(private val moduleKind: ModuleKind, name: String, private val emulateModules: Boolean = true) :
         MultipleFilesTranslationTest("jsModule/$name") {
     override fun setupConfig(configuration: CompilerConfiguration) {
         super.setupConfig(configuration)
@@ -35,16 +35,18 @@ abstract class AbstractJsModuleTest(private val moduleKind: ModuleKind, name: St
     }
 
     override fun additionalJsFiles(ecmaVersion: EcmaVersion): MutableList<String> {
-        return mutableListOf(
-                BasicTest.MODULE_EMULATION_FILE,
-                "${pathToTestDir()}/native/${getTestName(true)}.js"
-        )
+        val emulationFiles = if (emulateModules) listOf(BasicTest.MODULE_EMULATION_FILE) else listOf()
+        return (emulationFiles + listOf("${pathToTestDir()}/native/${getTestName(true)}.js")).toMutableList()
     }
 }
 
 abstract class AbstractAmdModuleTest : AbstractJsModuleTest(ModuleKind.AMD, "amd/")
 
 abstract class AbstractPlainModuleTest : AbstractJsModuleTest(ModuleKind.PLAIN, "plain/")
+
+abstract class AbstractUmdModuleTest : AbstractJsModuleTest(ModuleKind.UMD, "umd/")
+
+abstract class AbstractUmdFallbackModuleTest : AbstractJsModuleTest(ModuleKind.UMD, "umd-fallback/", emulateModules = false)
 
 abstract class AbstractBridgeTest : AbstractBlackBoxTest("bridges/")
 

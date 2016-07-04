@@ -1153,6 +1153,14 @@ fun main(args: Array<String>) {
             model("jsModule/plain/cases", extension = null, recursive = false, testClassName = "PlainModuleTestGenerated")
         }
 
+        testClass<AbstractUmdModuleTest>() {
+            model("jsModule/umd/cases", extension = null, recursive = false, testClassName = "UmdModuleTestGenerated")
+        }
+
+        testClass<AbstractUmdFallbackModuleTest>() {
+            model("jsModule/umd-fallback/cases", extension = null, recursive = false, testClassName = "UmdFallbackModuleTestGenerated")
+        }
+
         testClass<AbstractLightReflectionTest>() {
             model("reflection/light/cases")
         }
