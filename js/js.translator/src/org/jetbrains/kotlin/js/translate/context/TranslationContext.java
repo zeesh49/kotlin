@@ -91,7 +91,7 @@ public class TranslationContext {
     }
 
     @NotNull
-    public Map<String, JsName> getImportedModules() {
+    public Collection<StaticContext.ImportedModule> getImportedModules() {
         return staticContext.getImportedModules();
     }
 

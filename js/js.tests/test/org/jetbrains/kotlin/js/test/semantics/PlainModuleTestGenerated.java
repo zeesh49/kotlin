@@ -40,4 +40,10 @@ public class PlainModuleTestGenerated extends AbstractPlainModuleTest {
         String fileName = KotlinTestUtils.navigationMetadata("js/js.translator/testData/jsModule/plain/cases/externalFunction/");
         doTest(fileName);
     }
+
+    @TestMetadata("externalPackage")
+    public void testExternalPackage() throws Exception {
+        String fileName = KotlinTestUtils.navigationMetadata("js/js.translator/testData/jsModule/plain/cases/externalPackage/");
+        doTest(fileName);
+    }
 }

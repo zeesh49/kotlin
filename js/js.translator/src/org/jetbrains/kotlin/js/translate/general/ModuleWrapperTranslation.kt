@@ -18,12 +18,13 @@ package org.jetbrains.kotlin.js.translate.general
 
 import com.google.dart.compiler.backend.js.ast.*
 import org.jetbrains.kotlin.js.translate.context.Namer
+import org.jetbrains.kotlin.js.translate.context.StaticContext
 import org.jetbrains.kotlin.js.translate.utils.JsAstUtils
 import org.jetbrains.kotlin.serialization.js.ModuleKind
 
 object ModuleWrapperTranslation {
     @JvmStatic fun wrapIfNecessary(
-            moduleId: String, function: JsExpression, importedModules: List<String>,
+            moduleId: String, function: JsExpression, importedModules: List<StaticContext.ImportedModule>,
             program: JsProgram, kind: ModuleKind
     ): List<JsStatement> {
         return when (kind) {
@@ -36,7 +37,7 @@ object ModuleWrapperTranslation {
 
     private fun wrapUmd(
             moduleId: String, function: JsExpression,
-            importedModules: List<String>, program: JsProgram
+            importedModules: List<StaticContext.ImportedModule>, program: JsProgram
     ): List<JsStatement> {
         val scope = program.scope
         val defineName = scope.declareName("define")
@@ -73,13 +74,13 @@ object ModuleWrapperTranslation {
 
     private fun wrapAmd(
             moduleId: String,function: JsExpression,
-            importedModules: List<String>, program: JsProgram
+            importedModules: List<StaticContext.ImportedModule>, program: JsProgram
     ): List<JsStatement> {
         val scope = program.scope
         val defineName = scope.declareName("define")
         val invocationArgs = listOf(
                 program.getStringLiteral(moduleId),
-                JsArrayLiteral(importedModules.map { program.getStringLiteral(it) }),
+                JsArrayLiteral(importedModules.map { program.getStringLiteral(it.externalName) }),
                 function
         )
 
@@ -87,12 +88,16 @@ object ModuleWrapperTranslation {
         return listOf(invocation.makeStmt())
     }
 
-    private fun wrapCommonJs(function: JsExpression, importedModules: List<String>, program: JsProgram): List<JsStatement> {
+    private fun wrapCommonJs(
+            function: JsExpression,
+            importedModules: List<StaticContext.ImportedModule>,
+            program: JsProgram
+    ): List<JsStatement> {
         val scope = program.scope
         val moduleName = scope.declareName("module")
         val requireName = scope.declareName("require")
 
-        val invocationArgs = importedModules.map { JsInvocation(requireName.makeRef(), program.getStringLiteral(it)) }
+        val invocationArgs = importedModules.map { JsInvocation(requireName.makeRef(), program.getStringLiteral(it.externalName)) }
         val invocation = JsInvocation(function, invocationArgs)
         val assignment = JsAstUtils.assignment(JsNameRef("exports", moduleName.makeRef()), invocation)
         return listOf(assignment.makeStmt())
@@ -100,7 +105,7 @@ object ModuleWrapperTranslation {
 
     private fun wrapPlain(
             moduleId: String, function: JsExpression,
-            importedModules: List<String>, program: JsProgram
+            importedModules: List<StaticContext.ImportedModule>, program: JsProgram
     ): List<JsStatement> {
         val invocation = makePlainInvocation(function, importedModules, program)
 
@@ -114,9 +119,17 @@ object ModuleWrapperTranslation {
         return listOf(statement)
     }
 
-    private fun makePlainInvocation(function: JsExpression, importedModules: List<String>, program: JsProgram): JsInvocation {
+    private fun makePlainInvocation(
+            function: JsExpression,
+            importedModules: List<StaticContext.ImportedModule>,
+            program: JsProgram
+    ): JsInvocation {
         val invocationArgs = importedModules.map { makePlainModuleRef(it, program) }
         return JsInvocation(function, invocationArgs)
+    }
+
+    private fun makePlainModuleRef(module: StaticContext.ImportedModule, program: JsProgram): JsExpression {
+        return module.plainReference ?: makePlainModuleRef(module.externalName, program)
     }
 
     private fun makePlainModuleRef(moduleId: String, program: JsProgram): JsExpression {

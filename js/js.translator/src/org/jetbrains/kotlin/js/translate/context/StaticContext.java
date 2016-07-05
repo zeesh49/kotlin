@@ -28,6 +28,7 @@ import com.intellij.util.containers.hash.LinkedHashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.kotlin.descriptors.*;
+import org.jetbrains.kotlin.js.PredefinedAnnotation;
 import org.jetbrains.kotlin.js.config.JsConfig;
 import org.jetbrains.kotlin.js.config.LibrarySourcesConfig;
 import org.jetbrains.kotlin.js.translate.context.generator.Generator;
@@ -42,10 +43,7 @@ import org.jetbrains.kotlin.resolve.DescriptorUtils;
 import org.jetbrains.kotlin.resolve.calls.util.FakeCallableDescriptorForObject;
 import org.jetbrains.kotlin.serialization.js.ModuleKind;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.jetbrains.kotlin.js.translate.utils.AnnotationsUtils.*;
 import static org.jetbrains.kotlin.js.translate.utils.JsAstUtils.pureFqn;
@@ -112,9 +110,9 @@ public final class StaticContext {
     private final JsConfig config;
 
     @NotNull
-    private final Map<String, JsName> importedModules = new LinkedHashMap<String, JsName>();
+    private final Map<ImportedModuleKey, ImportedModule> importedModules = new LinkedHashMap<ImportedModuleKey, ImportedModule>();
 
-    private Map<String, JsName> readOnlyImportedModules;
+    private Collection<ImportedModule> readOnlyImportedModules;
 
     //TODO: too many parameters in constructor
     private StaticContext(
@@ -133,6 +131,10 @@ public final class StaticContext {
         this.rootScope = rootScope;
         this.standardClasses = standardClasses;
         this.config = config;
+
+        JsName kotlinName = rootScope.declareName(Namer.KOTLIN_NAME);
+        importedModules.put(new ImportedModuleKey(Namer.KOTLIN_LOWER_NAME, null),
+                            new ImportedModule(Namer.KOTLIN_LOWER_NAME, kotlinName, null));
     }
 
     @NotNull
@@ -166,9 +168,9 @@ public final class StaticContext {
     }
 
     @NotNull
-    public Map<String, JsName> getImportedModules() {
+    public Collection<ImportedModule> getImportedModules() {
         if (readOnlyImportedModules == null) {
-            readOnlyImportedModules = Collections.unmodifiableMap(importedModules);
+            readOnlyImportedModules = Collections.unmodifiableCollection(importedModules.values());
         }
         return readOnlyImportedModules;
     }
@@ -266,7 +268,7 @@ public final class StaticContext {
                 public JsName apply(@NotNull DeclarationDescriptor descriptor) {
                     if (config.getModuleKind() == ModuleKind.PLAIN) return null;
                     String moduleName = AnnotationsUtils.getModuleName(descriptor);
-                    return moduleName != null ? getModuleInternalName(moduleName) : null;
+                    return moduleName != null ? getImportedModule(moduleName, descriptor).getInternalName() : null;
                 }
             };
 
@@ -533,10 +535,9 @@ public final class StaticContext {
                 @Override
                 public JsExpression apply(@NotNull DeclarationDescriptor descriptor) {
                     if (!AnnotationsUtils.isNativeObject(descriptor)) return null;
-                    if (config.getModuleKind() == ModuleKind.PLAIN) return null;
 
                     String moduleName = AnnotationsUtils.getFileModuleName(getBindingContext(), descriptor);
-                    return moduleName != null ? getModuleReference(moduleName) : null;
+                    return moduleName != null ? getModuleReference(moduleName, null) : null;
                 }
             };
             Rule<JsExpression> standardObjectsHaveKotlinQualifier = new Rule<JsExpression>() {
@@ -664,23 +665,38 @@ public final class StaticContext {
 
         if (LibrarySourcesConfig.UNKNOWN_EXTERNAL_MODULE_NAME.equals(moduleName)) return null;
 
-        return getModuleReference(moduleName);
+        return getModuleReference(moduleName, null);
     }
 
     @NotNull
-    private JsNameRef getModuleReference(@NotNull String baseName) {
-        return JsAstUtils.pureFqn(getModuleInternalName(baseName), null);
+    private JsNameRef getModuleReference(@NotNull String baseName, @Nullable DeclarationDescriptor descriptor) {
+        return JsAstUtils.pureFqn(getImportedModule(baseName, descriptor).getInternalName(), null);
     }
 
     @NotNull
-    private JsName getModuleInternalName(@NotNull String baseName) {
-        JsName moduleId = baseName.equals(Namer.KOTLIN_LOWER_NAME) ? rootScope.declareName(Namer.KOTLIN_NAME) :
-                          importedModules.get(baseName);
-        if (moduleId == null) {
-            moduleId = rootScope.declareFreshName(Namer.LOCAL_MODULE_PREFIX + Namer.suggestedModuleName(baseName));
-            importedModules.put(baseName, moduleId);
+    private ImportedModule getImportedModule(@NotNull String baseName, @Nullable DeclarationDescriptor descriptor) {
+        ImportedModuleKey key = new ImportedModuleKey(baseName, descriptor);
+
+        ImportedModule module = importedModules.get(key);
+        if (module == null) {
+            JsName internalName = rootScope.declareFreshName(Namer.LOCAL_MODULE_PREFIX + Namer.suggestedModuleName(baseName));
+            JsName plainName = descriptor != null ? rootScope.declareName(getPlainId(descriptor)) : null;
+            module = new ImportedModule(baseName, internalName, plainName != null ? pureFqn(plainName, null) : null);
+            importedModules.put(key, module);
         }
-        return moduleId;
+        return module;
+    }
+
+    @NotNull
+    private static String getPlainId(@NotNull DeclarationDescriptor declaration) {
+        if (declaration instanceof ConstructorDescriptor) {
+            return getPlainId(((ConstructorDescriptor) declaration).getContainingDeclaration());
+        }
+
+        String explicitName = AnnotationsUtils.getNameForAnnotatedObject(declaration, PredefinedAnnotation.NATIVE);
+        if (explicitName != null) return explicitName;
+
+        return declaration.getName().getIdentifier();
     }
 
     private static JsExpression applySideEffects(JsExpression expression, DeclarationDescriptor descriptor) {
@@ -733,5 +749,70 @@ public final class StaticContext {
     @NotNull
     public Map<ClassDescriptor, List<DeferredCallSite>> getDeferredCallSites() {
         return deferredCallSites;
+    }
+
+    public static class ImportedModule {
+        @NotNull
+        private final String externalName;
+
+        @NotNull
+        private final JsName internalName;
+
+        @Nullable
+        private final JsExpression plainReference;
+
+        ImportedModule(@NotNull String externalName, @NotNull JsName internalName, @Nullable JsExpression plainReference) {
+            this.externalName = externalName;
+            this.internalName = internalName;
+            this.plainReference = plainReference;
+        }
+
+        @NotNull
+        public String getExternalName() {
+            return externalName;
+        }
+
+        @NotNull
+        public JsName getInternalName() {
+            return internalName;
+        }
+
+        @Nullable
+        public JsExpression getPlainReference() {
+            return plainReference;
+        }
+    }
+
+    private static class ImportedModuleKey {
+        @NotNull
+        private final String baseName;
+
+        @Nullable
+        private final DeclarationDescriptor declaration;
+
+        public ImportedModuleKey(@NotNull String baseName, @Nullable DeclarationDescriptor declaration) {
+            this.baseName = baseName;
+            this.declaration = declaration;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            ImportedModuleKey key = (ImportedModuleKey) o;
+
+            if (!baseName.equals(key.baseName)) return false;
+            if (declaration != null ? !declaration.equals(key.declaration) : key.declaration != null) return false;
+
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = baseName.hashCode();
+            result = 31 * result + (declaration != null ? declaration.hashCode() : 0);
+            return result;
+        }
     }
 }

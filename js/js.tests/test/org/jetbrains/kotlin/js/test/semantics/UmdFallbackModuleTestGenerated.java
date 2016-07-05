@@ -40,4 +40,10 @@ public class UmdFallbackModuleTestGenerated extends AbstractUmdFallbackModuleTes
         String fileName = KotlinTestUtils.navigationMetadata("js/js.translator/testData/jsModule/umd-fallback/cases/externalFunction/");
         doTest(fileName);
     }
+
+    @TestMetadata("externalPackage")
+    public void testExternalPackage() throws Exception {
+        String fileName = KotlinTestUtils.navigationMetadata("js/js.translator/testData/jsModule/umd-fallback/cases/externalPackage/");
+        doTest(fileName);
+    }
 }
