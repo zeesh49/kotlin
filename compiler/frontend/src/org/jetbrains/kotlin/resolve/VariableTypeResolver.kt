@@ -16,7 +16,7 @@
 
 package org.jetbrains.kotlin.resolve
 
-import org.jetbrains.kotlin.descriptors.PropertyDescriptor
+import org.jetbrains.kotlin.descriptors.VariableDescriptorWithAccessors
 import org.jetbrains.kotlin.descriptors.impl.VariableDescriptorWithInitializerImpl
 import org.jetbrains.kotlin.diagnostics.Errors
 import org.jetbrains.kotlin.diagnostics.Errors.VARIABLE_WITH_NO_TYPE_NO_INITIALIZER
@@ -62,7 +62,7 @@ class VariableTypeResolver(
                 return type
             }
             !variable.hasInitializer() -> {
-                if (hasDelegate && variableDescriptor is PropertyDescriptor) {
+                if (hasDelegate && variableDescriptor is VariableDescriptorWithAccessors) {
                     val property = variable as KtProperty
                     if (property.hasDelegateExpression()) {
                         return DeferredType.createRecursionIntolerant(
@@ -131,7 +131,7 @@ class VariableTypeResolver(
 
     private fun resolveDelegatedPropertyType(
             property: KtProperty,
-            propertyDescriptor: PropertyDescriptor,
+            propertyDescriptor: VariableDescriptorWithAccessors,
             scopeForInitializer: LexicalScope,
             delegateExpression: KtExpression,
             dataFlowInfo: DataFlowInfo,
