@@ -658,9 +658,63 @@ public class BytecodeTextTestGenerated extends AbstractBytecodeTextTest {
             doTest(fileName);
         }
 
+        @TestMetadata("constCompare.kt")
+        public void testConstCompare() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/bytecodeText/conditions/constCompare.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("constConjunction.kt")
+        public void testConstConjunction() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/bytecodeText/conditions/constConjunction.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("constDisjunction.kt")
+        public void testConstDisjunction() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/bytecodeText/conditions/constDisjunction.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("constEquals.kt")
+        public void testConstEquals() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/bytecodeText/conditions/constEquals.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("constLiteralCompare.kt")
+        public void testConstLiteralCompare() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/bytecodeText/conditions/constLiteralCompare.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("constLiteralConjunction.kt")
+        public void testConstLiteralConjunction() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/bytecodeText/conditions/constLiteralConjunction.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("constLiteralDisjunction.kt")
+        public void testConstLiteralDisjunction() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/bytecodeText/conditions/constLiteralDisjunction.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("constLiteralEquals.kt")
+        public void testConstLiteralEquals() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/bytecodeText/conditions/constLiteralEquals.kt");
+            doTest(fileName);
+        }
+
         @TestMetadata("disjunction.kt")
         public void testDisjunction() throws Exception {
             String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/bytecodeText/conditions/disjunction.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("enumEntryEquals.kt")
+        public void testEnumEntryEquals() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/bytecodeText/conditions/enumEntryEquals.kt");
             doTest(fileName);
         }
 

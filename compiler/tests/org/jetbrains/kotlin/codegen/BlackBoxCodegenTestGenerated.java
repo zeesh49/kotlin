@@ -3673,6 +3673,24 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
             doTest(fileName);
         }
 
+        @TestMetadata("kt12908.kt")
+        public void testKt12908() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/controlStructures/kt12908.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("kt12908_2.kt")
+        public void testKt12908_2() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/controlStructures/kt12908_2.kt");
+            doTest(fileName);
+        }
+
+        @TestMetadata("kt12908_while.kt")
+        public void testKt12908_while() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/controlStructures/kt12908_while.kt");
+            doTest(fileName);
+        }
+
         @TestMetadata("kt1441.kt")
         public void testKt1441() throws Exception {
             String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/controlStructures/kt1441.kt");
@@ -4384,16 +4402,19 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
             KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/codegen/box/cycles"), Pattern.compile("^(.+)\\.kt$"), true);
         }
 
-        @TestMetadata("kt12908.kt")
-        public void testKt12908() throws Exception {
-            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/cycles/kt12908.kt");
-            doTest(fileName);
-        }
+        @TestMetadata("compiler/testData/codegen/box/cycles/kt12908")
+        @TestDataPath("$PROJECT_ROOT")
+        @RunWith(JUnit3RunnerWithInners.class)
+        public static class Kt12908 extends AbstractBlackBoxCodegenTest {
+            public void testAllFilesPresentInKt12908() throws Exception {
+                KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/codegen/box/cycles/kt12908"), Pattern.compile("^(.+)\\.kt$"), true);
+            }
 
-        @TestMetadata("kt12908_2.kt")
-        public void testKt12908_2() throws Exception {
-            String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/cycles/kt12908_2.kt");
-            doTest(fileName);
+            @TestMetadata("while.kt")
+            public void testWhile() throws Exception {
+                String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/cycles/kt12908/while.kt");
+                doTest(fileName);
+            }
         }
     }
 

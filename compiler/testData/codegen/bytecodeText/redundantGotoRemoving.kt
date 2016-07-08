@@ -9,4 +9,4 @@ fun foo() {
     val x = identity(1)
 }
 
-// 1 GOTO
+// 0 GOTO

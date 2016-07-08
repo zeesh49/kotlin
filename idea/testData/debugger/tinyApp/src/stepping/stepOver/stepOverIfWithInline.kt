@@ -1,10 +1,10 @@
 package stepOverIfWithInline
-
+val one = 1
 fun main(args: Array<String>) {
     //Breakpoint!
     val prop = 1
     // False with braces
-    val a = if (1 > 2) {
+    val a = if (args.size < 0) {
         foo { test(1) }
     }
     else {
@@ -12,20 +12,20 @@ fun main(args: Array<String>) {
     }
 
     // False without braces
-    val b = if (1 > 2)
+    val b = if (args.size < 0)
         foo { test(1) }
     else
         foo { test(1) }
 
     // One line
-    val c = if (1 > 2) foo { test(1) } else foo { test(1) }
+    val c = if (args.size < 0) foo { test(1) } else foo { test(1) }
 
     // Else on next line, false
-    val d = if (1 > 2) foo { test(1) }
+    val d = if (args.size < 0) foo { test(1) }
             else foo { test(1) }
 
     // Else on next line, true
-    val e = if (1 < 2) foo { test(1) }
+    val e = if (args.size >= 0) foo { test(1) }
             else foo { test(1) }
 
     // Inline function call in condition

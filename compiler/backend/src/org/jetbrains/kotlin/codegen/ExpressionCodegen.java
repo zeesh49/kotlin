@@ -3368,6 +3368,11 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
 
     @Override
     public StackValue visitBinaryExpression(@NotNull KtBinaryExpression expression, @NotNull StackValue receiver) {
+        ConstantValue<?> compileTimeConstant = getPrimitiveOrStringCompileTimeConstant(expression, bindingContext);
+        if (compileTimeConstant != null) {
+            return StackValue.constant(compileTimeConstant.getValue(), expressionType(expression));
+        }
+
         KtSimpleNameExpression reference = expression.getOperationReference();
         IElementType opToken = reference.getReferencedNameElementType();
         if (opToken == KtTokens.EQ) {
@@ -3398,11 +3403,6 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
                               expression.getRight(), reference);
         }
         else {
-            ConstantValue<?> compileTimeConstant = getPrimitiveOrStringCompileTimeConstant(expression, bindingContext);
-            if (compileTimeConstant != null) {
-                return StackValue.constant(compileTimeConstant.getValue(), expressionType(expression));
-            }
-
             ResolvedCall<?> resolvedCall = CallUtilKt.getResolvedCallWithAssert(expression, bindingContext);
             FunctionDescriptor descriptor = (FunctionDescriptor) resolvedCall.getResultingDescriptor();
 

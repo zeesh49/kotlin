@@ -1,20 +1,20 @@
 package stepOverWhenWithInline
-
+val one = 1
 fun main(args: Array<String>) {
     //Breakpoint!
     val prop = 1
     // Break after second
     val a = when {
-        1 > 2 -> foo { test(1) }
-        2 > 1 -> foo { test(1) }
+        args.size < 0 -> foo { test(1) }
+        args.size >= 0 -> foo { test(1) }
         else -> foo { test(1) }
     }
 
     val b = when {
-        1 > 2 -> {
+        args.size < 0 -> {
             foo { test(1) }
         }
-        2 > 1 -> {
+        args.size >= 0 -> {
             foo { test(1) }
         }
         else -> {
@@ -55,16 +55,16 @@ fun main(args: Array<String>) {
     }
 
     val a2 = when {
-        2 > 1 -> foo { test(1) }
-        1 > 2 -> foo { test(1) }
+        args.size >= 0 -> foo { test(1) }
+        args.size < 0 -> foo { test(1) }
         else -> foo { test(1) }
     }
 
     val b2 = when {
-        2 > 1 -> {
+        args.size >= 0 -> {
             foo { test(1) }
         }
-        1 > 2 -> {
+        args.size < 0 -> {
             foo { test(1) }
         }
         else -> {

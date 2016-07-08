@@ -2,7 +2,7 @@ package ifCapturedVariableKt9118
 
 fun main(args: Array<String>) {
     //Breakpoint!
-    if (1 > 2) {
+    if (args.size < 0) {
         println()
     }
     var isCompiledDataFromCache = true

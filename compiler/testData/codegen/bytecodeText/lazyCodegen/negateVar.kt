@@ -4,4 +4,4 @@ fun test2() {
         val p = 1
     }
 }
-// 2 IF
+// 1 IF
