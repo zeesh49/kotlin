@@ -44,4 +44,8 @@ public final class MultiFileTest extends MultipleFilesTranslationTest {
     public void testPackageAndPrivateDeclarationDoNotClash() throws Exception {
         checkFooBoxIsTrue("packageAndPrivateDeclarationDoNotClash");
     }
+
+    public void testImportedDeclarationMangling() throws Exception {
+        checkFooBoxIsOk();
+    }
 }
