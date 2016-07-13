@@ -50,7 +50,6 @@ public abstract class KotlinAndroidTestCaseBase extends UsefulTestCase {
     protected CodeInsightTestFixture myFixture;
 
     protected Sdk androidSdk;
-    protected VirtualFile androidJar;
 
     private static final String TEST_DATA_PROJECT_RELATIVE = "/plugins/android-extensions/android-extensions-idea/testData/android";
 
@@ -76,7 +75,6 @@ public abstract class KotlinAndroidTestCaseBase extends UsefulTestCase {
             @Override
             public void run() throws Exception {
                 KotlinAndroidTestCaseBase.super.tearDown();
-                androidJar = null;
                 androidSdk = null;
             }
         });
@@ -135,16 +133,7 @@ public abstract class KotlinAndroidTestCaseBase extends UsefulTestCase {
         SdkModificator sdkModificator = sdk.getSdkModificator();
         sdkModificator.setHomePath(sdkPath);
 
-        if (platformDir.equals(getDefaultPlatformDir())) {
-            // Compatibility: the unit tests were using android.jar outside the sdk1.5 install;
-            // we need to use that one, rather than the real one in sdk1.5, in order for the
-            // tests to pass. Longer term, we should switch the unit tests over to all using
-            // a valid SDK.
-            String androidJarPath = sdkPath + "/../android.jar!/";
-            androidJar = VirtualFileManager.getInstance().findFileByUrl("jar://" + androidJarPath);
-        } else {
-            androidJar = VirtualFileManager.getInstance().findFileByUrl("jar://" + sdkPath + "/platforms/" + platformDir + "/android.jar!/");
-        }
+        VirtualFile androidJar = VirtualFileManager.getInstance().findFileByUrl("jar://" + sdkPath + "/platforms/" + platformDir + "/android.jar!/");
         sdkModificator.addRoot(androidJar, OrderRootType.CLASSES);
 
         VirtualFile resFolder = LocalFileSystem.getInstance().findFileByPath(sdkPath + "/platforms/" + platformDir + "/data/res");

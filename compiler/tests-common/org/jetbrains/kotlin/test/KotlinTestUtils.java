@@ -331,7 +331,7 @@ public class KotlinTestUtils {
     }
 
     public static File findAndroidApiJar() {
-        return new File(getHomeDirectory(), "dependencies/android.jar");
+        return new File(getHomeDirectory(), "dependencies/androidSDK/platforms/android-23/android.jar");
     }
 
     public static File getAnnotationsJar() {
