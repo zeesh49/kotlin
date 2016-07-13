@@ -308,6 +308,8 @@ class DefaultExpressionConverter : JavaElementVisitor(), ExpressionConverter {
             if (typeStr == "int") {
                 val toIntIsNeeded = value != null && value.toString().toInt() < 0 && !isLongField(expression.parent)
                 text = if (value != null && !isHexLiteral(text)) value.toString() else text + (if (toIntIsNeeded) ".toInt()" else "")
+            } else if (typeStr == "long" && isHexLiteral(text) && ((value as? Long ?: 0) < 0)) {
+                text = value.toString() + "L"
             }
 
             if (typeStr == "java.lang.String") {

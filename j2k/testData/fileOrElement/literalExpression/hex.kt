@@ -8,5 +8,8 @@ internal class Test {
         val l1: Long = 0xffffffff
         val l2 = 0xffffffffL
         val l3 = 0xffffffffffL
+        val l4 = -1L
+        val l5 = -6L
+        val l6 = 0x7FFFFFFFFFFFFFFFL
     }
 }
