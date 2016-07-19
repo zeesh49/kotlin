@@ -1,3 +1,5 @@
+public inline fun <T, R> with(receiver: T, block: T.() -> R): R = receiver.block()
+
 fun aaGlobalFun(){}
 val aaGlobalProp = 1
 
@@ -10,12 +12,21 @@ class Derived : Base() {
     fun aaDerivedFun(){}
     val aaDerivedProp = 1
 
-    fun foo() {
+    fun foo(y: Y) {
         val aaLocalVal = 1
         fun aaLocalFun(){}
 
-        aa<caret>
+        with (y) {
+            aa<caret>
+        }
     }
+}
+
+interface X {
+    fun aaX()
+}
+interface Y : X {
+    fun aaY()
 }
 
 fun Any.aaAnyExtensionFun(){}
@@ -28,6 +39,8 @@ fun <T> T.aaTypeParamExt(){}
 
 // ORDER: aaLocalVal
 // ORDER: aaLocalFun
+// ORDER: aaY
+// ORDER: aaX
 // ORDER: aaDerivedProp
 // ORDER: aaDerivedFun
 // ORDER: aaBaseProp
