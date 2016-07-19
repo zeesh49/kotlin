@@ -68,7 +68,7 @@ public abstract class AbstractLineMarkersTest extends KotlinLightCodeInsightFixt
     public void doTest(String path) {
         try {
             String fileText = FileUtil.loadFile(new File(path));
-            ConfigLibraryUtil.configureLibrariesByDirective(myFixture.getModule(), PlatformTestUtil.getCommunityPath(), fileText);
+            ConfigLibraryUtil.INSTANCE.configureLibrariesByDirective(myFixture.getModule(), PlatformTestUtil.getCommunityPath(), fileText);
 
             myFixture.configureByFile(path);
             Project project = myFixture.getProject();

@@ -122,7 +122,7 @@ public abstract class AbstractIntentionTest extends KotlinCodeInsightTestCase {
 
         try {
             if (isWithRuntime) {
-                ConfigLibraryUtil.configureKotlinRuntimeAndSdk(getModule(), PluginTestCaseBase.mockJdk());
+                ConfigLibraryUtil.INSTANCE.configureKotlinRuntimeAndSdk(getModule(), PluginTestCaseBase.mockJdk());
             }
 
             if (getFile() instanceof KtFile && !InTextDirectivesUtils.isDirectiveDefined(fileText, "// SKIP_ERRORS_BEFORE")) {
@@ -137,7 +137,7 @@ public abstract class AbstractIntentionTest extends KotlinCodeInsightTestCase {
         }
         finally {
             if (isWithRuntime) {
-                ConfigLibraryUtil.unConfigureKotlinRuntimeAndSdk(getModule(), getTestProjectJdk());
+                ConfigLibraryUtil.INSTANCE.unConfigureKotlinRuntimeAndSdk(getModule(), getTestProjectJdk());
             }
         }
     }

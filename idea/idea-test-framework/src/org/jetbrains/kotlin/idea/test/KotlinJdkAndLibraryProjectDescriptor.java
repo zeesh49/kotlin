@@ -54,6 +54,6 @@ public class KotlinJdkAndLibraryProjectDescriptor extends KotlinLightProjectDesc
         editor.setName(LIBRARY_NAME);
         editor.addRoot(VfsUtil.getUrlForLibraryRoot(libraryFile), OrderRootType.CLASSES);
 
-        ConfigLibraryUtil.addLibrary(editor, model);
+        ConfigLibraryUtil.INSTANCE.addLibrary(editor, model);
     }
 }

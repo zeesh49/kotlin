@@ -222,7 +222,7 @@ public abstract class AbstractQuickFixMultiFileTest extends KotlinDaemonAnalyzer
 
         boolean withRuntime = InTextDirectivesUtils.isDirectiveDefined(originalFileText, "// WITH_RUNTIME");
         if (withRuntime) {
-            ConfigLibraryUtil.configureKotlinRuntimeAndSdk(myModule, PluginTestCaseBase.mockJdk());
+            ConfigLibraryUtil.INSTANCE.configureKotlinRuntimeAndSdk(myModule, PluginTestCaseBase.mockJdk());
         }
 
         try {
@@ -318,7 +318,7 @@ public abstract class AbstractQuickFixMultiFileTest extends KotlinDaemonAnalyzer
         }
         finally {
             if (withRuntime) {
-                ConfigLibraryUtil.unConfigureKotlinRuntimeAndSdk(myModule, PluginTestCaseBase.mockJdk());
+                ConfigLibraryUtil.INSTANCE.unConfigureKotlinRuntimeAndSdk(myModule, PluginTestCaseBase.mockJdk());
             }
         }
     }

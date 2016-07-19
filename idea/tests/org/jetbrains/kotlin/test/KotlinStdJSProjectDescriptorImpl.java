@@ -48,6 +48,6 @@ public class KotlinStdJSProjectDescriptorImpl extends KotlinStdJSProjectDescript
         NewLibraryEditor editor = new NewLibraryEditor(configuration.getLibraryType(), configuration.getProperties());
         configuration.addRoots(editor);
 
-        ConfigLibraryUtil.addLibrary(editor, model);
+        ConfigLibraryUtil.INSTANCE.addLibrary(editor, model);
     }
 }
