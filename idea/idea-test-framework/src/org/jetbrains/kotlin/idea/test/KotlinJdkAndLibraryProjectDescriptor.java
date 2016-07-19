@@ -22,8 +22,10 @@ import com.intellij.openapi.module.StdModuleTypes;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.OrderRootType;
-import com.intellij.openapi.roots.ui.configuration.libraryEditor.NewLibraryEditor;
+import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.vfs.VfsUtil;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -50,10 +52,12 @@ public class KotlinJdkAndLibraryProjectDescriptor extends KotlinLightProjectDesc
 
     @Override
     public void configureModule(@NotNull Module module, @NotNull ModifiableRootModel model) {
-        NewLibraryEditor editor = new NewLibraryEditor();
-        editor.setName(LIBRARY_NAME);
-        editor.addRoot(VfsUtil.getUrlForLibraryRoot(libraryFile), OrderRootType.CLASSES);
-
-        ConfigLibraryUtil.INSTANCE.addLibrary(editor, model);
+        ConfigLibraryUtil.INSTANCE.addLibrary(module, LIBRARY_NAME, new Function1<Library.ModifiableModel, Unit>() {
+            @Override
+            public Unit invoke(Library.ModifiableModel model) {
+                model.addRoot(VfsUtil.getUrlForLibraryRoot(libraryFile), OrderRootType.CLASSES);
+                return null;
+            }
+        });
     }
 }

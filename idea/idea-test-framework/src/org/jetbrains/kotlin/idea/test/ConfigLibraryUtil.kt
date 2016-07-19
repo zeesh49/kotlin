@@ -20,12 +20,9 @@ import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.projectRoots.Sdk
 import com.intellij.openapi.roots.LibraryOrderEntry
-import com.intellij.openapi.roots.ModifiableRootModel
 import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.roots.OrderRootType
-import com.intellij.openapi.roots.impl.libraries.LibraryEx
 import com.intellij.openapi.roots.libraries.Library
-import com.intellij.openapi.roots.ui.configuration.libraryEditor.NewLibraryEditor
 import com.intellij.openapi.util.Computable
 import com.intellij.openapi.vfs.VfsUtil
 import org.jetbrains.kotlin.idea.util.application.runWriteAction
@@ -42,14 +39,6 @@ object ConfigLibraryUtil {
     private val DEFAULT_KOTLIN_TEST_LIB_NAME = "KOTLIN_TEST_LIB_NAME"
     private val DEFAULT_KOTLIN_JS_STDLIB_NAME = "KOTLIN_JS_STDLIB_NAME"
 
-    private fun getKotlinRuntimeLibEditor(libName: String, library: File): NewLibraryEditor {
-        val editor = NewLibraryEditor()
-        editor.name = libName
-        editor.addRoot(VfsUtil.getUrlForLibraryRoot(library), OrderRootType.CLASSES)
-
-        return editor
-    }
-
     fun configureKotlinRuntimeAndSdk(module: Module, sdk: Sdk) {
         configureSdk(module, sdk)
         configureKotlinRuntime(module)
@@ -61,15 +50,18 @@ object ConfigLibraryUtil {
     }
 
     fun configureKotlinRuntime(module: Module) {
-        addLibrary(getKotlinRuntimeLibEditor(DEFAULT_JAVA_RUNTIME_LIB_NAME, PathUtil.getKotlinPathsForDistDirectory().runtimePath),
-                   module)
-        addLibrary(getKotlinRuntimeLibEditor(DEFAULT_KOTLIN_TEST_LIB_NAME, PathUtil.getKotlinPathsForDistDirectory().kotlinTestPath),
-                   module)
+        addLibrary(module, DEFAULT_JAVA_RUNTIME_LIB_NAME) { libModel ->
+            libModel.addRoot(VfsUtil.getUrlForLibraryRoot(PathUtil.getKotlinPathsForDistDirectory().runtimePath), OrderRootType.CLASSES)
+        }
+        addLibrary(module, DEFAULT_KOTLIN_TEST_LIB_NAME) { libModel ->
+            libModel.addRoot(VfsUtil.getUrlForLibraryRoot(PathUtil.getKotlinPathsForDistDirectory().kotlinTestPath), OrderRootType.CLASSES)
+        }
     }
 
     fun configureKotlinJsRuntime(module: Module) {
-        addLibrary(getKotlinRuntimeLibEditor(DEFAULT_KOTLIN_JS_STDLIB_NAME,
-                                             PathUtil.getKotlinPathsForDistDirectory().jsStdLibJarPath), module)
+        addLibrary(module, DEFAULT_KOTLIN_JS_STDLIB_NAME) { libModel ->
+            libModel.addRoot(VfsUtil.getUrlForLibraryRoot(PathUtil.getKotlinPathsForDistDirectory().jsStdLibJarPath), OrderRootType.CLASSES)
+        }
     }
 
     fun unConfigureKotlinRuntime(module: Module) {
@@ -97,30 +89,23 @@ object ConfigLibraryUtil {
         }
     }
 
-    fun addLibrary(editor: NewLibraryEditor, module: Module): Library {
+    fun addLibrary(module: Module, name: String, callback: (Library.ModifiableModel) -> Unit): Library {
         return ApplicationManager.getApplication().runWriteAction(Computable {
             val rootManager = ModuleRootManager.getInstance(module)
             val model = rootManager.modifiableModel
 
-            val library = addLibrary(editor, model)
+            val library = model.moduleLibraryTable.createLibrary(name)
+
+            val libModel = library.modifiableModel
+            callback(libModel)
+
+            libModel.commit()
 
             model.commit()
 
             library
         })
     }
-
-    fun addLibrary(editor: NewLibraryEditor, model: ModifiableRootModel): Library {
-        val library = model.moduleLibraryTable.createLibrary(editor.name)
-
-        val libModel = library.modifiableModel
-        editor.applyTo(libModel as LibraryEx.ModifiableModelEx)
-
-        libModel.commit()
-
-        return library
-    }
-
 
     fun removeLibrary(module: Module, libraryName: String): Boolean {
         return runWriteAction {
@@ -163,13 +148,11 @@ object ConfigLibraryUtil {
     }
 
     fun addLibrary(module: Module, libraryName: String, rootPath: String, jarPaths: Array<String>) {
-        val editor = NewLibraryEditor()
-        editor.name = libraryName
-        for (jarPath in jarPaths) {
-            editor.addRoot(VfsUtil.getUrlForLibraryRoot(File(rootPath, jarPath)), OrderRootType.CLASSES)
+        addLibrary(module, libraryName) { libModel ->
+            for (jarPath in jarPaths) {
+                libModel.addRoot(VfsUtil.getUrlForLibraryRoot(File(rootPath, jarPath)), OrderRootType.CLASSES)
+            }
         }
-
-        addLibrary(editor, module)
     }
 
     fun configureLibraries(module: Module, rootPath: String, libraryInfos: List<String>) {

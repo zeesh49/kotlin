@@ -24,7 +24,7 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.OrderRootType;
-import com.intellij.openapi.roots.ui.configuration.libraryEditor.NewLibraryEditor;
+import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess;
@@ -37,6 +37,8 @@ import com.intellij.testFramework.IdeaTestUtil;
 import com.intellij.util.ThrowableRunnable;
 import com.intellij.util.indexing.FileBasedIndex;
 import com.intellij.xdebugger.XDebugSession;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.kotlin.asJava.FakeLightClassForFileOfPackage;
 import org.jetbrains.kotlin.asJava.KtLightClassForFacade;
@@ -84,14 +86,15 @@ public abstract class KotlinDebuggerTestCase extends DescriptorTestCase {
         super.setUp();
     }
 
-    private static void configureLibrary(@NotNull ModifiableRootModel model, @NotNull String libraryName, @NotNull File classes, @NotNull File sources) {
-        NewLibraryEditor customLibEditor = new NewLibraryEditor();
-        customLibEditor.setName(libraryName);
-
-        customLibEditor.addRoot(VfsUtil.getUrlForLibraryRoot(classes), OrderRootType.CLASSES);
-        customLibEditor.addRoot(VfsUtil.getUrlForLibraryRoot(sources), OrderRootType.SOURCES);
-
-        ConfigLibraryUtil.INSTANCE.addLibrary(customLibEditor, model);
+    private static void configureLibrary(@NotNull ModifiableRootModel model, @NotNull String libraryName, @NotNull final File classes, @NotNull final File sources) {
+        ConfigLibraryUtil.INSTANCE.addLibrary(model.getModule(), libraryName, new Function1<Library.ModifiableModel, Unit>() {
+            @Override
+            public Unit invoke(Library.ModifiableModel model) {
+                model.addRoot(VfsUtil.getUrlForLibraryRoot(classes), OrderRootType.CLASSES);
+                model.addRoot(VfsUtil.getUrlForLibraryRoot(sources), OrderRootType.SOURCES);
+                return null;
+            }
+        });
     }
 
     @Override
