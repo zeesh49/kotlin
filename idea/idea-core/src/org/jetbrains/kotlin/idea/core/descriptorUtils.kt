@@ -27,6 +27,7 @@ import org.jetbrains.kotlin.lexer.KtModifierKeywordToken
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtExpression
 import org.jetbrains.kotlin.resolve.BindingContext
+import org.jetbrains.kotlin.resolve.descriptorUtil.isExtension
 import org.jetbrains.kotlin.resolve.findOriginalTopMostOverriddenDescriptors
 import org.jetbrains.kotlin.resolve.scopes.LexicalScope
 import org.jetbrains.kotlin.resolve.scopes.receivers.ExpressionReceiver
@@ -58,7 +59,8 @@ private fun DeclarationDescriptorWithVisibility.isVisible(
 
     if (bindingContext == null || resolutionScope == null) return false
 
-    if (receiverExpression != null) {
+    // for extension it makes no sense to check explicit receiver because we need dispatch receiver which is implicit in this case
+    if (receiverExpression != null && !isExtension) {
         val receiverType = bindingContext.getType(receiverExpression) ?: return false
         val explicitReceiver = ExpressionReceiver.create(receiverExpression, receiverType, bindingContext)
         return Visibilities.isVisible(explicitReceiver, this, from)

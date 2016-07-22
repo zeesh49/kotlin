@@ -655,6 +655,12 @@ public class JvmBasicCompletionTestGenerated extends AbstractJvmBasicCompletionT
             doTest(fileName);
         }
 
+        @TestMetadata("ProtectedExtensionMethod.kt")
+        public void testProtectedExtensionMethod() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("idea/idea-completion/testData/basic/common/ProtectedExtensionMethod.kt");
+            doTest(fileName);
+        }
+
         @TestMetadata("QualifiedSuperMembers.kt")
         public void testQualifiedSuperMembers() throws Exception {
             String fileName = KotlinTestUtils.navigationMetadata("idea/idea-completion/testData/basic/common/QualifiedSuperMembers.kt");
