@@ -38,7 +38,7 @@ class KotlinGradleIT: BaseGradleIT() {
     fun testKotlinOnlyCompile() {
         val project = Project("kotlinProject", GRADLE_VERSION)
 
-        project.build("build") {
+        project.build("build", "-Dorg.gradle.debug=true") {
             assertSuccessful()
             assertReportExists()
             assertContains(":compileKotlin", ":compileTestKotlin")
