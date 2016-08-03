@@ -388,5 +388,24 @@ fun mapping(): List<GenericFunction> {
         }
     }
 
+    templates add f("groupingBy(crossinline keySelector: (T) -> K)") {
+        inline(true)
+        only(Iterables, Sequences, ArraysOfObjects, CharSequences)
+
+        typeParam("T")
+        typeParam("K")
+
+        returns("Grouping<T, K>")
+
+        body {
+            """
+            return object : Grouping<T, K> {
+                override fun elementIterator(): Iterator<T> = this@groupingBy.iterator()
+                override fun keySelector(element: T): K = keySelector(element)
+            }
+            """
+        }
+    }
+
     return templates
 }

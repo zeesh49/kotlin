@@ -665,6 +665,13 @@ public inline fun <T, K, V, M : MutableMap<in K, MutableList<V>>> Sequence<T>.gr
     return destination
 }
 
+public inline fun <T, K> Sequence<T>.groupingBy(crossinline keySelector: (T) -> K): Grouping<T, K> {
+    return object : Grouping<T, K> {
+        override fun elementIterator(): Iterator<T> = this@groupingBy.iterator()
+        override fun keySelector(element: T): K = keySelector(element)
+    }
+}
+
 /**
  * Returns a sequence containing the results of applying the given [transform] function
  * to each element in the original sequence.

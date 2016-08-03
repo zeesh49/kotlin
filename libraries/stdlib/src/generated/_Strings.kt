@@ -715,6 +715,13 @@ public inline fun <K, V, M : MutableMap<in K, MutableList<V>>> CharSequence.grou
     return destination
 }
 
+public inline fun <K> CharSequence.groupingBy(crossinline keySelector: (Char) -> K): Grouping<Char, K> {
+    return object : Grouping<Char, K> {
+        override fun elementIterator(): Iterator<Char> = this@groupingBy.iterator()
+        override fun keySelector(element: Char): K = keySelector(element)
+    }
+}
+
 /**
  * Returns a list containing the results of applying the given [transform] function
  * to each character in the original char sequence.
