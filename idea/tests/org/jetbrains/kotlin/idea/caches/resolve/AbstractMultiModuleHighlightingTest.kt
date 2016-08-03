@@ -48,7 +48,7 @@ abstract class AbstractMultiModuleHighlightingTest : DaemonAnalyzerTestCase() {
 
     protected fun module(name: String, hasTestRoot: Boolean = false, useFullJdk: Boolean = false): Module {
         val srcDir = TEST_DATA_PATH + "${getTestName(true)}/$name"
-        val moduleWithSrcRootSet = createModuleFromTestData(srcDir, "$name", StdModuleTypes.JAVA, true)!!
+        val moduleWithSrcRootSet = createModuleFromTestData(srcDir, name, StdModuleTypes.JAVA, true)!!
         if (hasTestRoot) {
             setTestRoot(moduleWithSrcRootSet, name)
         }

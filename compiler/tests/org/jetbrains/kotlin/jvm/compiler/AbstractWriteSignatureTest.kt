@@ -243,7 +243,7 @@ abstract class AbstractWriteSignatureTest : TestCaseWithTmpdir() {
     companion object {
         fun formatSignature(header: String, jvmSignature: String?, genericSignature: String): String {
             return listOf(
-                    "$header",
+                    header,
                     jvmSignature?.let { "jvm signature: $it" },
                     "generic signature: $genericSignature"
             ).filterNotNull().joinToString("\n") { "// $it" }

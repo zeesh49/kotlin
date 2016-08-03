@@ -51,7 +51,7 @@ abstract class ResolverForProject<M : ModuleInfo> {
     abstract val name: String
     abstract val allModules: Collection<M>
 
-    override fun toString() = "$name"
+    override fun toString() = name
 }
 
 class EmptyResolverForProject<M : ModuleInfo> : ResolverForProject<M>() {

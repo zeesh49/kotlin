@@ -106,7 +106,7 @@ class MultiModuleJavaAnalysisCustomTest : KtUsefulTestCase() {
                     "a" -> listOf(this)
                     "b" -> listOf(this, modules["a"]!!)
                     "c" -> listOf(this, modules["b"]!!, modules["a"]!!)
-                    else -> throw IllegalStateException("$_name")
+                    else -> throw IllegalStateException(_name)
                 }
             }
         }

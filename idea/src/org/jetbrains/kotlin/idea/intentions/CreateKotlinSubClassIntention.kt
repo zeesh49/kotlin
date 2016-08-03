@@ -131,7 +131,7 @@ class CreateKotlinSubClassIntention : SelfTargetingRangeIntention<KtClass>(KtCla
             val dlg = chooseSubclassToCreate(baseClass, baseName) ?: return
             val targetName = dlg.className
             val file = getOrCreateKotlinFile("$targetName.kt", dlg.targetDirectory)!!
-            val builder = buildClassHeader(targetName, baseClass, "${baseClass.fqName!!.asString()}")
+            val builder = buildClassHeader(targetName, baseClass, baseClass.fqName!!.asString())
             file.add(factory.createClass(builder.asString()))
             val klass = file.getChildOfType<KtClass>()!!
             ShortenReferences.DEFAULT.process(klass)
