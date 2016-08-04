@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2015 JetBrains s.r.o.
+ * Copyright 2010-2016 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,11 +23,15 @@ public class IncrementalCompilation {
     private static final String IS_EXPERIMENTAL_PROPERTY = "kotlin.incremental.compilation.experimental";
 
     public static boolean isExperimental() {
-        return isEnabled() && "true".equals(System.getProperty(IS_EXPERIMENTAL_PROPERTY));
+        return isEnabled() && getBoolean(IS_EXPERIMENTAL_PROPERTY);
     }
 
     public static boolean isEnabled() {
-        return !"false".equals(System.getProperty(INCREMENTAL_COMPILATION_PROPERTY));
+        return getBoolean(INCREMENTAL_COMPILATION_PROPERTY);
+    }
+
+    private static boolean getBoolean(String propertyName) {
+        return !"false".equals(System.getProperty(propertyName));
     }
 
     @TestOnly

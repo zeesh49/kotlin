@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2015 JetBrains s.r.o.
+ * Copyright 2010-2016 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +24,8 @@ class KotlinBuildProcessParametersProvider(private val compilerWorkspaceSettings
 ): BuildProcessParametersProvider() {
     override fun getVMArguments(): MutableList<String> {
         val res = arrayListOf<String>()
-        if (compilerWorkspaceSettings.preciseIncrementalEnabled) {
-            res.add("-Dkotlin.incremental.compilation.experimental=true")
+        if (!compilerWorkspaceSettings.preciseIncrementalEnabled) {
+            res.add("-Dkotlin.incremental.compilation.experimental=false")
         }
         if (compilerWorkspaceSettings.enableDaemon) {
             res.add("-Dkotlin.daemon.enabled")
