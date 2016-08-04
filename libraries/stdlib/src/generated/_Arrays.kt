@@ -7452,6 +7452,10 @@ public inline fun <K, V, M : MutableMap<in K, MutableList<V>>> CharArray.groupBy
     return destination
 }
 
+/**
+ * Creates a [Grouping] source from an array to be used later with one of group-and-fold operations
+ * using the specified [keySelector] function to extract a key from each element.
+ */
 public inline fun <T, K> Array<out T>.groupingBy(crossinline keySelector: (T) -> K): Grouping<T, K> {
     return object : Grouping<T, K> {
         override fun elementIterator(): Iterator<T> = this@groupingBy.iterator()

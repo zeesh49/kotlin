@@ -715,6 +715,10 @@ public inline fun <K, V, M : MutableMap<in K, MutableList<V>>> CharSequence.grou
     return destination
 }
 
+/**
+ * Creates a [Grouping] source from a char sequence to be used later with one of group-and-fold operations
+ * using the specified [keySelector] function to extract a key from each character.
+ */
 public inline fun <K> CharSequence.groupingBy(crossinline keySelector: (Char) -> K): Grouping<Char, K> {
     return object : Grouping<Char, K> {
         override fun elementIterator(): Iterator<Char> = this@groupingBy.iterator()
