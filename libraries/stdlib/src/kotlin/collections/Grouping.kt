@@ -210,7 +210,9 @@ public inline fun <S, T : S, K, M : MutableMap<in K, S>> Grouping<T, K>.reduceTo
 @JvmVersion
 public fun <T, K> Grouping<T, K>.countEach(): Map<K, Int> =
         // fold(0) { acc, e -> acc + 1 } optimized for boxing
-        fold(kotlin.jvm.internal.NonVolatileRef.IntRef()) { acc, e -> acc.apply { element += 1 } }
+        fold(
+                initialValueSelector = { k, e -> kotlin.jvm.internal.NonVolatileRef.IntRef() },
+                operation = { k, acc, e -> acc.apply { element += 1 } })
         .mapValues { it.value.element }
 
 /**
@@ -229,7 +231,9 @@ public fun <T, K, M : MutableMap<in K, Int>> Grouping<T, K>.countEachTo(destinat
 @JvmVersion
 public inline fun <T, K> Grouping<T, K>.sumEachBy(valueSelector: (T) -> Int): Map<K, Int> =
         // fold(0) { acc, e -> acc + valueSelector(e)} optimized for boxing
-        fold(kotlin.jvm.internal.NonVolatileRef.IntRef()) { acc, e -> acc.apply { element += valueSelector(e) } }
+        fold(
+                initialValueSelector = { k, e -> kotlin.jvm.internal.NonVolatileRef.IntRef() },
+                operation = { k, acc, e -> acc.apply { element += valueSelector(e) } })
         .mapValues { it.value.element }
 
 /**
