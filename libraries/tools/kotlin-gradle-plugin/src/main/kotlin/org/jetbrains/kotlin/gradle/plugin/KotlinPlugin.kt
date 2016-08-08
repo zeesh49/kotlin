@@ -204,7 +204,7 @@ class Kotlin2JsSourceSetProcessor(
 
     private fun kotlinSourcePathsForSourceMap() = sourceSet.getAllSource()
             .map { it.path }
-            .filter { it.endsWith(".kt") }
+            .filter { it.endsWith(".kt") || it.endsWith(".kts") }
             .map { it.replace(absoluteSourceRootDir, (kotlinTask.property("sourceMapDestinationDir") as File).path) }
 
     private fun shouldGenerateSourceMap() = kotlinTask.property("sourceMap")
