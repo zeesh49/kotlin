@@ -164,6 +164,16 @@ abstract class BaseGradleIT {
         return this
     }
 
+    fun CompiledProject.assertSubstringCount(substring: String, expectedCount: Int) {
+        val actualCount = substring.toRegex().findAll(output).count()
+        assertEquals(expectedCount, actualCount, "Number of occurrences in output for substring '$substring'")
+    }
+
+    fun CompiledProject.checkCleanupListener() {
+        assertSubstringCount("Initialized Kotlin Cleanup Listener", expectedCount = 1)
+        assertSubstringCount("Disposed Kotlin Cleanup Listener", expectedCount = 1)
+    }
+
     fun CompiledProject.assertNotContains(vararg expected: String): CompiledProject {
         for (str in expected) {
             assertFalse(output.contains(str.normalize()), "Output should not contain '$str'")

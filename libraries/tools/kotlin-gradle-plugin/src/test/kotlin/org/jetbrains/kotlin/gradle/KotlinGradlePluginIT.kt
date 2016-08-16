@@ -141,6 +141,7 @@ class KotlinGradleIT: BaseGradleIT() {
             assertSuccessful()
             assertReportExists("subproject")
             assertContains(":subproject:compileKotlin", ":subproject:compileTestKotlin")
+            checkCleanupListener()
         }
     }
 

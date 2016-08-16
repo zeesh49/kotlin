@@ -43,6 +43,7 @@ abstract class AbstractKotlinAndroidGradleTests(
                     ":compileFlavor1DebugUnitTestKotlin",
                     "InternalDummyTest PASSED",
                     ":compileFlavor1DebugAndroidTestKotlin")
+            checkCleanupListener()
         }
 
         // Run the build second time, assert everything is up-to-date
@@ -69,6 +70,7 @@ abstract class AbstractKotlinAndroidGradleTests(
                     ":compileFlavor2Jnidebug",
                     ":compileFlavor1Release",
                     ":compileFlavor2Release")
+            checkCleanupListener()
         }
     }
 
