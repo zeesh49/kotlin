@@ -23,7 +23,7 @@ abstract class KotlinBasePluginWrapper(protected val fileResolver: FileResolver)
         val plugin = getPlugin()
         plugin.apply(project)
 
-        CleanUpBuildListener.init(project.gradle)
+        KotlinGradleBuildServices.init(project.gradle)
     }
 
     protected abstract fun getPlugin(): Plugin<Project>

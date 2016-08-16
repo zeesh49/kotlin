@@ -37,9 +37,11 @@ private fun comparableVersionStr(version: String) =
                 ?.let { if (it.all { (it?.value?.length ?: 0).let { it > 0 && it < 4 }}) it else null }
                 ?.joinToString(".", transform = { it!!.value.padStart(3, '0') })
 
-class CleanUpBuildListener private constructor(): BuildAdapter() {
+class KotlinGradleBuildServices private constructor(): BuildAdapter() {
     companion object {
         const val FORCE_SYSTEM_GC_MESSAGE = "Forcing System.gc()"
+        const val INIT_MESSAGE = "Initialized KotlinGradleBuildServices"
+        const val DISPOSE_MESSAGE = "Disposed KotlinGradleBuildServices"
         private var initialized = false
 
         @JvmStatic
@@ -47,11 +49,11 @@ class CleanUpBuildListener private constructor(): BuildAdapter() {
         fun init(gradle: Gradle) {
             if (initialized) return
 
-            val listener = CleanUpBuildListener()
+            val listener = KotlinGradleBuildServices()
             gradle.addBuildListener(listener)
             initialized = true
-            val log = Logging.getLogger(CleanUpBuildListener::class.java)
-            log.kotlinDebug { "Initialized Kotlin Cleanup Listener" }
+            val log = Logging.getLogger(KotlinGradleBuildServices::class.java)
+            log.kotlinDebug(INIT_MESSAGE)
 
             listener.buildStarted()
         }
@@ -93,7 +95,7 @@ class CleanUpBuildListener private constructor(): BuildAdapter() {
 
         gradle.removeListener(this)
         initialized = false
-        log.kotlinDebug { "Disposed Kotlin Cleanup Listener" }
+        log.kotlinDebug(DISPOSE_MESSAGE)
     }
 
     private fun getUsedMemoryKb(): Long? {
