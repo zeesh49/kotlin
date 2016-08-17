@@ -5,6 +5,7 @@ package kotlin.collections
 
 import java.io.Serializable
 import java.util.*
+import kotlin.comparisons.Comparator
 
 
 internal object EmptySet : Set<Nothing>, Serializable {

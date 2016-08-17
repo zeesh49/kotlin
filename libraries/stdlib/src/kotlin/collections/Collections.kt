@@ -21,6 +21,7 @@ package kotlin.collections
 
 import java.io.Serializable
 import java.util.*
+import kotlin.comparisons.Comparator
 import kotlin.comparisons.compareValues
 
 internal object EmptyIterator : ListIterator<Nothing> {

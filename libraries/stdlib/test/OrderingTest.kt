@@ -1,6 +1,6 @@
 package test.comparisons
 
-import java.util.*
+
 import kotlin.test.*
 import org.junit.Test
 import kotlin.comparisons.*

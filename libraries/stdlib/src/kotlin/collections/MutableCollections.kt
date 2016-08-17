@@ -3,6 +3,8 @@
 
 package kotlin.collections
 
+import kotlin.comparisons.*
+
 /**
  * Removes a single instance of the specified element from this
  * collection, if it is present.
