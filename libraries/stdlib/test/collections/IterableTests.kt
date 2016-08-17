@@ -17,8 +17,6 @@
 package test.collections
 
 import org.junit.Test
-import java.util.ArrayList
-import java.util.LinkedHashSet
 import kotlin.test.*
 
 fun <T> iterableOf(vararg items: T): Iterable<T> = Iterable { items.iterator() }

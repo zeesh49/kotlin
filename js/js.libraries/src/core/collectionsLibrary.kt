@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-package java.util
+package kotlin.collections
+
 
 @native
 private val DEFAULT_INITIAL_CAPACITY = 16
@@ -123,7 +124,3 @@ public open class LinkedHashMap<K, V>(
 ) : HashMap<K, V>(initialCapacity, loadFactor)
 
 
-@native
-public class Date() {
-    public fun getTime(): Int = noImpl
-}

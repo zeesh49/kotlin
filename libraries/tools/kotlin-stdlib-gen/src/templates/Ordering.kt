@@ -23,7 +23,7 @@ fun ordering(): List<GenericFunction> {
             }
             """
         }
-        body(Lists) { """java.util.Collections.reverse(this)""" }
+        body(Lists) { """Collections.reverse(this)""" }
     }
 
     templates add f("reversed()") {

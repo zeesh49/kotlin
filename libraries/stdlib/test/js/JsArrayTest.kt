@@ -2,7 +2,6 @@ package test.collections.js
 
 import org.junit.Test as test
 import kotlin.test.*
-import java.util.ArrayList;
 
 class JsArrayTest {
 
@@ -22,8 +21,8 @@ class JsArrayTest {
     }
 
     @test fun arrayListFromCollection() {
-        var c: Collection<String>  = arrayOf("A", "B", "C").toList()
-        var a = ArrayList(c)
+        val c: Collection<String> = arrayOf("A", "B", "C").toList()
+        val a = ArrayList<String>(c)
 
         assertEquals(3, a.size)
         assertEquals("A", a[0])
