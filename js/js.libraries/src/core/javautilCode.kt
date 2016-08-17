@@ -16,3 +16,7 @@
 
 package java.util
 
+@native
+public class Date() {
+    public fun getTime(): Int = noImpl
+}

@@ -17,7 +17,6 @@
 package kotlin.text
 
 import kotlin.text.js.*
-import java.util.ArrayList
 
 /**
  * Provides enumeration values to use to set regular expression options.
@@ -216,7 +215,7 @@ private fun RegExp.findNext(input: String, from: Int): MatchResult? {
         override val groupValues: List<String>
             get() {
                 if (groupValues_ == null) {
-                    groupValues_ = object : java.util.AbstractList<String>() {
+                    groupValues_ = object : AbstractList<String>() {
                         override val size: Int get() = match.length
                         override fun get(index: Int): String = match[index] ?: ""
                     }

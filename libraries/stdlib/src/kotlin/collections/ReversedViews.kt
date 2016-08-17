@@ -18,8 +18,6 @@
 
 package kotlin.collections
 
-import java.util.AbstractList
-
 private open class ReversedListReadOnly<T>(protected open val delegate: List<T>) : AbstractList<T>() {
     override val size: Int get() = delegate.size
     override fun get(index: Int): T = delegate[index.flipIndex()]

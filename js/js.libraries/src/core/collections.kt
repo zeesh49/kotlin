@@ -15,6 +15,8 @@
  */
 package kotlin.collections
 
+import kotlin.comparisons.*
+
 
 @library("copyToArray")
 public fun <reified T> Collection<T>.toTypedArray(): Array<T> = noImpl
@@ -54,3 +56,27 @@ public fun <K, V> LinkedHashMap(m: Map<out K, V>): LinkedHashMap<K, V>
 public fun <E> ArrayList(c: Collection<E>): ArrayList<E>
         = ArrayList<E>().apply { asDynamic().array = c.toTypedArray<Any?>() } // black dynamic magic
 
+
+
+
+internal object Collections {
+    internal fun <T: Comparable<T>> sort(list: MutableList<T>): Unit = kotlin.collections.sort(list, naturalOrder())
+
+    internal fun <T> sort(list: MutableList<T>, comparator: Comparator<in T>): Unit = kotlin.collections.sort(list, comparator)
+
+    internal fun <T> reverse(list: MutableList<T>): Unit {
+        val size = list.size
+        for (i in 0..(size / 2) - 1) {
+            val i2 = size - i - 1
+            val tmp = list[i]
+            list[i] = list[i2]
+            list[i2] = tmp
+        }
+    }
+}
+
+@library("collectionsMax")
+private fun <T> max(col: Collection<T>, comp: Comparator<in T>): T = noImpl
+
+@library("collectionsSort")
+private fun <T> sort(list: MutableList<T>, comparator: Comparator<in T>): Unit = noImpl

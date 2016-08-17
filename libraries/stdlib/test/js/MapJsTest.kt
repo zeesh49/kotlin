@@ -2,7 +2,6 @@ package test.collections.js
 
 import kotlin.test.*
 import org.junit.Test as test
-import java.util.*
 import test.collections.*
 import test.collections.behaviors.*
 
@@ -41,8 +40,8 @@ class PrimitiveMapJsTest : MapJsTest() {
     }
 
     override fun <T : kotlin.Comparable<T>> Collection<T>.toNormalizedList(): List<T> = this.sorted()
-    override fun emptyMutableMap(): MutableMap<String, Int> = HashMap()
-    override fun emptyMutableMapWithNullableKeyValue(): MutableMap<String?, Int?> = HashMap()
+    override fun emptyMutableMap(): MutableMap<String, Int> = HashMap<String, Int>()
+    override fun emptyMutableMapWithNullableKeyValue(): MutableMap<String?, Int?> = HashMap<String?, Int?>()
 
     @test fun compareBehavior() {
         val specialJsStringMap = HashMap<String, Any>()
@@ -68,8 +67,8 @@ class LinkedHashMapTest : MapJsTest() {
     }
 
     override fun <T : kotlin.Comparable<T>> Collection<T>.toNormalizedList(): List<T> = this.toList()
-    override fun emptyMutableMap(): MutableMap<String, Int> = LinkedHashMap()
-    override fun emptyMutableMapWithNullableKeyValue(): MutableMap<String?, Int?> = LinkedHashMap()
+    override fun emptyMutableMap(): MutableMap<String, Int> = LinkedHashMap<String, Int>()
+    override fun emptyMutableMapWithNullableKeyValue(): MutableMap<String?, Int?> = LinkedHashMap<String?, Int?>()
 }
 
 abstract class MapJsTest {
