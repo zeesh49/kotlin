@@ -18,15 +18,6 @@ package java.lang
 
 
 @library
-public interface Runnable {
-    public open fun run(): Unit
-}
-
-public fun Runnable(action: () -> Unit): Runnable = object : Runnable {
-    override fun run() = action()
-}
-
-@library
 public interface Appendable {
     public open fun append(csq: CharSequence?): Appendable
     public open fun append(csq: CharSequence?, start: Int, end: Int): Appendable

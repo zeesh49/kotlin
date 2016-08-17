@@ -215,7 +215,6 @@
     Kotlin.UnsupportedOperationException = createClassNowWithMessage(Kotlin.RuntimeException);
     Kotlin.IndexOutOfBoundsException = createClassNowWithMessage(Kotlin.RuntimeException);
     Kotlin.ClassCastException = createClassNowWithMessage(Kotlin.RuntimeException);
-    Kotlin.IOException = createClassNowWithMessage(Kotlin.Exception);
     Kotlin.AssertionError = createClassNowWithMessage(Kotlin.Error);
 
     Kotlin.throwNPE = function (message) {
@@ -667,10 +666,6 @@
                 }
             }
         });
-
-    Kotlin.Runnable = Kotlin.createTraitNow(null, null, {
-        run: throwAbstractFunctionInvocationError("Runnable#run")
-    });
 
     Kotlin.Comparable = Kotlin.createTraitNow(null, null, {
         compareTo: throwAbstractFunctionInvocationError("Comparable#compareTo")
