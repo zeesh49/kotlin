@@ -16,6 +16,9 @@
 
 package java.util
 
+// TODO: Not supported
+// typealias Date = kotlin.js.Date
+
 @native
 public class Date() {
     public fun getTime(): Int = noImpl
