@@ -653,21 +653,18 @@ public class AsmUtil {
     public static StackValue genNotNullAssertions(
             @NotNull GenerationState state,
             @NotNull final StackValue stackValue,
-            @Nullable final RuntimeAssertionInfo runtimeAssertionInfo
+            @Nullable RuntimeAssertionInfo runtimeAssertionInfo
     ) {
         if (state.isCallAssertionsDisabled()) return stackValue;
         if (runtimeAssertionInfo == null || !runtimeAssertionInfo.getNeedNotNullAssertion()) return stackValue;
 
         return new StackValue(stackValue.type) {
-
             @Override
             public void putSelector(@NotNull Type type, @NotNull InstructionAdapter v) {
                 stackValue.put(type, v);
                 if (type.getSort() == Type.OBJECT || type.getSort() == Type.ARRAY) {
                     v.dup();
-                    v.visitLdcInsn(runtimeAssertionInfo.getMessage());
-                    v.invokestatic("kotlin/jvm/internal/Intrinsics", "checkExpressionValueIsNotNull",
-                                   "(Ljava/lang/Object;Ljava/lang/String;)V", false);
+                    v.invokestatic("kotlin/jvm/internal/Intrinsics", "checkNotNull", "(Ljava/lang/Object;)V", false);
                 }
             }
         };
