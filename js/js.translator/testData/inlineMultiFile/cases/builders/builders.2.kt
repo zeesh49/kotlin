@@ -5,8 +5,7 @@
 
 package foo
 
-import java.util.ArrayList
-import java.util.HashMap
+import java.util.*
 
 abstract class Element {
     abstract fun render(builder: StringBuilder, indent: String)

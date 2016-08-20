@@ -1,9 +1,7 @@
 package foo
 
-import java.util.ArrayList
-
 fun box(): Boolean {
-    var elems = ArrayList<Int>()
+    var elems = mutableListOf<Int>()
     for (i in 0.rangeTo(5)) {
         elems.add(i)
     }

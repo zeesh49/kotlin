@@ -1,6 +1,6 @@
 package foo
 
-import java.util.HashSet
+import java.util.*
 
 fun box(): String {
 

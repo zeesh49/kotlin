@@ -1,4 +1,4 @@
-import java.util.HashMap
+import java.util.*
 
 data class Pair<First, Second>(val first: First, val second: Second)
 

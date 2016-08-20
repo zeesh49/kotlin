@@ -1,4 +1,4 @@
-import java.util.HashSet
+import java.util.*
 
 interface A : Set<String>
 

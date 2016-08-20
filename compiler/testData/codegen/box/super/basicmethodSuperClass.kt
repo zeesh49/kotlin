@@ -1,4 +1,4 @@
-import java.util.ArrayList
+import java.util.*
 
 class N() : ArrayList<Any>() {
     override fun add(el: Any)  : Boolean {

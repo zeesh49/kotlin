@@ -1,5 +1,4 @@
-import java.util.ArrayList
-import java.util.Arrays
+import java.util.*
 
 interface A {
     fun foo(): Collection<String>

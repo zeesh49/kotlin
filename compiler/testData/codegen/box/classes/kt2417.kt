@@ -1,4 +1,4 @@
-import java.util.HashSet
+import java.util.*
 
 fun box() : String{
     val set = HashSet<String>()

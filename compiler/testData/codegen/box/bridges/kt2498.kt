@@ -1,4 +1,4 @@
-import java.util.ArrayList
+import java.util.*
 
 open class BaseStringList: ArrayList<String>() {
 }

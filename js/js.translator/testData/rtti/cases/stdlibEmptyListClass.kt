@@ -1,7 +1,7 @@
 // KT-5192 JS compiler fails to generate correct code for List implementation
 package foo
 
-import java.util.ArrayList
+import java.util.*
 
 class stdlib_emptyListClass : List<Any> by ArrayList<Any>() {}
 

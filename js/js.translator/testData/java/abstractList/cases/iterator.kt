@@ -1,6 +1,6 @@
 package foo
 
-import java.util.AbstractList
+import java.util.*
 
 class MyList<T>(vararg val data: T) : AbstractList<T>() {
     override fun get(index: Int) = data[index]

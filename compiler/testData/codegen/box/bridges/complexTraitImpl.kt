@@ -1,5 +1,4 @@
-import java.util.ArrayList
-import java.util.Arrays
+import java.util.*
 
 abstract class A {
     abstract fun foo(): List<String>

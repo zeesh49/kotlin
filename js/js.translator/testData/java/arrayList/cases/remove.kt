@@ -1,6 +1,6 @@
 package foo
 
-import java.util.ArrayList
+import java.util.*
 
 fun box(): Boolean {
     val arr = ArrayList<Int>()
