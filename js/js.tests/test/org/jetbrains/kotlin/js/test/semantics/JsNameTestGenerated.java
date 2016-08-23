@@ -47,6 +47,18 @@ public class JsNameTestGenerated extends AbstractJsNameTest {
         doTest(fileName);
     }
 
+    @TestMetadata("jsName.kt")
+    public void testJsName() throws Exception {
+        String fileName = KotlinTestUtils.navigationMetadata("js/js.translator/testData/jsName/cases/jsName.kt");
+        doTest(fileName);
+    }
+
+    @TestMetadata("jsNamePropertyAccessors.kt")
+    public void testJsNamePropertyAccessors() throws Exception {
+        String fileName = KotlinTestUtils.navigationMetadata("js/js.translator/testData/jsName/cases/jsNamePropertyAccessors.kt");
+        doTest(fileName);
+    }
+
     @TestMetadata("overriddenMethod.kt")
     public void testOverriddenMethod() throws Exception {
         String fileName = KotlinTestUtils.navigationMetadata("js/js.translator/testData/jsName/cases/overriddenMethod.kt");
