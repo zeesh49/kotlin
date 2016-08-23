@@ -422,7 +422,7 @@ public class KotlinTypeMapper {
     }
 
     @NotNull
-    private Type mapType(
+    public Type mapType(
             @NotNull KotlinType kotlinType,
             @Nullable final JvmSignatureWriter signatureVisitor,
             @NotNull TypeMappingMode mode

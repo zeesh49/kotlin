@@ -44,7 +44,9 @@ interface UBinaryExpression : UExpression {
     }
 
     override fun logString() =
-            "UBinaryExpression (${operator.text})\n" + leftOperand.logString().withMargin + "\n" + rightOperand.logString().withMargin
+            "UBinaryExpression (${operator.text})" + LINE_SEPARATOR +
+            leftOperand.logString().withMargin + LINE_SEPARATOR +
+            rightOperand.logString().withMargin
 
     override fun renderString() = leftOperand.renderString() + ' ' + operator.text + ' ' + rightOperand.renderString()
 }

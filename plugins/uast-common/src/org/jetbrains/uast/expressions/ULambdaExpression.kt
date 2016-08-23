@@ -15,6 +15,9 @@
  */
 package org.jetbrains.uast
 
+import com.intellij.psi.PsiParameter
+import org.jetbrains.uast.internal.acceptList
+import org.jetbrains.uast.internal.log
 import org.jetbrains.uast.visitor.UastVisitor
 
 /**
@@ -24,7 +27,7 @@ interface ULambdaExpression : UExpression {
     /**
      * Returns the list of lambda value parameters.
      */
-    val valueParameters: List<UVariable>
+    val valueParameters: List<UParameter>
 
     /**
      * Returns the lambda body expression.
@@ -39,12 +42,13 @@ interface ULambdaExpression : UExpression {
     }
 
     override fun logString() = log("ULambdaExpression", valueParameters, body)
+    
     override fun renderString(): String {
         val renderedValueParameters = if (valueParameters.isEmpty())
             ""
         else
-            valueParameters.joinToString { it.renderString() } + " ->\n"
+            valueParameters.joinToString { it.renderString() } + " ->" + LINE_SEPARATOR
 
-        return "{ " + renderedValueParameters + body.renderString().withMargin + "\n}"
+        return "{ " + renderedValueParameters + body.renderString().withMargin + LINE_SEPARATOR + "}"
     }
 }

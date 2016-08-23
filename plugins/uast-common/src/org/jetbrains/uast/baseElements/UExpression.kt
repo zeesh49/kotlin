@@ -15,12 +15,25 @@
  */
 package org.jetbrains.uast
 
+import com.intellij.psi.PsiAnnotation
+import com.intellij.psi.PsiType
 import org.jetbrains.uast.visitor.UastVisitor
 
+/**
+ * Represents an expression or statement (which is considered as an expression in Uast).
+ */
 interface UExpression : UElement {
-    open fun evaluate(): Any? = null
+    fun evaluate(): Any? = null
     fun evaluateString(): String? = evaluate() as? String
-    fun getExpressionType(): UType? = null
+    
+    val isUsedAsExpression: Boolean
+
+    /**
+     * Returns expression type.
+     *
+     * @return expression type, or null if type can not be inferred, or if this expression is a statement.
+     */
+    fun getExpressionType(): PsiType? = null
 
     override fun accept(visitor: UastVisitor) {
         visitor.visitElement(this)
@@ -28,15 +41,46 @@ interface UExpression : UElement {
     }
 }
 
+/**
+ * Represents an annotated element.
+ */
+interface UAnnotated : UElement {
+    /**
+     * Returns the list of annotations applied to the current element.
+     */
+    val annotations: List<PsiAnnotation>
+
+    /**
+     * Looks up for annotation element using the annotation qualified name.
+     *
+     * @param fqName the qualified name to search
+     * @return the first annotation element with the specified qualified name, or null if there is no annotation with such name.
+     */
+    fun findAnnotation(fqName: String): PsiAnnotation? = annotations.firstOrNull { it.qualifiedName == fqName }
+}
+
+/**
+ * Helper interface for [UAnnotated] elements without any annotations specified.
+ */
 interface NoAnnotations : UAnnotated {
-    override val annotations: List<UAnnotation>
+    override val annotations: List<PsiAnnotation>
         get() = emptyList()
 }
 
-interface NoModifiers : UModifierOwner {
-    override fun hasModifier(modifier: UastModifier) = false
-}
+/**
+ * In some cases (user typing, syntax error) elements, which are supposed to exist, are missing.
+ * The obvious example — the lack of the condition expression in [UIfExpression], e.g. `if () return`.
+ * [UIfExpression.condition] is required to return not-null values,
+ *  and Uast implementation should return something instead of `null` in this case.
+ *
+ * Use [UastEmptyExpression] in this case.
+ */
+object UastEmptyExpression : UExpression {
+    override val containingElement: UElement?
+        get() = null
 
-class EmptyUExpression(override val parent: UElement) : UExpression {
+    override val isUsedAsExpression: Boolean
+        get() = false
+
     override fun logString() = "EmptyExpression"
 }

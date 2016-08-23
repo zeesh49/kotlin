@@ -16,7 +16,7 @@
 package org.jetbrains.uast
 
 /**
- * Uast operator base inteface.
+ * Uast operator base interface.
  *
  * @see [UastPrefixOperator], [UastPostfixOperator], [UastBinaryOperator]
  */

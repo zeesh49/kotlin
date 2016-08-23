@@ -15,13 +15,17 @@
  */
 package org.jetbrains.uast
 
+import org.jetbrains.uast.internal.log
 import org.jetbrains.uast.visitor.UastVisitor
 
 class UNamedExpression(
         override val name: String,
-        override val parent: UElement
+        override val containingElement: UElement?
 ): UExpression, UNamed {
     lateinit var expression: UExpression
+
+    override val isUsedAsExpression: Boolean
+        get() = expression.isUsedAsExpression
 
     override fun accept(visitor: UastVisitor) {
         if (visitor.visitElement(this)) return
@@ -30,7 +34,15 @@ class UNamedExpression(
     }
 
     override fun logString() = log("UNamedExpression ($name)", expression)
-    override fun renderString() = "$name: $expression"
+    override fun renderString() = name + " = " + expression.renderString()
 
     override fun evaluate() = expression.evaluate()
+    
+    companion object {
+        inline fun create(name: String, parent: UElement?, innerExpr: UElement.() -> UExpression): UNamedExpression {
+            return UNamedExpression(name, parent).apply { 
+                expression = innerExpr(this)
+            }
+        }
+    }
 }

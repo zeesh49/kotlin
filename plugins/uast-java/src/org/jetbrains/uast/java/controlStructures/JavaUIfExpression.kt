@@ -22,11 +22,11 @@ import org.jetbrains.uast.psi.PsiElementBacked
 
 class JavaUIfExpression(
         override val psi: PsiIfStatement,
-        override val parent: UElement
-) : JavaAbstractUElement(), UIfExpression, PsiElementBacked {
+        override val containingElement: UElement?
+) : JavaAbstractUExpression(), UIfExpression, PsiElementBacked {
     override val condition by lz { JavaConverter.convertOrEmpty(psi.condition, this) }
-    override val thenBranch by lz { JavaConverter.convertOrEmpty(psi.thenBranch, this) }
-    override val elseBranch by lz { JavaConverter.convertOrEmpty(psi.elseBranch, this) }
+    override val thenExpression by lz { JavaConverter.convertOrEmpty(psi.thenBranch, this) }
+    override val elseExpression by lz { JavaConverter.convertOrEmpty(psi.elseBranch, this) }
 
     override val isTernary: Boolean
         get() = false

@@ -15,16 +15,35 @@
  */
 package org.jetbrains.uast
 
+import com.intellij.psi.PsiType
+import org.jetbrains.uast.internal.log
 import org.jetbrains.uast.visitor.UastVisitor
 
 /**
  * Represents an object literal expression, e.g. `new Runnable() {}` in Java.
  */
-interface UObjectLiteralExpression : UExpression {
+interface UObjectLiteralExpression : UCallExpression {
     /**
      * Returns the class declaration.
      */
     val declaration: UClass
+
+    override val kind: UastCallKind
+        get() = UastCallKind.CONSTRUCTOR_CALL
+
+    override val methodName: String?
+        get() = null
+
+    override val receiver: UExpression?
+        get() = null
+    
+    override val receiverType: PsiType?
+        get() = null
+
+    override val returnType: PsiType?
+        get() = null
+    
+    
 
     override fun accept(visitor: UastVisitor) {
         if (visitor.visitObjectLiteralExpression(this)) return
@@ -33,5 +52,5 @@ interface UObjectLiteralExpression : UExpression {
     }
 
     override fun logString() = log("UObjectLiteralExpression", declaration)
-    override fun renderString() = "anonymous " + declaration.renderString()
+    override fun renderString() = "anonymous " + declaration.text
 }

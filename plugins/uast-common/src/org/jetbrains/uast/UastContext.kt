@@ -1,50 +1,86 @@
-/*
- * Copyright 2000-2016 JetBrains s.r.o.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package org.jetbrains.uast
 
-/**
- * Interface for the Uast context.
- *
- * Context is needed for resolution, cause the reference can point to the element of the different language.
- */
-interface UastContext {
-    /**
-     * Returns all active language plugins.
-     */
-    val languagePlugins: List<UastLanguagePlugin>
+import com.intellij.psi.*
 
-    /**
-     * Convert an element of some language-specific AST to Uast element.
-     * If two or more language plugins can convert the given [element] type,
-     *  the first converter in the [languagePlugins] list will be chosen.
-     *
-     * @param element the language-specific AST element
-     * @return [UElement] instance, or null if [element] type is not supported by any of the provided language plugins.
-     */
-    fun convert(element: Any?): UElement? {
-        if (element == null) {
-            return null
+abstract class UastContext : UastLanguagePlugin() {
+    abstract val plugins: List<UastLanguagePlugin>
+    
+    init {
+        this.context = this
+    }
+
+    private val sortedPlugins by lazy { plugins.sortedByDescending { it.priority } }
+
+    override fun isFileSupported(fileName: String) = plugins.any { it.isFileSupported(fileName) }
+
+    override val priority: Int
+        get() = 0
+    
+    private inline fun <reified T : UDeclaration> getDeclaration(element: PsiElement): T {
+        for (plugin in sortedPlugins) {
+            (plugin.convertWithParent(element) as? T)?.let { return it }
         }
+        error("Can't find language plugin for $element")
+    }
+    
+    fun getMethod(method: PsiMethod): UMethod = getDeclaration(method)
+    
+    fun getVariable(variable: PsiVariable): UVariable = getDeclaration(variable)
+    
+    fun getClass(clazz: PsiClass): UClass = getDeclaration(clazz)
 
-        for (plugin in languagePlugins) {
-            val uelement = plugin.converter.convertWithParent(element)
-            if (uelement != null) {
-                return uelement
-            }
+    override fun convertElement(element: Any?, parent: UElement?): UElement? {
+        for (plugin in sortedPlugins) {
+            plugin.convertElement(element, parent)?.let { return it }
         }
         return null
+    }
+
+    override fun convertWithParent(element: Any?): UElement? {
+        for (plugin in sortedPlugins) {
+            plugin.convertWithParent(element)?.let { return it }
+        }
+        return null
+    }
+
+    override fun getMethodCallExpression(e: PsiElement, containingClassFqName: String?, methodName: String): Pair<UCallExpression, PsiMethod>? {
+        for (plugin in sortedPlugins) {
+            plugin.getMethodCallExpression(e, containingClassFqName, methodName)?.let { return it }
+        }
+        return null
+    }
+
+    override fun getConstructorCallExpression(e: PsiElement, fqName: String): Triple<UCallExpression, PsiMethod, PsiClass>? {
+        for (plugin in sortedPlugins) {
+            plugin.getConstructorCallExpression(e, fqName)?.let { return it }
+        }
+        return null
+    }
+
+    override fun getMethodBody(e: PsiMethod): UExpression? {
+        for (plugin in sortedPlugins) {
+            plugin.getMethodBody(e)?.let { return it }
+        }
+        return null
+    }
+
+    override fun getInitializerBody(e: PsiVariable): UExpression? {
+        for (plugin in sortedPlugins) {
+            plugin.getInitializerBody(e)?.let { return it }
+        }
+        return null
+    }
+
+    override fun getInitializerBody(e: PsiClassInitializer): UExpression {
+        for (plugin in sortedPlugins) {
+            plugin.getInitializerBody(e)?.let { return it }
+        }
+        return UastEmptyExpression
+    }
+}
+
+class UastContextImpl(override val plugins: List<UastLanguagePlugin>) : UastContext() {
+    init {
+        plugins.forEach { it.context = this }
     }
 }

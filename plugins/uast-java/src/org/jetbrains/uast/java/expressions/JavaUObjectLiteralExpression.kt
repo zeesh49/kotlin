@@ -16,15 +16,35 @@
 package org.jetbrains.uast.java
 
 import com.intellij.psi.PsiNewExpression
-import org.jetbrains.uast.UClassNotResolved
-import org.jetbrains.uast.UElement
-import org.jetbrains.uast.UObjectLiteralExpression
+import com.intellij.psi.PsiType
+import org.jetbrains.uast.*
+import org.jetbrains.uast.psi.PsiElementBacked
 
 class JavaUObjectLiteralExpression(
         override val psi: PsiNewExpression,
-        override val parent: UElement
-) : JavaAbstractUElement(), UObjectLiteralExpression, JavaUElementWithType {
-    override val declaration by lz {
-        psi.anonymousClass?.let { JavaUClass(it, this, psi) } ?: UClassNotResolved
+        override val containingElement: UElement?
+) : JavaAbstractUExpression(), UObjectLiteralExpression, PsiElementBacked {
+    override val declaration by lz { SimpleUClass.create(psi.anonymousClass!!, getLanguagePlugin(), this) }
+
+    override val methodReference = null
+
+    override val classReference by lz {
+        psi.classReference?.let { ref ->
+            JavaClassUSimpleReferenceExpression(ref.element?.text.orAnonymous(), ref, ref.element, this)
+        }
     }
+
+    override val valueArgumentCount: Int
+        get() = psi.argumentList?.expressions?.size ?: 0
+
+    override val valueArguments by lz {
+        psi.argumentList?.expressions?.map { JavaConverter.convertExpression(it, this) } ?: emptyList()
+    }
+
+    override val typeArgumentCount by lz { psi.classReference?.typeParameters?.size ?: 0 }
+
+    override val typeArguments: List<PsiType>
+        get() = psi.classReference?.typeParameters?.toList() ?: emptyList()
+
+    override fun resolve() = psi.resolveMethod()
 }

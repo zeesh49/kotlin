@@ -24,12 +24,12 @@ interface UElement {
     /**
      * Returns the element parent.
      */
-    val parent: UElement?
+    val containingElement: UElement?
 
     /**
      * Returns true if this element is valid, false otherwise.
      */
-    open val isValid: Boolean
+    val isPsiValid: Boolean
         get() = true
 
     /**
@@ -66,110 +66,20 @@ interface UElement {
     fun renderString(): String = logString()
 
     /**
+     * Returns the string as written in the source file.
+     * Use this String only for logging and diagnostic text messages.
+     *
+     * @return the original text.
+     */
+    fun originalString(): String = renderString()
+
+    /**
      * Passes the element to the specified visitor.
      *
      * @param visitor the visitor to pass the element to.
      */
     fun accept(visitor: UastVisitor) {
         visitor.visitElement(this)
+        visitor.afterVisitElement(this)
     }
-}
-
-/**
- * An interface for the [UElement] which was synthesized by an [UastExtendableVisitor].
- * A synthesized element is not processed by an [UastExtendableVisitor].
- */
-interface SynthesizedUElement : UElement
-
-/**
- * An interface for the [UElement] which has a name.
- */
-interface UNamed {
-    /**
-     * Returns the name of this element.
-     */
-    val name: String
-
-    /**
-     * Checks if the element name is equal to the passed name.
-     *
-     * @param name the name to check against
-     * @return true if the element name is equal to [name], false otherwise.
-     */
-    fun matchesName(name: String) = this.name == name
-}
-
-/**
- * An interface for the [UElement] which has a qualified name.
- */
-interface UFqNamed : UNamed {
-    /**
-     * Returns the qualified name of this element, or null if the qualified name was not resolved.
-     */
-    val fqName: String?
-
-    /**
-     * Checks if the element qualified name is equal to the passed name.
-     *
-     * @param fqName qualified name to check against
-     * @return true if the element name is not null and is equal to [name], false otherwise.
-     */
-    fun matchesFqName(fqName: String) = this.fqName == fqName
-}
-
-/**
- * An interface for the [UElement] which has Uast modifiers.
- */
-interface UModifierOwner {
-    /**
-     * Checks if the element has the passed modifier.
-     *
-     * @param modifier modifier to check
-     * @return true if the element has [modifier], false otherwise.
-     */
-    fun hasModifier(modifier: UastModifier): Boolean
-}
-
-/**
- * An interface for the [UElement] which has a visibility (class, function, variable).
- */
-interface UVisibilityOwner {
-    /**
-     * Returns the element visibility.
-     */
-    val visibility: UastVisibility
-}
-
-/**
- * An inteface for the [UElement] which can be resolved to the its declaration.
- */
-interface UResolvable {
-    /**
-     * Returns the declaration element.
-     *
-     * @param context the Uast context
-     * @return the resolved declaration, or null if the declaration was not resolved.
-     */
-    fun resolve(context: UastContext): UDeclaration?
-
-    /**
-     * Returns the declaration element or an empty Uast declaration element if the declaration was not resolved.
-     * An empty declaration element should be a singleton.
-     * [resolveOrEmpty] should not create new elements each time the declaration was not resolved.
-     *
-     * @param context the Uast context
-     * @return the resolved declaration, of an empty error Uast declaration element if the declaration was not resolved.
-     *
-     * @see [UDeclarationNotResolved]
-     */
-    fun resolveOrEmpty(context: UastContext): UDeclaration = resolve(context) ?: UDeclarationNotResolved
-
-    /**
-     * Returns the declaration [UClass] element of null if the declaration was not resolved.
-     *
-     * @param context the Uast context
-     * @return the resolved [UClass] element, or null if the class was not resolved,
-     *         or if the resolved [UElement] is not an instance of [UClass].
-     */
-    fun resolveClass(context: UastContext): UClass? = resolve(context) as? UClass
 }

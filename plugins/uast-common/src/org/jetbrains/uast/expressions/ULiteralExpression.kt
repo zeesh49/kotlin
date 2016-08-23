@@ -30,7 +30,7 @@ interface ULiteralExpression : UExpression {
     /**
      * Returns true if the literal is a `null`-literal, false otherwise.
      */
-    open val isNull: Boolean
+    val isNull: Boolean
         get() = value == null
 
     /**

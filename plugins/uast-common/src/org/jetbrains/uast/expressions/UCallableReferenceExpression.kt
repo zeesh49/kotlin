@@ -15,12 +15,14 @@
  */
 package org.jetbrains.uast
 
+
+import com.intellij.psi.PsiType
 import org.jetbrains.uast.visitor.UastVisitor
 
 /**
- * Represents a callable reference expression, e.g. `Clazz::functionName`.
+ * Represents a callable reference expression, e.g. `Clazz::methodName`.
  */
-interface UCallableReferenceExpression : UExpression, UResolvable {
+interface UCallableReferenceExpression : UExpression {
     /**
      * Returns the qualifier expression.
      * Can be null if the [qualifierType] is known.
@@ -31,7 +33,7 @@ interface UCallableReferenceExpression : UExpression, UResolvable {
      * Returns the qualifier type.
      * Can be null if the qualifier is an expression.
      */
-    val qualifierType: UType?
+    val qualifierType: PsiType?
 
     /**
      * Returns the callable name.
@@ -41,7 +43,6 @@ interface UCallableReferenceExpression : UExpression, UResolvable {
     override fun accept(visitor: UastVisitor) {
         if (visitor.visitCallableReferenceExpression(this)) return
         qualifierExpression?.accept(visitor)
-        qualifierType?.accept(visitor)
         visitor.afterVisitCallableReferenceExpression(this)
     }
 

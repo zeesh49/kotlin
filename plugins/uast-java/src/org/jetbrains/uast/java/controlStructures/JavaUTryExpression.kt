@@ -15,30 +15,41 @@
  */
 package org.jetbrains.uast.java
 
-import com.intellij.psi.PsiCatchSection
-import com.intellij.psi.PsiTryStatement
+import com.intellij.psi.*
 import org.jetbrains.uast.*
+import org.jetbrains.uast.expressions.UTypeReferenceExpression
 import org.jetbrains.uast.psi.PsiElementBacked
 
 class JavaUTryExpression(
         override val psi: PsiTryStatement,
-        override val parent: UElement
-) : JavaAbstractUElement(), UTryExpression, PsiElementBacked {
+        override val containingElement: UElement?
+) : JavaAbstractUExpression(), UTryExpression, PsiElementBacked {
     override val tryClause by lz { JavaConverter.convertOrEmpty(psi.tryBlock, this) }
     override val catchClauses by lz { psi.catchSections.map { JavaUCatchClause(it, this) } }
-    override val finallyClause by lz { psi.finallyBlock?.let { JavaConverter.convert(it, this) } }
-    override val resources by lz {
-        val vars = psi.resourceList ?: return@lz null
-        val resources = vars.map { JavaConverter.convert(it, this) ?: UDeclarationNotResolved }
-        if (resources.isEmpty()) null else resources
-    }
+    override val finallyClause by lz { psi.finallyBlock?.let { JavaConverter.convertBlock(it, this) } }
+    override val resources: List<PsiResourceListElement>?
+        get() = psi.resourceList?.toList() ?: emptyList<PsiResourceListElement>()
+    override val isResources: Boolean
+        get() = psi.resourceList != null
 }
 
 class JavaUCatchClause(
         override val psi: PsiCatchSection,
-        override val parent: UElement
+        override val containingElement: UElement?
 ) : JavaAbstractUElement(), UCatchClause, PsiElementBacked {
     override val body by lz { JavaConverter.convertOrEmpty(psi.catchBlock, this) }
-    override val parameters by lz { psi.parameter?.let { listOf(JavaConverter.convert(it, this)) } ?: emptyList() }
-    override val types by lz { psi.preciseCatchTypes.map { JavaConverter.convert(it, this) } }
+    
+    override val parameters by lz {
+        val languagePlugin = getLanguagePlugin()
+        (psi.parameter?.let { listOf(it) } ?: emptyList()).map { SimpleUParameter(it, languagePlugin, this) }
+    }
+
+    override val typeReferences by lz {
+        val typeElement = psi.parameter?.typeElement ?: return@lz emptyList<UTypeReferenceExpression>()
+        if (typeElement.type is PsiDisjunctionType) {
+            typeElement.children.filterIsInstance<PsiTypeElement>().map { JavaUTypeReferenceExpression(it, this) }
+        } else {
+            listOf(JavaUTypeReferenceExpression(typeElement, this))
+        }
+    }
 }

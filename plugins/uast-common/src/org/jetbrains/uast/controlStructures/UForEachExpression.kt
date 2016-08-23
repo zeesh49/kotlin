@@ -15,6 +15,8 @@
  */
 package org.jetbrains.uast
 
+import com.intellij.psi.PsiParameter
+import org.jetbrains.uast.internal.log
 import org.jetbrains.uast.visitor.UastVisitor
 
 /**
@@ -30,7 +32,7 @@ interface UForEachExpression : ULoopExpression {
     /**
      * Returns the loop variable.
      */
-    val variable: UVariable
+    val variable: UParameter
 
     /**
      * Returns the iterated value (collection, sequence, iterable etc.)
@@ -39,7 +41,6 @@ interface UForEachExpression : ULoopExpression {
 
     override fun accept(visitor: UastVisitor) {
         if (visitor.visitForEachExpression(this)) return
-        variable.accept(visitor)
         iteratedValue.accept(visitor)
         body.accept(visitor)
         visitor.afterVisitForEachExpression(this)

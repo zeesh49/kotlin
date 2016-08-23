@@ -16,15 +16,19 @@
 package org.jetbrains.uast.java
 
 import com.intellij.psi.PsiForeachStatement
+import com.intellij.psi.PsiParameter
+import org.jetbrains.uast.SimpleUParameter
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UForEachExpression
+import org.jetbrains.uast.UParameter
 import org.jetbrains.uast.psi.PsiElementBacked
 
 class JavaUForEachExpression(
         override val psi: PsiForeachStatement,
-        override val parent: UElement
-) : JavaAbstractUElement(), UForEachExpression, PsiElementBacked {
-    override val variable by lz { JavaConverter.convert(psi.iterationParameter, this) }
+        override val containingElement: UElement?
+) : JavaAbstractUExpression(), UForEachExpression, PsiElementBacked {
+    override val variable: UParameter
+        get() = SimpleUParameter(psi.iterationParameter, getLanguagePlugin(), this)
 
     override val iteratedValue by lz { JavaConverter.convertOrEmpty(psi.iteratedValue, this) }
     override val body by lz { JavaConverter.convertOrEmpty(psi.body, this) }

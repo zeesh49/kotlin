@@ -15,6 +15,8 @@
  */
 package org.jetbrains.uast
 
+import org.jetbrains.uast.internal.acceptList
+import org.jetbrains.uast.internal.log
 import org.jetbrains.uast.visitor.UastVisitor
 
 /**
@@ -39,5 +41,6 @@ interface UArrayAccessExpression : UExpression {
     }
 
     override fun logString() = log("UArrayAccessExpression", receiver, indices)
-    override fun renderString() = receiver.renderString() + indices.joinToString(prefix = "[", postfix = "]") { it.renderString() }
+    override fun renderString() = receiver.renderString() +
+            indices.joinToString(prefix = "[", postfix = "]") { it.renderString() }
 }
