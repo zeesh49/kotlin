@@ -27,9 +27,9 @@ import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.hash.LinkedHashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.kotlin.builtins.ReflectionTypes;
 import org.jetbrains.kotlin.descriptors.*;
 import org.jetbrains.kotlin.js.config.JsConfig;
+import org.jetbrains.kotlin.js.config.LibrarySourcesConfig;
 import org.jetbrains.kotlin.js.naming.NameSuggestion;
 import org.jetbrains.kotlin.js.naming.SuggestedName;
 import org.jetbrains.kotlin.js.translate.context.generator.Generator;
@@ -48,11 +48,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.jetbrains.kotlin.js.config.LibrarySourcesConfig.BUILTINS_JS_MODULE_NAME;
 import static org.jetbrains.kotlin.js.translate.utils.AnnotationsUtils.isLibraryObject;
 import static org.jetbrains.kotlin.js.translate.utils.AnnotationsUtils.isNativeObject;
 import static org.jetbrains.kotlin.js.translate.utils.JsAstUtils.pureFqn;
 import static org.jetbrains.kotlin.js.translate.utils.JsDescriptorUtils.getContainingDeclaration;
+import static org.jetbrains.kotlin.js.translate.utils.JsDescriptorUtils.getExternalModuleName;
 import static org.jetbrains.kotlin.js.translate.utils.JsDescriptorUtils.getSuperclass;
 
 /**
@@ -85,9 +85,6 @@ public final class StaticContext {
 
     @NotNull
     private final StandardClasses standardClasses;
-
-    @NotNull
-    private final ReflectionTypes reflectionTypes;
 
     @NotNull
     private final JsScope rootScope;
@@ -152,7 +149,6 @@ public final class StaticContext {
         this.rootScope = rootScope;
         this.standardClasses = standardClasses;
         this.config = config;
-        this.reflectionTypes = new ReflectionTypes(moduleDescriptor);
         currentModule = moduleDescriptor;
         rootPackageScope = new JsObjectScope(rootScope, "<root package>", "root-package");
     }
@@ -180,11 +176,6 @@ public final class StaticContext {
     @NotNull
     public Namer getNamer() {
         return namer;
-    }
-
-    @NotNull
-    public ReflectionTypes getReflectionTypes() {
-        return reflectionTypes;
     }
 
     @NotNull
@@ -242,16 +233,8 @@ public final class StaticContext {
                 return pureFqn(Namer.getRootPackageName(), null);
             }
             else {
-                String moduleName;
-                if (module == module.getBuiltIns().getBuiltInsModule()) {
-                    moduleName = BUILTINS_JS_MODULE_NAME;
-                }
-                else {
-                    moduleName = module.getName().asString();
-                    moduleName = moduleName.substring(1, moduleName.length() - 1);
-                }
-
-                return getModuleExpressionFor(module);
+                JsExpression result = getModuleExpressionFor(module);
+                return result != null ? result : pureFqn(Namer.getRootPackageName(), null);
             }
         }
 
