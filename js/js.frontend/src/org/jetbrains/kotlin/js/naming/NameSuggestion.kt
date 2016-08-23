@@ -18,12 +18,12 @@ package org.jetbrains.kotlin.js.naming
 
 import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.js.descriptorUtils.getJetTypeFqName
-import org.jetbrains.kotlin.js.descriptorUtils.isEnumValueOfMethod
 import org.jetbrains.kotlin.js.translate.utils.AnnotationsUtils.*
 import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.resolve.DescriptorUtils.isCompanionObject
 import org.jetbrains.kotlin.resolve.calls.tasks.isDynamic
 import org.jetbrains.kotlin.resolve.calls.util.FakeCallableDescriptorForObject
+import org.jetbrains.kotlin.resolve.descriptorUtil.isEnumValueOfMethod
 import java.util.*
 
 /**
@@ -227,9 +227,7 @@ class NameSuggestion {
                 is PackageFragmentDescriptor -> descriptor.visibility.isPublicAPI
                 is ClassDescriptor -> {
                     // Open (abstract) public methods of classes or final public methods of open (abstract) classes should be stable
-                    if (descriptor.modality == Modality.OPEN || descriptor.modality == Modality.ABSTRACT ||
-                        containingDeclaration.modality == Modality.OPEN || containingDeclaration.modality == Modality.ABSTRACT
-                    ) {
+                    if (containingDeclaration.modality == Modality.OPEN || containingDeclaration.modality == Modality.ABSTRACT) {
                         return descriptor.visibility.isPublicAPI
                     }
 

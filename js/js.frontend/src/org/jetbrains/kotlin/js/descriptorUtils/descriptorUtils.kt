@@ -59,11 +59,3 @@ fun KotlinType.getJetTypeFqName(printTypeArguments: Boolean): String {
 }
 
 fun ClassDescriptor.hasPrimaryConstructor(): Boolean = unsubstitutedPrimaryConstructor != null
-
-fun FunctionDescriptor.isEnumValueOfMethod(): Boolean {
-    val methodTypeParameters = valueParameters
-    val nullableString = TypeUtils.makeNullable(builtIns.stringType)
-    return DescriptorUtils.ENUM_VALUE_OF == name
-           && methodTypeParameters.size == 1
-           && KotlinTypeChecker.DEFAULT.isSubtypeOf(methodTypeParameters[0].type, nullableString)
-}

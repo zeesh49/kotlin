@@ -29,6 +29,8 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.resolve.constants.EnumValue
 import org.jetbrains.kotlin.types.KotlinType
+import org.jetbrains.kotlin.types.checker.KotlinTypeChecker
+import org.jetbrains.kotlin.types.typeUtil.makeNullable
 import org.jetbrains.kotlin.utils.DFS
 import org.jetbrains.kotlin.utils.addToStdlib.check
 
@@ -260,3 +262,11 @@ fun ClassDescriptor.getConstructorByParams(params: List<KotlinType>): Constructo
 // TODO: inline and remove as soon as all usage sies are converted to kotlin
 fun getConstructorByParamsMap(classDescriptor: ClassDescriptor, params: List<Pair<Name, KotlinType>>): ConstructorDescriptor? =
         classDescriptor.getConstructorByParams(params.map { it.second })
+
+fun FunctionDescriptor.isEnumValueOfMethod(): Boolean {
+    val methodTypeParameters = valueParameters
+    val nullableString = builtIns.stringType.makeNullable()
+    return DescriptorUtils.ENUM_VALUE_OF == name
+           && methodTypeParameters.size == 1
+           && KotlinTypeChecker.DEFAULT.isSubtypeOf(methodTypeParameters[0].type, nullableString)
+}

@@ -154,15 +154,6 @@ object CodegenUtil {
     }
 
     @JvmStatic
-    fun isEnumValueOfMethod(functionDescriptor: FunctionDescriptor): Boolean {
-        val methodTypeParameters = functionDescriptor.valueParameters
-        val nullableString = functionDescriptor.builtIns.stringType.makeNullable()
-        return DescriptorUtils.ENUM_VALUE_OF == functionDescriptor.name
-               && methodTypeParameters.size == 1
-               && KotlinTypeChecker.DEFAULT.isSubtypeOf(methodTypeParameters[0].type, nullableString)
-    }
-
-    @JvmStatic
     fun getLineNumberForElement(statement: PsiElement, markEndOffset: Boolean): Int? {
         val file = statement.containingFile
         if (file is KtFile && file.doNotAnalyze != null) {
