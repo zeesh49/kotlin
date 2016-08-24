@@ -29,7 +29,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.kotlin.descriptors.*;
 import org.jetbrains.kotlin.js.config.JsConfig;
-import org.jetbrains.kotlin.js.config.LibrarySourcesConfig;
 import org.jetbrains.kotlin.js.naming.NameSuggestion;
 import org.jetbrains.kotlin.js.naming.SuggestedName;
 import org.jetbrains.kotlin.js.translate.context.generator.Generator;
@@ -42,17 +41,13 @@ import org.jetbrains.kotlin.resolve.BindingTrace;
 import org.jetbrains.kotlin.resolve.DescriptorUtils;
 import org.jetbrains.kotlin.resolve.calls.tasks.DynamicCallsKt;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import static org.jetbrains.kotlin.js.config.LibrarySourcesConfig.UNKNOWN_EXTERNAL_MODULE_NAME;
 import static org.jetbrains.kotlin.js.translate.utils.AnnotationsUtils.isLibraryObject;
 import static org.jetbrains.kotlin.js.translate.utils.AnnotationsUtils.isNativeObject;
 import static org.jetbrains.kotlin.js.translate.utils.JsAstUtils.pureFqn;
 import static org.jetbrains.kotlin.js.translate.utils.JsDescriptorUtils.getContainingDeclaration;
-import static org.jetbrains.kotlin.js.translate.utils.JsDescriptorUtils.getExternalModuleName;
 import static org.jetbrains.kotlin.js.translate.utils.JsDescriptorUtils.getSuperclass;
 
 /**
@@ -481,10 +476,20 @@ public final class StaticContext {
 
     @Nullable
     public JsExpression getModuleExpressionFor(@NotNull DeclarationDescriptor descriptor) {
-        String moduleName = getExternalModuleName(descriptor);
-        if (moduleName == null) return null;
+        ModuleDescriptor module = DescriptorUtils.getContainingModule(descriptor);
+        if (currentModule == module) {
+            return pureFqn(Namer.getRootPackageName(), null);
+        }
+        String moduleName;
+        if (module == module.getBuiltIns().getBuiltInsModule()) {
+            moduleName = Namer.KOTLIN_LOWER_NAME;
+        }
+        else {
+            moduleName = module.getName().asString();
+            moduleName = moduleName.substring(1, moduleName.length() - 1);
+        }
 
-        if (LibrarySourcesConfig.UNKNOWN_EXTERNAL_MODULE_NAME.equals(moduleName)) return null;
+        if (UNKNOWN_EXTERNAL_MODULE_NAME.equals(moduleName)) return null;
 
         JsName moduleId = moduleName.equals(Namer.KOTLIN_LOWER_NAME) ? rootScope.declareName(Namer.KOTLIN_NAME) :
                           importedModules.get(moduleName);
