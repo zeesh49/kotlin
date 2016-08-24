@@ -144,7 +144,7 @@ class DebuggerClassNameProvider(val myDebugProcess: DebugProcess, val scopes: Li
             }
             element is KtNamedFunction -> {
                 val parentInternalName = if (parent is KtClassOrObject) {
-                    getClassNameForClass(parent, typeMapper)
+                    getClassNameForMemberInClass(parent, typeMapper, element)
                 }
                 else if (parent != null) {
                     val asmType = CodegenBinding.asmTypeForAnonymousClass(typeMapper.bindingContext, element)
@@ -167,7 +167,15 @@ class DebuggerClassNameProvider(val myDebugProcess: DebugProcess, val scopes: Li
         return CachedClassNames(getClassNameForFile(file))
     }
 
-    private fun getClassNameForClass(klass: KtClassOrObject, typeMapper: KotlinTypeMapper) = klass.readAction { getJvmInternalNameForImpl(typeMapper, it) }
+    private fun getClassNameForClass(klass: KtClassOrObject, typeMapper: KotlinTypeMapper) = klass.readAction { getJvmInternalName(typeMapper, it, false) }
+
+    private fun getClassNameForMemberInClass(klass: KtClassOrObject, typeMapper: KotlinTypeMapper, member: KtDeclaration): String? {
+        return klass.readAction {
+            val doNotUseImplForInterface = klass is KtClass && klass.isInterface() && member is KtFunction && !member.hasBody()
+            getJvmInternalName(typeMapper, it, doNotUseImplForInterface)
+        }
+    }
+
     private fun getClassNameForFile(file: KtFile) = file.readAction { NoResolveFileClassesProvider.getFileClassInternalName(it) }
 
     private val TYPES_TO_CALCULATE_CLASSNAME: Array<Class<out KtElement>> =
@@ -194,10 +202,10 @@ class DebuggerClassNameProvider(val myDebugProcess: DebugProcess, val scopes: Li
         }
     }
 
-    private fun getJvmInternalNameForImpl(typeMapper: KotlinTypeMapper, ktClass: KtClassOrObject): String? {
+    private fun getJvmInternalName(typeMapper: KotlinTypeMapper, ktClass: KtClassOrObject, doNotUseImplForInterface: Boolean): String? {
         val classDescriptor = typeMapper.bindingContext.get<PsiElement, ClassDescriptor>(BindingContext.CLASS, ktClass) ?: return null
 
-        if (ktClass is KtClass && ktClass.isInterface()) {
+        if (!doNotUseImplForInterface && ktClass is KtClass && ktClass.isInterface()) {
             return typeMapper.mapDefaultImpls(classDescriptor).internalName
         }
 
