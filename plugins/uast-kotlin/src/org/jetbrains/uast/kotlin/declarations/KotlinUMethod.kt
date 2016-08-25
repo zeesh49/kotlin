@@ -16,21 +16,26 @@
 
 package org.jetbrains.uast.kotlin.declarations
 
-import com.intellij.psi.PsiMethod
+import org.jetbrains.kotlin.asJava.elements.KtLightElement
 import org.jetbrains.kotlin.asJava.elements.KtLightMethod
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.uast.kotlin.lz
 import org.jetbrains.uast.*
+import org.jetbrains.uast.java.JavaUMethod
 
 class KotlinUMethod(
-        psi: PsiMethod, 
-        languagePlugin: UastLanguagePlugin, 
+        override val psi: KtLightMethod,
+        languagePlugin: UastLanguagePlugin,
         containingElement: UElement?
-) : SimpleUMethod(psi, languagePlugin, containingElement) {
-    private val ktFunction = (psi.originalElement as KtLightMethod).kotlinOrigin
-    
+) : JavaUMethod(psi, languagePlugin, containingElement) {
+    private val kotlinOrigin = (psi.originalElement as KtLightElement<*, *>).kotlinOrigin
+
     override val uastBody by lz {
-        val bodyExpression = (ktFunction as? KtFunction)?.bodyExpression ?: return@lz null
+        val originalElement = psi.originalElement
+        val bodyExpression = when (originalElement) {
+            is KtLightMethod -> (kotlinOrigin as? KtFunction)?.bodyExpression
+            else -> null
+        } ?: return@lz null
         languagePlugin.convertOpt<UExpression>(bodyExpression, this)
     }
 }

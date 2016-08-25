@@ -41,28 +41,10 @@ import com.android.tools.klint.detector.api.Severity;
 import com.android.tools.klint.detector.api.TextFormat;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Sets.SetView;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.JavaRecursiveElementVisitor;
-import com.intellij.psi.PsiAssignmentExpression;
-import com.intellij.psi.PsiBinaryExpression;
-import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiExpression;
 import com.intellij.psi.PsiField;
-import com.intellij.psi.PsiIdentifier;
-import com.intellij.psi.PsiIfStatement;
-import com.intellij.psi.PsiJavaCodeReferenceElement;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
-import com.intellij.psi.PsiNewExpression;
-import com.intellij.psi.PsiParenthesizedExpression;
-import com.intellij.psi.PsiPrefixExpression;
-import com.intellij.psi.PsiReferenceExpression;
-import com.intellij.psi.PsiSuperExpression;
-import com.intellij.psi.PsiThisExpression;
-import com.intellij.psi.PsiThrowStatement;
 import com.intellij.psi.PsiType;
-import com.intellij.psi.util.PsiTreeUtil;
 
 import org.jetbrains.uast.UBinaryExpression;
 import org.jetbrains.uast.UCallExpression;
@@ -77,7 +59,6 @@ import org.jetbrains.uast.USimpleNameReferenceExpression;
 import org.jetbrains.uast.USuperExpression;
 import org.jetbrains.uast.UThisExpression;
 import org.jetbrains.uast.UThrowExpression;
-import org.jetbrains.uast.UVariable;
 import org.jetbrains.uast.UastUtils;
 import org.jetbrains.uast.expressions.UReferenceExpression;
 import org.jetbrains.uast.util.UastExpressionUtils;
@@ -250,7 +231,7 @@ public class JavaPerformanceDetector extends Detector implements Detector.UastSc
                         //&& node.astTypeReference().astParts().size() == 1
                         && node.getValueArgumentCount() == 1) {
                     String argument = node.getValueArguments().get(0).originalString();
-                    mContext.report(USE_VALUE_OF, node, mContext.getLocation(node), getUseValueOfErrorMessage(
+                    mContext.report(USE_VALUE_OF, node, mContext.getUastLocation(node), getUseValueOfErrorMessage(
                             typeName, argument));
                 }
             }
@@ -270,7 +251,7 @@ public class JavaPerformanceDetector extends Detector implements Detector.UastSc
         }
 
         private void reportAllocation(UElement node) {
-            mContext.report(PAINT_ALLOC, node, mContext.getLocation(node),
+            mContext.report(PAINT_ALLOC, node, mContext.getUastLocation(node),
                 "Avoid object allocations during draw/layout operations (preallocate and " +
                 "reuse instead)");
         }
@@ -306,7 +287,7 @@ public class JavaPerformanceDetector extends Detector implements Detector.UastSc
                 }
             } else if (functionName.equals("getClipBounds")) {                   //$NON-NLS-1$
                 if (node.getValueArguments().isEmpty()) {
-                    mContext.report(PAINT_ALLOC, node, mContext.getLocation(node),
+                    mContext.report(PAINT_ALLOC, node, mContext.getUastLocation(node),
                             "Avoid object allocations during draw operations: Use " +
                                     "`Canvas.getClipBounds(Rect)` instead of `Canvas.getClipBounds()` " +
                                     "which allocates a temporary `Rect`");
@@ -476,16 +457,16 @@ public class JavaPerformanceDetector extends Detector implements Detector.UastSc
                 if (TYPE_INTEGER_WRAPPER.equals(typeName) || TYPE_BYTE_WRAPPER.equals(typeName)) {
                     String valueType = types.get(1).getCanonicalText();
                     if (valueType.equals(TYPE_INTEGER_WRAPPER)) {
-                        mContext.report(USE_SPARSE_ARRAY, node, mContext.getLocation(node),
+                        mContext.report(USE_SPARSE_ARRAY, node, mContext.getUastLocation(node),
                             "Use new `SparseIntArray(...)` instead for better performance");
                     } else if (valueType.equals(TYPE_LONG_WRAPPER) && minSdk >= 18) {
-                        mContext.report(USE_SPARSE_ARRAY, node, mContext.getLocation(node),
+                        mContext.report(USE_SPARSE_ARRAY, node, mContext.getUastLocation(node),
                                 "Use `new SparseLongArray(...)` instead for better performance");
                     } else if (valueType.equals(TYPE_BOOLEAN_WRAPPER)) {
-                        mContext.report(USE_SPARSE_ARRAY, node, mContext.getLocation(node),
+                        mContext.report(USE_SPARSE_ARRAY, node, mContext.getUastLocation(node),
                                 "Use `new SparseBooleanArray(...)` instead for better performance");
                     } else {
-                        mContext.report(USE_SPARSE_ARRAY, node, mContext.getLocation(node),
+                        mContext.report(USE_SPARSE_ARRAY, node, mContext.getUastLocation(node),
                             String.format(
                                 "Use `new SparseArray<%1$s>(...)` instead for better performance",
                               valueType.substring(valueType.lastIndexOf('.') + 1)));
@@ -497,7 +478,7 @@ public class JavaPerformanceDetector extends Detector implements Detector.UastSc
                     String message = useBuiltin ?
                             "Use `new LongSparseArray(...)` instead for better performance" :
                             "Use `new android.support.v4.util.LongSparseArray(...)` instead for better performance";
-                    mContext.report(USE_SPARSE_ARRAY, node, mContext.getLocation(node),
+                    mContext.report(USE_SPARSE_ARRAY, node, mContext.getUastLocation(node),
                             message);
                 }
             }
@@ -508,10 +489,10 @@ public class JavaPerformanceDetector extends Detector implements Detector.UastSc
             if (types.size() == 1) {
                 String valueType = types.get(0).getCanonicalText();
                 if (valueType.equals(TYPE_INTEGER_WRAPPER)) {
-                    mContext.report(USE_SPARSE_ARRAY, node, mContext.getLocation(node),
+                    mContext.report(USE_SPARSE_ARRAY, node, mContext.getUastLocation(node),
                         "Use `new SparseIntArray(...)` instead for better performance");
                 } else if (valueType.equals(TYPE_BOOLEAN_WRAPPER)) {
-                    mContext.report(USE_SPARSE_ARRAY, node, mContext.getLocation(node),
+                    mContext.report(USE_SPARSE_ARRAY, node, mContext.getUastLocation(node),
                             "Use `new SparseBooleanArray(...)` instead for better performance");
                 }
             }

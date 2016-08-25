@@ -27,10 +27,6 @@ import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.PsiExpression;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
 
 import org.jetbrains.uast.UCallExpression;
 import org.jetbrains.uast.UExpression;
@@ -96,7 +92,7 @@ public class AlarmDetector extends Detector implements Detector.UastScanner {
         if (value < min) {
             String message = String.format("Value will be forced up to %1$d as of Android 5.1; "
                     + "don't rely on this to be exact", min);
-            context.report(ISSUE, argument, context.getLocation(argument), message);
+            context.report(ISSUE, argument, context.getUastLocation(argument), message);
         }
     }
 

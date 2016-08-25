@@ -21,28 +21,18 @@ import com.android.annotations.NonNull;
 import com.android.annotations.Nullable;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
-import com.android.tools.klint.detector.api.LintUtils;
 import com.android.tools.klint.detector.api.Location;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
-import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiExpression;
-import com.intellij.psi.PsiExpressionList;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
 
 import org.jetbrains.uast.UCallExpression;
-import org.jetbrains.uast.UElement;
 import org.jetbrains.uast.UExpression;
 import org.jetbrains.uast.UMethod;
 import org.jetbrains.uast.UastLiteralUtils;
-import org.jetbrains.uast.expressions.UReferenceExpression;
 import org.jetbrains.uast.visitor.UastVisitor;
 
 import java.util.Arrays;
@@ -113,7 +103,7 @@ public class ReadParcelableDetector extends Detector implements Detector.UastSca
                             + "will not work if you are restoring your own classes. Consider "
                             + "using for example `%1$s(getClass().getClassLoader())` instead.",
                     node.getMethodName());
-            Location location = context.getLocation(node);
+            Location location = context.getUastLocation(node);
             context.report(ISSUE, node, location, message);
         } else if (argumentCount == 1) {
             UExpression parameter = expressions.get(0);
@@ -121,7 +111,7 @@ public class ReadParcelableDetector extends Detector implements Detector.UastSca
                 String message = "Passing null here (to use the default class loader) "
                         + "will not work if you are restoring your own classes. Consider "
                         + "using for example `getClass().getClassLoader()` instead.";
-                Location location = context.getLocation(node);
+                Location location = context.getUastLocation(node);
                 context.report(ISSUE, node, location, message);
             }
         }

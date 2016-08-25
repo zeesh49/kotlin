@@ -20,17 +20,12 @@ import com.android.annotations.NonNull;
 import com.android.annotations.Nullable;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
-import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiClassType;
-import com.intellij.psi.PsiExpression;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
 import com.intellij.psi.PsiType;
 
 import org.jetbrains.uast.UCallExpression;
@@ -106,7 +101,7 @@ public class SslCertificateSocketFactoryDetector extends Detector implements Det
                             && (INET_ADDRESS_CLASS.equals(type.getCanonicalText())
                             || context.getEvaluator().extendsClass(((PsiClassType)type).resolve(),
                             INET_ADDRESS_CLASS, false))) {
-                        context.report(CREATE_SOCKET, call, context.getLocation(call),
+                        context.report(CREATE_SOCKET, call, context.getUastLocation(call),
                                 "Use of `SSLCertificateSocketFactory.createSocket()` " +
                                         "with an InetAddress parameter can cause insecure " +
                                         "network traffic due to trusting arbitrary hostnames in " +
@@ -114,7 +109,7 @@ public class SslCertificateSocketFactoryDetector extends Detector implements Det
                     }
                 }
             } else if ("getInsecure".equals(methodName)) {
-                context.report(GET_INSECURE, call, context.getLocation(call),
+                context.report(GET_INSECURE, call, context.getUastLocation(call),
                         "Use of `SSLCertificateSocketFactory.getInsecure()` can cause " +
                                 "insecure network traffic due to trusting arbitrary TLS/SSL " +
                                 "certificates presented by peers");

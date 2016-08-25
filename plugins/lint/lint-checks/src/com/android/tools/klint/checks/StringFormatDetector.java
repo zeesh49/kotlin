@@ -47,11 +47,9 @@ import com.android.resources.ResourceFolderType;
 import com.android.resources.ResourceType;
 import com.android.tools.klint.client.api.JavaEvaluator;
 import com.android.tools.klint.client.api.LintClient;
-import com.android.tools.klint.client.api.UElementVisitor;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.Context;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
@@ -69,16 +67,13 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiClassType;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiParameterList;
-import com.intellij.psi.PsiReference;
 import com.intellij.psi.PsiType;
 import com.intellij.psi.PsiVariable;
 
-import org.jetbrains.uast.UBinaryExpression;
 import org.jetbrains.uast.UCallExpression;
 import org.jetbrains.uast.UExpression;
 import org.jetbrains.uast.ULiteralExpression;
@@ -1104,7 +1099,7 @@ public class StringFormatDetector extends ResourceXmlDetector implements Detecto
                 return;
             }
         }
-        Location location = context.getLocation(call);
+        Location location = context.getUastLocation(call);
         Location secondary = handle.resolve();
         secondary.setMessage("This definition does not require arguments");
         location.setSecondary(secondary);
@@ -1296,7 +1291,7 @@ public class StringFormatDetector extends ResourceXmlDetector implements Detecto
                 int count = getFormatArgumentCount(s, null);
                 Handle handle = pair.getFirst();
                 if (count != callCount) {
-                    Location location = context.getLocation(call);
+                    Location location = context.getUastLocation(call);
                     Location secondary = handle.resolve();
                     secondary.setMessage(String.format("This definition requires %1$d arguments",
                             count));
@@ -1375,7 +1370,7 @@ public class StringFormatDetector extends ResourceXmlDetector implements Detecto
                             }
 
                             if (!valid) {
-                                Location location = context.getLocation(args.get(argumentIndex));
+                                Location location = context.getUastLocation(args.get(argumentIndex));
                                 Location secondary = handle.resolve();
                                 secondary.setMessage("Conflicting argument declaration here");
                                 location.setSecondary(secondary);

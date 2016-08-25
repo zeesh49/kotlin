@@ -26,11 +26,6 @@ import com.android.tools.klint.detector.api.JavaContext;
 import com.android.tools.klint.detector.api.Location;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
-import com.intellij.psi.CommonClassNames;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiLiteralExpression;
-import com.intellij.psi.PsiType;
 
 import org.jetbrains.uast.UElement;
 import org.jetbrains.uast.ULiteralExpression;
@@ -108,13 +103,13 @@ public class SdCardDetector extends Detector implements Detector.UastScanner {
                         || s.startsWith("file:///sdcard/")) {      //$NON-NLS-1$
                     String message = "Do not hardcode \"/sdcard/\"; " +
                             "use `Environment.getExternalStorageDirectory().getPath()` instead";
-                    Location location = mContext.getLocation(node);
+                    Location location = mContext.getUastLocation(node);
                     mContext.report(ISSUE, node, location, message);
                 } else if (s.startsWith("/data/data/")    //$NON-NLS-1$
                         || s.startsWith("/data/user/")) { //$NON-NLS-1$
                     String message = "Do not hardcode \"`/data/`\"; " +
                             "use `Context.getFilesDir().getPath()` instead";
-                    Location location = mContext.getLocation(node);
+                    Location location = mContext.getUastLocation(node);
                     mContext.report(ISSUE, node, location, message);
                 }
             }

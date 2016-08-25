@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-package org.jetbrains.uast.kotlin
+package org.jetbrains.uast
 
-import com.intellij.psi.PsiFile
-import org.jetbrains.kotlin.psi.KtFile
-import org.jetbrains.uast.UClass
-import org.jetbrains.uast.UFile
-import org.jetbrains.uast.UastLanguagePlugin
+import com.intellij.psi.PsiElement
+import org.jetbrains.uast.psi.PsiElementBacked
 
-class KotlinUFile(override val psi: KtFile, override val languagePlugin: UastLanguagePlugin) : UFile {
-    override val packageName: String
-        get() = psi.packageFqName.asString()
+class UIdentifier(
+        override val psi: PsiElement?,
+        override val containingElement: UElement?
+) : UElement, PsiElementBacked {
+    val name: String
+        get() = psi?.text ?: "<error>"
     
-    override val imports by lz { psi.importDirectives.map { KotlinUImportStatement(it, this) } }
-    override val classes by lz { psi.classes.map { languagePlugin.convert<UClass>(it, this) } }
+    override fun logString() = "Identifier ($name)"
 }

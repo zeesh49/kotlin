@@ -29,7 +29,6 @@ import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
-import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiMethod;
 
 import org.jetbrains.uast.UCallExpression;
@@ -109,7 +108,7 @@ public class SQLiteDetector extends Detector implements Detector.UastScanner {
                     + "(STRING is a numeric type and its value can be adjusted; for example, "
                     + "strings that look like integers can drop leading zeroes. See issue "
                     + "explanation for details.)";
-            context.report(ISSUE, call, context.getLocation(call), message);
+            context.report(ISSUE, call, context.getUastLocation(call), message);
         }
 
     }

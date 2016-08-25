@@ -7,7 +7,9 @@ import org.jetbrains.uast.psi.PsiElementBacked
 
 interface UDeclaration : UElement, PsiElementBacked, PsiModifierListOwner {
     override val psi: PsiModifierListOwner
-    override fun getOriginalElement() = psi.originalElement
+    override fun getOriginalElement(): PsiElement? = psi.originalElement
+    
+    val uastNameIdentifier: UElement?
     
     val languagePlugin: UastLanguagePlugin
     

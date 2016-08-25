@@ -156,7 +156,7 @@ public class LocaleDetector extends Detector implements Detector.UastScanner {
             if (isLoggingParameter(call)) {
                 return;
             }
-            Location location = context.getLocation(call);
+            Location location = context.getUastLocation(call);
             String message =
                     "Implicitly using the default locale is a common source of bugs: " +
                             "Use `String.format(Locale, ...)` instead";

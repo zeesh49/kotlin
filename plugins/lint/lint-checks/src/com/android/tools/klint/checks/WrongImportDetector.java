@@ -20,17 +20,14 @@ import com.android.annotations.NonNull;
 import com.android.annotations.Nullable;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
 import com.android.tools.klint.detector.api.Location;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
-import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiImportStatement;
 
 import org.jetbrains.uast.UElement;
 import org.jetbrains.uast.UImportStatement;
@@ -104,7 +101,7 @@ public class WrongImportDetector extends Detector implements Detector.UastScanne
             if (resolved instanceof PsiClass) {
                 String qualifiedName = ((PsiClass) resolved).getQualifiedName();
                 if ("android.R".equals(qualifiedName)) {
-                    Location location = mContext.getLocation(statement);
+                    Location location = mContext.getUastLocation(statement);
                     mContext.report(ISSUE, statement, location,
                             "Don't include `android.R` here; use a fully qualified name for "
                                     + "each usage instead");

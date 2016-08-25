@@ -19,6 +19,7 @@ package org.jetbrains.uast.kotlin
 import org.jetbrains.kotlin.idea.KotlinLanguage
 import org.jetbrains.kotlin.psi.KtForExpression
 import org.jetbrains.uast.*
+import org.jetbrains.uast.java.JavaUParameter
 import org.jetbrains.uast.kotlin.psi.UastKotlinPsiParameter
 import org.jetbrains.uast.psi.PsiElementBacked
 import org.jetbrains.uast.psi.UastPsiParameterNotResolved
@@ -32,7 +33,7 @@ class KotlinUForEachExpression(
     
     override val variable by lz {
         val parameter = psi.loopParameter?.let { UastKotlinPsiParameter.create(it, psi, 0) } 
-                ?: UastPsiParameterNotResolved(psi, KotlinLanguage.INSTANCE) 
-        SimpleUParameter(parameter, getLanguagePlugin(), this)
+                ?: UastPsiParameterNotResolved(psi, KotlinLanguage.INSTANCE)
+        JavaUParameter(parameter, getLanguagePlugin(), this)
     }
 }

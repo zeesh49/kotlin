@@ -24,6 +24,13 @@ interface UVariable : UDeclaration, PsiVariable {
     override fun getInitializer() = psi.initializer
 
     override fun logString() = "UVariable (name = $name)"
+
+    override fun renderString() = buildString {
+        val modifiers = PsiModifier.MODIFIERS.filter { psi.hasModifierProperty(it) }.joinToString(" ")
+        if (modifiers.isNotEmpty()) append(modifiers).append(' ')
+        append("")
+        append(psi.type.getCanonicalText(false)).append(' ').append(psi.name)
+    }
 }
 
 interface UParameter : UVariable, PsiParameter {

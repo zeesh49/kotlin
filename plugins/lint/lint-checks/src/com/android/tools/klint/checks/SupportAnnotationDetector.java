@@ -60,7 +60,6 @@ import com.android.tools.klint.client.api.UastLintUtils;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.ConstantEvaluator;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
@@ -72,26 +71,16 @@ import com.android.tools.klint.detector.api.TextFormat;
 import com.android.utils.XmlUtils;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Sets;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.JavaRecursiveElementVisitor;
-import com.intellij.psi.JavaTokenType;
 import com.intellij.psi.PsiAnnotation;
 import com.intellij.psi.PsiAnnotationMemberValue;
-import com.intellij.psi.PsiAnonymousClass;
 import com.intellij.psi.PsiArrayInitializerMemberValue;
 import com.intellij.psi.PsiArrayType;
-import com.intellij.psi.PsiCatchSection;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiClassType;
-import com.intellij.psi.PsiDeclarationStatement;
-import com.intellij.psi.PsiDisjunctionType;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiEnumConstant;
-import com.intellij.psi.PsiExpression;
 import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiJavaCodeReferenceElement;
 import com.intellij.psi.PsiLiteral;
-import com.intellij.psi.PsiLocalVariable;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiModifier;
 import com.intellij.psi.PsiModifierList;
@@ -99,12 +88,8 @@ import com.intellij.psi.PsiNameValuePair;
 import com.intellij.psi.PsiParameter;
 import com.intellij.psi.PsiParameterList;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.PsiStatement;
-import com.intellij.psi.PsiTryStatement;
 import com.intellij.psi.PsiType;
 import com.intellij.psi.PsiVariable;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.util.PsiTreeUtil;
 
 import org.jetbrains.uast.UAnonymousClass;
 import org.jetbrains.uast.UBinaryExpression;
@@ -465,7 +450,7 @@ public class SupportAnnotationDetector extends Detector implements Detector.Uast
             String message = String.format(
                     "Should pass resolved color instead of resource id here: " +
                             "`getResources().getColor(%1$s)`", argument.originalString());
-            context.report(COLOR_USAGE, argument, context.getLocation(argument), message);
+            context.report(COLOR_USAGE, argument, context.getUastLocation(argument), message);
         }
     }
 
@@ -487,7 +472,7 @@ public class SupportAnnotationDetector extends Detector implements Detector.Uast
             String message = String.format(
               "Should pass resolved pixel dimension instead of resource id here: " +
                 "`getResources().getDimension*(%1$s)`", argument.originalString());
-            context.report(COLOR_USAGE, argument, context.getLocation(argument), message);
+            context.report(COLOR_USAGE, argument, context.getUastLocation(argument), message);
         }
     }
 
@@ -537,7 +522,7 @@ public class SupportAnnotationDetector extends Detector implements Detector.Uast
                 }
                 String message = getMissingPermissionMessage(requirement, name, permissions,
                         operation);
-                context.report(MISSING_PERMISSION, node, context.getLocation(node), message);
+                context.report(MISSING_PERMISSION, node, context.getUastLocation(node), message);
             }
         } else if (requirement.isRevocable(permissions) &&
                 context.getMainProject().getTargetSdkVersion().getFeatureLevel() >= 23) {
@@ -557,7 +542,7 @@ public class SupportAnnotationDetector extends Detector implements Detector.Uast
 
             if (!handlesMissingPermission && !isIgnoredInIde(MISSING_PERMISSION, context, node)) {
                 String message = getUnhandledPermissionMessage();
-                context.report(MISSING_PERMISSION, node, context.getLocation(node), message);
+                context.report(MISSING_PERMISSION, node, context.getUastLocation(node), message);
             }
         }
     }
@@ -820,7 +805,7 @@ public class SupportAnnotationDetector extends Detector implements Detector.Uast
                         + "original rectangle is not modified. These methods return false to "
                         + "indicate that this has happened.";
             }
-            context.report(issue, node, context.getLocation(node), message);
+            context.report(issue, node, context.getUastLocation(node), message);
         }
     }
 
@@ -888,7 +873,7 @@ public class SupportAnnotationDetector extends Detector implements Detector.Uast
                  method.isConstructor() ? "Constructor" : "Method",
                  method.getName(), describeThreads(targetThreads, true),
                  describeThreads(threadContext, false));
-            context.report(THREAD, node, context.getLocation(node), message);
+            context.report(THREAD, node, context.getUastLocation(node), message);
         }
     }
 
@@ -1156,7 +1141,7 @@ public class SupportAnnotationDetector extends Detector implements Detector.Uast
         } else {
             message = "Expected resource identifier (`R`.type.`name`)";
         }
-        context.report(RESOURCE_TYPE, argument, context.getLocation(argument), message);
+        context.report(RESOURCE_TYPE, argument, context.getUastLocation(argument), message);
     }
 
     /**
@@ -1246,7 +1231,7 @@ public class SupportAnnotationDetector extends Detector implements Detector.Uast
                 return;
             }
 
-            context.report(RANGE, argument, context.getLocation(argument), message);
+            context.report(RANGE, argument, context.getUastLocation(argument), message);
         }
     }
 
@@ -1314,7 +1299,7 @@ public class SupportAnnotationDetector extends Detector implements Detector.Uast
 
         String message = getFloatRangeError(value, from, to, fromInclusive, toInclusive, argument);
         if (message != null && !isIgnoredInIde(RANGE, context, argument)) {
-            context.report(RANGE, argument, context.getLocation(argument), message);
+            context.report(RANGE, argument, context.getUastLocation(argument), message);
         }
     }
 
@@ -1426,7 +1411,7 @@ public class SupportAnnotationDetector extends Detector implements Detector.Uast
         }
         String message = getSizeError(actual, exact, min, max, multiple, unit);
         if (message != null && !isIgnoredInIde(RANGE, context, argument)) {
-            context.report(RANGE, argument, context.getLocation(argument), message);
+            context.report(RANGE, argument, context.getUastLocation(argument), message);
         }
     }
 
@@ -1532,7 +1517,7 @@ public class SupportAnnotationDetector extends Detector implements Detector.Uast
                     if (isIgnoredInIde(TYPE_DEF, context, expression)) {
                         return;
                     }
-                    context.report(TYPE_DEF, expression, context.getLocation(expression),
+                    context.report(TYPE_DEF, expression, context.getUastLocation(expression),
                             "Flag not allowed here");
                 } else if (operator == UastPrefixOperator.UNARY_MINUS) {
                     reportTypeDef(context, annotation, argument, errorNode, allAnnotations);
@@ -1569,7 +1554,7 @@ public class SupportAnnotationDetector extends Detector implements Detector.Uast
                     if (isIgnoredInIde(TYPE_DEF, context, expression)) {
                         return;
                     }
-                    context.report(TYPE_DEF, expression, context.getLocation(expression),
+                    context.report(TYPE_DEF, expression, context.getUastLocation(expression),
                             "Flag not allowed here");
                 }
             }
@@ -1710,7 +1695,7 @@ public class SupportAnnotationDetector extends Detector implements Detector.Uast
             }
         }
 
-        context.report(TYPE_DEF, errorNode, context.getLocation(errorNode), message);
+        context.report(TYPE_DEF, errorNode, context.getUastLocation(errorNode), message);
     }
 
     @Nullable

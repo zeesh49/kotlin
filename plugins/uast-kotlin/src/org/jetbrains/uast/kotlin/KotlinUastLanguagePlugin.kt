@@ -20,8 +20,8 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.*
 import com.intellij.psi.impl.source.tree.LeafPsiElement
 import org.jetbrains.kotlin.asJava.LightClassUtil
-import org.jetbrains.kotlin.asJava.elements.KtLightElement
-import org.jetbrains.kotlin.asJava.elements.KtLightMethod
+import org.jetbrains.kotlin.asJava.classes.KtLightClass
+import org.jetbrains.kotlin.asJava.elements.*
 import org.jetbrains.kotlin.asJava.toLightClass
 import org.jetbrains.kotlin.codegen.state.KotlinTypeMapper
 import org.jetbrains.kotlin.descriptors.ConstructorDescriptor
@@ -34,6 +34,8 @@ import org.jetbrains.uast.kotlin.expressions.KotlinUBreakExpression
 import org.jetbrains.uast.kotlin.expressions.KotlinUContinueExpression
 import org.jetbrains.uast.kotlin.kinds.KotlinSpecialExpressionKinds
 import org.jetbrains.uast.*
+import org.jetbrains.uast.java.JavaUClass
+import org.jetbrains.uast.java.JavaUVariable
 import org.jetbrains.uast.java.JavaUastLanguagePlugin
 import org.jetbrains.uast.kotlin.declarations.KotlinUMethod
 import org.jetbrains.uast.kotlin.psi.UastKotlinPsiParameter
@@ -59,7 +61,7 @@ class KotlinUastLanguagePlugin : UastLanguagePlugin() {
     }
     
     override fun convertWithParent(element: Any?): UElement? {
-        if (element !is KtElement) return null
+        if (element !is PsiElement) return null
         if (element is PsiFile) return convertDeclaration(element, null)
 
         val parent = element.parent ?: return null
@@ -108,38 +110,28 @@ class KotlinUastLanguagePlugin : UastLanguagePlugin() {
     }
 
     private fun convertDeclaration(element: PsiElement, parent: UElement?): UElement? {
-        return when (element) {
-            is UDeclaration -> element
-            is PsiMethod -> {
-                if (element.originalElement is KtLightElement<*, *>)
-                    KotlinUMethod(element, this, parent)
-                else
-                    javaPlugin.convertOpt<UMethod>(element, parent)
-            }
-            is PsiClass -> {
-                if (element.originalElement is KtLightElement<*, *>)
-                    SimpleUClass.create(element, this, parent)
-                else
-                    javaPlugin.convertOpt<UClass>(element, parent)
-            }
-            is PsiVariable -> {
-                if (element.originalElement is KtLightElement<*, *>)
-                    SimpleUVariable.create(element, this, parent)
-                else
-                    javaPlugin.convertOpt<UVariable>(element, parent)
-            }
-            is UAnnotation, is PsiJavaFile -> javaPlugin.convertOpt(element, parent)
-            is KtFile -> KotlinUFile(element, this)
-            is KtClassOrObject -> javaPlugin.convertOpt(element.toLightClass(), parent)
+        if (element is UElement) return element
+        
+        val original = element.originalElement
+        return when (original) {
+            is KtLightMethod -> KotlinUMethod(original, this, parent)
+            is KtLightClass -> JavaUClass.create(original, this, parent)
+            is KtLightField, is KtLightParameter -> KotlinUVariable.create(original as PsiVariable, this, parent)
+
+            is KtClassOrObject -> javaPlugin.convertOpt(original.toLightClass(), parent)
             is KtFunction -> {
-                val lightMethod = LightClassUtil.getLightClassMethod(element) ?: return null
-                KotlinUMethod(lightMethod, this, parent)
+                val lightMethod = LightClassUtil.getLightClassMethod(original) ?: return null
+                convertDeclaration(lightMethod, parent)
             }
             is KtPropertyAccessor -> javaPlugin.convertOpt(
-                    LightClassUtil.getLightClassAccessorMethod(element), parent)
+                    LightClassUtil.getLightClassAccessorMethod(original), parent)
             is KtProperty -> javaPlugin.convertOpt<UField>(
-                    LightClassUtil.getLightClassBackingField(element), parent)
+                    LightClassUtil.getLightClassBackingField(original), parent)
                              ?: convertDeclaration(element.parent, parent)
+            
+            is KtFile -> KotlinUFile(original, this)
+            is FakeFileForLightClass -> KotlinUFile(original.navigationElement, this)
+            
             else -> null
         }
     }
@@ -150,7 +142,7 @@ internal object KotlinConverter : UastConverter {
         is KtParameterList -> KotlinUVariableDeclarationsExpression(parent).apply {
             val languagePlugin = parent!!.getLanguagePlugin()
             variables = element.parameters.mapIndexed { i, p -> 
-                SimpleUVariable.create(UastKotlinPsiParameter.create(p, element, i), languagePlugin, this)
+                KotlinUVariable.create(UastKotlinPsiParameter.create(p, element, i), languagePlugin, this)
             }
         }
         is KtClassBody -> KotlinUExpressionList(element, KotlinSpecialExpressionKinds.CLASS_BODY, parent).apply {
@@ -173,7 +165,7 @@ internal object KotlinConverter : UastConverter {
     ): UVariableDeclarationsExpression {
         val languagePlugin = parent!!.getLanguagePlugin()
         val parentPsiElement = (parent as? PsiElementBacked)?.psi
-        val variable = SimpleUVariable.create(UastKotlinPsiVariable.create(psi, parentPsiElement), languagePlugin, parent)
+        val variable = KotlinUVariable.create(UastKotlinPsiVariable.create(psi, parentPsiElement), languagePlugin, parent)
         return KotlinUVariableDeclarationsExpression(parent).apply { variables = listOf(variable) }
     }
     
@@ -212,11 +204,11 @@ internal object KotlinConverter : UastConverter {
         }
         is KtDestructuringDeclaration -> KotlinUVariableDeclarationsExpression(parent).apply {
             val languagePlugin = parent!!.getLanguagePlugin()
-            val tempAssignment = SimpleUVariable.create(UastKotlinPsiVariable.create(expression), languagePlugin, parent)
+            val tempAssignment = KotlinUVariable.create(UastKotlinPsiVariable.create(expression), languagePlugin, parent)
             val destructuringAssignments = expression.entries.mapIndexed { i, entry ->
                 val psiFactory = KtPsiFactory(expression.project)
                 val initializer = psiFactory.createExpression("${tempAssignment.name}.component${i + 1}()")
-                SimpleUVariable.create(UastKotlinPsiVariable.create(
+                KotlinUVariable.create(UastKotlinPsiVariable.create(
                         entry, tempAssignment.psi, initializer), languagePlugin, parent) 
             }
             variables = listOf(tempAssignment) + destructuringAssignments

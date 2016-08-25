@@ -47,7 +47,6 @@ import com.android.tools.klint.client.api.XmlParser;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.Context;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Detector.XmlScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
@@ -59,13 +58,8 @@ import com.android.tools.klint.detector.api.Severity;
 import com.android.tools.klint.detector.api.XmlContext;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.intellij.psi.JavaRecursiveElementVisitor;
-import com.intellij.psi.PsiAnonymousClass;
-import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiExpression;
 import com.intellij.psi.PsiField;
-import com.intellij.psi.PsiMethodCallExpression;
 
 import org.jetbrains.uast.UCallExpression;
 import org.jetbrains.uast.UClass;
@@ -74,7 +68,6 @@ import org.jetbrains.uast.UExpression;
 import org.jetbrains.uast.UastUtils;
 import org.jetbrains.uast.util.UastExpressionUtils;
 import org.jetbrains.uast.visitor.AbstractUastVisitor;
-import org.jetbrains.uast.visitor.UastVisitor;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -382,7 +375,7 @@ public class AppIndexingApiDetector extends Detector implements XmlScanner, Dete
                             "GoogleApiClient `%1$s` has not added support for App Indexing API",
                             startClient.originalString());
                     mContext.report(ISSUE_APP_INDEXING_API, startClient,
-                            mContext.getLocation(startClient), message);
+                                    mContext.getUastLocation(startClient), message);
                 }
 
                 // GoogleApiClient `connect` should exist
@@ -390,7 +383,7 @@ public class AppIndexingApiDetector extends Detector implements XmlScanner, Dete
                     String message = String.format("GoogleApiClient `%1$s` is not connected",
                                     startClient.originalString());
                     mContext.report(ISSUE_APP_INDEXING_API, startClient,
-                            mContext.getLocation(startClient), message);
+                                    mContext.getUastLocation(startClient), message);
                 }
 
                 // `AppIndex.AppIndexApi.end` should pair with `AppIndex.AppIndexApi.start`
@@ -414,7 +407,7 @@ public class AppIndexingApiDetector extends Detector implements XmlScanner, Dete
                             "GoogleApiClient `%1$s` has not added support for App Indexing API",
                             endClient.originalString());
                     mContext.report(ISSUE_APP_INDEXING_API, endClient,
-                            mContext.getLocation(endClient), message);
+                                    mContext.getUastLocation(endClient), message);
                 }
 
                 // GoogleApiClient `disconnect` should exist
@@ -422,7 +415,7 @@ public class AppIndexingApiDetector extends Detector implements XmlScanner, Dete
                     String message = String.format("GoogleApiClient `%1$s`"
                             + " is not disconnected", endClient.originalString());
                     mContext.report(ISSUE_APP_INDEXING_API, endClient,
-                            mContext.getLocation(endClient), message);
+                                    mContext.getUastLocation(endClient), message);
                 }
 
                 // `AppIndex.AppIndexApi.start` should pair with `AppIndex.AppIndexApi.end`

@@ -24,19 +24,14 @@ import com.android.annotations.Nullable;
 import com.android.tools.klint.client.api.JavaEvaluator;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
 import com.android.tools.klint.detector.api.TypeEvaluator;
-import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiClassType;
-import com.intellij.psi.PsiExpression;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
 import com.intellij.psi.PsiType;
 
 import org.jetbrains.uast.UCallExpression;
@@ -129,6 +124,6 @@ public class ViewTagDetector extends Detector implements Detector.UastScanner {
                         "Can lead to memory leaks in versions older than Android 4.0",
                 objectType);
 
-        context.report(ISSUE, call, context.getLocation(tagArgument), message);
+        context.report(ISSUE, call, context.getUastLocation(tagArgument), message);
     }
 }

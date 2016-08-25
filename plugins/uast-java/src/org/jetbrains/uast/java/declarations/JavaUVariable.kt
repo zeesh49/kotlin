@@ -1,78 +1,95 @@
-package org.jetbrains.uast
+/*
+ * Copyright 2010-2016 JetBrains s.r.o.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.jetbrains.uast.java
 
 import com.intellij.psi.*
-import org.jetbrains.uast.UElement
-import org.jetbrains.uast.UVariable
-import org.jetbrains.uast.UastLanguagePlugin
+import org.jetbrains.uast.*
 import org.jetbrains.uast.expressions.UReferenceExpression
 import org.jetbrains.uast.expressions.UTypeReferenceExpression
 
-abstract class AbstractUVariable : PsiVariable, UVariable {
+abstract class AbstractJavaUVariable : PsiVariable, UVariable {
     override val uastInitializer by lz { languagePlugin.convertOpt<UExpression>(psi.initializer, this) }
     override val uastAnnotations by lz { psi.annotations.map { SimpleUAnnotation(it, languagePlugin, this) } }
     override val typeReference by lz { languagePlugin.convertOpt<UTypeReferenceExpression>(psi.typeElement, this) }
+
+    override val uastNameIdentifier: UElement
+        get() = UIdentifier(psi.nameIdentifier, this)
 
     override fun equals(other: Any?) = this === other
     override fun hashCode() = psi.hashCode()
 }
 
-class SimpleUVariable(
-        psi: PsiVariable, 
-        override val languagePlugin: UastLanguagePlugin, 
+open class JavaUVariable(
+        psi: PsiVariable,
+        override val languagePlugin: UastLanguagePlugin,
         override val containingElement: UElement?
-) : AbstractUVariable(), UVariable, PsiVariable by psi {
+) : AbstractJavaUVariable(), UVariable, PsiVariable by psi {
     override val psi = unwrap(psi)
     
     companion object {
         fun create(psi: PsiVariable, languagePlugin: UastLanguagePlugin, containingElement: UElement?): UVariable {
             return when (psi) {
-                is PsiEnumConstant -> SimpleUEnumConstant(psi, languagePlugin, containingElement)
-                is PsiLocalVariable -> SimpleULocalVariable(psi, languagePlugin, containingElement)
-                is PsiParameter -> SimpleUParameter(psi, languagePlugin, containingElement)
-                is PsiField -> SimpleUField(psi, languagePlugin, containingElement)
-                else -> SimpleUVariable(psi, languagePlugin, containingElement)
+                is PsiEnumConstant -> JavaUEnumConstant(psi, languagePlugin, containingElement)
+                is PsiLocalVariable -> JavaULocalVariable(psi, languagePlugin, containingElement)
+                is PsiParameter -> JavaUParameter(psi, languagePlugin, containingElement)
+                is PsiField -> JavaUField(psi, languagePlugin, containingElement)
+                else -> JavaUVariable(psi, languagePlugin, containingElement)
             }
         }
     }
 }
 
-class SimpleUParameter(
+open class JavaUParameter(
         psi: PsiParameter,
         override val languagePlugin: UastLanguagePlugin,
         override val containingElement: UElement?
-) : AbstractUVariable(), UParameter, PsiParameter by psi {
+) : AbstractJavaUVariable(), org.jetbrains.uast.UParameter, PsiParameter by psi {
     override val psi = unwrap(psi) as PsiParameter
 }
 
-class SimpleUField(
+open class JavaUField(
         psi: PsiField,
         override val languagePlugin: UastLanguagePlugin,
         override val containingElement: UElement?
-) : AbstractUVariable(), UField, PsiField by psi {
+) : AbstractJavaUVariable(), org.jetbrains.uast.UField, PsiField by psi {
     override val psi = unwrap(psi) as PsiField
 }
 
-class SimpleULocalVariable(
+open class JavaULocalVariable(
         psi: PsiLocalVariable,
         override val languagePlugin: UastLanguagePlugin,
         override val containingElement: UElement?
-) : AbstractUVariable(), ULocalVariable, PsiLocalVariable by psi {
+) : AbstractJavaUVariable(), org.jetbrains.uast.ULocalVariable, PsiLocalVariable by psi {
     override val psi = unwrap(psi) as PsiLocalVariable
 }
 
-class SimpleUEnumConstant(
+open class JavaUEnumConstant(
         psi: PsiEnumConstant,
         override val languagePlugin: UastLanguagePlugin,
         override val containingElement: UElement?
-) : AbstractUVariable(), UEnumConstant, PsiEnumConstant by psi {
+) : AbstractJavaUVariable(), org.jetbrains.uast.UEnumConstant, PsiEnumConstant by psi {
     override val psi = unwrap(psi) as PsiEnumConstant
 
     override val isUsedAsExpression: Boolean
         get() = true
     
-    override val kind: UastCallKind
-        get() = UastCallKind.CONSTRUCTOR_CALL
-    override val receiver: UExpression?
+    override val kind: org.jetbrains.uast.UastCallKind
+        get() = org.jetbrains.uast.UastCallKind.CONSTRUCTOR_CALL
+    override val receiver: org.jetbrains.uast.UExpression?
         get() = null
     override val receiverType: PsiType?
         get() = null

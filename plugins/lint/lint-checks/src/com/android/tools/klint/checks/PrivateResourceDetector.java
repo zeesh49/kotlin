@@ -47,7 +47,6 @@ import com.android.resources.ResourceType;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.Context;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
@@ -58,8 +57,6 @@ import com.android.tools.klint.detector.api.ResourceXmlDetector;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
 import com.android.tools.klint.detector.api.XmlContext;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.PsiElement;
 
 import org.jetbrains.uast.UElement;
 import org.jetbrains.uast.visitor.UastVisitor;
@@ -123,7 +120,7 @@ public class PrivateResourceDetector extends ResourceXmlDetector implements
             if (project.getGradleProjectModel() != null && project.getCurrentVariant() != null) {
                 if (isPrivate(context, resourceType, name)) {
                     String message = createUsageErrorMessage(context, resourceType, name);
-                    context.report(ISSUE, node, context.getLocation(node), message);
+                    context.report(ISSUE, node, context.getUastLocation(node), message);
                 }
             }
         }

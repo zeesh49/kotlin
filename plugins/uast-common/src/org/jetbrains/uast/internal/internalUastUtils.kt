@@ -46,6 +46,3 @@ internal fun <T> lz(f: () -> T) = lazy(LazyThreadSafetyMode.NONE, f)
 
 internal val PsiType.name: String
     get() = getCanonicalText(false)
-
-internal val PsiModifierListOwner.annotations: Array<PsiAnnotation>
-    get() = modifierList?.annotations ?: emptyArray()

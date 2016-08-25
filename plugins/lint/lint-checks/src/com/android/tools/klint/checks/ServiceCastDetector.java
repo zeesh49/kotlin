@@ -20,7 +20,6 @@ import com.android.annotations.NonNull;
 import com.android.annotations.Nullable;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
@@ -28,14 +27,8 @@ import com.android.tools.klint.detector.api.LintUtils;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
 import com.google.common.collect.Maps;
-import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiExpression;
 import com.intellij.psi.PsiField;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
-import com.intellij.psi.PsiReferenceExpression;
-import com.intellij.psi.PsiTypeCastExpression;
 
 import org.jetbrains.uast.UBinaryExpressionWithType;
 import org.jetbrains.uast.UCallExpression;
@@ -113,7 +106,7 @@ public class ServiceCastDetector extends Detector implements Detector.UastScanne
                         String message = String.format(
                                 "Suspicious cast to `%1$s` for a `%2$s`: expected `%3$s`",
                                 stripPackage(castType), name, stripPackage(expectedClass));
-                        context.report(ISSUE, call, context.getLocation(cast), message);
+                        context.report(ISSUE, call, context.getUastLocation(cast), message);
                     }
                 }
 

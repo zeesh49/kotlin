@@ -27,13 +27,6 @@ import com.android.tools.klint.detector.api.JavaContext;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
 import com.google.common.collect.Sets;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiExpression;
-import com.intellij.psi.PsiExpressionList;
-import com.intellij.psi.PsiLiteral;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
 
 import org.jetbrains.uast.UCallExpression;
 import org.jetbrains.uast.UElement;
@@ -100,13 +93,13 @@ public class CipherGetInstanceDetector extends Detector implements Detector.Uast
         if (ALGORITHM_ONLY.contains(value)) {
             String message = "`Cipher.getInstance` should not be called without setting the"
                     + " encryption mode and padding";
-            context.report(ISSUE, call, context.getLocation(node), message);
+            context.report(ISSUE, call, context.getUastLocation(node), message);
         } else if (value.contains(ECB)) {
             String message = "ECB encryption mode should not be used";
             if (includeValue) {
                 message += " (was \"" + value + "\")";
             }
-            context.report(ISSUE, call, context.getLocation(node), message);
+            context.report(ISSUE, call, context.getUastLocation(node), message);
         }
     }
 }

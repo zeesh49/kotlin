@@ -32,12 +32,7 @@ import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
-import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiExpression;
-import com.intellij.psi.PsiExpressionStatement;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
 import com.intellij.psi.util.PsiTreeUtil;
 
 import org.jetbrains.uast.UCallExpression;
@@ -134,7 +129,7 @@ public class CustomViewDetector extends Detector implements Detector.UastScanner
                                     + "should have the same name (various editor features rely on "
                                     + "this convention)",
                             className, styleableName);
-                    context.report(ISSUE, node, context.getLocation(expression), message);
+                    context.report(ISSUE, node, context.getUastLocation(expression), message);
                 }
             } else if (context.getEvaluator().extendsClass(cls,
                     CLASS_VIEWGROUP + DOT_LAYOUT_PARAMS, false)) {
@@ -151,7 +146,7 @@ public class CustomViewDetector extends Detector implements Detector.UastScanner
                                     + "class (`%3$s`) plus \"`_Layout`\", e.g. `%4$s`. "
                                     + "(Various editor features rely on this convention.)",
                             styleableName, className, layoutClassName, expectedName);
-                    context.report(ISSUE, node, context.getLocation(expression), message);
+                    context.report(ISSUE, node, context.getUastLocation(expression), message);
                 }
             }
         }

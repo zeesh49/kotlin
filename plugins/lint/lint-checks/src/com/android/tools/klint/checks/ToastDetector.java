@@ -26,11 +26,9 @@ import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
-import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiMethod;
 
 import org.jetbrains.uast.UCallExpression;
-import org.jetbrains.uast.UElement;
 import org.jetbrains.uast.UExpression;
 import org.jetbrains.uast.ULiteralExpression;
 import org.jetbrains.uast.UMethod;
@@ -87,7 +85,7 @@ public class ToastDetector extends Detector implements Detector.UastScanner {
         if (args.size() == 3) {
             UExpression duration = args.get(2);
             if (duration instanceof ULiteralExpression) {
-                context.report(ISSUE, duration, context.getLocation(duration),
+                context.report(ISSUE, duration, context.getUastLocation(duration),
                         "Expected duration `Toast.LENGTH_SHORT` or `Toast.LENGTH_LONG`, a custom " +
                                 "duration value is not supported");
             }

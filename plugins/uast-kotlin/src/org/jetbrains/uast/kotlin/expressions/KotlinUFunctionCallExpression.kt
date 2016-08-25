@@ -22,12 +22,15 @@ import com.intellij.psi.PsiType
 import org.jetbrains.kotlin.asJava.LightClassUtil
 import org.jetbrains.kotlin.asJava.toLightClass
 import org.jetbrains.kotlin.descriptors.ConstructorDescriptor
+import org.jetbrains.kotlin.load.java.descriptors.SamConstructorDescriptor
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.resolve.calls.callUtil.getResolvedCall
 import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall
 import org.jetbrains.uast.*
 import org.jetbrains.uast.expressions.UReferenceExpression
+import org.jetbrains.uast.internal.acceptList
 import org.jetbrains.uast.psi.PsiElementBacked
+import org.jetbrains.uast.visitor.UastVisitor
 
 class KotlinUFunctionCallExpression(
         override val psi: KtCallExpression,
@@ -72,12 +75,18 @@ class KotlinUFunctionCallExpression(
     override val kind by lz {
         when (resolvedCall?.resultingDescriptor) {
             is ConstructorDescriptor -> UastCallKind.CONSTRUCTOR_CALL
+            is SamConstructorDescriptor -> UastCallKind.SAM_CONSTRUCTOR_CALL
             else -> UastCallKind.METHOD_CALL
         }
     }
 
     override val receiver: UExpression?
-        get() = throw UnsupportedOperationException()
+        get() {
+            return if (containingElement is UQualifiedReferenceExpression && containingElement.selector == this)
+                containingElement.receiver
+            else
+                null
+        }
 
     override fun resolve(): PsiMethod? {
         val descriptor = resolvedCall?.resultingDescriptor ?: return null
@@ -94,6 +103,15 @@ class KotlinUFunctionCallExpression(
             is PsiMethod -> source
             else -> null
         }
+    }
+
+    override fun accept(visitor: UastVisitor) {
+        if (visitor.visitCallExpression(this)) return
+        methodReference?.accept(visitor)
+        classReference.accept(visitor)
+        valueArguments.acceptList(visitor)
+        
+        visitor.afterVisitCallExpression(this)
     }
 }
 

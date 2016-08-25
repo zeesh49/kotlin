@@ -22,19 +22,14 @@ import com.android.tools.klint.client.api.JavaEvaluator;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.ConstantEvaluator;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
 import com.android.tools.klint.detector.api.TypeEvaluator;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.PsiClassType;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiExpression;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
 import com.intellij.psi.PsiType;
 
 import org.jetbrains.uast.UCallExpression;
@@ -99,7 +94,7 @@ public class SecureRandomDetector extends Detector implements Detector.UastScann
             Object seed = ConstantEvaluator.evaluate(context, seedArgument);
             //noinspection VariableNotUsedInsideIf
             if (seed != null) {
-                context.report(ISSUE, call, context.getLocation(call),
+                context.report(ISSUE, call, context.getUastLocation(call),
                         "Do not call `setSeed()` on a `SecureRandom` with a fixed seed: " +
                                 "it is not secure. Use `getSeed()`.");
             } else {
@@ -110,7 +105,7 @@ public class SecureRandomDetector extends Detector implements Detector.UastScann
                     String methodName = seedMethod.getName();
                     if (methodName.equals("currentTimeMillis")
                             || methodName.equals("nanoTime")) {
-                        context.report(ISSUE, call, context.getLocation(call),
+                        context.report(ISSUE, call, context.getUastLocation(call),
                                 "It is dangerous to seed `SecureRandom` with the current "
                                         + "time because that value is more predictable to "
                                         + "an attacker than the default seed.");

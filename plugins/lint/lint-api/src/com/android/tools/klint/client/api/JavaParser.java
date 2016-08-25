@@ -172,9 +172,9 @@ public abstract class JavaParser {
     @NonNull
     public Location getLocation(@NonNull JavaContext context, @NonNull PsiElement element) {
         TextRange range = element.getTextRange();
-        PsiFile containingFile = element.getContainingFile();
+        PsiFile containingFile = (((UFile) getUastContext().convertWithParent(element.getContainingFile()))).getPsi();
         File file = context.file;
-        if (containingFile != context.getJavaFile()) {
+        if (containingFile != context.getUFile().getPsi()) {
             // Reporting an error in a different file.
             if (context.getDriver().getScope().size() == 1) {
                 // Don't bother with this error if it's in a different file during single-file analysis

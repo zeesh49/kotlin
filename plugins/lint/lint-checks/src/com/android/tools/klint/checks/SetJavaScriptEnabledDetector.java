@@ -21,16 +21,11 @@ import com.android.annotations.Nullable;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.ConstantEvaluator;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.PsiExpression;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
 
 import org.jetbrains.uast.UCallExpression;
 import org.jetbrains.uast.UExpression;
@@ -73,7 +68,7 @@ public class SetJavaScriptEnabledDetector extends Detector implements Detector.U
         if (arguments.size() == 1) {
             Object constant = ConstantEvaluator.evaluate(context, arguments.get(0));
             if (constant != null && !Boolean.FALSE.equals(constant)) {
-                context.report(ISSUE, call, context.getLocation(call),
+                context.report(ISSUE, call, context.getUastLocation(call),
                         "Using `setJavaScriptEnabled` can introduce XSS vulnerabilities " +
                                 "into you application, review carefully.");
             }

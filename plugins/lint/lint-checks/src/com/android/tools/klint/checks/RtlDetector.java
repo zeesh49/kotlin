@@ -62,7 +62,6 @@ import com.android.tools.klint.client.api.JavaEvaluator;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.Context;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
@@ -73,15 +72,11 @@ import com.android.tools.klint.detector.api.Project;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
 import com.android.tools.klint.detector.api.XmlContext;
-import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiField;
-import com.intellij.psi.PsiReferenceExpression;
 
 import org.jetbrains.uast.UElement;
-import org.jetbrains.uast.UExpression;
 import org.jetbrains.uast.USimpleNameReferenceExpression;
-import org.jetbrains.uast.expressions.UReferenceExpression;
 import org.jetbrains.uast.visitor.AbstractUastVisitor;
 import org.jetbrains.uast.visitor.UastVisitor;
 import org.w3c.dom.Attr;
@@ -605,7 +600,7 @@ public class RtlDetector extends LayoutDetector implements Detector.UastScanner 
                     (isLeft ? GRAVITY_VALUE_START : GRAVITY_VALUE_END).toUpperCase(Locale.US),
                     (isLeft ? GRAVITY_VALUE_LEFT : GRAVITY_VALUE_RIGHT).toUpperCase(Locale.US));
             
-            Location location = mContext.getLocation(node);
+            Location location = mContext.getUastLocation(node);
             mContext.report(USE_START, node, location, message);
 
             return super.visitSimpleNameReferenceExpression(node);

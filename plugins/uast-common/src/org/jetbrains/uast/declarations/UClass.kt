@@ -4,7 +4,6 @@ import com.intellij.psi.PsiAnonymousClass
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiClassInitializer
 import com.intellij.psi.PsiModifierListOwner
-import org.jetbrains.uast.SimpleUVariable
 import org.jetbrains.uast.UDeclaration
 import org.jetbrains.uast.UMethod
 import org.jetbrains.uast.UVariable

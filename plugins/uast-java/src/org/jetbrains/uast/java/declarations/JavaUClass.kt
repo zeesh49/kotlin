@@ -1,11 +1,26 @@
-package org.jetbrains.uast
+/*
+ * Copyright 2010-2016 JetBrains s.r.o.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import com.intellij.psi.PsiAnnotation
+package org.jetbrains.uast.java
+
 import com.intellij.psi.PsiAnonymousClass
 import com.intellij.psi.PsiClass
-import com.intellij.psi.PsiElement
+import org.jetbrains.uast.*
 
-abstract class AbstractUClass : UClass {
+abstract class AbstractJavaUClass : UClass {
     override val uastDeclarations by lz {
         mutableListOf<UDeclaration>().apply {
             addAll(uastFields)
@@ -14,6 +29,9 @@ abstract class AbstractUClass : UClass {
             addAll(uastNestedClasses)
         }
     }
+
+    override val uastNameIdentifier: UElement
+        get() = UIdentifier(psi.nameIdentifier, this)
 
     override val uastAnnotations by lz { psi.annotations.map { SimpleUAnnotation(it, languagePlugin, this) } }
     
@@ -26,30 +44,30 @@ abstract class AbstractUClass : UClass {
     override fun hashCode() = psi.hashCode()
 }
 
-class SimpleUClass private constructor(
-        psi: PsiClass, 
-        override val languagePlugin: UastLanguagePlugin, 
+class JavaUClass private constructor(
+        psi: PsiClass,
+        override val languagePlugin: UastLanguagePlugin,
         override val containingElement: UElement?
-) : AbstractUClass(), PsiClass by psi {
+) : AbstractJavaUClass(), PsiClass by psi {
     override val psi = unwrap(psi)
-    
+
     companion object {
         private tailrec fun unwrap(psi: PsiClass): PsiClass = if (psi is UClass) unwrap(psi.psi) else psi
         
         fun create(psi: PsiClass, languagePlugin: UastLanguagePlugin, containingElement: UElement?): UClass {
             return if (psi is PsiAnonymousClass) 
-                SimpleUAnonymousClass(psi, languagePlugin, containingElement)
+                JavaUAnonymousClass(psi, languagePlugin, containingElement)
             else
-                SimpleUClass(psi, languagePlugin, containingElement)
+                JavaUClass(psi, languagePlugin, containingElement)
         }
     }
 }
 
-class SimpleUAnonymousClass(
+class JavaUAnonymousClass(
         psi: PsiAnonymousClass,
         override val languagePlugin: UastLanguagePlugin,
         override val containingElement: UElement?
-) : AbstractUClass(), UAnonymousClass, PsiAnonymousClass by psi {
+) : AbstractJavaUClass(), UAnonymousClass, PsiAnonymousClass by psi {
     override val psi: PsiAnonymousClass = unwrap(psi)
 
     private companion object {

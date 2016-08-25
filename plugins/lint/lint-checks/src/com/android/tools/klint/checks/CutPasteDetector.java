@@ -30,23 +30,16 @@ import com.android.tools.klint.detector.api.Location;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
 import com.google.common.collect.Maps;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.PsiBinaryExpression;
 import com.intellij.psi.PsiBreakStatement;
 import com.intellij.psi.PsiContinueStatement;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiIfStatement;
 import com.intellij.psi.PsiJavaToken;
-import com.intellij.psi.PsiLocalVariable;
 import com.intellij.psi.PsiLoopStatement;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
-import com.intellij.psi.PsiReferenceExpression;
 import com.intellij.psi.PsiReturnStatement;
 import com.intellij.psi.PsiStatement;
-import com.intellij.psi.PsiTypeCastExpression;
 import com.intellij.psi.PsiWhiteSpace;
-import com.intellij.psi.util.PsiTreeUtil;
 
 import org.jetbrains.uast.UArrayAccessExpression;
 import org.jetbrains.uast.UBinaryExpression;
@@ -151,8 +144,8 @@ public class CutPasteDetector extends Detector implements Detector.UastScanner {
                         if (!isReachableFrom(method, earlierCall, call)) {
                             return;
                         }
-                        Location location = context.getLocation(call);
-                        Location secondary = context.getLocation(earlierCall);
+                        Location location = context.getUastLocation(call);
+                        Location secondary = context.getUastLocation(earlierCall);
                         secondary.setMessage("First usage here");
                         location.setSecondary(secondary);
                         context.report(ISSUE, call, location, String.format(

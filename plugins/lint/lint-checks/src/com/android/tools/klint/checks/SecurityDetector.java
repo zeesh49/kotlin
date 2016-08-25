@@ -40,7 +40,6 @@ import com.android.annotations.Nullable;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.ConstantEvaluator;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Detector.XmlScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
@@ -50,11 +49,6 @@ import com.android.tools.klint.detector.api.Location;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
 import com.android.tools.klint.detector.api.XmlContext;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.PsiExpression;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
-import com.intellij.psi.PsiReferenceExpression;
 
 import org.jetbrains.uast.UCallExpression;
 import org.jetbrains.uast.UExpression;
@@ -404,7 +398,7 @@ public class SecurityDetector extends Detector implements XmlScanner, Detector.U
                 if (args.size() == 2 &&
                         Boolean.TRUE.equals(ConstantEvaluator.evaluate(context, args.get(0))) &&
                         Boolean.FALSE.equals(ConstantEvaluator.evaluate(context, args.get(1)))) {
-                    context.report(SET_READABLE, node, context.getLocation(node),
+                    context.report(SET_READABLE, node, context.getUastLocation(node),
                             "Setting file permissions to world-readable can be " +
                                     "risky, review carefully");
                 }
@@ -413,7 +407,7 @@ public class SecurityDetector extends Detector implements XmlScanner, Detector.U
                 if (args.size() == 2 &&
                         Boolean.TRUE.equals(ConstantEvaluator.evaluate(context, args.get(0))) &&
                         Boolean.FALSE.equals(ConstantEvaluator.evaluate(context, args.get(1)))) {
-                    context.report(SET_WRITABLE, node, context.getLocation(node),
+                    context.report(SET_WRITABLE, node, context.getUastLocation(node),
                             "Setting file permissions to world-writable can be " +
                                     "risky, review carefully");
                 }
@@ -447,12 +441,12 @@ public class SecurityDetector extends Detector implements XmlScanner, Detector.U
             String name = node.getIdentifier();
 
             if ("MODE_WORLD_WRITEABLE".equals(name)) { //$NON-NLS-1$
-                Location location = mContext.getLocation(node);
+                Location location = mContext.getUastLocation(node);
                 mContext.report(WORLD_WRITEABLE, node, location,
                         "Using `MODE_WORLD_WRITEABLE` when creating files can be " +
                                 "risky, review carefully");
             } else if ("MODE_WORLD_READABLE".equals(name)) { //$NON-NLS-1$
-                Location location = mContext.getLocation(node);
+                Location location = mContext.getUastLocation(node);
                 mContext.report(WORLD_READABLE, node, location,
                         "Using `MODE_WORLD_READABLE` when creating files can be " +
                                 "risky, review carefully");

@@ -18,7 +18,6 @@ package org.jetbrains.uast.java
 import com.intellij.psi.PsiCodeBlock
 import com.intellij.psi.PsiExpression
 import com.intellij.psi.PsiLambdaExpression
-import org.jetbrains.uast.SimpleUParameter
 import org.jetbrains.uast.UastEmptyExpression
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.ULambdaExpression
@@ -30,7 +29,7 @@ class JavaULambdaExpression(
 ) : JavaAbstractUExpression(), ULambdaExpression, PsiElementBacked {
     override val valueParameters by lz {
         val languagePlugin = getLanguagePlugin()
-        psi.parameterList.parameters.map { SimpleUParameter(it, languagePlugin, this) }
+        psi.parameterList.parameters.map { JavaUParameter(it, languagePlugin, this) }
     }
 
     override val body by lz {

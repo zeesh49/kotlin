@@ -69,4 +69,5 @@ internal inline fun String?.orAnonymous(kind: String = ""): String {
 
 internal fun <T> lz(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)
 
-internal fun PsiType.unwrapArrayType() = if (this is PsiArrayType) componentType else this
+val PsiModifierListOwner.annotations: Array<PsiAnnotation>
+    get() = modifierList?.annotations ?: emptyArray()

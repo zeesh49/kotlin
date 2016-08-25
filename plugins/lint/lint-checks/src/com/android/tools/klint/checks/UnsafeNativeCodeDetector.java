@@ -25,7 +25,6 @@ import com.android.tools.klint.client.api.JavaEvaluator;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.Context;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
@@ -35,9 +34,6 @@ import com.android.tools.klint.detector.api.Project;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
 import com.android.tools.klint.detector.api.Speed;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
 
 import org.jetbrains.uast.UCallExpression;
 import org.jetbrains.uast.UMethod;
@@ -115,7 +111,7 @@ public class UnsafeNativeCodeDetector extends Detector implements Detector.UastS
             JavaEvaluator evaluator = context.getEvaluator();
             if (evaluator.isMemberInSubClassOf(method, RUNTIME_CLASS, false) ||
                     evaluator.isMemberInSubClassOf(method, SYSTEM_CLASS, false)) {
-                context.report(LOAD, call, context.getLocation(call),
+                context.report(LOAD, call, context.getUastLocation(call),
                         "Dynamically loading code using `load` is risky, please use " +
                                 "`loadLibrary` instead when possible");
             }

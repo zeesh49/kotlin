@@ -39,13 +39,9 @@ import com.intellij.psi.PsiMethodCallExpression;
 import com.intellij.psi.PsiReturnStatement;
 import com.intellij.psi.PsiThrowStatement;
 
-import org.jetbrains.uast.UCallExpression;
-import org.jetbrains.uast.UClass;
-import org.jetbrains.uast.UExpression;
-import org.jetbrains.uast.UReturnExpression;
-import org.jetbrains.uast.UThrowExpression;
-import org.jetbrains.uast.UastLiteralUtils;
+import org.jetbrains.uast.*;
 import org.jetbrains.uast.visitor.AbstractUastVisitor;
+import org.jetbrains.uast.visitor.UastVisitor;
 
 import java.util.Collections;
 import java.util.List;
@@ -74,6 +70,17 @@ public class BadHostnameVerifierDetector extends Detector implements Detector.Ua
     @Override
     public List<String> applicableSuperClasses() {
         return Collections.singletonList("javax.net.ssl.HostnameVerifier");
+    }
+
+    @Override
+    public List<String> getApplicableMethodNames() {
+        return Collections.singletonList("HostnameVerifier");
+    }
+
+    @Override
+    public void visitMethod(@NonNull JavaContext context, @Nullable UastVisitor visitor, 
+            @NonNull UCallExpression node, @NonNull UMethod method) {
+        int a = 5;
     }
 
     @Override

@@ -21,20 +21,14 @@ import com.android.annotations.Nullable;
 import com.android.tools.klint.client.api.JavaEvaluator;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
 import com.android.tools.klint.detector.api.Location;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
-import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiExpression;
 import com.intellij.psi.PsiField;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
-import com.intellij.psi.PsiNewExpression;
 
 import org.jetbrains.uast.UCallExpression;
 import org.jetbrains.uast.UExpression;
@@ -75,7 +69,7 @@ public class AllowAllHostnameVerifierDetector extends Detector implements Detect
     @Override
     public void visitConstructor(@NonNull JavaContext context, @Nullable UastVisitor visitor,
             @NonNull UCallExpression node, @NonNull UMethod constructor) {
-        Location location = context.getLocation(node);
+        Location location = context.getUastLocation(node);
         context.report(ISSUE, node, location,
                 "Using the AllowAllHostnameVerifier HostnameVerifier is unsafe " +
                         "because it always returns true, which could cause insecure network " +
@@ -98,7 +92,7 @@ public class AllowAllHostnameVerifierDetector extends Detector implements Detect
             if (resolvedArgument instanceof PsiField) {
                 PsiField field = (PsiField) resolvedArgument;
                 if ("ALLOW_ALL_HOSTNAME_VERIFIER".equals(field.getName())) {
-                    Location location = context.getLocation(argument);
+                    Location location = context.getUastLocation(argument);
                     String message = "Using the ALLOW_ALL_HOSTNAME_VERIFIER HostnameVerifier "
                             + "is unsafe because it always returns true, which could cause "
                             + "insecure network traffic due to trusting TLS/SSL server "

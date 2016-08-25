@@ -26,9 +26,7 @@ import com.android.tools.klint.detector.api.JavaContext;
 import com.android.tools.klint.detector.api.Location;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
-import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiNewExpression;
 import com.intellij.psi.PsiParameter;
 import com.intellij.psi.PsiParameterList;
 import com.intellij.psi.PsiType;
@@ -91,7 +89,7 @@ public class DateFormatDetector extends Detector implements Detector.UastScanner
     public void visitConstructor(@NonNull JavaContext context, @Nullable UastVisitor visitor,
             @NonNull UCallExpression node, @NonNull UMethod constructor) {
         if (!specifiesLocale(constructor)) {
-            Location location = context.getLocation(node);
+            Location location = context.getUastLocation(node);
             String message =
                     "To get local formatting use `getDateInstance()`, `getDateTimeInstance()`, " +
                             "or `getTimeInstance()`, or use `new SimpleDateFormat(String template, " +

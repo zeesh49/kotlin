@@ -26,11 +26,8 @@ import com.android.tools.klint.detector.api.JavaContext;
 import com.android.tools.klint.detector.api.Location;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.PsiMethod;
 
 import org.jetbrains.uast.UCallExpression;
-import org.jetbrains.uast.UClass;
 import org.jetbrains.uast.UMethod;
 import org.jetbrains.uast.visitor.UastVisitor;
 
@@ -90,7 +87,7 @@ public class MathDetector extends Detector implements Detector.UastScanner {
                     "Use `java.lang.Math#%1$s` instead of `android.util.FloatMath#%1$s()` " +
                             "since it is faster as of API 8", method.getName());
             
-            Location location = context.getLocation(call.getMethodReference());
+            Location location = context.getUastLocation(call.getMethodReference());
             context.report(ISSUE, call, location, message);
         }
     }

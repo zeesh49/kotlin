@@ -20,7 +20,6 @@ import static com.android.SdkConstants.ANDROID_URI;
 import static com.android.SdkConstants.ATTR_LAYOUT_RESOURCE_PREFIX;
 import static com.android.tools.klint.checks.ViewHolderDetector.INFLATE;
 
-import com.android.SdkConstants;
 import com.android.annotations.NonNull;
 import com.android.annotations.Nullable;
 import com.android.annotations.VisibleForTesting;
@@ -34,7 +33,6 @@ import com.android.tools.klint.client.api.UastLintUtils;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.Context;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
@@ -48,18 +46,11 @@ import com.android.tools.klint.detector.api.XmlContext;
 import com.android.utils.Pair;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiExpression;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
-import com.intellij.psi.PsiReferenceExpression;
 
 import org.jetbrains.uast.UCallExpression;
 import org.jetbrains.uast.UExpression;
 import org.jetbrains.uast.UMethod;
 import org.jetbrains.uast.UastLiteralUtils;
-import org.jetbrains.uast.expressions.UReferenceExpression;
 import org.jetbrains.uast.visitor.UastVisitor;
 import org.kxml2.io.KXmlParser;
 import org.w3c.dom.Attr;
@@ -189,11 +180,11 @@ public class LayoutInflationDetector extends LayoutDetector implements Detector.
                 if (mPendingErrors == null) {
                     mPendingErrors = Lists.newArrayList();
                 }
-                Location location = context.getLocation(second);
+                Location location = context.getUastLocation(second);
                 mPendingErrors.add(Pair.of(layoutName, location));
             }
         } else if (hasLayoutParams(context, layoutName)) {
-            context.report(ISSUE, call, context.getLocation(second), ERROR_MESSAGE);
+            context.report(ISSUE, call, context.getUastLocation(second), ERROR_MESSAGE);
         }
     }
 

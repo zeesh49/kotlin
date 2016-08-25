@@ -24,7 +24,6 @@ import com.android.annotations.Nullable;
 import com.android.tools.klint.client.api.JavaEvaluator;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
@@ -32,21 +31,13 @@ import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.intellij.psi.JavaRecursiveElementVisitor;
-import com.intellij.psi.PsiAssignmentExpression;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiExpression;
 import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiLocalVariable;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
-import com.intellij.psi.PsiNewExpression;
 import com.intellij.psi.PsiParameter;
-import com.intellij.psi.PsiReferenceExpression;
-import com.intellij.psi.PsiStatement;
 import com.intellij.psi.PsiVariable;
-import com.intellij.psi.util.PsiTreeUtil;
 
 import org.jetbrains.uast.UAnonymousClass;
 import org.jetbrains.uast.UBinaryExpression;
@@ -61,7 +52,6 @@ import org.jetbrains.uast.UastUtils;
 import org.jetbrains.uast.expressions.UReferenceExpression;
 import org.jetbrains.uast.util.UastExpressionUtils;
 import org.jetbrains.uast.visitor.AbstractUastVisitor;
-import org.jetbrains.uast.visitor.UastVisitor;
 
 import java.util.Collections;
 import java.util.List;
@@ -217,7 +207,7 @@ public class RecyclerViewDetector extends Detector implements Detector.UastScann
                                 + "causing a delayed update & potential jumps if the item "
                                 + "resizes.",
                             sourceBinderReference.originalString());
-                    context.report(DATA_BINDER, source, context.getLocation(source), message);
+                    context.report(DATA_BINDER, source, context.getUastLocation(source), message);
                 }
             }
         }

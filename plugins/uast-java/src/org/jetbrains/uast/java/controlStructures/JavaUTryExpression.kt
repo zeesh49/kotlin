@@ -41,7 +41,7 @@ class JavaUCatchClause(
     
     override val parameters by lz {
         val languagePlugin = getLanguagePlugin()
-        (psi.parameter?.let { listOf(it) } ?: emptyList()).map { SimpleUParameter(it, languagePlugin, this) }
+        (psi.parameter?.let { listOf(it) } ?: emptyList()).map { JavaUParameter(it, languagePlugin, this) }
     }
 
     override val typeReferences by lz {

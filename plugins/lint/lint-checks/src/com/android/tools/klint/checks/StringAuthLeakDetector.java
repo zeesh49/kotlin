@@ -10,10 +10,6 @@ import com.android.tools.klint.detector.api.Location;
 import com.android.tools.klint.detector.api.JavaContext;
 import com.android.tools.klint.detector.api.Severity;
 import com.android.tools.klint.detector.api.Scope;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiLiteralExpression;
 
 import org.jetbrains.uast.UElement;
 import org.jetbrains.uast.ULiteralExpression;
@@ -71,7 +67,7 @@ public class StringAuthLeakDetector extends Detector implements Detector.UastSca
                     if (password == null || (password.startsWith("%") && password.endsWith("s"))) {
                         return super.visitLiteralExpression(node);
                     }
-                    Location location = mContext.getLocation(node);
+                    Location location = mContext.getUastLocation(node);
                     mContext.report(AUTH_LEAK, node, location, "Possible credential leak");
                 }
             }

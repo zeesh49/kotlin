@@ -36,7 +36,6 @@ import com.android.tools.klint.client.api.LintClient;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.Context;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
@@ -54,16 +53,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
-import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiClassType;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiExpression;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
-import com.intellij.psi.PsiParenthesizedExpression;
 import com.intellij.psi.PsiType;
-import com.intellij.psi.PsiTypeCastExpression;
-import com.intellij.psi.PsiTypeElement;
 
 import org.jetbrains.uast.UBinaryExpressionWithType;
 import org.jetbrains.uast.UCallExpression;
@@ -350,7 +341,7 @@ public class ViewTypeDetector extends ResourceXmlDetector implements Detector.Ua
             String message = String.format(
                     "Unexpected cast to `%1$s`: layout tag was `%2$s`",
                     castType.substring(castType.lastIndexOf('.') + 1), layoutType);
-            context.report(ISSUE, node, context.getLocation(node), message);
+            context.report(ISSUE, node, context.getUastLocation(node), message);
         }
     }
 }

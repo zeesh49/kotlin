@@ -1029,7 +1029,7 @@ public class UElementVisitor {
         public boolean visitCallExpression(UCallExpression node) {
             boolean result = super.visitCallExpression(node);
 
-            if (UastExpressionUtils.isMethodCall(node)) {
+            if (UastExpressionUtils.isMethodCall(node) || UastExpressionUtils.isSamConstructorCall(node)) {
                 visitMethodCallExpression(node);
             } else if (UastExpressionUtils.isConstructorCall(node)) {
                 visitNewExpression(node);

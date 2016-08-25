@@ -27,6 +27,7 @@ import com.intellij.psi.util.PsiTypesUtil
 import org.jetbrains.kotlin.KtNodeTypes
 import org.jetbrains.kotlin.asJava.toLightClass
 import org.jetbrains.kotlin.asJava.toLightElements
+import org.jetbrains.kotlin.codegen.signature.BothSignatureWriter
 import org.jetbrains.kotlin.codegen.signature.JvmSignatureWriter
 import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
 import org.jetbrains.kotlin.load.kotlin.TypeMappingMode
@@ -44,7 +45,7 @@ internal inline fun String?.orAnonymous(kind: String = ""): String {
 }
 
 internal tailrec fun UElement.getLanguagePlugin(): UastLanguagePlugin {
-    return if (this is UDeclaration) getLanguagePlugin() else containingElement!!.getLanguagePlugin()
+    return if (this is UDeclaration) languagePlugin else containingElement!!.getLanguagePlugin()
 }
 
 internal fun DeclarationDescriptor.toSource() = try {
@@ -62,7 +63,7 @@ internal fun KotlinType.toPsiType(element: KtElement): PsiType {
     val typeMapper = ServiceManager.getService(project, KotlinUastBindingContextProviderService::class.java)
             .getTypeMapper(element) ?: return UastErrorType
     
-    val signatureWriter = JvmSignatureWriter()
+    val signatureWriter = BothSignatureWriter(BothSignatureWriter.Mode.TYPE)
     typeMapper.mapType(this, signatureWriter, TypeMappingMode.DEFAULT)
     
     val signature = StringCharacterIterator(signatureWriter.toString())

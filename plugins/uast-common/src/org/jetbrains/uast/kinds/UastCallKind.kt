@@ -25,6 +25,9 @@ open class UastCallKind(val name: String) {
 
         @JvmField
         val CONSTRUCTOR_CALL = UastCallKind("constructor_call")
+        
+        @JvmField
+        val SAM_CONSTRUCTOR_CALL = UastCallKind("sam_constructor_call")
 
         @JvmField
         val NEW_ARRAY_WITH_DIMENSIONS = UastCallKind("new_array_with_dimensions")

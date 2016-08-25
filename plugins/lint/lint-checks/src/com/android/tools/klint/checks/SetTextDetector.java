@@ -21,24 +21,16 @@ import com.android.annotations.Nullable;
 import com.android.tools.klint.client.api.JavaEvaluator;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.JavaTokenType;
-import com.intellij.psi.PsiBinaryExpression;
 import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiLiteral;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
 
 import org.jetbrains.uast.UBinaryExpression;
 import org.jetbrains.uast.UCallExpression;
-import org.jetbrains.uast.UClass;
 import org.jetbrains.uast.UElement;
 import org.jetbrains.uast.ULiteralExpression;
 import org.jetbrains.uast.UMethod;
@@ -120,7 +112,7 @@ public class SetTextDetector extends Detector implements Detector.UastScanner {
         if (node instanceof ULiteralExpression) {
             Object value = ((ULiteralExpression) node).getValue();
             if (value instanceof String && value.toString().matches(WORD_PATTERN)) {
-                context.report(SET_TEXT_I18N, node, context.getLocation(node),
+                context.report(SET_TEXT_I18N, node, context.getUastLocation(node),
                         "String literal in `setText` can not be translated. Use Android "
                                 + "resources instead.");
             }
@@ -134,7 +126,7 @@ public class SetTextDetector extends Detector implements Detector.UastScanner {
 
                 PsiClass superClass = containingClass.getSuperClass();
                 if (superClass != null && NUMBER_CLS.equals(superClass.getQualifiedName())) {
-                    context.report(SET_TEXT_I18N, node, context.getLocation(node),
+                    context.report(SET_TEXT_I18N, node, context.getUastLocation(node),
                             "Number formatting does not take into account locale settings. " +
                                     "Consider using `String.format` instead.");
                 }
@@ -146,7 +138,7 @@ public class SetTextDetector extends Detector implements Detector.UastScanner {
         } else if (node instanceof UBinaryExpression) {
             UBinaryExpression expression = (UBinaryExpression) node;
             if (expression.getOperator() == UastBinaryOperator.PLUS) {
-                context.report(SET_TEXT_I18N, node, context.getLocation(node),
+                context.report(SET_TEXT_I18N, node, context.getUastLocation(node),
                         "Do not concatenate text displayed with `setText`. "
                                 + "Use resource string with placeholders.");
             }

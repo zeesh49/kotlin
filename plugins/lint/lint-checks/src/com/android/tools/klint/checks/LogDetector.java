@@ -25,29 +25,16 @@ import com.android.tools.klint.client.api.UastLintUtils;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.ConstantEvaluator;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
 import com.android.tools.klint.detector.api.Location;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.PsiBinaryExpression;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiExpression;
-import com.intellij.psi.PsiExpressionList;
-import com.intellij.psi.PsiField;
-import com.intellij.psi.PsiIfStatement;
-import com.intellij.psi.PsiLiteral;
-import com.intellij.psi.PsiLocalVariable;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
 import com.intellij.psi.PsiNamedElement;
-import com.intellij.psi.PsiParameter;
 import com.intellij.psi.PsiParameterList;
-import com.intellij.psi.PsiReferenceExpression;
 import com.intellij.psi.PsiVariable;
 
 import org.jetbrains.uast.UBinaryExpressionWithType;
@@ -179,7 +166,7 @@ public class LogDetector extends Detector implements Detector.UastScanner {
                             "conditional: surround with `if (Log.isLoggable(...))` or " +
                             "`if (BuildConfig.DEBUG) { ... }`",
                     node.getMethodReference());
-            context.report(CONDITIONAL, node, context.getLocation(node), message);
+            context.report(CONDITIONAL, node, context.getUastLocation(node), message);
         }
 
         // Check tag length
@@ -195,7 +182,7 @@ public class LogDetector extends Detector implements Detector.UastScanner {
                     String message = String.format(
                             "The logging tag can be at most 23 characters, was %1$d (%2$s)",
                             tag.length(), tag);
-                    context.report(LONG_TAG, node, context.getLocation(node), message);
+                    context.report(LONG_TAG, node, context.getUastLocation(node), message);
                 }
             }
         }
@@ -300,8 +287,8 @@ public class LogDetector extends Detector implements Detector.UastScanner {
                 PsiNamedElement resolved2 = UastUtils.tryResolveNamed(logTag);
                 if ((resolved1 == null || resolved2 == null || !resolved1.equals(resolved2))
                         && context.isEnabled(WRONG_TAG)) {
-                    Location location = context.getLocation(logTag);
-                    Location alternate = context.getLocation(isLoggableTag);
+                    Location location = context.getUastLocation(logTag);
+                    Location alternate = context.getUastLocation(isLoggableTag);
                     alternate.setMessage("Conflicting tag");
                     location.setSecondary(alternate);
                     String isLoggableDescription = resolved1 != null
@@ -353,8 +340,8 @@ public class LogDetector extends Detector implements Detector.UastScanner {
                     "Mismatched logging levels: when checking `isLoggable` level `%1$s`, the " +
                             "corresponding log call should be `Log.%2$s`, not `Log.%3$s`",
                     resolved.getName(), expectedCall, logCallName);
-            Location location = context.getLocation(logCall.getMethodReference());
-            Location alternate = context.getLocation(isLoggableLevel);
+            Location location = context.getUastLocation(logCall.getMethodReference());
+            Location alternate = context.getUastLocation(isLoggableLevel);
             alternate.setMessage("Conflicting tag");
             location.setSecondary(alternate);
             context.report(WRONG_TAG, isLoggableCall, location, message);

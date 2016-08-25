@@ -23,16 +23,11 @@ import com.android.tools.klint.client.api.JavaParser;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.ConstantEvaluator;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.PsiExpression;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
 
 import org.jetbrains.uast.UCallExpression;
 import org.jetbrains.uast.UExpression;
@@ -95,7 +90,7 @@ public class GetSignaturesDetector extends Detector implements Detector.UastScan
             int flagValue, JavaContext context, UCallExpression node,
             UExpression last) {
         if ((flagValue & GET_SIGNATURES_FLAG) != 0) {
-            context.report(ISSUE, node, context.getLocation(last),
+            context.report(ISSUE, node, context.getUastLocation(last),
                 "Reading app signatures from getPackageInfo: The app signatures "
                     + "could be exploited if not validated properly; "
                     + "see issue explanation for details.");

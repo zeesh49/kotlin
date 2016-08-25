@@ -87,9 +87,9 @@ class JavaUastLanguagePlugin : UastLanguagePlugin() {
         return when (element) {
             is PsiJavaFile -> JavaUFile(element, this)
             is UDeclaration -> element
-            is PsiClass -> SimpleUClass.create(element, this, parent)
-            is PsiMethod -> SimpleUMethod(element, this, parent)
-            is PsiVariable -> SimpleUVariable.create(element, this, parent)
+            is PsiClass -> JavaUClass.create(element, this, parent)
+            is PsiMethod -> JavaUMethod(element, this, parent)
+            is PsiVariable -> JavaUVariable.create(element, this, parent)
             is UAnnotation -> SimpleUAnnotation(element, this, parent)
             else -> null
         }
@@ -241,7 +241,7 @@ internal object JavaConverter : UastConverter {
             val variables = mutableListOf<UVariable>()
             for (element in elements) {
                 if (element !is PsiVariable) continue
-                variables += SimpleUVariable.create(element, languagePlugin, this)
+                variables += JavaUVariable.create(element, languagePlugin, this)
             }
             this.variables = variables
         }

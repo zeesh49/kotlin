@@ -18,15 +18,10 @@ package com.android.tools.klint.checks;
 
 import static com.android.SdkConstants.ANDROID_PREFIX;
 import static com.android.SdkConstants.ANDROID_THEME_PREFIX;
-import static com.android.SdkConstants.ANDROID_URI;
 import static com.android.SdkConstants.ATTR_CLASS;
 import static com.android.SdkConstants.ATTR_FULL_BACKUP_CONTENT;
-import static com.android.SdkConstants.ATTR_ID;
 import static com.android.SdkConstants.ATTR_LABEL_FOR;
-import static com.android.SdkConstants.ATTR_LAYOUT_HEIGHT;
-import static com.android.SdkConstants.ATTR_LAYOUT_WIDTH;
 import static com.android.SdkConstants.ATTR_NAME;
-import static com.android.SdkConstants.ATTR_PADDING_START;
 import static com.android.SdkConstants.ATTR_PARENT;
 import static com.android.SdkConstants.ATTR_TARGET_API;
 import static com.android.SdkConstants.ATTR_TEXT_IS_SELECTABLE;
@@ -45,7 +40,6 @@ import static com.android.SdkConstants.TAG_STYLE;
 import static com.android.SdkConstants.TARGET_API;
 import static com.android.SdkConstants.TOOLS_URI;
 import static com.android.SdkConstants.VIEW_TAG;
-import static com.android.tools.klint.checks.RtlDetector.ATTR_SUPPORTS_RTL;
 import static com.android.tools.klint.detector.api.ClassContext.getFqcn;
 import static com.android.tools.klint.detector.api.LintUtils.getNextInstruction;
 import static com.android.tools.klint.detector.api.LintUtils.skipParentheses;
@@ -55,25 +49,20 @@ import static com.android.tools.klint.detector.api.Location.SearchDirection.FORW
 import static com.android.tools.klint.detector.api.Location.SearchDirection.NEAREST;
 import static com.android.utils.SdkUtils.getResourceFieldName;
 
-import com.android.SdkConstants;
 import com.android.annotations.NonNull;
 import com.android.annotations.Nullable;
 import com.android.resources.ResourceFolderType;
 import com.android.resources.ResourceType;
 import com.android.sdklib.AndroidVersion;
-import com.android.sdklib.BuildToolInfo;
 import com.android.sdklib.SdkVersionInfo;
-import com.android.tools.klint.client.api.IssueRegistry;
 import com.android.tools.klint.client.api.JavaEvaluator;
 import com.android.tools.klint.client.api.LintDriver;
 import com.android.tools.klint.client.api.UastLintUtils;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.ClassContext;
 import com.android.tools.klint.detector.api.Context;
-import com.android.tools.klint.detector.api.DefaultPosition;
 import com.android.tools.klint.detector.api.Detector;
 import com.android.tools.klint.detector.api.Detector.ClassScanner;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
@@ -86,25 +75,17 @@ import com.android.tools.klint.detector.api.Severity;
 import com.android.tools.klint.detector.api.TextFormat;
 import com.android.tools.klint.detector.api.XmlContext;
 import com.google.common.collect.Lists;
-import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiAnnotation;
 import com.intellij.psi.PsiAnnotationMemberValue;
 import com.intellij.psi.PsiAnnotationParameterList;
 import com.intellij.psi.PsiArrayInitializerMemberValue;
-import com.intellij.psi.PsiAssignmentExpression;
-import com.intellij.psi.PsiCallExpression;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiClassType;
-import com.intellij.psi.PsiCodeBlock;
-import com.intellij.psi.PsiComment;
-import com.intellij.psi.PsiDisjunctionType;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiExpression;
-import com.intellij.psi.PsiExpressionList;
 import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiLiteral;
-import com.intellij.psi.PsiLocalVariable;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiModifier;
 import com.intellij.psi.PsiModifierList;
@@ -114,15 +95,8 @@ import com.intellij.psi.PsiParameter;
 import com.intellij.psi.PsiParameterList;
 import com.intellij.psi.PsiPrimitiveType;
 import com.intellij.psi.PsiReferenceExpression;
-import com.intellij.psi.PsiResourceList;
 import com.intellij.psi.PsiResourceListElement;
-import com.intellij.psi.PsiTryStatement;
 import com.intellij.psi.PsiType;
-import com.intellij.psi.PsiTypeCastExpression;
-import com.intellij.psi.PsiTypeElement;
-import com.intellij.psi.PsiWhiteSpace;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.util.PsiTreeUtil;
 
 import org.jetbrains.uast.UBinaryExpression;
 import org.jetbrains.uast.UBinaryExpressionWithType;
@@ -138,8 +112,6 @@ import org.jetbrains.uast.UImportStatement;
 import org.jetbrains.uast.ULiteralExpression;
 import org.jetbrains.uast.ULocalVariable;
 import org.jetbrains.uast.UMethod;
-import org.jetbrains.uast.UParameter;
-import org.jetbrains.uast.UQualifiedReferenceExpression;
 import org.jetbrains.uast.UReturnExpression;
 import org.jetbrains.uast.USimpleNameReferenceExpression;
 import org.jetbrains.uast.USwitchClauseExpression;
@@ -176,7 +148,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -1745,7 +1716,7 @@ public class ApiDetector extends ResourceXmlDetector
                 return;
             }
 
-            Location location = mContext.getLocation(node);
+            Location location = mContext.getUastLocation(node);
             String message = String.format("Cast from %1$s to %2$s requires API level %3$d (current min is %4$d)",
                     UastLintUtils.getClassName(classType),
                     UastLintUtils.getClassName(interfaceType), api, minSdk);
@@ -1885,7 +1856,7 @@ public class ApiDetector extends ResourceXmlDetector
                         int target = getTargetApi(expression);
                         if (target == -1 || api > target) {
                             Location location;
-                            location = mContext.getLocation(expression);
+                            location = mContext.getUastLocation(expression);
                             String fqcn = method.getName();
                             String message = String.format(
                               "Call requires API level %1$d (current min is %2$d): `%3$s`",
@@ -1969,7 +1940,7 @@ public class ApiDetector extends ResourceXmlDetector
                 int minSdk = getMinSdk(mContext);
 
                 if (api > minSdk && api > getTargetApi(statement)) {
-                    Location location = mContext.getLocation(statement);
+                    Location location = mContext.getUastLocation(statement);
                     String message = String.format("Try-with-resources requires "
                             + "API level %1$d (current min is %2$d)", api, minSdk);
                     LintDriver driver = mContext.getDriver();
@@ -2011,7 +1982,7 @@ public class ApiDetector extends ResourceXmlDetector
                 }
 
                 Location location;
-                location = mContext.getLocation(typeReference);
+                location = mContext.getUastLocation(typeReference);
                 String fqcn = resolved.getQualifiedName();
                 String message = String.format("Class requires API level %1$d (current min is %2$d): %3$s", api, minSdk, fqcn);
 
@@ -2084,7 +2055,7 @@ public class ApiDetector extends ResourceXmlDetector
                             "Field requires API level %1$d (current min is %2$d): `%3$s`",
                             api, minSdk, fqcn);
 
-                    Location location = mContext.getLocation(node);
+                    Location location = mContext.getUastLocation(node);
                     mContext.report(INLINED, node, location, message);
                 }
 

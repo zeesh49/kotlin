@@ -349,7 +349,7 @@ public class CleanupDetector extends Detector implements Detector.UastScanner {
         if (locationNode == null) {
             locationNode = node;
         }
-        Location location = context.getLocation(locationNode);
+        Location location = context.getUastLocation(locationNode);
         context.report(RECYCLE_RESOURCE, node, location, message);
     }
 
@@ -545,7 +545,7 @@ public class CleanupDetector extends Detector implements Detector.UastScanner {
 
             String message = "`SharedPreferences.edit()` without a corresponding `commit()` or "
                     + "`apply()` call";
-            context.report(SHARED_PREF, node, context.getLocation(node), message);
+            context.report(SHARED_PREF, node, context.getUastLocation(node), message);
         }
     }
 
@@ -649,7 +649,7 @@ public class CleanupDetector extends Detector implements Detector.UastScanner {
                 String message = "Consider using `apply()` instead; `commit` writes "
                         + "its data to persistent storage immediately, whereas "
                         + "`apply` will handle it in the background";
-                context.report(SHARED_PREF, node, context.getLocation(node), message);
+                context.report(SHARED_PREF, node, context.getUastLocation(node), message);
             }
         }
     }

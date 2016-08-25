@@ -27,7 +27,6 @@ import com.android.tools.klint.client.api.JavaEvaluator;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.Context;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
@@ -36,10 +35,8 @@ import com.android.tools.klint.detector.api.ResourceXmlDetector;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
 import com.android.tools.klint.detector.api.XmlContext;
-import com.intellij.psi.JavaElementVisitor;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiField;
-import com.intellij.psi.PsiJavaCodeReferenceElement;
 
 import org.jetbrains.uast.expressions.UReferenceExpression;
 import org.jetbrains.uast.visitor.UastVisitor;
@@ -215,7 +212,7 @@ public class AlwaysShowActionDetector extends ResourceXmlDetector implements
                 if (mAlwaysFields == null) {
                     mAlwaysFields = new ArrayList<Location>();
                 }
-                mAlwaysFields.add(context.getLocation(reference));
+                mAlwaysFields.add(context.getUastLocation(reference));
             } else {
                 mHasIfRoomRefs = true;
             }

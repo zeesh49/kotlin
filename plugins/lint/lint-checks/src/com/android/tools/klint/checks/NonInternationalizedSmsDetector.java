@@ -20,17 +20,11 @@ import com.android.annotations.NonNull;
 import com.android.annotations.Nullable;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.PsiExpression;
-import com.intellij.psi.PsiLiteral;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
 
 import org.jetbrains.uast.UCallExpression;
 import org.jetbrains.uast.UExpression;
@@ -98,7 +92,7 @@ public class NonInternationalizedSmsDetector extends Detector implements Detecto
         if (number.startsWith("+")) {  //$NON-NLS-1$
             return;
         }
-        context.report(ISSUE, call, context.getLocation(destinationAddress),
+        context.report(ISSUE, call, context.getUastLocation(destinationAddress),
                 "To make sure the SMS can be sent by all users, please start the SMS number " +
                         "with a + and a country code or restrict the code invocation to people in the " +
                         "country you are targeting.");

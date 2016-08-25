@@ -26,23 +26,18 @@ import com.android.tools.klint.client.api.JavaEvaluator;
 import com.android.tools.klint.client.api.JavaParser;
 import com.android.tools.klint.client.api.JavaParser.ResolvedClass;
 import com.android.tools.klint.client.api.LintDriver;
-import com.android.tools.klint.client.api.LintLanguageExtension;
 import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.google.common.collect.Iterators;
-import com.intellij.openapi.util.Segment;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiAnnotation;
 import com.intellij.psi.PsiAnonymousClass;
 import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiEnumConstant;
 import com.intellij.psi.PsiExpression;
 import com.intellij.psi.PsiField;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiIdentifier;
 import com.intellij.psi.PsiJavaCodeReferenceElement;
 import com.intellij.psi.PsiJavaFile;
 import com.intellij.psi.PsiLabeledStatement;
@@ -55,20 +50,11 @@ import com.intellij.psi.PsiReferenceExpression;
 import com.intellij.psi.PsiSwitchStatement;
 import com.intellij.psi.util.PsiTreeUtil;
 
-import org.jetbrains.uast.UCallExpression;
-import org.jetbrains.uast.UClass;
-import org.jetbrains.uast.UElement;
-import org.jetbrains.uast.UEnumConstant;
-import org.jetbrains.uast.UFile;
-import org.jetbrains.uast.UVariable;
-import org.jetbrains.uast.UastContext;
-import org.jetbrains.uast.UastUtils;
-import org.jetbrains.uast.java.JavaUastLanguagePlugin;
+import org.jetbrains.uast.*;
 import org.jetbrains.uast.psi.PsiElementBacked;
 import org.jetbrains.uast.psi.UElementWithLocation;
 
 import java.io.File;
-import java.util.Collections;
 import java.util.Iterator;
 
 import lombok.ast.AnnotationElement;
@@ -223,7 +209,12 @@ public class JavaContext extends Context {
 
     @NonNull
     public Location getUastNameLocation(@NonNull UElement element) {
-        if (element instanceof PsiNameIdentifierOwner) {
+        if (element instanceof UDeclaration) {
+            UElement nameIdentifier = ((UDeclaration) element).getUastNameIdentifier();
+            if (nameIdentifier != null) {
+                return getUastLocation(nameIdentifier);
+            }
+        } else if (element instanceof PsiNameIdentifierOwner) {
             PsiElement nameIdentifier = ((PsiNameIdentifierOwner) element).getNameIdentifier();
             if (nameIdentifier != null) {
                 return getLocation(nameIdentifier);
@@ -231,11 +222,11 @@ public class JavaContext extends Context {
         } else if (element instanceof UCallExpression) {
             UElement methodReference = ((UCallExpression) element).getMethodReference();
             if (methodReference != null) {
-                return getLocation(methodReference);
+                return getUastLocation(methodReference);
             }
         }
         
-        return getLocation(element);
+        return getUastLocation(element);
     }
 
     @NonNull
@@ -244,7 +235,7 @@ public class JavaContext extends Context {
     }
     
     @NonNull
-    public Location getLocation(@Nullable UElement node) {
+    public Location getUastLocation(@Nullable UElement node) {
         if (node == null) {
             return Location.NONE;
         }
@@ -314,17 +305,7 @@ public class JavaContext extends Context {
     public void setCompilationUnit(@Nullable Node compilationUnit) {
         mCompilationUnit = compilationUnit;
     }
-
-    /**
-     * Returns the {@link PsiJavaFile}.
-     *
-     * @return the parsed Java source file
-     */
-    @Nullable
-    public PsiJavaFile getJavaFile() {
-        return mJavaFile;
-    }
-
+    
     /**
      * Returns the {@link UFile}.
      * 

@@ -32,11 +32,7 @@ import com.android.tools.klint.detector.api.LintUtils;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
 import com.android.tools.klint.detector.api.TextFormat;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
-import com.intellij.psi.util.PsiTreeUtil;
 
 import org.jetbrains.uast.UCallExpression;
 import org.jetbrains.uast.UClass;
@@ -114,7 +110,7 @@ public class AppCompatCallDetector extends Detector implements Detector.UastScan
 
             if (replace != null) {
                 String message = String.format(ERROR_MESSAGE_FORMAT, replace, name);
-                context.report(ISSUE, node, context.getLocation(node), message);
+                context.report(ISSUE, node, context.getUastLocation(node), message);
             }
         }
 

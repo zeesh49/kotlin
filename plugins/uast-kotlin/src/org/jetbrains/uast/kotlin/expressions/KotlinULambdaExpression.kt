@@ -18,6 +18,7 @@ package org.jetbrains.uast.kotlin
 
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.uast.*
+import org.jetbrains.uast.java.JavaUParameter
 import org.jetbrains.uast.kotlin.psi.UastKotlinPsiParameter
 import org.jetbrains.uast.psi.PsiElementBacked
 
@@ -29,8 +30,8 @@ class KotlinULambdaExpression(
     
     override val valueParameters by lz {
         val languagePlugin = getLanguagePlugin()
-        psi.valueParameters.mapIndexed { i, p -> 
-            SimpleUParameter(UastKotlinPsiParameter.create(p, psi, i), languagePlugin, this)
+        psi.valueParameters.mapIndexed { i, p ->
+            JavaUParameter(UastKotlinPsiParameter.create(p, psi, i), languagePlugin, this)
         }
     }
     

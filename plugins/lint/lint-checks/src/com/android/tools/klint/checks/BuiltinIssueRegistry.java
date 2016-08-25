@@ -57,7 +57,6 @@ public class BuiltinIssueRegistry extends IssueRegistry {
         issues.add(AppIndexingApiDetector.ISSUE_APP_INDEXING_API);
         issues.add(AppIndexingApiDetector.ISSUE_URL_ERROR);
         issues.add(AppIndexingApiDetector.ISSUE_APP_INDEXING);
-        issues.add(AssertDetector.ISSUE);
         issues.add(BadHostnameVerifierDetector.ISSUE);
         issues.add(BatteryDetector.ISSUE);
         issues.add(CallSuperDetector.ISSUE);

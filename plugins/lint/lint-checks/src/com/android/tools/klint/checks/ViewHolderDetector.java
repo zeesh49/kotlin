@@ -25,23 +25,13 @@ import com.android.annotations.Nullable;
 import com.android.tools.klint.client.api.JavaEvaluator;
 import com.android.tools.klint.detector.api.Category;
 import com.android.tools.klint.detector.api.Detector;
-import com.android.tools.klint.detector.api.Detector.JavaPsiScanner;
 import com.android.tools.klint.detector.api.Implementation;
 import com.android.tools.klint.detector.api.Issue;
 import com.android.tools.klint.detector.api.JavaContext;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
 import com.google.common.collect.Lists;
-import com.intellij.psi.JavaElementVisitor;
-import com.intellij.psi.JavaRecursiveElementVisitor;
-import com.intellij.psi.PsiConditionalExpression;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiIfStatement;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiMethodCallExpression;
-import com.intellij.psi.PsiReferenceExpression;
-import com.intellij.psi.PsiSwitchStatement;
-import com.intellij.psi.util.PsiTreeUtil;
 
 import org.jetbrains.uast.UCallExpression;
 import org.jetbrains.uast.UElement;
@@ -50,7 +40,6 @@ import org.jetbrains.uast.UIfExpression;
 import org.jetbrains.uast.UMethod;
 import org.jetbrains.uast.USwitchExpression;
 import org.jetbrains.uast.UastUtils;
-import org.jetbrains.uast.expressions.UReferenceExpression;
 import org.jetbrains.uast.util.UastExpressionUtils;
 import org.jetbrains.uast.visitor.AbstractUastVisitor;
 import org.jetbrains.uast.visitor.UastVisitor;
@@ -190,7 +179,7 @@ public class ViewHolderDetector extends Detector implements Detector.UastScanner
                             + "Should use View Holder pattern (use recycled view passed "
                             + "into this method as the second parameter) for smoother "
                             + "scrolling";
-                    mContext.report(ISSUE, node, mContext.getLocation(node), message);
+                    mContext.report(ISSUE, node, mContext.getUastLocation(node), message);
                 }
             }
         }

@@ -19,11 +19,11 @@ package org.jetbrains.uast.kotlin
 import com.intellij.psi.PsiParameter
 import com.intellij.psi.PsiType
 import org.jetbrains.kotlin.psi.KtCatchClause
-import org.jetbrains.uast.SimpleUParameter
 import org.jetbrains.uast.UCatchClause
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UParameter
 import org.jetbrains.uast.expressions.UTypeReferenceExpression
+import org.jetbrains.uast.java.JavaUParameter
 import org.jetbrains.uast.kotlin.psi.UastKotlinPsiParameter
 import org.jetbrains.uast.psi.PsiElementBacked
 
@@ -35,7 +35,7 @@ class KotlinUCatchClause(
     
     override val parameters by lz {
         val parameter = psi.catchParameter ?: return@lz emptyList<UParameter>()
-        listOf(SimpleUParameter(UastKotlinPsiParameter.create(parameter, psi, 0), getLanguagePlugin(), this))
+        listOf(JavaUParameter(UastKotlinPsiParameter.create(parameter, psi, 0), getLanguagePlugin(), this))
     }
 
     override val typeReferences by lz {
