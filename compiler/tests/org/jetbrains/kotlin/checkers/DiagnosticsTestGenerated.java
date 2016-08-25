@@ -12183,6 +12183,12 @@ public class DiagnosticsTestGenerated extends AbstractDiagnosticsTest {
                 doTest(fileName);
             }
 
+            @TestMetadata("nestedClassInAnonymousObject.kt")
+            public void testNestedClassInAnonymousObject() throws Exception {
+                String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/diagnostics/tests/objects/nestedClassInAnonymousObject.kt");
+                doTest(fileName);
+            }
+
             @TestMetadata("objectInsideFun.kt")
             public void testObjectInsideFun() throws Exception {
                 String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/diagnostics/tests/objects/objectInsideFun.kt");
@@ -15212,6 +15218,33 @@ public class DiagnosticsTestGenerated extends AbstractDiagnosticsTest {
                 @TestMetadata("twoTypeParameters.kt")
                 public void testTwoTypeParameters() throws Exception {
                     String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/diagnostics/tests/resolve/nestedCalls/twoTypeParameters.kt");
+                    doTest(fileName);
+                }
+            }
+
+            @TestMetadata("compiler/testData/diagnostics/tests/resolve/noCandidates")
+            @TestDataPath("$PROJECT_ROOT")
+            @RunWith(JUnit3RunnerWithInners.class)
+            public static class NoCandidates extends AbstractDiagnosticsTest {
+                public void testAllFilesPresentInNoCandidates() throws Exception {
+                    KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("compiler/testData/diagnostics/tests/resolve/noCandidates"), Pattern.compile("^(.+)\\.kt$"), true);
+                }
+
+                @TestMetadata("kt2787.kt")
+                public void testKt2787() throws Exception {
+                    String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/diagnostics/tests/resolve/noCandidates/kt2787.kt");
+                    doTest(fileName);
+                }
+
+                @TestMetadata("resolvedToClassifier.kt")
+                public void testResolvedToClassifier() throws Exception {
+                    String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/diagnostics/tests/resolve/noCandidates/resolvedToClassifier.kt");
+                    doTest(fileName);
+                }
+
+                @TestMetadata("resolvedToClassifierWithReceiver.kt")
+                public void testResolvedToClassifierWithReceiver() throws Exception {
+                    String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/diagnostics/tests/resolve/noCandidates/resolvedToClassifierWithReceiver.kt");
                     doTest(fileName);
                 }
             }
