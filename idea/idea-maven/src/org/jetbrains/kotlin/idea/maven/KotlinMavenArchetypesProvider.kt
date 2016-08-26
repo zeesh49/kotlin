@@ -23,16 +23,19 @@ import org.jetbrains.idea.maven.dom.MavenVersionComparable
 import org.jetbrains.idea.maven.indices.MavenArchetypesProvider
 import org.jetbrains.idea.maven.model.MavenArchetype
 import org.jetbrains.kotlin.idea.KotlinPluginUtil
+import org.jetbrains.kotlin.idea.actions.internal.KotlinInternalMode
 import org.jetbrains.kotlin.utils.ifEmpty
 import java.net.HttpURLConnection
 import java.net.URLEncoder
 import java.util.concurrent.TimeUnit
 
-class KotlinMavenArchetypesProvider(val kotlinPluginVersion: String) : MavenArchetypesProvider {
-    constructor() : this(KotlinPluginUtil.getPluginVersion())
+class KotlinMavenArchetypesProvider(val kotlinPluginVersion: String, val predefinedInternalMode: Boolean?) : MavenArchetypesProvider {
+    constructor() : this(KotlinPluginUtil.getPluginVersion(), null)
 
     val VERSIONS_LIST_URL = mavenSearchUrl("org.jetbrains.kotlin", packaging = "maven-archetype", rowsLimit = 1000)
-    private val versionPrefix by lazy { """^\d+\.\d+\.""".toRegex().find(kotlinPluginVersion)?.value ?: "1.0." }
+    private val versionPrefix by lazy { versionPrefix(kotlinPluginVersion) ?: "1.0." }
+    private val internalMode: Boolean
+        get() = predefinedInternalMode ?: KotlinInternalMode.enabled
 
     private val archetypesBlocking by lazy {
         try {
@@ -60,10 +63,17 @@ class KotlinMavenArchetypesProvider(val kotlinPluginVersion: String) : MavenArch
             .asJsonArray
             .map { it.asJsonObject }
             .map { MavenArchetype(it.get("g").asString, it.get("a").asString, it.get("v").asString, null, null) }
-            .filter { it.version?.startsWith(versionPrefix) ?: false }
-            .groupBy { it.groupId + ":" + it.artifactId }
-            .mapValues { chooseVersion(it.value) }
-            .mapNotNull { it.value }
+            .let { versions ->
+                val filtered = when {
+                    internalMode -> versions
+                    else -> versions.filter { it.version?.startsWith(versionPrefix) ?: false }
+                }
+
+                filtered.let { if (it.isEmpty()) versions else it }
+                    .groupBy { it.groupId + ":" + it.artifactId + if (internalMode) (":" + versionPrefix(it.version)) else "" }
+                    .mapValues { chooseVersion(it.value) }
+                    .mapNotNull { it.value }
+            }
 
     private fun chooseVersion(versions: List<MavenArchetype>): MavenArchetype? {
         return versions.maxBy { MavenVersionComparable(it.version) }
@@ -103,4 +113,6 @@ class KotlinMavenArchetypesProvider(val kotlinPluginVersion: String) : MavenArch
         }
 
     private fun String.encodeURL() = URLEncoder.encode(this, "UTF-8")
+
+    private fun versionPrefix(version: String) = """^\d+\.\d+\.""".toRegex().find(version)?.value
 }
