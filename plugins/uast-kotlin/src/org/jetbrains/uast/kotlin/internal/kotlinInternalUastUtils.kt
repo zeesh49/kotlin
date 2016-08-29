@@ -37,6 +37,7 @@ import org.jetbrains.kotlin.resolve.DescriptorToSourceUtils
 import org.jetbrains.kotlin.resolve.calls.callUtil.getResolvedCall
 import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.uast.*
+import org.jetbrains.uast.kotlin.psi.UastKotlinPsiVariable
 import java.text.StringCharacterIterator
 
 @Suppress("NOTHING_TO_INLINE")
@@ -84,19 +85,27 @@ internal fun KtClassOrObject.toPsiType(): PsiType {
     return PsiTypesUtil.getClassType(lightClass)
 }
 
-internal fun PsiElement.getMaybeLightElement(): PsiElement? = when (this) {
-    is KtDeclaration -> toLightElements().firstOrNull()
-    is KtElement -> null
-    else -> this
+internal fun PsiElement.getMaybeLightElement(languagePlugin: UastLanguagePlugin): PsiElement? {
+    return when (this) {
+        is KtVariableDeclaration -> {
+            toLightElements().firstOrNull()?.let { return it }
+            
+        }
+        is KtDeclaration -> toLightElements().firstOrNull()
+        is KtElement -> null
+        else -> this
+    }
 }
 
-internal fun KtElement.resolveCallToDeclaration(resultingDescriptor: DeclarationDescriptor? = null): PsiElement? {
+internal fun KtElement.resolveCallToDeclaration(
+        resultingDescriptor: DeclarationDescriptor? = null,
+        languagePlugin: UastLanguagePlugin): PsiElement? {
     val descriptor = resultingDescriptor ?: run {
         val resolvedCall = getResolvedCall(analyze()) ?: return null
         resolvedCall.resultingDescriptor
     }
     
-    return descriptor.toSource()?.getMaybeLightElement()
+    return descriptor.toSource()?.getMaybeLightElement(languagePlugin)
 }
 
 internal fun KtExpression?.isNullExpression(): Boolean {

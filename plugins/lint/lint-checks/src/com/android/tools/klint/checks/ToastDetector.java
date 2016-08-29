@@ -108,14 +108,14 @@ public class ToastDetector extends Detector implements Detector.UastScanner {
 
     private static class ShowFinder extends AbstractUastVisitor {
         /** The target makeText call */
-        private final UCallExpression mTarget;
+        private final UExpression mTarget;
         /** Whether we've found the show method */
         private boolean mFound;
         /** Whether we've seen the target makeText node yet */
         private boolean mSeenTarget;
 
         private ShowFinder(UCallExpression target) {
-            mTarget = target;
+            mTarget = UastUtils.getQualifiedParentOrThis(target);
         }
 
         @Override
@@ -123,7 +123,7 @@ public class ToastDetector extends Detector implements Detector.UastScanner {
             if (node.equals(mTarget)) {
                 mSeenTarget = true;
             } else {
-                if ((mSeenTarget || mTarget.equals(node.getReceiver())) 
+                if ((mTarget.equals(node.getReceiver())) 
                         && "show".equals(node.getMethodName())) {
                     // TODO: Do more flow analysis to see whether we're really calling show
                     // on the right type of object?

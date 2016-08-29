@@ -117,6 +117,22 @@ public class UElementVisitor {
             VisitingDetector v = new VisitingDetector(detector, uastScanner);
             mAllDetectors.add(v);
 
+            List<String> names = detector.getApplicableMethodNames();
+            if (names != null) {
+                // not supported in Java visitors; adding a method invocation node is trivial
+                // for that case.
+                assert names != XmlScanner.ALL;
+
+                for (String name : names) {
+                    List<VisitingDetector> list = mMethodDetectors.get(name);
+                    if (list == null) {
+                        list = new ArrayList<VisitingDetector>(SAME_TYPE_COUNT);
+                        mMethodDetectors.put(name, list);
+                    }
+                    list.add(v);
+                }
+            }
+            
             List<String> applicableSuperClasses = detector.applicableSuperClasses();
             if (applicableSuperClasses != null) {
                 for (String fqn : applicableSuperClasses) {
@@ -137,22 +153,6 @@ public class UElementVisitor {
                     if (list == null) {
                         list = new ArrayList<VisitingDetector>(SAME_TYPE_COUNT);
                         mNodePsiTypeDetectors.put(type, list);
-                    }
-                    list.add(v);
-                }
-            }
-
-            List<String> names = detector.getApplicableMethodNames();
-            if (names != null) {
-                // not supported in Java visitors; adding a method invocation node is trivial
-                // for that case.
-                assert names != XmlScanner.ALL;
-
-                for (String name : names) {
-                    List<VisitingDetector> list = mMethodDetectors.get(name);
-                    if (list == null) {
-                        list = new ArrayList<VisitingDetector>(SAME_TYPE_COUNT);
-                        mMethodDetectors.put(name, list);
                     }
                     list.add(v);
                 }
@@ -1029,7 +1029,7 @@ public class UElementVisitor {
         public boolean visitCallExpression(UCallExpression node) {
             boolean result = super.visitCallExpression(node);
 
-            if (UastExpressionUtils.isMethodCall(node) || UastExpressionUtils.isSamConstructorCall(node)) {
+            if (UastExpressionUtils.isMethodCall(node)) {
                 visitMethodCallExpression(node);
             } else if (UastExpressionUtils.isConstructorCall(node)) {
                 visitNewExpression(node);

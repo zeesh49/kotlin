@@ -35,7 +35,7 @@ class KotlinUCatchClause(
     
     override val parameters by lz {
         val parameter = psi.catchParameter ?: return@lz emptyList<UParameter>()
-        listOf(JavaUParameter(UastKotlinPsiParameter.create(parameter, psi, 0), getLanguagePlugin(), this))
+        listOf(KotlinUParameter(UastKotlinPsiParameter.create(parameter, psi, 0), getLanguagePlugin(), this))
     }
 
     override val typeReferences by lz {

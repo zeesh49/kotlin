@@ -59,7 +59,7 @@ fun UElement.getContainingVariable() = getContainingUVariable()?.psi
 
 fun PsiElement?.getContainingClass() = this?.let { PsiTreeUtil.getParentOfType(it, PsiClass::class.java) }
 
-fun UElement.isChildOf(probablyParent: UElement, strict: Boolean = false): Boolean {
+fun UElement.isChildOf(probablyParent: UElement?, strict: Boolean = false): Boolean {
     tailrec fun isChildOf(current: UElement?, probablyParent: UElement): Boolean {
         return when (current) {
             null -> false
@@ -67,7 +67,8 @@ fun UElement.isChildOf(probablyParent: UElement, strict: Boolean = false): Boole
             else -> isChildOf(current.containingElement, probablyParent)
         }
     }
-
+    
+    if (probablyParent == null) return false
     return isChildOf(if (strict) this else containingElement, probablyParent)
 }
 

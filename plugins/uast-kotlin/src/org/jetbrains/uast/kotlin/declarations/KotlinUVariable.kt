@@ -23,12 +23,19 @@ import org.jetbrains.uast.*
 import org.jetbrains.uast.expressions.UReferenceExpression
 import org.jetbrains.uast.expressions.UTypeReferenceExpression
 import org.jetbrains.uast.java.*
+import org.jetbrains.uast.kotlin.psi.UastKotlinPsiParameter
+import org.jetbrains.uast.kotlin.psi.UastKotlinPsiVariable
 
 abstract class AbstractKotlinUVariable : AbstractJavaUVariable() {
     override val uastInitializer: UExpression?
         get() {
-            val kotlinOrigin = (psi as? KtLightElement<*, *>)?.kotlinOrigin ?: return null
-            val initializerExpression = (kotlinOrigin as? KtVariableDeclaration)?.initializer ?: return null
+            val psi = psi
+            val initializerExpression = when (psi) {
+                is UastKotlinPsiVariable -> psi.ktInitializer
+                is UastKotlinPsiParameter -> psi.ktDefaultValue
+                is KtLightElement<*, *> -> (psi.kotlinOrigin as? KtVariableDeclaration)?.initializer
+                else -> null
+            } ?: return null
             return languagePlugin.convertExpressionOrEmpty(initializerExpression, this)
         }
 }

@@ -28,8 +28,7 @@ interface UVariable : UDeclaration, PsiVariable {
     override fun renderString() = buildString {
         val modifiers = PsiModifier.MODIFIERS.filter { psi.hasModifierProperty(it) }.joinToString(" ")
         if (modifiers.isNotEmpty()) append(modifiers).append(' ')
-        append("")
-        append(psi.type.getCanonicalText(false)).append(' ').append(psi.name)
+        append("var ").append(psi.name).append(": ").append(psi.type.getCanonicalText(false))
     }
 }
 
@@ -58,4 +57,6 @@ interface UEnumConstant : UField, UCallExpression, PsiEnumConstant {
         valueArguments.acceptList(visitor)
         visitor.afterVisitVariable(this)
     }
+
+    override fun renderString() = name ?: "<ERROR>"
 }

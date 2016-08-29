@@ -115,10 +115,10 @@ class KotlinUastLanguagePlugin : UastLanguagePlugin() {
         val original = element.originalElement
         return when (original) {
             is KtLightMethod -> KotlinUMethod(original, this, parent)
-            is KtLightClass -> JavaUClass.create(original, this, parent)
+            is KtLightClass -> KotlinUClass.create(original, this, parent)
             is KtLightField, is KtLightParameter -> KotlinUVariable.create(original as PsiVariable, this, parent)
 
-            is KtClassOrObject -> javaPlugin.convertOpt(original.toLightClass(), parent)
+            is KtClassOrObject -> original.toLightClass()?.let { lightClass -> KotlinUClass.create(lightClass, this, parent) }
             is KtFunction -> {
                 val lightMethod = LightClassUtil.getLightClassMethod(original) ?: return null
                 convertDeclaration(lightMethod, parent)

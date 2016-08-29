@@ -73,17 +73,6 @@ public class BadHostnameVerifierDetector extends Detector implements Detector.Ua
     }
 
     @Override
-    public List<String> getApplicableMethodNames() {
-        return Collections.singletonList("HostnameVerifier");
-    }
-
-    @Override
-    public void visitMethod(@NonNull JavaContext context, @Nullable UastVisitor visitor, 
-            @NonNull UCallExpression node, @NonNull UMethod method) {
-        int a = 5;
-    }
-
-    @Override
     public void checkClass(@NonNull JavaContext context, @NonNull UClass declaration) {
         JavaEvaluator evaluator = context.getEvaluator();
         for (PsiMethod method : declaration.findMethodsByName("verify", false)) {

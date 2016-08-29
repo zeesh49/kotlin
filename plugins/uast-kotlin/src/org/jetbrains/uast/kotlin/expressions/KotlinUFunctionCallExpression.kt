@@ -75,7 +75,6 @@ class KotlinUFunctionCallExpression(
     override val kind by lz {
         when (resolvedCall?.resultingDescriptor) {
             is ConstructorDescriptor -> UastCallKind.CONSTRUCTOR_CALL
-            is SamConstructorDescriptor -> UastCallKind.SAM_CONSTRUCTOR_CALL
             else -> UastCallKind.METHOD_CALL
         }
     }

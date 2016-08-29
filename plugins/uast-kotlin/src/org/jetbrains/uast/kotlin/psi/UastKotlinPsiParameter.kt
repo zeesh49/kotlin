@@ -5,25 +5,33 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiParameter
 import com.intellij.psi.PsiType
 import com.intellij.psi.impl.light.LightParameter
+import org.jetbrains.kotlin.descriptors.VariableDescriptor
 import org.jetbrains.kotlin.idea.KotlinLanguage
+import org.jetbrains.kotlin.psi.KtExpression
 import org.jetbrains.kotlin.psi.KtParameter
+import org.jetbrains.kotlin.resolve.BindingContext
+import org.jetbrains.uast.UastErrorType
+import org.jetbrains.uast.kotlin.analyze
 import org.jetbrains.uast.kotlin.toPsiType
 
 class UastKotlinPsiParameter(
         name: String,
         type: PsiType,
-        declarationScope: PsiElement, 
-        language: Language, 
-        isVarArgs: Boolean
-) : LightParameter(name, type, declarationScope, language, isVarArgs) {
+        declarationScope: PsiElement,
+        language: Language,
+        isVarArgs: Boolean,
+        val ktDefaultValue: KtExpression?
+        ) : LightParameter(name, type, declarationScope, language, isVarArgs) {
     companion object {
         fun create(parameter: KtParameter, owner: PsiElement, index: Int): PsiParameter {
             return UastKotlinPsiParameter(
                     parameter.name ?: "p$index",
-                    parameter.typeReference.toPsiType(),
+                    (parameter.analyze()[BindingContext.DECLARATION_TO_DESCRIPTOR, parameter] as? VariableDescriptor)
+                            ?.type?.toPsiType(parameter) ?: UastErrorType,
                     owner,
                     KotlinLanguage.INSTANCE,
-                    parameter.isVarArg)
+                    parameter.isVarArg,
+                    parameter.defaultValue)
         }
     }
 }

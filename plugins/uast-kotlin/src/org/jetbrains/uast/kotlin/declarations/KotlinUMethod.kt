@@ -23,7 +23,7 @@ import org.jetbrains.uast.kotlin.lz
 import org.jetbrains.uast.*
 import org.jetbrains.uast.java.JavaUMethod
 
-class KotlinUMethod(
+open class KotlinUMethod(
         override val psi: KtLightMethod,
         languagePlugin: UastLanguagePlugin,
         containingElement: UElement?

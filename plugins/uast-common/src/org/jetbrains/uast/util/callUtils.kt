@@ -23,8 +23,6 @@ fun UElement.isConstructorCall() = (this as? UCallExpression)?.kind == UastCallK
 
 fun UElement.isMethodCall() = (this as? UCallExpression)?.kind == UastCallKind.METHOD_CALL
 
-fun UElement.isSamConstructorCall() = (this as? UCallExpression)?.kind == UastCallKind.SAM_CONSTRUCTOR_CALL
-
 fun UElement.isNewArray() = isNewArrayWithDimensions() || isNewArrayWithInitializer()
 
 fun UElement.isNewArrayWithDimensions() = (this as? UCallExpression)?.kind == UastCallKind.NEW_ARRAY_WITH_DIMENSIONS

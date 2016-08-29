@@ -31,7 +31,7 @@ class KotlinULambdaExpression(
     override val valueParameters by lz {
         val languagePlugin = getLanguagePlugin()
         psi.valueParameters.mapIndexed { i, p ->
-            JavaUParameter(UastKotlinPsiParameter.create(p, psi, i), languagePlugin, this)
+            KotlinUParameter(UastKotlinPsiParameter.create(p, psi, i), languagePlugin, this)
         }
     }
     
