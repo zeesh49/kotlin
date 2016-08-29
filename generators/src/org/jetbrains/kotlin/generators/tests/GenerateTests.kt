@@ -1118,14 +1118,6 @@ fun main(args: Array<String>) {
             model("multiModule/cases")
         }
 
-        testClass<AbstractLabelTest>() {
-            model("labels/cases")
-        }
-
-        testClass<AbstractJsCodeTest>() {
-            model("jsCode/cases")
-        }
-
         testClass<AbstractReifiedTest>() {
             model("reified/cases")
         }
