@@ -60,7 +60,3 @@ abstract class AbstractSuperTest : JsBasicBoxTest("super/")
 abstract class AbstractLocalClassesTest : JsBasicBoxTest("localClasses/")
 
 abstract class AbstractNonLocalReturnsTest : JsBasicBoxTest("inline.generated/nonLocalReturns/")
-
-abstract class AbstractRttiTest : JsBasicBoxTest("rtti/")
-
-abstract class AbstractLightReflectionTest : JsBasicBoxTest("reflection/light/")
