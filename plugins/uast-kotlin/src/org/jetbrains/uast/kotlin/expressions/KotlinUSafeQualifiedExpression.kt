@@ -34,5 +34,5 @@ class KotlinUSafeQualifiedExpression(
     override val resolvedName: String?
         get() = (resolve() as? PsiNamedElement)?.name
     
-    override fun resolve() = psi.selectorExpression?.resolveCallToDeclaration()
+    override fun resolve() = psi.selectorExpression?.resolveCallToDeclaration(context = this)
 }

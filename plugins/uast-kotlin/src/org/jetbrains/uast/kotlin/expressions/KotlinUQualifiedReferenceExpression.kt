@@ -36,7 +36,7 @@ class KotlinUQualifiedReferenceExpression(
     override val selector by lz { KotlinConverter.convertOrEmpty(psi.selectorExpression, this) }
     override val accessType = UastQualifiedExpressionAccessType.SIMPLE
     
-    override fun resolve() = psi.selectorExpression?.resolveCallToDeclaration()
+    override fun resolve() = psi.selectorExpression?.resolveCallToDeclaration(context = this)
 
     override val resolvedName: String?
         get() = (resolve() as? PsiNamedElement)?.name
@@ -61,6 +61,6 @@ class KotlinUComponentQualifiedReferenceExpression(
     override fun resolve(): PsiElement? {
         val bindingContext = psi.analyze()
         val descriptor = bindingContext[BindingContext.COMPONENT_RESOLVED_CALL, psi]?.resultingDescriptor ?: return null
-        return descriptor.toSource()?.getMaybeLightElement()
+        return descriptor.toSource()?.getMaybeLightElement(this)
     }
 }

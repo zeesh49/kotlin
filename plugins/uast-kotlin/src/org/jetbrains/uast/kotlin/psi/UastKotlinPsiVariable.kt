@@ -5,6 +5,7 @@ import com.intellij.psi.*
 import org.jetbrains.kotlin.asJava.elements.LightVariableBuilder
 import org.jetbrains.kotlin.idea.KotlinLanguage
 import org.jetbrains.kotlin.psi.KtDestructuringDeclaration
+import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtExpression
 import org.jetbrains.kotlin.psi.KtVariableDeclaration
 import org.jetbrains.kotlin.resolve.BindingContext
@@ -19,12 +20,21 @@ class UastKotlinPsiVariable(
         type: PsiType,
         language: Language,
         val ktInitializer: KtExpression?,
-        val psiParent: PsiElement?
+        val psiParent: PsiElement?,
+        val ktElement: KtElement
 ) : LightVariableBuilder(manager, name, type, language) {
     override fun getParent() = psiParent
 
     override fun hasInitializer() = ktInitializer != null
     override fun getInitializer(): PsiExpression? = ktInitializer?.let { KotlinUastPsiExpression(it) }
+    
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other?.javaClass != javaClass) return false
+        return ktElement == (other as? UastKotlinPsiVariable)?.ktElement
+    }
+
+    override fun hashCode() = ktElement.hashCode()
 
     companion object {
         fun create(declaration: KtVariableDeclaration, parent: PsiElement?, initializer: KtExpression? = null): PsiVariable {
@@ -34,7 +44,8 @@ class UastKotlinPsiVariable(
                     declaration.typeReference.toPsiType(), 
                     KotlinLanguage.INSTANCE,
                     initializer ?: declaration.initializer,
-                    parent)
+                    parent,
+                    declaration)
         }
         
         fun create(declaration: KtDestructuringDeclaration): PsiVariable {
@@ -44,7 +55,8 @@ class UastKotlinPsiVariable(
                     UastErrorType, //TODO,
                     KotlinLanguage.INSTANCE,
                     declaration.initializer,
-                    declaration.parent)
+                    declaration.parent,
+                    declaration)
         }
     }
 }

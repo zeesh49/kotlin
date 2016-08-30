@@ -85,11 +85,19 @@ internal fun KtClassOrObject.toPsiType(): PsiType {
     return PsiTypesUtil.getClassType(lightClass)
 }
 
-internal fun PsiElement.getMaybeLightElement(languagePlugin: UastLanguagePlugin): PsiElement? {
+internal fun PsiElement.getMaybeLightElement(context: UElement): PsiElement? {
     return when (this) {
         is KtVariableDeclaration -> {
-            toLightElements().firstOrNull()?.let { return it }
+            val lightElement = toLightElements().firstOrNull()
+            if (lightElement != null) return lightElement
             
+            val languagePlugin = context.getLanguagePlugin()
+            val uElement = languagePlugin.convertWithParent(this)
+            when (uElement) {
+                is UDeclaration -> uElement.psi
+                is UVariableDeclarationsExpression -> uElement.variables.firstOrNull()?.psi
+                else -> null
+            }
         }
         is KtDeclaration -> toLightElements().firstOrNull()
         is KtElement -> null
@@ -99,13 +107,14 @@ internal fun PsiElement.getMaybeLightElement(languagePlugin: UastLanguagePlugin)
 
 internal fun KtElement.resolveCallToDeclaration(
         resultingDescriptor: DeclarationDescriptor? = null,
-        languagePlugin: UastLanguagePlugin): PsiElement? {
+        context: KotlinAbstractUElement
+): PsiElement? {
     val descriptor = resultingDescriptor ?: run {
         val resolvedCall = getResolvedCall(analyze()) ?: return null
         resolvedCall.resultingDescriptor
     }
     
-    return descriptor.toSource()?.getMaybeLightElement(languagePlugin)
+    return descriptor.toSource()?.getMaybeLightElement(context)
 }
 
 internal fun KtExpression?.isNullExpression(): Boolean {

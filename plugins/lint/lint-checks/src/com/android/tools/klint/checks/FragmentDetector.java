@@ -34,6 +34,7 @@ import com.intellij.psi.PsiAnonymousClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
 
+import org.jetbrains.uast.UAnonymousClass;
 import org.jetbrains.uast.UClass;
 import org.jetbrains.uast.UElement;
 
@@ -87,14 +88,10 @@ public class FragmentDetector extends Detector implements Detector.UastScanner {
 
     @Override
     public void checkClass(@NonNull JavaContext context, @NonNull UClass node) {
-        if (node instanceof PsiAnonymousClass) {
+        if (node instanceof UAnonymousClass) {
             String message = "Fragments should be static such that they can be re-instantiated by " +
                     "the system, and anonymous classes are not static";
-            PsiElement locationNode = JavaContext.findNameElement(node);
-            if (locationNode == null) {
-                locationNode = node;
-            }
-            context.report(ISSUE, locationNode, context.getLocation(locationNode), message);
+            context.reportUast(ISSUE, node, context.getUastNameLocation(node), message);
             return;
         }
 

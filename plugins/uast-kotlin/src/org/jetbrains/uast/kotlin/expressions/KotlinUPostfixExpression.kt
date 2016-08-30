@@ -18,15 +18,13 @@ package org.jetbrains.uast.kotlin
 
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtPostfixExpression
-import org.jetbrains.uast.UElement
-import org.jetbrains.uast.UPostfixExpression
-import org.jetbrains.uast.UastPostfixOperator
+import org.jetbrains.uast.*
 import org.jetbrains.uast.psi.PsiElementBacked
 
 class KotlinUPostfixExpression(
         override val psi: KtPostfixExpression,
         override val containingElement: UElement?
-) : KotlinAbstractUExpression(), UPostfixExpression, PsiElementBacked, KotlinUElementWithType, KotlinEvaluatableUElement {
+) : KotlinAbstractUExpression(), UPostfixExpression, PsiElementBacked, KotlinUElementWithType, KotlinEvaluatableUElement, UResolvable {
     override val operand by lz { KotlinConverter.convertOrEmpty(psi.baseExpression, this) }
 
     override val operator = when (psi.operationToken) {
@@ -34,5 +32,10 @@ class KotlinUPostfixExpression(
         KtTokens.MINUSMINUS -> UastPostfixOperator.DEC
         KtTokens.EXCLEXCL -> KotlinPostfixOperators.EXCLEXCL
         else -> UastPostfixOperator.UNKNOWN
+    }
+    
+    override fun resolve() = when (psi.operationToken) {
+        KtTokens.EXCLEXCL -> operand.tryResolve()
+        else -> null
     }
 }

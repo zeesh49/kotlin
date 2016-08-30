@@ -21,6 +21,7 @@ import com.intellij.psi.PsiClass
 import org.jetbrains.kotlin.asJava.classes.KtLightClass
 import org.jetbrains.kotlin.asJava.elements.KtLightMethod
 import org.jetbrains.kotlin.asJava.toLightMethods
+import org.jetbrains.kotlin.psi.KtObjectDeclaration
 import org.jetbrains.uast.*
 import org.jetbrains.uast.java.AbstractJavaUClass
 import org.jetbrains.uast.kotlin.declarations.KotlinUMethod
@@ -33,6 +34,9 @@ class KotlinUClass private constructor(
     val ktClass = psi.kotlinOrigin
     override val psi = unwrap(psi)
 
+    override val uastNameIdentifier: UElement
+        get() = UIdentifier(psi.nameIdentifier, this)
+    
     override val uastMethods: List<UMethod> by lz {
         val primaryConstructor = ktClass?.getPrimaryConstructor()?.toLightMethods()?.firstOrNull()
         val hasSecondaryConstructors = ktClass?.getSecondaryConstructors()?.isNotEmpty() ?: false
@@ -82,6 +86,12 @@ class KotlinUAnonymousClass(
         override val containingElement: UElement?
 ) : AbstractJavaUClass(), UAnonymousClass, PsiAnonymousClass by psi {
     override val psi: PsiAnonymousClass = unwrap(psi)
+
+    override val uastNameIdentifier: UElement?
+        get() {
+            val ktClassOrObject = (psi.originalElement as? KtLightClass)?.kotlinOrigin as? KtObjectDeclaration ?: return null 
+            return UIdentifier(ktClassOrObject.getObjectKeyword(), this)
+        }
 
     private companion object {
         tailrec fun unwrap(psi: PsiAnonymousClass): PsiAnonymousClass = if (psi is UAnonymousClass) unwrap(psi.psi) else psi

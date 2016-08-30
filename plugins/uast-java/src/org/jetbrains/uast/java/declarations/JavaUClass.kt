@@ -30,7 +30,7 @@ abstract class AbstractJavaUClass : UClass {
         }
     }
 
-    override val uastNameIdentifier: UElement
+    override val uastNameIdentifier: UElement?
         get() = UIdentifier(psi.nameIdentifier, this)
 
     override val uastAnnotations by lz { psi.annotations.map { SimpleUAnnotation(it, languagePlugin, this) } }

@@ -20,8 +20,9 @@ class UastKotlinPsiParameter(
         declarationScope: PsiElement,
         language: Language,
         isVarArgs: Boolean,
-        val ktDefaultValue: KtExpression?
-        ) : LightParameter(name, type, declarationScope, language, isVarArgs) {
+        val ktDefaultValue: KtExpression?,
+        val ktParameter: KtParameter
+) : LightParameter(name, type, declarationScope, language, isVarArgs) {
     companion object {
         fun create(parameter: KtParameter, owner: PsiElement, index: Int): PsiParameter {
             return UastKotlinPsiParameter(
@@ -31,7 +32,16 @@ class UastKotlinPsiParameter(
                     owner,
                     KotlinLanguage.INSTANCE,
                     parameter.isVarArg,
-                    parameter.defaultValue)
+                    parameter.defaultValue,
+                    parameter)
         }
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other?.javaClass != javaClass) return false
+        return ktParameter == (other as? UastKotlinPsiParameter)?.ktParameter
+    }
+
+    override fun hashCode() = ktParameter.hashCode()
 }
