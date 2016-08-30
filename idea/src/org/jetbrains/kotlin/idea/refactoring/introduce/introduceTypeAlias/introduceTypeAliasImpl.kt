@@ -48,9 +48,11 @@ sealed class IntroduceTypeAliasAnalysisResult {
     class Success(val descriptor: IntroduceTypeAliasDescriptor) : IntroduceTypeAliasAnalysisResult()
 }
 
-private fun IntroduceTypeAliasData.getTargetScope() = targetSibling.getResolutionScope(bindingContext, resolutionFacade)
+fun IntroduceTypeAliasData.getTargetScope() = targetSibling.getResolutionScope(bindingContext, resolutionFacade)
 
-fun IntroduceTypeAliasData.analyze(): IntroduceTypeAliasAnalysisResult {
+fun IntroduceTypeAliasData.analyze(
+        foldTypeElements: List<KtTypeElement> = emptyList()
+): IntroduceTypeAliasAnalysisResult {
     val psiFactory = KtPsiFactory(originalType)
 
     val contextExpression = originalType.getStrictParentOfType<KtExpression>()!!
@@ -67,12 +69,13 @@ fun IntroduceTypeAliasData.analyze(): IntroduceTypeAliasAnalysisResult {
     val unifier = KotlinPsiUnifier.DEFAULT
     val groupedReferencesToExtract = LinkedMultiMap<TypeReferenceInfo, TypeReferenceInfo>()
 
-    val forcedCandidates = if (extractTypeConstructor) newTypeReference.typeElement!!.typeArgumentsAsTypes else emptyList()
+    val additionalElementsToExtract = SmartList(foldTypeElements)
+    if (extractTypeConstructor) newTypeReference.typeElement!!.typeArgumentsAsTypes.mapTo(additionalElementsToExtract) { it.typeElement }
 
     for (newReference in newReferences) {
         val resolveInfo = newReference.resolveInfo!!
 
-        if (newReference !in forcedCandidates) {
+        if (newReference.typeElement !in additionalElementsToExtract) {
             val originalDescriptor = resolveInfo.type.constructor.declarationDescriptor
             val newDescriptor = newContext[BindingContext.TYPE, newReference]?.constructor?.declarationDescriptor
             if (compareDescriptors(project, originalDescriptor, newDescriptor)) continue

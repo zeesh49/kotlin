@@ -16,34 +16,44 @@
 
 package org.jetbrains.kotlin.idea.refactoring.introduce.introduceTypeAlias.ui;
 
+import com.intellij.icons.AllIcons;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.SelectionModel;
+import com.intellij.openapi.editor.event.SelectionEvent;
+import com.intellij.openapi.editor.event.SelectionListener;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.util.IconLoader;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.refactoring.ui.NameSuggestionsField;
 import com.intellij.ui.TitledSeparator;
 import com.intellij.util.containers.MultiMap;
 import kotlin.Unit;
+import kotlin.collections.CollectionsKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.kotlin.idea.KotlinFileType;
+import org.jetbrains.kotlin.idea.codeInsight.CodeInsightUtils;
+import org.jetbrains.kotlin.idea.core.CollectingNameValidator;
 import org.jetbrains.kotlin.idea.core.KotlinNameSuggester;
 import org.jetbrains.kotlin.idea.core.UtilsKt;
 import org.jetbrains.kotlin.idea.refactoring.KotlinRefactoringUtilKt;
-import org.jetbrains.kotlin.idea.refactoring.introduce.introduceTypeAlias.IntroduceTypeAliasDescriptor;
-import org.jetbrains.kotlin.idea.refactoring.introduce.introduceTypeAlias.IntroduceTypeAliasImplKt;
-import org.jetbrains.kotlin.idea.refactoring.introduce.introduceTypeAlias.KotlinIntroduceTypeAliasHandler;
-import org.jetbrains.kotlin.idea.refactoring.introduce.introduceTypeAlias.TypeParameter;
+import org.jetbrains.kotlin.idea.refactoring.introduce.introduceTypeAlias.*;
 import org.jetbrains.kotlin.idea.refactoring.introduce.ui.KotlinSignatureComponent;
 import org.jetbrains.kotlin.lexer.KtModifierKeywordToken;
 import org.jetbrains.kotlin.lexer.KtTokens;
+import org.jetbrains.kotlin.psi.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.*;
+import java.util.Collections;
 import java.util.List;
 
 public class KotlinIntroduceTypeAliasDialog extends DialogWrapper {
@@ -54,12 +64,16 @@ public class KotlinIntroduceTypeAliasDialog extends DialogWrapper {
     private JPanel aliasNamePanel;
     private NameSuggestionsField aliasNameField;
     private JLabel aliasNameLabel;
+    private JButton foldButton;
+    private JButton undoButton;
+    private JButton redoButton;
     private IntroduceTypeAliasParameterTablePanel parameterTablePanel;
 
     private final Project project;
 
     private final IntroduceTypeAliasDescriptor originalDescriptor;
     private IntroduceTypeAliasDescriptor currentDescriptor;
+    private final IntroduceTypeAliasParameterEditor parameterEditor;
 
     private final Function1<KotlinIntroduceTypeAliasDialog, Unit> onAccept;
 
@@ -72,6 +86,7 @@ public class KotlinIntroduceTypeAliasDialog extends DialogWrapper {
         this.project = project;
         this.originalDescriptor = originalDescriptor;
         this.currentDescriptor = originalDescriptor;
+        this.parameterEditor = new IntroduceTypeAliasParameterEditor(originalDescriptor);
         this.onAccept = onAccept;
 
         setModal(true);
@@ -118,6 +133,9 @@ public class KotlinIntroduceTypeAliasDialog extends DialogWrapper {
 
         setOKActionEnabled(checkNames());
         signaturePreviewField.setText(IntroduceTypeAliasImplKt.generateTypeAlias(currentDescriptor, true).getText());
+
+        undoButton.setEnabled(parameterEditor.getCanUndo());
+        redoButton.setEnabled(parameterEditor.getCanRedo());
     }
 
     @Override
@@ -173,32 +191,123 @@ public class KotlinIntroduceTypeAliasDialog extends DialogWrapper {
                 }
         );
 
-        if (!originalDescriptor.getTypeParameters().isEmpty()) {
-            parameterTablePanel = new IntroduceTypeAliasParameterTablePanel() {
-                @Override
-                protected void updateSignature() {
-                    KotlinIntroduceTypeAliasDialog.this.update();
-                }
+        parameterTablePanel = new IntroduceTypeAliasParameterTablePanel() {
+            @Override
+            protected void updateSignature() {
+                KotlinIntroduceTypeAliasDialog.this.update();
+            }
 
-                @Override
-                protected void onEnterAction() {
-                    doOKAction();
-                }
+            @Override
+            protected void onEnterAction() {
+                doOKAction();
+            }
 
-                @Override
-                protected void onCancelAction() {
-                    doCancelAction();
-                }
-            };
-            parameterTablePanel.init(originalDescriptor.getTypeParameters());
+            @Override
+            protected void onCancelAction() {
+                doCancelAction();
+            }
+        };
+        parameterTablePanel.init(originalDescriptor.getTypeParameters());
 
-            inputParametersPanel.setText("Type &Parameters");
-            inputParametersPanel.setLabelFor(parameterTablePanel.getTable());
-            inputParametersPanel.add(parameterTablePanel);
-        }
-        else {
-            inputParametersPanel.setVisible(false);
-        }
+        inputParametersPanel.setText("Type &Parameters");
+        inputParametersPanel.setLabelFor(parameterTablePanel.getTable());
+        inputParametersPanel.add(parameterTablePanel);
+
+        foldButton.setIcon(AllIcons.General.Add);
+        foldButton.setDisabledIcon(IconLoader.getDisabledIcon(AllIcons.General.Add));
+        foldButton.setEnabled(false);
+        foldButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        parameterEditor.setCurrentDescriptor(createDescriptor());
+
+                        KtTypeReference typeReferenceToFold = getSelectedTypeReference();
+                        if (typeReferenceToFold == null) return;
+
+                        KtTypeAlias typeAlias = PsiTreeUtil.getParentOfType(typeReferenceToFold, KtTypeAlias.class);
+                        if (typeAlias == null) return;
+
+                        List<String> parameterNames = CollectionsKt.map(
+                                typeAlias.getTypeParameters(),
+                                new Function1<KtTypeParameter, String>() {
+                                    @Override
+                                    public String invoke(KtTypeParameter parameter) {
+                                        return parameter.getName();
+                                    }
+                                }
+                        );
+                        String defaultName = KotlinNameSuggester.INSTANCE
+                                .suggestNamesForTypeParameters(1, new CollectingNameValidator(parameterNames))
+                                .get(0);
+
+                        parameterEditor.foldSingle(defaultName, typeReferenceToFold, typeAlias);
+
+                        reloadFromParameterEditor();
+                    }
+                }
+        );
+
+        undoButton.setIcon(AllIcons.Actions.Undo);
+        undoButton.setDisabledIcon(IconLoader.getDisabledIcon(AllIcons.Actions.Undo));
+        undoButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        parameterEditor.setCurrentDescriptor(createDescriptor());
+                        parameterEditor.undo();
+                        reloadFromParameterEditor();
+                    }
+                }
+        );
+
+        redoButton.setIcon(AllIcons.Actions.Redo);
+        redoButton.setDisabledIcon(IconLoader.getDisabledIcon(AllIcons.Actions.Redo));
+        redoButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        parameterEditor.setCurrentDescriptor(createDescriptor());
+                        parameterEditor.redo();
+                        reloadFromParameterEditor();
+                    }
+                }
+        );
+
+        pack();
+
+        //noinspection ConstantConditions
+        signaturePreviewField.getEditor().getSelectionModel().addSelectionListener(
+                new SelectionListener() {
+                    @Override
+                    public void selectionChanged(SelectionEvent e) {
+                        foldButton.setEnabled(getSelectedTypeReference() != null);
+                    }
+                }
+        );
+    }
+
+    @Nullable
+    private KtTypeReference getSelectedTypeReference() {
+        Editor editor = signaturePreviewField.getEditor();
+        if (editor == null) return null;
+
+        SelectionModel selectionModel = editor.getSelectionModel();
+        if (!selectionModel.hasSelection()) return null;
+
+        KtTypeAlias typeAlias = new KtPsiFactory(project).createDeclaration(signaturePreviewField.getText());
+        KtTypeElement typeElementToFold = (KtTypeElement) CodeInsightUtils.findElement(
+                typeAlias.getContainingFile(),
+                selectionModel.getSelectionStart(),
+                selectionModel.getSelectionEnd(),
+                CodeInsightUtils.ElementKind.TYPE_ELEMENT
+        );
+        return PsiTreeUtil.getParentOfType(typeElementToFold, KtTypeReference.class);
+    }
+
+    private void reloadFromParameterEditor() {
+        parameterTablePanel.init(parameterEditor.getCurrentDescriptor().getTypeParameters());
+        update();
     }
 
     @SuppressWarnings("SuspiciousMethodCalls")
