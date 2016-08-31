@@ -17,6 +17,7 @@
 package org.jetbrains.uast.kotlin
 
 import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiMethod
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtBinaryExpression
 import org.jetbrains.uast.*
@@ -28,6 +29,13 @@ class KotlinUBinaryExpression(
 ) : KotlinAbstractUExpression(), UBinaryExpression, PsiElementBacked, KotlinUElementWithType, KotlinEvaluatableUElement {
     override val leftOperand by lz { KotlinConverter.convertOrEmpty(psi.left, this) }
     override val rightOperand by lz { KotlinConverter.convertOrEmpty(psi.right, this) }
+
+    override val operatorIdentifier: UIdentifier?
+        get() = UIdentifier(psi.operationReference, this)
+
+    override fun resolve(): PsiMethod? {
+        psi.operationReference.resolveCallToDeclaration(this) as? PsiMethod
+    }
 
     override val operator = when (psi.operationToken) {
         KtTokens.EQ -> UastBinaryOperator.ASSIGN
@@ -54,7 +62,7 @@ class KotlinUBinaryExpression(
         KtTokens.IN_KEYWORD -> KotlinBinaryOperators.IN
         KtTokens.NOT_IN -> KotlinBinaryOperators.NOT_IN
         KtTokens.RANGE -> KotlinBinaryOperators.RANGE_TO
-        else -> UastBinaryOperator.UNKNOWN
+        else -> UastBinaryOperator.OTHER
     }
 }
 

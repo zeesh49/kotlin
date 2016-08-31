@@ -18,6 +18,7 @@ package org.jetbrains.uast.java
 import com.intellij.psi.PsiAssignmentExpression
 import org.jetbrains.uast.UBinaryExpression
 import org.jetbrains.uast.UElement
+import org.jetbrains.uast.UIdentifier
 import org.jetbrains.uast.psi.PsiElementBacked
 
 class JavaUAssignmentExpression(
@@ -27,4 +28,9 @@ class JavaUAssignmentExpression(
     override val leftOperand by lz { JavaConverter.convertExpression(psi.lExpression, this) }
     override val rightOperand by lz { JavaConverter.convertOrEmpty(psi.rExpression, this) }
     override val operator by lz { psi.operationTokenType.getOperatorType() }
+    
+    override fun resolve() = null
+
+    override val operatorIdentifier: UIdentifier
+        get() = UIdentifier(psi.operationSign, this)
 }

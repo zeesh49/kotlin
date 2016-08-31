@@ -15,12 +15,15 @@
  */
 package org.jetbrains.uast
 
+import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiMethod
+import org.jetbrains.uast.expressions.UReferenceExpression
 import org.jetbrains.uast.visitor.UastVisitor
 
 /**
  * Represents a binary expression (value1 op value2), eg. `2 + "A"`.
  */
-interface UBinaryExpression : UExpression {
+interface UBinaryExpression : UExpression, UResolvable {
     /**
      * Returns the left operand.
      */
@@ -30,6 +33,10 @@ interface UBinaryExpression : UExpression {
      * Returns the binary operator.
      */
     val operator: UastBinaryOperator
+    
+    val operatorIdentifier: UIdentifier?
+
+    override fun resolve(): PsiMethod?
 
     /**
      * Returns the right operand.

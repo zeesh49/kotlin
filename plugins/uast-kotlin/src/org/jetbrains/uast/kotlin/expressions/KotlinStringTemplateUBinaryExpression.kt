@@ -16,11 +16,9 @@
 
 package org.jetbrains.uast.kotlin
 
+import com.intellij.psi.PsiMethod
 import org.jetbrains.kotlin.psi.KtStringTemplateExpression
-import org.jetbrains.uast.UBinaryExpression
-import org.jetbrains.uast.UElement
-import org.jetbrains.uast.UExpression
-import org.jetbrains.uast.UastBinaryOperator
+import org.jetbrains.uast.*
 import org.jetbrains.uast.psi.PsiElementBacked
 
 class KotlinStringTemplateUBinaryExpression(
@@ -34,4 +32,9 @@ class KotlinStringTemplateUBinaryExpression(
         internal set
 
     override val operator = UastBinaryOperator.PLUS
+
+    override val operatorIdentifier: UIdentifier?
+        get() = null
+
+    override fun resolve() = null
 }

@@ -93,7 +93,7 @@ open class UastBinaryOperator(override val text: String): UastOperator {
         val UNSIGNED_SHIFT_RIGHT = BitwiseOperator(">>>")
 
         @JvmField
-        val UNKNOWN = UastBinaryOperator("<unknown>")
+        val OTHER = UastBinaryOperator("<other>")
 
         @JvmField
         val PLUS_ASSIGN = AssignOperator("+=")

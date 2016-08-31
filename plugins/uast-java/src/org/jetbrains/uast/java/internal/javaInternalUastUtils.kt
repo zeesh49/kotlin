@@ -53,7 +53,7 @@ internal fun IElementType.getOperatorType() = when (this) {
     JavaTokenType.LTLTEQ -> UastBinaryOperator.SHIFT_LEFT_ASSIGN
     JavaTokenType.GTGTEQ -> UastBinaryOperator.SHIFT_RIGHT_ASSIGN
     JavaTokenType.GTGTGTEQ -> UastBinaryOperator.UNSIGNED_SHIFT_RIGHT_ASSIGN
-    else -> UastBinaryOperator.UNKNOWN
+    else -> UastBinaryOperator.OTHER
 }
 
 internal tailrec fun UElement.getLanguagePlugin(): UastLanguagePlugin {

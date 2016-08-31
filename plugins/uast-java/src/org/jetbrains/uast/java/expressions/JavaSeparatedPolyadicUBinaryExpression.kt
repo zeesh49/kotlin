@@ -15,10 +15,12 @@
  */
 package org.jetbrains.uast.java
 
+import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiPolyadicExpression
 import org.jetbrains.uast.UBinaryExpression
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UExpression
+import org.jetbrains.uast.UIdentifier
 import org.jetbrains.uast.psi.PsiElementBacked
 
 class JavaSeparatedPolyadicUBinaryExpression(
@@ -28,4 +30,9 @@ class JavaSeparatedPolyadicUBinaryExpression(
     override lateinit var leftOperand: UExpression
     override lateinit var rightOperand: UExpression
     override val operator = psi.operationTokenType.getOperatorType()
+    
+    override val operatorIdentifier: UIdentifier?
+        get() = null
+
+    override fun resolve() = null
 }
