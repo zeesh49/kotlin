@@ -67,6 +67,8 @@ private val DEFAULT_IMPORTS_FOR_JVM: List<ImportPath> = ArrayList<ImportPath>().
 }
 
 private val EXCLUDED_IMPORTS_FOR_JVM: List<FqName> = listOf(
+        "Appendable",
+        "StringBuilder",
         "Error",
         "Exception",
         "RuntimeException",
