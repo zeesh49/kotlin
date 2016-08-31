@@ -1051,6 +1051,12 @@ public class BoxJsTestGenerated extends AbstractBoxJsTest {
             KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("js/js.translator/testData/box/delegation"), Pattern.compile("^([^_](.+))\\.kt$"), true);
         }
 
+        @TestMetadata("complexDelegation.kt")
+        public void testComplexDelegation() throws Exception {
+            String fileName = KotlinTestUtils.navigationMetadata("js/js.translator/testData/box/delegation/complexDelegation.kt");
+            doTest(fileName);
+        }
+
         @TestMetadata("delegation2.kt")
         public void testDelegation2() throws Exception {
             String fileName = KotlinTestUtils.navigationMetadata("js/js.translator/testData/box/delegation/delegation2.kt");
