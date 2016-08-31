@@ -6,5 +6,5 @@ class Test {
 
 }
 
-// EXIST: AbstractList, Date
-// EXIST_JAVA_ONLY: Random, concurrent
+// EXIST: Date
+// EXIST_JAVA_ONLY: AbstractList, Random, concurrent
