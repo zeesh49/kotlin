@@ -29,7 +29,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiTreeUtil
 import org.jetbrains.kotlin.idea.inspections.IntentionBasedInspection
-import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.containsInside
 import org.jetbrains.kotlin.psi.psiUtil.parentsWithSelf
 import java.util.*
@@ -72,16 +72,25 @@ abstract class SelfTargetingIntention<TElement : PsiElement>(
         }
 
         for (element in elementsToCheck) {
-            @Suppress("UNCHECKED_CAST")
-            if (elementType.isInstance(element) && isApplicableTo(element as TElement, offset)) {
-                return element
+            if (elementType.isInstance(element)) {
+                @Suppress("UNCHECKED_CAST")
+                if (isApplicableTo(element as TElement, offset)) {
+                    return element
+                }
             }
-            if (!allowCaretInsideElement(element) && element.textRange.containsInside(offset)) break
+
+            if (!allowCaretInsideElement(element) && element.textRange.containsInside(offset)) {
+                break
+            }
         }
         return null
     }
 
-    protected open fun allowCaretInsideElement(element: PsiElement): Boolean = true
+    protected open fun allowCaretInsideElement(element: PsiElement): Boolean =
+            element !is KtNamedFunction &&
+            element !is KtProperty &&
+            element !is KtClassOrObject &&
+            element !is KtBlockExpression
 
     final override fun isAvailable(project: Project, editor: Editor, file: PsiFile): Boolean {
         val target = getTarget(editor, file) ?: return false
