@@ -92,7 +92,7 @@ class K2JVMCompiler : CLICompiler<K2JVMCompilerArguments>() {
                 )
                 return COMPILATION_ERROR
             }
-            configuration.addKotlinSourceRoot(arguments.freeArgs.get(0))
+            configuration.addKotlinSourceRoot(arguments.freeArgs[0])
         }
         else if (arguments.module == null) {
             for (arg in arguments.freeArgs) {
@@ -360,7 +360,6 @@ class K2JVMCompiler : CLICompiler<K2JVMCompilerArguments>() {
             configuration.put(JVMConfigurationKeys.INHERIT_MULTIFILE_PARTS, arguments.inheritMultifileParts)
             configuration.put(CLIConfigurationKeys.ALLOW_KOTLIN_PACKAGE, arguments.allowKotlinPackage)
             configuration.put(CLIConfigurationKeys.REPORT_PERF, arguments.reportPerf)
-            configuration.put(JVMConfigurationKeys.LOAD_SCRIPT_CONFIGS, arguments.loadScriptConfigs)
 
             arguments.declarationsOutputPath?.let { configuration.put(JVMConfigurationKeys.DECLARATIONS_JSON_PATH, it) }
         }

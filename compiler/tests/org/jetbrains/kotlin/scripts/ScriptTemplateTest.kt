@@ -40,7 +40,7 @@ import kotlin.reflect.KClass
 // TODO: the contetnts of this file should go into ScriptTest.kt and replace appropriate xml-based functionality,
 // as soon as the the latter is removed from the codebase
 
-class ScriptTest2 {
+class ScriptTemplateTest {
     @Test
     fun testScriptWithParam() {
         val aClass = compileScript("fib.kts", ScriptWithIntParam::class, null)

@@ -72,7 +72,10 @@ import org.jetbrains.kotlin.cli.jvm.config.addJvmClasspathRoots
 import org.jetbrains.kotlin.codegen.extensions.ClassBuilderInterceptorExtension
 import org.jetbrains.kotlin.codegen.extensions.ExpressionCodegenExtension
 import org.jetbrains.kotlin.compiler.plugin.ComponentRegistrar
-import org.jetbrains.kotlin.config.*
+import org.jetbrains.kotlin.config.CompilerConfiguration
+import org.jetbrains.kotlin.config.ContentRoot
+import org.jetbrains.kotlin.config.JVMConfigurationKeys
+import org.jetbrains.kotlin.config.kotlinSourceRoots
 import org.jetbrains.kotlin.extensions.ExternalDeclarationsProvider
 import org.jetbrains.kotlin.extensions.StorageComponentContainerContributor
 import org.jetbrains.kotlin.idea.KotlinFileType
@@ -89,9 +92,9 @@ import org.jetbrains.kotlin.resolve.jvm.extensions.AnalysisCompletedHandlerExten
 import org.jetbrains.kotlin.resolve.jvm.extensions.PackageFragmentProviderExtension
 import org.jetbrains.kotlin.resolve.lazy.declarations.CliDeclarationProviderFactoryService
 import org.jetbrains.kotlin.resolve.lazy.declarations.DeclarationProviderFactoryService
-import org.jetbrains.kotlin.script.*
+import org.jetbrains.kotlin.script.KotlinScriptDefinitionProvider
+import org.jetbrains.kotlin.script.KotlinScriptExternalImportsProvider
 import org.jetbrains.kotlin.utils.PathUtil
-import org.jetbrains.kotlin.utils.ifEmpty
 import java.io.File
 import java.util.*
 
@@ -103,7 +106,7 @@ class KotlinCoreEnvironment private constructor(
 
     private val projectEnvironment: JavaCoreProjectEnvironment = object : KotlinCoreProjectEnvironment(parentDisposable, applicationEnvironment) {
         override fun preregisterServices() {
-            registerProjectExtensionPoints(Extensions.getArea(getProject()))
+            registerProjectExtensionPoints(Extensions.getArea(project))
         }
     }
     private val sourceFiles = ArrayList<KtFile>()
@@ -127,24 +130,11 @@ class KotlinCoreEnvironment private constructor(
             message ->
             report(ERROR, message)
         }))
-        sourceFiles.sortedWith(object : Comparator<KtFile> {
-            override fun compare(o1: KtFile, o2: KtFile): Int {
-                return o1.virtualFile.path.compareTo(o2.virtualFile.path, ignoreCase = true)
-            }
-        })
+        sourceFiles.sortedWith(Comparator<KtFile> { o1, o2 -> o1.virtualFile.path.compareTo(o2.virtualFile.path, ignoreCase = true) })
 
         KotlinScriptDefinitionProvider.getInstance(project).let { scriptDefinitionProvider ->
             scriptDefinitionProvider.setScriptDefinitions(
-                    configuration.getList(JVMConfigurationKeys.SCRIPT_DEFINITIONS)
-                            .ifEmpty {
-                                if (configuration.get(JVMConfigurationKeys.LOAD_SCRIPT_CONFIGS) ?: false)
-                                    loadScriptConfigsFromProjectRoot(File(project.basePath ?: ".")).let { configs ->
-                                        val kotlinEnvVars = generateKotlinScriptClasspathEnvVars(project)
-                                        configs.map { KotlinConfigurableScriptDefinition(it, kotlinEnvVars) }
-                                    }
-                                else null
-                                ?: emptyList()
-                            })
+                    configuration.getList(JVMConfigurationKeys.SCRIPT_DEFINITIONS))
 
             KotlinScriptExternalImportsProvider.getInstance(project)?.run {
                 configuration.addJvmClasspathRoots(
@@ -260,7 +250,7 @@ class KotlinCoreEnvironment private constructor(
 
     private fun findJarRoot(root: JvmClasspathRoot): VirtualFile? {
         val path = root.file
-        val jarFile = applicationEnvironment.jarFileSystem.findFileByPath("${path}${URLUtil.JAR_SEPARATOR}")
+        val jarFile = applicationEnvironment.jarFileSystem.findFileByPath("$path${URLUtil.JAR_SEPARATOR}")
         if (jarFile == null) {
             report(WARNING, "Classpath entry points to a file that is not a JAR archive: $path")
             return null
@@ -302,12 +292,10 @@ class KotlinCoreEnvironment private constructor(
             if (!(System.getProperty(KOTLIN_COMPILER_ENVIRONMENT_KEEPALIVE_PROPERTY).toBooleanLenient() ?: false)) {
                 // JPS may run many instances of the compiler in parallel (there's an option for compiling independent modules in parallel in IntelliJ)
                 // All projects share the same ApplicationEnvironment, and when the last project is disposed, the ApplicationEnvironment is disposed as well
-                Disposer.register(parentDisposable, object : Disposable {
-                    override fun dispose() {
-                        synchronized (APPLICATION_LOCK) {
-                            if (--ourProjectCount <= 0) {
-                                disposeApplicationEnvironment()
-                            }
+                Disposer.register(parentDisposable, Disposable {
+                    synchronized (APPLICATION_LOCK) {
+                        if (--ourProjectCount <= 0) {
+                            disposeApplicationEnvironment()
                         }
                     }
                 })
@@ -339,11 +327,9 @@ class KotlinCoreEnvironment private constructor(
                 val parentDisposable = Disposer.newDisposable()
                 ourApplicationEnvironment = createApplicationEnvironment(parentDisposable, configuration, configFilePaths)
                 ourProjectCount = 0
-                Disposer.register(parentDisposable, object : Disposable {
-                    override fun dispose() {
-                        synchronized (APPLICATION_LOCK) {
-                            ourApplicationEnvironment = null
-                        }
+                Disposer.register(parentDisposable, Disposable {
+                    synchronized (APPLICATION_LOCK) {
+                        ourApplicationEnvironment = null
                     }
                 })
                 return ourApplicationEnvironment!!

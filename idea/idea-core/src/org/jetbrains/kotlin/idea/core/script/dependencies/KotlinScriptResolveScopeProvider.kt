@@ -21,18 +21,16 @@ import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.ResolveScopeProvider
 import com.intellij.psi.search.GlobalSearchScope
 import org.jetbrains.kotlin.idea.core.script.KotlinScriptConfigurationManager
-import org.jetbrains.kotlin.script.KotlinConfigurableScriptDefinition
 import org.jetbrains.kotlin.script.KotlinScriptDefinitionFromTemplate
 import org.jetbrains.kotlin.script.getScriptDefinition
 
 class KotlinScriptResolveScopeProvider : ResolveScopeProvider() {
-    override fun getResolveScope(file: VirtualFile, project: Project): GlobalSearchScope? {
-        val scriptDefinition = getScriptDefinition(file, project) ?: return null
-        // TODO: this should get this particular scripts dependencies
-        if (scriptDefinition is KotlinConfigurableScriptDefinition || scriptDefinition is KotlinScriptDefinitionFromTemplate) {
-            // TODO: should include the file itself
-            return KotlinScriptConfigurationManager.getInstance(project).getAllScriptsClasspathScope()
-        }
-        return null
-    }
+    override fun getResolveScope(file: VirtualFile, project: Project): GlobalSearchScope? =
+            // TODO: this should get this particular scripts dependencies
+            when (getScriptDefinition(file, project)) {
+                null -> null
+                is KotlinScriptDefinitionFromTemplate -> // TODO: should include the file itself
+                    KotlinScriptConfigurationManager.getInstance(project).getAllScriptsClasspathScope()
+                else -> null
+            }
 }
