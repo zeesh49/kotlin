@@ -75,8 +75,5 @@ internal object Collections {
     }
 }
 
-@library("collectionsMax")
-private fun <T> max(col: Collection<T>, comp: Comparator<in T>): T = noImpl
-
 @library("collectionsSort")
 private fun <T> sort(list: MutableList<T>, comparator: Comparator<in T>): Unit = noImpl
