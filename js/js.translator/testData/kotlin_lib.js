@@ -671,9 +671,11 @@
         compareTo: throwAbstractFunctionInvocationError("Comparable#compareTo")
     });
 
+/*
     Kotlin.Appendable = Kotlin.createTraitNow(null, null, {
         append: throwAbstractFunctionInvocationError("Appendable#append")
     });
+*/
 
     Kotlin.Closeable = Kotlin.createTraitNow(null, null, {
         close: throwAbstractFunctionInvocationError("Closeable#close")
@@ -1128,6 +1130,7 @@
     };
 
 
+/*
     Kotlin.StringBuilder = Kotlin.createClassNow([CharSequence],
         function (content) {
             this.string = typeof(content) == "string" ? content : "";
@@ -1162,6 +1165,7 @@
             return this.string;
         }
     });
+*/
 
     Kotlin.splitString = function (str, regex, limit) {
         return str.split(new RegExp(regex), limit);
