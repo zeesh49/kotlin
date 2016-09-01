@@ -99,6 +99,28 @@ class KotlinMavenArchetypesProviderTest {
 
         assertEquals(
                 listOf(
+                        MavenArchetype("org.jetbrains.kotlin", "kotlin-archetype-jvm", "1.0.1-2", null, null),
+                        MavenArchetype("org.jetbrains.kotlin", "kotlin-archetype-jvm", "1.1.2", null, null),
+                        MavenArchetype("org.jetbrains.kotlin", "kotlin-archetype-js", "1.0.0", null, null)
+                ).sortedBy { it.artifactId + "." + it.version },
+                versions.sortedBy { it.artifactId + "." + it.version }
+        )
+    }
+
+    @Test
+    fun extractVersionsSnapshotPlugin() {
+        val file = File(BASE_PATH, "extractVersions/maven-central-response.json")
+        assertTrue("Test data is missing", file.exists())
+
+        val json = file.bufferedReader().use {
+            JsonParser().parse(it)
+        }
+
+        val versions = KotlinMavenArchetypesProvider("@snapshot@", false).extractVersions(json)
+
+        assertEquals(
+                listOf(
+                        MavenArchetype("org.jetbrains.kotlin", "kotlin-archetype-jvm", "1.0.1-2", null, null),
                         MavenArchetype("org.jetbrains.kotlin", "kotlin-archetype-jvm", "1.1.2", null, null),
                         MavenArchetype("org.jetbrains.kotlin", "kotlin-archetype-js", "1.0.0", null, null)
                 ).sortedBy { it.artifactId + "." + it.version },
