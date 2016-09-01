@@ -111,7 +111,7 @@ public abstract class AbstractMap<K, out V> protected constructor() : Map<K, V> 
 
     private fun implFindEntry(key: K): Map.Entry<K, V>? = entries.firstOrNull { it.key == key }
 
-    companion object {
+    internal companion object {
 
         internal fun entryHashCode(e: Map.Entry<*, *>): Int = with(e) { (key?.hashCode() ?: 0) xor (value?.hashCode() ?: 0) }
         internal fun entryToString(e: Map.Entry<*, *>): String = with(e) { "$key=$value" }
