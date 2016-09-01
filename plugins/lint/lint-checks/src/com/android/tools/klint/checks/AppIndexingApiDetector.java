@@ -357,7 +357,7 @@ public class AppIndexingApiDetector extends Detector implements XmlScanner, Dete
             // `AppIndex.AppIndexApi.start / end / view / viewEnd` should exist
             if (mStartMethods.isEmpty() && mEndMethods.isEmpty()) {
                 mContext.reportUast(ISSUE_APP_INDEXING_API, mCls,
-                        mContext.getNameLocation(mCls),
+                        mContext.getUastNameLocation(mCls),
                         "Missing support for Google App Indexing API");
                 return;
             }

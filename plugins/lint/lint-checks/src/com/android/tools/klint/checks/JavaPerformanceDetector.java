@@ -498,7 +498,7 @@ public class JavaPerformanceDetector extends Detector implements Detector.UastSc
             }
         }
     }
-
+    
     private static String getUseValueOfErrorMessage(String typeName, String argument) {
         // Keep in sync with {@link #getReplacedType} below
         return String.format("Use `%1$s.valueOf(%2$s)` instead",

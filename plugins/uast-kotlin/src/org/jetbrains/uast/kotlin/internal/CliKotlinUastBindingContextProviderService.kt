@@ -11,6 +11,7 @@ import org.jetbrains.kotlin.load.java.JvmAbi
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.resolve.BindingContext
+import org.jetbrains.kotlin.resolve.BindingTrace
 import org.jetbrains.kotlin.resolve.jvm.extensions.AnalysisCompletedHandlerExtension
 import org.jetbrains.uast.kotlin.KotlinUastBindingContextProviderService
 
@@ -48,10 +49,10 @@ class UastAnalysisCompletedHandlerExtension : AnalysisCompletedHandlerExtension 
     override fun analysisCompleted(
             project: Project, 
             module: ModuleDescriptor, 
-            bindingContext: BindingContext, 
+            bindingTrace: BindingTrace, 
             files: Collection<KtFile>
     ): AnalysisResult? {
-        context = bindingContext
+        context = bindingTrace.bindingContext
         return null
     }
 }

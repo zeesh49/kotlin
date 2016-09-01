@@ -64,6 +64,6 @@ class UastKotlinPsiVariable(
 private class KotlinUastPsiExpression(val ktExpression: KtExpression) : PsiElement by ktExpression, PsiExpression {
     override fun getType(): PsiType? {
         val ktType = ktExpression.analyze()[BindingContext.EXPRESSION_TYPE_INFO, ktExpression]?.type ?: return null
-        return ktType.toPsiType(ktExpression)
+        return ktType.toPsiType(ktExpression, boxed = false)
     }
 }

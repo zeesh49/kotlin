@@ -57,7 +57,7 @@ internal fun DeclarationDescriptor.toSource() = try {
 
 internal fun <T> lz(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)
 
-internal fun KotlinType.toPsiType(element: KtElement): PsiType {
+internal fun KotlinType.toPsiType(element: KtElement, boxed: Boolean): PsiType {
     if (this.isError) return UastErrorType
     
     val project = element.project
@@ -65,7 +65,8 @@ internal fun KotlinType.toPsiType(element: KtElement): PsiType {
             .getTypeMapper(element) ?: return UastErrorType
     
     val signatureWriter = BothSignatureWriter(BothSignatureWriter.Mode.TYPE)
-    typeMapper.mapType(this, signatureWriter, TypeMappingMode.DEFAULT)
+    val typeMappingMode = if (boxed) TypeMappingMode.GENERIC_ARGUMENT else TypeMappingMode.DEFAULT
+    typeMapper.mapType(this, signatureWriter, typeMappingMode)
     
     val signature = StringCharacterIterator(signatureWriter.toString())
     
@@ -75,9 +76,9 @@ internal fun KotlinType.toPsiType(element: KtElement): PsiType {
     return ClsTypeElementImpl(element, typeText, '\u0000').type
 }
 
-internal fun KtTypeReference?.toPsiType(): PsiType {
+internal fun KtTypeReference?.toPsiType(boxed: Boolean = false): PsiType {
     if (this == null) return UastErrorType
-    return (analyze()[BindingContext.TYPE, this] ?: return UastErrorType).toPsiType(this)
+    return (analyze()[BindingContext.TYPE, this] ?: return UastErrorType).toPsiType(this, boxed)
 }
 
 internal fun KtClassOrObject.toPsiType(): PsiType {
@@ -106,8 +107,8 @@ internal fun PsiElement.getMaybeLightElement(context: UElement): PsiElement? {
 }
 
 internal fun KtElement.resolveCallToDeclaration(
-        resultingDescriptor: DeclarationDescriptor? = null,
-        context: KotlinAbstractUElement
+        context: KotlinAbstractUElement,
+        resultingDescriptor: DeclarationDescriptor? = null
 ): PsiElement? {
     val descriptor = resultingDescriptor ?: run {
         val resolvedCall = getResolvedCall(analyze()) ?: return null

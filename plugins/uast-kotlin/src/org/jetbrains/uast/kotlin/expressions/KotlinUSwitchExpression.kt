@@ -64,7 +64,7 @@ class KotlinUSwitchEntry(
                     else -> UastBinaryExpressionWithTypeKind.INSTANCE_CHECK
                 }
                 val typeRef = it.typeReference
-                val type = typeRef.toPsiType()
+                val type = typeRef.toPsiType(boxed = true)
                 this.type = type
                 typeReference = typeRef?.let { KotlinUTypeReferenceExpression(type, it, this) }
             }

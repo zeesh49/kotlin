@@ -32,7 +32,7 @@ open class KotlinUSimpleReferenceExpression(
         override val containingElement: UElement?,
         private val resultingDescriptor: DeclarationDescriptor? = null
 ) : KotlinAbstractUExpression(), USimpleNameReferenceExpression, PsiElementBacked, KotlinUElementWithType, KotlinEvaluatableUElement {
-    override fun resolve() = (psi as? KtElement)?.resolveCallToDeclaration(resultingDescriptor, context = this)
+    override fun resolve() = (psi as? KtElement)?.resolveCallToDeclaration(this, resultingDescriptor)
     override val resolvedName: String?
         get() = (resolve() as? PsiNamedElement)?.name
 }

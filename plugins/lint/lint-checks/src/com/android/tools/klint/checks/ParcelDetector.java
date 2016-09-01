@@ -96,7 +96,7 @@ public class ParcelDetector extends Detector implements Detector.UastScanner {
 
         PsiField field = declaration.findFieldByName("CREATOR", false);
         if (field == null) {
-            Location location = context.getNameLocation(declaration);
+            Location location = context.getUastNameLocation(declaration);
             context.reportUast(ISSUE, declaration, location,
                     "This class implements `Parcelable` but does not "
                             + "provide a `CREATOR` field");

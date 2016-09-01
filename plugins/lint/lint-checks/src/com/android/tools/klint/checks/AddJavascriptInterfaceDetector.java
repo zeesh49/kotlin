@@ -89,6 +89,6 @@ public class AddJavascriptInterfaceDetector extends Detector implements Detector
         if (reportElement == null) {
             reportElement = call;
         }
-        context.reportUast(ISSUE, method, context.getUastNameLocation(reportElement), message);
+        context.reportUast(ISSUE, reportElement, context.getUastNameLocation(reportElement), message);
     }
 }

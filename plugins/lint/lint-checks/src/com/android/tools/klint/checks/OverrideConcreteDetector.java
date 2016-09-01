@@ -137,7 +137,7 @@ public class OverrideConcreteDetector extends Detector implements Detector.UastS
                         "Must override `%1$s.%2$s(%3$s)`: Method was abstract until %4$d, and your `minSdkVersion` is %5$d",
                         NOTIFICATION_LISTENER_SERVICE_FQN, methodName,
                         STATUS_BAR_NOTIFICATION_FQN, CONCRETE_IN, minSdk);
-                context.reportUast(ISSUE, declaration, context.getNameLocation(declaration), message);
+                context.reportUast(ISSUE, declaration, context.getUastNameLocation(declaration), message);
                 break;
             }
 

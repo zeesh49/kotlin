@@ -28,7 +28,7 @@ class UastKotlinPsiParameter(
             return UastKotlinPsiParameter(
                     parameter.name ?: "p$index",
                     (parameter.analyze()[BindingContext.DECLARATION_TO_DESCRIPTOR, parameter] as? VariableDescriptor)
-                            ?.type?.toPsiType(parameter) ?: UastErrorType,
+                            ?.type?.toPsiType(parameter, boxed = false) ?: UastErrorType,
                     owner,
                     KotlinLanguage.INSTANCE,
                     parameter.isVarArg,

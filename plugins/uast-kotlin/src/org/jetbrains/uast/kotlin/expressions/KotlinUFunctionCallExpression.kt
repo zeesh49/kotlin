@@ -44,7 +44,7 @@ class KotlinUFunctionCallExpression(
     override val receiverType by lz {
         val resolvedCall = this.resolvedCall ?: return@lz null
         val receiver = resolvedCall.extensionReceiver ?: resolvedCall.dispatchReceiver ?: return@lz null
-        receiver.type.toPsiType(psi)
+        receiver.type.toPsiType(psi, boxed = true)
     }
 
     override val methodName by lz { resolvedCall?.resultingDescriptor?.name?.asString() }
@@ -67,7 +67,7 @@ class KotlinUFunctionCallExpression(
     override val typeArgumentCount: Int
         get() = psi.typeArguments.size
 
-    override val typeArguments by lz { psi.typeArguments.map { it.typeReference.toPsiType() } }
+    override val typeArguments by lz { psi.typeArguments.map { it.typeReference.toPsiType(boxed = true) } }
 
     override val returnType: PsiType?
         get() = getExpressionType()

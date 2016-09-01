@@ -144,7 +144,7 @@ public class ViewConstructorDetector extends Detector implements Detector.UastSc
                             + "`(Context)` or `(Context,AttributeSet)` "
                             + "or `(Context,AttributeSet,int)`",
                     declaration.getName());
-            Location location = context.getNameLocation(declaration);
+            Location location = context.getUastNameLocation(declaration);
             context.reportUast(ISSUE, declaration, location, message  /*data*/);
         }
     }

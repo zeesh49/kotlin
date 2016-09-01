@@ -119,12 +119,8 @@ public class HandlerDetector extends Detector implements Detector.UastScanner {
             // possibly used correctly from elsewhere
             return;
         }
-
-        PsiElement locationNode = JavaContext.findNameElement(declaration);
-        if (locationNode == null) {
-            locationNode = declaration;
-        }
-        Location location = context.getLocation(locationNode);
+        
+        Location location = context.getUastNameLocation(declaration);
         String name;
         if (isAnonymous) {
             name = "anonymous " + ((UAnonymousClass)declaration).getBaseClassReference().getQualifiedName();
@@ -133,7 +129,7 @@ public class HandlerDetector extends Detector implements Detector.UastScanner {
         }
 
         //noinspection VariableNotUsedInsideIf
-        context.report(ISSUE, locationNode, location, String.format(
+        context.reportUast(ISSUE, declaration, location, String.format(
                 "This Handler class should be static or leaks might occur (%1$s)",
                 name));
 
