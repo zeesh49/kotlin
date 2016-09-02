@@ -117,6 +117,7 @@ import org.jetbrains.kotlin.idea.stubs.AbstractResolveByStubTest
 import org.jetbrains.kotlin.idea.stubs.AbstractStubBuilderTest
 import org.jetbrains.kotlin.integration.AbstractAntTaskTest
 import org.jetbrains.kotlin.ir.AbstractIrTextTestCase
+import org.jetbrains.kotlin.ir.AbstractPsi2IrAcceptanceTestCase
 import org.jetbrains.kotlin.j2k.AbstractJavaToKotlinConverterForWebDemoTest
 import org.jetbrains.kotlin.j2k.AbstractJavaToKotlinConverterMultiFileTest
 import org.jetbrains.kotlin.j2k.AbstractJavaToKotlinConverterSingleFileTest
@@ -236,6 +237,10 @@ fun main(args: Array<String>) {
 
         testClass<AbstractIrTextTestCase>() {
             model("ir/irText")
+        }
+
+        testClass<AbstractPsi2IrAcceptanceTestCase>() {
+            model("codegen/box")
         }
 
         testClass<AbstractBytecodeListingTest>() {
