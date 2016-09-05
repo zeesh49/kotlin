@@ -22,6 +22,7 @@ import java.util.*
 interface FunctionHandle {
     val isDeclaration: Boolean
     val isAbstract: Boolean
+    val isInterfaceDeclaration: Boolean
 
     fun getOverridden(): Iterable<FunctionHandle>
 }
@@ -108,7 +109,7 @@ fun <Function : FunctionHandle> findConcreteSuperDeclaration(function: Function)
     }
     result.removeAll(toRemove)
 
-    val concreteRelevantDeclarations = result.filter { !it.isAbstract }
+    val concreteRelevantDeclarations = result.filter { !it.isAbstract && !it.isInterfaceDeclaration }
     if (concreteRelevantDeclarations.size != 1) {
         error("Concrete fake override $function should have exactly one concrete super-declaration: $concreteRelevantDeclarations")
     }
