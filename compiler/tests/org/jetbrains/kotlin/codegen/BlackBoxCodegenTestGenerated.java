@@ -12252,6 +12252,12 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
                 doTest(fileName);
             }
 
+            @TestMetadata("genericOverriddenFunction.kt")
+            public void testGenericOverriddenFunction() throws Exception {
+                String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/reflection/functions/genericOverriddenFunction.kt");
+                doTest(fileName);
+            }
+
             @TestMetadata("javaClassGetFunctions.kt")
             public void testJavaClassGetFunctions() throws Exception {
                 String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/reflection/functions/javaClassGetFunctions.kt");
@@ -12990,6 +12996,12 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
             @TestMetadata("genericClassLiteralPropertyReceiverIsStar.kt")
             public void testGenericClassLiteralPropertyReceiverIsStar() throws Exception {
                 String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/reflection/properties/genericClassLiteralPropertyReceiverIsStar.kt");
+                doTest(fileName);
+            }
+
+            @TestMetadata("genericOverriddenProperty.kt")
+            public void testGenericOverriddenProperty() throws Exception {
+                String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/codegen/box/reflection/properties/genericOverriddenProperty.kt");
                 doTest(fileName);
             }
 
