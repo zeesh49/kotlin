@@ -47,7 +47,6 @@ messages/**)
 -libraryjars '<bootstrap.runtime>'
 -libraryjars '<bootstrap.reflect>'
 
--target 1.6
 -dontoptimize
 -dontobfuscate
 

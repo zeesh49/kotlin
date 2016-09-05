@@ -28,7 +28,7 @@
     <property name="protobuf-lite.jar" value="${basedir}/dependencies/protobuf-2.6.1-lite.jar"/>
     <property name="javax.inject.jar" value="${basedir}/lib/javax.inject.jar"/>
 
-    <property name="java.target" value="1.6"/>
+    <property name="java.target" value="1.8"/>
 
     <property name="dependencies.dir" value="${basedir}/dependencies"/>
 
@@ -895,6 +895,8 @@
                 <arg value="-module-name"/>
                 <arg value="@{moduleName}"/>
                 <arg value="-Xallow-kotlin-package"/>
+                <arg value="-jvm-target"/>
+                <arg value="1.8"/>
             </java>
 
             <javac2 srcdir="${toString:src.dirset}" destdir="@{output}" debug="true" debuglevel="lines,vars,source"
