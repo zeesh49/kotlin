@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /simple.kt
+    TYPEALIAS typealias S = String type=kotlin.String
+    TYPEALIAS typealias SF = (T) -> S type=(T) -> S
+    PROPERTY public val f: SF<S /* = kotlin.String */> /* = (in S /* = kotlin.String */) -> S /* = kotlin.String */ */
+      EXPRESSION_BODY
+        BLOCK type=(S /* = kotlin.String */) -> S /* = kotlin.String */ operator=LAMBDA
+          FUN local final fun <anonymous>(it: S /* = kotlin.String */): S /* = kotlin.String */
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<anonymous>(S /* = String */): S /* = String */'
+                GET_VAR 'value-parameter it: S /* = String */' type=S /* = kotlin.String */ operator=null
+          CALLABLE_REFERENCE '<anonymous>(S /* = String */): S /* = String */' type=(S /* = kotlin.String */) -> S /* = kotlin.String */ operator=LAMBDA
+    FUN public fun box(): S /* = kotlin.String */
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): S /* = String */'
+          CALL 'invoke(S /* = String */): S /* = String */' type=S /* = kotlin.String */ operator=INVOKE
+            $this: CALL '<get-f>(): SF<S /* = String */> /* = (in S /* = String */) -> S /* = String */ */' type=SF<S /* = kotlin.String */> /* = (in S /* = kotlin.String */) -> S /* = kotlin.String */ */ operator=GET_PROPERTY
+            p1: CONST String type=kotlin.String value='OK'

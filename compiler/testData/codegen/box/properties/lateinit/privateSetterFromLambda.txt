@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /privateSetterFromLambda.kt
+    CLASS CLASS My
+      CONSTRUCTOR public constructor My()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='My'
+      PROPERTY public final lateinit var x: kotlin.String
+        PROPERTY_SETTER private final fun <set-x>(<set-?>: kotlin.String): kotlin.Unit
+      FUN public final fun init(arg: kotlin.String, f: (kotlin.String) -> kotlin.String): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-x>(String): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'My' type=My
+            <set-?>: CALL 'invoke(String): String' type=kotlin.String operator=INVOKE
+              $this: GET_VAR 'value-parameter f: (String) -> String' type=(kotlin.String) -> kotlin.String operator=VARIABLE_AS_FUNCTION
+              p1: GET_VAR 'value-parameter arg: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val my: My
+          CALL 'constructor My()' type=My operator=null
+        CALL 'init(String, (String) -> String): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'my: My' type=My operator=null
+          arg: CONST String type=kotlin.String value='O'
+          f: BLOCK type=(kotlin.String) -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(it: kotlin.String): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(String): String'
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                    $this: GET_VAR 'value-parameter it: String' type=kotlin.String operator=null
+                    other: CONST String type=kotlin.String value='K'
+            CALLABLE_REFERENCE '<anonymous>(String): String' type=(kotlin.String) -> kotlin.String operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-x>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_VAR 'my: My' type=My operator=null

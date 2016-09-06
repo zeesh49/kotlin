@@ -1,0 +1,23 @@
+MODULE <test-module>
+  FILE /safeAccess.kt
+    CLASS OBJECT Test
+      CONSTRUCTOR private constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      PROPERTY public final val a: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          BLOCK type=kotlin.String? operator=SAFE_CALL
+            VAR val tmp0_safe_receiver: Test
+              GET_OBJECT 'Test' type=Test
+            WHEN type=kotlin.String? operator=SAFE_CALL
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_safe_receiver: Test' type=Test operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CONST Null type=kotlin.Nothing? value='null'
+              else: CALL '<get-a>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'tmp0_safe_receiver: Test' type=Test operator=null

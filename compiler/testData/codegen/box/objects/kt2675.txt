@@ -1,0 +1,46 @@
+MODULE <test-module>
+  FILE /kt2675.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun ok(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='ok(): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CALL 'bar(): String' type=kotlin.String operator=null
+                $this: GET_OBJECT 'Bar' type=A.Foo.Bar
+              other: CALL '<get-barv>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_OBJECT 'Bar' type=A.Foo.Bar
+      CLASS OBJECT Foo
+        CONSTRUCTOR private constructor Foo()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+        FUN public final fun foo(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo(): String'
+              CONST String type=kotlin.String value='O'
+        PROPERTY public final val foov: kotlin.String = "K"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='K'
+        CLASS OBJECT Bar
+          CONSTRUCTOR private constructor Bar()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='Bar'
+          FUN public final fun bar(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='bar(): String'
+                CALL 'foo(): String' type=kotlin.String operator=null
+                  $this: THIS of 'Foo' type=A.Foo
+          PROPERTY public final val barv: kotlin.String = "K"
+            EXPRESSION_BODY
+              CALL '<get-foov>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'Foo' type=A.Foo
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'ok(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor A()' type=A operator=null

@@ -1,0 +1,39 @@
+MODULE <test-module>
+  FILE /primitive.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: BLOCK type=kotlin.Int operator=ELVIS
+                VAR val tmp0_elvis_lhs: kotlin.Int
+                  CONST Int type=kotlin.Int value='42'
+                WHEN type=kotlin.Int operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_elvis_lhs: Int' type=kotlin.Int operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CONST Int type=kotlin.Int value='239'
+                  else: GET_VAR 'tmp0_elvis_lhs: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='42'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail Int'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: BLOCK type=kotlin.Long operator=ELVIS
+                VAR val tmp1_elvis_lhs: kotlin.Long
+                  CALL 'toLong(): Long' type=kotlin.Long operator=null
+                    $this: CONST Int type=kotlin.Int value='42'
+                WHEN type=kotlin.Long operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp1_elvis_lhs: Long' type=kotlin.Long operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'toLong(): Long' type=kotlin.Long operator=null
+                    $this: CONST Int type=kotlin.Int value='239'
+                  else: GET_VAR 'tmp1_elvis_lhs: Long' type=kotlin.Long operator=null
+              arg1: CALL 'toLong(): Long' type=kotlin.Long operator=null
+                $this: CONST Int type=kotlin.Int value='42'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail Long'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,27 @@
+MODULE <test-module>
+  FILE /classObject.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      CLASS OBJECT companion object of C
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of C'
+        FUN public final fun create(): C
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='create(): C'
+              CALL 'constructor C()' type=C operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val c: C
+          CALL 'create(): C' type=C operator=null
+            $this: GET_OBJECT 'companion object of C' type=C.Companion
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: TYPE_OP operator=INSTANCEOF typeOperand=C
+              GET_VAR 'c: C' type=C operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

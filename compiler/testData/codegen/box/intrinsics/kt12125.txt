@@ -1,0 +1,60 @@
+MODULE <test-module>
+  FILE /kt12125.kt
+    FUN public fun test(i: kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test(Int): Int'
+          GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var b: kotlin.Byte
+          CALL '<get-MAX_VALUE>(): Byte' type=kotlin.Byte operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Byte' type=kotlin.Byte.Companion
+        BLOCK type=kotlin.Byte operator=POSTFIX_INCR
+          VAR val tmp0: kotlin.Byte
+            GET_VAR 'b: Byte' type=kotlin.Byte operator=POSTFIX_INCR
+          SET_VAR 'b: Byte' type=kotlin.Unit operator=POSTFIX_INCR
+            CALL 'inc(): Byte' type=kotlin.Byte operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp0: Byte' type=kotlin.Byte operator=null
+          GET_VAR 'tmp0: Byte' type=kotlin.Byte operator=null
+        VAR var result: kotlin.Int
+          CALL 'test(Int): Int' type=kotlin.Int operator=null
+            i: CALL 'toInt(): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CALL 'toInt(): Int' type=kotlin.Int operator=null
+                $this: CALL '<get-MIN_VALUE>(): Byte' type=kotlin.Byte operator=GET_PROPERTY
+                  $this: GET_OBJECT 'companion object of Byte' type=kotlin.Byte.Companion
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              GET_VAR 'result: Int' type=kotlin.Int operator=null
+        VAR var s: kotlin.Short
+          CALL '<get-MIN_VALUE>(): Short' type=kotlin.Short operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Short' type=kotlin.Short.Companion
+        BLOCK type=kotlin.Short operator=POSTFIX_DECR
+          VAR val tmp1: kotlin.Short
+            GET_VAR 's: Short' type=kotlin.Short operator=POSTFIX_DECR
+          SET_VAR 's: Short' type=kotlin.Unit operator=POSTFIX_DECR
+            CALL 'dec(): Short' type=kotlin.Short operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp1: Short' type=kotlin.Short operator=null
+          GET_VAR 'tmp1: Short' type=kotlin.Short operator=null
+        SET_VAR 'result: Int' type=kotlin.Unit operator=EQ
+          CALL 'test(Int): Int' type=kotlin.Int operator=null
+            i: CALL 'toInt(): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 's: Short' type=kotlin.Short operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CALL 'toInt(): Int' type=kotlin.Int operator=null
+                $this: CALL '<get-MAX_VALUE>(): Short' type=kotlin.Short operator=GET_PROPERTY
+                  $this: GET_OBJECT 'companion object of Short' type=kotlin.Short.Companion
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 2: '
+              GET_VAR 'result: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

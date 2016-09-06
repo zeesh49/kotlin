@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /substituteIntForGeneric.kt
+    CLASS CLASS L
+      CONSTRUCTOR public constructor L<T>(a: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'a: T' type=kotlin.Unit operator=null
+            receiver: THIS of 'L' type=L<T>
+            value: GET_VAR 'value-parameter a: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='L'
+      PROPERTY public final var a: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter a: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun foo(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(): Int'
+          CALL '<get-a>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: CALL 'constructor L(Int)' type=L<kotlin.Int> operator=null
+              a: CONST Int type=kotlin.Int value='5'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.Any
+          CALL 'foo(): Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: TYPE_OP operator=INSTANCEOF typeOperand=java.lang.Integer
+              GET_VAR 'x: Any' type=kotlin.Any operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'x: Any' type=kotlin.Any operator=null

@@ -1,0 +1,40 @@
+MODULE <test-module>
+  FILE /annotationRetentionAnnotation.kt
+    CLASS ANNOTATION_CLASS Anno
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: kotlin.collections.List<kotlin.Annotation>
+          CALL '<get-annotations>(): List<Annotation>' type=kotlin.collections.List<kotlin.Annotation> operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'Anno' type=kotlin.reflect.KClass<Anno>
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: List<Annotation>' type=kotlin.collections.List<kotlin.Annotation> operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 1: '
+              GET_VAR 'a: List<Annotation>' type=kotlin.collections.List<kotlin.Annotation> operator=null
+        VAR val ann: kotlin.annotation.Retention
+          BLOCK type=kotlin.annotation.Retention operator=ELVIS
+            VAR val tmp0_elvis_lhs: kotlin.annotation.Retention?
+              TYPE_OP operator=SAFE_CAST typeOperand=kotlin.annotation.Retention
+                CALL 'single() on List<Annotation>: Annotation' type=kotlin.Annotation operator=null
+                  $receiver: GET_VAR 'a: List<Annotation>' type=kotlin.collections.List<kotlin.Annotation> operator=null
+            WHEN type=kotlin.annotation.Retention operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_elvis_lhs: Retention?' type=kotlin.annotation.Retention? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='Fail 2: '
+                  CALL 'single() on List<Annotation>: Annotation' type=kotlin.Annotation operator=null
+                    $receiver: GET_VAR 'a: List<Annotation>' type=kotlin.collections.List<kotlin.Annotation> operator=null
+              else: GET_VAR 'tmp0_elvis_lhs: Retention?' type=kotlin.annotation.Retention? operator=null
+        CALL 'assertEquals(AnnotationRetention, AnnotationRetention, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_ENUM_VALUE 'RUNTIME' type=kotlin.annotation.AnnotationRetention
+          actual: CALL '<get-value>(): AnnotationRetention' type=kotlin.annotation.AnnotationRetention operator=GET_PROPERTY
+            $this: GET_VAR 'ann: Retention' type=kotlin.annotation.Retention operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

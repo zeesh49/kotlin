@@ -1,0 +1,59 @@
+MODULE <test-module>
+  FILE /Kotlin.kt
+    CLASS CLASS Outer
+      CONSTRUCTOR public constructor Outer<E>(x: E)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'x: E' type=kotlin.Unit operator=null
+            receiver: THIS of 'Outer' type=Outer<E>
+            value: GET_VAR 'value-parameter x: E' type=E operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+      PROPERTY public final val x: E
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter x: E' type=E operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner<F>(y: F)
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            SET_BACKING_FIELD 'y: F' type=kotlin.Unit operator=null
+              receiver: THIS of 'Inner' type=Outer<E>.Inner<F>
+              value: GET_VAR 'value-parameter y: F' type=F operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+        PROPERTY public final val y: F
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter y: F' type=F operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+        FUN public final fun foo(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo(): String'
+              CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                  $receiver: CALL '<get-x>(): E' type=E operator=GET_PROPERTY
+                    $this: THIS of 'Outer' type=Outer<E>
+                other: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                  $receiver: CALL '<get-y>(): F' type=F operator=GET_PROPERTY
+                    $this: THIS of 'Inner' type=Outer<E>.Inner<F>
+    CLASS OBJECT Test
+      CONSTRUCTOR private constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      FUN public final fun foo(x: Outer<kotlin.String>.Inner<java.lang.Integer>): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(Outer<String>.Inner<Integer>): String'
+            CALL 'foo(): String' type=kotlin.String operator=null
+              $this: GET_VAR 'value-parameter x: Outer<String>.Inner<Integer>' type=Outer<kotlin.String>.Inner<java.lang.Integer> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val result: kotlin.String!
+          CALL 'test(): String!' type=kotlin.String! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: String!' type=kotlin.String! operator=null
+              arg1: CONST String type=kotlin.String value='OK1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'result: String!' type=kotlin.String! operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

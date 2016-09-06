@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /box.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'get(): String' type=kotlin.String operator=null
+            $this: CALL '<get-okRef>(): KProperty0<String>' type=kotlin.reflect.KProperty0<kotlin.String> operator=GET_PROPERTY
+              $this: GET_OBJECT 'OK' type=a.OK
+  FILE /part1.kt
+    PROPERTY private val ok: kotlin.String
+      EXPRESSION_BODY
+        CALL 'run(() -> String): String' type=kotlin.String operator=null
+          block: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='OK'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+    CLASS OBJECT OK
+      CONSTRUCTOR private constructor OK()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='OK'
+      PROPERTY public final val okRef: kotlin.reflect.KProperty0<kotlin.String>
+        EXPRESSION_BODY
+          CALLABLE_REFERENCE 'ok: String' type=kotlin.reflect.KProperty0<kotlin.String> operator=null

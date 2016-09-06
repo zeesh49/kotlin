@@ -1,0 +1,80 @@
+MODULE <test-module>
+  FILE /traitproperty.kt
+    CLASS INTERFACE M
+      PROPERTY public abstract var backingB: kotlin.Int
+      PROPERTY public open var b: kotlin.Int
+        PROPERTY_GETTER public open fun <get-b>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-b>(): Int'
+              CALL '<get-backingB>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'M' type=M
+        PROPERTY_SETTER public open fun <set-b>(value: kotlin.Int): kotlin.Unit
+          BLOCK_BODY
+            CALL '<set-backingB>(Int): Unit' type=kotlin.Unit operator=EQ
+              $this: THIS of 'M' type=M
+              <set-?>: GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=null
+    CLASS CLASS N
+      CONSTRUCTOR public constructor N()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='N'
+      PROPERTY public open override var backingB: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+      PROPERTY public final val a: kotlin.Int
+        PROPERTY_GETTER public final fun <get-a>(): kotlin.Int
+          BLOCK_BODY
+            CALL '<set-b>(Int): Unit' superQualifier=M type=kotlin.Unit operator=EQ
+              $this: THIS of 'N' type=M
+              value: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CALL '<get-b>(): Int' superQualifier=M type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'N' type=M
+                other: CONST Int type=kotlin.Int value='1'
+            RETURN type=kotlin.Nothing from='<get-a>(): Int'
+              CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CALL '<get-b>(): Int' superQualifier=M type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'N' type=M
+                other: CONST Int type=kotlin.Int value='1'
+      PROPERTY public open override var b: kotlin.Int
+        EXPRESSION_BODY
+          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+            $this: CALL '<get-a>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'N' type=N
+            other: CONST Int type=kotlin.Int value='1'
+      PROPERTY public final val superb: kotlin.Int
+        PROPERTY_GETTER public final fun <get-superb>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-superb>(): Int'
+              CALL '<get-b>(): Int' superQualifier=M type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'N' type=M
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val n: N
+          CALL 'constructor N()' type=N operator=null
+        CALL '<get-a>(): Int' type=kotlin.Int operator=GET_PROPERTY
+          $this: GET_VAR 'n: N' type=N operator=null
+        CALL '<get-b>(): Int' type=kotlin.Int operator=GET_PROPERTY
+          $this: GET_VAR 'n: N' type=N operator=null
+        CALL '<get-superb>(): Int' type=kotlin.Int operator=GET_PROPERTY
+          $this: GET_VAR 'n: N' type=N operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=ANDAND
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL '<get-b>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'n: N' type=N operator=null
+                arg1: CONST Int type=kotlin.Int value='3'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL '<get-a>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'n: N' type=N operator=null
+                arg1: CONST Int type=kotlin.Int value='4'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-superb>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'n: N' type=N operator=null
+              arg1: CONST Int type=kotlin.Int value='3'
+            else: CONST Boolean type=kotlin.Boolean value='false'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='fail'

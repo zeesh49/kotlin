@@ -1,0 +1,48 @@
+MODULE <test-module>
+  FILE /nestedMaps.kt
+    CLASS OBJECT Map1
+      CONSTRUCTOR private constructor Map1()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Map1'
+      FUN public final operator fun get(i: kotlin.Int, j: kotlin.Int): Map2
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(Int, Int): Map2'
+            GET_OBJECT 'Map2' type=Map2
+    CLASS OBJECT Map2
+      CONSTRUCTOR private constructor Map2()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Map2'
+      FUN public final operator fun get(i: kotlin.Int, j: kotlin.Int): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(Int, Int): Int'
+            CONST Int type=kotlin.Int value='0'
+      FUN public final operator fun set(i: kotlin.Int, j: kotlin.Int, newValue: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Int operator=POSTFIX_INCR
+          VAR val tmp0_array: Map2
+            CALL 'get(Int, Int): Map2' type=Map2 operator=GET_ARRAY_ELEMENT
+              $this: GET_OBJECT 'Map1' type=Map1
+              i: CONST Int type=kotlin.Int value='0'
+              j: CONST Int type=kotlin.Int value='0'
+          VAR val tmp1_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          VAR val tmp2_index1: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          VAR val tmp3: kotlin.Int
+            CALL 'get(Int, Int): Int' type=kotlin.Int operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp0_array: Map2' type=Map2 operator=null
+              i: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+              j: GET_VAR 'tmp2_index1: Int' type=kotlin.Int operator=null
+          CALL 'set(Int, Int, Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+            $this: GET_VAR 'tmp0_array: Map2' type=Map2 operator=null
+            i: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+            j: GET_VAR 'tmp2_index1: Int' type=kotlin.Int operator=null
+            newValue: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp3: Int' type=kotlin.Int operator=null
+          GET_VAR 'tmp3: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

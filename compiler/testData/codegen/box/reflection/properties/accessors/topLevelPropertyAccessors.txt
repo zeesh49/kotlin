@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /topLevelPropertyAccessors.kt
+    PROPERTY public var state: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val prop: kotlin.reflect.KMutableProperty0<kotlin.String>
+          CALLABLE_REFERENCE 'state: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value=''
+          actual: CALL 'invoke(): String' type=kotlin.String operator=null
+            $this: CALL '<get-getter>(): KProperty0.Getter<String>' type=kotlin.reflect.KProperty0.Getter<kotlin.String> operator=GET_PROPERTY
+              $this: GET_VAR 'prop: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value=''
+          actual: CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+            $this: CALL '<get-getter>(): KProperty0.Getter<String>' type=kotlin.reflect.KProperty0.Getter<kotlin.String> operator=GET_PROPERTY
+              $this: GET_VAR 'prop: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+        CALL 'invoke(String): Unit' type=kotlin.Unit operator=INVOKE
+          $this: CALL '<get-setter>(): KMutableProperty0.Setter<String>' type=kotlin.reflect.KMutableProperty0.Setter<kotlin.String> operator=GET_PROPERTY
+            $this: GET_VAR 'prop: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+          p1: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'get(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'prop: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null

@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /propertyAccessors.kt
+    CLASS ANNOTATION_CLASS Get
+    CLASS ANNOTATION_CLASS Set
+    CLASS ANNOTATION_CLASS SetParam
+    PROPERTY public var foo: kotlin.String
+      PROPERTY_GETTER @Get public fun <get-foo>(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-foo>(): String'
+            CONST String type=kotlin.String value=''
+      PROPERTY_SETTER @Set public fun <set-foo>(@SetParam value: kotlin.String): kotlin.Unit
+        BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=INSTANCEOF typeOperand=Get
+            CALL 'single() on List<Annotation>: Annotation' type=kotlin.Annotation operator=null
+              $receiver: CALL '<get-annotations>(): List<Annotation>' type=kotlin.collections.List<kotlin.Annotation> operator=GET_PROPERTY
+                $this: CALL '<get-getter>(): KProperty0.Getter<String>' type=kotlin.reflect.KProperty0.Getter<kotlin.String> operator=GET_PROPERTY
+                  $this: CALLABLE_REFERENCE 'foo: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=INSTANCEOF typeOperand=Set
+            CALL 'single() on List<Annotation>: Annotation' type=kotlin.Annotation operator=null
+              $receiver: CALL '<get-annotations>(): List<Annotation>' type=kotlin.collections.List<kotlin.Annotation> operator=GET_PROPERTY
+                $this: CALL '<get-setter>(): KMutableProperty0.Setter<String>' type=kotlin.reflect.KMutableProperty0.Setter<kotlin.String> operator=GET_PROPERTY
+                  $this: CALLABLE_REFERENCE 'foo: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=INSTANCEOF typeOperand=SetParam
+            CALL 'single() on List<Annotation>: Annotation' type=kotlin.Annotation operator=null
+              $receiver: CALL '<get-annotations>(): List<Annotation>' type=kotlin.collections.List<kotlin.Annotation> operator=GET_PROPERTY
+                $this: CALL 'single() on List<KParameter>: KParameter' type=kotlin.reflect.KParameter operator=null
+                  $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                    $this: CALL '<get-setter>(): KMutableProperty0.Setter<String>' type=kotlin.reflect.KMutableProperty0.Setter<kotlin.String> operator=GET_PROPERTY
+                      $this: CALLABLE_REFERENCE 'foo: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,131 @@
+MODULE <test-module>
+  FILE /generalAccess.kt
+    PROPERTY public val staticProperty: kotlin.String = "1"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='1'
+    PROPERTY public val kotlin.String.staticExt: kotlin.String
+      PROPERTY_GETTER public fun kotlin.String.<get-staticExt>(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-staticExt>() on String: String'
+            CONST String type=kotlin.String value='1'
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(init: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'init: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=As.A
+            value: GET_VAR 'value-parameter init: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val init: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter init: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public open val property: kotlin.String
+        EXPRESSION_BODY
+          CALL '<get-init>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: THIS of 'A' type=As.A
+      PROPERTY private final val privateProperty: kotlin.String
+        EXPRESSION_BODY
+          CALL '<get-init>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: THIS of 'A' type=As.A
+      PROPERTY public final val kotlin.String.ext: kotlin.String
+        PROPERTY_GETTER public final fun kotlin.String.<get-ext>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-ext>() on String: String'
+              CONST String type=kotlin.String value='1'
+      PROPERTY public final val kotlin.Int.myInc: kotlin.Int
+        PROPERTY_GETTER public final fun kotlin.Int.<get-myInc>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-myInc>() on Int: Int'
+              CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: $RECEIVER of 'myInc: Int on Int' type=kotlin.Int
+                other: CONST Int type=kotlin.Int value='1'
+      FUN public open fun getPrivate(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getPrivate(): String'
+            CALL '<get-privateProperty>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'A' type=As.A
+      FUN public open fun getExt(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getExt(): String'
+            CALL '<get-ext>() on String: String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'A' type=As.A
+              $receiver: CONST String type=kotlin.String value='0'
+      PROPERTY public final var backingField: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+        PROPERTY_GETTER public final fun <get-backingField>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-backingField>(): Int'
+              CALL '<get-myInc>() on Int: Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'A' type=As.A
+                $receiver: GET_VAR 'field: Int' type=kotlin.Int operator=null
+        PROPERTY_SETTER public final fun <set-backingField>(s: kotlin.Int): kotlin.Unit
+          BLOCK_BODY
+            SET_BACKING_FIELD 'backingField: Int' type=kotlin.Unit operator=EQ
+              value: GET_VAR 'value-parameter s: Int' type=kotlin.Int operator=null
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B(init: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A(String)'
+            init: CONST String type=kotlin.String value='1'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public open override val property: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter init: String' type=kotlin.String operator=null
+      FUN public final fun getOpenProperty(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getOpenProperty(): String'
+            CALL '<get-property>(): String' superQualifier=A type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'B' type=As.A
+      FUN public final fun getWithBackingFieldProperty(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getWithBackingFieldProperty(): String'
+            CALL '<get-property>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'B' type=As.B
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: As.A
+          CALL 'constructor A(String)' type=As.A operator=null
+            init: CONST String type=kotlin.String value='1'
+        VAR val b: As.B
+          CALL 'constructor B(String)' type=As.B operator=null
+            init: CONST String type=kotlin.String value='0'
+        CALL '<set-backingField>(Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a: A' type=As.A operator=null
+          s: CONST Int type=kotlin.Int value='0'
+        VAR val result: kotlin.String
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                    $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                      $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                        $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                          $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                            $this: CALL '<get-property>(): String' type=kotlin.String operator=GET_PROPERTY
+                              $this: GET_VAR 'a: A' type=As.A operator=null
+                            other: CALL 'getPrivate(): String' type=kotlin.String operator=null
+                              $this: GET_VAR 'a: A' type=As.A operator=null
+                          other: CALL '<get-staticProperty>(): String' type=kotlin.String operator=GET_PROPERTY
+                        other: CALL '<get-staticExt>() on String: String' type=kotlin.String operator=GET_PROPERTY
+                          $receiver: CONST String type=kotlin.String value='0'
+                      other: CALL 'getExt(): String' type=kotlin.String operator=null
+                        $this: GET_VAR 'a: A' type=As.A operator=null
+                    other: CALL '<get-backingField>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                      $this: GET_VAR 'a: A' type=As.A operator=null
+                  other: CALL '<get-backingField>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                    $this: GET_VAR 'a: A' type=As.A operator=null
+                other: CALL 'getOpenProperty(): String' type=kotlin.String operator=null
+                  $this: GET_VAR 'b: B' type=As.B operator=null
+              other: CALL '<get-property>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'b: B' type=As.B operator=null
+            other: CALL 'getWithBackingFieldProperty(): String' type=kotlin.String operator=null
+              $this: GET_VAR 'b: B' type=As.B operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'result: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='1111111100'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

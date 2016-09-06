@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /kt1688.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var s: kotlin.String
+          CONST String type=kotlin.String value=''
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor RuntimeException()' type=java.lang.RuntimeException operator=null
+          catch e: BLOCK type=kotlin.Unit operator=null
+          finally: BLOCK type=kotlin.Unit operator=null
+            SET_VAR 's: String' type=kotlin.Unit operator=PLUSEQ
+              CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: GET_VAR 's: String' type=kotlin.String operator=PLUSEQ
+                other: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          GET_VAR 's: String' type=kotlin.String operator=null

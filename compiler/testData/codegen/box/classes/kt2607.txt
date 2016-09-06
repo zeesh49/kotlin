@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /kt2607.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val o: box.<no name provided>
+          BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              CLASS CLASS C
+                CONSTRUCTOR public constructor C()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='C'
+                FUN public final fun foo(): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='foo(): String'
+                      CONST String type=kotlin.String value='OK'
+            CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor C()' type=box.<no name provided>.C operator=null
+              $this: GET_VAR 'o: <no name provided>' type=box.<no name provided> operator=null

@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /falseSmartCast.kt
+    CLASS CLASS SuperFoo
+      CONSTRUCTOR public constructor SuperFoo()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SuperFoo'
+      FUN public final fun bar(): kotlin.String
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=IF
+            if: TYPE_OP operator=INSTANCEOF typeOperand=Foo
+              THIS of 'SuperFoo' type=SuperFoo
+            then: BLOCK type=kotlin.Nothing operator=null
+              CALL 'superFoo(): Unit' type=kotlin.Unit operator=null
+                $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=Foo
+                  THIS of 'SuperFoo' type=SuperFoo
+              RETURN type=kotlin.Nothing from='bar(): String'
+                CALL 'baz(): String' type=kotlin.String operator=null
+                  $this: THIS of 'SuperFoo' type=SuperFoo
+          RETURN type=kotlin.Nothing from='bar(): String'
+            CALL 'baz(): String' type=kotlin.String operator=null
+              $this: THIS of 'SuperFoo' type=SuperFoo
+      FUN public final fun baz(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='baz(): String'
+            CONST String type=kotlin.String value='OK'
+    CLASS CLASS Foo
+      CONSTRUCTOR public constructor Foo()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor SuperFoo()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      FUN public final fun superFoo(): kotlin.Unit
+        BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'bar(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Foo()' type=Foo operator=null

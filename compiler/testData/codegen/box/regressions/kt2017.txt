@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /kt2017.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val sorted: kotlin.collections.List<kotlin.String>
+          CALL 'sorted() on Iterable<String>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            $receiver: CALL 'arrayListOf(vararg String): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              elements: VARARG type=Array<out String> varargElementType=String
+                CONST String type=kotlin.String value='1'
+                CONST String type=kotlin.String value='3'
+                CONST String type=kotlin.String value='2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'sorted: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+                arg1: CALL 'arrayListOf(vararg String): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+                  elements: VARARG type=Array<out String> varargElementType=String
+                    CONST String type=kotlin.String value='1'
+                    CONST String type=kotlin.String value='2'
+                    CONST String type=kotlin.String value='3'
+            then: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+              GET_VAR 'sorted: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            else: CONST String type=kotlin.String value='OK'

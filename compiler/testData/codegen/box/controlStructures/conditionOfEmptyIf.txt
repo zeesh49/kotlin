@@ -1,0 +1,19 @@
+MODULE <test-module>
+  FILE /conditionOfEmptyIf.kt
+    PROPERTY public var result: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='Fail'
+    FUN public fun setOK(): kotlin.Boolean
+      BLOCK_BODY
+        CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='setOK(): Boolean'
+          CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'setOK(): Boolean' type=kotlin.Boolean operator=null
+          then: BLOCK type=kotlin.Unit operator=null
+          else: BLOCK type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY

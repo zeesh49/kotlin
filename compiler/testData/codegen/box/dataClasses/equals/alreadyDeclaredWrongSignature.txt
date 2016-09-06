@@ -1,0 +1,322 @@
+MODULE <test-module>
+  FILE /alreadyDeclaredWrongSignature.kt
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B(x: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'x: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'B' type=B
+            value: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public final val x: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun equals(other: B): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='equals(B): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+      FUN public final operator fun component1(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component1(): Int'
+            CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'B' type=B
+      FUN public final fun copy(x: kotlin.Int = ...): B
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='copy(Int = ...): B'
+            CALL 'constructor B(Int)' type=B operator=null
+              x: GET_VAR 'value-parameter x: Int = ...' type=kotlin.Int operator=null
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='B('
+              CONST String type=kotlin.String value='x='
+              CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'B' type=B
+              CONST String type=kotlin.String value=')'
+      FUN public open override fun hashCode(): kotlin.Int
+        BLOCK_BODY
+          VAR val tmp0_result: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          SET_VAR 'tmp0_result: Int' type=kotlin.Unit operator=EQ
+            CALL 'hashCode(): Int' type=kotlin.Int operator=null
+              $this: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'B' type=B
+          RETURN type=kotlin.Nothing from='hashCode(): Int'
+            GET_VAR 'tmp0_result: Int' type=kotlin.Int operator=null
+      FUN public open override fun equals(other: kotlin.Any?): kotlin.Boolean
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+              arg0: THIS of 'B' type=B
+              arg1: GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='true'
+          WHEN type=kotlin.Unit operator=null
+            if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=B
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          VAR val tmp0_other_with_cast: B
+            TYPE_OP operator=CAST typeOperand=B
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'B' type=B
+                arg1: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'tmp0_other_with_cast: B' type=B operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C(x: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'x: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'C' type=C
+            value: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      PROPERTY public final val x: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun equals(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='equals(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+      FUN public final operator fun component1(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component1(): Int'
+            CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'C' type=C
+      FUN public final fun copy(x: kotlin.Int = ...): C
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='copy(Int = ...): C'
+            CALL 'constructor C(Int)' type=C operator=null
+              x: GET_VAR 'value-parameter x: Int = ...' type=kotlin.Int operator=null
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='C('
+              CONST String type=kotlin.String value='x='
+              CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'C' type=C
+              CONST String type=kotlin.String value=')'
+      FUN public open override fun hashCode(): kotlin.Int
+        BLOCK_BODY
+          VAR val tmp0_result: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          SET_VAR 'tmp0_result: Int' type=kotlin.Unit operator=EQ
+            CALL 'hashCode(): Int' type=kotlin.Int operator=null
+              $this: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'C' type=C
+          RETURN type=kotlin.Nothing from='hashCode(): Int'
+            GET_VAR 'tmp0_result: Int' type=kotlin.Int operator=null
+      FUN public open override fun equals(other: kotlin.Any?): kotlin.Boolean
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+              arg0: THIS of 'C' type=C
+              arg1: GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='true'
+          WHEN type=kotlin.Unit operator=null
+            if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=C
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          VAR val tmp0_other_with_cast: C
+            TYPE_OP operator=CAST typeOperand=C
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'C' type=C
+                arg1: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'tmp0_other_with_cast: C' type=C operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+    CLASS CLASS D
+      CONSTRUCTOR public constructor D(x: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'x: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'D' type=D
+            value: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='D'
+      PROPERTY public final val x: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun equals(other: kotlin.Any?, another: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='equals(Any?, String): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+      FUN public final operator fun component1(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component1(): Int'
+            CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'D' type=D
+      FUN public final fun copy(x: kotlin.Int = ...): D
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='copy(Int = ...): D'
+            CALL 'constructor D(Int)' type=D operator=null
+              x: GET_VAR 'value-parameter x: Int = ...' type=kotlin.Int operator=null
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='D('
+              CONST String type=kotlin.String value='x='
+              CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'D' type=D
+              CONST String type=kotlin.String value=')'
+      FUN public open override fun hashCode(): kotlin.Int
+        BLOCK_BODY
+          VAR val tmp0_result: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          SET_VAR 'tmp0_result: Int' type=kotlin.Unit operator=EQ
+            CALL 'hashCode(): Int' type=kotlin.Int operator=null
+              $this: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'D' type=D
+          RETURN type=kotlin.Nothing from='hashCode(): Int'
+            GET_VAR 'tmp0_result: Int' type=kotlin.Int operator=null
+      FUN public open override fun equals(other: kotlin.Any?): kotlin.Boolean
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+              arg0: THIS of 'D' type=D
+              arg1: GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='true'
+          WHEN type=kotlin.Unit operator=null
+            if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=D
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          VAR val tmp0_other_with_cast: D
+            TYPE_OP operator=CAST typeOperand=D
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'D' type=D
+                arg1: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'tmp0_other_with_cast: D' type=D operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+    CLASS CLASS E
+      CONSTRUCTOR public constructor E(x: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'x: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'E' type=E
+            value: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='E'
+      PROPERTY public final val x: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun equals(x: E): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='equals(E): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+      FUN public open override fun equals(x: kotlin.Any?): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+      FUN public final operator fun component1(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component1(): Int'
+            CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'E' type=E
+      FUN public final fun copy(x: kotlin.Int = ...): E
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='copy(Int = ...): E'
+            CALL 'constructor E(Int)' type=E operator=null
+              x: GET_VAR 'value-parameter x: Int = ...' type=kotlin.Int operator=null
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='E('
+              CONST String type=kotlin.String value='x='
+              CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'E' type=E
+              CONST String type=kotlin.String value=')'
+      FUN public open override fun hashCode(): kotlin.Int
+        BLOCK_BODY
+          VAR val tmp0_result: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          SET_VAR 'tmp0_result: Int' type=kotlin.Unit operator=EQ
+            CALL 'hashCode(): Int' type=kotlin.Int operator=null
+              $this: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'E' type=E
+          RETURN type=kotlin.Nothing from='hashCode(): Int'
+            GET_VAR 'tmp0_result: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'getDeclaredMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+          $this: CALL '<get-java>() on KClass<B>: Class<B>' type=java.lang.Class<B> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'B' type=kotlin.reflect.KClass<B>
+          p0: CONST String type=kotlin.String value='equals'
+          p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+            CALL '<get-java>() on KClass<Any>: Class<Any>' type=java.lang.Class<kotlin.Any> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+        CALL 'getDeclaredMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+          $this: CALL '<get-java>() on KClass<B>: Class<B>' type=java.lang.Class<B> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'B' type=kotlin.reflect.KClass<B>
+          p0: CONST String type=kotlin.String value='equals'
+          p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+            CALL '<get-java>() on KClass<B>: Class<B>' type=java.lang.Class<B> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'B' type=kotlin.reflect.KClass<B>
+        CALL 'getDeclaredMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+          $this: CALL '<get-java>() on KClass<C>: Class<C>' type=java.lang.Class<C> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'C' type=kotlin.reflect.KClass<C>
+          p0: CONST String type=kotlin.String value='equals'
+          p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+            CALL '<get-java>() on KClass<Any>: Class<Any>' type=java.lang.Class<kotlin.Any> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+        CALL 'getDeclaredMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+          $this: CALL '<get-java>() on KClass<C>: Class<C>' type=java.lang.Class<C> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'C' type=kotlin.reflect.KClass<C>
+          p0: CONST String type=kotlin.String value='equals'
+        CALL 'getDeclaredMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+          $this: CALL '<get-java>() on KClass<D>: Class<D>' type=java.lang.Class<D> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'D' type=kotlin.reflect.KClass<D>
+          p0: CONST String type=kotlin.String value='equals'
+          p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+            CALL '<get-java>() on KClass<Any>: Class<Any>' type=java.lang.Class<kotlin.Any> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+        CALL 'getDeclaredMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+          $this: CALL '<get-java>() on KClass<D>: Class<D>' type=java.lang.Class<D> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'D' type=kotlin.reflect.KClass<D>
+          p0: CONST String type=kotlin.String value='equals'
+          p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+            CALL '<get-java>() on KClass<Any>: Class<Any>' type=java.lang.Class<kotlin.Any> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+            CALL '<get-java>() on KClass<String>: Class<String>' type=java.lang.Class<kotlin.String> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+        CALL 'getDeclaredMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+          $this: CALL '<get-java>() on KClass<E>: Class<E>' type=java.lang.Class<E> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'E' type=kotlin.reflect.KClass<E>
+          p0: CONST String type=kotlin.String value='equals'
+          p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+            CALL '<get-java>() on KClass<Any>: Class<Any>' type=java.lang.Class<kotlin.Any> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+        CALL 'getDeclaredMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+          $this: CALL '<get-java>() on KClass<E>: Class<E>' type=java.lang.Class<E> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'E' type=kotlin.reflect.KClass<E>
+          p0: CONST String type=kotlin.String value='equals'
+          p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+            CALL '<get-java>() on KClass<E>: Class<E>' type=java.lang.Class<E> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'E' type=kotlin.reflect.KClass<E>
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,175 @@
+MODULE <test-module>
+  FILE /rawStringsWithManyQuotes.kt
+    CLASS CLASS P
+      CONSTRUCTOR public constructor P(actual: kotlin.String, expected: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'actual: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'P' type=P
+            value: GET_VAR 'value-parameter actual: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'expected: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'P' type=P
+            value: GET_VAR 'value-parameter expected: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='P'
+      PROPERTY public final val actual: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter actual: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val expected: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter expected: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun array(vararg s: P): kotlin.Array<out P>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='array(vararg P): Array<out P>'
+          GET_VAR 'value-parameter vararg s: P' type=kotlin.Array<out P> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val data: kotlin.Array<out P>
+          CALL 'array(vararg P): Array<out P>' type=kotlin.Array<out P> operator=null
+            s: VARARG type=Array<out P> varargElementType=P
+              CALL 'constructor P(String, String)' type=P operator=null
+                actual: CONST String type=kotlin.String value=''
+                expected: CONST String type=kotlin.String value=''
+              CALL 'constructor P(String, String)' type=P operator=null
+                actual: CONST String type=kotlin.String value='"'
+                expected: CONST String type=kotlin.String value='"'
+              CALL 'constructor P(String, String)' type=P operator=null
+                actual: CONST String type=kotlin.String value='""'
+                expected: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+              CALL 'constructor P(String, String)' type=P operator=null
+                actual: CONST String type=kotlin.String value='"""'
+                expected: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+              CALL 'constructor P(String, String)' type=P operator=null
+                actual: CONST String type=kotlin.String value='""""'
+                expected: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+              CALL 'constructor P(String, String)' type=P operator=null
+                actual: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value=' '
+                expected: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value=' '
+              CALL 'constructor P(String, String)' type=P operator=null
+                actual: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value=' '
+                expected: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value=' '
+              CALL 'constructor P(String, String)' type=P operator=null
+                actual: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value=' '
+                  CONST String type=kotlin.String value='"'
+                expected: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value=' '
+                  CONST String type=kotlin.String value='"'
+              CALL 'constructor P(String, String)' type=P operator=null
+                actual: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value=' '
+                  CONST String type=kotlin.String value='""'
+                expected: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value=' '
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+              CALL 'constructor P(String, String)' type=P operator=null
+                actual: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value=' '
+                  CONST String type=kotlin.String value='"""'
+                expected: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value=' '
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+              CALL 'constructor P(String, String)' type=P operator=null
+                actual: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value=' '
+                  CONST String type=kotlin.String value='""""'
+                expected: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value=' '
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+              CALL 'constructor P(String, String)' type=P operator=null
+                actual: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value=' '
+                  CONST String type=kotlin.String value='"""""'
+                expected: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value=' '
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+              CALL 'constructor P(String, String)' type=P operator=null
+                actual: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value=' '
+                  CONST String type=kotlin.String value='"'
+                expected: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value=' '
+                  CONST String type=kotlin.String value='"'
+              CALL 'constructor P(String, String)' type=P operator=null
+                actual: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value=' '
+                  CONST String type=kotlin.String value='""'
+                expected: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value=' '
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value='"'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='0'
+                other: CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+                  $this: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                    $this: GET_VAR 'data: Array<out P>' type=kotlin.Array<out P> operator=null
+                  other: CONST Int type=kotlin.Int value='1'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                VAR val p: P
+                  CALL 'get(Int): P' type=P operator=GET_ARRAY_ELEMENT
+                    $this: GET_VAR 'data: Array<out P>' type=kotlin.Array<out P> operator=null
+                    index: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                    arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                      arg0: CALL '<get-actual>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'p: P' type=P operator=null
+                      arg1: CALL '<get-expected>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'p: P' type=P operator=null
+                  then: RETURN type=kotlin.Nothing from='box(): String'
+                    STRING_CONCATENATION type=kotlin.String
+                      CONST String type=kotlin.String value='Fail at #'
+                      GET_VAR 'i: Int' type=kotlin.Int operator=null
+                      CONST String type=kotlin.String value='. actual=''
+                      CALL '<get-actual>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'p: P' type=P operator=null
+                      CONST String type=kotlin.String value='', expected=''
+                      CALL '<get-expected>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'p: P' type=P operator=null
+                      CONST String type=kotlin.String value='''
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

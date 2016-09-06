@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /shared.kt
+    FUN public infix fun <T> T.mustBe(t: T): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assert(String, () -> Boolean): Unit' type=kotlin.Unit operator=null
+          message: STRING_CONCATENATION type=kotlin.String
+            $RECEIVER of 'mustBe(T) on T: Unit' type=T
+            CONST String type=kotlin.String value=' must be '
+            GET_VAR 'value-parameter t: T' type=T operator=null
+          condition: BLOCK type=() -> kotlin.Boolean operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Boolean
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Boolean'
+                  CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: $RECEIVER of 'mustBe(T) on T: Unit' type=T
+                    arg1: GET_VAR 'value-parameter t: T' type=T operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Boolean' type=() -> kotlin.Boolean operator=LAMBDA
+    FUN public inline fun assert(message: kotlin.String, condition: () -> kotlin.Boolean): kotlin.Unit
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'invoke(): Boolean' type=kotlin.Boolean operator=INVOKE
+              $this: GET_VAR 'value-parameter condition: () -> Boolean' type=() -> kotlin.Boolean operator=VARIABLE_AS_FUNCTION
+          then: THROW type=kotlin.Nothing
+            CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+              p0: GET_VAR 'value-parameter message: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'mustBe(String) on String: Unit' type=kotlin.Unit operator=null
+          $receiver: CONST String type=kotlin.String value='lala'
+          t: CONST String type=kotlin.String value='lala'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

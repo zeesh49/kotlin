@@ -1,0 +1,62 @@
+MODULE <test-module>
+  FILE /kt6895.kt
+    CLASS CLASS UpdateableThing
+      CONSTRUCTOR public constructor UpdateableThing()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='UpdateableThing'
+      PROPERTY private final val lock: java.util.concurrent.locks.ReentrantReadWriteLock
+        EXPRESSION_BODY
+          CALL 'constructor ReentrantReadWriteLock()' type=java.util.concurrent.locks.ReentrantReadWriteLock operator=null
+      PROPERTY private final var updateCount: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+      FUN public final fun <T> performUpdates(block: () -> T): T
+        BLOCK_BODY
+          CALL 'write(() -> Nothing) on ReentrantReadWriteLock: Nothing' type=kotlin.Nothing operator=null
+            $receiver: CALL '<get-lock>(): ReentrantReadWriteLock' type=java.util.concurrent.locks.ReentrantReadWriteLock operator=GET_PROPERTY
+              $this: THIS of 'UpdateableThing' type=UpdateableThing
+            action: BLOCK type=() -> kotlin.Nothing operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Nothing
+                BLOCK_BODY
+                  BLOCK type=kotlin.Int operator=PREFIX_INCR
+                    VAR val tmp0_this: UpdateableThing
+                      THIS of 'UpdateableThing' type=UpdateableThing
+                    BLOCK type=kotlin.Int operator=PREFIX_INCR
+                      VAR val tmp1: kotlin.Int
+                        CALL 'inc(): Int' type=kotlin.Int operator=PREFIX_INCR
+                          $this: CALL '<get-updateCount>(): Int' type=kotlin.Int operator=PREFIX_INCR
+                            $this: GET_VAR 'tmp0_this: UpdateableThing' type=UpdateableThing operator=null
+                      CALL '<set-updateCount>(Int): Unit' type=kotlin.Unit operator=PREFIX_INCR
+                        $this: GET_VAR 'tmp0_this: UpdateableThing' type=UpdateableThing operator=null
+                        <set-?>: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                      GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                  VAR val result: T
+                    CALL 'invoke(): T' type=T operator=INVOKE
+                      $this: GET_VAR 'value-parameter block: () -> T' type=() -> T operator=VARIABLE_AS_FUNCTION
+                  BLOCK type=kotlin.Int operator=PREFIX_DECR
+                    VAR val tmp2_this: UpdateableThing
+                      THIS of 'UpdateableThing' type=UpdateableThing
+                    BLOCK type=kotlin.Int operator=PREFIX_DECR
+                      VAR val tmp3: kotlin.Int
+                        CALL 'dec(): Int' type=kotlin.Int operator=PREFIX_DECR
+                          $this: CALL '<get-updateCount>(): Int' type=kotlin.Int operator=PREFIX_DECR
+                            $this: GET_VAR 'tmp2_this: UpdateableThing' type=UpdateableThing operator=null
+                      CALL '<set-updateCount>(Int): Unit' type=kotlin.Unit operator=PREFIX_DECR
+                        $this: GET_VAR 'tmp2_this: UpdateableThing' type=UpdateableThing operator=null
+                        <set-?>: GET_VAR 'tmp3: Int' type=kotlin.Int operator=null
+                      GET_VAR 'tmp3: Int' type=kotlin.Int operator=null
+                  RETURN type=kotlin.Nothing from='performUpdates(() -> T): T'
+                    GET_VAR 'result: T' type=T operator=null
+              CALLABLE_REFERENCE '<anonymous>(): Nothing' type=() -> kotlin.Nothing operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'performUpdates(() -> String): String' type=kotlin.String operator=null
+            $this: CALL 'constructor UpdateableThing()' type=UpdateableThing operator=null
+            block: BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    CONST String type=kotlin.String value='OK'
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA

@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /nestedConstructorFromClass.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS CLASS Nested
+        CONSTRUCTOR public constructor Nested()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Nested'
+        PROPERTY public final val o: kotlin.Int = 111
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='111'
+        PROPERTY public final val k: kotlin.Int = 222
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='222'
+      FUN public final fun result(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='result(): Int'
+            CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+              $this: CALL '<get-o>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL 'invoke(): A.Nested' type=A.Nested operator=null
+                  $this: CALLABLE_REFERENCE 'constructor Nested()' type=kotlin.reflect.KFunction0<A.Nested> operator=null
+              other: CALL '<get-k>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL 'invoke(): A.Nested' type=A.Nested operator=null
+                  $this: CALLABLE_REFERENCE 'constructor Nested()' type=kotlin.reflect.KFunction0<A.Nested> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val result: kotlin.Int
+          CALL 'result(): Int' type=kotlin.Int operator=null
+            $this: CALL 'constructor A()' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='333'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'result: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

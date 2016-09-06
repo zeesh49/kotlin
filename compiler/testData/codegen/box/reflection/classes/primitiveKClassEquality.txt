@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /primitiveKClassEquality.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.reflect.KClass<kotlin.Int>
+          CALL '<get-kotlin>() on Class<Int>: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=GET_PROPERTY
+            $receiver: BLOCK type=java.lang.Class<kotlin.Int> operator=EXCLEXCL
+              VAR val tmp0_notnull: java.lang.Class<kotlin.Int>?
+                CALL '<get-javaPrimitiveType>() on KClass<Int>: Class<Int>?' type=java.lang.Class<kotlin.Int>? operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+              WHEN type=java.lang.Class<kotlin.Int> operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: Class<Int>?' type=java.lang.Class<kotlin.Int>? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: Class<Int>?' type=java.lang.Class<kotlin.Int>? operator=null
+        VAR val y: kotlin.reflect.KClass<kotlin.Int>
+          CALL '<get-kotlin>() on Class<Int>: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=GET_PROPERTY
+            $receiver: CALL '<get-javaObjectType>() on KClass<Int>: Class<Int>' type=java.lang.Class<kotlin.Int> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+        CALL 'assertEquals(KClass<Int>, KClass<Int>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'x: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=null
+          actual: GET_VAR 'y: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'x: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=null
+          actual: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'y: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+            arg0: GET_VAR 'x: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=null
+            arg1: GET_VAR 'y: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

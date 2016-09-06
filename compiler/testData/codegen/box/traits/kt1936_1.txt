@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /kt1936_1.kt
+    CLASS INTERFACE MyTrait
+      PROPERTY public abstract var property: kotlin.String
+      FUN public open fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CALL '<get-property>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'MyTrait' type=MyTrait
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B(param: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public open override var property: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter param: String' type=kotlin.String operator=null
+      FUN public open override fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CALL 'foo(): String' superQualifier=MyTrait type=kotlin.String operator=null
+              $this: THIS of 'B' type=MyTrait
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor B(String)' type=B operator=null
+              param: CONST String type=kotlin.String value='OK'

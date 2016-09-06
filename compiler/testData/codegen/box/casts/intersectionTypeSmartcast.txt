@@ -1,0 +1,68 @@
+MODULE <test-module>
+  FILE /intersectionTypeSmartcast.kt
+    CLASS INTERFACE A
+      FUN public abstract fun foo(): kotlin.Any?
+    CLASS INTERFACE B
+      FUN public abstract fun foo(): kotlin.String
+    FUN public fun bar(x: kotlin.Any?): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: TYPE_OP operator=INSTANCEOF typeOperand=A
+            GET_VAR 'value-parameter x: Any?' type=kotlin.Any? operator=null
+          then: BLOCK type=kotlin.Unit operator=null
+            VAR val k: kotlin.Any?
+              CALL 'foo(): Any?' type=kotlin.Any? operator=null
+                $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=A
+                  GET_VAR 'value-parameter x: Any?' type=kotlin.Any? operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: GET_VAR 'k: Any?' type=kotlin.Any? operator=null
+                  arg1: CONST String type=kotlin.String value='OK'
+              then: RETURN type=kotlin.Nothing from='bar(Any?): String'
+                CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: TYPE_OP operator=INSTANCEOF typeOperand=B
+            GET_VAR 'value-parameter x: Any?' type=kotlin.Any? operator=null
+          then: BLOCK type=kotlin.Unit operator=null
+            VAR val k: kotlin.String
+              CALL 'foo(): String' type=kotlin.String operator=null
+                $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=B
+                  GET_VAR 'value-parameter x: Any?' type=kotlin.Any? operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                    $this: GET_VAR 'k: String' type=kotlin.String operator=null
+                  arg1: CONST Int type=kotlin.Int value='2'
+              then: RETURN type=kotlin.Nothing from='bar(Any?): String'
+                CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=ANDAND
+            if: TYPE_OP operator=INSTANCEOF typeOperand=A
+              GET_VAR 'value-parameter x: Any?' type=kotlin.Any? operator=null
+            then: TYPE_OP operator=INSTANCEOF typeOperand=B
+              GET_VAR 'value-parameter x: Any?' type=kotlin.Any? operator=null
+            else: CONST Boolean type=kotlin.Boolean value='false'
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='bar(Any?): String'
+              CALL 'foo(): String' type=kotlin.String operator=null
+                $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=B
+                  GET_VAR 'value-parameter x: Any?' type=kotlin.Any? operator=null
+        RETURN type=kotlin.Nothing from='bar(Any?): String'
+          CONST String type=kotlin.String value='fail 4'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'bar(Any?): String' type=kotlin.String operator=null
+            x: BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                FUN public open override fun foo(): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='foo(): String'
+                      CONST String type=kotlin.String value='OK'
+              CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL

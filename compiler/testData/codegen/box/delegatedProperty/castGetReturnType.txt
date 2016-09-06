@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /castGetReturnType.kt
+    CLASS CLASS Delegate
+      CONSTRUCTOR public constructor Delegate()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Delegate'
+      FUN public final operator fun getValue(t: kotlin.Any?, p: kotlin.reflect.KProperty<*>): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getValue(Any?, KProperty<*>): Int'
+            CONST Int type=kotlin.Int value='1'
+    CLASS CLASS AImpl
+      CONSTRUCTOR public constructor AImpl()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='AImpl'
+      PROPERTY public final val prop: kotlin.Number
+        delegate: PROPERTY val `prop$delegate`: Delegate
+          EXPRESSION_BODY
+            CALL 'constructor Delegate()' type=Delegate operator=null
+        PROPERTY_GETTER public final fun <get-prop>(): kotlin.Number
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-prop>(): Number'
+              CALL 'getValue(Any?, KProperty<*>): Int' type=kotlin.Int operator=null
+                $this: GET_BACKING_FIELD '`prop$delegate`: Delegate' type=Delegate operator=null
+                  receiver: THIS of 'AImpl' type=AImpl
+                t: THIS of 'AImpl' type=AImpl
+                p: CALLABLE_REFERENCE 'prop: Number' type=kotlin.reflect.KProperty1<AImpl, kotlin.Number> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-prop>(): Number' type=kotlin.Number operator=GET_PROPERTY
+                $this: CALL 'constructor AImpl()' type=AImpl operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

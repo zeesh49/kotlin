@@ -1,0 +1,131 @@
+MODULE <test-module>
+  FILE /primaryConstructor.kt
+    CLASS CLASS OnlyPrimary
+      CONSTRUCTOR public constructor OnlyPrimary()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='OnlyPrimary'
+    CLASS CLASS PrimaryWithSecondary
+      CONSTRUCTOR public constructor PrimaryWithSecondary(s: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 's: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'PrimaryWithSecondary' type=PrimaryWithSecondary
+            value: GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='PrimaryWithSecondary'
+      PROPERTY public final val s: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CONSTRUCTOR public constructor PrimaryWithSecondary(x: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor PrimaryWithSecondary(String)'
+            s: CALL 'toString(): String' type=kotlin.String operator=null
+              $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'PrimaryWithSecondary' type=PrimaryWithSecondary
+    CLASS CLASS OnlySecondary
+      CONSTRUCTOR public constructor OnlySecondary(s: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='OnlySecondary'
+    CLASS CLASS TwoSecondaries
+      CONSTRUCTOR public constructor TwoSecondaries(s: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='TwoSecondaries'
+      CONSTRUCTOR public constructor TwoSecondaries(d: kotlin.Double)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='TwoSecondaries'
+    CLASS ENUM_CLASS En
+      CONSTRUCTOR private constructor En()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='En'
+      FUN public final fun values(): kotlin.Array<En>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): En
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    CLASS INTERFACE I
+    CLASS OBJECT O
+      CONSTRUCTOR private constructor O()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='O'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      CLASS OBJECT companion object of C
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of C'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val p1: kotlin.reflect.KFunction<OnlyPrimary>?
+          CALL '<get-primaryConstructor>() on KClass<OnlyPrimary>: KFunction<OnlyPrimary>?' type=kotlin.reflect.KFunction<OnlyPrimary>? operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'OnlyPrimary' type=kotlin.reflect.KClass<OnlyPrimary>
+        CALL 'assertNotNull(KFunction<OnlyPrimary>?, String? = ...): KFunction<OnlyPrimary>' type=kotlin.reflect.KFunction<OnlyPrimary> operator=null
+          actual: GET_VAR 'p1: KFunction<OnlyPrimary>?' type=kotlin.reflect.KFunction<OnlyPrimary>? operator=null
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=INSTANCEOF typeOperand=OnlyPrimary
+            CALL 'call(vararg Any?): OnlyPrimary' type=OnlyPrimary operator=null
+              $this: BLOCK type=kotlin.reflect.KFunction<OnlyPrimary> operator=EXCLEXCL
+                VAR val tmp0_notnull: kotlin.reflect.KFunction<OnlyPrimary>?
+                  GET_VAR 'p1: KFunction<OnlyPrimary>?' type=kotlin.reflect.KFunction<OnlyPrimary>? operator=null
+                WHEN type=kotlin.reflect.KFunction<OnlyPrimary> operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_notnull: KFunction<OnlyPrimary>?' type=kotlin.reflect.KFunction<OnlyPrimary>? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: GET_VAR 'tmp0_notnull: KFunction<OnlyPrimary>?' type=kotlin.reflect.KFunction<OnlyPrimary>? operator=null
+        VAR val p2: kotlin.reflect.KFunction<PrimaryWithSecondary>?
+          CALL '<get-primaryConstructor>() on KClass<PrimaryWithSecondary>: KFunction<PrimaryWithSecondary>?' type=kotlin.reflect.KFunction<PrimaryWithSecondary>? operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'PrimaryWithSecondary' type=kotlin.reflect.KClass<PrimaryWithSecondary>
+        CALL 'assertNotNull(KFunction<PrimaryWithSecondary>?, String? = ...): KFunction<PrimaryWithSecondary>' type=kotlin.reflect.KFunction<PrimaryWithSecondary> operator=null
+          actual: GET_VAR 'p2: KFunction<PrimaryWithSecondary>?' type=kotlin.reflect.KFunction<PrimaryWithSecondary>? operator=null
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'toString(): String' type=kotlin.String operator=null
+              $this: CALL 'call(vararg Any?): PrimaryWithSecondary' type=PrimaryWithSecondary operator=null
+                $this: BLOCK type=kotlin.reflect.KFunction<PrimaryWithSecondary> operator=EXCLEXCL
+                  VAR val tmp1_notnull: kotlin.reflect.KFunction<PrimaryWithSecondary>?
+                    GET_VAR 'p2: KFunction<PrimaryWithSecondary>?' type=kotlin.reflect.KFunction<PrimaryWithSecondary>? operator=null
+                  WHEN type=kotlin.reflect.KFunction<PrimaryWithSecondary> operator=null
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp1_notnull: KFunction<PrimaryWithSecondary>?' type=kotlin.reflect.KFunction<PrimaryWithSecondary>? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                    else: GET_VAR 'tmp1_notnull: KFunction<PrimaryWithSecondary>?' type=kotlin.reflect.KFunction<PrimaryWithSecondary>? operator=null
+                args: VARARG type=Array<out Any?> varargElementType=Any?
+                  CONST String type=kotlin.String value='beer'
+            arg1: CONST String type=kotlin.String value='beer'
+        VAR val p3: kotlin.reflect.KFunction<OnlySecondary>?
+          CALL '<get-primaryConstructor>() on KClass<OnlySecondary>: KFunction<OnlySecondary>?' type=kotlin.reflect.KFunction<OnlySecondary>? operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'OnlySecondary' type=kotlin.reflect.KClass<OnlySecondary>
+        CALL 'assertNull(Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: GET_VAR 'p3: KFunction<OnlySecondary>?' type=kotlin.reflect.KFunction<OnlySecondary>? operator=null
+        VAR val p4: kotlin.reflect.KFunction<TwoSecondaries>?
+          CALL '<get-primaryConstructor>() on KClass<TwoSecondaries>: KFunction<TwoSecondaries>?' type=kotlin.reflect.KFunction<TwoSecondaries>? operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'TwoSecondaries' type=kotlin.reflect.KClass<TwoSecondaries>
+        CALL 'assertNull(Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: GET_VAR 'p4: KFunction<TwoSecondaries>?' type=kotlin.reflect.KFunction<TwoSecondaries>? operator=null
+        CALL 'assertNotNull(KFunction<En>?, String? = ...): KFunction<En>' type=kotlin.reflect.KFunction<En> operator=null
+          actual: CALL '<get-primaryConstructor>() on KClass<En>: KFunction<En>?' type=kotlin.reflect.KFunction<En>? operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'En' type=kotlin.reflect.KClass<En>
+        CALL 'assertNull(Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-primaryConstructor>() on KClass<I>: KFunction<I>?' type=kotlin.reflect.KFunction<I>? operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'I' type=kotlin.reflect.KClass<I>
+        CALL 'assertNull(Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-primaryConstructor>() on KClass<O>: KFunction<O>?' type=kotlin.reflect.KFunction<O>? operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'O' type=kotlin.reflect.KClass<O>
+        CALL 'assertNull(Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-primaryConstructor>() on KClass<C.Companion>: KFunction<C.Companion>?' type=kotlin.reflect.KFunction<C.Companion>? operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'companion object of C' type=kotlin.reflect.KClass<C.Companion>
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

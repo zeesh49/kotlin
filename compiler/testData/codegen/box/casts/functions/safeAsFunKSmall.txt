@@ -1,0 +1,106 @@
+MODULE <test-module>
+  FILE /safeAsFunKSmall.kt
+    FUN public fun fn0(): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun fn1(x: kotlin.Any): kotlin.Unit
+      BLOCK_BODY
+    FUN public inline fun safeAsReturnsNull(operation: kotlin.String, cast: () -> kotlin.Any?): kotlin.Unit
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            VAR val x: kotlin.Any?
+              CALL 'invoke(): Any?' type=kotlin.Any? operator=INVOKE
+                $this: GET_VAR 'value-parameter cast: () -> Any?' type=() -> kotlin.Any? operator=VARIABLE_AS_FUNCTION
+            CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+              value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'x: Any?' type=kotlin.Any? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                      STRING_CONCATENATION type=kotlin.String
+                        GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                        CONST String type=kotlin.String value=': should return null, got '
+                        GET_VAR 'x: Any?' type=kotlin.Any? operator=null
+                CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=': should not throw exceptions, got '
+                  GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+    FUN public inline fun safeAsReturnsNonNull(operation: kotlin.String, cast: () -> kotlin.Any?): kotlin.Unit
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            VAR val x: kotlin.Any?
+              CALL 'invoke(): Any?' type=kotlin.Any? operator=INVOKE
+                $this: GET_VAR 'value-parameter cast: () -> Any?' type=() -> kotlin.Any? operator=VARIABLE_AS_FUNCTION
+            CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+              value: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: GET_VAR 'x: Any?' type=kotlin.Any? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+              lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                      STRING_CONCATENATION type=kotlin.String
+                        GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                        CONST String type=kotlin.String value=': should return non-null'
+                CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=': should not throw exceptions, got '
+                  GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f0: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALLABLE_REFERENCE 'fn0(): Unit' type=kotlin.reflect.KFunction0<kotlin.Unit> operator=null
+        VAR val f1: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALLABLE_REFERENCE 'fn1(Any): Unit' type=kotlin.reflect.KFunction1<kotlin.Any, kotlin.Unit> operator=null
+        CALL 'safeAsReturnsNonNull(String, () -> Any?): Unit' type=kotlin.Unit operator=null
+          operation: CONST String type=kotlin.String value='f0 as? Function0<*>'
+          cast: BLOCK type=() -> kotlin.Function0<*>? operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Function0<*>?
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Function0<*>?'
+                  TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Function0<*>
+                    GET_VAR 'f0: Any' type=kotlin.Any operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Function0<*>?' type=() -> kotlin.Function0<*>? operator=LAMBDA
+        CALL 'safeAsReturnsNull(String, () -> Any?): Unit' type=kotlin.Unit operator=null
+          operation: CONST String type=kotlin.String value='f0 as? Function1<*, *>'
+          cast: BLOCK type=() -> kotlin.Function1<*, *>? operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Function1<*, *>?
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Function1<*, *>?'
+                  TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Function1<*, *>
+                    GET_VAR 'f0: Any' type=kotlin.Any operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Function1<*, *>?' type=() -> kotlin.Function1<*, *>? operator=LAMBDA
+        CALL 'safeAsReturnsNull(String, () -> Any?): Unit' type=kotlin.Unit operator=null
+          operation: CONST String type=kotlin.String value='f1 as? Function0<*>'
+          cast: BLOCK type=() -> kotlin.Function0<*>? operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Function0<*>?
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Function0<*>?'
+                  TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Function0<*>
+                    GET_VAR 'f1: Any' type=kotlin.Any operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Function0<*>?' type=() -> kotlin.Function0<*>? operator=LAMBDA
+        CALL 'safeAsReturnsNonNull(String, () -> Any?): Unit' type=kotlin.Unit operator=null
+          operation: CONST String type=kotlin.String value='f1 as? Function1<*, *>'
+          cast: BLOCK type=() -> kotlin.Function1<*, *>? operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Function1<*, *>?
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Function1<*, *>?'
+                  TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Function1<*, *>
+                    GET_VAR 'f1: Any' type=kotlin.Any operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Function1<*, *>?' type=() -> kotlin.Function1<*, *>? operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

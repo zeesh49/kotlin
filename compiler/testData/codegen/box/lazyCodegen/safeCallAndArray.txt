@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /safeCallAndArray.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      FUN public final fun calc(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='calc(): String'
+            CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String?
+      BLOCK_BODY
+        VAR val c: C?
+          CALL 'constructor C()' type=C operator=null
+        VAR val arrayList: kotlin.Array<kotlin.String?>
+          CALL 'arrayOf(vararg String?): Array<String?>' type=kotlin.Array<kotlin.String?> operator=null
+            elements: VARARG type=Array<out String?> varargElementType=String?
+              BLOCK type=kotlin.String? operator=SAFE_CALL
+                VAR val tmp0_safe_receiver: C?
+                  GET_VAR 'c: C?' type=C? operator=null
+                WHEN type=kotlin.String? operator=SAFE_CALL
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_safe_receiver: C?' type=C? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CONST Null type=kotlin.Nothing? value='null'
+                  else: CALL 'calc(): String' type=kotlin.String operator=null
+                    $this: GET_VAR 'tmp0_safe_receiver: C?' type=C? operator=null
+              CONST String type=kotlin.String value=''
+        RETURN type=kotlin.Nothing from='box(): String?'
+          CALL 'get(Int): String?' type=kotlin.String? operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'arrayList: Array<String?>' type=kotlin.Array<kotlin.String?> operator=null
+            index: CONST Int type=kotlin.Int value='0'

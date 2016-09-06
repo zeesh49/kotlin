@@ -1,0 +1,54 @@
+MODULE <test-module>
+  FILE /kt6590_identityEquals.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val i: kotlin.Int = 10000
+          CONST Int type=kotlin.Int value='10000'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+              arg0: GET_VAR 'i: Int' type=kotlin.Int operator=null
+              arg1: GET_VAR 'i: Int' type=kotlin.Int operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail int ==='
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: GET_VAR 'i: Int' type=kotlin.Int operator=null
+              arg1: GET_VAR 'i: Int' type=kotlin.Int operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail int !=='
+        VAR val j: kotlin.Long = 123.toLong()
+          CONST Long type=kotlin.Long value='123'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+              arg0: GET_VAR 'j: Long' type=kotlin.Long operator=null
+              arg1: GET_VAR 'j: Long' type=kotlin.Long operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail long ==='
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: GET_VAR 'j: Long' type=kotlin.Long operator=null
+              arg1: GET_VAR 'j: Long' type=kotlin.Long operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail long !=='
+        VAR val d: kotlin.Double = 3.14.toDouble()
+          CONST Double type=kotlin.Double value='3.14'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+              arg0: GET_VAR 'd: Double' type=kotlin.Double operator=null
+              arg1: GET_VAR 'd: Double' type=kotlin.Double operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail double ==='
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: GET_VAR 'd: Double' type=kotlin.Double operator=null
+              arg1: GET_VAR 'd: Double' type=kotlin.Double operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail double !=='
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

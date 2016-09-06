@@ -1,0 +1,47 @@
+MODULE <test-module>
+  FILE /redundantStubForSize.kt
+    CLASS CLASS A1
+      CONSTRUCTOR public constructor A1()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A1'
+      PROPERTY public open val size: kotlin.Int = 56
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='56'
+    CLASS CLASS A2
+      CONSTRUCTOR public constructor A2()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A1()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A2'
+      FUN public open override fun contains(element: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException(String!)' type=java.lang.UnsupportedOperationException operator=null
+              p0: CONST String type=kotlin.String value='not implemented'
+      FUN public open override fun containsAll(elements: kotlin.collections.Collection<kotlin.String>): kotlin.Boolean
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException(String!)' type=java.lang.UnsupportedOperationException operator=null
+              p0: CONST String type=kotlin.String value='not implemented'
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException(String!)' type=java.lang.UnsupportedOperationException operator=null
+              p0: CONST String type=kotlin.String value='not implemented'
+      FUN public open override fun iterator(): kotlin.collections.Iterator<kotlin.String>
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException(String!)' type=java.lang.UnsupportedOperationException operator=null
+              p0: CONST String type=kotlin.String value='not implemented'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL 'constructor A2()' type=A2 operator=null
+              arg1: CONST Int type=kotlin.Int value='56'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

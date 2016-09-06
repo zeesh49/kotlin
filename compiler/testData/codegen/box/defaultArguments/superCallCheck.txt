@@ -1,0 +1,88 @@
+MODULE <test-module>
+  FILE /superCallCheck.kt
+    FUN public fun def(i: kotlin.Int = ...): kotlin.Int
+      i: EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='0'
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='def(Int = ...): Int'
+          GET_VAR 'value-parameter i: Int = ...' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val clazz: java.lang.Class<*>!
+          CALL 'forName(String!): Class<*>!' type=java.lang.Class<*>! operator=null
+            p0: CONST String type=kotlin.String value='SuperCallCheckKt'
+        VAR val method: java.lang.reflect.Method!
+          CALL 'getMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+              GET_VAR 'clazz: Class<*>!' type=java.lang.Class<*>! operator=null
+            p0: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='def'
+              CONST String type=kotlin.String value='$'
+              CONST String type=kotlin.String value='default'
+            p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+              CALL '<get-java>() on KClass<Int>: Class<Int>' type=java.lang.Class<kotlin.Int> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+              CALL '<get-java>() on KClass<Int>: Class<Int>' type=java.lang.Class<kotlin.Int> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+              CALL '<get-java>() on KClass<Any>: Class<Any>' type=java.lang.Class<kotlin.Any> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+        VAR val result: kotlin.Any!
+          CALL 'invoke(Any!, vararg Any!): Any!' type=kotlin.Any! operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+              GET_VAR 'method: Method!' type=java.lang.reflect.Method! operator=null
+            p0: CONST Null type=kotlin.Nothing? value='null'
+            p1: VARARG type=(kotlin.Array<(kotlin.Any..kotlin.Any?)>..kotlin.Array<out (kotlin.Any..kotlin.Any?)>?) varargElementType=(kotlin.Any..kotlin.Any?)
+              CONST Int type=kotlin.Int value='-1'
+              CONST Int type=kotlin.Int value='1'
+              CONST Null type=kotlin.Nothing? value='null'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Any!' type=kotlin.Any! operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              GET_VAR 'result: Any!' type=kotlin.Any! operator=null
+        VAR var failed: kotlin.Boolean
+          CONST Boolean type=kotlin.Boolean value='false'
+        TRY_CATCH type=kotlin.Any!
+          try: BLOCK type=kotlin.Any! operator=null
+            CALL 'invoke(Any!, vararg Any!): Any!' type=kotlin.Any! operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                GET_VAR 'method: Method!' type=java.lang.reflect.Method! operator=null
+              p0: CONST Null type=kotlin.Nothing? value='null'
+              p1: VARARG type=(kotlin.Array<(kotlin.Any..kotlin.Any?)>..kotlin.Array<out (kotlin.Any..kotlin.Any?)>?) varargElementType=(kotlin.Any..kotlin.Any?)
+                CONST Int type=kotlin.Int value='-1'
+                CONST Int type=kotlin.Int value='1'
+                CONST String type=kotlin.String value='fail'
+          catch e: BLOCK type=kotlin.Unit operator=null
+            VAR val cause: kotlin.Throwable?
+              CALL '<get-cause>(): Throwable?' type=kotlin.Throwable? operator=GET_PROPERTY
+                $this: GET_VAR 'e: Exception /* = Exception */' type=kotlin.Exception /* = java.lang.Exception */ operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: WHEN type=kotlin.Boolean operator=ANDAND
+                if: TYPE_OP operator=INSTANCEOF typeOperand=java.lang.UnsupportedOperationException
+                  GET_VAR 'cause: Throwable?' type=kotlin.Throwable? operator=null
+                then: CALL 'startsWith(String, Boolean = ...) on String: Boolean' type=kotlin.Boolean operator=null
+                  $receiver: BLOCK type=kotlin.String operator=EXCLEXCL
+                    VAR val tmp0_notnull: kotlin.String?
+                      CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                        $this: GET_VAR 'cause: Throwable?' type=kotlin.Throwable? operator=null
+                    WHEN type=kotlin.String operator=null
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'tmp0_notnull: String?' type=kotlin.String? operator=null
+                        arg1: CONST Null type=kotlin.Nothing? value='null'
+                      then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                      else: GET_VAR 'tmp0_notnull: String?' type=kotlin.String? operator=null
+                  prefix: CONST String type=kotlin.String value='Super calls'
+                else: CONST Boolean type=kotlin.Boolean value='false'
+              then: BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'failed: Boolean' type=kotlin.Unit operator=EQ
+                  CONST Boolean type=kotlin.Boolean value='true'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+              $this: GET_VAR 'failed: Boolean' type=kotlin.Boolean operator=null
+            then: CONST String type=kotlin.String value='fail'
+            else: CONST String type=kotlin.String value='OK'

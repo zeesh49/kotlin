@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /kt737.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=null
+                $this: CONST Int type=kotlin.Int value='3'
+                other: CONST Int type=kotlin.Int value='2'
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail #1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GTEQ
+              $this: CALL 'compareTo(Long): Int' type=kotlin.Int operator=null
+                $this: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                  $this: CONST Int type=kotlin.Int value='5'
+                other: CALL 'toLong(): Long' type=kotlin.Long operator=null
+                  $this: CONST Int type=kotlin.Int value='10'
+              other: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail #2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

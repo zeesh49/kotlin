@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /kt2384.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS OBJECT companion object of A
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of A'
+        PROPERTY public final val b: kotlin.Int = 0
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='0'
+        PROPERTY public final val c: kotlin.Int = 0
+          EXPRESSION_BODY
+            CALL '<get-b>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'companion object of A' type=A.Companion
+        ANONYMOUS_INITIALIZER companion object of A
+          BLOCK_BODY
+            VAR val d: kotlin.Int = 0
+              CALL '<get-b>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'companion object of A' type=A.Companion
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'constructor A()' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-c>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_OBJECT 'companion object of A' type=A.Companion
+              arg1: CALL '<get-b>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_OBJECT 'companion object of A' type=A.Companion
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='Fail'

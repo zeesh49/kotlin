@@ -1,0 +1,35 @@
+MODULE <test-module>
+  FILE /kt2702.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<R>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public open fun foo(r: R): R
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(R): R'
+            GET_VAR 'value-parameter r: R' type=R operator=null
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor B()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      FUN public open override fun foo(r: kotlin.String): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(String): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CALL 'foo(String): String' superQualifier=B type=kotlin.String operator=null
+                $this: THIS of 'C' type=B
+                r: GET_VAR 'value-parameter r: String' type=kotlin.String operator=null
+              other: CONST String type=kotlin.String value='K'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(String): String' type=kotlin.String operator=null
+            $this: CALL 'constructor C()' type=C operator=null
+            r: CONST String type=kotlin.String value='O'

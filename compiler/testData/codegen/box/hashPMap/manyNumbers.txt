@@ -1,0 +1,172 @@
+MODULE <test-module>
+  FILE /manyNumbers.kt
+    FUN public fun digitSum(number: kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        VAR var x: kotlin.Int
+          GET_VAR 'value-parameter number: Int' type=kotlin.Int operator=null
+        VAR var ans: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'x: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+          body: BLOCK type=kotlin.Unit operator=null
+            SET_VAR 'ans: Int' type=kotlin.Unit operator=PLUSEQ
+              CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                $this: GET_VAR 'ans: Int' type=kotlin.Int operator=PLUSEQ
+                other: CALL 'mod(Int): Int' type=kotlin.Int operator=PERC
+                  $this: GET_VAR 'x: Int' type=kotlin.Int operator=null
+                  other: CONST Int type=kotlin.Int value='10'
+            SET_VAR 'x: Int' type=kotlin.Unit operator=DIVEQ
+              CALL 'div(Int): Int' type=kotlin.Int operator=DIVEQ
+                $this: GET_VAR 'x: Int' type=kotlin.Int operator=DIVEQ
+                other: CONST Int type=kotlin.Int value='10'
+        RETURN type=kotlin.Nothing from='digitSum(Int): Int'
+          GET_VAR 'ans: Int' type=kotlin.Int operator=null
+    PROPERTY public val N: kotlin.Int = 1000000
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='1000000'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var map: kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!>
+          BLOCK type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!>
+              CALL 'empty(): HashPMap<Int!, Any!>' type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=null
+            WHEN type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: HashPMap<Int!, Any!>' type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: HashPMap<Int!, Any!>' type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=null
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp1_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='1'
+                other: CALL '<get-N>(): Int' type=kotlin.Int operator=GET_PROPERTY
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp1_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val x: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp1_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'map: HashPMap<Int!, Any!>' type=kotlin.Unit operator=EQ
+                  BLOCK type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=EXCLEXCL
+                    VAR val tmp2_notnull: kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!>
+                      CALL 'plus(Int!, Any!): HashPMap<Int!, Any!>' type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=null
+                        $this: GET_VAR 'map: HashPMap<Int!, Any!>' type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=null
+                        key: GET_VAR 'x: Int' type=kotlin.Int operator=null
+                        value: CALL 'digitSum(Int): Int' type=kotlin.Int operator=null
+                          number: GET_VAR 'x: Int' type=kotlin.Int operator=null
+                    WHEN type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=null
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'tmp2_notnull: HashPMap<Int!, Any!>' type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=null
+                        arg1: CONST Null type=kotlin.Nothing? value='null'
+                      then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                      else: GET_VAR 'tmp2_notnull: HashPMap<Int!, Any!>' type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-N>(): Int' type=kotlin.Int operator=GET_PROPERTY
+          actual: CALL 'size(): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'map: HashPMap<Int!, Any!>' type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=null
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp3_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'downTo(Int) on Int: IntProgression' type=kotlin.ranges.IntProgression operator=null
+                $receiver: CALL '<get-N>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                to: CONST Int type=kotlin.Int value='1'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp3_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val x: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp3_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+                  actual: CALL 'containsKey(Any!): Boolean' type=kotlin.Boolean operator=null
+                    $this: GET_VAR 'map: HashPMap<Int!, Any!>' type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=null
+                    key: GET_VAR 'x: Int' type=kotlin.Int operator=null
+                  message: STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='Not found: '
+                    GET_VAR 'x: Int' type=kotlin.Int operator=null
+                CALL 'assertEquals(Any!, Any!, String? = ...): Unit' type=kotlin.Unit operator=null
+                  expected: CALL 'digitSum(Int): Int' type=kotlin.Int operator=null
+                    number: GET_VAR 'x: Int' type=kotlin.Int operator=null
+                  actual: CALL 'get(Any!): Any!' type=kotlin.Any! operator=GET_ARRAY_ELEMENT
+                    $this: GET_VAR 'map: HashPMap<Int!, Any!>' type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=null
+                    key: GET_VAR 'x: Int' type=kotlin.Int operator=null
+                  message: STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='Incorrect value for '
+                    GET_VAR 'x: Int' type=kotlin.Int operator=null
+        VAR val list: java.util.ArrayList<kotlin.Int>
+          CALL 'toCollection(ArrayList<Int>) on Iterable<Int>: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+            $receiver: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+              $this: CONST Int type=kotlin.Int value='1'
+              other: CALL '<get-N>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            destination: CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.Int> operator=null
+        CALL 'shuffle((Mutable)List<*>!, Random!): Unit' type=kotlin.Unit operator=null
+          p0: GET_VAR 'list: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          p1: CALL 'constructor Random(Long)' type=java.util.Random operator=null
+            p0: CONST Long type=kotlin.Long value='42'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp4_iterator: kotlin.collections.MutableIterator<kotlin.Int>
+            CALL 'iterator(): MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'list: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp4_iterator: MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val x: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp4_iterator: MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'map: HashPMap<Int!, Any!>' type=kotlin.Unit operator=EQ
+                  BLOCK type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=EXCLEXCL
+                    VAR val tmp5_notnull: kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!>
+                      CALL 'minus(Any!): HashPMap<Int!, Any!>' type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=null
+                        $this: GET_VAR 'map: HashPMap<Int!, Any!>' type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=null
+                        key: GET_VAR 'x: Int' type=kotlin.Int operator=null
+                    WHEN type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=null
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'tmp5_notnull: HashPMap<Int!, Any!>' type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=null
+                        arg1: CONST Null type=kotlin.Nothing? value='null'
+                      then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                      else: GET_VAR 'tmp5_notnull: HashPMap<Int!, Any!>' type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='0'
+          actual: CALL 'size(): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'map: HashPMap<Int!, Any!>' type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=null
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp6_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='1'
+                other: CALL '<get-N>(): Int' type=kotlin.Int operator=GET_PROPERTY
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp6_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val x: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp6_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+                  actual: CALL 'containsKey(Any!): Boolean' type=kotlin.Boolean operator=null
+                    $this: GET_VAR 'map: HashPMap<Int!, Any!>' type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=null
+                    key: GET_VAR 'x: Int' type=kotlin.Int operator=null
+                  message: STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='Incorrectly found: '
+                    GET_VAR 'x: Int' type=kotlin.Int operator=null
+                CALL 'assertEquals(Any?, Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+                  expected: CONST Null type=kotlin.Nothing? value='null'
+                  actual: CALL 'get(Any!): Any!' type=kotlin.Any! operator=GET_ARRAY_ELEMENT
+                    $this: GET_VAR 'map: HashPMap<Int!, Any!>' type=kotlin.reflect.jvm.internal.pcollections.HashPMap<kotlin.Int!, kotlin.Any!> operator=null
+                    key: GET_VAR 'x: Int' type=kotlin.Int operator=null
+                  message: STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='Incorrectly found value for '
+                    GET_VAR 'x: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

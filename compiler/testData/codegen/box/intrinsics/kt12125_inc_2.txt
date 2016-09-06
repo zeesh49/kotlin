@@ -1,0 +1,58 @@
+MODULE <test-module>
+  FILE /kt12125_inc_2.kt
+    FUN public fun test(i: kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test(Int): Int'
+          GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var aByte: kotlin.Byte?
+          CONST Byte type=kotlin.Byte value='0'
+        VAR var bByte: kotlin.Byte
+          CONST Byte type=kotlin.Byte value='0'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'aByte: Byte?' type=kotlin.Byte? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: BLOCK type=kotlin.Unit operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL 'dec(): Byte' type=kotlin.Byte operator=null
+                    $this: GET_VAR 'aByte: Byte?' type=kotlin.Byte? operator=null
+                  arg1: CALL 'dec(): Byte' type=kotlin.Byte operator=null
+                    $this: GET_VAR 'bByte: Byte' type=kotlin.Byte operator=null
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='Failed post-decrement Byte: '
+                  CALL 'dec(): Byte' type=kotlin.Byte operator=null
+                    $this: GET_VAR 'aByte: Byte?' type=kotlin.Byte? operator=null
+                  CONST String type=kotlin.String value=' != '
+                  CALL 'dec(): Byte' type=kotlin.Byte operator=null
+                    $this: GET_VAR 'bByte: Byte' type=kotlin.Byte operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'aByte: Byte?' type=kotlin.Byte? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: BLOCK type=kotlin.Unit operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL 'inc(): Byte' type=kotlin.Byte operator=null
+                    $this: GET_VAR 'aByte: Byte?' type=kotlin.Byte? operator=null
+                  arg1: CALL 'inc(): Byte' type=kotlin.Byte operator=null
+                    $this: GET_VAR 'bByte: Byte' type=kotlin.Byte operator=null
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='Failed post-increment Byte: '
+                  CALL 'inc(): Byte' type=kotlin.Byte operator=null
+                    $this: GET_VAR 'aByte: Byte?' type=kotlin.Byte? operator=null
+                  CONST String type=kotlin.String value=' != '
+                  CALL 'inc(): Byte' type=kotlin.Byte operator=null
+                    $this: GET_VAR 'bByte: Byte' type=kotlin.Byte operator=null
+        SET_VAR 'aByte: Byte?' type=kotlin.Unit operator=EQ
+          CONST Null type=kotlin.Nothing? value='null'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,30 @@
+MODULE <test-module>
+  FILE /objectClone.kt
+    CLASS INTERFACE A
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor HashSet()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      FUN public open override fun clone(): B
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor AssertionError()' type=java.lang.AssertionError operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          TRY_CATCH type=kotlin.String
+            try: BLOCK type=kotlin.String operator=null
+              CALL 'clone(): B' type=B operator=null
+                $this: CALL 'constructor B()' type=B operator=null
+              CONST String type=kotlin.String value='Fail 1'
+            catch e: BLOCK type=kotlin.String operator=null
+              TRY_CATCH type=kotlin.String
+                try: BLOCK type=kotlin.String operator=null
+                  VAR val hs: java.util.HashSet<kotlin.String>
+                    CALL 'constructor B()' type=B operator=null
+                  CALL 'clone(): Any' type=kotlin.Any operator=null
+                    $this: GET_VAR 'hs: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+                  CONST String type=kotlin.String value='Fail 2'
+                catch e: BLOCK type=kotlin.String operator=null
+                  CONST String type=kotlin.String value='OK'

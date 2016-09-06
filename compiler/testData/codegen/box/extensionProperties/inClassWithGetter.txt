@@ -1,0 +1,23 @@
+MODULE <test-module>
+  FILE /inClassWithGetter.kt
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      PROPERTY public final val kotlin.Int.foo: kotlin.String
+        PROPERTY_GETTER public final fun kotlin.Int.<get-foo>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-foo>() on Int: String'
+              CONST String type=kotlin.String value='OK'
+      FUN public final fun test(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test(): String'
+            CALL '<get-foo>() on Int: String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'Test' type=Test
+              $receiver: CONST Int type=kotlin.Int value='1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'test(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Test()' type=Test operator=null

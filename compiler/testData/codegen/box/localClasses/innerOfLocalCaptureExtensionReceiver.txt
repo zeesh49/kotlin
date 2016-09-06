@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /innerOfLocalCaptureExtensionReceiver.kt
+    FUN public fun kotlin.String.bar(): kotlin.String
+      BLOCK_BODY
+        CLASS CLASS Local
+          CONSTRUCTOR public constructor Local()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='Local'
+          FUN public final fun result(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='result(): String'
+                $RECEIVER of 'bar() on String: String' type=kotlin.String
+        CLASS CLASS Outer
+          CONSTRUCTOR public constructor Outer()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+          CLASS CLASS Inner
+            CONSTRUCTOR public constructor Inner()
+              BLOCK_BODY
+                DELEGATING_CONSTRUCTOR_CALL 'constructor Local()'
+                INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+            FUN public final fun outer(): bar.Outer
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='outer(): Outer'
+                  THIS of 'Outer' type=bar.Outer
+        RETURN type=kotlin.Nothing from='bar() on String: String'
+          CALL 'result(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Inner()' type=bar.Outer.Inner operator=null
+              $this: CALL 'constructor Outer()' type=bar.Outer operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'bar() on String: String' type=kotlin.String operator=null
+            $receiver: CONST String type=kotlin.String value='OK'

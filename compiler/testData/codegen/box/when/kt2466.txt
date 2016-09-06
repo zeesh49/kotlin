@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /kt2466.kt
+    FUN public fun foo(b: kotlin.Boolean): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(Boolean): Int'
+          BLOCK type=kotlin.Int operator=WHEN
+            VAR val tmp0_subject: kotlin.Boolean
+              GET_VAR 'value-parameter b: Boolean' type=kotlin.Boolean operator=null
+            WHEN type=kotlin.Int operator=WHEN
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Boolean' type=kotlin.Boolean operator=null
+                arg1: CONST Boolean type=kotlin.Boolean value='false'
+              then: CONST Int type=kotlin.Int value='0'
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Boolean' type=kotlin.Boolean operator=null
+                arg1: CONST Boolean type=kotlin.Boolean value='true'
+              then: CONST Int type=kotlin.Int value='1'
+              else: CONST Int type=kotlin.Int value='2'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL 'foo(Boolean): Int' type=kotlin.Int operator=null
+                  b: CONST Boolean type=kotlin.Boolean value='false'
+                arg1: CONST Int type=kotlin.Int value='0'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL 'foo(Boolean): Int' type=kotlin.Int operator=null
+                  b: CONST Boolean type=kotlin.Boolean value='true'
+                arg1: CONST Int type=kotlin.Int value='1'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='Fail'

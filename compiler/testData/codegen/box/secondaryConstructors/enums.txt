@@ -1,0 +1,219 @@
+MODULE <test-module>
+  FILE /enums.kt
+    CLASS ENUM_CLASS A1
+      CONSTRUCTOR private constructor A1(prop1: kotlin.String)
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          SET_BACKING_FIELD 'prop1: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A1' type=A1
+            value: GET_VAR 'value-parameter prop1: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A1'
+      PROPERTY public final val prop1: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter prop1: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      ENUM_ENTRY enum entry X
+        init: ENUM_CONSTRUCTOR_CALL 'constructor A1(String)' X
+          prop1: CONST String type=kotlin.String value='asd'
+      ENUM_ENTRY enum entry Y
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Y()' Y
+        class: CLASS ENUM_ENTRY Y
+          CONSTRUCTOR private constructor Y()
+            BLOCK_BODY
+              ENUM_CONSTRUCTOR_CALL 'constructor A1()' super
+              INSTANCE_INITIALIZER_CALL classDescriptor='Y'
+          FUN public open override fun f(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='f(): String'
+                CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: CALL 'f(): String' superQualifier=A1 type=kotlin.String operator=null
+                    $this: THIS of 'Y' type=A1
+                  other: CONST String type=kotlin.String value='#Y'
+      ENUM_ENTRY enum entry Z
+        init: ENUM_CONSTRUCTOR_CALL 'constructor A1(Int)' Z
+          x: CONST Int type=kotlin.Int value='5'
+      PROPERTY public final val prop2: kotlin.String = "const2"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='const2'
+      PROPERTY public final var prop3: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value=''
+      CONSTRUCTOR private constructor A1()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A1(String)'
+            prop1: CONST String type=kotlin.String value='default'
+          CALL '<set-prop3>(String): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'A1' type=A1
+            <set-?>: CONST String type=kotlin.String value='empty'
+      CONSTRUCTOR private constructor A1(x: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A1(String)'
+            prop1: CALL 'toString(): String' type=kotlin.String operator=null
+              $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+          CALL '<set-prop3>(String): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'A1' type=A1
+            <set-?>: CONST String type=kotlin.String value='int'
+      FUN public open fun f(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='f(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CALL '<get-prop1>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'A1' type=A1
+              CONST String type=kotlin.String value='#'
+              CALL '<get-prop2>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'A1' type=A1
+              CONST String type=kotlin.String value='#'
+              CALL '<get-prop3>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'A1' type=A1
+      FUN public final fun values(): kotlin.Array<A1>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): A1
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    CLASS ENUM_CLASS A2
+      ENUM_ENTRY enum entry X
+        init: ENUM_CONSTRUCTOR_CALL 'constructor A2(String)' X
+          arg: CONST String type=kotlin.String value='asd'
+      ENUM_ENTRY enum entry Y
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Y()' Y
+        class: CLASS ENUM_ENTRY Y
+          CONSTRUCTOR private constructor Y()
+            BLOCK_BODY
+              ENUM_CONSTRUCTOR_CALL 'constructor A2()' super
+              INSTANCE_INITIALIZER_CALL classDescriptor='Y'
+          FUN public open override fun f(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='f(): String'
+                CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: CALL 'f(): String' superQualifier=A2 type=kotlin.String operator=null
+                    $this: THIS of 'Y' type=A2
+                  other: CONST String type=kotlin.String value='#Y'
+      ENUM_ENTRY enum entry Z
+        init: ENUM_CONSTRUCTOR_CALL 'constructor A2(Int)' Z
+          x: CONST Int type=kotlin.Int value='5'
+      PROPERTY public final val prop1: kotlin.String
+      PROPERTY public final val prop2: kotlin.String = "const2"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='const2'
+      PROPERTY public final var prop3: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value=''
+      CONSTRUCTOR private constructor A2(arg: kotlin.String)
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          SET_BACKING_FIELD 'prop1: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A2' type=A2
+            value: GET_VAR 'value-parameter arg: String' type=kotlin.String operator=null
+      CONSTRUCTOR private constructor A2()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          SET_BACKING_FIELD 'prop1: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A2' type=A2
+            value: CONST String type=kotlin.String value='default'
+          CALL '<set-prop3>(String): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'A2' type=A2
+            <set-?>: CONST String type=kotlin.String value='empty'
+      CONSTRUCTOR private constructor A2(x: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A2(String)'
+            arg: CALL 'toString(): String' type=kotlin.String operator=null
+              $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+          CALL '<set-prop3>(String): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'A2' type=A2
+            <set-?>: CONST String type=kotlin.String value='int'
+      FUN public open fun f(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='f(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CALL '<get-prop1>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'A2' type=A2
+              CONST String type=kotlin.String value='#'
+              CALL '<get-prop2>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'A2' type=A2
+              CONST String type=kotlin.String value='#'
+              CALL '<get-prop3>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'A2' type=A2
+      FUN public final fun values(): kotlin.Array<A2>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): A2
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a1x: A1
+          GET_ENUM_VALUE 'X' type=A1
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'f(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'a1x: A1' type=A1 operator=null
+              arg1: CONST String type=kotlin.String value='asd#const2#'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail1: '
+              CALL 'f(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'a1x: A1' type=A1 operator=null
+        VAR val a1y: A1
+          GET_ENUM_VALUE 'Y' type=A1
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'f(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'a1y: A1' type=A1 operator=null
+              arg1: CONST String type=kotlin.String value='default#const2#empty#Y'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail2: '
+              CALL 'f(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'a1y: A1' type=A1 operator=null
+        VAR val a1z: A1
+          GET_ENUM_VALUE 'Z' type=A1
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'f(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'a1z: A1' type=A1 operator=null
+              arg1: CONST String type=kotlin.String value='5#const2#int'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail3: '
+              CALL 'f(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'a1z: A1' type=A1 operator=null
+        VAR val a2x: A2
+          GET_ENUM_VALUE 'X' type=A2
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'f(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'a2x: A2' type=A2 operator=null
+              arg1: CONST String type=kotlin.String value='asd#const2#'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail4: '
+              CALL 'f(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'a2x: A2' type=A2 operator=null
+        VAR val a2y: A2
+          GET_ENUM_VALUE 'Y' type=A2
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'f(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'a2y: A2' type=A2 operator=null
+              arg1: CONST String type=kotlin.String value='default#const2#empty#Y'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail5: '
+              CALL 'f(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'a2y: A2' type=A2 operator=null
+        VAR val a2z: A2
+          GET_ENUM_VALUE 'Z' type=A2
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'f(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'a2z: A2' type=A2 operator=null
+              arg1: CONST String type=kotlin.String value='5#const2#int'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail6: '
+              CALL 'f(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'a2z: A2' type=A2 operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

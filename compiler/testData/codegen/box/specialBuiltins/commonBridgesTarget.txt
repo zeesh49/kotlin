@@ -1,0 +1,45 @@
+MODULE <test-module>
+  FILE /commonBridgesTarget.kt
+    CLASS CLASS Base
+      CONSTRUCTOR public constructor Base<Target : DatabaseEntity>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor HashSet()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Base'
+      FUN public open override fun remove(element: Target): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='remove(Target): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+    CLASS CLASS Derived
+      CONSTRUCTOR public constructor Derived()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Base()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Derived'
+      FUN public open override fun remove(element: Issue): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='remove(Issue): Boolean'
+            CALL 'remove(Issue): Boolean' superQualifier=Base type=kotlin.Boolean operator=null
+              $this: THIS of 'Derived' type=Base<Issue>
+              element: GET_VAR 'value-parameter element: Issue' type=Issue operator=null
+    CLASS CLASS DatabaseEntity
+      CONSTRUCTOR public constructor DatabaseEntity()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='DatabaseEntity'
+    CLASS CLASS Issue
+      CONSTRUCTOR public constructor Issue()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor DatabaseEntity()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Issue'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val sprintIssues: Derived
+          CALL 'constructor Derived()' type=Derived operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'remove(Issue): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR 'sprintIssues: Derived' type=Derived operator=null
+              element: CALL 'constructor Issue()' type=Issue operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

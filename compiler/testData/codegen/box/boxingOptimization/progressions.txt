@@ -1,0 +1,222 @@
+MODULE <test-module>
+  FILE /progressions.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val result1: kotlin.Int
+          CALL 'count((Int) -> Boolean) on Iterable<Int>: Int' type=kotlin.Int operator=null
+            $receiver: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+              $this: CONST Int type=kotlin.Int value='1'
+              other: CONST Int type=kotlin.Int value='100'
+            predicate: BLOCK type=(kotlin.Int) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Int): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): Boolean'
+                    CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: CALL 'mod(Int): Int' type=kotlin.Int operator=PERC
+                        $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                        other: CONST Int type=kotlin.Int value='2'
+                      arg1: CONST Int type=kotlin.Int value='0'
+              CALLABLE_REFERENCE '<anonymous>(Int): Boolean' type=(kotlin.Int) -> kotlin.Boolean operator=LAMBDA
+        VAR val result2: kotlin.Int
+          CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: CALL 'filter((Int) -> Boolean) on Iterable<Int>: List<Int>' type=kotlin.collections.List<kotlin.Int> operator=null
+              $receiver: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='1'
+                other: CONST Int type=kotlin.Int value='100'
+              predicate: BLOCK type=(kotlin.Int) -> kotlin.Boolean operator=LAMBDA
+                FUN local final fun <anonymous>(x: kotlin.Int): kotlin.Boolean
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(Int): Boolean'
+                      CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: CALL 'mod(Int): Int' type=kotlin.Int operator=PERC
+                          $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                          other: CONST Int type=kotlin.Int value='2'
+                        arg1: CONST Int type=kotlin.Int value='0'
+                CALLABLE_REFERENCE '<anonymous>(Int): Boolean' type=(kotlin.Int) -> kotlin.Boolean operator=LAMBDA
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'result1: Int' type=kotlin.Int operator=null
+          actual: CONST Int type=kotlin.Int value='50'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'result2: Int' type=kotlin.Int operator=null
+          actual: CONST Int type=kotlin.Int value='50'
+        VAR val result3: kotlin.Int
+          CALL 'count((Int) -> Boolean) on Iterable<Int>: Int' type=kotlin.Int operator=null
+            $receiver: CALL 'map((Int) -> Int) on Iterable<Int>: List<Int>' type=kotlin.collections.List<kotlin.Int> operator=null
+              $receiver: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='1'
+                other: CONST Int type=kotlin.Int value='100'
+              transform: BLOCK type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+                FUN local final fun <anonymous>(x: kotlin.Int): kotlin.Int
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(Int): Int'
+                      CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                        $this: CONST Int type=kotlin.Int value='2'
+                        other: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                CALLABLE_REFERENCE '<anonymous>(Int): Int' type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+            predicate: BLOCK type=(kotlin.Int) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Int): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): Boolean'
+                    CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: CALL 'mod(Int): Int' type=kotlin.Int operator=PERC
+                        $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                        other: CONST Int type=kotlin.Int value='2'
+                      arg1: CONST Int type=kotlin.Int value='0'
+              CALLABLE_REFERENCE '<anonymous>(Int): Boolean' type=(kotlin.Int) -> kotlin.Boolean operator=LAMBDA
+        VAR val result4: kotlin.Int
+          CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: CALL 'filter((Int) -> Boolean) on Iterable<Int>: List<Int>' type=kotlin.collections.List<kotlin.Int> operator=null
+              $receiver: CALL 'map((Int) -> Int) on Iterable<Int>: List<Int>' type=kotlin.collections.List<kotlin.Int> operator=null
+                $receiver: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                  $this: CONST Int type=kotlin.Int value='1'
+                  other: CONST Int type=kotlin.Int value='100'
+                transform: BLOCK type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+                  FUN local final fun <anonymous>(x: kotlin.Int): kotlin.Int
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Int): Int'
+                        CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                          $this: CONST Int type=kotlin.Int value='2'
+                          other: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Int): Int' type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+              predicate: BLOCK type=(kotlin.Int) -> kotlin.Boolean operator=LAMBDA
+                FUN local final fun <anonymous>(x: kotlin.Int): kotlin.Boolean
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(Int): Boolean'
+                      CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: CALL 'mod(Int): Int' type=kotlin.Int operator=PERC
+                          $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                          other: CONST Int type=kotlin.Int value='2'
+                        arg1: CONST Int type=kotlin.Int value='0'
+                CALLABLE_REFERENCE '<anonymous>(Int): Boolean' type=(kotlin.Int) -> kotlin.Boolean operator=LAMBDA
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'result3: Int' type=kotlin.Int operator=null
+          actual: CONST Int type=kotlin.Int value='100'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'result4: Int' type=kotlin.Int operator=null
+          actual: CONST Int type=kotlin.Int value='100'
+        VAR val result5: kotlin.Int
+          CALL 'count((Long) -> Boolean) on Iterable<Long>: Int' type=kotlin.Int operator=null
+            $receiver: CALL 'rangeTo(Long): LongRange' type=kotlin.ranges.LongRange operator=RANGE
+              $this: CONST Long type=kotlin.Long value='1'
+              other: CONST Long type=kotlin.Long value='100'
+            predicate: BLOCK type=(kotlin.Long) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Long): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Long): Boolean'
+                    CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: CALL 'mod(Int): Long' type=kotlin.Long operator=PERC
+                        $this: GET_VAR 'value-parameter x: Long' type=kotlin.Long operator=null
+                        other: CONST Int type=kotlin.Int value='2'
+                      arg1: CONST Long type=kotlin.Long value='0'
+              CALLABLE_REFERENCE '<anonymous>(Long): Boolean' type=(kotlin.Long) -> kotlin.Boolean operator=LAMBDA
+        VAR val result6: kotlin.Int
+          CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: CALL 'filter((Long) -> Boolean) on Iterable<Long>: List<Long>' type=kotlin.collections.List<kotlin.Long> operator=null
+              $receiver: CALL 'rangeTo(Long): LongRange' type=kotlin.ranges.LongRange operator=RANGE
+                $this: CONST Long type=kotlin.Long value='1'
+                other: CONST Long type=kotlin.Long value='100'
+              predicate: BLOCK type=(kotlin.Long) -> kotlin.Boolean operator=LAMBDA
+                FUN local final fun <anonymous>(x: kotlin.Long): kotlin.Boolean
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(Long): Boolean'
+                      CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: CALL 'mod(Int): Long' type=kotlin.Long operator=PERC
+                          $this: GET_VAR 'value-parameter x: Long' type=kotlin.Long operator=null
+                          other: CONST Int type=kotlin.Int value='2'
+                        arg1: CONST Long type=kotlin.Long value='0'
+                CALLABLE_REFERENCE '<anonymous>(Long): Boolean' type=(kotlin.Long) -> kotlin.Boolean operator=LAMBDA
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'result5: Int' type=kotlin.Int operator=null
+          actual: CONST Int type=kotlin.Int value='50'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'result6: Int' type=kotlin.Int operator=null
+          actual: CONST Int type=kotlin.Int value='50'
+        VAR val result7: kotlin.Int
+          CALL 'count((Long) -> Boolean) on Iterable<Long>: Int' type=kotlin.Int operator=null
+            $receiver: CALL 'map((Long) -> Long) on Iterable<Long>: List<Long>' type=kotlin.collections.List<kotlin.Long> operator=null
+              $receiver: CALL 'rangeTo(Long): LongRange' type=kotlin.ranges.LongRange operator=RANGE
+                $this: CONST Long type=kotlin.Long value='1'
+                other: CONST Long type=kotlin.Long value='100'
+              transform: BLOCK type=(kotlin.Long) -> kotlin.Long operator=LAMBDA
+                FUN local final fun <anonymous>(x: kotlin.Long): kotlin.Long
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(Long): Long'
+                      CALL 'times(Long): Long' type=kotlin.Long operator=MUL
+                        $this: CONST Int type=kotlin.Int value='2'
+                        other: GET_VAR 'value-parameter x: Long' type=kotlin.Long operator=null
+                CALLABLE_REFERENCE '<anonymous>(Long): Long' type=(kotlin.Long) -> kotlin.Long operator=LAMBDA
+            predicate: BLOCK type=(kotlin.Long) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Long): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Long): Boolean'
+                    CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: CALL 'mod(Int): Long' type=kotlin.Long operator=PERC
+                        $this: GET_VAR 'value-parameter x: Long' type=kotlin.Long operator=null
+                        other: CONST Int type=kotlin.Int value='2'
+                      arg1: CONST Long type=kotlin.Long value='0'
+              CALLABLE_REFERENCE '<anonymous>(Long): Boolean' type=(kotlin.Long) -> kotlin.Boolean operator=LAMBDA
+        VAR val result8: kotlin.Int
+          CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: CALL 'filter((Long) -> Boolean) on Iterable<Long>: List<Long>' type=kotlin.collections.List<kotlin.Long> operator=null
+              $receiver: CALL 'map((Long) -> Long) on Iterable<Long>: List<Long>' type=kotlin.collections.List<kotlin.Long> operator=null
+                $receiver: CALL 'rangeTo(Long): LongRange' type=kotlin.ranges.LongRange operator=RANGE
+                  $this: CONST Long type=kotlin.Long value='1'
+                  other: CONST Long type=kotlin.Long value='100'
+                transform: BLOCK type=(kotlin.Long) -> kotlin.Long operator=LAMBDA
+                  FUN local final fun <anonymous>(x: kotlin.Long): kotlin.Long
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Long): Long'
+                        CALL 'times(Long): Long' type=kotlin.Long operator=MUL
+                          $this: CONST Int type=kotlin.Int value='2'
+                          other: GET_VAR 'value-parameter x: Long' type=kotlin.Long operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Long): Long' type=(kotlin.Long) -> kotlin.Long operator=LAMBDA
+              predicate: BLOCK type=(kotlin.Long) -> kotlin.Boolean operator=LAMBDA
+                FUN local final fun <anonymous>(x: kotlin.Long): kotlin.Boolean
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(Long): Boolean'
+                      CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: CALL 'mod(Int): Long' type=kotlin.Long operator=PERC
+                          $this: GET_VAR 'value-parameter x: Long' type=kotlin.Long operator=null
+                          other: CONST Int type=kotlin.Int value='2'
+                        arg1: CONST Long type=kotlin.Long value='0'
+                CALLABLE_REFERENCE '<anonymous>(Long): Boolean' type=(kotlin.Long) -> kotlin.Boolean operator=LAMBDA
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'result7: Int' type=kotlin.Int operator=null
+          actual: CONST Int type=kotlin.Int value='100'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'result8: Int' type=kotlin.Int operator=null
+          actual: CONST Int type=kotlin.Int value='100'
+        VAR val result9: kotlin.Int
+          CALL 'reduce((Int, Int) -> Int) on Iterable<Int>: Int' type=kotlin.Int operator=null
+            $receiver: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+              $this: CONST Int type=kotlin.Int value='0'
+              other: CONST Int type=kotlin.Int value='10'
+            operation: BLOCK type=(kotlin.Int, kotlin.Int) -> kotlin.Int operator=LAMBDA
+              FUN local final fun <anonymous>(total: kotlin.Int, next: kotlin.Int): kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int, Int): Int'
+                    CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                      $this: GET_VAR 'value-parameter total: Int' type=kotlin.Int operator=null
+                      other: GET_VAR 'value-parameter next: Int' type=kotlin.Int operator=null
+              CALLABLE_REFERENCE '<anonymous>(Int, Int): Int' type=(kotlin.Int, kotlin.Int) -> kotlin.Int operator=LAMBDA
+        VAR val result10: kotlin.Long
+          CALL 'reduce((Long, Long) -> Long) on Iterable<Long>: Long' type=kotlin.Long operator=null
+            $receiver: CALL 'rangeTo(Long): LongRange' type=kotlin.ranges.LongRange operator=RANGE
+              $this: CONST Long type=kotlin.Long value='0'
+              other: CONST Long type=kotlin.Long value='10'
+            operation: BLOCK type=(kotlin.Long, kotlin.Long) -> kotlin.Long operator=LAMBDA
+              FUN local final fun <anonymous>(total: kotlin.Long, next: kotlin.Long): kotlin.Long
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Long, Long): Long'
+                    CALL 'plus(Long): Long' type=kotlin.Long operator=PLUS
+                      $this: GET_VAR 'value-parameter total: Long' type=kotlin.Long operator=null
+                      other: GET_VAR 'value-parameter next: Long' type=kotlin.Long operator=null
+              CALLABLE_REFERENCE '<anonymous>(Long, Long): Long' type=(kotlin.Long, kotlin.Long) -> kotlin.Long operator=LAMBDA
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'result9: Int' type=kotlin.Int operator=null
+          actual: CONST Int type=kotlin.Int value='55'
+        CALL 'assertEquals(Long, Long, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'result10: Long' type=kotlin.Long operator=null
+          actual: CONST Long type=kotlin.Long value='55'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /K.kt
+    CLASS CLASS K
+      CONSTRUCTOR public constructor K()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor J()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='K'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val k: K
+          CALL 'constructor K()' type=K operator=null
+        VAR val p: kotlin.reflect.KMutableProperty1<K, kotlin.String!>
+          CALLABLE_REFERENCE 'result: String!' type=kotlin.reflect.KMutableProperty1<K, kotlin.String!> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(K): String!' type=kotlin.String! operator=null
+                $this: GET_VAR 'p: KMutableProperty1<K, String!>' type=kotlin.reflect.KMutableProperty1<K, kotlin.String!> operator=null
+                receiver: GET_VAR 'k: K' type=K operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail'
+        CALL 'set(K, String!): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'p: KMutableProperty1<K, String!>' type=kotlin.reflect.KMutableProperty1<K, kotlin.String!> operator=null
+          receiver: GET_VAR 'k: K' type=K operator=null
+          value: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+            CALL 'get(K): String!' type=kotlin.String! operator=null
+              $this: GET_VAR 'p: KMutableProperty1<K, String!>' type=kotlin.reflect.KMutableProperty1<K, kotlin.String!> operator=null
+              receiver: GET_VAR 'k: K' type=K operator=null

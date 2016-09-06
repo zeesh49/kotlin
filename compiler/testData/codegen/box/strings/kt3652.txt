@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /kt3652.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var a: kotlin.Char
+          CONST Char type=kotlin.Char value='a'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: STRING_CONCATENATION type=kotlin.String
+                BLOCK type=kotlin.Char operator=POSTFIX_INCR
+                  VAR val tmp0: kotlin.Char
+                    GET_VAR 'a: Char' type=kotlin.Char operator=POSTFIX_INCR
+                  SET_VAR 'a: Char' type=kotlin.Unit operator=POSTFIX_INCR
+                    CALL 'inc(): Char' type=kotlin.Char operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp0: Char' type=kotlin.Char operator=null
+                  GET_VAR 'tmp0: Char' type=kotlin.Char operator=null
+                CONST String type=kotlin.String value='x'
+              arg1: CONST String type=kotlin.String value='ax'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: BLOCK type=kotlin.Char operator=POSTFIX_INCR
+                VAR val tmp1: kotlin.Char
+                  GET_VAR 'a: Char' type=kotlin.Char operator=POSTFIX_INCR
+                SET_VAR 'a: Char' type=kotlin.Unit operator=POSTFIX_INCR
+                  CALL 'inc(): Char' type=kotlin.Char operator=POSTFIX_INCR
+                    $this: GET_VAR 'tmp1: Char' type=kotlin.Char operator=null
+                GET_VAR 'tmp1: Char' type=kotlin.Char operator=null
+              arg1: CONST String type=kotlin.String value='b'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

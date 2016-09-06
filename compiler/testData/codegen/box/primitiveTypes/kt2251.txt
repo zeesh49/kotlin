@@ -1,0 +1,346 @@
+MODULE <test-module>
+  FILE /kt2251.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(b: kotlin.Byte)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'b: Byte' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter b: Byte' type=kotlin.Byte operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var b: kotlin.Byte
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter b: Byte' type=kotlin.Byte operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun c(d: kotlin.Short): kotlin.Char
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='c(Short): Char'
+            CALL 'toChar(): Char' type=kotlin.Char operator=null
+              $this: CALL 'plus(Byte): Int' type=kotlin.Int operator=PLUS
+                $this: CALL '<get-b>(): Byte' type=kotlin.Byte operator=GET_PROPERTY
+                  $this: THIS of 'A' type=A
+                other: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                  $this: GET_VAR 'value-parameter d: Short' type=kotlin.Short operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'c(Short): Char' type=kotlin.Char operator=null
+                $this: CALL 'constructor A(Byte)' type=A operator=null
+                  b: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                    $this: CONST Int type=kotlin.Int value='10'
+                d: CALL 'toShort(): Short' type=kotlin.Short operator=null
+                  $this: CONST Int type=kotlin.Int value='20'
+              arg1: CALL 'toChar(): Char' type=kotlin.Char operator=null
+                $this: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                  $this: CONST Int type=kotlin.Int value='30'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='plus failed'
+        VAR var x: kotlin.Byte
+          CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+            $this: CONST Int type=kotlin.Int value='20'
+        VAR var y: kotlin.Byte
+          CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+            $this: CONST Int type=kotlin.Int value='20'
+        VAR val foo: () -> kotlin.Byte
+          BLOCK type=() -> kotlin.Byte operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Byte
+              BLOCK_BODY
+                BLOCK type=kotlin.Byte operator=POSTFIX_INCR
+                  VAR val tmp0: kotlin.Byte
+                    GET_VAR 'x: Byte' type=kotlin.Byte operator=POSTFIX_INCR
+                  SET_VAR 'x: Byte' type=kotlin.Unit operator=POSTFIX_INCR
+                    CALL 'inc(): Byte' type=kotlin.Byte operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp0: Byte' type=kotlin.Byte operator=null
+                  GET_VAR 'tmp0: Byte' type=kotlin.Byte operator=null
+                RETURN type=kotlin.Nothing from='<anonymous>(): Byte'
+                  BLOCK type=kotlin.Byte operator=PREFIX_INCR
+                    VAR val tmp1: kotlin.Byte
+                      CALL 'inc(): Byte' type=kotlin.Byte operator=PREFIX_INCR
+                        $this: GET_VAR 'x: Byte' type=kotlin.Byte operator=PREFIX_INCR
+                    SET_VAR 'x: Byte' type=kotlin.Unit operator=PREFIX_INCR
+                      GET_VAR 'tmp1: Byte' type=kotlin.Byte operator=null
+                    GET_VAR 'tmp1: Byte' type=kotlin.Byte operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Byte' type=() -> kotlin.Byte operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: WHEN type=kotlin.Boolean operator=OROR
+              if: WHEN type=kotlin.Boolean operator=OROR
+                if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                    arg0: BLOCK type=kotlin.Byte operator=PREFIX_INCR
+                      VAR val tmp0: kotlin.Byte
+                        CALL 'inc(): Byte' type=kotlin.Byte operator=PREFIX_INCR
+                          $this: GET_VAR 'x: Byte' type=kotlin.Byte operator=PREFIX_INCR
+                      SET_VAR 'x: Byte' type=kotlin.Unit operator=PREFIX_INCR
+                        GET_VAR 'tmp0: Byte' type=kotlin.Byte operator=null
+                      GET_VAR 'tmp0: Byte' type=kotlin.Byte operator=null
+                    arg1: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                      $this: CONST Int type=kotlin.Int value='21'
+                then: CONST Boolean type=kotlin.Boolean value='true'
+                else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                    arg0: BLOCK type=kotlin.Byte operator=POSTFIX_INCR
+                      VAR val tmp1: kotlin.Byte
+                        GET_VAR 'x: Byte' type=kotlin.Byte operator=POSTFIX_INCR
+                      SET_VAR 'x: Byte' type=kotlin.Unit operator=POSTFIX_INCR
+                        CALL 'inc(): Byte' type=kotlin.Byte operator=POSTFIX_INCR
+                          $this: GET_VAR 'tmp1: Byte' type=kotlin.Byte operator=null
+                      GET_VAR 'tmp1: Byte' type=kotlin.Byte operator=null
+                    arg1: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                      $this: CONST Int type=kotlin.Int value='21'
+              then: CONST Boolean type=kotlin.Boolean value='true'
+              else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL 'invoke(): Byte' type=kotlin.Byte operator=INVOKE
+                    $this: GET_VAR 'foo: () -> Byte' type=() -> kotlin.Byte operator=VARIABLE_AS_FUNCTION
+                  arg1: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                    $this: CONST Int type=kotlin.Int value='24'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'x: Byte' type=kotlin.Byte operator=null
+                arg1: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                  $this: CONST Int type=kotlin.Int value='24'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='shared byte fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: WHEN type=kotlin.Boolean operator=OROR
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: BLOCK type=kotlin.Byte operator=PREFIX_INCR
+                    VAR val tmp2: kotlin.Byte
+                      CALL 'inc(): Byte' type=kotlin.Byte operator=PREFIX_INCR
+                        $this: GET_VAR 'y: Byte' type=kotlin.Byte operator=PREFIX_INCR
+                    SET_VAR 'y: Byte' type=kotlin.Unit operator=PREFIX_INCR
+                      GET_VAR 'tmp2: Byte' type=kotlin.Byte operator=null
+                    GET_VAR 'tmp2: Byte' type=kotlin.Byte operator=null
+                  arg1: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                    $this: CONST Int type=kotlin.Int value='21'
+              then: CONST Boolean type=kotlin.Boolean value='true'
+              else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: BLOCK type=kotlin.Byte operator=POSTFIX_INCR
+                    VAR val tmp3: kotlin.Byte
+                      GET_VAR 'y: Byte' type=kotlin.Byte operator=POSTFIX_INCR
+                    SET_VAR 'y: Byte' type=kotlin.Unit operator=POSTFIX_INCR
+                      CALL 'inc(): Byte' type=kotlin.Byte operator=POSTFIX_INCR
+                        $this: GET_VAR 'tmp3: Byte' type=kotlin.Byte operator=null
+                    GET_VAR 'tmp3: Byte' type=kotlin.Byte operator=null
+                  arg1: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                    $this: CONST Int type=kotlin.Int value='21'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'y: Byte' type=kotlin.Byte operator=null
+                arg1: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                  $this: CONST Int type=kotlin.Int value='22'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='byte fail'
+        VAR var xs: kotlin.Short
+          CALL 'toShort(): Short' type=kotlin.Short operator=null
+            $this: CONST Int type=kotlin.Int value='20'
+        VAR var ys: kotlin.Short
+          CALL 'toShort(): Short' type=kotlin.Short operator=null
+            $this: CONST Int type=kotlin.Int value='20'
+        VAR val foos: () -> kotlin.Short
+          BLOCK type=() -> kotlin.Short operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Short
+              BLOCK_BODY
+                BLOCK type=kotlin.Short operator=POSTFIX_INCR
+                  VAR val tmp0: kotlin.Short
+                    GET_VAR 'xs: Short' type=kotlin.Short operator=POSTFIX_INCR
+                  SET_VAR 'xs: Short' type=kotlin.Unit operator=POSTFIX_INCR
+                    CALL 'inc(): Short' type=kotlin.Short operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp0: Short' type=kotlin.Short operator=null
+                  GET_VAR 'tmp0: Short' type=kotlin.Short operator=null
+                RETURN type=kotlin.Nothing from='<anonymous>(): Short'
+                  BLOCK type=kotlin.Short operator=PREFIX_INCR
+                    VAR val tmp1: kotlin.Short
+                      CALL 'inc(): Short' type=kotlin.Short operator=PREFIX_INCR
+                        $this: GET_VAR 'xs: Short' type=kotlin.Short operator=PREFIX_INCR
+                    SET_VAR 'xs: Short' type=kotlin.Unit operator=PREFIX_INCR
+                      GET_VAR 'tmp1: Short' type=kotlin.Short operator=null
+                    GET_VAR 'tmp1: Short' type=kotlin.Short operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Short' type=() -> kotlin.Short operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: WHEN type=kotlin.Boolean operator=OROR
+              if: WHEN type=kotlin.Boolean operator=OROR
+                if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                    arg0: BLOCK type=kotlin.Short operator=PREFIX_INCR
+                      VAR val tmp4: kotlin.Short
+                        CALL 'inc(): Short' type=kotlin.Short operator=PREFIX_INCR
+                          $this: GET_VAR 'xs: Short' type=kotlin.Short operator=PREFIX_INCR
+                      SET_VAR 'xs: Short' type=kotlin.Unit operator=PREFIX_INCR
+                        GET_VAR 'tmp4: Short' type=kotlin.Short operator=null
+                      GET_VAR 'tmp4: Short' type=kotlin.Short operator=null
+                    arg1: CALL 'toShort(): Short' type=kotlin.Short operator=null
+                      $this: CONST Int type=kotlin.Int value='21'
+                then: CONST Boolean type=kotlin.Boolean value='true'
+                else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                    arg0: BLOCK type=kotlin.Short operator=POSTFIX_INCR
+                      VAR val tmp5: kotlin.Short
+                        GET_VAR 'xs: Short' type=kotlin.Short operator=POSTFIX_INCR
+                      SET_VAR 'xs: Short' type=kotlin.Unit operator=POSTFIX_INCR
+                        CALL 'inc(): Short' type=kotlin.Short operator=POSTFIX_INCR
+                          $this: GET_VAR 'tmp5: Short' type=kotlin.Short operator=null
+                      GET_VAR 'tmp5: Short' type=kotlin.Short operator=null
+                    arg1: CALL 'toShort(): Short' type=kotlin.Short operator=null
+                      $this: CONST Int type=kotlin.Int value='21'
+              then: CONST Boolean type=kotlin.Boolean value='true'
+              else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL 'invoke(): Short' type=kotlin.Short operator=INVOKE
+                    $this: GET_VAR 'foos: () -> Short' type=() -> kotlin.Short operator=VARIABLE_AS_FUNCTION
+                  arg1: CALL 'toShort(): Short' type=kotlin.Short operator=null
+                    $this: CONST Int type=kotlin.Int value='24'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'xs: Short' type=kotlin.Short operator=null
+                arg1: CALL 'toShort(): Short' type=kotlin.Short operator=null
+                  $this: CONST Int type=kotlin.Int value='24'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='shared short fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: WHEN type=kotlin.Boolean operator=OROR
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: BLOCK type=kotlin.Short operator=PREFIX_INCR
+                    VAR val tmp6: kotlin.Short
+                      CALL 'inc(): Short' type=kotlin.Short operator=PREFIX_INCR
+                        $this: GET_VAR 'ys: Short' type=kotlin.Short operator=PREFIX_INCR
+                    SET_VAR 'ys: Short' type=kotlin.Unit operator=PREFIX_INCR
+                      GET_VAR 'tmp6: Short' type=kotlin.Short operator=null
+                    GET_VAR 'tmp6: Short' type=kotlin.Short operator=null
+                  arg1: CALL 'toShort(): Short' type=kotlin.Short operator=null
+                    $this: CONST Int type=kotlin.Int value='21'
+              then: CONST Boolean type=kotlin.Boolean value='true'
+              else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: BLOCK type=kotlin.Short operator=POSTFIX_INCR
+                    VAR val tmp7: kotlin.Short
+                      GET_VAR 'ys: Short' type=kotlin.Short operator=POSTFIX_INCR
+                    SET_VAR 'ys: Short' type=kotlin.Unit operator=POSTFIX_INCR
+                      CALL 'inc(): Short' type=kotlin.Short operator=POSTFIX_INCR
+                        $this: GET_VAR 'tmp7: Short' type=kotlin.Short operator=null
+                    GET_VAR 'tmp7: Short' type=kotlin.Short operator=null
+                  arg1: CALL 'toShort(): Short' type=kotlin.Short operator=null
+                    $this: CONST Int type=kotlin.Int value='21'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'ys: Short' type=kotlin.Short operator=null
+                arg1: CALL 'toShort(): Short' type=kotlin.Short operator=null
+                  $this: CONST Int type=kotlin.Int value='22'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='short fail'
+        VAR var xc: kotlin.Char
+          CALL 'toChar(): Char' type=kotlin.Char operator=null
+            $this: CONST Int type=kotlin.Int value='20'
+        VAR var yc: kotlin.Char
+          CALL 'toChar(): Char' type=kotlin.Char operator=null
+            $this: CONST Int type=kotlin.Int value='20'
+        VAR val fooc: () -> kotlin.Char
+          BLOCK type=() -> kotlin.Char operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Char
+              BLOCK_BODY
+                BLOCK type=kotlin.Char operator=POSTFIX_INCR
+                  VAR val tmp0: kotlin.Char
+                    GET_VAR 'xc: Char' type=kotlin.Char operator=POSTFIX_INCR
+                  SET_VAR 'xc: Char' type=kotlin.Unit operator=POSTFIX_INCR
+                    CALL 'inc(): Char' type=kotlin.Char operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp0: Char' type=kotlin.Char operator=null
+                  GET_VAR 'tmp0: Char' type=kotlin.Char operator=null
+                RETURN type=kotlin.Nothing from='<anonymous>(): Char'
+                  BLOCK type=kotlin.Char operator=PREFIX_INCR
+                    VAR val tmp1: kotlin.Char
+                      CALL 'inc(): Char' type=kotlin.Char operator=PREFIX_INCR
+                        $this: GET_VAR 'xc: Char' type=kotlin.Char operator=PREFIX_INCR
+                    SET_VAR 'xc: Char' type=kotlin.Unit operator=PREFIX_INCR
+                      GET_VAR 'tmp1: Char' type=kotlin.Char operator=null
+                    GET_VAR 'tmp1: Char' type=kotlin.Char operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Char' type=() -> kotlin.Char operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: WHEN type=kotlin.Boolean operator=OROR
+              if: WHEN type=kotlin.Boolean operator=OROR
+                if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                    arg0: BLOCK type=kotlin.Char operator=PREFIX_INCR
+                      VAR val tmp8: kotlin.Char
+                        CALL 'inc(): Char' type=kotlin.Char operator=PREFIX_INCR
+                          $this: GET_VAR 'xc: Char' type=kotlin.Char operator=PREFIX_INCR
+                      SET_VAR 'xc: Char' type=kotlin.Unit operator=PREFIX_INCR
+                        GET_VAR 'tmp8: Char' type=kotlin.Char operator=null
+                      GET_VAR 'tmp8: Char' type=kotlin.Char operator=null
+                    arg1: CALL 'toChar(): Char' type=kotlin.Char operator=null
+                      $this: CONST Int type=kotlin.Int value='21'
+                then: CONST Boolean type=kotlin.Boolean value='true'
+                else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                    arg0: BLOCK type=kotlin.Char operator=POSTFIX_INCR
+                      VAR val tmp9: kotlin.Char
+                        GET_VAR 'xc: Char' type=kotlin.Char operator=POSTFIX_INCR
+                      SET_VAR 'xc: Char' type=kotlin.Unit operator=POSTFIX_INCR
+                        CALL 'inc(): Char' type=kotlin.Char operator=POSTFIX_INCR
+                          $this: GET_VAR 'tmp9: Char' type=kotlin.Char operator=null
+                      GET_VAR 'tmp9: Char' type=kotlin.Char operator=null
+                    arg1: CALL 'toChar(): Char' type=kotlin.Char operator=null
+                      $this: CONST Int type=kotlin.Int value='21'
+              then: CONST Boolean type=kotlin.Boolean value='true'
+              else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL 'invoke(): Char' type=kotlin.Char operator=INVOKE
+                    $this: GET_VAR 'fooc: () -> Char' type=() -> kotlin.Char operator=VARIABLE_AS_FUNCTION
+                  arg1: CALL 'toChar(): Char' type=kotlin.Char operator=null
+                    $this: CONST Int type=kotlin.Int value='24'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'xc: Char' type=kotlin.Char operator=null
+                arg1: CALL 'toChar(): Char' type=kotlin.Char operator=null
+                  $this: CONST Int type=kotlin.Int value='24'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='shared char fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: WHEN type=kotlin.Boolean operator=OROR
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: BLOCK type=kotlin.Char operator=PREFIX_INCR
+                    VAR val tmp10: kotlin.Char
+                      CALL 'inc(): Char' type=kotlin.Char operator=PREFIX_INCR
+                        $this: GET_VAR 'yc: Char' type=kotlin.Char operator=PREFIX_INCR
+                    SET_VAR 'yc: Char' type=kotlin.Unit operator=PREFIX_INCR
+                      GET_VAR 'tmp10: Char' type=kotlin.Char operator=null
+                    GET_VAR 'tmp10: Char' type=kotlin.Char operator=null
+                  arg1: CALL 'toChar(): Char' type=kotlin.Char operator=null
+                    $this: CONST Int type=kotlin.Int value='21'
+              then: CONST Boolean type=kotlin.Boolean value='true'
+              else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: BLOCK type=kotlin.Char operator=POSTFIX_INCR
+                    VAR val tmp11: kotlin.Char
+                      GET_VAR 'yc: Char' type=kotlin.Char operator=POSTFIX_INCR
+                    SET_VAR 'yc: Char' type=kotlin.Unit operator=POSTFIX_INCR
+                      CALL 'inc(): Char' type=kotlin.Char operator=POSTFIX_INCR
+                        $this: GET_VAR 'tmp11: Char' type=kotlin.Char operator=null
+                    GET_VAR 'tmp11: Char' type=kotlin.Char operator=null
+                  arg1: CALL 'toChar(): Char' type=kotlin.Char operator=null
+                    $this: CONST Int type=kotlin.Int value='21'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'yc: Char' type=kotlin.Char operator=null
+                arg1: CALL 'toChar(): Char' type=kotlin.Char operator=null
+                  $this: CONST Int type=kotlin.Int value='22'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='char fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

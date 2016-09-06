@@ -1,0 +1,41 @@
+MODULE <test-module>
+  FILE /overloadedFunVsVal.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val x: kotlin.Int = 1
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+      FUN public final fun x(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='x(): String'
+            CONST String type=kotlin.String value='OK'
+    PROPERTY public val f1: kotlin.reflect.KProperty1<A, kotlin.Int>
+      EXPRESSION_BODY
+        CALLABLE_REFERENCE 'x: Int' type=kotlin.reflect.KProperty1<A, kotlin.Int> operator=null
+    PROPERTY public val f2: (A) -> kotlin.String
+      EXPRESSION_BODY
+        CALLABLE_REFERENCE 'x(): String' type=kotlin.reflect.KFunction1<A, kotlin.String> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          CALL 'constructor A()' type=A operator=null
+        VAR val x1: kotlin.Int
+          CALL 'get(A): Int' type=kotlin.Int operator=null
+            $this: CALL '<get-f1>(): KProperty1<A, Int>' type=kotlin.reflect.KProperty1<A, kotlin.Int> operator=GET_PROPERTY
+            receiver: GET_VAR 'a: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'x1: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 1: '
+              GET_VAR 'x1: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'invoke(A): String' type=kotlin.String operator=INVOKE
+            $this: CALL '<get-f2>(): (A) -> String' type=(A) -> kotlin.String operator=GET_PROPERTY
+            p1: GET_VAR 'a: A' type=A operator=null

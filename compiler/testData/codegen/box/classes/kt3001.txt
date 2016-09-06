@@ -1,0 +1,40 @@
+MODULE <test-module>
+  FILE /kt3001.kt
+    CLASS INTERFACE A
+      PROPERTY public abstract val result: kotlin.String
+    CLASS CLASS Base
+      CONSTRUCTOR public constructor Base(result: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'result: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Base' type=Base
+            value: GET_VAR 'value-parameter result: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Base'
+      PROPERTY public open override val result: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter result: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS Derived
+      CONSTRUCTOR public constructor Derived()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Derived'
+      PROPERTY val `Derived$A$delegate`: Base
+        EXPRESSION_BODY
+          CALL 'constructor Base(String)' type=Base operator=null
+            result: CONST String type=kotlin.String value='OK'
+      PROPERTY public open override val result: kotlin.String
+        PROPERTY_GETTER public open override fun <get-result>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-result>(): String'
+              CALL '<get-result>(): String' type=kotlin.String operator=null
+                $this: GET_VAR '`Derived$A$delegate`: Base' type=Base operator=null
+    CLASS CLASS Z
+      CONSTRUCTOR public constructor Z()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Derived()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Z'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor Z()' type=Z operator=null

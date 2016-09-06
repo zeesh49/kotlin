@@ -1,0 +1,78 @@
+MODULE <test-module>
+  FILE /classVisibility.kt
+    CLASS CLASS DefaultVisibilityClass
+      CONSTRUCTOR public constructor DefaultVisibilityClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='DefaultVisibilityClass'
+    CLASS CLASS PublicClass
+      CONSTRUCTOR public constructor PublicClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='PublicClass'
+      CLASS CLASS ProtectedClass
+        CONSTRUCTOR public constructor ProtectedClass()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='ProtectedClass'
+      FUN public final fun getProtectedClass(): kotlin.reflect.KClass<*>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getProtectedClass(): KClass<*>'
+            CLASS_REFERENCE 'ProtectedClass' type=kotlin.reflect.KClass<PublicClass.ProtectedClass>
+    CLASS CLASS InternalClass
+      CONSTRUCTOR public constructor InternalClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='InternalClass'
+    CLASS CLASS PrivateClass
+      CONSTRUCTOR public constructor PrivateClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='PrivateClass'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(KVisibility?, KVisibility?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_ENUM_VALUE 'PUBLIC' type=kotlin.reflect.KVisibility
+          actual: CALL '<get-visibility>(): KVisibility?' type=kotlin.reflect.KVisibility? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'DefaultVisibilityClass' type=kotlin.reflect.KClass<DefaultVisibilityClass>
+        CALL 'assertEquals(KVisibility?, KVisibility?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_ENUM_VALUE 'PUBLIC' type=kotlin.reflect.KVisibility
+          actual: CALL '<get-visibility>(): KVisibility?' type=kotlin.reflect.KVisibility? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'PublicClass' type=kotlin.reflect.KClass<PublicClass>
+        CALL 'assertEquals(KVisibility?, KVisibility?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_ENUM_VALUE 'PROTECTED' type=kotlin.reflect.KVisibility
+          actual: CALL '<get-visibility>(): KVisibility?' type=kotlin.reflect.KVisibility? operator=GET_PROPERTY
+            $this: CALL 'getProtectedClass(): KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+              $this: CALL 'constructor PublicClass()' type=PublicClass operator=null
+        CALL 'assertEquals(KVisibility?, KVisibility?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_ENUM_VALUE 'INTERNAL' type=kotlin.reflect.KVisibility
+          actual: CALL '<get-visibility>(): KVisibility?' type=kotlin.reflect.KVisibility? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'InternalClass' type=kotlin.reflect.KClass<InternalClass>
+        CALL 'assertEquals(KVisibility?, KVisibility?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_ENUM_VALUE 'PRIVATE' type=kotlin.reflect.KVisibility
+          actual: CALL '<get-visibility>(): KVisibility?' type=kotlin.reflect.KVisibility? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'PrivateClass' type=kotlin.reflect.KClass<PrivateClass>
+        CLASS CLASS Local
+          CONSTRUCTOR public constructor Local()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='Local'
+        CALL 'assertEquals(KVisibility?, KVisibility?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Null type=kotlin.Nothing? value='null'
+          actual: CALL '<get-visibility>(): KVisibility?' type=kotlin.reflect.KVisibility? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'Local' type=kotlin.reflect.KClass<box.Local>
+        VAR val anonymous: box.<no name provided>
+          BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+            CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL
+        CALL 'assertEquals(KVisibility?, KVisibility?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Null type=kotlin.Nothing? value='null'
+          actual: CALL '<get-visibility>(): KVisibility?' type=kotlin.reflect.KVisibility? operator=GET_PROPERTY
+            $this: GET_CLASS type=kotlin.reflect.KClass<box.<no name provided>>
+              GET_VAR 'anonymous: <no name provided>' type=box.<no name provided> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,109 @@
+MODULE <test-module>
+  FILE /safeAssignComplex.kt
+    PROPERTY public var holder: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    PROPERTY public var mainShape: Shape?
+      EXPRESSION_BODY
+        CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun getShape(): Shape?
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=PLUSEQ
+          CALL '<set-holder>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+            <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+              $this: CALL '<get-holder>(): String' type=kotlin.String operator=PLUSEQ
+              other: CONST String type=kotlin.String value='getShape1()'
+        CALL '<set-mainShape>(Shape?): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: CALL 'constructor Shape(String)' type=Shape operator=null
+            result: CONST String type=kotlin.String value='fail'
+        RETURN type=kotlin.Nothing from='getShape(): Shape?'
+          CALL '<get-mainShape>(): Shape?' type=Shape? operator=GET_PROPERTY
+    FUN public fun getOK(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=PLUSEQ
+          CALL '<set-holder>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+            <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+              $this: CALL '<get-holder>(): String' type=kotlin.String operator=PLUSEQ
+              other: CONST String type=kotlin.String value='->OK'
+        RETURN type=kotlin.Nothing from='getOK(): String'
+          CONST String type=kotlin.String value='OK'
+    CLASS CLASS Shape
+      CONSTRUCTOR public constructor Shape(result: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'result: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Shape' type=Shape
+            value: GET_VAR 'value-parameter result: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Shape'
+      PROPERTY public final var result: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter result: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final var innerShape: Shape?
+        EXPRESSION_BODY
+          CONST Null type=kotlin.Nothing? value='null'
+      FUN public final fun getShape2(): Shape?
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            CALL '<set-holder>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+              <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: CALL '<get-holder>(): String' type=kotlin.String operator=PLUSEQ
+                other: CONST String type=kotlin.String value='->getShape2()'
+          CALL '<set-innerShape>(Shape?): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'Shape' type=Shape
+            <set-?>: CALL 'constructor Shape(String)' type=Shape operator=null
+              result: CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'Shape' type=Shape
+          RETURN type=kotlin.Nothing from='getShape2(): Shape?'
+            CALL '<get-innerShape>(): Shape?' type=Shape? operator=GET_PROPERTY
+              $this: THIS of 'Shape' type=Shape
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp1_safe_receiver: Shape?
+            BLOCK type=Shape? operator=SAFE_CALL
+              VAR val tmp0_safe_receiver: Shape?
+                CALL 'getShape(): Shape?' type=Shape? operator=null
+              WHEN type=Shape? operator=SAFE_CALL
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_safe_receiver: Shape?' type=Shape? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CONST Null type=kotlin.Nothing? value='null'
+                else: CALL 'getShape2(): Shape?' type=Shape? operator=null
+                  $this: GET_VAR 'tmp0_safe_receiver: Shape?' type=Shape? operator=null
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp1_safe_receiver: Shape?' type=Shape? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+              $this: GET_VAR 'tmp1_safe_receiver: Shape?' type=Shape? operator=null
+              <set-?>: CALL 'getOK(): String' type=kotlin.String operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+              arg1: CONST String type=kotlin.String value='getShape1()->getShape2()->OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail '
+              CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: BLOCK type=Shape operator=EXCLEXCL
+              VAR val tmp3_notnull: Shape?
+                CALL '<get-innerShape>(): Shape?' type=Shape? operator=GET_PROPERTY
+                  $this: BLOCK type=Shape operator=EXCLEXCL
+                    VAR val tmp2_notnull: Shape?
+                      CALL '<get-mainShape>(): Shape?' type=Shape? operator=GET_PROPERTY
+                    WHEN type=Shape operator=null
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'tmp2_notnull: Shape?' type=Shape? operator=null
+                        arg1: CONST Null type=kotlin.Nothing? value='null'
+                      then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                      else: GET_VAR 'tmp2_notnull: Shape?' type=Shape? operator=null
+              WHEN type=Shape operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp3_notnull: Shape?' type=Shape? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp3_notnull: Shape?' type=Shape? operator=null

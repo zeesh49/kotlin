@@ -1,0 +1,79 @@
+MODULE <test-module>
+  FILE /kt11121.kt
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B<M>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    CLASS INTERFACE A
+      FUN public open fun <T, L> p(p: T): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='p(T): T'
+            GET_VAR 'value-parameter p: T' type=T operator=null
+      PROPERTY public open val <T> T.z: T?
+        PROPERTY_GETTER public open fun T.<get-z>(): T?
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-z>() on T: T?'
+              CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val defaultImpls: java.lang.Class<*>!
+          CALL 'forName(String!): Class<*>!' type=java.lang.Class<*>! operator=null
+            p0: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='A'
+              CONST String type=kotlin.String value='$'
+              CONST String type=kotlin.String value='DefaultImpls'
+        VAR val declaredMethod: java.lang.reflect.Method!
+          CALL 'getDeclaredMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+              GET_VAR 'defaultImpls: Class<*>!' type=java.lang.Class<*>! operator=null
+            p0: CONST String type=kotlin.String value='p'
+            p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+              CALL '<get-java>() on KClass<A<*, *>>: Class<A<*, *>>' type=java.lang.Class<A<*, *>> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A<*, *>>
+              CALL '<get-java>() on KClass<Any>: Class<Any>' type=java.lang.Class<kotlin.Any> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toGenericString(): String!' type=kotlin.String! operator=null
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                  GET_VAR 'declaredMethod: Method!' type=java.lang.reflect.Method! operator=null
+              arg1: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='public static <T_I1,Y,T,L> T A'
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='DefaultImpls.p(A<T_I1, Y>,T)'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              CALL 'toGenericString(): String!' type=kotlin.String! operator=null
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                  GET_VAR 'declaredMethod: Method!' type=java.lang.reflect.Method! operator=null
+        VAR val declaredProperty: java.lang.reflect.Method!
+          CALL 'getDeclaredMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+              GET_VAR 'defaultImpls: Class<*>!' type=java.lang.Class<*>! operator=null
+            p0: CONST String type=kotlin.String value='getZ'
+            p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+              CALL '<get-java>() on KClass<A<*, *>>: Class<A<*, *>>' type=java.lang.Class<A<*, *>> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A<*, *>>
+              CALL '<get-java>() on KClass<Any>: Class<Any>' type=java.lang.Class<kotlin.Any> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toGenericString(): String!' type=kotlin.String! operator=null
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                  GET_VAR 'declaredProperty: Method!' type=java.lang.reflect.Method! operator=null
+              arg1: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='public static <T_I1,Y,T> T A'
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='DefaultImpls.getZ(A<T_I1, Y>,T)'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 2: '
+              CALL 'toGenericString(): String!' type=kotlin.String! operator=null
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                  GET_VAR 'declaredProperty: Method!' type=java.lang.reflect.Method! operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

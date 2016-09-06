@@ -1,0 +1,75 @@
+MODULE <test-module>
+  FILE /capturedLocalVarNoInline.kt
+    FUN public fun <T> run(f: () -> T): T
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='run(() -> T): T'
+          CALL 'invoke(): T' type=T operator=INVOKE
+            $this: GET_VAR 'value-parameter f: () -> T' type=() -> T operator=VARIABLE_AS_FUNCTION
+    CLASS CLASS Delegate
+      CONSTRUCTOR public constructor Delegate()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Delegate'
+      PROPERTY public final var inner: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+      FUN public final operator fun getValue(t: kotlin.Any?, p: kotlin.reflect.KProperty<*>): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getValue(Any?, KProperty<*>): Int'
+            CALL '<get-inner>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'Delegate' type=foo.Delegate
+      FUN public final operator fun setValue(t: kotlin.Any?, p: kotlin.reflect.KProperty<*>, i: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-inner>(Int): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'Delegate' type=foo.Delegate
+            <set-?>: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        LOCAL_DELEGATED_PROPERTY var prop: kotlin.Int
+          VAR val `prop$delegate`: foo.Delegate
+            CALL 'constructor Delegate()' type=foo.Delegate operator=null
+          LOCAL_PROPERTY_ACCESSOR <get-prop>(): Int
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<get-prop>(): Int'
+                CALL 'getValue(Any?, KProperty<*>): Int' type=kotlin.Int operator=null
+                  $this: GET_VAR '`prop$delegate`: Delegate' type=foo.Delegate operator=null
+                  t: CONST Null type=kotlin.Nothing? value='null'
+                  p: CALLABLE_REFERENCE 'prop: Int' type=kotlin.reflect.KMutableProperty0<kotlin.Int> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+          LOCAL_PROPERTY_ACCESSOR <set-prop>(Int): Int
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<set-prop>(Int): Int'
+                TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Int
+                  CALL 'setValue(Any?, KProperty<*>, Int): Unit' type=kotlin.Unit operator=null
+                    $this: GET_VAR '`prop$delegate`: Delegate' type=foo.Delegate operator=null
+                    t: CONST Null type=kotlin.Nothing? value='null'
+                    p: CALLABLE_REFERENCE 'prop: Int' type=kotlin.reflect.KMutableProperty0<kotlin.Int> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+                    i: GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=null
+        CALL 'run(() -> Unit): Unit' type=kotlin.Unit operator=null
+          f: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  CALL '<set-prop>(Int): Int' type=kotlin.Int operator=EQ
+                    value: CONST Int type=kotlin.Int value='2'
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop>(): Int' type=kotlin.Int operator=GET_LOCAL_PROPERTY
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail get'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'run(() -> String): String' type=kotlin.String operator=null
+            f: BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    WHEN type=kotlin.String operator=IF
+                      if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                          arg0: CALL '<get-prop>(): Int' type=kotlin.Int operator=GET_LOCAL_PROPERTY
+                          arg1: CONST Int type=kotlin.Int value='2'
+                      then: CONST String type=kotlin.String value='fail set'
+                      else: CONST String type=kotlin.String value='OK'
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA

@@ -1,0 +1,52 @@
+MODULE <test-module>
+  FILE /test.kt
+    FUN public fun bar(args: kotlin.Array<kotlin.String>?): kotlin.Int
+      BLOCK_BODY
+        VAR var res: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'value-parameter args: Array<String>?' type=kotlin.Array<kotlin.String>? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: BLOCK type=kotlin.Unit operator=null
+            SET_VAR 'res: Int' type=kotlin.Unit operator=PLUSEQ
+              CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                $this: GET_VAR 'res: Int' type=kotlin.Int operator=PLUSEQ
+                other: CALL 'foo(Int, vararg String!): Int' type=kotlin.Int operator=null
+                  $this: CALL 'constructor A()' type=A operator=null
+                  x: CONST Int type=kotlin.Int value='1'
+                  args: VARARG type=(kotlin.Array<(kotlin.String..kotlin.String?)>..kotlin.Array<out (kotlin.String..kotlin.String?)>?) varargElementType=(kotlin.String..kotlin.String?)
+                    SPREAD_ELEMENT
+                      GET_VAR 'value-parameter args: Array<String>?' type=kotlin.Array<kotlin.String>? operator=null
+        SET_VAR 'res: Int' type=kotlin.Unit operator=PLUSEQ
+          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+            $this: GET_VAR 'res: Int' type=kotlin.Int operator=PLUSEQ
+            other: CALL 'foo(Int, vararg String!): Int' type=kotlin.Int operator=null
+              $this: CALL 'constructor A()' type=A operator=null
+              x: CONST Int type=kotlin.Int value='1'
+              args: VARARG type=(kotlin.Array<(kotlin.String..kotlin.String?)>..kotlin.Array<out (kotlin.String..kotlin.String?)>?) varargElementType=(kotlin.String..kotlin.String?)
+                SPREAD_ELEMENT
+                  GET_BACKING_FIELD 'ar: Array<(out) String!>!' type=kotlin.Array<(out) kotlin.String!>! operator=GET_PROPERTY
+        RETURN type=kotlin.Nothing from='bar(Array<String>?): Int'
+          GET_VAR 'res: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'bar(Array<String>?): Int' type=kotlin.Int operator=null
+                args: CONST Null type=kotlin.Nothing? value='null'
+              arg1: CONST Int type=kotlin.Int value='3'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'bar(Array<String>?): Int' type=kotlin.Int operator=null
+                args: GET_BACKING_FIELD 'ar: Array<(out) String!>!' type=kotlin.Array<(out) kotlin.String!>! operator=GET_PROPERTY
+              arg1: CONST Int type=kotlin.Int value='6'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

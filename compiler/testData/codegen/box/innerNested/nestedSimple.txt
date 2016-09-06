@@ -1,0 +1,21 @@
+MODULE <test-module>
+  FILE /nestedSimple.kt
+    CLASS CLASS Outer
+      CONSTRUCTOR public constructor Outer()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+      CLASS CLASS Nested
+        CONSTRUCTOR public constructor Nested()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Nested'
+        FUN public final fun box(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'box(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Nested()' type=Outer.Nested operator=null

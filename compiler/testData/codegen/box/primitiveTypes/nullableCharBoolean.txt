@@ -1,0 +1,39 @@
+MODULE <test-module>
+  FILE /nullableCharBoolean.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val c: kotlin.Char? = \u0061 ('a')
+          CONST Char type=kotlin.Char value='a'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'minus(Char): Int' type=kotlin.Int operator=MINUS
+                $this: BLOCK type=kotlin.Char operator=EXCLEXCL
+                  VAR val tmp0_notnull: kotlin.Char?
+                    GET_VAR 'c: Char?' type=kotlin.Char? operator=null
+                  WHEN type=kotlin.Char operator=null
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp0_notnull: Char?' type=kotlin.Char? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                    else: GET_VAR 'tmp0_notnull: Char?' type=kotlin.Char? operator=null
+                other: CONST Char type=kotlin.Char value='a'
+              arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail c'
+        VAR val b: kotlin.Boolean? = false
+          CONST Boolean type=kotlin.Boolean value='false'
+        WHEN type=kotlin.Unit operator=IF
+          if: BLOCK type=kotlin.Boolean operator=EXCLEXCL
+            VAR val tmp1_notnull: kotlin.Boolean?
+              GET_VAR 'b: Boolean?' type=kotlin.Boolean? operator=null
+            WHEN type=kotlin.Boolean operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp1_notnull: Boolean?' type=kotlin.Boolean? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp1_notnull: Boolean?' type=kotlin.Boolean? operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail b'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

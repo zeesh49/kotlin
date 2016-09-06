@@ -1,0 +1,171 @@
+MODULE <test-module>
+  FILE /nativePropertyAccessors.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      CLASS OBJECT companion object of C
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of C'
+        PROPERTY public final val defaultGetter: kotlin.Int = 1
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='1'
+          PROPERTY_GETTER public final external fun <get-defaultGetter>(): kotlin.Int
+        PROPERTY public final var defaultSetter: kotlin.Int
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='1'
+          PROPERTY_GETTER public final external fun <get-defaultSetter>(): kotlin.Int
+          PROPERTY_SETTER public final external fun <set-defaultSetter>(<set-?>: kotlin.Int): kotlin.Unit
+      PROPERTY public final val defaultGetter: kotlin.Int = 1
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+        PROPERTY_GETTER public final external fun <get-defaultGetter>(): kotlin.Int
+      PROPERTY public final var defaultSetter: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+        PROPERTY_GETTER public final external fun <get-defaultSetter>(): kotlin.Int
+        PROPERTY_SETTER public final external fun <set-defaultSetter>(<set-?>: kotlin.Int): kotlin.Unit
+    PROPERTY public val defaultGetter: kotlin.Int = 1
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='1'
+      PROPERTY_GETTER public external fun <get-defaultGetter>(): kotlin.Int
+    PROPERTY public var defaultSetter: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='1'
+      PROPERTY_GETTER public external fun <get-defaultSetter>(): kotlin.Int
+      PROPERTY_SETTER public external fun <set-defaultSetter>(<set-?>: kotlin.Int): kotlin.Unit
+    FUN public fun check(body: () -> kotlin.Unit, signature: kotlin.String): kotlin.String?
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+              $this: GET_VAR 'value-parameter body: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+            RETURN type=kotlin.Nothing from='check(() -> Unit, String): String?'
+              CONST String type=kotlin.String value='Link error expected'
+          catch e: BLOCK type=kotlin.Unit operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                    $this: GET_VAR 'e: UnsatisfiedLinkError' type=java.lang.UnsatisfiedLinkError operator=null
+                  arg1: GET_VAR 'value-parameter signature: String' type=kotlin.String operator=null
+              then: RETURN type=kotlin.Nothing from='check(() -> Unit, String): String?'
+                CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='Fail '
+                    GET_VAR 'value-parameter signature: String' type=kotlin.String operator=null
+                    CONST String type=kotlin.String value=': '
+                  other: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                    $this: GET_VAR 'e: UnsatisfiedLinkError' type=java.lang.UnsatisfiedLinkError operator=null
+        RETURN type=kotlin.Nothing from='check(() -> Unit, String): String?'
+          CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          BLOCK type=kotlin.String operator=ELVIS
+            VAR val tmp5_elvis_lhs: kotlin.String?
+              BLOCK type=kotlin.String? operator=ELVIS
+                VAR val tmp4_elvis_lhs: kotlin.String?
+                  BLOCK type=kotlin.String? operator=ELVIS
+                    VAR val tmp3_elvis_lhs: kotlin.String?
+                      BLOCK type=kotlin.String? operator=ELVIS
+                        VAR val tmp2_elvis_lhs: kotlin.String?
+                          BLOCK type=kotlin.String? operator=ELVIS
+                            VAR val tmp1_elvis_lhs: kotlin.String?
+                              BLOCK type=kotlin.String? operator=ELVIS
+                                VAR val tmp0_elvis_lhs: kotlin.String?
+                                  CALL 'check(() -> Unit, String): String?' type=kotlin.String? operator=null
+                                    body: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                                      FUN local final fun <anonymous>(): kotlin.Unit
+                                        BLOCK_BODY
+                                          RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                                            CALL '<get-defaultGetter>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                                      CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+                                    signature: CONST String type=kotlin.String value='NativePropertyAccessorsKt.getDefaultGetter()I'
+                                WHEN type=kotlin.String? operator=null
+                                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                                    arg0: GET_VAR 'tmp0_elvis_lhs: String?' type=kotlin.String? operator=null
+                                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                                  then: CALL 'check(() -> Unit, String): String?' type=kotlin.String? operator=null
+                                    body: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                                      FUN local final fun <anonymous>(): kotlin.Unit
+                                        BLOCK_BODY
+                                          RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                                            CALL '<set-defaultSetter>(Int): Unit' type=kotlin.Unit operator=EQ
+                                              <set-?>: CONST Int type=kotlin.Int value='1'
+                                      CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+                                    signature: CONST String type=kotlin.String value='NativePropertyAccessorsKt.setDefaultSetter(I)V'
+                                  else: GET_VAR 'tmp0_elvis_lhs: String?' type=kotlin.String? operator=null
+                            WHEN type=kotlin.String? operator=null
+                              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                                arg0: GET_VAR 'tmp1_elvis_lhs: String?' type=kotlin.String? operator=null
+                                arg1: CONST Null type=kotlin.Nothing? value='null'
+                              then: CALL 'check(() -> Unit, String): String?' type=kotlin.String? operator=null
+                                body: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                                  FUN local final fun <anonymous>(): kotlin.Unit
+                                    BLOCK_BODY
+                                      RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                                        CALL '<get-defaultGetter>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                                          $this: GET_OBJECT 'companion object of C' type=C.Companion
+                                  CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+                                signature: STRING_CONCATENATION type=kotlin.String
+                                  CONST String type=kotlin.String value='C'
+                                  CONST String type=kotlin.String value='$'
+                                  CONST String type=kotlin.String value='Companion.getDefaultGetter()I'
+                              else: GET_VAR 'tmp1_elvis_lhs: String?' type=kotlin.String? operator=null
+                        WHEN type=kotlin.String? operator=null
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: GET_VAR 'tmp2_elvis_lhs: String?' type=kotlin.String? operator=null
+                            arg1: CONST Null type=kotlin.Nothing? value='null'
+                          then: CALL 'check(() -> Unit, String): String?' type=kotlin.String? operator=null
+                            body: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                              FUN local final fun <anonymous>(): kotlin.Unit
+                                BLOCK_BODY
+                                  RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                                    CALL '<set-defaultSetter>(Int): Unit' type=kotlin.Unit operator=EQ
+                                      $this: GET_OBJECT 'companion object of C' type=C.Companion
+                                      <set-?>: CONST Int type=kotlin.Int value='1'
+                              CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+                            signature: STRING_CONCATENATION type=kotlin.String
+                              CONST String type=kotlin.String value='C'
+                              CONST String type=kotlin.String value='$'
+                              CONST String type=kotlin.String value='Companion.setDefaultSetter(I)V'
+                          else: GET_VAR 'tmp2_elvis_lhs: String?' type=kotlin.String? operator=null
+                    WHEN type=kotlin.String? operator=null
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'tmp3_elvis_lhs: String?' type=kotlin.String? operator=null
+                        arg1: CONST Null type=kotlin.Nothing? value='null'
+                      then: CALL 'check(() -> Unit, String): String?' type=kotlin.String? operator=null
+                        body: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                          FUN local final fun <anonymous>(): kotlin.Unit
+                            BLOCK_BODY
+                              RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                                CALL '<get-defaultGetter>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                                  $this: CALL 'constructor C()' type=C operator=null
+                          CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+                        signature: CONST String type=kotlin.String value='C.getDefaultGetter()I'
+                      else: GET_VAR 'tmp3_elvis_lhs: String?' type=kotlin.String? operator=null
+                WHEN type=kotlin.String? operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp4_elvis_lhs: String?' type=kotlin.String? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'check(() -> Unit, String): String?' type=kotlin.String? operator=null
+                    body: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                      FUN local final fun <anonymous>(): kotlin.Unit
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                            CALL '<set-defaultSetter>(Int): Unit' type=kotlin.Unit operator=EQ
+                              $this: CALL 'constructor C()' type=C operator=null
+                              <set-?>: CONST Int type=kotlin.Int value='1'
+                      CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+                    signature: CONST String type=kotlin.String value='C.setDefaultSetter(I)V'
+                  else: GET_VAR 'tmp4_elvis_lhs: String?' type=kotlin.String? operator=null
+            WHEN type=kotlin.String operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp5_elvis_lhs: String?' type=kotlin.String? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CONST String type=kotlin.String value='OK'
+              else: GET_VAR 'tmp5_elvis_lhs: String?' type=kotlin.String? operator=null

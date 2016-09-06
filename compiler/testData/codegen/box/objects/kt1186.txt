@@ -1,0 +1,101 @@
+MODULE <test-module>
+  FILE /kt1186.kt
+    CLASS ENUM_CLASS Color
+      CONSTRUCTOR private constructor Color(rgb: kotlin.Int)
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          SET_BACKING_FIELD 'rgb: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'Color' type=Color
+            value: GET_VAR 'value-parameter rgb: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Color'
+      PROPERTY public final val rgb: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter rgb: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      ENUM_ENTRY enum entry RED
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Color(Int)' RED
+          rgb: CONST Int type=kotlin.Int value='16711680'
+      ENUM_ENTRY enum entry GREEN
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Color(Int)' GREEN
+          rgb: CONST Int type=kotlin.Int value='65280'
+      ENUM_ENTRY enum entry BLUE
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Color(Int)' BLUE
+          rgb: CONST Int type=kotlin.Int value='255'
+      FUN public final fun values(): kotlin.Array<Color>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): Color
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    CLASS ENUM_CLASS Direction
+      CONSTRUCTOR private constructor Direction()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='Direction'
+      ENUM_ENTRY enum entry NORTH
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Direction()' NORTH
+      ENUM_ENTRY enum entry SOUTH
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Direction()' SOUTH
+      ENUM_ENTRY enum entry WEST
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Direction()' WEST
+      ENUM_ENTRY enum entry EAST
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Direction()' EAST
+      FUN public final fun values(): kotlin.Array<Direction>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): Direction
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun bar(c: Color): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='bar(Color): Int'
+          BLOCK type=kotlin.Int operator=WHEN
+            VAR val tmp0_subject: Color
+              GET_VAR 'value-parameter c: Color' type=Color operator=null
+            WHEN type=kotlin.Int operator=WHEN
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Color' type=Color operator=null
+                arg1: GET_ENUM_VALUE 'RED' type=Color
+              then: CONST Int type=kotlin.Int value='1'
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Color' type=Color operator=null
+                arg1: GET_ENUM_VALUE 'GREEN' type=Color
+              then: CONST Int type=kotlin.Int value='2'
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Color' type=Color operator=null
+                arg1: GET_ENUM_VALUE 'BLUE' type=Color
+              then: CONST Int type=kotlin.Int value='3'
+    FUN public fun foo(d: Direction): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(Direction): Int'
+          BLOCK type=kotlin.Int operator=WHEN
+            VAR val tmp0_subject: Direction
+              GET_VAR 'value-parameter d: Direction' type=Direction operator=null
+            WHEN type=kotlin.Int operator=WHEN
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Direction' type=Direction operator=null
+                arg1: GET_ENUM_VALUE 'NORTH' type=Direction
+              then: CONST Int type=kotlin.Int value='1'
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Direction' type=Direction operator=null
+                arg1: GET_ENUM_VALUE 'SOUTH' type=Direction
+              then: CONST Int type=kotlin.Int value='2'
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Direction' type=Direction operator=null
+                arg1: GET_ENUM_VALUE 'WEST' type=Direction
+              then: CONST Int type=kotlin.Int value='3'
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Direction' type=Direction operator=null
+                arg1: GET_ENUM_VALUE 'EAST' type=Direction
+              then: CONST Int type=kotlin.Int value='4'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL 'foo(Direction): Int' type=kotlin.Int operator=null
+                  d: GET_ENUM_VALUE 'EAST' type=Direction
+                arg1: CONST Int type=kotlin.Int value='4'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL 'bar(Color): Int' type=kotlin.Int operator=null
+                  c: GET_ENUM_VALUE 'GREEN' type=Color
+                arg1: CONST Int type=kotlin.Int value='2'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

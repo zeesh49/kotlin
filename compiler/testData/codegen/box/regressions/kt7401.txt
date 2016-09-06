@@ -1,0 +1,37 @@
+MODULE <test-module>
+  FILE /kt7401.kt
+    FUN public fun foo(): kotlin.Long
+      BLOCK_BODY
+        VAR var n: kotlin.Long
+          CONST Long type=kotlin.Long value='2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+            arg0: CALL 'compareTo(Long): Int' type=kotlin.Int operator=GT
+              $this: GET_VAR 'n: Long' type=kotlin.Long operator=null
+              other: CONST Long type=kotlin.Long value='0'
+          then: BLOCK type=kotlin.Long operator=null
+            BLOCK type=kotlin.Long operator=POSTFIX_INCR
+              VAR val tmp0: kotlin.Long
+                GET_VAR 'n: Long' type=kotlin.Long operator=POSTFIX_INCR
+              SET_VAR 'n: Long' type=kotlin.Unit operator=POSTFIX_INCR
+                CALL 'inc(): Long' type=kotlin.Long operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp0: Long' type=kotlin.Long operator=null
+              GET_VAR 'tmp0: Long' type=kotlin.Long operator=null
+        BLOCK type=kotlin.Long operator=POSTFIX_INCR
+          VAR val tmp1: kotlin.Long
+            GET_VAR 'n: Long' type=kotlin.Long operator=POSTFIX_INCR
+          SET_VAR 'n: Long' type=kotlin.Unit operator=POSTFIX_INCR
+            CALL 'inc(): Long' type=kotlin.Long operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp1: Long' type=kotlin.Long operator=null
+          GET_VAR 'tmp1: Long' type=kotlin.Long operator=null
+        RETURN type=kotlin.Nothing from='foo(): Long'
+          GET_VAR 'n: Long' type=kotlin.Long operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'foo(): Long' type=kotlin.Long operator=null
+              arg1: CONST Long type=kotlin.Long value='4'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='Fail'

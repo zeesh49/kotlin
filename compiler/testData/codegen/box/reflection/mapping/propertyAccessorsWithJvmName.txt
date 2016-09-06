@@ -1,0 +1,81 @@
+MODULE <test-module>
+  FILE /propertyAccessorsWithJvmName.kt
+    PROPERTY public var state: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='value'
+      PROPERTY_GETTER @kotlin.jvm.JvmName public fun <get-state>(): kotlin.String
+      PROPERTY_SETTER @kotlin.jvm.JvmName public fun <set-state>(<set-?>: kotlin.String): kotlin.Unit
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val p: kotlin.reflect.KMutableProperty0<kotlin.String>
+          CALLABLE_REFERENCE 'state: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'p: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+              arg1: CONST String type=kotlin.String value='state'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail name: '
+              CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'p: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'p: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+              arg1: CONST String type=kotlin.String value='value'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail get: '
+              CALL 'get(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'p: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+        CALL 'set(String): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'p: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+          value: CONST String type=kotlin.String value='OK'
+        VAR val getterName: kotlin.String!
+          CALL 'getName(): String!' type=kotlin.String! operator=null
+            $this: BLOCK type=java.lang.reflect.Method operator=EXCLEXCL
+              VAR val tmp0_notnull: java.lang.reflect.Method?
+                CALL '<get-javaGetter>() on KProperty<*>: Method?' type=java.lang.reflect.Method? operator=GET_PROPERTY
+                  $receiver: GET_VAR 'p: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+              WHEN type=java.lang.reflect.Method operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: Method?' type=java.lang.reflect.Method? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: Method?' type=java.lang.reflect.Method? operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'getterName: String!' type=kotlin.String! operator=null
+              arg1: CONST String type=kotlin.String value='getter'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail getter name: '
+              GET_VAR 'getterName: String!' type=kotlin.String! operator=null
+        VAR val setterName: kotlin.String!
+          CALL 'getName(): String!' type=kotlin.String! operator=null
+            $this: BLOCK type=java.lang.reflect.Method operator=EXCLEXCL
+              VAR val tmp1_notnull: java.lang.reflect.Method?
+                CALL '<get-javaSetter>() on KMutableProperty<*>: Method?' type=java.lang.reflect.Method? operator=GET_PROPERTY
+                  $receiver: GET_VAR 'p: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+              WHEN type=java.lang.reflect.Method operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp1_notnull: Method?' type=java.lang.reflect.Method? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp1_notnull: Method?' type=java.lang.reflect.Method? operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'setterName: String!' type=kotlin.String! operator=null
+              arg1: CONST String type=kotlin.String value='setter'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail setter name: '
+              GET_VAR 'setterName: String!' type=kotlin.String! operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'get(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'p: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null

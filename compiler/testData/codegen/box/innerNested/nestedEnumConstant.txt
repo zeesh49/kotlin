@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /nestedEnumConstant.kt
+    CLASS CLASS Outer
+      CONSTRUCTOR public constructor Outer()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+      CLASS ENUM_CLASS Nested
+        CONSTRUCTOR private constructor Nested()
+          BLOCK_BODY
+            ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+            INSTANCE_INITIALIZER_CALL classDescriptor='Nested'
+        ENUM_ENTRY enum entry O
+          init: ENUM_CONSTRUCTOR_CALL 'constructor Nested()' O
+        ENUM_ENTRY enum entry K
+          init: ENUM_CONSTRUCTOR_CALL 'constructor Nested()' K
+        FUN public final fun values(): kotlin.Array<Outer.Nested>
+          SYNTHETIC_BODY kind=ENUM_VALUES
+        FUN public final fun valueOf(value: kotlin.String): Outer.Nested
+          SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          STRING_CONCATENATION type=kotlin.String
+            GET_ENUM_VALUE 'O' type=Outer.Nested
+            GET_ENUM_VALUE 'K' type=Outer.Nested

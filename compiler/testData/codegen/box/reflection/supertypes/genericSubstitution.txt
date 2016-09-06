@@ -1,0 +1,72 @@
+MODULE <test-module>
+  FILE /genericSubstitution.kt
+    CLASS INTERFACE A
+    CLASS INTERFACE B
+    CLASS INTERFACE C
+    CLASS INTERFACE D
+    CLASS INTERFACE StringList
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(List<KClassifier?>, List<KClassifier?>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(vararg KClass<out Any>): List<KClass<out Any>>' type=kotlin.collections.List<kotlin.reflect.KClass<out kotlin.Any>> operator=null
+            elements: VARARG type=Array<out KClass<out Any>> varargElementType=KClass<out Any>
+              CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+              CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+          actual: CALL 'map((KTypeProjection) -> KClassifier?) on Iterable<KTypeProjection>: List<KClassifier?>' type=kotlin.collections.List<kotlin.reflect.KClassifier?> operator=null
+            $receiver: CALL '<get-arguments>(): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=GET_PROPERTY
+              $this: CALL 'single((KType) -> Boolean) on Iterable<KType>: KType' type=kotlin.reflect.KType operator=null
+                $receiver: CALL '<get-allSupertypes>() on KClass<*>: Collection<KType>' type=kotlin.collections.Collection<kotlin.reflect.KType> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'D' type=kotlin.reflect.KClass<D>
+                predicate: BLOCK type=(kotlin.reflect.KType) -> kotlin.Boolean operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.reflect.KType): kotlin.Boolean
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(KType): Boolean'
+                        CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: CALL '<get-classifier>(): KClassifier?' type=kotlin.reflect.KClassifier? operator=GET_PROPERTY
+                            $this: GET_VAR 'value-parameter it: KType' type=kotlin.reflect.KType operator=null
+                          arg1: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A<*, *>>
+                  CALLABLE_REFERENCE '<anonymous>(KType): Boolean' type=(kotlin.reflect.KType) -> kotlin.Boolean operator=LAMBDA
+            transform: BLOCK type=(kotlin.reflect.KTypeProjection) -> kotlin.reflect.KClassifier? operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KTypeProjection): kotlin.reflect.KClassifier?
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KTypeProjection): KClassifier?'
+                    CALL '<get-classifier>(): KClassifier?' type=kotlin.reflect.KClassifier? operator=GET_PROPERTY
+                      $this: BLOCK type=kotlin.reflect.KType operator=EXCLEXCL
+                        VAR val tmp0_notnull: kotlin.reflect.KType?
+                          CALL '<get-type>(): KType?' type=kotlin.reflect.KType? operator=GET_PROPERTY
+                            $this: GET_VAR 'value-parameter it: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+                        WHEN type=kotlin.reflect.KType operator=null
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: GET_VAR 'tmp0_notnull: KType?' type=kotlin.reflect.KType? operator=null
+                            arg1: CONST Null type=kotlin.Nothing? value='null'
+                          then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                          else: GET_VAR 'tmp0_notnull: KType?' type=kotlin.reflect.KType? operator=null
+              CALLABLE_REFERENCE '<anonymous>(KTypeProjection): KClassifier?' type=(kotlin.reflect.KTypeProjection) -> kotlin.reflect.KClassifier? operator=LAMBDA
+        VAR val collectionType: kotlin.reflect.KType
+          CALL 'single((KType) -> Boolean) on Iterable<KType>: KType' type=kotlin.reflect.KType operator=null
+            $receiver: CALL '<get-allSupertypes>() on KClass<*>: Collection<KType>' type=kotlin.collections.Collection<kotlin.reflect.KType> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'StringList' type=kotlin.reflect.KClass<StringList>
+            predicate: BLOCK type=(kotlin.reflect.KType) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KType): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KType): Boolean'
+                    CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: CALL '<get-classifier>(): KClassifier?' type=kotlin.reflect.KClassifier? operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KType' type=kotlin.reflect.KType operator=null
+                      arg1: CLASS_REFERENCE 'Collection' type=kotlin.reflect.KClass<kotlin.collections.Collection<*>>
+              CALLABLE_REFERENCE '<anonymous>(KType): Boolean' type=(kotlin.reflect.KType) -> kotlin.Boolean operator=LAMBDA
+        VAR val arg: kotlin.reflect.KType
+          BLOCK type=kotlin.reflect.KType operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.reflect.KType?
+              CALL '<get-type>(): KType?' type=kotlin.reflect.KType? operator=GET_PROPERTY
+                $this: CALL 'single() on List<KTypeProjection>: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+                  $receiver: CALL '<get-arguments>(): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=GET_PROPERTY
+                    $this: GET_VAR 'collectionType: KType' type=kotlin.reflect.KType operator=null
+            WHEN type=kotlin.reflect.KType operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: KType?' type=kotlin.reflect.KType? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: KType?' type=kotlin.reflect.KType? operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

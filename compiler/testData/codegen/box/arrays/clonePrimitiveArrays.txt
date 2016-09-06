@@ -1,0 +1,170 @@
+MODULE <test-module>
+  FILE /clonePrimitiveArrays.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val i: kotlin.IntArray
+          CALL 'intArrayOf(vararg Int): IntArray' type=kotlin.IntArray operator=null
+            elements: VARARG type=IntArray varargElementType=Int
+              CONST Int type=kotlin.Int value='1'
+              CONST Int type=kotlin.Int value='2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'equals(IntArray!, IntArray!): Boolean' type=kotlin.Boolean operator=null
+              p0: GET_VAR 'i: IntArray' type=kotlin.IntArray operator=null
+              p1: CALL 'clone(): IntArray' type=kotlin.IntArray operator=null
+                $this: GET_VAR 'i: IntArray' type=kotlin.IntArray operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail int'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+            arg0: CALL 'clone(): IntArray' type=kotlin.IntArray operator=null
+              $this: GET_VAR 'i: IntArray' type=kotlin.IntArray operator=null
+            arg1: GET_VAR 'i: IntArray' type=kotlin.IntArray operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail int identity'
+        VAR val j: kotlin.LongArray
+          CALL 'longArrayOf(vararg Long): LongArray' type=kotlin.LongArray operator=null
+            elements: VARARG type=LongArray varargElementType=Long
+              CONST Long type=kotlin.Long value='1'
+              CONST Long type=kotlin.Long value='2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'equals(LongArray!, LongArray!): Boolean' type=kotlin.Boolean operator=null
+              p0: GET_VAR 'j: LongArray' type=kotlin.LongArray operator=null
+              p1: CALL 'clone(): LongArray' type=kotlin.LongArray operator=null
+                $this: GET_VAR 'j: LongArray' type=kotlin.LongArray operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail long'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+            arg0: CALL 'clone(): LongArray' type=kotlin.LongArray operator=null
+              $this: GET_VAR 'j: LongArray' type=kotlin.LongArray operator=null
+            arg1: GET_VAR 'j: LongArray' type=kotlin.LongArray operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail long identity'
+        VAR val s: kotlin.ShortArray
+          CALL 'shortArrayOf(vararg Short): ShortArray' type=kotlin.ShortArray operator=null
+            elements: VARARG type=ShortArray varargElementType=Short
+              CALL 'toShort(): Short' type=kotlin.Short operator=null
+                $this: CONST Int type=kotlin.Int value='1'
+              CALL 'toShort(): Short' type=kotlin.Short operator=null
+                $this: CONST Int type=kotlin.Int value='2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'equals(ShortArray!, ShortArray!): Boolean' type=kotlin.Boolean operator=null
+              p0: GET_VAR 's: ShortArray' type=kotlin.ShortArray operator=null
+              p1: CALL 'clone(): ShortArray' type=kotlin.ShortArray operator=null
+                $this: GET_VAR 's: ShortArray' type=kotlin.ShortArray operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail short'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+            arg0: CALL 'clone(): ShortArray' type=kotlin.ShortArray operator=null
+              $this: GET_VAR 's: ShortArray' type=kotlin.ShortArray operator=null
+            arg1: GET_VAR 's: ShortArray' type=kotlin.ShortArray operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail short identity'
+        VAR val b: kotlin.ByteArray
+          CALL 'byteArrayOf(vararg Byte): ByteArray' type=kotlin.ByteArray operator=null
+            elements: VARARG type=ByteArray varargElementType=Byte
+              CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                $this: CONST Int type=kotlin.Int value='1'
+              CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                $this: CONST Int type=kotlin.Int value='2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'equals(ByteArray!, ByteArray!): Boolean' type=kotlin.Boolean operator=null
+              p0: GET_VAR 'b: ByteArray' type=kotlin.ByteArray operator=null
+              p1: CALL 'clone(): ByteArray' type=kotlin.ByteArray operator=null
+                $this: GET_VAR 'b: ByteArray' type=kotlin.ByteArray operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail byte'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+            arg0: CALL 'clone(): ByteArray' type=kotlin.ByteArray operator=null
+              $this: GET_VAR 'b: ByteArray' type=kotlin.ByteArray operator=null
+            arg1: GET_VAR 'b: ByteArray' type=kotlin.ByteArray operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail byte identity'
+        VAR val c: kotlin.CharArray
+          CALL 'charArrayOf(vararg Char): CharArray' type=kotlin.CharArray operator=null
+            elements: VARARG type=CharArray varargElementType=Char
+              CONST Char type=kotlin.Char value='a'
+              CONST Char type=kotlin.Char value='b'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'equals(CharArray!, CharArray!): Boolean' type=kotlin.Boolean operator=null
+              p0: GET_VAR 'c: CharArray' type=kotlin.CharArray operator=null
+              p1: CALL 'clone(): CharArray' type=kotlin.CharArray operator=null
+                $this: GET_VAR 'c: CharArray' type=kotlin.CharArray operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail char'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+            arg0: CALL 'clone(): CharArray' type=kotlin.CharArray operator=null
+              $this: GET_VAR 'c: CharArray' type=kotlin.CharArray operator=null
+            arg1: GET_VAR 'c: CharArray' type=kotlin.CharArray operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail char identity'
+        VAR val d: kotlin.DoubleArray
+          CALL 'doubleArrayOf(vararg Double): DoubleArray' type=kotlin.DoubleArray operator=null
+            elements: VARARG type=DoubleArray varargElementType=Double
+              CONST Double type=kotlin.Double value='1.0'
+              CONST Double type=kotlin.Double value='-1.0'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'equals(DoubleArray!, DoubleArray!): Boolean' type=kotlin.Boolean operator=null
+              p0: GET_VAR 'd: DoubleArray' type=kotlin.DoubleArray operator=null
+              p1: CALL 'clone(): DoubleArray' type=kotlin.DoubleArray operator=null
+                $this: GET_VAR 'd: DoubleArray' type=kotlin.DoubleArray operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail double'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+            arg0: CALL 'clone(): DoubleArray' type=kotlin.DoubleArray operator=null
+              $this: GET_VAR 'd: DoubleArray' type=kotlin.DoubleArray operator=null
+            arg1: GET_VAR 'd: DoubleArray' type=kotlin.DoubleArray operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail double identity'
+        VAR val f: kotlin.FloatArray
+          CALL 'floatArrayOf(vararg Float): FloatArray' type=kotlin.FloatArray operator=null
+            elements: VARARG type=FloatArray varargElementType=Float
+              CONST Float type=kotlin.Float value='1.0'
+              CONST Float type=kotlin.Float value='-1.0'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'equals(FloatArray!, FloatArray!): Boolean' type=kotlin.Boolean operator=null
+              p0: GET_VAR 'f: FloatArray' type=kotlin.FloatArray operator=null
+              p1: CALL 'clone(): FloatArray' type=kotlin.FloatArray operator=null
+                $this: GET_VAR 'f: FloatArray' type=kotlin.FloatArray operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail float'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+            arg0: CALL 'clone(): FloatArray' type=kotlin.FloatArray operator=null
+              $this: GET_VAR 'f: FloatArray' type=kotlin.FloatArray operator=null
+            arg1: GET_VAR 'f: FloatArray' type=kotlin.FloatArray operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail float identity'
+        VAR val z: kotlin.BooleanArray
+          CALL 'booleanArrayOf(vararg Boolean): BooleanArray' type=kotlin.BooleanArray operator=null
+            elements: VARARG type=BooleanArray varargElementType=Boolean
+              CONST Boolean type=kotlin.Boolean value='true'
+              CONST Boolean type=kotlin.Boolean value='false'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'equals(BooleanArray!, BooleanArray!): Boolean' type=kotlin.Boolean operator=null
+              p0: GET_VAR 'z: BooleanArray' type=kotlin.BooleanArray operator=null
+              p1: CALL 'clone(): BooleanArray' type=kotlin.BooleanArray operator=null
+                $this: GET_VAR 'z: BooleanArray' type=kotlin.BooleanArray operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail boolean'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+            arg0: CALL 'clone(): BooleanArray' type=kotlin.BooleanArray operator=null
+              $this: GET_VAR 'z: BooleanArray' type=kotlin.BooleanArray operator=null
+            arg1: GET_VAR 'z: BooleanArray' type=kotlin.BooleanArray operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail boolean identity'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

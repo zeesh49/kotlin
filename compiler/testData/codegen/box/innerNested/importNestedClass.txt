@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /importNestedClass.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS CLASS B
+        CONSTRUCTOR public constructor B()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='B'
+        CLASS CLASS C
+          CONSTRUCTOR public constructor C()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='C'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          CALL 'constructor A()' type=A operator=null
+        VAR val b: A.B
+          CALL 'constructor B()' type=A.B operator=null
+        VAR val ab: A.B
+          CALL 'constructor B()' type=A.B operator=null
+        VAR val c: A.B.C
+          CALL 'constructor C()' type=A.B.C operator=null
+        VAR val bc: A.B.C
+          CALL 'constructor C()' type=A.B.C operator=null
+        VAR val abc: A.B.C
+          CALL 'constructor C()' type=A.B.C operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

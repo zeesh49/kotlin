@@ -1,0 +1,92 @@
+MODULE <test-module>
+  FILE /companionObjectInEnum.kt
+    CLASS ENUM_CLASS Game
+      CONSTRUCTOR private constructor Game()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='Game'
+      ENUM_ENTRY enum entry ROCK
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Game()' ROCK
+      ENUM_ENTRY enum entry PAPER
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Game()' PAPER
+      ENUM_ENTRY enum entry SCISSORS
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Game()' SCISSORS
+      CLASS OBJECT companion object of Game
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of Game'
+        FUN public final fun foo(): Game
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo(): Game'
+              GET_ENUM_VALUE 'ROCK' type=Game
+        PROPERTY public final val bar: Game
+          EXPRESSION_BODY
+            GET_ENUM_VALUE 'PAPER' type=Game
+        PROPERTY public final val values2: kotlin.Array<Game>
+          EXPRESSION_BODY
+            CALL 'values(): Array<Game>' type=kotlin.Array<Game> operator=null
+        PROPERTY public final val scissors: Game
+          EXPRESSION_BODY
+            CALL 'valueOf(String): Game' type=Game operator=null
+              value: CONST String type=kotlin.String value='SCISSORS'
+      FUN public final fun values(): kotlin.Array<Game>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): Game
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(): Game' type=Game operator=null
+                $this: GET_OBJECT 'companion object of Game' type=Game.Companion
+              arg1: GET_ENUM_VALUE 'ROCK' type=Game
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-bar>(): Game' type=Game operator=GET_PROPERTY
+                $this: GET_OBJECT 'companion object of Game' type=Game.Companion
+              arg1: GET_ENUM_VALUE 'PAPER' type=Game
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 2: '
+              CALL '<get-bar>(): Game' type=Game operator=GET_PROPERTY
+                $this: GET_OBJECT 'companion object of Game' type=Game.Companion
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL 'values(): Array<Game>' type=kotlin.Array<Game> operator=null
+              arg1: CONST Int type=kotlin.Int value='3'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'valueOf(String): Game' type=Game operator=null
+                value: CONST String type=kotlin.String value='SCISSORS'
+              arg1: GET_ENUM_VALUE 'SCISSORS' type=Game
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 4'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL '<get-values2>(): Array<Game>' type=kotlin.Array<Game> operator=GET_PROPERTY
+                  $this: GET_OBJECT 'companion object of Game' type=Game.Companion
+              arg1: CONST Int type=kotlin.Int value='3'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 5'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-scissors>(): Game' type=Game operator=GET_PROPERTY
+                $this: GET_OBJECT 'companion object of Game' type=Game.Companion
+              arg1: GET_ENUM_VALUE 'SCISSORS' type=Game
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 6'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

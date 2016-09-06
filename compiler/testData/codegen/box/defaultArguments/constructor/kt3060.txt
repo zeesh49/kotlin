@@ -1,0 +1,30 @@
+MODULE <test-module>
+  FILE /kt3060.kt
+    CLASS CLASS Foo
+      CONSTRUCTOR private constructor Foo(param: kotlin.String = ...)
+        param: EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'param: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Foo' type=Foo
+            value: GET_VAR 'value-parameter param: String = ...' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      PROPERTY public final val param: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter param: String = ...' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CLASS OBJECT companion object of Foo
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of Foo'
+        PROPERTY public final val s: Foo
+          EXPRESSION_BODY
+            CALL 'constructor Foo(String = ...)' type=Foo operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL '<get-param>(): String' type=kotlin.String operator=GET_PROPERTY
+          $this: CALL '<get-s>(): Foo' type=Foo operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Foo' type=Foo.Companion
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

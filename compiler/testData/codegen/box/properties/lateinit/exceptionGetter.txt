@@ -1,0 +1,21 @@
+MODULE <test-module>
+  FILE /exceptionGetter.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final lateinit var str: kotlin.String
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          CALL 'constructor A()' type=A operator=null
+        TRY_CATCH type=kotlin.String
+          try: BLOCK type=kotlin.String operator=null
+            CALL '<get-str>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: GET_VAR 'a: A' type=A operator=null
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='FAIL'

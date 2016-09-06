@@ -1,0 +1,42 @@
+MODULE <test-module>
+  FILE /kt1649_2.kt
+    CLASS INTERFACE A
+      PROPERTY public abstract val method: () -> kotlin.Unit?
+    FUN public fun test(a: A): kotlin.Unit
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-method>(): () -> Unit?' type=() -> kotlin.Unit? operator=GET_PROPERTY
+                $this: GET_VAR 'value-parameter a: A' type=A operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: BLOCK type=kotlin.Unit? operator=null
+            CALL 'invoke(): Unit?' type=kotlin.Unit? operator=null
+              $this: BLOCK type=() -> kotlin.Unit? operator=EXCLEXCL
+                VAR val tmp0_notnull: () -> kotlin.Unit?
+                  CALL '<get-method>(): () -> Unit?' type=() -> kotlin.Unit? operator=GET_PROPERTY
+                    $this: GET_VAR 'value-parameter a: A' type=A operator=null
+                WHEN type=() -> kotlin.Unit? operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_notnull: () -> Unit?' type=() -> kotlin.Unit? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: GET_VAR 'tmp0_notnull: () -> Unit?' type=() -> kotlin.Unit? operator=null
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public open override val method: () -> kotlin.Unit
+        EXPRESSION_BODY
+          BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'test(A): Unit' type=kotlin.Unit operator=null
+          a: CALL 'constructor B()' type=B operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

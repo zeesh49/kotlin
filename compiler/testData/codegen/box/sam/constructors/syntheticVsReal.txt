@@ -1,0 +1,32 @@
+MODULE <test-module>
+  FILE /syntheticVsReal.kt
+    PROPERTY public var global: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    FUN public fun Runnable(f: () -> kotlin.Unit): java.lang.Runnable
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='Runnable(() -> Unit): Runnable'
+          BLOCK type=Runnable.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              FUN public open override fun run(): kotlin.Unit
+                BLOCK_BODY
+                  CALL '<set-global>(String): Unit' type=kotlin.Unit operator=EQ
+                    <set-?>: CONST String type=kotlin.String value='OK'
+            CALL 'constructor <no name provided>()' type=Runnable.<no name provided> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'run(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'Runnable(() -> Unit): Runnable' type=java.lang.Runnable operator=null
+            f: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                    CALL '<set-global>(String): Unit' type=kotlin.Unit operator=EQ
+                      <set-?>: CONST String type=kotlin.String value='FAIL'
+              CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-global>(): String' type=kotlin.String operator=GET_PROPERTY

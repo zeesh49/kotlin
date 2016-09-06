@@ -1,0 +1,19 @@
+MODULE <test-module>
+  FILE /objectInitialization_kt5523.kt
+    CLASS OBJECT A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val a: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+      PROPERTY public final val b: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CALL '<get-a>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_OBJECT 'A' type=A
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_OBJECT 'A' type=A

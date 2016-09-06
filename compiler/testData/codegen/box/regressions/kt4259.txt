@@ -1,0 +1,37 @@
+MODULE <test-module>
+  FILE /kt4259.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val s: kotlin.String? = "a"
+          CONST String type=kotlin.String value='a'
+        VAR val o: kotlin.Char? = \u0061 ('a')
+          BLOCK type=kotlin.Char? operator=SAFE_CALL
+            VAR val tmp0_safe_receiver: kotlin.String?
+              GET_VAR 's: String?' type=kotlin.String? operator=null
+            WHEN type=kotlin.Char? operator=SAFE_CALL
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_safe_receiver: String?' type=kotlin.String? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CONST Null type=kotlin.Nothing? value='null'
+              else: CALL 'get(Int): Char' type=kotlin.Char operator=null
+                $this: GET_VAR 'tmp0_safe_receiver: String?' type=kotlin.String? operator=null
+                index: CONST Int type=kotlin.Int value='0'
+        VAR val c: kotlin.Any?
+          BLOCK type=java.lang.Class<kotlin.Char>? operator=SAFE_CALL
+            VAR val tmp1_safe_receiver: kotlin.Char?
+              GET_VAR 'o: Char?' type=kotlin.Char? operator=null
+            WHEN type=java.lang.Class<kotlin.Char>? operator=SAFE_CALL
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp1_safe_receiver: Char?' type=kotlin.Char? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CONST Null type=kotlin.Nothing? value='null'
+              else: CALL '<get-javaClass>() on Char: Class<Char>' type=java.lang.Class<kotlin.Char> operator=GET_PROPERTY
+                $this: GET_VAR 'tmp1_safe_receiver: Char?' type=kotlin.Char? operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'c: Any?' type=kotlin.Any? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

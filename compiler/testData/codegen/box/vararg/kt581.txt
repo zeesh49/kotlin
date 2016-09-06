@@ -1,0 +1,85 @@
+MODULE <test-module>
+  FILE /kt581.kt
+    FUN public fun iarray(vararg a: kotlin.Int): kotlin.IntArray
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='iarray(vararg Int): IntArray'
+          GET_VAR 'value-parameter vararg a: Int' type=kotlin.IntArray operator=null
+    PROPERTY public val kotlin.IntArray.indices: kotlin.ranges.IntRange
+      PROPERTY_GETTER public fun kotlin.IntArray.<get-indices>(): kotlin.ranges.IntRange
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-indices>() on IntArray: IntRange'
+            CALL 'constructor IntRange(Int, Int)' type=kotlin.ranges.IntRange operator=null
+              start: CONST Int type=kotlin.Int value='0'
+              endInclusive: CALL 'lastIndex() on IntArray: Int' type=kotlin.Int operator=null
+                $receiver: $RECEIVER of 'indices: IntRange on IntArray' type=kotlin.IntArray
+    FUN public fun kotlin.IntArray.lastIndex(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='lastIndex() on IntArray: Int'
+          CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+            $this: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: $RECEIVER of 'lastIndex() on IntArray: Int' type=kotlin.IntArray
+            other: CONST Int type=kotlin.Int value='1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val vals: kotlin.IntArray
+          CALL 'iarray(vararg Int): IntArray' type=kotlin.IntArray operator=null
+            a: VARARG type=IntArray varargElementType=Int
+              CONST Int type=kotlin.Int value='789'
+              CONST Int type=kotlin.Int value='678'
+              CONST Int type=kotlin.Int value='567'
+              CONST Int type=kotlin.Int value='456'
+              CONST Int type=kotlin.Int value='345'
+              CONST Int type=kotlin.Int value='234'
+              CONST Int type=kotlin.Int value='123'
+              CONST Int type=kotlin.Int value='12'
+        VAR val diffs: java.util.HashSet<kotlin.Int>
+          CALL 'constructor HashSet()' type=java.util.HashSet<kotlin.Int> operator=null
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL '<get-indices>() on IntArray: IntRange' type=kotlin.ranges.IntRange operator=GET_PROPERTY
+                $receiver: GET_VAR 'vals: IntArray' type=kotlin.IntArray operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=FOR_LOOP
+                VAR val tmp1_iterator: kotlin.collections.IntIterator
+                  CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+                    $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                      $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                      other: CALL 'lastIndex() on IntArray: Int' type=kotlin.Int operator=null
+                        $receiver: GET_VAR 'vals: IntArray' type=kotlin.IntArray operator=null
+                WHILE label=null operator=FOR_LOOP_INNER_WHILE
+                  condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+                    $this: GET_VAR 'tmp1_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+                  body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+                    VAR val j: kotlin.Int
+                      CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                        $this: GET_VAR 'tmp1_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+                    CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+                      $this: GET_VAR 'diffs: HashSet<Int>' type=java.util.HashSet<kotlin.Int> operator=null
+                      element: CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+                        $this: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                          $this: GET_VAR 'vals: IntArray' type=kotlin.IntArray operator=null
+                          index: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                        other: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                          $this: GET_VAR 'vals: IntArray' type=kotlin.IntArray operator=null
+                          index: GET_VAR 'j: Int' type=kotlin.Int operator=null
+        VAR val size: kotlin.Int
+          CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: GET_VAR 'diffs: HashSet<Int>' type=java.util.HashSet<kotlin.Int> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'size: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='8'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'size: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

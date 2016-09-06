@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /prefixIncrementOnSmartCast.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var i: kotlin.Int?
+        SET_VAR 'i: Int?' type=kotlin.Unit operator=EQ
+          CONST Int type=kotlin.Int value='10'
+        VAR val j: kotlin.Int
+          BLOCK type=kotlin.Int? operator=PREFIX_INCR
+            VAR val tmp0: kotlin.Int
+              CALL 'inc(): Int' type=kotlin.Int operator=PREFIX_INCR
+                $this: GET_VAR 'i: Int?' type=kotlin.Int? operator=PREFIX_INCR
+            SET_VAR 'i: Int?' type=kotlin.Unit operator=PREFIX_INCR
+              GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+            GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'j: Int' type=kotlin.Int operator=null
+                arg1: CONST Int type=kotlin.Int value='11'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CONST Int type=kotlin.Int value='11'
+                arg1: GET_VAR 'i: Int?' type=kotlin.Int? operator=null
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail j = '
+              GET_VAR 'j: Int' type=kotlin.Int operator=null
+              CONST String type=kotlin.String value=' i = '
+              GET_VAR 'i: Int?' type=kotlin.Int? operator=null

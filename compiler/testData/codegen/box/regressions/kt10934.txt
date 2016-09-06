@@ -1,0 +1,141 @@
+MODULE <test-module>
+  FILE /kt10934.kt
+    CLASS CLASS Parser
+      CONSTRUCTOR public constructor Parser<TInput, TValue>(f: (TInput) -> Result<TInput, TValue>)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'f: (TInput) -> Result<TInput, TValue>' type=kotlin.Unit operator=null
+            receiver: THIS of 'Parser' type=Parser<TInput, TValue>
+            value: GET_VAR 'value-parameter f: (TInput) -> Result<TInput, TValue>' type=(TInput) -> Result<TInput, TValue> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Parser'
+      PROPERTY public final val f: (TInput) -> Result<TInput, TValue>
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter f: (TInput) -> Result<TInput, TValue>' type=(TInput) -> Result<TInput, TValue> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final operator fun invoke(input: TInput): Result<TInput, TValue>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='invoke(TInput): Result<TInput, TValue>'
+            CALL 'invoke(TInput): Result<TInput, TValue>' type=Result<TInput, TValue> operator=INVOKE
+              $this: CALL '<get-f>(): (TInput) -> Result<TInput, TValue>' type=(TInput) -> Result<TInput, TValue> operator=GET_PROPERTY
+                $this: THIS of 'Parser' type=Parser<TInput, TValue>
+              p1: GET_VAR 'value-parameter input: TInput' type=TInput operator=null
+      FUN public final fun <TIntermediate, TValue2> mapJoin(selector: (TValue) -> Parser<TInput, TIntermediate>, projector: (TValue, TIntermediate) -> TValue2): Parser<TInput, TValue2>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='mapJoin((TValue) -> Parser<TInput, TIntermediate>, (TValue, TIntermediate) -> TValue2): Parser<TInput, TValue2>'
+            CALL 'constructor Parser((TInput) -> Result<TInput, TValue2>)' type=Parser<TInput, TValue2> operator=null
+              f: BLOCK type=(TInput) -> Result<TInput, TValue2> operator=LAMBDA
+                FUN local final fun <anonymous>(input: TInput): Result<TInput, TValue2>
+                  BLOCK_BODY
+                    VAR val res: Result<TInput, TValue>
+                      CALL 'invoke(TInput): Result<TInput, TValue>' type=Result<TInput, TValue> operator=null
+                        $this: THIS of 'Parser' type=Parser<TInput, TValue>
+                        input: GET_VAR 'value-parameter input: TInput' type=TInput operator=null
+                    RETURN type=kotlin.Nothing from='<anonymous>(TInput): Result<TInput, TValue2>'
+                      BLOCK type=Result<TInput, TValue2> operator=WHEN
+                        VAR val tmp0_subject: Result<TInput, TValue>
+                          GET_VAR 'res: Result<TInput, TValue>' type=Result<TInput, TValue> operator=null
+                        WHEN type=Result<TInput, TValue2> operator=WHEN
+                          if: TYPE_OP operator=INSTANCEOF typeOperand=Result.ParseError<TInput, TValue>
+                            GET_VAR 'tmp0_subject: Result<TInput, TValue>' type=Result<TInput, TValue> operator=null
+                          then: CALL 'constructor ParseError(String, Result.ParseError<TInput, *>?, TInput)' type=Result.ParseError<TInput, TValue2> operator=null
+                            productionLabel: CALL '<get-productionLabel>(): String' type=kotlin.String operator=GET_PROPERTY
+                              $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=Result.ParseError<TInput, TValue>
+                                GET_VAR 'res: Result<TInput, TValue>' type=Result<TInput, TValue> operator=null
+                            child: CALL '<get-child>(): Result.ParseError<TInput, *>?' type=Result.ParseError<TInput, *>? operator=GET_PROPERTY
+                              $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=Result.ParseError<TInput, TValue>
+                                GET_VAR 'res: Result<TInput, TValue>' type=Result<TInput, TValue> operator=null
+                            rest: CALL '<get-rest>(): TInput' type=TInput operator=GET_PROPERTY
+                              $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=Result.ParseError<TInput, TValue>
+                                GET_VAR 'res: Result<TInput, TValue>' type=Result<TInput, TValue> operator=null
+                          if: TYPE_OP operator=INSTANCEOF typeOperand=Result.Value<TInput, TValue>
+                            GET_VAR 'tmp0_subject: Result<TInput, TValue>' type=Result<TInput, TValue> operator=null
+                          then: BLOCK type=Result<TInput, TValue2> operator=null
+                            VAR val v: TValue
+                              CALL '<get-value>(): TValue' type=TValue operator=GET_PROPERTY
+                                $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=Result.Value<TInput, TValue>
+                                  GET_VAR 'res: Result<TInput, TValue>' type=Result<TInput, TValue> operator=null
+                            VAR val res2: Result<TInput, TIntermediate>
+                              CALL 'invoke(TInput): Result<TInput, TIntermediate>' type=Result<TInput, TIntermediate> operator=null
+                                $this: CALL 'invoke(TValue): Parser<TInput, TIntermediate>' type=Parser<TInput, TIntermediate> operator=INVOKE
+                                  $this: GET_VAR 'value-parameter selector: (TValue) -> Parser<TInput, TIntermediate>' type=(TValue) -> Parser<TInput, TIntermediate> operator=VARIABLE_AS_FUNCTION
+                                  p1: GET_VAR 'v: TValue' type=TValue operator=null
+                                input: CALL '<get-rest>(): TInput' type=TInput operator=GET_PROPERTY
+                                  $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=Result.Value<TInput, TValue>
+                                    GET_VAR 'res: Result<TInput, TValue>' type=Result<TInput, TValue> operator=null
+                            BLOCK type=Result<TInput, TValue2> operator=WHEN
+                              VAR val tmp1_subject: Result<TInput, TIntermediate>
+                                GET_VAR 'res2: Result<TInput, TIntermediate>' type=Result<TInput, TIntermediate> operator=null
+                              WHEN type=Result<TInput, TValue2> operator=WHEN
+                                if: TYPE_OP operator=INSTANCEOF typeOperand=Result.ParseError<TInput, TIntermediate>
+                                  GET_VAR 'tmp1_subject: Result<TInput, TIntermediate>' type=Result<TInput, TIntermediate> operator=null
+                                then: CALL 'constructor ParseError(String, Result.ParseError<TInput, *>?, TInput)' type=Result.ParseError<TInput, TValue2> operator=null
+                                  productionLabel: CALL '<get-productionLabel>(): String' type=kotlin.String operator=GET_PROPERTY
+                                    $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=Result.ParseError<TInput, TIntermediate>
+                                      GET_VAR 'res2: Result<TInput, TIntermediate>' type=Result<TInput, TIntermediate> operator=null
+                                  child: CALL '<get-child>(): Result.ParseError<TInput, *>?' type=Result.ParseError<TInput, *>? operator=GET_PROPERTY
+                                    $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=Result.ParseError<TInput, TIntermediate>
+                                      GET_VAR 'res2: Result<TInput, TIntermediate>' type=Result<TInput, TIntermediate> operator=null
+                                  rest: CALL '<get-rest>(): TInput' type=TInput operator=GET_PROPERTY
+                                    $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=Result.ParseError<TInput, TIntermediate>
+                                      GET_VAR 'res2: Result<TInput, TIntermediate>' type=Result<TInput, TIntermediate> operator=null
+                                if: TYPE_OP operator=INSTANCEOF typeOperand=Result.Value<TInput, TIntermediate>
+                                  GET_VAR 'tmp1_subject: Result<TInput, TIntermediate>' type=Result<TInput, TIntermediate> operator=null
+                                then: CALL 'constructor Value(TValue2, TInput)' type=Result.Value<TInput, TValue2> operator=null
+                                  value: CALL 'invoke(TValue, TIntermediate): TValue2' type=TValue2 operator=INVOKE
+                                    $this: GET_VAR 'value-parameter projector: (TValue, TIntermediate) -> TValue2' type=(TValue, TIntermediate) -> TValue2 operator=VARIABLE_AS_FUNCTION
+                                    p1: GET_VAR 'v: TValue' type=TValue operator=null
+                                    p2: CALL '<get-value>(): TIntermediate' type=TIntermediate operator=GET_PROPERTY
+                                      $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=Result.Value<TInput, TIntermediate>
+                                        GET_VAR 'res2: Result<TInput, TIntermediate>' type=Result<TInput, TIntermediate> operator=null
+                                  rest: CALL '<get-rest>(): TInput' type=TInput operator=GET_PROPERTY
+                                    $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=Result.Value<TInput, TIntermediate>
+                                      GET_VAR 'res2: Result<TInput, TIntermediate>' type=Result<TInput, TIntermediate> operator=null
+                CALLABLE_REFERENCE '<anonymous>(TInput): Result<TInput, TValue2>' type=(TInput) -> Result<TInput, TValue2> operator=LAMBDA
+    CLASS CLASS Result
+      CONSTRUCTOR private constructor Result<TInput, TValue>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Result'
+      CLASS CLASS Value
+        CONSTRUCTOR public constructor Value<TInput, TValue>(value: TValue, rest: TInput)
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Result()'
+            SET_BACKING_FIELD 'value: TValue' type=kotlin.Unit operator=null
+              receiver: THIS of 'Value' type=Result.Value<TInput, TValue>
+              value: GET_VAR 'value-parameter value: TValue' type=TValue operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            SET_BACKING_FIELD 'rest: TInput' type=kotlin.Unit operator=null
+              receiver: THIS of 'Value' type=Result.Value<TInput, TValue>
+              value: GET_VAR 'value-parameter rest: TInput' type=TInput operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            INSTANCE_INITIALIZER_CALL classDescriptor='Value'
+        PROPERTY public final val value: TValue
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter value: TValue' type=TValue operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+        PROPERTY public final val rest: TInput
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter rest: TInput' type=TInput operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CLASS CLASS ParseError
+        CONSTRUCTOR public constructor ParseError<TInput, TValue>(productionLabel: kotlin.String, child: Result.ParseError<TInput, *>?, rest: TInput)
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Result()'
+            SET_BACKING_FIELD 'productionLabel: String' type=kotlin.Unit operator=null
+              receiver: THIS of 'ParseError' type=Result.ParseError<TInput, TValue>
+              value: GET_VAR 'value-parameter productionLabel: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            SET_BACKING_FIELD 'child: Result.ParseError<TInput, *>?' type=kotlin.Unit operator=null
+              receiver: THIS of 'ParseError' type=Result.ParseError<TInput, TValue>
+              value: GET_VAR 'value-parameter child: Result.ParseError<TInput, *>?' type=Result.ParseError<TInput, *>? operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            SET_BACKING_FIELD 'rest: TInput' type=kotlin.Unit operator=null
+              receiver: THIS of 'ParseError' type=Result.ParseError<TInput, TValue>
+              value: GET_VAR 'value-parameter rest: TInput' type=TInput operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            INSTANCE_INITIALIZER_CALL classDescriptor='ParseError'
+        PROPERTY public final val productionLabel: kotlin.String
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter productionLabel: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+        PROPERTY public final val child: Result.ParseError<TInput, *>?
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter child: Result.ParseError<TInput, *>?' type=Result.ParseError<TInput, *>? operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+        PROPERTY public final val rest: TInput
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter rest: TInput' type=TInput operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

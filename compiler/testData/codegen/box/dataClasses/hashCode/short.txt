@@ -1,0 +1,99 @@
+MODULE <test-module>
+  FILE /short.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(a: kotlin.Short)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'a: Short' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter a: Short' type=kotlin.Short operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val a: kotlin.Short
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter a: Short' type=kotlin.Short operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final operator fun component1(): kotlin.Short
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component1(): Short'
+            CALL '<get-a>(): Short' type=kotlin.Short operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+      FUN public final fun copy(a: kotlin.Short = ...): A
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='copy(Short = ...): A'
+            CALL 'constructor A(Short)' type=A operator=null
+              a: GET_VAR 'value-parameter a: Short = ...' type=kotlin.Short operator=null
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='A('
+              CONST String type=kotlin.String value='a='
+              CALL '<get-a>(): Short' type=kotlin.Short operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+              CONST String type=kotlin.String value=')'
+      FUN public open override fun hashCode(): kotlin.Int
+        BLOCK_BODY
+          VAR val tmp0_result: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          SET_VAR 'tmp0_result: Int' type=kotlin.Unit operator=EQ
+            CALL 'hashCode(): Int' type=kotlin.Int operator=null
+              $this: CALL '<get-a>(): Short' type=kotlin.Short operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+          RETURN type=kotlin.Nothing from='hashCode(): Int'
+            GET_VAR 'tmp0_result: Int' type=kotlin.Int operator=null
+      FUN public open override fun equals(other: kotlin.Any?): kotlin.Boolean
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+              arg0: THIS of 'A' type=A
+              arg1: GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='true'
+          WHEN type=kotlin.Unit operator=null
+            if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=A
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          VAR val tmp0_other_with_cast: A
+            TYPE_OP operator=CAST typeOperand=A
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-a>(): Short' type=kotlin.Short operator=GET_PROPERTY
+                  $this: THIS of 'A' type=A
+                arg1: CALL '<get-a>(): Short' type=kotlin.Short operator=GET_PROPERTY
+                  $this: GET_VAR 'tmp0_other_with_cast: A' type=A operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val v1: kotlin.Int
+          CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: CALL 'constructor A(Short)' type=A operator=null
+              a: CALL 'toShort(): Short' type=kotlin.Short operator=null
+                $this: CONST Int type=kotlin.Int value='10'
+        VAR val v2: kotlin.Int
+          CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: BLOCK type=kotlin.Short operator=EXCLEXCL
+              VAR val tmp0_notnull: kotlin.Short?
+                TYPE_OP operator=CAST typeOperand=kotlin.Short?
+                  CALL 'toShort(): Short' type=kotlin.Short operator=null
+                    $this: CONST Int type=kotlin.Int value='10'
+              WHEN type=kotlin.Short operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: Short?' type=kotlin.Short? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: Short?' type=kotlin.Short? operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'v1: Int' type=kotlin.Int operator=null
+              arg1: GET_VAR 'v2: Int' type=kotlin.Int operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              GET_VAR 'v1: Int' type=kotlin.Int operator=null
+              CONST String type=kotlin.String value=' '
+              GET_VAR 'v2: Int' type=kotlin.Int operator=null

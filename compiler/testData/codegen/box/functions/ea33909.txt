@@ -1,0 +1,21 @@
+MODULE <test-module>
+  FILE /ea33909.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'justPrint(Int): String' type=kotlin.String operator=null
+            value: CALL 'compareTo(Int): Int' type=kotlin.Int operator=null
+              $this: CONST Int type=kotlin.Int value='9'
+              other: CONST Int type=kotlin.Int value='4'
+    FUN public fun justPrint(value: kotlin.Int): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='justPrint(Int): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+              arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+                $this: GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=null
+                other: CONST Int type=kotlin.Int value='0'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=null

@@ -1,0 +1,32 @@
+MODULE <test-module>
+  FILE /kt3573.kt
+    CLASS CLASS Data
+      CONSTRUCTOR public constructor Data()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Data'
+    FUN public fun newInit(f: Data.() -> Data): Data
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='newInit(Data.() -> Data): Data'
+          CALL 'invoke() on Data: Data' type=Data operator=INVOKE
+            $this: GET_VAR 'value-parameter f: Data.() -> Data' type=Data.() -> Data operator=VARIABLE_AS_FUNCTION
+            $receiver: CALL 'constructor Data()' type=Data operator=null
+    CLASS CLASS TestClass
+      CONSTRUCTOR public constructor TestClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='TestClass'
+      PROPERTY public final val test: Data
+        EXPRESSION_BODY
+          CALL 'newInit(Data.() -> Data): Data' type=Data operator=null
+            f: BLOCK type=Data.() -> Data operator=LAMBDA
+              FUN local final fun Data.<anonymous>(): Data
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Data: Data'
+                    $RECEIVER of '<anonymous>() on Data: Data' type=Data
+              CALLABLE_REFERENCE '<anonymous>() on Data: Data' type=Data.() -> Data operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'constructor TestClass()' type=TestClass operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

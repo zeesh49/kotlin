@@ -1,0 +1,13 @@
+MODULE <test-module>
+  FILE /genericValMultipleUpperBounds.kt
+    PROPERTY public val <T : kotlin.Number> T.valProp: T where T : java.io.Serializable
+      PROPERTY_GETTER public fun T.<get-valProp>(): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-valProp>() on T: T'
+            $RECEIVER of 'valProp: T on T' type=T
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL '<get-valProp>() on Int: Int' type=kotlin.Int operator=GET_PROPERTY
+          $receiver: CONST Int type=kotlin.Int value='0'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

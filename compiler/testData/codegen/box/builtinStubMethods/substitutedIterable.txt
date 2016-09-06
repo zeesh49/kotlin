@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /test.kt
+    CLASS INTERFACE MyIterable
+    CLASS CLASS E
+      CONSTRUCTOR public constructor E()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor RuntimeException()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='E'
+    FUN public fun foo(): MyIterable<kotlin.String>
+      BLOCK_BODY
+        THROW type=kotlin.Nothing
+          CALL 'constructor E()' type=E operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'next(): String' type=kotlin.String operator=null
+              $this: CALL 'iterator(): Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+                $this: CALL 'foo(): MyIterable<String>' type=MyIterable<kotlin.String> operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail: E should have been thrown'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        CALL 'checkCallFromJava(): Unit' type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

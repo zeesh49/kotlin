@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /kt454.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var s1: kotlin.String
+          CONST String type=kotlin.String value='s'
+        VAR val s2: kotlin.String?
+          WHEN type=kotlin.String? operator=IF
+            if: CONST Boolean type=kotlin.Boolean value='true'
+            then: GET_VAR 's1: String' type=kotlin.String operator=null
+            else: CONST Null type=kotlin.Nothing? value='null'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 's2: String?' type=kotlin.String? operator=null
+              arg1: CONST String type=kotlin.String value='s'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

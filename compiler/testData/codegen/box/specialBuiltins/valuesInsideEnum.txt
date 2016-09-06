@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /valuesInsideEnum.kt
+    CLASS ENUM_CLASS Variants
+      CONSTRUCTOR private constructor Variants()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='Variants'
+      ENUM_ENTRY enum entry O
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Variants()' O
+      ENUM_ENTRY enum entry K
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Variants()' K
+      CLASS OBJECT companion object of Variants
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of Variants'
+        PROPERTY public final val valueStr: kotlin.String
+          EXPRESSION_BODY
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: CALL 'get(Int): Variants' type=Variants operator=GET_ARRAY_ELEMENT
+                  $this: CALL 'values(): Array<Variants>' type=kotlin.Array<Variants> operator=null
+                  index: CONST Int type=kotlin.Int value='0'
+              other: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: CALL 'get(Int): Variants' type=Variants operator=GET_ARRAY_ELEMENT
+                  $this: CALL 'values(): Array<Variants>' type=kotlin.Array<Variants> operator=null
+                  index: CONST Int type=kotlin.Int value='1'
+      FUN public final fun values(): kotlin.Array<Variants>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): Variants
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-valueStr>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Variants' type=Variants.Companion

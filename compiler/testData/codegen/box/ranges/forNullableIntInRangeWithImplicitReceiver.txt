@@ -1,0 +1,49 @@
+MODULE <test-module>
+  FILE /forNullableIntInRangeWithImplicitReceiver.kt
+    FUN public fun suppressBoxingOptimization(ni: kotlin.Int?): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun kotlin.Int.digitsUpto(end: kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        VAR var sum: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=null
+                $this: $RECEIVER of 'digitsUpto(Int) on Int: Int' type=kotlin.Int
+                other: GET_VAR 'value-parameter end: Int' type=kotlin.Int operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int?
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                CALL 'suppressBoxingOptimization(Int?): Unit' type=kotlin.Unit operator=null
+                  ni: GET_VAR 'i: Int?' type=kotlin.Int? operator=null
+                SET_VAR 'sum: Int' type=kotlin.Unit operator=EQ
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                      $this: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='10'
+                    other: BLOCK type=kotlin.Int operator=EXCLEXCL
+                      VAR val tmp1_notnull: kotlin.Int?
+                        GET_VAR 'i: Int?' type=kotlin.Int? operator=null
+                      WHEN type=kotlin.Int operator=null
+                        if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: GET_VAR 'tmp1_notnull: Int?' type=kotlin.Int? operator=null
+                          arg1: CONST Null type=kotlin.Nothing? value='null'
+                        then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                        else: GET_VAR 'tmp1_notnull: Int?' type=kotlin.Int? operator=null
+        RETURN type=kotlin.Nothing from='digitsUpto(Int) on Int: Int'
+          GET_VAR 'sum: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1234'
+          actual: CALL 'digitsUpto(Int) on Int: Int' type=kotlin.Int operator=null
+            $receiver: CONST Int type=kotlin.Int value='1'
+            end: CONST Int type=kotlin.Int value='4'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,57 @@
+MODULE <test-module>
+  FILE /localReturnWithAutolabel.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: kotlin.Int = 1
+          CONST Int type=kotlin.Int value='1'
+        VAR val explicitlyReturned: kotlin.String
+          CALL 'run1(() -> String): String' type=kotlin.String operator=null
+            f: BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    WHEN type=kotlin.String operator=IF
+                      if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+                        arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+                          $this: GET_VAR 'a: Int' type=kotlin.Int operator=null
+                          other: CONST Int type=kotlin.Int value='0'
+                      then: RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                        CONST String type=kotlin.String value='OK'
+                      else: CONST String type=kotlin.String value='Fail 1'
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'explicitlyReturned: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            GET_VAR 'explicitlyReturned: String' type=kotlin.String operator=null
+        VAR val implicitlyReturned: kotlin.String
+          CALL 'run1(() -> String): String' type=kotlin.String operator=null
+            f: BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    WHEN type=kotlin.String operator=IF
+                      if: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+                        arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+                          $this: GET_VAR 'a: Int' type=kotlin.Int operator=null
+                          other: CONST Int type=kotlin.Int value='0'
+                      then: RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                        CONST String type=kotlin.String value='Fail 2'
+                      else: CONST String type=kotlin.String value='OK'
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'implicitlyReturned: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            GET_VAR 'implicitlyReturned: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun <T> run1(f: () -> T): T
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='run1(() -> T): T'
+          CALL 'invoke(): T' type=T operator=INVOKE
+            $this: GET_VAR 'value-parameter f: () -> T' type=() -> T operator=VARIABLE_AS_FUNCTION

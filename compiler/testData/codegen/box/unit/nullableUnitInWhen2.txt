@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /nullableUnitInWhen2.kt
+    FUN public fun foo(): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit? operator=WHEN
+          VAR val tmp0_subject: kotlin.String
+            CONST String type=kotlin.String value='A'
+          WHEN type=kotlin.Unit? operator=WHEN
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_subject: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='B'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'foo(): Unit' type=kotlin.Unit operator=null
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

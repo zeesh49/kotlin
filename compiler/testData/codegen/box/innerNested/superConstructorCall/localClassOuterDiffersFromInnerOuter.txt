@@ -1,0 +1,49 @@
+MODULE <test-module>
+  FILE /localClassOuterDiffersFromInnerOuter.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun bar(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='bar(): Any'
+            CALL 'invoke(): Local' type=A.bar.<anonymous>.<anonymous>.Local operator=null
+              $this: BLOCK type=() -> A.bar.<anonymous>.<anonymous>.Local operator=LAMBDA
+                FUN local final fun <anonymous>(): A.bar.<anonymous>.<anonymous>.Local
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(): Local'
+                      CALL 'invoke(): Local' type=A.bar.<anonymous>.<anonymous>.Local operator=null
+                        $this: BLOCK type=() -> A.bar.<anonymous>.<anonymous>.Local operator=LAMBDA
+                          FUN local final fun <anonymous>(): A.bar.<anonymous>.<anonymous>.Local
+                            BLOCK_BODY
+                              CLASS CLASS Local
+                                CONSTRUCTOR public constructor Local()
+                                  BLOCK_BODY
+                                    DELEGATING_CONSTRUCTOR_CALL 'constructor Inner()'
+                                      $this: THIS of 'A' type=A
+                                    INSTANCE_INITIALIZER_CALL classDescriptor='Local'
+                                FUN public open override fun toString(): kotlin.String
+                                  BLOCK_BODY
+                                    RETURN type=kotlin.Nothing from='toString(): String'
+                                      CALL 'foo(): String' type=kotlin.String operator=null
+                                        $this: THIS of 'A' type=A
+                              RETURN type=kotlin.Nothing from='<anonymous>(): Local'
+                                CALL 'constructor Local()' type=A.bar.<anonymous>.<anonymous>.Local operator=null
+                          CALLABLE_REFERENCE '<anonymous>(): Local' type=() -> A.bar.<anonymous>.<anonymous>.Local operator=LAMBDA
+                CALLABLE_REFERENCE '<anonymous>(): Local' type=() -> A.bar.<anonymous>.<anonymous>.Local operator=LAMBDA
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+      FUN public final fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL 'bar(): Any' type=kotlin.Any operator=null
+              $this: CALL 'constructor A()' type=A operator=null

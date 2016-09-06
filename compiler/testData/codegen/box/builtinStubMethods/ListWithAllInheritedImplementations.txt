@@ -1,0 +1,146 @@
+MODULE <test-module>
+  FILE /ListWithAllInheritedImplementations.kt
+    CLASS CLASS Super
+      CONSTRUCTOR public constructor Super<T>(v: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'v: T' type=kotlin.Unit operator=null
+            receiver: THIS of 'Super' type=Super<T>
+            value: GET_VAR 'value-parameter v: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Super'
+      PROPERTY public final val v: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter v: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun add(e: T): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='add(T): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+      FUN public final fun remove(o: T): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='remove(T): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+      FUN public final fun addAll(c: kotlin.collections.Collection<T>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='addAll(Collection<T>): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+      FUN public final fun addAll(index: kotlin.Int, c: kotlin.collections.Collection<T>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='addAll(Int, Collection<T>): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+      FUN public final fun removeAll(c: kotlin.collections.Collection<T>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='removeAll(Collection<T>): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+      FUN public final fun retainAll(c: kotlin.collections.Collection<T>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='retainAll(Collection<T>): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+      FUN public final fun clear(): kotlin.Unit
+        BLOCK_BODY
+      FUN public final fun set(index: kotlin.Int, element: T): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='set(Int, T): T'
+            GET_VAR 'value-parameter element: T' type=T operator=null
+      FUN public final fun add(index: kotlin.Int, element: T): kotlin.Unit
+        BLOCK_BODY
+      FUN public final fun removeAt(index: kotlin.Int): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='removeAt(Int): T'
+            CALL '<get-v>(): T' type=T operator=GET_PROPERTY
+              $this: THIS of 'Super' type=Super<T>
+    CLASS CLASS MyList
+      CONSTRUCTOR public constructor MyList<T>(v: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Super(T)'
+            v: GET_VAR 'value-parameter v: T' type=T operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyList'
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-size>(): Int'
+              CONST Int type=kotlin.Int value='0'
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='isEmpty(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+      FUN public open override fun contains(o: T): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='contains(T): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+      FUN public open override fun iterator(): kotlin.collections.Iterator<T>
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor Error()' type=java.lang.Error operator=null
+      FUN public open override fun containsAll(c: kotlin.collections.Collection<T>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsAll(Collection<T>): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+      FUN public open override fun get(index: kotlin.Int): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(Int): T'
+            CALL '<get-v>(): T' type=T operator=GET_PROPERTY
+              $this: THIS of 'MyList' type=MyList<T>
+      FUN public open override fun indexOf(o: T): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='indexOf(T): Int'
+            CONST Int type=kotlin.Int value='-1'
+      FUN public open override fun lastIndexOf(o: T): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='lastIndexOf(T): Int'
+            CONST Int type=kotlin.Int value='-1'
+      FUN public open override fun listIterator(): kotlin.collections.ListIterator<T>
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor Error()' type=java.lang.Error operator=null
+      FUN public open override fun listIterator(index: kotlin.Int): kotlin.collections.ListIterator<T>
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor Error()' type=java.lang.Error operator=null
+      FUN public open override fun subList(fromIndex: kotlin.Int, toIndex: kotlin.Int): kotlin.collections.List<T>
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor Error()' type=java.lang.Error operator=null
+      FUN public open override fun hashCode(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='hashCode(): Int'
+            CONST Int type=kotlin.Int value='0'
+      FUN public open override fun equals(other: kotlin.Any?): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val list: java.util.List<kotlin.String>
+          TYPE_OP operator=CAST typeOperand=java.util.List<kotlin.String>
+            CALL 'constructor MyList(String)' type=MyList<kotlin.String> operator=null
+              v: CONST String type=kotlin.String value=''
+        CALL 'add(String!): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'list: List<String>' type=java.util.List<kotlin.String> operator=null
+          element: CONST String type=kotlin.String value=''
+        CALL 'remove(String!): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'list: List<String>' type=java.util.List<kotlin.String> operator=null
+          element: CONST String type=kotlin.String value=''
+        CALL 'addAll(Collection<String!>): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'list: List<String>' type=java.util.List<kotlin.String> operator=null
+          elements: GET_VAR 'list: List<String>' type=java.util.List<kotlin.String> operator=null
+        CALL 'removeAll(Collection<String!>): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'list: List<String>' type=java.util.List<kotlin.String> operator=null
+          elements: GET_VAR 'list: List<String>' type=java.util.List<kotlin.String> operator=null
+        CALL 'retainAll(Collection<String!>): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'list: List<String>' type=java.util.List<kotlin.String> operator=null
+          elements: GET_VAR 'list: List<String>' type=java.util.List<kotlin.String> operator=null
+        CALL 'clear(): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'list: List<String>' type=java.util.List<kotlin.String> operator=null
+        CALL 'set(Int, String!): String!' type=kotlin.String! operator=null
+          $this: GET_VAR 'list: List<String>' type=java.util.List<kotlin.String> operator=null
+          p0: CONST Int type=kotlin.Int value='0'
+          p1: CONST String type=kotlin.String value=''
+        CALL 'add(Int, String!): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'list: List<String>' type=java.util.List<kotlin.String> operator=null
+          p0: CONST Int type=kotlin.Int value='0'
+          p1: CONST String type=kotlin.String value=''
+        CALL 'remove(Int): String!' type=kotlin.String! operator=null
+          $this: GET_VAR 'list: List<String>' type=java.util.List<kotlin.String> operator=null
+          p0: CONST Int type=kotlin.Int value='0'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

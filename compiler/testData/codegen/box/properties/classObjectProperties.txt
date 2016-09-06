@@ -1,0 +1,144 @@
+MODULE <test-module>
+  FILE /classObjectProperties.kt
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      CLASS OBJECT companion object of Test
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of Test'
+        PROPERTY public final val prop1: kotlin.Int = 10
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='10'
+        PROPERTY public final var prop2: kotlin.Int
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='11'
+          PROPERTY_SETTER private final fun <set-prop2>(<set-?>: kotlin.Int): kotlin.Unit
+        PROPERTY public final val prop3: kotlin.Int = 12
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='12'
+          PROPERTY_GETTER public final fun <get-prop3>(): kotlin.Int
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<get-prop3>(): Int'
+                GET_VAR 'field: Int' type=kotlin.Int operator=null
+        PROPERTY public final var prop4: kotlin.Int
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='13'
+        FUN public final fun incProp4(): kotlin.Unit
+          BLOCK_BODY
+            BLOCK type=kotlin.Int operator=POSTFIX_INCR
+              VAR val tmp0_this: Test.Companion
+                THIS of 'companion object of Test' type=Test.Companion
+              BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                VAR val tmp1: kotlin.Int
+                  CALL '<get-prop4>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                    $this: GET_VAR 'tmp0_this: Test.Companion' type=Test.Companion operator=null
+                CALL '<set-prop4>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp0_this: Test.Companion' type=Test.Companion operator=null
+                  <set-?>: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                    $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        PROPERTY public final var prop5: kotlin.Int
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='14'
+        PROPERTY public final var prop7: kotlin.Int
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='20'
+          PROPERTY_SETTER public final fun <set-prop7>(i: kotlin.Int): kotlin.Unit
+            BLOCK_BODY
+              BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                VAR val tmp0: kotlin.Int
+                  GET_BACKING_FIELD 'prop7: Int' type=kotlin.Int operator=POSTFIX_INCR
+                SET_BACKING_FIELD 'prop7: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                  value: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                    $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val t: Test.Companion
+          GET_OBJECT 'companion object of Test' type=Test.Companion
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop1>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 't: Test.Companion' type=Test.Companion operator=null
+              arg1: CONST Int type=kotlin.Int value='10'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop2>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 't: Test.Companion' type=Test.Companion operator=null
+              arg1: CONST Int type=kotlin.Int value='11'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop3>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 't: Test.Companion' type=Test.Companion operator=null
+              arg1: CONST Int type=kotlin.Int value='12'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop4>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 't: Test.Companion' type=Test.Companion operator=null
+              arg1: CONST Int type=kotlin.Int value='13'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail4'
+        CALL 'incProp4(): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 't: Test.Companion' type=Test.Companion operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop4>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 't: Test.Companion' type=Test.Companion operator=null
+              arg1: CONST Int type=kotlin.Int value='14'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail4.inc'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop5>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 't: Test.Companion' type=Test.Companion operator=null
+              arg1: CONST Int type=kotlin.Int value='14'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail5'
+        CALL '<set-prop5>(Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 't: Test.Companion' type=Test.Companion operator=null
+          <set-?>: CONST Int type=kotlin.Int value='1414'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop5>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 't: Test.Companion' type=Test.Companion operator=null
+              arg1: CONST Int type=kotlin.Int value='1414'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail6'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop7>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 't: Test.Companion' type=Test.Companion operator=null
+              arg1: CONST Int type=kotlin.Int value='20'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail7'
+        CALL '<set-prop7>(Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 't: Test.Companion' type=Test.Companion operator=null
+          i: CONST Int type=kotlin.Int value='1000000'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop7>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 't: Test.Companion' type=Test.Companion operator=null
+              arg1: CONST Int type=kotlin.Int value='21'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail8'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,78 @@
+MODULE <test-module>
+  FILE /kt1932.kt
+    CLASS ANNOTATION_CLASS foo
+      PROPERTY public final val name: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter name: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      FUN @foo public final fun hello(input: kotlin.String): kotlin.Unit
+        BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val test: Test
+          CALL 'constructor Test()' type=Test operator=null
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp1_iterator: kotlin.collections.Iterator<java.lang.reflect.Method!>
+            CALL 'iterator(): Iterator<Method!>' type=kotlin.collections.Iterator<java.lang.reflect.Method!> operator=FOR_LOOP_ITERATOR
+              $this: BLOCK type=kotlin.Array<(out) java.lang.reflect.Method!> operator=EXCLEXCL
+                VAR val tmp0_notnull: kotlin.Array<(out) java.lang.reflect.Method!>!
+                  CALL 'getMethods(): Array<(out) Method!>!' type=kotlin.Array<(out) java.lang.reflect.Method!>! operator=null
+                    $this: CALL '<get-java>() on KClass<Test>: Class<Test>' type=java.lang.Class<Test> operator=GET_PROPERTY
+                      $receiver: CLASS_REFERENCE 'Test' type=kotlin.reflect.KClass<Test>
+                WHEN type=kotlin.Array<(out) java.lang.reflect.Method!> operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_notnull: Array<(out) Method!>!' type=kotlin.Array<(out) java.lang.reflect.Method!>! operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Method!>
+                    GET_VAR 'tmp0_notnull: Array<(out) Method!>!' type=kotlin.Array<(out) java.lang.reflect.Method!>! operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp1_iterator: Iterator<Method!>' type=kotlin.collections.Iterator<java.lang.reflect.Method!> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val method: java.lang.reflect.Method!
+                CALL 'next(): Method!' type=java.lang.reflect.Method! operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp1_iterator: Iterator<Method!>' type=kotlin.collections.Iterator<java.lang.reflect.Method!> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                VAR val anns: kotlin.Array<java.lang.annotation.Annotation>
+                  TYPE_OP operator=CAST typeOperand=kotlin.Array<java.lang.annotation.Annotation>
+                    BLOCK type=kotlin.Array<(out) kotlin.Annotation!>? operator=SAFE_CALL
+                      VAR val tmp2_safe_receiver: java.lang.reflect.Method!
+                        GET_VAR 'method: Method!' type=java.lang.reflect.Method! operator=null
+                      WHEN type=kotlin.Array<(out) kotlin.Annotation!>? operator=SAFE_CALL
+                        if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: GET_VAR 'tmp2_safe_receiver: Method!' type=java.lang.reflect.Method! operator=null
+                          arg1: CONST Null type=kotlin.Nothing? value='null'
+                        then: CONST Null type=kotlin.Nothing? value='null'
+                        else: CALL 'getAnnotations(): Array<(out) Annotation!>!' type=kotlin.Array<(out) kotlin.Annotation!>! operator=null
+                          $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                            GET_VAR 'tmp2_safe_receiver: Method!' type=java.lang.reflect.Method! operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+                    $this: CALL 'isEmpty() on Array<out Annotation>: Boolean' type=kotlin.Boolean operator=null
+                      $receiver: GET_VAR 'anns: Array<Annotation>' type=kotlin.Array<java.lang.annotation.Annotation> operator=null
+                  then: BLOCK type=kotlin.Unit operator=null
+                    BLOCK type=kotlin.Unit operator=FOR_LOOP
+                      VAR val tmp3_iterator: kotlin.collections.Iterator<java.lang.annotation.Annotation>
+                        CALL 'iterator(): Iterator<Annotation>' type=kotlin.collections.Iterator<java.lang.annotation.Annotation> operator=FOR_LOOP_ITERATOR
+                          $this: GET_VAR 'anns: Array<Annotation>' type=kotlin.Array<java.lang.annotation.Annotation> operator=null
+                      WHILE label=null operator=FOR_LOOP_INNER_WHILE
+                        condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+                          $this: GET_VAR 'tmp3_iterator: Iterator<Annotation>' type=kotlin.collections.Iterator<java.lang.annotation.Annotation> operator=null
+                        body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+                          VAR val ann: java.lang.annotation.Annotation
+                            CALL 'next(): Annotation' type=java.lang.annotation.Annotation operator=FOR_LOOP_NEXT
+                              $this: GET_VAR 'tmp3_iterator: Iterator<Annotation>' type=kotlin.collections.Iterator<java.lang.annotation.Annotation> operator=null
+                          BLOCK type=kotlin.Nothing operator=null
+                            VAR val fooAnn: foo
+                              TYPE_OP operator=CAST typeOperand=foo
+                                GET_VAR 'ann: Annotation' type=java.lang.annotation.Annotation operator=null
+                            RETURN type=kotlin.Nothing from='box(): String'
+                              CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                                $this: GET_VAR 'fooAnn: foo' type=foo operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='fail'

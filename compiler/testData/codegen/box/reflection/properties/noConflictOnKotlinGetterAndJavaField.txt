@@ -1,0 +1,53 @@
+MODULE <test-module>
+  FILE /K.kt
+    CLASS CLASS K
+      CONSTRUCTOR public constructor K()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor J()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='K'
+      FUN public final fun getFoo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getFoo(): String'
+            CONST String type=kotlin.String value='K'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val j: J
+          CALL 'constructor J()' type=J operator=null
+        VAR val x: kotlin.reflect.KMutableProperty1<J, kotlin.String!>
+          CALLABLE_REFERENCE 'foo: String!' type=kotlin.reflect.KMutableProperty1<J, kotlin.String!> operator=null
+        CALL 'set(J, String!): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'x: KMutableProperty1<J, String!>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String!> operator=null
+          receiver: GET_VAR 'j: J' type=J operator=null
+          value: CONST String type=kotlin.String value='J'
+        CALL 'assertEquals(String!, String!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='J'
+          actual: CALL 'get(J): String!' type=kotlin.String! operator=null
+            $this: GET_VAR 'x: KMutableProperty1<J, String!>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String!> operator=null
+            receiver: GET_VAR 'j: J' type=J operator=null
+        VAR val k: K
+          CALL 'constructor K()' type=K operator=null
+        VAR val y: kotlin.reflect.KMutableProperty1<K, kotlin.String!>
+          CALLABLE_REFERENCE 'foo: String!' type=kotlin.reflect.KMutableProperty1<K, kotlin.String!> operator=null
+        CALL 'set(K, String!): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'y: KMutableProperty1<K, String!>' type=kotlin.reflect.KMutableProperty1<K, kotlin.String!> operator=null
+          receiver: GET_VAR 'k: K' type=K operator=null
+          value: CONST String type=kotlin.String value='K'
+        CALL 'assertEquals(String!, String!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='K'
+          actual: CALL 'get(K): String!' type=kotlin.String! operator=null
+            $this: GET_VAR 'y: KMutableProperty1<K, String!>' type=kotlin.reflect.KMutableProperty1<K, kotlin.String!> operator=null
+            receiver: GET_VAR 'k: K' type=K operator=null
+        CALL 'assertEquals(String!, String!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='K'
+          actual: CALL 'get(J): String!' type=kotlin.String! operator=null
+            $this: GET_VAR 'x: KMutableProperty1<J, String!>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String!> operator=null
+            receiver: GET_VAR 'k: K' type=K operator=null
+        VAR val z: kotlin.reflect.KFunction1<K, kotlin.String>
+          CALLABLE_REFERENCE 'getFoo(): String' type=kotlin.reflect.KFunction1<K, kotlin.String> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='K'
+          actual: CALL 'invoke(K): String' type=kotlin.String operator=null
+            $this: GET_VAR 'z: KFunction1<K, String>' type=kotlin.reflect.KFunction1<K, kotlin.String> operator=null
+            p1: GET_VAR 'k: K' type=K operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

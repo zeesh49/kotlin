@@ -1,0 +1,56 @@
+MODULE <test-module>
+  FILE /kt1891.kt
+    CLASS CLASS MyList
+      CONSTRUCTOR public constructor MyList<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyList'
+      PROPERTY public final var value: T?
+        EXPRESSION_BODY
+          CONST Null type=kotlin.Nothing? value='null'
+      FUN public final operator fun get(index: kotlin.Int): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(Int): T'
+            BLOCK type=T operator=EXCLEXCL
+              VAR val tmp0_notnull: T?
+                CALL '<get-value>(): T?' type=T? operator=GET_PROPERTY
+                  $this: THIS of 'MyList' type=MyList<T>
+              WHEN type=T operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: T?' type=T? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: T?' type=T? operator=null
+      FUN public final operator fun set(index: kotlin.Int, value: T): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-value>(T?): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'MyList' type=MyList<T>
+            <set-?>: GET_VAR 'value-parameter value: T' type=T operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val list: MyList<kotlin.Int>
+          CALL 'constructor MyList()' type=MyList<kotlin.Int> operator=null
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'list: MyList<Int>' type=MyList<kotlin.Int> operator=null
+          index: CONST Int type=kotlin.Int value='17'
+          value: CONST Int type=kotlin.Int value='1'
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'list: MyList<Int>' type=MyList<kotlin.Int> operator=null
+          index: CONST Int type=kotlin.Int value='17'
+          value: BLOCK type=kotlin.Int operator=POSTFIX_INCR
+            VAR val tmp0_array: MyList<kotlin.Int>
+              GET_VAR 'list: MyList<Int>' type=MyList<kotlin.Int> operator=null
+            VAR val tmp1_index0: kotlin.Int
+              CONST Int type=kotlin.Int value='18'
+            VAR val tmp2: kotlin.Int
+              CALL 'get(Int): Int' type=kotlin.Int operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp0_array: MyList<Int>' type=MyList<kotlin.Int> operator=null
+                index: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+            CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp0_array: MyList<Int>' type=MyList<kotlin.Int> operator=null
+              index: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+              value: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp2: Int' type=kotlin.Int operator=null
+            GET_VAR 'tmp2: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

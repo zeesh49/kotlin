@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /simple.kt
+    FUN public fun java.lang.StringBuilder.first(): kotlin.Char
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='first() on StringBuilder: Char'
+          CALL 'get(Int): Char' type=kotlin.Char operator=null
+            $this: $RECEIVER of 'first() on StringBuilder: Char' type=java.lang.StringBuilder
+            p0: CONST Int type=kotlin.Int value='0'
+    FUN public fun foo(): kotlin.Char
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(): Char'
+          CALL 'first() on StringBuilder: Char' type=kotlin.Char operator=null
+            $receiver: CALL 'constructor StringBuilder(String!)' type=java.lang.StringBuilder operator=null
+              p0: CONST String type=kotlin.String value='foo'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'foo(): Char' type=kotlin.Char operator=null
+              arg1: CONST Char type=kotlin.Char value='f'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              CALL 'foo(): Char' type=kotlin.Char operator=null

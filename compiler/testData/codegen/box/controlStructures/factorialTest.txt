@@ -1,0 +1,98 @@
+MODULE <test-module>
+  FILE /factorialTest.kt
+    FUN public fun facWhile(i: kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        VAR var count: kotlin.Int
+          CONST Int type=kotlin.Int value='1'
+        VAR var result: kotlin.Int
+          CONST Int type=kotlin.Int value='1'
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+              $this: GET_VAR 'count: Int' type=kotlin.Int operator=null
+              other: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+          body: BLOCK type=kotlin.Unit operator=null
+            SET_VAR 'count: Int' type=kotlin.Unit operator=EQ
+              CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: GET_VAR 'count: Int' type=kotlin.Int operator=null
+                other: CONST Int type=kotlin.Int value='1'
+            SET_VAR 'result: Int' type=kotlin.Unit operator=EQ
+              CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                $this: GET_VAR 'result: Int' type=kotlin.Int operator=null
+                other: GET_VAR 'count: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='facWhile(Int): Int'
+          GET_VAR 'result: Int' type=kotlin.Int operator=null
+    FUN public fun facBreak(i: kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        VAR var count: kotlin.Int
+          CONST Int type=kotlin.Int value='1'
+        VAR var result: kotlin.Int
+          CONST Int type=kotlin.Int value='1'
+        WHILE label=null operator=WHILE_LOOP
+          condition: CONST Boolean type=kotlin.Boolean value='true'
+          body: BLOCK type=kotlin.Unit operator=null
+            SET_VAR 'count: Int' type=kotlin.Unit operator=EQ
+              CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: GET_VAR 'count: Int' type=kotlin.Int operator=null
+                other: CONST Int type=kotlin.Int value='1'
+            SET_VAR 'result: Int' type=kotlin.Unit operator=EQ
+              CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                $this: GET_VAR 'result: Int' type=kotlin.Int operator=null
+                other: GET_VAR 'count: Int' type=kotlin.Int operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'count: Int' type=kotlin.Int operator=null
+                arg1: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+              then: BREAK label=null loop.label=null depth=0
+        RETURN type=kotlin.Nothing from='facBreak(Int): Int'
+          GET_VAR 'result: Int' type=kotlin.Int operator=null
+    FUN public fun facDoWhile(i: kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        VAR var count: kotlin.Int
+          CONST Int type=kotlin.Int value='1'
+        VAR var result: kotlin.Int
+          CONST Int type=kotlin.Int value='1'
+        DO_WHILE label=null operator=DO_WHILE_LOOP
+          body: BLOCK type=kotlin.Unit operator=null
+            SET_VAR 'count: Int' type=kotlin.Unit operator=EQ
+              CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: GET_VAR 'count: Int' type=kotlin.Int operator=null
+                other: CONST Int type=kotlin.Int value='1'
+            SET_VAR 'result: Int' type=kotlin.Unit operator=EQ
+              CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                $this: GET_VAR 'result: Int' type=kotlin.Int operator=null
+                other: GET_VAR 'count: Int' type=kotlin.Int operator=null
+          condition: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'count: Int' type=kotlin.Int operator=null
+              arg1: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='facDoWhile(Int): Int'
+          GET_VAR 'result: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='6'
+          actual: CALL 'facWhile(Int): Int' type=kotlin.Int operator=null
+            i: CONST Int type=kotlin.Int value='3'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='6'
+          actual: CALL 'facBreak(Int): Int' type=kotlin.Int operator=null
+            i: CONST Int type=kotlin.Int value='3'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='6'
+          actual: CALL 'facDoWhile(Int): Int' type=kotlin.Int operator=null
+            i: CONST Int type=kotlin.Int value='3'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='120'
+          actual: CALL 'facWhile(Int): Int' type=kotlin.Int operator=null
+            i: CONST Int type=kotlin.Int value='5'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='120'
+          actual: CALL 'facBreak(Int): Int' type=kotlin.Int operator=null
+            i: CONST Int type=kotlin.Int value='5'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='120'
+          actual: CALL 'facDoWhile(Int): Int' type=kotlin.Int operator=null
+            i: CONST Int type=kotlin.Int value='5'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

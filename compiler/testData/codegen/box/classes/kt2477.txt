@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /kt2477.kt
+    CLASS INTERFACE A
+      PROPERTY public open val c: kotlin.String
+        PROPERTY_GETTER public open fun <get-c>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-c>(): String'
+              CONST String type=kotlin.String value='OK'
+    CLASS INTERFACE B
+      PROPERTY private final val c: kotlin.String
+        PROPERTY_GETTER private final fun <get-c>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-c>(): String'
+              CONST String type=kotlin.String value='FAIL'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      PROPERTY private final val c: kotlin.String = "FAIL"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='FAIL'
+    CLASS CLASS D
+      CONSTRUCTOR public constructor D()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor C()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='D'
+      PROPERTY public final val b: kotlin.String
+        EXPRESSION_BODY
+          CALL '<get-c>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: THIS of 'D' type=test.D
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-c>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor D()' type=test.D operator=null

@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /namedClassObject.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      CLASS OBJECT companion object of CFoo
+        CONSTRUCTOR private constructor Foo()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of CFoo'
+        FUN public final fun create(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='create(): Int'
+              CONST Int type=kotlin.Int value='3'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val c1: kotlin.Int
+          CALL 'create(): Int' type=kotlin.Int operator=null
+            $this: GET_OBJECT 'companion object of CFoo' type=C.Foo
+        VAR val c2: kotlin.Int
+          CALL 'create(): Int' type=kotlin.Int operator=null
+            $this: GET_OBJECT 'companion object of CFoo' type=C.Foo
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'c1: Int' type=kotlin.Int operator=null
+                arg1: CONST Int type=kotlin.Int value='3'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'c2: Int' type=kotlin.Int operator=null
+                arg1: CONST Int type=kotlin.Int value='3'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

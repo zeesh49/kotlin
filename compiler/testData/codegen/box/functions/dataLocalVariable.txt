@@ -1,0 +1,30 @@
+MODULE <test-module>
+  FILE /dataLocalVariable.kt
+    FUN public fun ok(b: kotlin.Boolean): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='ok(Boolean): String'
+          WHEN type=kotlin.String operator=IF
+            if: GET_VAR 'value-parameter b: Boolean' type=kotlin.Boolean operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='Fail'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val data: kotlin.collections.(Mutable)List<kotlin.String!>
+          BLOCK type=kotlin.collections.(Mutable)List<kotlin.String!> operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.collections.(Mutable)List<kotlin.String!>!
+              CALL 'asList(vararg String!): (Mutable)List<String!>!' type=kotlin.collections.(Mutable)List<kotlin.String!>! operator=null
+                p0: VARARG type=(kotlin.Array<(kotlin.String..kotlin.String?)>..kotlin.Array<out (kotlin.String..kotlin.String?)>?) varargElementType=(kotlin.String..kotlin.String?)
+                  CONST String type=kotlin.String value='foo'
+                  CONST String type=kotlin.String value='bar'
+            WHEN type=kotlin.collections.(Mutable)List<kotlin.String!> operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: (Mutable)List<String!>!' type=kotlin.collections.(Mutable)List<kotlin.String!>! operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.collections.List<kotlin.String!>
+                GET_VAR 'tmp0_notnull: (Mutable)List<String!>!' type=kotlin.collections.(Mutable)List<kotlin.String!>! operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'ok(Boolean): String' type=kotlin.String operator=null
+            b: CALL 'contains(String!): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR 'data: (Mutable)List<String!>' type=kotlin.collections.(Mutable)List<kotlin.String!> operator=null
+              element: CONST String type=kotlin.String value='foo'

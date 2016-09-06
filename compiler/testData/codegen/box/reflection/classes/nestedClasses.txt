@@ -1,0 +1,183 @@
+MODULE <test-module>
+  FILE /nestedClasses.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS OBJECT companion object of A
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of A'
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+      CLASS CLASS Nested
+        CONSTRUCTOR public constructor Nested()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Nested'
+      CLASS CLASS PrivateNested
+        CONSTRUCTOR public constructor PrivateNested()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='PrivateNested'
+    FUN public fun nestedNames(c: kotlin.reflect.KClass<*>): kotlin.collections.List<kotlin.String>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='nestedNames(KClass<*>): List<String>'
+          CALL 'sorted() on Iterable<String>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            $receiver: CALL 'map((KClass<*>) -> String) on Iterable<KClass<*>>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              $receiver: CALL '<get-nestedClasses>(): Collection<KClass<*>>' type=kotlin.collections.Collection<kotlin.reflect.KClass<*>> operator=GET_PROPERTY
+                $this: GET_VAR 'value-parameter c: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+              transform: BLOCK type=(kotlin.reflect.KClass<*>) -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KClass<*>): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KClass<*>): String'
+                      BLOCK type=kotlin.String operator=ELVIS
+                        VAR val tmp0_elvis_lhs: kotlin.String?
+                          CALL '<get-simpleName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                            $this: GET_VAR 'value-parameter it: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+                        WHEN type=kotlin.String operator=null
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: GET_VAR 'tmp0_elvis_lhs: String?' type=kotlin.String? operator=null
+                            arg1: CONST Null type=kotlin.Nothing? value='null'
+                          then: THROW type=kotlin.Nothing
+                            CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                              p0: STRING_CONCATENATION type=kotlin.String
+                                CONST String type=kotlin.String value='Unnamed class: '
+                                CALL '<get-java>() on KClass<*>: Class<out Any>' type=java.lang.Class<out kotlin.Any> operator=GET_PROPERTY
+                                  $receiver: GET_VAR 'value-parameter it: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+                          else: GET_VAR 'tmp0_elvis_lhs: String?' type=kotlin.String? operator=null
+                CALLABLE_REFERENCE '<anonymous>(KClass<*>): String' type=(kotlin.reflect.KClass<*>) -> kotlin.String operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'emptyList(): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+          actual: CALL 'nestedNames(KClass<*>): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            c: CLASS_REFERENCE 'Inner' type=kotlin.reflect.KClass<A.Inner>
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(vararg String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='Companion'
+              CONST String type=kotlin.String value='Inner'
+              CONST String type=kotlin.String value='Nested'
+              CONST String type=kotlin.String value='PrivateNested'
+          actual: CALL 'nestedNames(KClass<*>): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            c: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'emptyList(): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+          actual: CALL 'nestedNames(KClass<*>): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            c: CLASS_REFERENCE 'Error' type=kotlin.reflect.KClass<kotlin.Error /* = java.lang.Error */>
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(vararg String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='State'
+              CONST String type=kotlin.String value='UncaughtExceptionHandler'
+          actual: CALL 'nestedNames(KClass<*>): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            c: CLASS_REFERENCE 'Thread' type=kotlin.reflect.KClass<java.lang.Thread>
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'emptyList(): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+          actual: CALL 'nestedNames(KClass<*>): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            c: CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Any>>
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'emptyList(): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+          actual: CALL 'nestedNames(KClass<*>): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            c: CLASS_REFERENCE 'CharSequence' type=kotlin.reflect.KClass<kotlin.CharSequence>
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            element: CONST String type=kotlin.String value='Companion'
+          actual: CALL 'nestedNames(KClass<*>): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            c: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'emptyList(): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+          actual: CALL 'nestedNames(KClass<*>): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            c: CLASS_REFERENCE 'Collection' type=kotlin.reflect.KClass<kotlin.collections.Collection<*>>
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'emptyList(): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+          actual: CALL 'nestedNames(KClass<*>): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            c: CLASS_REFERENCE 'MutableCollection' type=kotlin.reflect.KClass<kotlin.collections.MutableCollection<*>>
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'emptyList(): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+          actual: CALL 'nestedNames(KClass<*>): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            c: CLASS_REFERENCE 'List' type=kotlin.reflect.KClass<kotlin.collections.List<*>>
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'emptyList(): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+          actual: CALL 'nestedNames(KClass<*>): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            c: CLASS_REFERENCE 'MutableList' type=kotlin.reflect.KClass<kotlin.collections.MutableList<*>>
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            element: CONST String type=kotlin.String value='Entry'
+          actual: CALL 'nestedNames(KClass<*>): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            c: CLASS_REFERENCE 'Map' type=kotlin.reflect.KClass<kotlin.collections.Map<*, *>>
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'emptyList(): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+          actual: CALL 'nestedNames(KClass<*>): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            c: CLASS_REFERENCE 'Entry' type=kotlin.reflect.KClass<kotlin.collections.Map.Entry<*, *>>
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'emptyList(): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+          actual: CALL 'nestedNames(KClass<*>): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            c: CLASS_REFERENCE 'MutableEntry' type=kotlin.reflect.KClass<kotlin.collections.MutableMap.MutableEntry<*, *>>
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            element: CONST String type=kotlin.String value='Entry'
+          actual: CALL 'nestedNames(KClass<*>): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            c: CLASS_REFERENCE 'MutableMap' type=kotlin.reflect.KClass<kotlin.collections.MutableMap<*, *>>
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<kotlin.reflect.KClass<out kotlin.Any>>
+            CALL 'iterator(): Iterator<KClass<out Any>>' type=kotlin.collections.Iterator<kotlin.reflect.KClass<out kotlin.Any>> operator=FOR_LOOP_ITERATOR
+              $this: CALL 'listOf(vararg KClass<out Any>): List<KClass<out Any>>' type=kotlin.collections.List<kotlin.reflect.KClass<out kotlin.Any>> operator=null
+                elements: VARARG type=Array<out KClass<out Any>> varargElementType=KClass<out Any>
+                  CLASS_REFERENCE 'Byte' type=kotlin.reflect.KClass<kotlin.Byte>
+                  CLASS_REFERENCE 'Double' type=kotlin.reflect.KClass<kotlin.Double>
+                  CLASS_REFERENCE 'Float' type=kotlin.reflect.KClass<kotlin.Float>
+                  CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+                  CLASS_REFERENCE 'Long' type=kotlin.reflect.KClass<kotlin.Long>
+                  CLASS_REFERENCE 'Short' type=kotlin.reflect.KClass<kotlin.Short>
+                  CLASS_REFERENCE 'Char' type=kotlin.reflect.KClass<kotlin.Char>
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<KClass<out Any>>' type=kotlin.collections.Iterator<kotlin.reflect.KClass<out kotlin.Any>> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val primitive: kotlin.reflect.KClass<out kotlin.Any>
+                CALL 'next(): KClass<out Any>' type=kotlin.reflect.KClass<out kotlin.Any> operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<KClass<out Any>>' type=kotlin.collections.Iterator<kotlin.reflect.KClass<out kotlin.Any>> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+                  expected: CALL 'listOf(String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+                    element: CONST String type=kotlin.String value='Companion'
+                  actual: CALL 'nestedNames(KClass<*>): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+                    c: GET_VAR 'primitive: KClass<out Any>' type=kotlin.reflect.KClass<out kotlin.Any> operator=null
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'emptyList(): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+          actual: CALL 'nestedNames(KClass<*>): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            c: CLASS_REFERENCE 'Boolean' type=kotlin.reflect.KClass<kotlin.Boolean>
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp1_iterator: kotlin.collections.Iterator<kotlin.reflect.KClass<out kotlin.Any>>
+            CALL 'iterator(): Iterator<KClass<out Any>>' type=kotlin.collections.Iterator<kotlin.reflect.KClass<out kotlin.Any>> operator=FOR_LOOP_ITERATOR
+              $this: CALL 'listOf(vararg KClass<out Any>): List<KClass<out Any>>' type=kotlin.collections.List<kotlin.reflect.KClass<out kotlin.Any>> operator=null
+                elements: VARARG type=Array<out KClass<out Any>> varargElementType=KClass<out Any>
+                  CLASS_REFERENCE 'ByteArray' type=kotlin.reflect.KClass<kotlin.ByteArray>
+                  CLASS_REFERENCE 'DoubleArray' type=kotlin.reflect.KClass<kotlin.DoubleArray>
+                  CLASS_REFERENCE 'FloatArray' type=kotlin.reflect.KClass<kotlin.FloatArray>
+                  CLASS_REFERENCE 'IntArray' type=kotlin.reflect.KClass<kotlin.IntArray>
+                  CLASS_REFERENCE 'LongArray' type=kotlin.reflect.KClass<kotlin.LongArray>
+                  CLASS_REFERENCE 'ShortArray' type=kotlin.reflect.KClass<kotlin.ShortArray>
+                  CLASS_REFERENCE 'CharArray' type=kotlin.reflect.KClass<kotlin.CharArray>
+                  CLASS_REFERENCE 'BooleanArray' type=kotlin.reflect.KClass<kotlin.BooleanArray>
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp1_iterator: Iterator<KClass<out Any>>' type=kotlin.collections.Iterator<kotlin.reflect.KClass<out kotlin.Any>> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val primitiveArray: kotlin.reflect.KClass<out kotlin.Any>
+                CALL 'next(): KClass<out Any>' type=kotlin.reflect.KClass<out kotlin.Any> operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp1_iterator: Iterator<KClass<out Any>>' type=kotlin.collections.Iterator<kotlin.reflect.KClass<out kotlin.Any>> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+                  expected: CALL 'emptyList(): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+                  actual: CALL 'nestedNames(KClass<*>): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+                    c: GET_VAR 'primitiveArray: KClass<out Any>' type=kotlin.reflect.KClass<out kotlin.Any> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /kt3576.kt
+    CLASS OBJECT TestObject
+      CONSTRUCTOR private constructor TestObject()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='TestObject'
+      PROPERTY public final val testFloat: kotlin.Float = 0.9999.toFloat()
+        EXPRESSION_BODY
+          CALL 'toFloat(): Float' type=kotlin.Float operator=null
+            $this: CONST Double type=kotlin.Double value='0.9999'
+      PROPERTY public final val otherFloat: kotlin.Float = 1.01.toFloat()
+        EXPRESSION_BODY
+          CALL 'toFloat(): Float' type=kotlin.Float operator=null
+            $this: CONST Double type=kotlin.Double value='1.01'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: CALL 'equals(Any?): Boolean' type=kotlin.Boolean operator=null
+                $this: CALL '<get-testFloat>(): Float' type=kotlin.Float operator=GET_PROPERTY
+                  $this: GET_OBJECT 'TestObject' type=TestObject
+                other: CALL 'toFloat(): Float' type=kotlin.Float operator=null
+                  $this: CONST Double type=kotlin.Double value='0.9999'
+              then: CALL 'equals(Any?): Boolean' type=kotlin.Boolean operator=null
+                $this: CALL '<get-otherFloat>(): Float' type=kotlin.Float operator=GET_PROPERTY
+                  $this: GET_OBJECT 'TestObject' type=TestObject
+                other: CALL 'toFloat(): Float' type=kotlin.Float operator=null
+                  $this: CONST Double type=kotlin.Double value='1.01'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

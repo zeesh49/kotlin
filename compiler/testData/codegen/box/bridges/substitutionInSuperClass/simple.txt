@@ -1,0 +1,57 @@
+MODULE <test-module>
+  FILE /simple.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public open fun foo(t: T): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(T): String'
+            CONST String type=kotlin.String value='A'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    CLASS CLASS Z
+      CONSTRUCTOR public constructor Z()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor B()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Z'
+      FUN public open override fun foo(t: kotlin.String): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(String): String'
+            CONST String type=kotlin.String value='Z'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val z: Z
+          CALL 'constructor Z()' type=Z operator=null
+        VAR val b: B
+          GET_VAR 'z: Z' type=Z operator=null
+        VAR val a: A<kotlin.String>
+          GET_VAR 'z: Z' type=Z operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=WHEN
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'foo(String): String' type=kotlin.String operator=null
+                  $this: GET_VAR 'z: Z' type=Z operator=null
+                  t: CONST String type=kotlin.String value=''
+                arg1: CONST String type=kotlin.String value='Z'
+            then: CONST String type=kotlin.String value='Fail #1'
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'foo(String): String' type=kotlin.String operator=null
+                  $this: GET_VAR 'b: B' type=B operator=null
+                  t: CONST String type=kotlin.String value=''
+                arg1: CONST String type=kotlin.String value='Z'
+            then: CONST String type=kotlin.String value='Fail #2'
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'foo(String): String' type=kotlin.String operator=null
+                  $this: GET_VAR 'a: A<String>' type=A<kotlin.String> operator=null
+                  t: CONST String type=kotlin.String value=''
+                arg1: CONST String type=kotlin.String value='Z'
+            then: CONST String type=kotlin.String value='Fail #3'
+            else: CONST String type=kotlin.String value='OK'

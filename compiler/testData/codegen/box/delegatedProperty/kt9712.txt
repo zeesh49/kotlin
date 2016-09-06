@@ -1,0 +1,86 @@
+MODULE <test-module>
+  FILE /kt9712.kt
+    CLASS OBJECT X
+      CONSTRUCTOR private constructor X()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='X'
+      PROPERTY public final var O: kotlin.String
+        delegate: PROPERTY val `O$delegate`: kotlin.properties.ReadWriteProperty<kotlin.Any?, kotlin.String>
+          EXPRESSION_BODY
+            CALL 'observable(String, crossinline (KProperty<*>, String, String) -> Unit): ReadWriteProperty<Any?, String>' type=kotlin.properties.ReadWriteProperty<kotlin.Any?, kotlin.String> operator=null
+              $this: GET_OBJECT 'Delegates' type=kotlin.properties.Delegates
+              initialValue: CONST String type=kotlin.String value='O'
+              onChange: BLOCK type=(kotlin.reflect.KProperty<*>, kotlin.String, kotlin.String) -> kotlin.Unit operator=LAMBDA
+                FUN local final fun <anonymous>(prop: kotlin.reflect.KProperty<*>, old: kotlin.String, new: kotlin.String): kotlin.Unit
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KProperty<*>, String, String): Unit'
+                CALLABLE_REFERENCE '<anonymous>(KProperty<*>, String, String): Unit' type=(kotlin.reflect.KProperty<*>, kotlin.String, kotlin.String) -> kotlin.Unit operator=LAMBDA
+        PROPERTY_GETTER public final fun <get-O>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-O>(): String'
+              CALL 'getValue(Any?, KProperty<*>): String' type=kotlin.String operator=null
+                $this: GET_BACKING_FIELD '`O$delegate`: ReadWriteProperty<Any?, String>' type=kotlin.properties.ReadWriteProperty<kotlin.Any?, kotlin.String> operator=null
+                  receiver: THIS of 'X' type=X
+                thisRef: THIS of 'X' type=X
+                property: CALLABLE_REFERENCE 'O: String' type=kotlin.reflect.KMutableProperty1<X, kotlin.String> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+        PROPERTY_SETTER private final fun <set-O>(<set-?>: kotlin.String): kotlin.Unit
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<set-O>(String): Unit'
+              CALL 'setValue(Any?, KProperty<*>, String): Unit' type=kotlin.Unit operator=null
+                $this: GET_BACKING_FIELD '`O$delegate`: ReadWriteProperty<Any?, String>' type=kotlin.properties.ReadWriteProperty<kotlin.Any?, kotlin.String> operator=null
+                  receiver: THIS of 'X' type=X
+                thisRef: THIS of 'X' type=X
+                property: CALLABLE_REFERENCE 'O: String' type=kotlin.reflect.KMutableProperty1<X, kotlin.String> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+                value: GET_VAR 'value-parameter <set-?>: String' type=kotlin.String operator=null
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var K: kotlin.String
+        delegate: PROPERTY val `K$delegate`: kotlin.properties.ReadWriteProperty<kotlin.Any?, kotlin.String>
+          EXPRESSION_BODY
+            CALL 'observable(String, crossinline (KProperty<*>, String, String) -> Unit): ReadWriteProperty<Any?, String>' type=kotlin.properties.ReadWriteProperty<kotlin.Any?, kotlin.String> operator=null
+              $this: GET_OBJECT 'Delegates' type=kotlin.properties.Delegates
+              initialValue: CONST String type=kotlin.String value=''
+              onChange: BLOCK type=(kotlin.reflect.KProperty<*>, kotlin.String, kotlin.String) -> kotlin.Unit operator=LAMBDA
+                FUN local final fun <anonymous>(prop: kotlin.reflect.KProperty<*>, old: kotlin.String, new: kotlin.String): kotlin.Unit
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KProperty<*>, String, String): Unit'
+                CALLABLE_REFERENCE '<anonymous>(KProperty<*>, String, String): Unit' type=(kotlin.reflect.KProperty<*>, kotlin.String, kotlin.String) -> kotlin.Unit operator=LAMBDA
+        PROPERTY_GETTER public final fun <get-K>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-K>(): String'
+              CALL 'getValue(Any?, KProperty<*>): String' type=kotlin.String operator=null
+                $this: GET_BACKING_FIELD '`K$delegate`: ReadWriteProperty<Any?, String>' type=kotlin.properties.ReadWriteProperty<kotlin.Any?, kotlin.String> operator=null
+                  receiver: THIS of 'A' type=A
+                thisRef: THIS of 'A' type=A
+                property: CALLABLE_REFERENCE 'K: String' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+        PROPERTY_SETTER protected final fun <set-K>(<set-?>: kotlin.String): kotlin.Unit
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<set-K>(String): Unit'
+              CALL 'setValue(Any?, KProperty<*>, String): Unit' type=kotlin.Unit operator=null
+                $this: GET_BACKING_FIELD '`K$delegate`: ReadWriteProperty<Any?, String>' type=kotlin.properties.ReadWriteProperty<kotlin.Any?, kotlin.String> operator=null
+                  receiver: THIS of 'A' type=A
+                thisRef: THIS of 'A' type=A
+                property: CALLABLE_REFERENCE 'K: String' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+                value: GET_VAR 'value-parameter <set-?>: String' type=kotlin.String operator=null
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      ANONYMOUS_INITIALIZER B
+        BLOCK_BODY
+          CALL '<set-K>(String): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'B' type=B
+            <set-?>: CONST String type=kotlin.String value='K'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL '<get-O>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: GET_OBJECT 'X' type=X
+            other: CALL '<get-K>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: CALL 'constructor B()' type=B operator=null

@@ -1,0 +1,171 @@
+MODULE <test-module>
+  FILE /asSafeForConstants.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Int
+              CONST Int type=kotlin.Int value='1'
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Byte
+                CONST Int type=kotlin.Int value='1'
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Short
+                CONST Int type=kotlin.Int value='1'
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Long
+                CONST Int type=kotlin.Int value='1'
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Char
+                CONST Int type=kotlin.Int value='1'
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 5'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Double
+                CONST Int type=kotlin.Int value='1'
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 6'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Float
+                CONST Int type=kotlin.Int value='1'
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 7'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Int
+                CONST Double type=kotlin.Double value='1.0'
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 11'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Byte
+                CONST Double type=kotlin.Double value='1.0'
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 12'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Short
+                CONST Double type=kotlin.Double value='1.0'
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 13'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Long
+                CONST Double type=kotlin.Double value='1.0'
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 14'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Char
+                CONST Double type=kotlin.Double value='1.0'
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 15'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Double
+              CONST Double type=kotlin.Double value='1.0'
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 16'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Float
+                CONST Double type=kotlin.Double value='1.0'
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 17'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Int
+                CONST Float type=kotlin.Float value='1.0'
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 21'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Byte
+                CONST Float type=kotlin.Float value='1.0'
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 22'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Short
+                CONST Float type=kotlin.Float value='1.0'
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 23'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Long
+                CONST Float type=kotlin.Float value='1.0'
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 24'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Char
+                CONST Float type=kotlin.Float value='1.0'
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 25'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Double
+                CONST Float type=kotlin.Float value='1.0'
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 26'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Float
+              CONST Float type=kotlin.Float value='1.0'
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 27'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

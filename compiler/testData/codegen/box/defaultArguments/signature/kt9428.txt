@@ -1,0 +1,70 @@
+MODULE <test-module>
+  FILE /kt9428.kt
+    CLASS CLASS Player
+      CONSTRUCTOR public constructor Player(name: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'name: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Player' type=Player
+            value: GET_VAR 'value-parameter name: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Player'
+      PROPERTY public final val name: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter name: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS SlashPlayer
+      CONSTRUCTOR public constructor SlashPlayer(name: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Player(String)'
+            name: GET_VAR 'value-parameter name: String' type=kotlin.String operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='SlashPlayer'
+    CLASS CLASS Game
+      CONSTRUCTOR public constructor Game<T : Player>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Game'
+      FUN public abstract fun getPlayer(name: kotlin.String, create: kotlin.Boolean = ...): T?
+        create: EXPRESSION_BODY
+          CONST Boolean type=kotlin.Boolean value='true'
+    CLASS CLASS SimpleGame
+      CONSTRUCTOR public constructor SimpleGame()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Game()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SimpleGame'
+      FUN public open override fun getPlayer(name: kotlin.String, create: kotlin.Boolean = ...): SlashPlayer?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getPlayer(String, Boolean = ...): SlashPlayer?'
+            WHEN type=SlashPlayer? operator=IF
+              if: GET_VAR 'value-parameter create: Boolean = ...' type=kotlin.Boolean operator=null
+              then: BLOCK type=SlashPlayer operator=null
+                CALL 'constructor SlashPlayer(String)' type=SlashPlayer operator=null
+                  name: GET_VAR 'value-parameter name: String' type=kotlin.String operator=null
+              else: CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val player1: SlashPlayer?
+          CALL 'getPlayer(String, Boolean = ...): SlashPlayer?' type=SlashPlayer? operator=null
+            $this: CALL 'constructor SimpleGame()' type=SimpleGame operator=null
+            name: CONST String type=kotlin.String value='fail'
+            create: CONST Boolean type=kotlin.Boolean value='false'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'player1: SlashPlayer?' type=SlashPlayer? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        VAR val player2: SlashPlayer?
+          CALL 'getPlayer(String, Boolean = ...): SlashPlayer?' type=SlashPlayer? operator=null
+            $this: CALL 'constructor SimpleGame()' type=SimpleGame operator=null
+            name: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: BLOCK type=SlashPlayer operator=EXCLEXCL
+              VAR val tmp0_notnull: SlashPlayer?
+                GET_VAR 'player2: SlashPlayer?' type=SlashPlayer? operator=null
+              WHEN type=SlashPlayer operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: SlashPlayer?' type=SlashPlayer? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: SlashPlayer?' type=SlashPlayer? operator=null

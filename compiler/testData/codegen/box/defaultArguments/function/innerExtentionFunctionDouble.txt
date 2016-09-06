@@ -1,0 +1,41 @@
+MODULE <test-module>
+  FILE /innerExtentionFunctionDouble.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun kotlin.Double.foo(a: kotlin.Double = ...): kotlin.Double
+        a: EXPRESSION_BODY
+          CONST Double type=kotlin.Double value='1.0'
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(Double = ...) on Double: Double'
+            GET_VAR 'value-parameter a: Double = ...' type=kotlin.Double operator=null
+      FUN public final fun test(): kotlin.String
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'foo(Double = ...) on Double: Double' type=kotlin.Double operator=null
+                  $this: THIS of 'A' type=A
+                  $receiver: CONST Double type=kotlin.Double value='1.0'
+                arg1: CONST Double type=kotlin.Double value='1.0'
+            then: RETURN type=kotlin.Nothing from='test(): String'
+              CONST String type=kotlin.String value='fail'
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'foo(Double = ...) on Double: Double' type=kotlin.Double operator=null
+                  $this: THIS of 'A' type=A
+                  $receiver: CONST Double type=kotlin.Double value='1.0'
+                  a: CONST Double type=kotlin.Double value='2.0'
+                arg1: CONST Double type=kotlin.Double value='2.0'
+            then: RETURN type=kotlin.Nothing from='test(): String'
+              CONST String type=kotlin.String value='fail'
+          RETURN type=kotlin.Nothing from='test(): String'
+            CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'test(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor A()' type=A operator=null

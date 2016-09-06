@@ -1,0 +1,465 @@
+MODULE <test-module>
+  FILE /nonLocalReturn.kt
+    PROPERTY public val count: kotlin.Int = 10
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='10'
+    PROPERTY public var index: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='0'
+    PROPERTY public val doneSignal: java.util.concurrent.CountDownLatch
+      EXPRESSION_BODY
+        CALL 'constructor CountDownLatch(Int)' type=java.util.concurrent.CountDownLatch operator=null
+          p0: CALL '<get-count>(): Int' type=kotlin.Int operator=GET_PROPERTY
+    PROPERTY public val startSignal: java.util.concurrent.CountDownLatch
+      EXPRESSION_BODY
+        CALL 'constructor CountDownLatch(Int)' type=java.util.concurrent.CountDownLatch operator=null
+          p0: CONST Int type=kotlin.Int value='1'
+    PROPERTY public val mutex: kotlin.Any
+      EXPRESSION_BODY
+        CALL 'constructor Object()' type=java.lang.Object operator=null
+    PROPERTY public val results: java.util.ArrayList<kotlin.Int>
+      EXPRESSION_BODY
+        CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+    PROPERTY public val executorService: java.util.concurrent.ExecutorService!
+      EXPRESSION_BODY
+        CALL 'newFixedThreadPool(Int): ExecutorService!' type=java.util.concurrent.ExecutorService! operator=null
+          p0: CALL '<get-count>(): Int' type=kotlin.Int operator=GET_PROPERTY
+    CLASS CLASS MyException
+      CONSTRUCTOR public constructor MyException(message: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Exception(String!)'
+            p0: GET_VAR 'value-parameter message: String' type=kotlin.String operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyException'
+    CLASS ENUM_CLASS ExecutionType
+      CONSTRUCTOR private constructor ExecutionType()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='ExecutionType'
+      ENUM_ENTRY enum entry LOCAL
+        init: ENUM_CONSTRUCTOR_CALL 'constructor ExecutionType()' LOCAL
+      ENUM_ENTRY enum entry NON_LOCAL_SIMPLE
+        init: ENUM_CONSTRUCTOR_CALL 'constructor ExecutionType()' NON_LOCAL_SIMPLE
+      ENUM_ENTRY enum entry NON_LOCAL_EXCEPTION
+        init: ENUM_CONSTRUCTOR_CALL 'constructor ExecutionType()' NON_LOCAL_EXCEPTION
+      ENUM_ENTRY enum entry NON_LOCAL_FINALLY
+        init: ENUM_CONSTRUCTOR_CALL 'constructor ExecutionType()' NON_LOCAL_FINALLY
+      ENUM_ENTRY enum entry NON_LOCAL_EXCEPTION_AND_FINALLY
+        init: ENUM_CONSTRUCTOR_CALL 'constructor ExecutionType()' NON_LOCAL_EXCEPTION_AND_FINALLY
+      ENUM_ENTRY enum entry NON_LOCAL_EXCEPTION_AND_FINALLY_WITH_RETURN
+        init: ENUM_CONSTRUCTOR_CALL 'constructor ExecutionType()' NON_LOCAL_EXCEPTION_AND_FINALLY_WITH_RETURN
+      ENUM_ENTRY enum entry NON_LOCAL_NESTED
+        init: ENUM_CONSTRUCTOR_CALL 'constructor ExecutionType()' NON_LOCAL_NESTED
+      FUN public final fun values(): kotlin.Array<ExecutionType>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): ExecutionType
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    CLASS CLASS TestLocal
+      CONSTRUCTOR public constructor TestLocal(name: kotlin.String, executionType: ExecutionType)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'name: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'TestLocal' type=TestLocal
+            value: GET_VAR 'value-parameter name: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'executionType: ExecutionType' type=kotlin.Unit operator=null
+            receiver: THIS of 'TestLocal' type=TestLocal
+            value: GET_VAR 'value-parameter executionType: ExecutionType' type=ExecutionType operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='TestLocal'
+      PROPERTY public final val name: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter name: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val executionType: ExecutionType
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter executionType: ExecutionType' type=ExecutionType operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public open override fun call(): kotlin.String
+        BLOCK_BODY
+          CALL 'await(): Unit' type=kotlin.Unit operator=null
+            $this: CALL '<get-startSignal>(): CountDownLatch' type=java.util.concurrent.CountDownLatch operator=GET_PROPERTY
+          RETURN type=kotlin.Nothing from='call(): String'
+            BLOCK type=kotlin.String operator=WHEN
+              VAR val tmp0_subject: ExecutionType
+                CALL '<get-executionType>(): ExecutionType' type=ExecutionType operator=GET_PROPERTY
+                  $this: THIS of 'TestLocal' type=TestLocal
+              WHEN type=kotlin.String operator=WHEN
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_subject: ExecutionType' type=ExecutionType operator=null
+                  arg1: GET_ENUM_VALUE 'LOCAL' type=ExecutionType
+                then: CALL 'local(): String' type=kotlin.String operator=null
+                  $this: THIS of 'TestLocal' type=TestLocal
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_subject: ExecutionType' type=ExecutionType operator=null
+                  arg1: GET_ENUM_VALUE 'NON_LOCAL_SIMPLE' type=ExecutionType
+                then: CALL 'nonLocalSimple(): String' type=kotlin.String operator=null
+                  $this: THIS of 'TestLocal' type=TestLocal
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_subject: ExecutionType' type=ExecutionType operator=null
+                  arg1: GET_ENUM_VALUE 'NON_LOCAL_EXCEPTION' type=ExecutionType
+                then: CALL 'nonLocalWithException(): String' type=kotlin.String operator=null
+                  $this: THIS of 'TestLocal' type=TestLocal
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_subject: ExecutionType' type=ExecutionType operator=null
+                  arg1: GET_ENUM_VALUE 'NON_LOCAL_FINALLY' type=ExecutionType
+                then: CALL 'nonLocalWithFinally(): String' type=kotlin.String operator=null
+                  $this: THIS of 'TestLocal' type=TestLocal
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_subject: ExecutionType' type=ExecutionType operator=null
+                  arg1: GET_ENUM_VALUE 'NON_LOCAL_EXCEPTION_AND_FINALLY' type=ExecutionType
+                then: CALL 'nonLocalWithExceptionAndFinally(): String' type=kotlin.String operator=null
+                  $this: THIS of 'TestLocal' type=TestLocal
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_subject: ExecutionType' type=ExecutionType operator=null
+                  arg1: GET_ENUM_VALUE 'NON_LOCAL_EXCEPTION_AND_FINALLY_WITH_RETURN' type=ExecutionType
+                then: CALL 'nonLocalWithExceptionAndFinallyWithReturn(): String' type=kotlin.String operator=null
+                  $this: THIS of 'TestLocal' type=TestLocal
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_subject: ExecutionType' type=ExecutionType operator=null
+                  arg1: GET_ENUM_VALUE 'NON_LOCAL_NESTED' type=ExecutionType
+                then: CALL 'nonLocalNested(): String' type=kotlin.String operator=null
+                  $this: THIS of 'TestLocal' type=TestLocal
+                else: CONST String type=kotlin.String value='fail'
+      FUN private final fun underMutexFun(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+            $this: CALL '<get-results>(): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=GET_PROPERTY
+            element: BLOCK type=kotlin.Int operator=PREFIX_INCR
+              BLOCK type=kotlin.Int operator=PREFIX_INCR
+                VAR val tmp0: kotlin.Int
+                  CALL 'inc(): Int' type=kotlin.Int operator=PREFIX_INCR
+                    $this: CALL '<get-index>(): Int' type=kotlin.Int operator=PREFIX_INCR
+                CALL '<set-index>(Int): Unit' type=kotlin.Unit operator=PREFIX_INCR
+                  <set-?>: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+          CALL 'countDown(): Unit' type=kotlin.Unit operator=null
+            $this: CALL '<get-doneSignal>(): CountDownLatch' type=java.util.concurrent.CountDownLatch operator=GET_PROPERTY
+      FUN public final fun local(): kotlin.String
+        BLOCK_BODY
+          CALL 'synchronized(Any, () -> Unit): Unit' type=kotlin.Unit operator=null
+            lock: CALL '<get-mutex>(): Any' type=kotlin.Any operator=GET_PROPERTY
+            block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                    CALL 'underMutexFun(): Unit' type=kotlin.Unit operator=null
+                      $this: THIS of 'TestLocal' type=TestLocal
+              CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+          RETURN type=kotlin.Nothing from='local(): String'
+            CALL 'toString(): String' type=kotlin.String operator=null
+              $this: CALL '<get-executionType>(): ExecutionType' type=ExecutionType operator=GET_PROPERTY
+                $this: THIS of 'TestLocal' type=TestLocal
+      FUN public final fun nonLocalSimple(): kotlin.String
+        BLOCK_BODY
+          CALL 'synchronized(Any, () -> Nothing): Nothing' type=kotlin.Nothing operator=null
+            lock: CALL '<get-mutex>(): Any' type=kotlin.Any operator=GET_PROPERTY
+            block: BLOCK type=() -> kotlin.Nothing operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Nothing
+                BLOCK_BODY
+                  CALL 'underMutexFun(): Unit' type=kotlin.Unit operator=null
+                    $this: THIS of 'TestLocal' type=TestLocal
+                  RETURN type=kotlin.Nothing from='nonLocalSimple(): String'
+                    CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                      $this: CALL '<get-executionType>(): ExecutionType' type=ExecutionType operator=GET_PROPERTY
+                        $this: THIS of 'TestLocal' type=TestLocal
+              CALLABLE_REFERENCE '<anonymous>(): Nothing' type=() -> kotlin.Nothing operator=LAMBDA
+          RETURN type=kotlin.Nothing from='nonLocalSimple(): String'
+            CONST String type=kotlin.String value='fail'
+      FUN public final fun nonLocalWithException(): kotlin.String
+        BLOCK_BODY
+          CALL 'synchronized(Any, () -> Nothing): Nothing' type=kotlin.Nothing operator=null
+            lock: CALL '<get-mutex>(): Any' type=kotlin.Any operator=GET_PROPERTY
+            block: BLOCK type=() -> kotlin.Nothing operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Nothing
+                BLOCK_BODY
+                  TRY_CATCH type=kotlin.Nothing
+                    try: BLOCK type=kotlin.Nothing operator=null
+                      CALL 'underMutexFun(): Unit' type=kotlin.Unit operator=null
+                        $this: THIS of 'TestLocal' type=TestLocal
+                      THROW type=kotlin.Nothing
+                        CALL 'constructor MyException(String)' type=MyException operator=null
+                          message: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                            $this: CALL '<get-executionType>(): ExecutionType' type=ExecutionType operator=GET_PROPERTY
+                              $this: THIS of 'TestLocal' type=TestLocal
+                    catch e: BLOCK type=kotlin.Nothing operator=null
+                      RETURN type=kotlin.Nothing from='nonLocalWithException(): String'
+                        BLOCK type=kotlin.String operator=EXCLEXCL
+                          VAR val tmp0_notnull: kotlin.String?
+                            CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                              $this: GET_VAR 'e: MyException' type=MyException operator=null
+                          WHEN type=kotlin.String operator=null
+                            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                              arg0: GET_VAR 'tmp0_notnull: String?' type=kotlin.String? operator=null
+                              arg1: CONST Null type=kotlin.Nothing? value='null'
+                            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                            else: GET_VAR 'tmp0_notnull: String?' type=kotlin.String? operator=null
+              CALLABLE_REFERENCE '<anonymous>(): Nothing' type=() -> kotlin.Nothing operator=LAMBDA
+          RETURN type=kotlin.Nothing from='nonLocalWithException(): String'
+            CONST String type=kotlin.String value='fail'
+      FUN public final fun nonLocalWithFinally(): kotlin.String
+        BLOCK_BODY
+          CALL 'synchronized(Any, () -> Nothing): Nothing' type=kotlin.Nothing operator=null
+            lock: CALL '<get-mutex>(): Any' type=kotlin.Any operator=GET_PROPERTY
+            block: BLOCK type=() -> kotlin.Nothing operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Nothing
+                BLOCK_BODY
+                  TRY_CATCH type=kotlin.Nothing
+                    try: BLOCK type=kotlin.Nothing operator=null
+                      CALL 'underMutexFun(): Unit' type=kotlin.Unit operator=null
+                        $this: THIS of 'TestLocal' type=TestLocal
+                      RETURN type=kotlin.Nothing from='nonLocalWithFinally(): String'
+                        CONST String type=kotlin.String value='fail'
+                    finally: BLOCK type=kotlin.Nothing operator=null
+                      RETURN type=kotlin.Nothing from='nonLocalWithFinally(): String'
+                        CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                          $this: CALL '<get-executionType>(): ExecutionType' type=ExecutionType operator=GET_PROPERTY
+                            $this: THIS of 'TestLocal' type=TestLocal
+              CALLABLE_REFERENCE '<anonymous>(): Nothing' type=() -> kotlin.Nothing operator=LAMBDA
+          RETURN type=kotlin.Nothing from='nonLocalWithFinally(): String'
+            CONST String type=kotlin.String value='fail'
+      FUN public final fun nonLocalWithExceptionAndFinally(): kotlin.String
+        BLOCK_BODY
+          CALL 'synchronized(Any, () -> Nothing): Nothing' type=kotlin.Nothing operator=null
+            lock: CALL '<get-mutex>(): Any' type=kotlin.Any operator=GET_PROPERTY
+            block: BLOCK type=() -> kotlin.Nothing operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Nothing
+                BLOCK_BODY
+                  TRY_CATCH type=kotlin.Nothing
+                    try: BLOCK type=kotlin.Nothing operator=null
+                      CALL 'underMutexFun(): Unit' type=kotlin.Unit operator=null
+                        $this: THIS of 'TestLocal' type=TestLocal
+                      THROW type=kotlin.Nothing
+                        CALL 'constructor MyException(String)' type=MyException operator=null
+                          message: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                            $this: CALL '<get-executionType>(): ExecutionType' type=ExecutionType operator=GET_PROPERTY
+                              $this: THIS of 'TestLocal' type=TestLocal
+                    catch e: BLOCK type=kotlin.Nothing operator=null
+                      RETURN type=kotlin.Nothing from='nonLocalWithExceptionAndFinally(): String'
+                        BLOCK type=kotlin.String operator=EXCLEXCL
+                          VAR val tmp0_notnull: kotlin.String?
+                            CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                              $this: GET_VAR 'e: MyException' type=MyException operator=null
+                          WHEN type=kotlin.String operator=null
+                            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                              arg0: GET_VAR 'tmp0_notnull: String?' type=kotlin.String? operator=null
+                              arg1: CONST Null type=kotlin.Nothing? value='null'
+                            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                            else: GET_VAR 'tmp0_notnull: String?' type=kotlin.String? operator=null
+                    finally: BLOCK type=kotlin.String operator=null
+                      CONST String type=kotlin.String value='123'
+              CALLABLE_REFERENCE '<anonymous>(): Nothing' type=() -> kotlin.Nothing operator=LAMBDA
+          RETURN type=kotlin.Nothing from='nonLocalWithExceptionAndFinally(): String'
+            CONST String type=kotlin.String value='fail'
+      FUN public final fun nonLocalWithExceptionAndFinallyWithReturn(): kotlin.String
+        BLOCK_BODY
+          CALL 'synchronized(Any, () -> Nothing): Nothing' type=kotlin.Nothing operator=null
+            lock: CALL '<get-mutex>(): Any' type=kotlin.Any operator=GET_PROPERTY
+            block: BLOCK type=() -> kotlin.Nothing operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Nothing
+                BLOCK_BODY
+                  TRY_CATCH type=kotlin.Nothing
+                    try: BLOCK type=kotlin.Nothing operator=null
+                      CALL 'underMutexFun(): Unit' type=kotlin.Unit operator=null
+                        $this: THIS of 'TestLocal' type=TestLocal
+                      THROW type=kotlin.Nothing
+                        CALL 'constructor MyException(String)' type=MyException operator=null
+                          message: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                            $this: CALL '<get-executionType>(): ExecutionType' type=ExecutionType operator=GET_PROPERTY
+                              $this: THIS of 'TestLocal' type=TestLocal
+                    catch e: BLOCK type=kotlin.Nothing operator=null
+                      RETURN type=kotlin.Nothing from='nonLocalWithExceptionAndFinallyWithReturn(): String'
+                        CONST String type=kotlin.String value='fail1'
+                    finally: BLOCK type=kotlin.Nothing operator=null
+                      RETURN type=kotlin.Nothing from='nonLocalWithExceptionAndFinallyWithReturn(): String'
+                        CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                          $this: CALL '<get-executionType>(): ExecutionType' type=ExecutionType operator=GET_PROPERTY
+                            $this: THIS of 'TestLocal' type=TestLocal
+              CALLABLE_REFERENCE '<anonymous>(): Nothing' type=() -> kotlin.Nothing operator=LAMBDA
+          RETURN type=kotlin.Nothing from='nonLocalWithExceptionAndFinallyWithReturn(): String'
+            CONST String type=kotlin.String value='fail'
+      FUN public final fun nonLocalNested(): kotlin.String
+        BLOCK_BODY
+          CALL 'synchronized(Any, () -> Nothing): Nothing' type=kotlin.Nothing operator=null
+            lock: CALL '<get-mutex>(): Any' type=kotlin.Any operator=GET_PROPERTY
+            block: BLOCK type=() -> kotlin.Nothing operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Nothing
+                BLOCK_BODY
+                  TRY_CATCH type=kotlin.Nothing
+                    try: BLOCK type=kotlin.Nothing operator=null
+                      TRY_CATCH type=kotlin.Nothing
+                        try: BLOCK type=kotlin.Nothing operator=null
+                          CALL 'underMutexFun(): Unit' type=kotlin.Unit operator=null
+                            $this: THIS of 'TestLocal' type=TestLocal
+                          THROW type=kotlin.Nothing
+                            CALL 'constructor MyException(String)' type=MyException operator=null
+                              message: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                                $this: CALL '<get-executionType>(): ExecutionType' type=ExecutionType operator=GET_PROPERTY
+                                  $this: THIS of 'TestLocal' type=TestLocal
+                        catch e: BLOCK type=kotlin.Nothing operator=null
+                          RETURN type=kotlin.Nothing from='nonLocalNested(): String'
+                            CONST String type=kotlin.String value='fail1'
+                        finally: BLOCK type=kotlin.Nothing operator=null
+                          RETURN type=kotlin.Nothing from='nonLocalNested(): String'
+                            CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                              $this: CALL '<get-executionType>(): ExecutionType' type=ExecutionType operator=GET_PROPERTY
+                                $this: THIS of 'TestLocal' type=TestLocal
+                    finally: BLOCK type=kotlin.Unit operator=null
+                      VAR val p: kotlin.Int = 2
+                        CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                          $this: CONST Int type=kotlin.Int value='1'
+                          other: CONST Int type=kotlin.Int value='1'
+              CALLABLE_REFERENCE '<anonymous>(): Nothing' type=() -> kotlin.Nothing operator=LAMBDA
+          RETURN type=kotlin.Nothing from='nonLocalNested(): String'
+            CONST String type=kotlin.String value='fail'
+    FUN public fun testTemplate(type: ExecutionType, producer: (kotlin.Int) -> java.util.concurrent.Callable<kotlin.String>): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            VAR val futures: java.util.ArrayList<java.util.concurrent.Future<kotlin.String>>
+              CALL 'arrayListOf(vararg Future<String>): ArrayList<Future<String>>' type=java.util.ArrayList<java.util.concurrent.Future<kotlin.String>> operator=null
+            BLOCK type=kotlin.Unit operator=FOR_LOOP
+              VAR val tmp0_iterator: kotlin.collections.IntIterator
+                CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+                  $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                    $this: CONST Int type=kotlin.Int value='1'
+                    other: CALL '<get-count>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              WHILE label=null operator=FOR_LOOP_INNER_WHILE
+                condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+                body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+                  VAR val i: kotlin.Int
+                    CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                      $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+                  BLOCK type=kotlin.Boolean operator=null
+                    CALL 'add(Future<String>): Boolean' type=kotlin.Boolean operator=null
+                      $this: GET_VAR 'futures: ArrayList<Future<String>>' type=java.util.ArrayList<java.util.concurrent.Future<kotlin.String>> operator=null
+                      element: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.util.concurrent.Future<kotlin.String!>
+                        CALL 'submit(Callable<String!>!): Future<String!>!' type=java.util.concurrent.Future<kotlin.String!>! operator=null
+                          $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.util.concurrent.ExecutorService
+                            CALL '<get-executorService>(): ExecutorService!' type=java.util.concurrent.ExecutorService! operator=GET_PROPERTY
+                          p0: CALL 'invoke(Int): Callable<String>' type=java.util.concurrent.Callable<kotlin.String> operator=INVOKE
+                            $this: GET_VAR 'value-parameter producer: (Int) -> Callable<String>' type=(kotlin.Int) -> java.util.concurrent.Callable<kotlin.String> operator=VARIABLE_AS_FUNCTION
+                            p1: GET_VAR 'i: Int' type=kotlin.Int operator=null
+            CALL 'countDown(): Unit' type=kotlin.Unit operator=null
+              $this: CALL '<get-startSignal>(): CountDownLatch' type=java.util.concurrent.CountDownLatch operator=GET_PROPERTY
+            VAR val b: kotlin.Boolean
+              CALL 'await(Long, TimeUnit!): Boolean' type=kotlin.Boolean operator=null
+                $this: CALL '<get-doneSignal>(): CountDownLatch' type=java.util.concurrent.CountDownLatch operator=GET_PROPERTY
+                p0: CONST Long type=kotlin.Long value='10'
+                p1: GET_ENUM_VALUE 'SECONDS' type=java.util.concurrent.TimeUnit
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+                $this: GET_VAR 'b: Boolean' type=kotlin.Boolean operator=null
+              then: RETURN type=kotlin.Nothing from='testTemplate(ExecutionType, (Int) -> Callable<String>): String'
+                CONST String type=kotlin.String value='fail: processes not finished'
+            BLOCK type=kotlin.Unit operator=FOR_LOOP
+              VAR val tmp1_iterator: kotlin.collections.IntIterator
+                CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+                  $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                    $this: CONST Int type=kotlin.Int value='1'
+                    other: CALL '<get-count>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              WHILE label=null operator=FOR_LOOP_INNER_WHILE
+                condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+                  $this: GET_VAR 'tmp1_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+                body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+                  VAR val i: kotlin.Int
+                    CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                      $this: GET_VAR 'tmp1_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+                  BLOCK type=kotlin.Unit operator=null
+                    WHEN type=kotlin.Unit operator=IF
+                      if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                          arg0: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                            $this: CALL '<get-results>(): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=GET_PROPERTY
+                            index: CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+                              $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                              other: CONST Int type=kotlin.Int value='1'
+                          arg1: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                      then: RETURN type=kotlin.Nothing from='testTemplate(ExecutionType, (Int) -> Callable<String>): String'
+                        CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                          $this: STRING_CONCATENATION type=kotlin.String
+                            CONST String type=kotlin.String value='fail '
+                            GET_VAR 'i: Int' type=kotlin.Int operator=null
+                            CONST String type=kotlin.String value=' != '
+                            CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                              $this: CALL '<get-results>(): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=GET_PROPERTY
+                              index: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                            CONST String type=kotlin.String value=': synchronization not works : '
+                          other: CALL 'joinToString(CharSequence = ..., CharSequence = ..., CharSequence = ..., Int = ..., CharSequence = ..., ((Int) -> CharSequence)? = ...) on Iterable<Int>: String' type=kotlin.String operator=null
+                            $receiver: CALL '<get-results>(): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=GET_PROPERTY
+            BLOCK type=kotlin.Unit operator=FOR_LOOP
+              VAR val tmp2_iterator: kotlin.collections.MutableIterator<java.util.concurrent.Future<kotlin.String>>
+                CALL 'iterator(): MutableIterator<Future<String>>' type=kotlin.collections.MutableIterator<java.util.concurrent.Future<kotlin.String>> operator=FOR_LOOP_ITERATOR
+                  $this: GET_VAR 'futures: ArrayList<Future<String>>' type=java.util.ArrayList<java.util.concurrent.Future<kotlin.String>> operator=null
+              WHILE label=null operator=FOR_LOOP_INNER_WHILE
+                condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+                  $this: GET_VAR 'tmp2_iterator: MutableIterator<Future<String>>' type=kotlin.collections.MutableIterator<java.util.concurrent.Future<kotlin.String>> operator=null
+                body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+                  VAR val f: java.util.concurrent.Future<kotlin.String>
+                    CALL 'next(): Future<String>' type=java.util.concurrent.Future<kotlin.String> operator=FOR_LOOP_NEXT
+                      $this: GET_VAR 'tmp2_iterator: MutableIterator<Future<String>>' type=kotlin.collections.MutableIterator<java.util.concurrent.Future<kotlin.String>> operator=null
+                  BLOCK type=kotlin.Unit operator=null
+                    WHEN type=kotlin.Unit operator=IF
+                      if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                          arg0: CALL 'get(): String!' type=kotlin.String! operator=null
+                            $this: GET_VAR 'f: Future<String>' type=java.util.concurrent.Future<kotlin.String> operator=null
+                          arg1: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                            $this: GET_VAR 'value-parameter type: ExecutionType' type=ExecutionType operator=null
+                      then: RETURN type=kotlin.Nothing from='testTemplate(ExecutionType, (Int) -> Callable<String>): String'
+                        STRING_CONCATENATION type=kotlin.String
+                          CONST String type=kotlin.String value='failed result '
+                          CALL 'get(): String!' type=kotlin.String! operator=null
+                            $this: GET_VAR 'f: Future<String>' type=java.util.concurrent.Future<kotlin.String> operator=null
+                          CONST String type=kotlin.String value=' != '
+                          CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                            $this: GET_VAR 'value-parameter type: ExecutionType' type=ExecutionType operator=null
+          finally: BLOCK type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='testTemplate(ExecutionType, (Int) -> Callable<String>): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun runTest(type: ExecutionType): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='runTest(ExecutionType): String'
+          CALL 'testTemplate(ExecutionType, (Int) -> Callable<String>): String' type=kotlin.String operator=null
+            type: GET_VAR 'value-parameter type: ExecutionType' type=ExecutionType operator=null
+            producer: BLOCK type=(kotlin.Int) -> TestLocal operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.Int): TestLocal
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): TestLocal'
+                    CALL 'constructor TestLocal(String, ExecutionType)' type=TestLocal operator=null
+                      name: CALL 'toString(): String' type=kotlin.String operator=null
+                        $this: GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                      executionType: GET_VAR 'value-parameter type: ExecutionType' type=ExecutionType operator=null
+              CALLABLE_REFERENCE '<anonymous>(Int): TestLocal' type=(kotlin.Int) -> TestLocal operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            BLOCK type=kotlin.Unit operator=FOR_LOOP
+              VAR val tmp0_iterator: kotlin.collections.Iterator<ExecutionType>
+                CALL 'iterator(): Iterator<ExecutionType>' type=kotlin.collections.Iterator<ExecutionType> operator=FOR_LOOP_ITERATOR
+                  $this: CALL 'values(): Array<ExecutionType>' type=kotlin.Array<ExecutionType> operator=null
+              WHILE label=null operator=FOR_LOOP_INNER_WHILE
+                condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<ExecutionType>' type=kotlin.collections.Iterator<ExecutionType> operator=null
+                body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+                  VAR val type: ExecutionType
+                    CALL 'next(): ExecutionType' type=ExecutionType operator=FOR_LOOP_NEXT
+                      $this: GET_VAR 'tmp0_iterator: Iterator<ExecutionType>' type=kotlin.collections.Iterator<ExecutionType> operator=null
+                  BLOCK type=kotlin.Unit operator=null
+                    VAR val result: kotlin.String
+                      CALL 'runTest(ExecutionType): String' type=kotlin.String operator=null
+                        type: GET_VAR 'type: ExecutionType' type=ExecutionType operator=null
+                    WHEN type=kotlin.Unit operator=IF
+                      if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                          arg0: GET_VAR 'result: String' type=kotlin.String operator=null
+                          arg1: CONST String type=kotlin.String value='OK'
+                      then: RETURN type=kotlin.Nothing from='box(): String'
+                        STRING_CONCATENATION type=kotlin.String
+                          CONST String type=kotlin.String value='fail on '
+                          GET_VAR 'type: ExecutionType' type=ExecutionType operator=null
+                          CONST String type=kotlin.String value=' execution: '
+                          GET_VAR 'result: String' type=kotlin.String operator=null
+          finally: BLOCK type=kotlin.Unit operator=null
+            CALL 'shutdown(): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.util.concurrent.ExecutorService
+                CALL '<get-executorService>(): ExecutorService!' type=java.util.concurrent.ExecutorService! operator=GET_PROPERTY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

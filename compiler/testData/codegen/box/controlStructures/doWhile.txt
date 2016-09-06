@@ -1,0 +1,76 @@
+MODULE <test-module>
+  FILE /doWhile.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var x: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        DO_WHILE label=null operator=DO_WHILE_LOOP
+          body: BLOCK type=kotlin.Int operator=POSTFIX_INCR
+            VAR val tmp0: kotlin.Int
+              GET_VAR 'x: Int' type=kotlin.Int operator=POSTFIX_INCR
+            SET_VAR 'x: Int' type=kotlin.Unit operator=POSTFIX_INCR
+              CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+            GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+          condition: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+              $this: GET_VAR 'x: Int' type=kotlin.Int operator=null
+              other: CONST Int type=kotlin.Int value='5'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'x: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='5'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 1 '
+              GET_VAR 'x: Int' type=kotlin.Int operator=null
+        VAR var y: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        DO_WHILE label=null operator=DO_WHILE_LOOP
+          body: BLOCK type=kotlin.Unit operator=null
+            BLOCK type=kotlin.Int operator=POSTFIX_INCR
+              VAR val tmp1: kotlin.Int
+                GET_VAR 'y: Int' type=kotlin.Int operator=POSTFIX_INCR
+              SET_VAR 'y: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+          condition: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+              $this: GET_VAR 'y: Int' type=kotlin.Int operator=null
+              other: CONST Int type=kotlin.Int value='5'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'y: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='5'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 2 '
+              GET_VAR 'y: Int' type=kotlin.Int operator=null
+        VAR var z: kotlin.String
+          CONST String type=kotlin.String value=''
+        DO_WHILE label=null operator=DO_WHILE_LOOP
+          body: BLOCK type=kotlin.Unit operator=null
+            SET_VAR 'z: String' type=kotlin.Unit operator=PLUSEQ
+              CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: GET_VAR 'z: String' type=kotlin.String operator=PLUSEQ
+                other: CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'z: String' type=kotlin.String operator=null
+          condition: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+              $this: CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'z: String' type=kotlin.String operator=null
+              other: CONST Int type=kotlin.Int value='5'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'z: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='01234'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 3 '
+              GET_VAR 'z: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

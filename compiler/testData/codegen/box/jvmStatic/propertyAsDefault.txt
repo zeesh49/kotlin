@@ -1,0 +1,22 @@
+MODULE <test-module>
+  FILE /propertyAsDefault.kt
+    CLASS OBJECT X
+      CONSTRUCTOR private constructor X()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='X'
+      PROPERTY @kotlin.jvm.JvmStatic public final val x: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+      FUN public final fun fn(value: kotlin.String = ...): kotlin.String
+        value: EXPRESSION_BODY
+          CALL '<get-x>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: THIS of 'X' type=X
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='fn(String = ...): String'
+            GET_VAR 'value-parameter value: String = ...' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'fn(String = ...): String' type=kotlin.String operator=null
+            $this: GET_OBJECT 'X' type=X

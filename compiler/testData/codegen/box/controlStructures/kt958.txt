@@ -1,0 +1,17 @@
+MODULE <test-module>
+  FILE /kt958.kt
+    FUN public fun test(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test(): Int'
+          CONST Int type=kotlin.Int value='239'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'contains(Int): Boolean' type=kotlin.Boolean operator=IN
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='239'
+                other: CONST Int type=kotlin.Int value='240'
+              value: CALL 'test(): Int' type=kotlin.Int operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

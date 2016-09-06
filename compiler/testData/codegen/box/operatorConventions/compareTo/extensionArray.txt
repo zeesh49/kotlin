@@ -1,0 +1,81 @@
+MODULE <test-module>
+  FILE /extensionArray.kt
+    FUN public fun checkLess(x: kotlin.Array<kotlin.Int>, y: kotlin.Array<kotlin.Int>): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='checkLess(Array<Int>, Array<Int>): String'
+          WHEN type=kotlin.String operator=WHEN
+            if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+              arg0: CALL 'compareTo(Array<Int>) on Array<Int>: Int' type=kotlin.Int operator=GTEQ
+                $receiver: GET_VAR 'value-parameter x: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+                other: GET_VAR 'value-parameter y: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'value-parameter x: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+              CONST String type=kotlin.String value=' >= '
+              GET_VAR 'value-parameter y: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+            if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+              $this: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+                arg0: CALL 'compareTo(Array<Int>) on Array<Int>: Int' type=kotlin.Int operator=LT
+                  $receiver: GET_VAR 'value-parameter x: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+                  other: GET_VAR 'value-parameter y: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail !('
+              GET_VAR 'value-parameter x: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+              CONST String type=kotlin.String value=' < '
+              GET_VAR 'value-parameter y: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+              CONST String type=kotlin.String value=')'
+            if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+              $this: CALL 'LTEQ0(Int): Boolean' type=kotlin.Boolean operator=LTEQ
+                arg0: CALL 'compareTo(Array<Int>) on Array<Int>: Int' type=kotlin.Int operator=LTEQ
+                  $receiver: GET_VAR 'value-parameter x: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+                  other: GET_VAR 'value-parameter y: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail !('
+              GET_VAR 'value-parameter x: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+              CONST String type=kotlin.String value=' <= '
+              GET_VAR 'value-parameter y: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+              CONST String type=kotlin.String value=')'
+            if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+              arg0: CALL 'compareTo(Array<Int>) on Array<Int>: Int' type=kotlin.Int operator=GT
+                $receiver: GET_VAR 'value-parameter x: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+                other: GET_VAR 'value-parameter y: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'value-parameter x: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+              CONST String type=kotlin.String value=' > '
+              GET_VAR 'value-parameter y: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+            if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+              arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GTEQ
+                $this: CALL 'compareTo(Array<Int>) on Array<Int>: Int' type=kotlin.Int operator=null
+                  $receiver: GET_VAR 'value-parameter x: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+                  other: GET_VAR 'value-parameter y: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+                other: CONST Int type=kotlin.Int value='0'
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'value-parameter x: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+              CONST String type=kotlin.String value='.compareTo('
+              GET_VAR 'value-parameter y: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+              CONST String type=kotlin.String value=') >= 0'
+            else: CONST String type=kotlin.String value='OK'
+    FUN public operator fun kotlin.Array<kotlin.Int>.compareTo(other: kotlin.Array<kotlin.Int>): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='compareTo(Array<Int>) on Array<Int>: Int'
+          CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+            $this: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: $RECEIVER of 'compareTo(Array<Int>) on Array<Int>: Int' type=kotlin.Array<kotlin.Int>
+            other: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: GET_VAR 'value-parameter other: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: kotlin.Array<kotlin.Int>
+          TYPE_OP operator=CAST typeOperand=kotlin.Array<kotlin.Int>
+            CALL 'arrayOfNulls(Int): Array<Int?>' type=kotlin.Array<kotlin.Int?> operator=null
+              size: CONST Int type=kotlin.Int value='0'
+        VAR val b: kotlin.Array<kotlin.Int>
+          TYPE_OP operator=CAST typeOperand=kotlin.Array<kotlin.Int>
+            CALL 'arrayOfNulls(Int): Array<Int?>' type=kotlin.Array<kotlin.Int?> operator=null
+              size: CONST Int type=kotlin.Int value='1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'checkLess(Array<Int>, Array<Int>): String' type=kotlin.String operator=null
+            x: GET_VAR 'a: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+            y: GET_VAR 'b: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null

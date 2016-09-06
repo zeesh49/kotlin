@@ -1,0 +1,11 @@
+MODULE <test-module>
+  FILE /kt602.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'isArrayOf() on Array<*>: Boolean' type=kotlin.Boolean operator=null
+              $receiver: CALL 'arrayOfNulls(Int): Array<Int?>' type=kotlin.Array<kotlin.Int?> operator=null
+                size: CONST Int type=kotlin.Int value='10'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /tryCatch.kt
+    FUN public fun exit(): kotlin.Nothing
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: kotlin.String
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            SET_VAR 'a: String' type=kotlin.Unit operator=EQ
+              CONST String type=kotlin.String value='OK'
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            CALL 'exit(): Nothing' type=kotlin.Nothing operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          GET_VAR 'a: String' type=kotlin.String operator=null

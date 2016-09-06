@@ -1,0 +1,59 @@
+MODULE <test-module>
+  FILE /simpleWithHandleResult.kt
+    CLASS CLASS Controller
+      CONSTRUCTOR public constructor Controller()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Controller'
+      PROPERTY public final var res: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+      FUN public final suspend fun suspendHere(x: kotlin.coroutines.Continuation<kotlin.String>): kotlin.Unit
+        BLOCK_BODY
+          CALL 'resume(String): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR 'value-parameter x: Continuation<String>' type=kotlin.coroutines.Continuation<kotlin.String> operator=null
+            data: CONST String type=kotlin.String value='OK'
+      FUN public final operator fun handleResult(x: kotlin.Int, y: kotlin.coroutines.Continuation<kotlin.Nothing>): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-res>(Int): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'Controller' type=Controller
+            <set-?>: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+    FUN public fun builder(coroutine c: Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>): kotlin.Int
+      BLOCK_BODY
+        VAR val controller: Controller
+          CALL 'constructor Controller()' type=Controller operator=null
+        CALL 'resume(Unit): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'invoke(Controller): Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=INVOKE
+            $this: GET_VAR 'value-parameter coroutine c: Controller.() -> Continuation<Unit>' type=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+            p1: GET_VAR 'controller: Controller' type=Controller operator=null
+          data: GET_OBJECT 'Unit' type=kotlin.Unit
+        RETURN type=kotlin.Nothing from='builder(coroutine Controller.() -> Continuation<Unit>): Int'
+          CALL '<get-res>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: GET_VAR 'controller: Controller' type=Controller operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.String
+          CONST String type=kotlin.String value=''
+        VAR val handledResult: kotlin.Int
+          CALL 'builder(coroutine Controller.() -> Continuation<Unit>): Int' type=kotlin.Int operator=null
+            c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+              BLOCK type=Controller.() -> kotlin.Int operator=LAMBDA
+                FUN local final fun Controller.<anonymous>(): kotlin.Int
+                  BLOCK_BODY
+                    SET_VAR 'result: String' type=kotlin.Unit operator=EQ
+                      CALL 'suspendHere(): String' type=kotlin.String operator=null
+                        $this: $RECEIVER of '<anonymous>() on Controller: Int' type=Controller
+                    RETURN type=kotlin.Nothing from='<anonymous>() on Controller: Int'
+                      CONST Int type=kotlin.Int value='56'
+                CALLABLE_REFERENCE '<anonymous>() on Controller: Int' type=Controller.() -> kotlin.Int operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'handledResult: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='56'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              GET_VAR 'handledResult: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          GET_VAR 'result: String' type=kotlin.String operator=null

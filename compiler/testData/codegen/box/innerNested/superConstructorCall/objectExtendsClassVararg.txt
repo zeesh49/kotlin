@@ -1,0 +1,49 @@
+MODULE <test-module>
+  FILE /objectExtendsClassVararg.kt
+    CLASS CLASS SomeClass
+      CONSTRUCTOR public constructor SomeClass(some: kotlin.Double, other: kotlin.Int, vararg args: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'some: Double' type=kotlin.Unit operator=null
+            receiver: THIS of 'SomeClass' type=SomeClass
+            value: GET_VAR 'value-parameter some: Double' type=kotlin.Double operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'other: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'SomeClass' type=SomeClass
+            value: GET_VAR 'value-parameter other: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'args: Array<out String>' type=kotlin.Unit operator=null
+            receiver: THIS of 'SomeClass' type=SomeClass
+            value: GET_VAR 'value-parameter vararg args: String' type=kotlin.Array<out kotlin.String> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='SomeClass'
+      PROPERTY public final val some: kotlin.Double
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter some: Double' type=kotlin.Double operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val other: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter other: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val args: kotlin.Array<out kotlin.String>
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter vararg args: String' type=kotlin.Array<out kotlin.String> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun result(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='result(): String'
+            CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+              $this: CALL '<get-args>(): Array<out String>' type=kotlin.Array<out kotlin.String> operator=GET_PROPERTY
+                $this: THIS of 'SomeClass' type=SomeClass
+              index: CONST Int type=kotlin.Int value='1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'result(): String' type=kotlin.String operator=null
+            $this: BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor SomeClass(Double, Int, vararg String)'
+                      some: CONST Double type=kotlin.Double value='3.14'
+                      other: CONST Int type=kotlin.Int value='42'
+                      args: VARARG type=Array<out String> varargElementType=String
+                        CONST String type=kotlin.String value='No'
+                        CONST String type=kotlin.String value='OK'
+                        CONST String type=kotlin.String value='Yes'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL

@@ -1,0 +1,71 @@
+MODULE <test-module>
+  FILE /kt1572.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(t: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 't: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter t: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val t: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter t: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun testKt1572(): kotlin.Boolean
+      BLOCK_BODY
+        VAR var a: A
+          CALL 'constructor A(Int)' type=A operator=null
+            t: CONST Int type=kotlin.Int value='0'
+        VAR var b: A
+          CALL 'constructor A(Int)' type=A operator=null
+            t: CONST Int type=kotlin.Int value='3'
+        VAR val changer: () -> kotlin.Unit
+          BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  SET_VAR 'a: A' type=kotlin.Unit operator=EQ
+                    GET_VAR 'b: A' type=A operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        SET_VAR 'b: A' type=kotlin.Unit operator=EQ
+          CALL 'constructor A(Int)' type=A operator=null
+            t: CONST Int type=kotlin.Int value='10'
+        CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'changer: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+        RETURN type=kotlin.Nothing from='testKt1572(): Boolean'
+          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL '<get-t>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: GET_VAR 'a: A' type=A operator=null
+            arg1: CONST Int type=kotlin.Int value='10'
+    FUN public fun testPrimitives(): kotlin.Boolean
+      BLOCK_BODY
+        VAR var a: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        VAR var b: kotlin.Int
+          CONST Int type=kotlin.Int value='3'
+        VAR val changer: () -> kotlin.Unit
+          BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  SET_VAR 'a: Int' type=kotlin.Unit operator=EQ
+                    GET_VAR 'b: Int' type=kotlin.Int operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        SET_VAR 'b: Int' type=kotlin.Unit operator=EQ
+          CONST Int type=kotlin.Int value='10'
+        CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'changer: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+        RETURN type=kotlin.Nothing from='testPrimitives(): Boolean'
+          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'a: Int' type=kotlin.Int operator=null
+            arg1: CONST Int type=kotlin.Int value='10'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: CALL 'testKt1572(): Boolean' type=kotlin.Boolean operator=null
+              then: CALL 'testPrimitives(): Boolean' type=kotlin.Boolean operator=null
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

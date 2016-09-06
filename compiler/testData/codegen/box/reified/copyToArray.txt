@@ -1,0 +1,43 @@
+MODULE <test-module>
+  FILE /copyToArray.kt
+    FUN public inline fun <reified T> copy(c: kotlin.collections.Collection<T>): kotlin.Array<T>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='copy(Collection<T>): Array<T>'
+          CALL 'toTypedArray() on Collection<T>: Array<T>' type=kotlin.Array<T> operator=null
+            $receiver: GET_VAR 'value-parameter c: Collection<T>' type=kotlin.collections.Collection<T> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: kotlin.Array<kotlin.String>
+          CALL 'copy(Collection<String>): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            c: CALL 'listOf(vararg String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              elements: VARARG type=Array<out String> varargElementType=String
+                CONST String type=kotlin.String value='a'
+                CONST String type=kotlin.String value='b'
+                CONST String type=kotlin.String value='c'
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='abc'
+          actual: CALL 'joinToString(CharSequence = ..., CharSequence = ..., CharSequence = ..., Int = ..., CharSequence = ..., ((String) -> CharSequence)? = ...) on Array<out String>: String' type=kotlin.String operator=null
+            $receiver: GET_VAR 'a: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            separator: CONST String type=kotlin.String value=''
+        VAR val b: kotlin.Array<kotlin.Int>
+          CALL 'copy(Collection<Int>): Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+            c: CALL 'listOf(vararg Int): List<Int>' type=kotlin.collections.List<kotlin.Int> operator=null
+              elements: VARARG type=Array<out Int> varargElementType=Int
+                CONST Int type=kotlin.Int value='1'
+                CONST Int type=kotlin.Int value='2'
+                CONST Int type=kotlin.Int value='3'
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='123'
+          actual: CALL 'joinToString(CharSequence = ..., CharSequence = ..., CharSequence = ..., Int = ..., CharSequence = ..., ((String) -> CharSequence)? = ...) on Iterable<String>: String' type=kotlin.String operator=null
+            $receiver: CALL 'map((Int) -> String) on Array<out Int>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              $receiver: GET_VAR 'b: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+              transform: BLOCK type=(kotlin.Int) -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.Int): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(Int): String'
+                      CALL 'toString(): String' type=kotlin.String operator=null
+                        $this: GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                CALLABLE_REFERENCE '<anonymous>(Int): String' type=(kotlin.Int) -> kotlin.String operator=LAMBDA
+            separator: CONST String type=kotlin.String value=''
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

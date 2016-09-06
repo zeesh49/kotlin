@@ -1,0 +1,93 @@
+MODULE <test-module>
+  FILE /kt245.kt
+    FUN public fun foo(): kotlin.Unit
+      BLOCK_BODY
+        VAR val l: java.util.ArrayList<kotlin.Int>
+          CALL 'constructor ArrayList(Int)' type=java.util.ArrayList<kotlin.Int> operator=null
+            p0: CONST Int type=kotlin.Int value='2'
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'l: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='1'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.MutableIterator<kotlin.Int>
+            CALL 'iterator(): MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'l: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val el: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+              BLOCK type=kotlin.Unit operator=null
+        VAR val iterator: kotlin.collections.MutableIterator<kotlin.Int>
+          CALL 'iterator(): MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+            $this: GET_VAR 'l: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+        WHILE label=null operator=WHILE_LOOP
+          condition: BLOCK type=kotlin.Boolean operator=ELVIS
+            VAR val tmp2_elvis_lhs: kotlin.Boolean?
+              BLOCK type=kotlin.Boolean? operator=SAFE_CALL
+                VAR val tmp1_safe_receiver: kotlin.collections.MutableIterator<kotlin.Int>
+                  GET_VAR 'iterator: MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+                WHEN type=kotlin.Boolean? operator=SAFE_CALL
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp1_safe_receiver: MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CONST Null type=kotlin.Nothing? value='null'
+                  else: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=null
+                    $this: GET_VAR 'tmp1_safe_receiver: MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+            WHEN type=kotlin.Boolean operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp2_elvis_lhs: Boolean?' type=kotlin.Boolean? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CONST Boolean type=kotlin.Boolean value='false'
+              else: GET_VAR 'tmp2_elvis_lhs: Boolean?' type=kotlin.Boolean? operator=null
+          body: BLOCK type=kotlin.Unit operator=null
+            VAR val i: kotlin.Int
+              BLOCK type=kotlin.Int? operator=SAFE_CALL
+                VAR val tmp3_safe_receiver: kotlin.collections.MutableIterator<kotlin.Int>
+                  GET_VAR 'iterator: MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+                WHEN type=kotlin.Int? operator=SAFE_CALL
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp3_safe_receiver: MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CONST Null type=kotlin.Nothing? value='null'
+                  else: CALL 'next(): Int' type=kotlin.Int operator=null
+                    $this: GET_VAR 'tmp3_safe_receiver: MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'iterator: MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: BLOCK type=kotlin.Unit operator=null
+            WHILE label=null operator=WHILE_LOOP
+              condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=null
+                $this: GET_VAR 'iterator: MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+              body: BLOCK type=kotlin.Unit operator=null
+                VAR val i: kotlin.Int
+                  BLOCK type=kotlin.Int? operator=SAFE_CALL
+                    VAR val tmp4_safe_receiver: kotlin.collections.MutableIterator<kotlin.Int>
+                      GET_VAR 'iterator: MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+                    WHEN type=kotlin.Int? operator=SAFE_CALL
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'tmp4_safe_receiver: MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+                        arg1: CONST Null type=kotlin.Nothing? value='null'
+                      then: CONST Null type=kotlin.Nothing? value='null'
+                      else: CALL 'next(): Int' type=kotlin.Int operator=null
+                        $this: GET_VAR 'tmp4_safe_receiver: MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'iterator: MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: BLOCK type=kotlin.Unit operator=null
+            WHILE label=null operator=WHILE_LOOP
+              condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=null
+                $this: GET_VAR 'iterator: MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+              body: BLOCK type=kotlin.Int operator=null
+                CALL 'next(): Int' type=kotlin.Int operator=null
+                  $this: GET_VAR 'iterator: MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

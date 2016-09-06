@@ -1,0 +1,80 @@
+MODULE <test-module>
+  FILE /innerGenericArguments.kt
+    CLASS CLASS Outer
+      CONSTRUCTOR public constructor Outer<A, B>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner<C, D>()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+        CLASS CLASS Innermost
+          CONSTRUCTOR public constructor Innermost<E, F>()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='Innermost'
+    FUN public fun foo(): Outer<kotlin.Int, kotlin.Number>.Inner<kotlin.String, kotlin.Float>.Innermost<kotlin.Any, kotlin.Any?>
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val types: kotlin.collections.List<kotlin.reflect.KType>
+          CALL 'map((KTypeProjection) -> KType) on Iterable<KTypeProjection>: List<KType>' type=kotlin.collections.List<kotlin.reflect.KType> operator=null
+            $receiver: CALL '<get-arguments>(): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=GET_PROPERTY
+              $this: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                $this: CALLABLE_REFERENCE 'foo(): Outer<Int, Number>.Inner<String, Float>.Innermost<Any, Any?>' type=kotlin.reflect.KFunction0<Outer<kotlin.Int, kotlin.Number>.Inner<kotlin.String, kotlin.Float>.Innermost<kotlin.Any, kotlin.Any?>> operator=null
+            transform: BLOCK type=(kotlin.reflect.KTypeProjection) -> kotlin.reflect.KType operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KTypeProjection): kotlin.reflect.KType
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KTypeProjection): KType'
+                    BLOCK type=kotlin.reflect.KType operator=EXCLEXCL
+                      VAR val tmp0_notnull: kotlin.reflect.KType?
+                        CALL '<get-type>(): KType?' type=kotlin.reflect.KType? operator=GET_PROPERTY
+                          $this: GET_VAR 'value-parameter it: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+                      WHEN type=kotlin.reflect.KType operator=null
+                        if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: GET_VAR 'tmp0_notnull: KType?' type=kotlin.reflect.KType? operator=null
+                          arg1: CONST Null type=kotlin.Nothing? value='null'
+                        then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                        else: GET_VAR 'tmp0_notnull: KType?' type=kotlin.reflect.KType? operator=null
+              CALLABLE_REFERENCE '<anonymous>(KTypeProjection): KType' type=(kotlin.reflect.KTypeProjection) -> kotlin.reflect.KType operator=LAMBDA
+        CALL 'assertEquals(List<KClassifier?>, List<KClassifier?>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(vararg KClass<out Any>): List<KClass<out Any>>' type=kotlin.collections.List<kotlin.reflect.KClass<out kotlin.Any>> operator=null
+            elements: VARARG type=Array<out KClass<out Any>> varargElementType=KClass<out Any>
+              CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+              CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+              CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+              CLASS_REFERENCE 'Float' type=kotlin.reflect.KClass<kotlin.Float>
+              CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+              CLASS_REFERENCE 'Number' type=kotlin.reflect.KClass<kotlin.Number>
+          actual: CALL 'map((KType) -> KClassifier?) on Iterable<KType>: List<KClassifier?>' type=kotlin.collections.List<kotlin.reflect.KClassifier?> operator=null
+            $receiver: GET_VAR 'types: List<KType>' type=kotlin.collections.List<kotlin.reflect.KType> operator=null
+            transform: BLOCK type=(kotlin.reflect.KType) -> kotlin.reflect.KClassifier? operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KType): kotlin.reflect.KClassifier?
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KType): KClassifier?'
+                    CALL '<get-classifier>(): KClassifier?' type=kotlin.reflect.KClassifier? operator=GET_PROPERTY
+                      $this: GET_VAR 'value-parameter it: KType' type=kotlin.reflect.KType operator=null
+              CALLABLE_REFERENCE '<anonymous>(KType): KClassifier?' type=(kotlin.reflect.KType) -> kotlin.reflect.KClassifier? operator=LAMBDA
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isMarkedNullable>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALL 'get(Int): KType' type=kotlin.reflect.KType operator=GET_ARRAY_ELEMENT
+              $this: GET_VAR 'types: List<KType>' type=kotlin.collections.List<kotlin.reflect.KType> operator=null
+              index: CONST Int type=kotlin.Int value='0'
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isMarkedNullable>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALL 'get(Int): KType' type=kotlin.reflect.KType operator=GET_ARRAY_ELEMENT
+              $this: GET_VAR 'types: List<KType>' type=kotlin.collections.List<kotlin.reflect.KType> operator=null
+              index: CONST Int type=kotlin.Int value='1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

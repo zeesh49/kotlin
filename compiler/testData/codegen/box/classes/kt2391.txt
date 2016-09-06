@@ -1,0 +1,41 @@
+MODULE <test-module>
+  FILE /kt2391.kt
+    CLASS INTERFACE LoggerAware
+      PROPERTY public abstract val logger: java.lang.StringBuilder
+    CLASS CLASS HttpServer
+      CONSTRUCTOR public constructor HttpServer()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='HttpServer'
+      FUN public final fun start(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'append(String!): StringBuilder!' type=java.lang.StringBuilder! operator=null
+            $this: CALL '<get-logger>(): StringBuilder' type=java.lang.StringBuilder operator=GET_PROPERTY
+              $this: THIS of 'HttpServer' type=HttpServer
+            p0: CONST String type=kotlin.String value='OK'
+    CLASS CLASS MyHttpServer
+      CONSTRUCTOR public constructor MyHttpServer()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor HttpServer()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyHttpServer'
+      PROPERTY public open override val logger: java.lang.StringBuilder
+        EXPRESSION_BODY
+          CALL 'constructor StringBuilder()' type=java.lang.StringBuilder operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val server: MyHttpServer
+          CALL 'constructor MyHttpServer()' type=MyHttpServer operator=null
+        CALL 'start(): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'server: MyHttpServer' type=MyHttpServer operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          BLOCK type=kotlin.String operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.String
+              CALL 'toString(): String' type=kotlin.String operator=null
+                $this: CALL '<get-logger>(): StringBuilder' type=java.lang.StringBuilder operator=GET_PROPERTY
+                  $this: GET_VAR 'server: MyHttpServer' type=MyHttpServer operator=null
+            WHEN type=kotlin.String operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: String' type=kotlin.String operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: String' type=kotlin.String operator=null

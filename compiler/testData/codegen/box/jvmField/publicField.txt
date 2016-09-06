@@ -1,0 +1,64 @@
+MODULE <test-module>
+  FILE /publicField.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY @kotlin.jvm.JvmField public final val field: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+      CLASS OBJECT companion object of A
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of A'
+        PROPERTY @kotlin.jvm.JvmField public final val cfield: kotlin.String = "OK"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='OK'
+    CLASS OBJECT Object
+      CONSTRUCTOR private constructor Object()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Object'
+      PROPERTY @kotlin.jvm.JvmField public final val field: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.String
+          CALL '<get-field>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor A()' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              GET_VAR 'result: String' type=kotlin.String operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-cfield>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_OBJECT 'companion object of A' type=A.Companion
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 2: '
+              CALL '<get-cfield>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_OBJECT 'companion object of A' type=A.Companion
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-field>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_OBJECT 'Object' type=Object
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 3: '
+              CALL '<get-field>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_OBJECT 'Object' type=Object
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

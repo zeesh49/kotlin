@@ -1,0 +1,40 @@
+MODULE <test-module>
+  FILE /privateToThis.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<in I>(init_o: I, init_k: I)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'init_k: I' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A<I>
+            value: GET_VAR 'value-parameter init_k: I' type=I operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY private/*private to this*/ final val init_k: I
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter init_k: I' type=I operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY private/*private to this*/ final val o: I
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter init_o: I' type=I operator=null
+      FUN private/*private to this*/ final fun k(): I
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='k(): I'
+            CALL '<get-init_k>(): I' type=I operator=GET_PROPERTY
+              $this: THIS of 'A' type=A<I>
+      FUN public final fun getOk(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getOk(): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                $receiver: CALL '<get-o>(): I' type=I operator=GET_PROPERTY
+                  $this: THIS of 'A' type=A<I>
+              other: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                $receiver: CALL 'k(): I' type=I operator=null
+                  $this: THIS of 'A' type=A<I>
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A<kotlin.String>
+          CALL 'constructor A(String, String)' type=A<kotlin.String> operator=null
+            init_o: CONST String type=kotlin.String value='O'
+            init_k: CONST String type=kotlin.String value='K'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'getOk(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'a: A<String>' type=A<kotlin.String> operator=null

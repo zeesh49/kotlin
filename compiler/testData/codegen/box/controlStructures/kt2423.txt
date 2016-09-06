@@ -1,0 +1,142 @@
+MODULE <test-module>
+  FILE /kt2423.kt
+    FUN public fun ok1(): kotlin.Boolean
+      BLOCK_BODY
+        VAR val queue: java.util.LinkedList<kotlin.Int!>
+          CALL 'constructor LinkedList((MutableCollection<out Int!>..Collection<Int!>?))' type=java.util.LinkedList<kotlin.Int!> operator=null
+            p0: CALL 'listOf(vararg Int): List<Int>' type=kotlin.collections.List<kotlin.Int> operator=null
+              elements: VARARG type=Array<out Int> varargElementType=Int
+                CONST Int type=kotlin.Int value='1'
+                CONST Int type=kotlin.Int value='2'
+                CONST Int type=kotlin.Int value='3'
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR 'queue: LinkedList<Int!>' type=java.util.LinkedList<kotlin.Int!> operator=null
+          body: BLOCK type=kotlin.Unit operator=null
+            CALL 'poll(): Int!' type=kotlin.Int! operator=null
+              $this: GET_VAR 'queue: LinkedList<Int!>' type=java.util.LinkedList<kotlin.Int!> operator=null
+            BLOCK type=kotlin.Unit operator=FOR_LOOP
+              VAR val tmp0_iterator: kotlin.collections.IntIterator
+                CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+                  $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                    $this: CONST Int type=kotlin.Int value='1'
+                    other: CONST Int type=kotlin.Int value='3'
+              WHILE label=null operator=FOR_LOOP_INNER_WHILE
+                condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+                body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+                  VAR val y: kotlin.Int
+                    CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                      $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+                  BLOCK type=kotlin.Unit operator=null
+                    WHEN type=kotlin.Unit operator=IF
+                      if: CALL 'contains(Int!): Boolean' type=kotlin.Boolean operator=null
+                        $this: GET_VAR 'queue: LinkedList<Int!>' type=java.util.LinkedList<kotlin.Int!> operator=null
+                        element: GET_VAR 'y: Int' type=kotlin.Int operator=null
+                      then: BLOCK type=kotlin.Nothing operator=null
+                        RETURN type=kotlin.Nothing from='ok1(): Boolean'
+                          CONST Boolean type=kotlin.Boolean value='true'
+        RETURN type=kotlin.Nothing from='ok1(): Boolean'
+          CONST Boolean type=kotlin.Boolean value='false'
+    FUN public fun ok2(): kotlin.Boolean
+      BLOCK_BODY
+        VAR val queue: java.util.LinkedList<kotlin.Int!>
+          CALL 'constructor LinkedList((MutableCollection<out Int!>..Collection<Int!>?))' type=java.util.LinkedList<kotlin.Int!> operator=null
+            p0: CALL 'listOf(vararg Int): List<Int>' type=kotlin.collections.List<kotlin.Int> operator=null
+              elements: VARARG type=Array<out Int> varargElementType=Int
+                CONST Int type=kotlin.Int value='1'
+                CONST Int type=kotlin.Int value='2'
+                CONST Int type=kotlin.Int value='3'
+        VAR val array: kotlin.Array<kotlin.Int>
+          CALL 'arrayOf(vararg Int): Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+            elements: VARARG type=Array<out Int> varargElementType=Int
+              CONST Int type=kotlin.Int value='1'
+              CONST Int type=kotlin.Int value='2'
+              CONST Int type=kotlin.Int value='3'
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR 'queue: LinkedList<Int!>' type=java.util.LinkedList<kotlin.Int!> operator=null
+          body: BLOCK type=kotlin.Unit operator=null
+            CALL 'poll(): Int!' type=kotlin.Int! operator=null
+              $this: GET_VAR 'queue: LinkedList<Int!>' type=java.util.LinkedList<kotlin.Int!> operator=null
+            BLOCK type=kotlin.Unit operator=FOR_LOOP
+              VAR val tmp0_iterator: kotlin.collections.Iterator<kotlin.Int>
+                CALL 'iterator(): Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=FOR_LOOP_ITERATOR
+                  $this: GET_VAR 'array: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+              WHILE label=null operator=FOR_LOOP_INNER_WHILE
+                condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+                body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+                  VAR val y: kotlin.Int
+                    CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                      $this: GET_VAR 'tmp0_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+                  BLOCK type=kotlin.Unit operator=null
+                    WHEN type=kotlin.Unit operator=IF
+                      if: CALL 'contains(Int!): Boolean' type=kotlin.Boolean operator=null
+                        $this: GET_VAR 'queue: LinkedList<Int!>' type=java.util.LinkedList<kotlin.Int!> operator=null
+                        element: GET_VAR 'y: Int' type=kotlin.Int operator=null
+                      then: BLOCK type=kotlin.Nothing operator=null
+                        RETURN type=kotlin.Nothing from='ok2(): Boolean'
+                          CONST Boolean type=kotlin.Boolean value='true'
+        RETURN type=kotlin.Nothing from='ok2(): Boolean'
+          CONST Boolean type=kotlin.Boolean value='false'
+    FUN public fun ok3(): kotlin.Boolean
+      BLOCK_BODY
+        VAR val queue: java.util.LinkedList<kotlin.Int!>
+          CALL 'constructor LinkedList((MutableCollection<out Int!>..Collection<Int!>?))' type=java.util.LinkedList<kotlin.Int!> operator=null
+            p0: CALL 'listOf(vararg Int): List<Int>' type=kotlin.collections.List<kotlin.Int> operator=null
+              elements: VARARG type=Array<out Int> varargElementType=Int
+                CONST Int type=kotlin.Int value='1'
+                CONST Int type=kotlin.Int value='2'
+                CONST Int type=kotlin.Int value='3'
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR 'queue: LinkedList<Int!>' type=java.util.LinkedList<kotlin.Int!> operator=null
+          body: BLOCK type=kotlin.Unit operator=null
+            CALL 'poll(): Int!' type=kotlin.Int! operator=null
+              $this: GET_VAR 'queue: LinkedList<Int!>' type=java.util.LinkedList<kotlin.Int!> operator=null
+            VAR var x: kotlin.Int
+              CONST Int type=kotlin.Int value='0'
+            DO_WHILE label=null operator=DO_WHILE_LOOP
+              body: BLOCK type=kotlin.Unit operator=null
+                BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                  VAR val tmp0: kotlin.Int
+                    GET_VAR 'x: Int' type=kotlin.Int operator=POSTFIX_INCR
+                  SET_VAR 'x: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                    CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'x: Int' type=kotlin.Int operator=null
+                    arg1: CONST Int type=kotlin.Int value='2'
+                  then: RETURN type=kotlin.Nothing from='ok3(): Boolean'
+                    CONST Boolean type=kotlin.Boolean value='true'
+              condition: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+                arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+                  $this: GET_VAR 'x: Int' type=kotlin.Int operator=null
+                  other: CONST Int type=kotlin.Int value='2'
+        RETURN type=kotlin.Nothing from='ok3(): Boolean'
+          CONST Boolean type=kotlin.Boolean value='false'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'ok1(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail #1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'ok2(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail #2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'ok3(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail #3'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,54 @@
+MODULE <test-module>
+  FILE /kt10729.kt
+    CLASS CLASS IntentionsBundle
+      CONSTRUCTOR public constructor IntentionsBundle()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='IntentionsBundle'
+      CLASS OBJECT companion object of IntentionsBundle
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of IntentionsBundle'
+        FUN public final fun message(key: kotlin.String): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='message(String): String'
+              CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: GET_VAR 'value-parameter key: String' type=kotlin.String operator=null
+                other: CALL '<get-BUNDLE>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: THIS of 'companion object of IntentionsBundle' type=IntentionsBundle.Companion
+        FUN public final fun message2(key: kotlin.String): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='message2(String): String'
+              CALL 'invoke(): String' type=kotlin.String operator=null
+                $this: BLOCK type=() -> kotlin.String operator=LAMBDA
+                  FUN local final fun <anonymous>(): kotlin.String
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                        CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                          $this: GET_VAR 'value-parameter key: String' type=kotlin.String operator=null
+                          other: CALL '<get-BUNDLE>(): String' type=kotlin.String operator=GET_PROPERTY
+                            $this: THIS of 'companion object of IntentionsBundle' type=IntentionsBundle.Companion
+                  CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        PROPERTY private const final val BUNDLE: kotlin.String = "K"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='K'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'message(String): String' type=kotlin.String operator=null
+                $this: GET_OBJECT 'companion object of IntentionsBundle' type=IntentionsBundle.Companion
+                key: CONST String type=kotlin.String value='O'
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              CALL 'message(String): String' type=kotlin.String operator=null
+                $this: GET_OBJECT 'companion object of IntentionsBundle' type=IntentionsBundle.Companion
+                key: CONST String type=kotlin.String value='O'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'message2(String): String' type=kotlin.String operator=null
+            $this: GET_OBJECT 'companion object of IntentionsBundle' type=IntentionsBundle.Companion
+            key: CONST String type=kotlin.String value='O'

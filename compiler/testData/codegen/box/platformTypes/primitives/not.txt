@@ -1,0 +1,23 @@
+MODULE <test-module>
+  FILE /not.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val l: java.util.ArrayList<kotlin.Boolean>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.Boolean> operator=null
+        CALL 'add(Boolean): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'l: ArrayList<Boolean>' type=java.util.ArrayList<kotlin.Boolean> operator=null
+          element: CONST Boolean type=kotlin.Boolean value='true'
+        VAR val x: kotlin.Boolean
+          CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'get(Int): Boolean' type=kotlin.Boolean operator=GET_ARRAY_ELEMENT
+              $this: GET_VAR 'l: ArrayList<Boolean>' type=java.util.ArrayList<kotlin.Boolean> operator=null
+              index: CONST Int type=kotlin.Int value='0'
+        WHEN type=kotlin.Unit operator=IF
+          if: GET_VAR 'x: Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'x: Boolean' type=kotlin.Boolean operator=null
+              CONST String type=kotlin.String value='}'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

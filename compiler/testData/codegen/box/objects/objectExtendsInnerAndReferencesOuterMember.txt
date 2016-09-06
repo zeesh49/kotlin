@@ -1,0 +1,39 @@
+MODULE <test-module>
+  FILE /objectExtendsInnerAndReferencesOuterMember.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val x: kotlin.Any
+        PROPERTY_GETTER public final fun <get-x>(): kotlin.Any
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-x>(): Any'
+              BLOCK type=A.<get-x>.<no name provided> operator=OBJECT_LITERAL
+                CLASS CLASS <no name provided>
+                  CONSTRUCTOR public constructor <no name provided>()
+                    BLOCK_BODY
+                      DELEGATING_CONSTRUCTOR_CALL 'constructor Inner()'
+                        $this: THIS of 'A' type=A
+                      INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                  FUN public open override fun toString(): kotlin.String
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='toString(): String'
+                        CALL 'foo(): String' type=kotlin.String operator=null
+                          $this: THIS of 'A' type=A
+                CALL 'constructor <no name provided>()' type=A.<get-x>.<no name provided> operator=OBJECT_LITERAL
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+      FUN public final fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL '<get-x>(): Any' type=kotlin.Any operator=GET_PROPERTY
+              $this: CALL 'constructor A()' type=A operator=null

@@ -1,0 +1,27 @@
+MODULE <test-module>
+  FILE /longValue.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var obj: java.lang.Object
+          TYPE_OP operator=CAST typeOperand=java.lang.Object
+            CONST String type=kotlin.String value='0'
+        VAR val result: kotlin.Long
+          CALL 'synchronized(Any, () -> Long): Long' type=kotlin.Long operator=null
+            lock: GET_VAR 'obj: Object' type=java.lang.Object operator=null
+            block: BLOCK type=() -> kotlin.Long operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Long
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Long'
+                    CONST Long type=kotlin.Long value='239'
+              CALLABLE_REFERENCE '<anonymous>(): Long' type=() -> kotlin.Long operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Long' type=kotlin.Long operator=null
+              arg1: CONST Long type=kotlin.Long value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'result: Long' type=kotlin.Long operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

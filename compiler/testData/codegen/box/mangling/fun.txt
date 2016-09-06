@@ -1,0 +1,60 @@
+MODULE <test-module>
+  FILE /fun.kt
+    FUN internal fun noMangling(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='noMangling(): Int'
+          CONST Int type=kotlin.Int value='1'
+    CLASS CLASS Z
+      CONSTRUCTOR public constructor Z()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Z'
+      FUN internal final fun mangled(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='mangled(): Int'
+            CONST Int type=kotlin.Int value='1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val clazz: java.lang.Class<test.Z>
+          CALL '<get-java>() on KClass<Z>: Class<Z>' type=java.lang.Class<test.Z> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Z' type=kotlin.reflect.KClass<test.Z>
+        VAR val declaredMethods: kotlin.Array<(out) java.lang.reflect.Method!>!
+          CALL '<get-declaredMethods>() on Class<Z>: Array<(out) Method!>!' type=kotlin.Array<(out) java.lang.reflect.Method!>! operator=GET_PROPERTY
+            $receiver: GET_VAR 'clazz: Class<Z>' type=java.lang.Class<test.Z> operator=null
+        VAR val mangled: java.lang.reflect.Method?
+          CALL 'firstOrNull((Method!) -> Boolean) on Array<out Method!>: Method?' type=java.lang.reflect.Method? operator=null
+            $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Method!>
+              GET_VAR 'declaredMethods: Array<(out) Method!>!' type=kotlin.Array<(out) java.lang.reflect.Method!>! operator=null
+            predicate: BLOCK type=(java.lang.reflect.Method!) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(it: java.lang.reflect.Method!): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Method!): Boolean'
+                    CALL 'startsWith(String, Boolean = ...) on String: Boolean' type=kotlin.Boolean operator=null
+                      $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+                        CALL '<get-name>() on Method: String!' type=kotlin.String! operator=GET_PROPERTY
+                          $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                            GET_VAR 'value-parameter it: Method!' type=java.lang.reflect.Method! operator=null
+                      prefix: STRING_CONCATENATION type=kotlin.String
+                        CONST String type=kotlin.String value='mangled'
+                        CONST String type=kotlin.String value='$'
+              CALLABLE_REFERENCE '<anonymous>(Method!): Boolean' type=(java.lang.reflect.Method!) -> kotlin.Boolean operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'mangled: Method?' type=java.lang.reflect.Method? operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Class internal function should exist'
+        VAR val topLevel: java.lang.reflect.Method!
+          CALL 'getMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+              CALL 'forName(String!): Class<*>!' type=java.lang.Class<*>! operator=null
+                p0: CONST String type=kotlin.String value='test.FunKt'
+            p0: CONST String type=kotlin.String value='noMangling'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'topLevel: Method!' type=java.lang.reflect.Method! operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Top level internal function should exist'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

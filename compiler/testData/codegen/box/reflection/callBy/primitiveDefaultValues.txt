@@ -1,0 +1,55 @@
+MODULE <test-module>
+  FILE /primitiveDefaultValues.kt
+    FUN public fun primitives(boolean: kotlin.Boolean = ..., character: kotlin.Char = ..., byte: kotlin.Byte = ..., short: kotlin.Short = ..., int: kotlin.Int = ..., float: kotlin.Float = ..., long: kotlin.Long = ..., double: kotlin.Double = ...): kotlin.Unit
+      boolean: EXPRESSION_BODY
+        CONST Boolean type=kotlin.Boolean value='true'
+      character: EXPRESSION_BODY
+        CONST Char type=kotlin.Char value='z'
+      byte: EXPRESSION_BODY
+        CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+          $this: CONST Int type=kotlin.Int value='5'
+      short: EXPRESSION_BODY
+        CALL 'toShort(): Short' type=kotlin.Short operator=null
+          $this: CONST Int type=kotlin.Int value='-5'
+      int: EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='2000000000'
+      float: EXPRESSION_BODY
+        CONST Float type=kotlin.Float value='-2.72'
+      long: EXPRESSION_BODY
+        CONST Long type=kotlin.Long value='1000000000000000000'
+      double: EXPRESSION_BODY
+        CONST Double type=kotlin.Double value='3.14159265359'
+      BLOCK_BODY
+        CALL 'assertEquals(Boolean, Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Boolean type=kotlin.Boolean value='true'
+          actual: GET_VAR 'value-parameter boolean: Boolean = ...' type=kotlin.Boolean operator=null
+        CALL 'assertEquals(Char, Char, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Char type=kotlin.Char value='z'
+          actual: GET_VAR 'value-parameter character: Char = ...' type=kotlin.Char operator=null
+        CALL 'assertEquals(Byte, Byte, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+            $this: CONST Int type=kotlin.Int value='5'
+          actual: GET_VAR 'value-parameter byte: Byte = ...' type=kotlin.Byte operator=null
+        CALL 'assertEquals(Short, Short, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'toShort(): Short' type=kotlin.Short operator=null
+            $this: CONST Int type=kotlin.Int value='-5'
+          actual: GET_VAR 'value-parameter short: Short = ...' type=kotlin.Short operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='2000000000'
+          actual: GET_VAR 'value-parameter int: Int = ...' type=kotlin.Int operator=null
+        CALL 'assertEquals(Float, Float, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Float type=kotlin.Float value='-2.72'
+          actual: GET_VAR 'value-parameter float: Float = ...' type=kotlin.Float operator=null
+        CALL 'assertEquals(Long, Long, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Long type=kotlin.Long value='1000000000000000000'
+          actual: GET_VAR 'value-parameter long: Long = ...' type=kotlin.Long operator=null
+        CALL 'assertEquals(Double, Double, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Double type=kotlin.Double value='3.14159265359'
+          actual: GET_VAR 'value-parameter double: Double = ...' type=kotlin.Double operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'callBy(Map<KParameter, Any?>): Unit' type=kotlin.Unit operator=null
+          $this: CALLABLE_REFERENCE 'primitives(Boolean = ..., Char = ..., Byte = ..., Short = ..., Int = ..., Float = ..., Long = ..., Double = ...): Unit' type=kotlin.reflect.KFunction8<kotlin.Boolean, kotlin.Char, kotlin.Byte, kotlin.Short, kotlin.Int, kotlin.Float, kotlin.Long, kotlin.Double, kotlin.Unit> operator=null
+          args: CALL 'emptyMap(): Map<KParameter, Any?>' type=kotlin.collections.Map<kotlin.reflect.KParameter, kotlin.Any?> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

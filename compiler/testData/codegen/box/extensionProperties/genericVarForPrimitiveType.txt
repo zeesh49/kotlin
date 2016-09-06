@@ -1,0 +1,151 @@
+MODULE <test-module>
+  FILE /genericVarForPrimitiveType.kt
+    PROPERTY public var <T> T.varProp: T
+      PROPERTY_GETTER public fun T.<get-varProp>(): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-varProp>() on T: T'
+            $RECEIVER of 'varProp: T on T' type=T
+      PROPERTY_SETTER public fun T.<set-varProp>(value: T): kotlin.Unit
+        BLOCK_BODY
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var int: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+      PROPERTY public final var long: kotlin.Long
+        EXPRESSION_BODY
+          CALL 'toLong(): Long' type=kotlin.Long operator=null
+            $this: CONST Int type=kotlin.Int value='0'
+      PROPERTY public final var short: kotlin.Short
+        EXPRESSION_BODY
+          CALL 'toShort(): Short' type=kotlin.Short operator=null
+            $this: CONST Int type=kotlin.Int value='0'
+      PROPERTY public final var byte: kotlin.Byte
+        EXPRESSION_BODY
+          CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+            $this: CONST Int type=kotlin.Int value='0'
+      PROPERTY public final var double: kotlin.Double
+        EXPRESSION_BODY
+          CONST Double type=kotlin.Double value='0.0'
+      PROPERTY public final var float: kotlin.Float
+        EXPRESSION_BODY
+          CONST Float type=kotlin.Float value='0.0'
+      PROPERTY public final var char: kotlin.Char
+        EXPRESSION_BODY
+          CONST Char type=kotlin.Char value='0'
+      PROPERTY public final var bool: kotlin.Boolean
+        EXPRESSION_BODY
+          CONST Boolean type=kotlin.Boolean value='false'
+      FUN public final operator fun invoke(): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-varProp>(T) on T: Unit' type=kotlin.Unit operator=EQ
+            $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+              CALL '<get-int>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+            value: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+              CALL '<get-int>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+          CALL '<set-varProp>(T) on T: Unit' type=kotlin.Unit operator=EQ
+            $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+              CALL '<get-long>(): Long' type=kotlin.Long operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+            value: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+              CALL '<get-long>(): Long' type=kotlin.Long operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+          CALL '<set-varProp>(T) on T: Unit' type=kotlin.Unit operator=EQ
+            $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+              CALL '<get-short>(): Short' type=kotlin.Short operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+            value: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+              CALL '<get-short>(): Short' type=kotlin.Short operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+          CALL '<set-varProp>(T) on T: Unit' type=kotlin.Unit operator=EQ
+            $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+              CALL '<get-byte>(): Byte' type=kotlin.Byte operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+            value: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+              CALL '<get-byte>(): Byte' type=kotlin.Byte operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+          CALL '<set-varProp>(T) on T: Unit' type=kotlin.Unit operator=EQ
+            $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+              CALL '<get-double>(): Double' type=kotlin.Double operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+            value: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+              CALL '<get-double>(): Double' type=kotlin.Double operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+          CALL '<set-varProp>(T) on T: Unit' type=kotlin.Unit operator=EQ
+            $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+              CALL '<get-float>(): Float' type=kotlin.Float operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+            value: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+              CALL '<get-float>(): Float' type=kotlin.Float operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+          CALL '<set-varProp>(T) on T: Unit' type=kotlin.Unit operator=EQ
+            $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+              CALL '<get-char>(): Char' type=kotlin.Char operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+            value: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+              CALL '<get-char>(): Char' type=kotlin.Char operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+          CALL '<set-varProp>(T) on T: Unit' type=kotlin.Unit operator=EQ
+            $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+              CALL '<get-bool>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+            value: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+              CALL '<get-bool>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL '<set-varProp>(T) on T: Unit' type=kotlin.Unit operator=EQ
+          $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+            CONST Int type=kotlin.Int value='0'
+          value: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+            CONST Int type=kotlin.Int value='0'
+        CALL '<set-varProp>(T) on T: Unit' type=kotlin.Unit operator=EQ
+          $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+            CONST Boolean type=kotlin.Boolean value='false'
+          value: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+            CONST Boolean type=kotlin.Boolean value='false'
+        CALL '<set-varProp>(T) on T: Unit' type=kotlin.Unit operator=EQ
+          $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+            CONST Char type=kotlin.Char value='0'
+          value: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+            CONST Char type=kotlin.Char value='0'
+        CALL '<set-varProp>(T) on T: Unit' type=kotlin.Unit operator=EQ
+          $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+            CONST Double type=kotlin.Double value='0.0'
+          value: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+            CONST Double type=kotlin.Double value='0.0'
+        CALL '<set-varProp>(T) on T: Unit' type=kotlin.Unit operator=EQ
+          $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+            CONST Float type=kotlin.Float value='0.0'
+          value: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+            CONST Float type=kotlin.Float value='0.0'
+        CALL '<set-varProp>(T) on T: Unit' type=kotlin.Unit operator=EQ
+          $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+            CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+              $this: CONST Int type=kotlin.Int value='0'
+          value: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+            CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+              $this: CONST Int type=kotlin.Int value='0'
+        CALL '<set-varProp>(T) on T: Unit' type=kotlin.Unit operator=EQ
+          $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+            CALL 'toShort(): Short' type=kotlin.Short operator=null
+              $this: CONST Int type=kotlin.Int value='0'
+          value: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+            CALL 'toShort(): Short' type=kotlin.Short operator=null
+              $this: CONST Int type=kotlin.Int value='0'
+        CALL '<set-varProp>(T) on T: Unit' type=kotlin.Unit operator=EQ
+          $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+            CALL 'toLong(): Long' type=kotlin.Long operator=null
+              $this: CONST Int type=kotlin.Int value='0'
+          value: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+            CALL 'toLong(): Long' type=kotlin.Long operator=null
+              $this: CONST Int type=kotlin.Int value='0'
+        CALL 'invoke(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor A()' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

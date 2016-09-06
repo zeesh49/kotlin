@@ -1,0 +1,54 @@
+MODULE <test-module>
+  FILE /kt4514.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        FUN local final fun kotlin.String.f(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='f() on String: String'
+              $RECEIVER of 'f() on String: String' type=kotlin.String
+        VAR val vf: kotlin.String.() -> kotlin.String
+          BLOCK type=kotlin.String.() -> kotlin.String operator=LAMBDA
+            FUN local final fun kotlin.String.<anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>() on String: String'
+                  $RECEIVER of '<anonymous>() on String: String' type=kotlin.String
+            CALLABLE_REFERENCE '<anonymous>() on String: String' type=kotlin.String.() -> kotlin.String operator=LAMBDA
+        VAR val localExt: kotlin.String
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'f() on String: String' type=kotlin.String operator=null
+              $receiver: CONST String type=kotlin.String value='O'
+            other: BLOCK type=kotlin.String? operator=SAFE_CALL
+              VAR val tmp0_safe_receiver: kotlin.String
+                CONST String type=kotlin.String value='K'
+              WHEN type=kotlin.String? operator=SAFE_CALL
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_safe_receiver: String' type=kotlin.String operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CONST Null type=kotlin.Nothing? value='null'
+                else: CALL 'f() on String: String' type=kotlin.String operator=null
+                  $this: GET_VAR 'tmp0_safe_receiver: String' type=kotlin.String operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'localExt: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='localExt '
+              GET_VAR 'localExt: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'invoke() on String: String' type=kotlin.String operator=INVOKE
+              $this: GET_VAR 'vf: String.() -> String' type=kotlin.String.() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+              $receiver: CONST String type=kotlin.String value='O'
+            other: BLOCK type=kotlin.String? operator=SAFE_CALL
+              VAR val tmp1_safe_receiver: kotlin.String
+                CONST String type=kotlin.String value='K'
+              WHEN type=kotlin.String? operator=SAFE_CALL
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp1_safe_receiver: String' type=kotlin.String operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CONST Null type=kotlin.Nothing? value='null'
+                else: CALL 'invoke() on String: String' type=kotlin.String operator=INVOKE
+                  $this: GET_VAR 'vf: String.() -> String' type=kotlin.String.() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+                  $receiver: GET_VAR 'tmp1_safe_receiver: String' type=kotlin.String operator=null

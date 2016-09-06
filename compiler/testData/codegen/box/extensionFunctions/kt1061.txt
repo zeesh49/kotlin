@@ -1,0 +1,27 @@
+MODULE <test-module>
+  FILE /kt1061.kt
+    CLASS OBJECT X
+      CONSTRUCTOR private constructor X()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='X'
+      PROPERTY public final val doit: (kotlin.Int) -> kotlin.Int
+        EXPRESSION_BODY
+          BLOCK type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+            FUN local final fun <anonymous>(i: kotlin.Int): kotlin.Int
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(Int): Int'
+                  GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+            CALLABLE_REFERENCE '<anonymous>(Int): Int' type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'invoke(Int): Int' type=kotlin.Int operator=INVOKE
+                $this: CALL '<get-doit>(): (Int) -> Int' type=(kotlin.Int) -> kotlin.Int operator=GET_PROPERTY
+                  $this: GET_OBJECT 'X' type=X
+                p1: CONST Int type=kotlin.Int value='3'
+              arg1: CONST Int type=kotlin.Int value='3'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

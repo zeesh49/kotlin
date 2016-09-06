@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /1.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val okRef: kotlin.reflect.KProperty0<kotlin.String>
+          CALLABLE_REFERENCE 'OK: String' type=kotlin.reflect.KProperty0<kotlin.String> operator=null
+        VAR val annotations: kotlin.collections.List<kotlin.Annotation>
+          CALL '<get-annotations>(): List<Annotation>' type=kotlin.collections.List<kotlin.Annotation> operator=GET_PROPERTY
+            $this: GET_VAR 'okRef: KProperty0<String>' type=kotlin.reflect.KProperty0<kotlin.String> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'annotations: List<Annotation>' type=kotlin.collections.List<kotlin.Annotation> operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='Failed, annotations: '
+                GET_VAR 'annotations: List<Annotation>' type=kotlin.collections.List<kotlin.Annotation> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'get(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'okRef: KProperty0<String>' type=kotlin.reflect.KProperty0<kotlin.String> operator=null
+  FILE /2.kt
+    CLASS ANNOTATION_CLASS A
+    PROPERTY @a.A public const val OK: kotlin.String = "OK"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='OK'

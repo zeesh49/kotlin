@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /genericMethod.kt
+    CLASS INTERFACE A
+      PROPERTY public abstract val property: T
+      FUN public open fun a(): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='a(): T'
+            CALL '<get-property>(): T' type=T operator=GET_PROPERTY
+              $this: THIS of 'A' type=A<T>
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public open override val property: kotlin.Any = "fail"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='fail'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor B()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      PROPERTY public open override val property: kotlin.Any = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          TYPE_OP operator=CAST typeOperand=kotlin.String
+            CALL 'a(): Any' type=kotlin.Any operator=null
+              $this: CALL 'constructor C()' type=C operator=null

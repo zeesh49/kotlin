@@ -1,0 +1,67 @@
+MODULE <test-module>
+  FILE /jvmStaticExternal.kt
+    CLASS CLASS WithNative
+      CONSTRUCTOR public constructor WithNative()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='WithNative'
+      CLASS OBJECT companion object of WithNative
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of WithNative'
+        FUN @kotlin.jvm.JvmStatic public final external fun bar(l: kotlin.Long, s: kotlin.String): kotlin.Double
+    CLASS OBJECT ObjWithNative
+      CONSTRUCTOR private constructor ObjWithNative()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ObjWithNative'
+      FUN @kotlin.jvm.JvmStatic public final external fun bar(l: kotlin.Long, s: kotlin.String): kotlin.Double
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var d: kotlin.Double
+          CONST Double type=kotlin.Double value='0.0'
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            SET_VAR 'd: Double' type=kotlin.Unit operator=EQ
+              CALL 'bar(Long, String): Double' type=kotlin.Double operator=null
+                $this: GET_OBJECT 'companion object of WithNative' type=foo.WithNative.Companion
+                l: CONST Long type=kotlin.Long value='1'
+                s: CONST String type=kotlin.String value=''
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Link error expected'
+          catch e: BLOCK type=kotlin.Unit operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                    $this: GET_VAR 'e: UnsatisfiedLinkError' type=java.lang.UnsatisfiedLinkError operator=null
+                  arg1: CONST String type=kotlin.String value='foo.WithNative.bar(JLjava/lang/String;)D'
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: CONST String type=kotlin.String value='Fail 1: '
+                  other: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                    $this: GET_VAR 'e: UnsatisfiedLinkError' type=java.lang.UnsatisfiedLinkError operator=null
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            SET_VAR 'd: Double' type=kotlin.Unit operator=EQ
+              CALL 'bar(Long, String): Double' type=kotlin.Double operator=null
+                $this: GET_OBJECT 'ObjWithNative' type=foo.ObjWithNative
+                l: CONST Long type=kotlin.Long value='1'
+                s: CONST String type=kotlin.String value=''
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Link error expected on object'
+          catch e: BLOCK type=kotlin.Unit operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                    $this: GET_VAR 'e: UnsatisfiedLinkError' type=java.lang.UnsatisfiedLinkError operator=null
+                  arg1: CONST String type=kotlin.String value='foo.ObjWithNative.bar(JLjava/lang/String;)D'
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: CONST String type=kotlin.String value='Fail 2: '
+                  other: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                    $this: GET_VAR 'e: UnsatisfiedLinkError' type=java.lang.UnsatisfiedLinkError operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

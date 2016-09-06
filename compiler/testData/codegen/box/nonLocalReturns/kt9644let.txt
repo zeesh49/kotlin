@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /kt9644let.kt
+    FUN public fun foo(): kotlin.Unit
+      BLOCK_BODY
+        CALL 'with(Int, Int.() -> Nothing): Nothing' type=kotlin.Nothing operator=null
+          receiver: CONST Int type=kotlin.Int value='1'
+          block: BLOCK type=kotlin.Int.() -> kotlin.Nothing operator=LAMBDA
+            FUN local final fun kotlin.Int.<anonymous>(): kotlin.Nothing
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='foo(): Unit'
+                  CALL 'forEach((Int) -> Unit) on Iterable<Int>: Unit' type=kotlin.Unit operator=null
+                    $receiver: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                      $this: CONST Int type=kotlin.Int value='1'
+                      other: CONST Int type=kotlin.Int value='2'
+                    action: BLOCK type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+                      FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Unit
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='<anonymous>(Int): Unit'
+                            GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                      CALLABLE_REFERENCE '<anonymous>(Int): Unit' type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+            CALLABLE_REFERENCE '<anonymous>() on Int: Nothing' type=kotlin.Int.() -> kotlin.Nothing operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,48 @@
+MODULE <test-module>
+  FILE /kt508.kt
+    FUN public operator fun <K, V> kotlin.collections.MutableMap<K, V>.set(key: K, value: V): V?
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='set(K, V) on MutableMap<K, V>: V?'
+          CALL 'put(K, V): V?' type=V? operator=null
+            $this: $RECEIVER of 'set(K, V) on MutableMap<K, V>: V?' type=kotlin.collections.MutableMap<K, V>
+            key: GET_VAR 'value-parameter key: K' type=K operator=null
+            value: GET_VAR 'value-parameter value: V' type=V operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val commands: kotlin.collections.MutableMap<kotlin.String, kotlin.String>
+          CALL 'constructor HashMap()' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+        CALL 'set(String, String) on MutableMap<String, String>: String?' type=kotlin.String? operator=EQ
+          $receiver: GET_VAR 'commands: MutableMap<String, String>' type=kotlin.collections.MutableMap<kotlin.String, kotlin.String> operator=null
+          key: CONST String type=kotlin.String value='c1'
+          value: CONST String type=kotlin.String value='239'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(String): String?' type=kotlin.String? operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'commands: MutableMap<String, String>' type=kotlin.collections.MutableMap<kotlin.String, kotlin.String> operator=null
+                key: CONST String type=kotlin.String value='c1'
+              arg1: CONST String type=kotlin.String value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        BLOCK type=kotlin.Unit operator=PLUSEQ
+          VAR val tmp0_array: kotlin.collections.MutableMap<kotlin.String, kotlin.String>
+            GET_VAR 'commands: MutableMap<String, String>' type=kotlin.collections.MutableMap<kotlin.String, kotlin.String> operator=null
+          VAR val tmp1_index0: kotlin.String
+            CONST String type=kotlin.String value='c1'
+          CALL 'set(String, String) on MutableMap<String, String>: String?' type=kotlin.String? operator=PLUSEQ
+            $receiver: GET_VAR 'tmp0_array: MutableMap<String, String>' type=kotlin.collections.MutableMap<kotlin.String, kotlin.String> operator=null
+            key: GET_VAR 'tmp1_index0: String' type=kotlin.String operator=null
+            value: CALL 'plus(Any?) on String?: String' type=kotlin.String operator=PLUSEQ
+              $receiver: CALL 'get(String): String?' type=kotlin.String? operator=PLUSEQ
+                $this: GET_VAR 'tmp0_array: MutableMap<String, String>' type=kotlin.collections.MutableMap<kotlin.String, kotlin.String> operator=null
+                key: GET_VAR 'tmp1_index0: String' type=kotlin.String operator=null
+              other: CONST String type=kotlin.String value='932'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'get(String): String?' type=kotlin.String? operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'commands: MutableMap<String, String>' type=kotlin.collections.MutableMap<kotlin.String, kotlin.String> operator=null
+                key: CONST String type=kotlin.String value='c1'
+              arg1: CONST String type=kotlin.String value='239932'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

@@ -1,0 +1,330 @@
+MODULE <test-module>
+  FILE /asForConstants.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'check(Int, (Int) -> Unit): String' type=kotlin.String operator=null
+              param: CONST Int type=kotlin.Int value='1'
+              f: BLOCK type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Unit
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(Int): Unit'
+                      TYPE_OP operator=CAST typeOperand=kotlin.Int
+                        GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                CALLABLE_REFERENCE '<anonymous>(Int): Unit' type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+            arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'check(Int, (Int) -> Unit): String' type=kotlin.String operator=null
+                param: CONST Int type=kotlin.Int value='1'
+                f: BLOCK type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Int): Unit'
+                        TYPE_OP operator=CAST typeOperand=kotlin.Byte
+                          GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Int): Unit' type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'check(Int, (Int) -> Unit): String' type=kotlin.String operator=null
+                param: CONST Int type=kotlin.Int value='1'
+                f: BLOCK type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Int): Unit'
+                        TYPE_OP operator=CAST typeOperand=kotlin.Short
+                          GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Int): Unit' type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'check(Int, (Int) -> Unit): String' type=kotlin.String operator=null
+                param: CONST Int type=kotlin.Int value='1'
+                f: BLOCK type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Int): Unit'
+                        TYPE_OP operator=CAST typeOperand=kotlin.Long
+                          GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Int): Unit' type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'check(Int, (Int) -> Unit): String' type=kotlin.String operator=null
+                param: CONST Int type=kotlin.Int value='1'
+                f: BLOCK type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Int): Unit'
+                        TYPE_OP operator=CAST typeOperand=kotlin.Char
+                          GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Int): Unit' type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 5'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'check(Int, (Int) -> Unit): String' type=kotlin.String operator=null
+                param: CONST Int type=kotlin.Int value='1'
+                f: BLOCK type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Int): Unit'
+                        TYPE_OP operator=CAST typeOperand=kotlin.Double
+                          GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Int): Unit' type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 6'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'check(Int, (Int) -> Unit): String' type=kotlin.String operator=null
+                param: CONST Int type=kotlin.Int value='1'
+                f: BLOCK type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Int): Unit'
+                        TYPE_OP operator=CAST typeOperand=kotlin.Float
+                          GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Int): Unit' type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 7'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'check(Double, (Double) -> Unit): String' type=kotlin.String operator=null
+                param: CONST Double type=kotlin.Double value='1.0'
+                f: BLOCK type=(kotlin.Double) -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Double): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Double): Unit'
+                        TYPE_OP operator=CAST typeOperand=kotlin.Int
+                          GET_VAR 'value-parameter it: Double' type=kotlin.Double operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Double): Unit' type=(kotlin.Double) -> kotlin.Unit operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 11'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'check(Double, (Double) -> Unit): String' type=kotlin.String operator=null
+                param: CONST Double type=kotlin.Double value='1.0'
+                f: BLOCK type=(kotlin.Double) -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Double): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Double): Unit'
+                        TYPE_OP operator=CAST typeOperand=kotlin.Byte
+                          GET_VAR 'value-parameter it: Double' type=kotlin.Double operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Double): Unit' type=(kotlin.Double) -> kotlin.Unit operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 12'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'check(Double, (Double) -> Unit): String' type=kotlin.String operator=null
+                param: CONST Double type=kotlin.Double value='1.0'
+                f: BLOCK type=(kotlin.Double) -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Double): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Double): Unit'
+                        TYPE_OP operator=CAST typeOperand=kotlin.Short
+                          GET_VAR 'value-parameter it: Double' type=kotlin.Double operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Double): Unit' type=(kotlin.Double) -> kotlin.Unit operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 13'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'check(Double, (Double) -> Unit): String' type=kotlin.String operator=null
+                param: CONST Double type=kotlin.Double value='1.0'
+                f: BLOCK type=(kotlin.Double) -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Double): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Double): Unit'
+                        TYPE_OP operator=CAST typeOperand=kotlin.Long
+                          GET_VAR 'value-parameter it: Double' type=kotlin.Double operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Double): Unit' type=(kotlin.Double) -> kotlin.Unit operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 14'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'check(Double, (Double) -> Unit): String' type=kotlin.String operator=null
+                param: CONST Double type=kotlin.Double value='1.0'
+                f: BLOCK type=(kotlin.Double) -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Double): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Double): Unit'
+                        TYPE_OP operator=CAST typeOperand=kotlin.Char
+                          GET_VAR 'value-parameter it: Double' type=kotlin.Double operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Double): Unit' type=(kotlin.Double) -> kotlin.Unit operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 15'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'check(Double, (Double) -> Unit): String' type=kotlin.String operator=null
+              param: CONST Double type=kotlin.Double value='1.0'
+              f: BLOCK type=(kotlin.Double) -> kotlin.Unit operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.Double): kotlin.Unit
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(Double): Unit'
+                      TYPE_OP operator=CAST typeOperand=kotlin.Double
+                        GET_VAR 'value-parameter it: Double' type=kotlin.Double operator=null
+                CALLABLE_REFERENCE '<anonymous>(Double): Unit' type=(kotlin.Double) -> kotlin.Unit operator=LAMBDA
+            arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 16'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'check(Double, (Double) -> Unit): String' type=kotlin.String operator=null
+                param: CONST Double type=kotlin.Double value='1.0'
+                f: BLOCK type=(kotlin.Double) -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Double): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Double): Unit'
+                        TYPE_OP operator=CAST typeOperand=kotlin.Float
+                          GET_VAR 'value-parameter it: Double' type=kotlin.Double operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Double): Unit' type=(kotlin.Double) -> kotlin.Unit operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 17'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'check(Float, (Float) -> Unit): String' type=kotlin.String operator=null
+                param: CONST Float type=kotlin.Float value='1.0'
+                f: BLOCK type=(kotlin.Float) -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Float): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Float): Unit'
+                        TYPE_OP operator=CAST typeOperand=kotlin.Int
+                          GET_VAR 'value-parameter it: Float' type=kotlin.Float operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Float): Unit' type=(kotlin.Float) -> kotlin.Unit operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 21'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'check(Float, (Float) -> Unit): String' type=kotlin.String operator=null
+                param: CONST Float type=kotlin.Float value='1.0'
+                f: BLOCK type=(kotlin.Float) -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Float): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Float): Unit'
+                        TYPE_OP operator=CAST typeOperand=kotlin.Byte
+                          GET_VAR 'value-parameter it: Float' type=kotlin.Float operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Float): Unit' type=(kotlin.Float) -> kotlin.Unit operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 22'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'check(Float, (Float) -> Unit): String' type=kotlin.String operator=null
+                param: CONST Float type=kotlin.Float value='1.0'
+                f: BLOCK type=(kotlin.Float) -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Float): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Float): Unit'
+                        TYPE_OP operator=CAST typeOperand=kotlin.Short
+                          GET_VAR 'value-parameter it: Float' type=kotlin.Float operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Float): Unit' type=(kotlin.Float) -> kotlin.Unit operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 23'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'check(Float, (Float) -> Unit): String' type=kotlin.String operator=null
+                param: CONST Float type=kotlin.Float value='1.0'
+                f: BLOCK type=(kotlin.Float) -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Float): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Float): Unit'
+                        TYPE_OP operator=CAST typeOperand=kotlin.Long
+                          GET_VAR 'value-parameter it: Float' type=kotlin.Float operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Float): Unit' type=(kotlin.Float) -> kotlin.Unit operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 24'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'check(Float, (Float) -> Unit): String' type=kotlin.String operator=null
+                param: CONST Float type=kotlin.Float value='1.0'
+                f: BLOCK type=(kotlin.Float) -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Float): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Float): Unit'
+                        TYPE_OP operator=CAST typeOperand=kotlin.Char
+                          GET_VAR 'value-parameter it: Float' type=kotlin.Float operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Float): Unit' type=(kotlin.Float) -> kotlin.Unit operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 25'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'check(Float, (Float) -> Unit): String' type=kotlin.String operator=null
+                param: CONST Float type=kotlin.Float value='1.0'
+                f: BLOCK type=(kotlin.Float) -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Float): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Float): Unit'
+                        TYPE_OP operator=CAST typeOperand=kotlin.Double
+                          GET_VAR 'value-parameter it: Float' type=kotlin.Float operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Float): Unit' type=(kotlin.Float) -> kotlin.Unit operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 26'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'check(Float, (Float) -> Unit): String' type=kotlin.String operator=null
+              param: CONST Float type=kotlin.Float value='1.0'
+              f: BLOCK type=(kotlin.Float) -> kotlin.Unit operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.Float): kotlin.Unit
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(Float): Unit'
+                      TYPE_OP operator=CAST typeOperand=kotlin.Float
+                        GET_VAR 'value-parameter it: Float' type=kotlin.Float operator=null
+                CALLABLE_REFERENCE '<anonymous>(Float): Unit' type=(kotlin.Float) -> kotlin.Unit operator=LAMBDA
+            arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 27'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun <T> check(param: T, f: (T) -> kotlin.Unit): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            CALL 'invoke(T): Unit' type=kotlin.Unit operator=INVOKE
+              $this: GET_VAR 'value-parameter f: (T) -> Unit' type=(T) -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+              p1: GET_VAR 'value-parameter param: T' type=T operator=null
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='check(T, (T) -> Unit): String'
+              CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='check(T, (T) -> Unit): String'
+          CONST String type=kotlin.String value='fail'

@@ -1,0 +1,53 @@
+MODULE <test-module>
+  FILE /memberExtensionToString.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var kotlin.String.id: kotlin.String
+        PROPERTY_GETTER public final fun kotlin.String.<get-id>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-id>() on String: String'
+              $RECEIVER of 'id: String on String' type=kotlin.String
+        PROPERTY_SETTER public final fun kotlin.String.<set-id>(value: kotlin.String): kotlin.Unit
+          BLOCK_BODY
+      FUN public final fun kotlin.Int.foo(): kotlin.Double
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo() on Int: Double'
+            CALL 'toDouble(): Double' type=kotlin.Double operator=null
+              $this: $RECEIVER of 'foo() on Int: Double' type=kotlin.Int
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val p: kotlin.reflect.KProperty2<A, *, *>
+          CALL 'single() on Iterable<KProperty2<A, *, *>>: KProperty2<A, *, *>' type=kotlin.reflect.KProperty2<A, *, *> operator=null
+            $receiver: CALL '<get-memberExtensionProperties>() on KClass<A>: Collection<KProperty2<A, *, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty2<A, *, *>> operator=GET_PROPERTY
+              $receiver: CALL '<get-kotlin>() on Class<A>: KClass<A>' type=kotlin.reflect.KClass<A> operator=GET_PROPERTY
+                $receiver: CALL '<get-java>() on KClass<A>: Class<A>' type=java.lang.Class<A> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'p: KProperty2<A, *, *>' type=kotlin.reflect.KProperty2<A, *, *> operator=null
+              arg1: CONST String type=kotlin.String value='var A.(kotlin.String.)id: kotlin.String'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'p: KProperty2<A, *, *>' type=kotlin.reflect.KProperty2<A, *, *> operator=null
+        VAR val q: kotlin.reflect.KFunction<*>
+          CALL 'single() on Iterable<KFunction<*>>: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+            $receiver: CALL '<get-declaredFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+              $receiver: CALL '<get-kotlin>() on Class<A>: KClass<A>' type=kotlin.reflect.KClass<A> operator=GET_PROPERTY
+                $receiver: CALL '<get-java>() on KClass<A>: Class<A>' type=java.lang.Class<A> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'q: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+              arg1: CONST String type=kotlin.String value='fun A.(kotlin.Int.)foo(): kotlin.Double'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail q '
+              GET_VAR 'q: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

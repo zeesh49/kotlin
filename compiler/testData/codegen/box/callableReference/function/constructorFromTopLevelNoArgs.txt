@@ -1,0 +1,16 @@
+MODULE <test-module>
+  FILE /constructorFromTopLevelNoArgs.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var result: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'invoke(): A' type=A operator=null
+              $this: CALLABLE_REFERENCE 'constructor A()' type=kotlin.reflect.KFunction0<A> operator=null

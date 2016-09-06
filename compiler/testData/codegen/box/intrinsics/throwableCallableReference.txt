@@ -1,0 +1,133 @@
+MODULE <test-module>
+  FILE /throwableCallableReference.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val s: kotlin.String? = "OK"
+          CONST String type=kotlin.String value='OK'
+        VAR val t: kotlin.Throwable?
+          CALL 'constructor Throwable(String?, Throwable?)' type=kotlin.Throwable operator=null
+            message: CONST String type=kotlin.String value='test'
+            cause: CONST Null type=kotlin.Nothing? value='null'
+        VAR var thr1: kotlin.reflect.KFunction2<kotlin.String?, kotlin.Throwable?, kotlin.Throwable>
+          CALLABLE_REFERENCE 'constructor Throwable(String?, Throwable?)' type=kotlin.reflect.KFunction2<kotlin.String?, kotlin.Throwable?, kotlin.Throwable> operator=null
+        VAR val z: kotlin.Throwable
+          CALL 'invoke(String?, Throwable?): Throwable' type=kotlin.Throwable operator=INVOKE
+            $this: GET_VAR 'thr1: KFunction2<String?, Throwable?, Throwable>' type=kotlin.reflect.KFunction2<kotlin.String?, kotlin.Throwable?, kotlin.Throwable> operator=VARIABLE_AS_FUNCTION
+            p1: GET_VAR 's: String?' type=kotlin.String? operator=null
+            p2: GET_VAR 't: Throwable?' type=kotlin.Throwable? operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                $this: GET_VAR 'z: Throwable' type=kotlin.Throwable operator=null
+              arg1: GET_VAR 's: String?' type=kotlin.String? operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                $this: GET_VAR 'z: Throwable' type=kotlin.Throwable operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: CALL '<get-cause>(): Throwable?' type=kotlin.Throwable? operator=GET_PROPERTY
+                $this: GET_VAR 'z: Throwable' type=kotlin.Throwable operator=null
+              arg1: GET_VAR 't: Throwable?' type=kotlin.Throwable? operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 2: '
+              CALL '<get-cause>(): Throwable?' type=kotlin.Throwable? operator=GET_PROPERTY
+                $this: GET_VAR 'z: Throwable' type=kotlin.Throwable operator=null
+        VAR var thr2: kotlin.reflect.KFunction1<kotlin.String?, kotlin.Throwable>
+          CALLABLE_REFERENCE 'constructor Throwable(String?)' type=kotlin.reflect.KFunction1<kotlin.String?, kotlin.Throwable> operator=null
+        VAR val z2: kotlin.Throwable
+          CALL 'invoke(String?): Throwable' type=kotlin.Throwable operator=INVOKE
+            $this: GET_VAR 'thr2: KFunction1<String?, Throwable>' type=kotlin.reflect.KFunction1<kotlin.String?, kotlin.Throwable> operator=VARIABLE_AS_FUNCTION
+            p1: GET_VAR 's: String?' type=kotlin.String? operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                $this: GET_VAR 'z2: Throwable' type=kotlin.Throwable operator=null
+              arg1: GET_VAR 's: String?' type=kotlin.String? operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 3: '
+              CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                $this: GET_VAR 'z2: Throwable' type=kotlin.Throwable operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: CALL '<get-cause>(): Throwable?' type=kotlin.Throwable? operator=GET_PROPERTY
+                $this: GET_VAR 'z2: Throwable' type=kotlin.Throwable operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 4: '
+              CALL '<get-cause>(): Throwable?' type=kotlin.Throwable? operator=GET_PROPERTY
+                $this: GET_VAR 'z2: Throwable' type=kotlin.Throwable operator=null
+        VAR var thr3: kotlin.reflect.KFunction1<kotlin.Throwable?, kotlin.Throwable>
+          CALLABLE_REFERENCE 'constructor Throwable(Throwable?)' type=kotlin.reflect.KFunction1<kotlin.Throwable?, kotlin.Throwable> operator=null
+        VAR val z3: kotlin.Throwable
+          CALL 'invoke(Throwable?): Throwable' type=kotlin.Throwable operator=INVOKE
+            $this: GET_VAR 'thr3: KFunction1<Throwable?, Throwable>' type=kotlin.reflect.KFunction1<kotlin.Throwable?, kotlin.Throwable> operator=VARIABLE_AS_FUNCTION
+            p1: GET_VAR 't: Throwable?' type=kotlin.Throwable? operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                $this: GET_VAR 'z3: Throwable' type=kotlin.Throwable operator=null
+              arg1: CONST String type=kotlin.String value='java.lang.Throwable: test'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 5: '
+              CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                $this: GET_VAR 'z3: Throwable' type=kotlin.Throwable operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: CALL '<get-cause>(): Throwable?' type=kotlin.Throwable? operator=GET_PROPERTY
+                $this: GET_VAR 'z3: Throwable' type=kotlin.Throwable operator=null
+              arg1: GET_VAR 't: Throwable?' type=kotlin.Throwable? operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 6: '
+              CALL '<get-cause>(): Throwable?' type=kotlin.Throwable? operator=GET_PROPERTY
+                $this: GET_VAR 'z2: Throwable' type=kotlin.Throwable operator=null
+        VAR var thr4: kotlin.reflect.KFunction0<kotlin.Throwable>
+          CALLABLE_REFERENCE 'constructor Throwable()' type=kotlin.reflect.KFunction0<kotlin.Throwable> operator=null
+        VAR val z4: kotlin.Throwable
+          CALL 'invoke(): Throwable' type=kotlin.Throwable operator=INVOKE
+            $this: GET_VAR 'thr4: KFunction0<Throwable>' type=kotlin.reflect.KFunction0<kotlin.Throwable> operator=VARIABLE_AS_FUNCTION
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                $this: GET_VAR 'z4: Throwable' type=kotlin.Throwable operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 7: '
+              CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                $this: GET_VAR 'z4: Throwable' type=kotlin.Throwable operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: CALL '<get-cause>(): Throwable?' type=kotlin.Throwable? operator=GET_PROPERTY
+                $this: GET_VAR 'z4: Throwable' type=kotlin.Throwable operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 8: '
+              CALL '<get-cause>(): Throwable?' type=kotlin.Throwable? operator=GET_PROPERTY
+                $this: GET_VAR 'z4: Throwable' type=kotlin.Throwable operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          BLOCK type=kotlin.String operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.String?
+              CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                $this: GET_VAR 'z: Throwable' type=kotlin.Throwable operator=null
+            WHEN type=kotlin.String operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: String?' type=kotlin.String? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: String?' type=kotlin.String? operator=null

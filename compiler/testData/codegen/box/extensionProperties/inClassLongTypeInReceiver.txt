@@ -1,0 +1,62 @@
+MODULE <test-module>
+  FILE /inClassLongTypeInReceiver.kt
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      PROPERTY public final var doubleStorage: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='fail'
+      PROPERTY public final var longStorage: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='fail'
+      PROPERTY public final var kotlin.Double.foo: kotlin.String
+        PROPERTY_GETTER public final fun kotlin.Double.<get-foo>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-foo>() on Double: String'
+              CALL '<get-doubleStorage>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'Test' type=Test
+        PROPERTY_SETTER public final fun kotlin.Double.<set-foo>(value: kotlin.String): kotlin.Unit
+          BLOCK_BODY
+            CALL '<set-doubleStorage>(String): Unit' type=kotlin.Unit operator=EQ
+              $this: THIS of 'Test' type=Test
+              <set-?>: GET_VAR 'value-parameter value: String' type=kotlin.String operator=null
+      PROPERTY public final var kotlin.Long.bar: kotlin.String
+        PROPERTY_GETTER public final fun kotlin.Long.<get-bar>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-bar>() on Long: String'
+              CALL '<get-longStorage>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'Test' type=Test
+        PROPERTY_SETTER public final fun kotlin.Long.<set-bar>(value: kotlin.String): kotlin.Unit
+          BLOCK_BODY
+            CALL '<set-longStorage>(String): Unit' type=kotlin.Unit operator=EQ
+              $this: THIS of 'Test' type=Test
+              <set-?>: GET_VAR 'value-parameter value: String' type=kotlin.String operator=null
+      FUN public final fun test(): kotlin.String
+        BLOCK_BODY
+          VAR val d: kotlin.Double = 1.0.toDouble()
+            CONST Double type=kotlin.Double value='1.0'
+          CALL '<set-foo>(String) on Double: Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'Test' type=Test
+            $receiver: GET_VAR 'd: Double' type=kotlin.Double operator=null
+            value: CONST String type=kotlin.String value='O'
+          VAR val l: kotlin.Long = 1.toLong()
+            CONST Long type=kotlin.Long value='1'
+          CALL '<set-bar>(String) on Long: Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'Test' type=Test
+            $receiver: GET_VAR 'l: Long' type=kotlin.Long operator=null
+            value: CONST String type=kotlin.String value='K'
+          RETURN type=kotlin.Nothing from='test(): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CALL '<get-foo>() on Double: String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'Test' type=Test
+                $receiver: GET_VAR 'd: Double' type=kotlin.Double operator=null
+              other: CALL '<get-bar>() on Long: String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'Test' type=Test
+                $receiver: GET_VAR 'l: Long' type=kotlin.Long operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'test(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Test()' type=Test operator=null

@@ -1,0 +1,90 @@
+MODULE <test-module>
+  FILE /genericValForPrimitiveType.kt
+    PROPERTY public val <T> T.valProp: T
+      PROPERTY_GETTER public fun T.<get-valProp>(): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-valProp>() on T: T'
+            $RECEIVER of 'valProp: T on T' type=T
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val int: kotlin.Int = 0
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+      PROPERTY public final val long: kotlin.Long = 0.toLong()
+        EXPRESSION_BODY
+          CALL 'toLong(): Long' type=kotlin.Long operator=null
+            $this: CONST Int type=kotlin.Int value='0'
+      PROPERTY public final val short: kotlin.Short = 0.toShort()
+        EXPRESSION_BODY
+          CALL 'toShort(): Short' type=kotlin.Short operator=null
+            $this: CONST Int type=kotlin.Int value='0'
+      PROPERTY public final val byte: kotlin.Byte = 0.toByte()
+        EXPRESSION_BODY
+          CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+            $this: CONST Int type=kotlin.Int value='0'
+      PROPERTY public final val double: kotlin.Double = 0.0.toDouble()
+        EXPRESSION_BODY
+          CONST Double type=kotlin.Double value='0.0'
+      PROPERTY public final val float: kotlin.Float = 0.0.toFloat()
+        EXPRESSION_BODY
+          CONST Float type=kotlin.Float value='0.0'
+      PROPERTY public final val char: kotlin.Char = \u0030 ('0')
+        EXPRESSION_BODY
+          CONST Char type=kotlin.Char value='0'
+      PROPERTY public final val bool: kotlin.Boolean = false
+        EXPRESSION_BODY
+          CONST Boolean type=kotlin.Boolean value='false'
+      FUN public final operator fun invoke(): kotlin.Unit
+        BLOCK_BODY
+          CALL '<get-valProp>() on Int: Int' type=kotlin.Int operator=GET_PROPERTY
+            $receiver: CALL '<get-int>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+          CALL '<get-valProp>() on Long: Long' type=kotlin.Long operator=GET_PROPERTY
+            $receiver: CALL '<get-long>(): Long' type=kotlin.Long operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+          CALL '<get-valProp>() on Short: Short' type=kotlin.Short operator=GET_PROPERTY
+            $receiver: CALL '<get-short>(): Short' type=kotlin.Short operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+          CALL '<get-valProp>() on Byte: Byte' type=kotlin.Byte operator=GET_PROPERTY
+            $receiver: CALL '<get-byte>(): Byte' type=kotlin.Byte operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+          CALL '<get-valProp>() on Double: Double' type=kotlin.Double operator=GET_PROPERTY
+            $receiver: CALL '<get-double>(): Double' type=kotlin.Double operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+          CALL '<get-valProp>() on Float: Float' type=kotlin.Float operator=GET_PROPERTY
+            $receiver: CALL '<get-float>(): Float' type=kotlin.Float operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+          CALL '<get-valProp>() on Char: Char' type=kotlin.Char operator=GET_PROPERTY
+            $receiver: CALL '<get-char>(): Char' type=kotlin.Char operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+          CALL '<get-valProp>() on Boolean: Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $receiver: CALL '<get-bool>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL '<get-valProp>() on Int: Int' type=kotlin.Int operator=GET_PROPERTY
+          $receiver: CONST Int type=kotlin.Int value='0'
+        CALL '<get-valProp>() on Boolean: Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+          $receiver: CONST Boolean type=kotlin.Boolean value='false'
+        CALL '<get-valProp>() on Char: Char' type=kotlin.Char operator=GET_PROPERTY
+          $receiver: CONST Char type=kotlin.Char value='0'
+        CALL '<get-valProp>() on Double: Double' type=kotlin.Double operator=GET_PROPERTY
+          $receiver: CONST Double type=kotlin.Double value='0.0'
+        CALL '<get-valProp>() on Float: Float' type=kotlin.Float operator=GET_PROPERTY
+          $receiver: CONST Float type=kotlin.Float value='0.0'
+        CALL '<get-valProp>() on Byte: Byte' type=kotlin.Byte operator=GET_PROPERTY
+          $receiver: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+            $this: CONST Int type=kotlin.Int value='0'
+        CALL '<get-valProp>() on Short: Short' type=kotlin.Short operator=GET_PROPERTY
+          $receiver: CALL 'toShort(): Short' type=kotlin.Short operator=null
+            $this: CONST Int type=kotlin.Int value='0'
+        CALL '<get-valProp>() on Long: Long' type=kotlin.Long operator=GET_PROPERTY
+          $receiver: CALL 'toLong(): Long' type=kotlin.Long operator=null
+            $this: CONST Int type=kotlin.Int value='0'
+        CALL 'invoke(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor A()' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

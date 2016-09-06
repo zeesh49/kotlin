@@ -1,0 +1,135 @@
+MODULE <test-module>
+  FILE /kt903.kt
+    FUN public operator fun kotlin.Int.plus(a: kotlin.Int?): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='plus(Int?) on Int: Int'
+          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+            $this: $RECEIVER of 'plus(Int?) on Int: Int' type=kotlin.Int
+            other: BLOCK type=kotlin.Int operator=EXCLEXCL
+              VAR val tmp0_notnull: kotlin.Int?
+                GET_VAR 'value-parameter a: Int?' type=kotlin.Int? operator=null
+              WHEN type=kotlin.Int operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+    CLASS CLASS PerfectNumberFinder
+      CONSTRUCTOR public constructor PerfectNumberFinder()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='PerfectNumberFinder'
+      FUN public open fun isPerfect(number: kotlin.Int): kotlin.Boolean
+        BLOCK_BODY
+          VAR var factors: kotlin.collections.MutableList<kotlin.Int?>
+            CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.Int?> operator=null
+          BLOCK type=kotlin.Boolean? operator=SAFE_CALL
+            VAR val tmp0_safe_receiver: kotlin.collections.MutableList<kotlin.Int?>
+              GET_VAR 'factors: MutableList<Int?>' type=kotlin.collections.MutableList<kotlin.Int?> operator=null
+            WHEN type=kotlin.Boolean? operator=SAFE_CALL
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_safe_receiver: MutableList<Int?>' type=kotlin.collections.MutableList<kotlin.Int?> operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CONST Null type=kotlin.Nothing? value='null'
+              else: CALL 'add(Int?): Boolean' type=kotlin.Boolean operator=null
+                $this: GET_VAR 'tmp0_safe_receiver: MutableList<Int?>' type=kotlin.collections.MutableList<kotlin.Int?> operator=null
+                element: CONST Int type=kotlin.Int value='1'
+          BLOCK type=kotlin.Boolean? operator=SAFE_CALL
+            VAR val tmp1_safe_receiver: kotlin.collections.MutableList<kotlin.Int?>
+              GET_VAR 'factors: MutableList<Int?>' type=kotlin.collections.MutableList<kotlin.Int?> operator=null
+            WHEN type=kotlin.Boolean? operator=SAFE_CALL
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp1_safe_receiver: MutableList<Int?>' type=kotlin.collections.MutableList<kotlin.Int?> operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CONST Null type=kotlin.Nothing? value='null'
+              else: CALL 'add(Int?): Boolean' type=kotlin.Boolean operator=null
+                $this: GET_VAR 'tmp1_safe_receiver: MutableList<Int?>' type=kotlin.collections.MutableList<kotlin.Int?> operator=null
+                element: GET_VAR 'value-parameter number: Int' type=kotlin.Int operator=null
+          BLOCK type=kotlin.Unit operator=FOR_LOOP
+            VAR val tmp2_iterator: kotlin.collections.IntIterator
+              CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+                $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                  $this: CONST Int type=kotlin.Int value='2'
+                  other: CALL 'toInt(): Int' type=kotlin.Int operator=null
+                    $this: CALL 'minus(Int): Double' type=kotlin.Double operator=MINUS
+                      $this: CALL 'sqrt(Double): Double' type=kotlin.Double operator=null
+                        p0: CALL 'toDouble(): Double' type=kotlin.Double operator=null
+                          $this: GET_VAR 'value-parameter number: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='1'
+            WHILE label=null operator=FOR_LOOP_INNER_WHILE
+              condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+                $this: GET_VAR 'tmp2_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+                VAR val i: kotlin.Int
+                  CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                    $this: GET_VAR 'tmp2_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: CALL 'mod(Int): Int' type=kotlin.Int operator=PERC
+                      $this: GET_VAR 'value-parameter number: Int' type=kotlin.Int operator=null
+                      other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                    arg1: CONST Int type=kotlin.Int value='0'
+                  then: BLOCK type=kotlin.Unit operator=null
+                    BLOCK type=kotlin.Boolean? operator=SAFE_CALL
+                      VAR val tmp3_safe_receiver: kotlin.collections.MutableList<kotlin.Int?>
+                        GET_VAR 'factors: MutableList<Int?>' type=kotlin.collections.MutableList<kotlin.Int?> operator=null
+                      WHEN type=kotlin.Boolean? operator=SAFE_CALL
+                        if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: GET_VAR 'tmp3_safe_receiver: MutableList<Int?>' type=kotlin.collections.MutableList<kotlin.Int?> operator=null
+                          arg1: CONST Null type=kotlin.Nothing? value='null'
+                        then: CONST Null type=kotlin.Nothing? value='null'
+                        else: CALL 'add(Int?): Boolean' type=kotlin.Boolean operator=null
+                          $this: GET_VAR 'tmp3_safe_receiver: MutableList<Int?>' type=kotlin.collections.MutableList<kotlin.Int?> operator=null
+                          element: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                    WHEN type=kotlin.Unit operator=IF
+                      if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                          arg0: CALL 'div(Int): Int' type=kotlin.Int operator=DIV
+                            $this: GET_VAR 'value-parameter number: Int' type=kotlin.Int operator=null
+                            other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                          arg1: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                      then: BLOCK type=kotlin.Boolean? operator=SAFE_CALL
+                        VAR val tmp4_safe_receiver: kotlin.collections.MutableList<kotlin.Int?>
+                          GET_VAR 'factors: MutableList<Int?>' type=kotlin.collections.MutableList<kotlin.Int?> operator=null
+                        WHEN type=kotlin.Boolean? operator=SAFE_CALL
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: GET_VAR 'tmp4_safe_receiver: MutableList<Int?>' type=kotlin.collections.MutableList<kotlin.Int?> operator=null
+                            arg1: CONST Null type=kotlin.Nothing? value='null'
+                          then: CONST Null type=kotlin.Nothing? value='null'
+                          else: CALL 'add(Int?): Boolean' type=kotlin.Boolean operator=null
+                            $this: GET_VAR 'tmp4_safe_receiver: MutableList<Int?>' type=kotlin.collections.MutableList<kotlin.Int?> operator=null
+                            element: CALL 'div(Int): Int' type=kotlin.Int operator=DIV
+                              $this: GET_VAR 'value-parameter number: Int' type=kotlin.Int operator=null
+                              other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+          VAR var sum: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          BLOCK type=kotlin.Unit operator=FOR_LOOP
+            VAR val tmp5_iterator: kotlin.collections.MutableIterator<kotlin.Int?>
+              CALL 'iterator(): MutableIterator<Int?>' type=kotlin.collections.MutableIterator<kotlin.Int?> operator=FOR_LOOP_ITERATOR
+                $this: GET_VAR 'factors: MutableList<Int?>' type=kotlin.collections.MutableList<kotlin.Int?> operator=null
+            WHILE label=null operator=FOR_LOOP_INNER_WHILE
+              condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+                $this: GET_VAR 'tmp5_iterator: MutableIterator<Int?>' type=kotlin.collections.MutableIterator<kotlin.Int?> operator=null
+              body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+                VAR val i: kotlin.Int?
+                  CALL 'next(): Int?' type=kotlin.Int? operator=FOR_LOOP_NEXT
+                    $this: GET_VAR 'tmp5_iterator: MutableIterator<Int?>' type=kotlin.collections.MutableIterator<kotlin.Int?> operator=null
+                SET_VAR 'sum: Int' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Int?) on Int: Int' type=kotlin.Int operator=PLUSEQ
+                    $receiver: GET_VAR 'sum: Int' type=kotlin.Int operator=PLUSEQ
+                    a: GET_VAR 'i: Int?' type=kotlin.Int? operator=null
+          RETURN type=kotlin.Nothing from='isPerfect(Int): Boolean'
+            CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+                $this: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+                other: GET_VAR 'value-parameter number: Int' type=kotlin.Int operator=null
+              arg1: GET_VAR 'value-parameter number: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'isPerfect(Int): Boolean' type=kotlin.Boolean operator=null
+              $this: CALL 'constructor PerfectNumberFinder()' type=PerfectNumberFinder operator=null
+              number: CONST Int type=kotlin.Int value='28'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

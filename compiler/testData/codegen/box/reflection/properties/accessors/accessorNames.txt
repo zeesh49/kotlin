@@ -1,0 +1,79 @@
+MODULE <test-module>
+  FILE /accessorNames.kt
+    PROPERTY public var foo: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    PROPERTY public var kotlin.String.bar: kotlin.String
+      PROPERTY_GETTER public fun kotlin.String.<get-bar>(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-bar>() on String: String'
+            $RECEIVER of 'bar: String on String' type=kotlin.String
+      PROPERTY_SETTER public fun kotlin.String.<set-bar>(value: kotlin.String): kotlin.Unit
+        BLOCK_BODY
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(baz: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'baz: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter baz: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var baz: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter baz: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final var kotlin.String.quux: kotlin.String
+        PROPERTY_GETTER public final fun kotlin.String.<get-quux>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-quux>() on String: String'
+              $RECEIVER of 'quux: String on String' type=kotlin.String
+        PROPERTY_SETTER public final fun kotlin.String.<set-quux>(value: kotlin.String): kotlin.Unit
+          BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='<get-foo>'
+          actual: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL '<get-getter>(): KProperty0.Getter<String>' type=kotlin.reflect.KProperty0.Getter<kotlin.String> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'foo: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='<set-foo>'
+          actual: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL '<get-setter>(): KMutableProperty0.Setter<String>' type=kotlin.reflect.KMutableProperty0.Setter<kotlin.String> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'foo: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='<get-bar>'
+          actual: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL '<get-getter>(): KProperty1.Getter<String, String>' type=kotlin.reflect.KProperty1.Getter<kotlin.String, kotlin.String> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'bar: String on String' type=kotlin.reflect.KMutableProperty1<kotlin.String, kotlin.String> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='<set-bar>'
+          actual: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL '<get-setter>(): KMutableProperty1.Setter<String, String>' type=kotlin.reflect.KMutableProperty1.Setter<kotlin.String, kotlin.String> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'bar: String on String' type=kotlin.reflect.KMutableProperty1<kotlin.String, kotlin.String> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='<get-baz>'
+          actual: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL '<get-getter>(): KProperty1.Getter<A, Int>' type=kotlin.reflect.KProperty1.Getter<A, kotlin.Int> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'baz: Int' type=kotlin.reflect.KMutableProperty1<A, kotlin.Int> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='<set-baz>'
+          actual: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL '<get-setter>(): KMutableProperty1.Setter<A, Int>' type=kotlin.reflect.KMutableProperty1.Setter<A, kotlin.Int> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'baz: Int' type=kotlin.reflect.KMutableProperty1<A, kotlin.Int> operator=null
+        VAR val me: kotlin.reflect.KMutableProperty2<A, kotlin.String, kotlin.String>
+          TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty2<A, kotlin.String, kotlin.String>
+            CALL 'single() on Iterable<KProperty2<A, *, *>>: KProperty2<A, *, *>' type=kotlin.reflect.KProperty2<A, *, *> operator=null
+              $receiver: CALL '<get-memberExtensionProperties>() on KClass<A>: Collection<KProperty2<A, *, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty2<A, *, *>> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='<get-quux>'
+          actual: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL '<get-getter>(): KProperty2.Getter<A, String, String>' type=kotlin.reflect.KProperty2.Getter<A, kotlin.String, kotlin.String> operator=GET_PROPERTY
+              $this: GET_VAR 'me: KMutableProperty2<A, String, String>' type=kotlin.reflect.KMutableProperty2<A, kotlin.String, kotlin.String> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='<set-quux>'
+          actual: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL '<get-setter>(): KMutableProperty2.Setter<A, String, String>' type=kotlin.reflect.KMutableProperty2.Setter<A, kotlin.String, kotlin.String> operator=GET_PROPERTY
+              $this: GET_VAR 'me: KMutableProperty2<A, String, String>' type=kotlin.reflect.KMutableProperty2<A, kotlin.String, kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

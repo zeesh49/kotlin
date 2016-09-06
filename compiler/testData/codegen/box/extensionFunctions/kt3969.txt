@@ -1,0 +1,47 @@
+MODULE <test-module>
+  FILE /kt3969.kt
+    PROPERTY public var result: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='Fail'
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+    FUN public operator fun A.inc(s: kotlin.String = ...): A
+      s: EXPRESSION_BODY
+        CONST String type=kotlin.String value='OK'
+      BLOCK_BODY
+        CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: GET_VAR 'value-parameter s: String = ...' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='inc(String = ...) on A: A'
+          $RECEIVER of 'inc(String = ...) on A: A' type=A
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var a: A
+          CALL 'constructor A()' type=A operator=null
+        BLOCK type=A operator=POSTFIX_INCR
+          VAR val tmp0: A
+            GET_VAR 'a: A' type=A operator=POSTFIX_INCR
+          SET_VAR 'a: A' type=kotlin.Unit operator=POSTFIX_INCR
+            CALL 'inc(String = ...) on A: A' type=A operator=POSTFIX_INCR
+              $receiver: GET_VAR 'tmp0: A' type=A operator=null
+          GET_VAR 'tmp0: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 1'
+        CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: CONST String type=kotlin.String value='Fail'
+        BLOCK type=A operator=PREFIX_INCR
+          VAR val tmp1: A
+            CALL 'inc(String = ...) on A: A' type=A operator=PREFIX_INCR
+              $receiver: GET_VAR 'a: A' type=A operator=PREFIX_INCR
+          SET_VAR 'a: A' type=kotlin.Unit operator=PREFIX_INCR
+            GET_VAR 'tmp1: A' type=A operator=null
+          GET_VAR 'tmp1: A' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY

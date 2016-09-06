@@ -1,0 +1,45 @@
+MODULE <test-module>
+  FILE /kt6047.kt
+    FUN public fun checkLongAB5E(x: kotlin.Long): kotlin.Unit
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='checkLongAB5E(Long): Unit'
+          CALL 'assertEquals(Long, Long, String? = ...): Unit' type=kotlin.Unit operator=null
+            expected: CONST Long type=kotlin.Long value='43870'
+            actual: GET_VAR 'value-parameter x: Long' type=kotlin.Long operator=null
+    FUN public fun checkDouble1(y: kotlin.Double): kotlin.Unit
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='checkDouble1(Double): Unit'
+          CALL 'assertEquals(Double, Double, String? = ...): Unit' type=kotlin.Unit operator=null
+            expected: CONST Double type=kotlin.Double value='1.0'
+            actual: GET_VAR 'value-parameter y: Double' type=kotlin.Double operator=null
+    FUN public fun checkByte10(z: kotlin.Byte): kotlin.Unit
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='checkByte10(Byte): Unit'
+          CALL 'assertEquals(Byte, Byte, String? = ...): Unit' type=kotlin.Unit operator=null
+            expected: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+              $this: CONST Int type=kotlin.Int value='10'
+            actual: GET_VAR 'value-parameter z: Byte' type=kotlin.Byte operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.Long!
+          CALL 'valueOf(String!, Int): Long!' type=kotlin.Long! operator=null
+            p0: CONST String type=kotlin.String value='AB5E'
+            p1: CONST Int type=kotlin.Int value='16'
+        CALL 'checkLongAB5E(Long): Unit' type=kotlin.Unit operator=null
+          x: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Long
+            GET_VAR 'x: Long!' type=kotlin.Long! operator=null
+        VAR val y: kotlin.Double!
+          CALL 'valueOf(String!): Double!' type=kotlin.Double! operator=null
+            p0: CONST String type=kotlin.String value='1.0'
+        CALL 'checkDouble1(Double): Unit' type=kotlin.Unit operator=null
+          y: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Double
+            GET_VAR 'y: Double!' type=kotlin.Double! operator=null
+        VAR val z: kotlin.Byte!
+          CALL 'valueOf(String!, Int): Byte!' type=kotlin.Byte! operator=null
+            p0: CONST String type=kotlin.String value='A'
+            p1: CONST Int type=kotlin.Int value='16'
+        CALL 'checkByte10(Byte): Unit' type=kotlin.Unit operator=null
+          z: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Byte
+            GET_VAR 'z: Byte!' type=kotlin.Byte! operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

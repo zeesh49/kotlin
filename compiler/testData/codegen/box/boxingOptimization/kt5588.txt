@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /kt5588.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val s: kotlin.String = "notA"
+          CONST String type=kotlin.String value='notA'
+        VAR val id: kotlin.Int?
+          BLOCK type=kotlin.Int? operator=WHEN
+            VAR val tmp0_subject: kotlin.String
+              GET_VAR 's: String' type=kotlin.String operator=null
+            WHEN type=kotlin.Int? operator=WHEN
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: String' type=kotlin.String operator=null
+                arg1: CONST String type=kotlin.String value='a'
+              then: CONST Int type=kotlin.Int value='1'
+              else: CONST Null type=kotlin.Nothing? value='null'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'id: Int?' type=kotlin.Int? operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='fail'

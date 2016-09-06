@@ -1,0 +1,21 @@
+MODULE <test-module>
+  FILE /nonLiteralRunnable.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.String
+          CONST String type=kotlin.String value='FAIL'
+        VAR val f: () -> kotlin.Unit
+          BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  SET_VAR 'result: String' type=kotlin.Unit operator=EQ
+                    CONST String type=kotlin.String value='OK'
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        VAR val r: java.lang.Runnable
+          CALL 'Runnable(() -> Unit): Runnable' type=java.lang.Runnable operator=null
+            function: GET_VAR 'f: () -> Unit' type=() -> kotlin.Unit operator=null
+        CALL 'run(): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'r: Runnable' type=java.lang.Runnable operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          GET_VAR 'result: String' type=kotlin.String operator=null

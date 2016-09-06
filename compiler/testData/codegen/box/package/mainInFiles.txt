@@ -1,0 +1,88 @@
+MODULE <test-module>
+  FILE /1.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+    FUN public fun getMain(className: kotlin.String): java.lang.reflect.Method
+      BLOCK_BODY
+        VAR val classLoader: java.lang.ClassLoader!
+          CALL '<get-classLoader>() on Class<A>: ClassLoader!' type=java.lang.ClassLoader! operator=GET_PROPERTY
+            $receiver: CALL '<get-javaClass>() on A: Class<A>' type=java.lang.Class<test.A> operator=GET_PROPERTY
+              $receiver: CALL 'constructor A()' type=test.A operator=null
+        RETURN type=kotlin.Nothing from='getMain(String): Method'
+          TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+            CALL 'getDeclaredMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+                CALL 'loadClass(String!): Class<*>!' type=java.lang.Class<*>! operator=null
+                  $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.ClassLoader
+                    GET_VAR 'classLoader: ClassLoader!' type=java.lang.ClassLoader! operator=null
+                  p0: GET_VAR 'value-parameter className: String' type=kotlin.String operator=null
+              p0: CONST String type=kotlin.String value='main'
+              p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+                CALL '<get-java>() on KClass<Array<String>>: Class<Array<String>>' type=java.lang.Class<kotlin.Array<kotlin.String>> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.String>>
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val bMain: java.lang.reflect.Method
+          CALL 'getMain(String): Method' type=java.lang.reflect.Method operator=null
+            className: CONST String type=kotlin.String value='pkg.AKt'
+        VAR val cMain: java.lang.reflect.Method
+          CALL 'getMain(String): Method' type=java.lang.reflect.Method operator=null
+            className: CONST String type=kotlin.String value='pkg.BKt'
+        VAR val args: kotlin.Array<kotlin.String>
+          CALL 'constructor Array(Int, (Int) -> String)' type=kotlin.Array<kotlin.String> operator=null
+            size: CONST Int type=kotlin.Int value='1'
+            init: BLOCK type=(kotlin.Int) -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.Int): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): String'
+                    CONST String type=kotlin.String value=''
+              CALLABLE_REFERENCE '<anonymous>(Int): String' type=(kotlin.Int) -> kotlin.String operator=LAMBDA
+        CALL 'invoke(Any!, vararg Any!): Any!' type=kotlin.Any! operator=null
+          $this: GET_VAR 'bMain: Method' type=java.lang.reflect.Method operator=null
+          p0: CONST Null type=kotlin.Nothing? value='null'
+          p1: VARARG type=(kotlin.Array<(kotlin.Any..kotlin.Any?)>..kotlin.Array<out (kotlin.Any..kotlin.Any?)>?) varargElementType=(kotlin.Any..kotlin.Any?)
+            GET_VAR 'args: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+        CALL 'invoke(Any!, vararg Any!): Any!' type=kotlin.Any! operator=null
+          $this: GET_VAR 'cMain: Method' type=java.lang.reflect.Method operator=null
+          p0: CONST Null type=kotlin.Nothing? value='null'
+          p1: VARARG type=(kotlin.Array<(kotlin.Any..kotlin.Any?)>..kotlin.Array<out (kotlin.Any..kotlin.Any?)>?) varargElementType=(kotlin.Any..kotlin.Any?)
+            GET_VAR 'args: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'args: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+  FILE /a.kt
+    FUN public fun main(args: kotlin.Array<kotlin.String>): kotlin.Unit
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=PLUSEQ
+          VAR val tmp0_array: kotlin.Array<kotlin.String>
+            GET_VAR 'value-parameter args: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+          VAR val tmp1_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          CALL 'set(Int, String): Unit' type=kotlin.Unit operator=PLUSEQ
+            $this: GET_VAR 'tmp0_array: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            index: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+            value: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+              $this: CALL 'get(Int): String' type=kotlin.String operator=PLUSEQ
+                $this: GET_VAR 'tmp0_array: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                index: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+              other: CONST String type=kotlin.String value='O'
+  FILE /b.kt
+    FUN public fun main(args: kotlin.Array<kotlin.String>): kotlin.Unit
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=PLUSEQ
+          VAR val tmp0_array: kotlin.Array<kotlin.String>
+            GET_VAR 'value-parameter args: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+          VAR val tmp1_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          CALL 'set(Int, String): Unit' type=kotlin.Unit operator=PLUSEQ
+            $this: GET_VAR 'tmp0_array: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            index: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+            value: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+              $this: CALL 'get(Int): String' type=kotlin.String operator=PLUSEQ
+                $this: GET_VAR 'tmp0_array: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                index: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+              other: CONST String type=kotlin.String value='K'

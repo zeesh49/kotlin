@@ -1,0 +1,92 @@
+MODULE <test-module>
+  FILE /varargs.kt
+    FUN public fun <T> foo(vararg a: T): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(vararg T): Int'
+          CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: GET_VAR 'value-parameter vararg a: T' type=kotlin.Array<out T> operator=null
+    FUN public inline fun <reified T> bar(block: () -> T): kotlin.Array<T>
+      BLOCK_BODY
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='2'
+          actual: CALL 'foo(vararg T): Int' type=kotlin.Int operator=null
+            a: VARARG type=Array<out T> varargElementType=T
+              CALL 'invoke(): T' type=T operator=INVOKE
+                $this: GET_VAR 'value-parameter block: () -> T' type=() -> T operator=VARIABLE_AS_FUNCTION
+              CALL 'invoke(): T' type=T operator=INVOKE
+                $this: GET_VAR 'value-parameter block: () -> T' type=() -> T operator=VARIABLE_AS_FUNCTION
+        RETURN type=kotlin.Nothing from='bar(() -> T): Array<T>'
+          CALL 'arrayOf(vararg T): Array<T>' type=kotlin.Array<T> operator=null
+            elements: VARARG type=Array<out T> varargElementType=T
+              CALL 'invoke(): T' type=T operator=INVOKE
+                $this: GET_VAR 'value-parameter block: () -> T' type=() -> T operator=VARIABLE_AS_FUNCTION
+              CALL 'invoke(): T' type=T operator=INVOKE
+                $this: GET_VAR 'value-parameter block: () -> T' type=() -> T operator=VARIABLE_AS_FUNCTION
+              CALL 'invoke(): T' type=T operator=INVOKE
+                $this: GET_VAR 'value-parameter block: () -> T' type=() -> T operator=VARIABLE_AS_FUNCTION
+    FUN public inline fun <reified T> empty(): kotlin.Array<T>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='empty(): Array<T>'
+          CALL 'arrayOf(vararg T): Array<T>' type=kotlin.Array<T> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var i: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        VAR val a: kotlin.Array<kotlin.String>
+          CALL 'bar(() -> String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            block: BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                    VAR val tmp0: kotlin.Int
+                      GET_VAR 'i: Int' type=kotlin.Int operator=POSTFIX_INCR
+                    SET_VAR 'i: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                      CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                        $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                    GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    CALL 'toString(): String' type=kotlin.String operator=null
+                      $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='345'
+          actual: CALL 'joinToString(CharSequence = ..., CharSequence = ..., CharSequence = ..., Int = ..., CharSequence = ..., ((String) -> CharSequence)? = ...) on Array<out String>: String' type=kotlin.String operator=null
+            $receiver: GET_VAR 'a: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            separator: CONST String type=kotlin.String value=''
+        SET_VAR 'i: Int' type=kotlin.Unit operator=EQ
+          CONST Int type=kotlin.Int value='0'
+        VAR val b: kotlin.Array<kotlin.Int>
+          CALL 'bar(() -> Int): Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+            block: BLOCK type=() -> kotlin.Int operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Int'
+                    BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                      VAR val tmp0: kotlin.Int
+                        GET_VAR 'i: Int' type=kotlin.Int operator=POSTFIX_INCR
+                      SET_VAR 'i: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                        CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                          $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                      GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+              CALLABLE_REFERENCE '<anonymous>(): Int' type=() -> kotlin.Int operator=LAMBDA
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='234'
+          actual: CALL 'joinToString(CharSequence = ..., CharSequence = ..., CharSequence = ..., Int = ..., CharSequence = ..., ((String) -> CharSequence)? = ...) on Iterable<String>: String' type=kotlin.String operator=null
+            $receiver: CALL 'map((Int) -> String) on Array<out Int>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              $receiver: GET_VAR 'b: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+              transform: BLOCK type=(kotlin.Int) -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.Int): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(Int): String'
+                      CALL 'toString(): String' type=kotlin.String operator=null
+                        $this: GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                CALLABLE_REFERENCE '<anonymous>(Int): String' type=(kotlin.Int) -> kotlin.String operator=LAMBDA
+            separator: CONST String type=kotlin.String value=''
+        VAR val c: kotlin.Array<kotlin.String>
+          CALL 'empty(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='0'
+          actual: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: GET_VAR 'c: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

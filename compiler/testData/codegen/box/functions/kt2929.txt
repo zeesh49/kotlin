@@ -1,0 +1,21 @@
+MODULE <test-module>
+  FILE /kt2929.kt
+    FUN public fun foo(): kotlin.Int
+      BLOCK_BODY
+        VAR val a: kotlin.String = "test"
+          CONST String type=kotlin.String value='test'
+        VAR val b: kotlin.String = "test"
+          CONST String type=kotlin.String value='test'
+        RETURN type=kotlin.Nothing from='foo(): Int'
+          CALL 'compareTo(String): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'a: String' type=kotlin.String operator=null
+            other: GET_VAR 'b: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'foo(): Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='Fail'

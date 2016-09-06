@@ -1,0 +1,52 @@
+MODULE <test-module>
+  FILE /extentionFunctionDoubleTwoArgs.kt
+    FUN public fun kotlin.Double.foo(a: kotlin.Double = ..., b: kotlin.Double = ...): kotlin.Double
+      a: EXPRESSION_BODY
+        CONST Double type=kotlin.Double value='1.0'
+      b: EXPRESSION_BODY
+        CONST Double type=kotlin.Double value='1.0'
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(Double = ..., Double = ...) on Double: Double'
+          CALL 'plus(Double): Double' type=kotlin.Double operator=PLUS
+            $this: GET_VAR 'value-parameter a: Double = ...' type=kotlin.Double operator=null
+            other: GET_VAR 'value-parameter b: Double = ...' type=kotlin.Double operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(Double = ..., Double = ...) on Double: Double' type=kotlin.Double operator=null
+                $receiver: CONST Double type=kotlin.Double value='1.0'
+              arg1: CONST Double type=kotlin.Double value='2.0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(Double = ..., Double = ...) on Double: Double' type=kotlin.Double operator=null
+                $receiver: CONST Double type=kotlin.Double value='1.0'
+                a: CONST Double type=kotlin.Double value='2.0'
+                b: CONST Double type=kotlin.Double value='2.0'
+              arg1: CONST Double type=kotlin.Double value='4.0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(Double = ..., Double = ...) on Double: Double' type=kotlin.Double operator=null
+                $receiver: CONST Double type=kotlin.Double value='1.0'
+                a: CONST Double type=kotlin.Double value='2.0'
+              arg1: CONST Double type=kotlin.Double value='3.0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(Double = ..., Double = ...) on Double: Double' type=kotlin.Double operator=null
+                $receiver: CONST Double type=kotlin.Double value='1.0'
+                b: CONST Double type=kotlin.Double value='2.0'
+              arg1: CONST Double type=kotlin.Double value='3.0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

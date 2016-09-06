@@ -1,0 +1,266 @@
+MODULE <test-module>
+  FILE /kt528.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val input: java.io.StringReader
+          CALL 'constructor StringReader(String!)' type=java.io.StringReader operator=null
+            p0: CONST String type=kotlin.String value='/aaa/bbb/ccc/ddd'
+        VAR val luhny: mask.Luhny
+          CALL 'constructor Luhny()' type=mask.Luhny operator=null
+        CALL 'forEachChar((Char) -> Unit) on Reader: Unit' type=kotlin.Unit operator=null
+          $receiver: GET_VAR 'input: StringReader' type=java.io.StringReader operator=null
+          body: BLOCK type=(kotlin.Char) -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(it: kotlin.Char): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(Char): Unit'
+                  CALL 'charIn(Char): Unit' type=kotlin.Unit operator=null
+                    $this: GET_VAR 'luhny: Luhny' type=mask.Luhny operator=null
+                    it: GET_VAR 'value-parameter it: Char' type=kotlin.Char operator=null
+            CALLABLE_REFERENCE '<anonymous>(Char): Unit' type=(kotlin.Char) -> kotlin.Unit operator=LAMBDA
+        CALL 'printAll(): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'luhny: Luhny' type=mask.Luhny operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    CLASS CLASS Luhny
+      CONSTRUCTOR public constructor Luhny()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Luhny'
+      PROPERTY public final val buffer: java.util.LinkedList<kotlin.Char>
+        EXPRESSION_BODY
+          CALL 'constructor LinkedList()' type=java.util.LinkedList<kotlin.Char> operator=null
+      PROPERTY public final val digits: java.util.LinkedList<kotlin.Int>
+        EXPRESSION_BODY
+          CALL 'constructor LinkedList()' type=java.util.LinkedList<kotlin.Int> operator=null
+      PROPERTY public final var toBeMasked: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+      FUN public final fun charIn(it: kotlin.Char): kotlin.Unit
+        BLOCK_BODY
+          CALL 'addLast(Char!): Unit' type=kotlin.Unit operator=null
+            $this: CALL '<get-buffer>(): LinkedList<Char>' type=java.util.LinkedList<kotlin.Char> operator=GET_PROPERTY
+              $this: THIS of 'Luhny' type=mask.Luhny
+            p0: GET_VAR 'value-parameter it: Char' type=kotlin.Char operator=null
+          WHEN type=kotlin.Unit operator=WHEN
+            if: CALL 'isDigit() on Char: Boolean' type=kotlin.Boolean operator=null
+              $receiver: GET_VAR 'value-parameter it: Char' type=kotlin.Char operator=null
+            then: BLOCK type=kotlin.Unit operator=null
+              CALL 'addLast(Int!): Unit' type=kotlin.Unit operator=null
+                $this: CALL '<get-digits>(): LinkedList<Int>' type=java.util.LinkedList<kotlin.Int> operator=GET_PROPERTY
+                  $this: THIS of 'Luhny' type=mask.Luhny
+                p0: CALL 'minus(Char): Int' type=kotlin.Int operator=MINUS
+                  $this: GET_VAR 'value-parameter it: Char' type=kotlin.Char operator=null
+                  other: CONST Char type=kotlin.Char value='0'
+            if: WHEN type=kotlin.Boolean operator=OROR
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'value-parameter it: Char' type=kotlin.Char operator=null
+                arg1: CONST Char type=kotlin.Char value=' '
+              then: CONST Boolean type=kotlin.Boolean value='true'
+              else: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'value-parameter it: Char' type=kotlin.Char operator=null
+                arg1: CONST Char type=kotlin.Char value='-'
+            then: BLOCK type=kotlin.Unit operator=null
+            else: BLOCK type=kotlin.Unit operator=null
+              CALL 'printAll(): Unit' type=kotlin.Unit operator=null
+                $this: THIS of 'Luhny' type=mask.Luhny
+              CALL 'clear(): Unit' type=kotlin.Unit operator=null
+                $this: CALL '<get-digits>(): LinkedList<Int>' type=java.util.LinkedList<kotlin.Int> operator=GET_PROPERTY
+                  $this: THIS of 'Luhny' type=mask.Luhny
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+              arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+                $this: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: CALL '<get-digits>(): LinkedList<Int>' type=java.util.LinkedList<kotlin.Int> operator=GET_PROPERTY
+                    $this: THIS of 'Luhny' type=mask.Luhny
+                other: CONST Int type=kotlin.Int value='16'
+            then: CALL 'printOneDigit(): Unit' type=kotlin.Unit operator=null
+              $this: THIS of 'Luhny' type=mask.Luhny
+          CALL 'check(): Unit' type=kotlin.Unit operator=null
+            $this: THIS of 'Luhny' type=mask.Luhny
+      FUN public final fun check(): kotlin.Unit
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+              arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+                $this: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: CALL '<get-digits>(): LinkedList<Int>' type=java.util.LinkedList<kotlin.Int> operator=GET_PROPERTY
+                    $this: THIS of 'Luhny' type=mask.Luhny
+                other: CONST Int type=kotlin.Int value='14'
+            then: RETURN type=kotlin.Nothing from='check(): Unit'
+          CALL 'print(Any?): Unit' type=kotlin.Unit operator=null
+            message: CONST String type=kotlin.String value='check'
+          VAR val sum: kotlin.Int
+            CALL 'sum((Int, Int) -> Int) on LinkedList<Int>: Int' type=kotlin.Int operator=null
+              $receiver: CALL '<get-digits>(): LinkedList<Int>' type=java.util.LinkedList<kotlin.Int> operator=GET_PROPERTY
+                $this: THIS of 'Luhny' type=mask.Luhny
+              f: BLOCK type=(kotlin.Int, kotlin.Int) -> kotlin.Int operator=LAMBDA
+                FUN local final fun <anonymous>(i: kotlin.Int, d: kotlin.Int): kotlin.Int
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(Int, Int): Int'
+                      WHEN type=kotlin.Int operator=IF
+                        if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: CALL 'mod(Int): Int' type=kotlin.Int operator=PERC
+                            $this: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+                            other: CONST Int type=kotlin.Int value='2'
+                          arg1: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                            $this: CALL '<get-digits>(): LinkedList<Int>' type=java.util.LinkedList<kotlin.Int> operator=GET_PROPERTY
+                              $this: THIS of 'Luhny' type=mask.Luhny
+                        then: BLOCK type=kotlin.Int operator=null
+                          VAR val f: kotlin.Int
+                            CALL 'div(Int): Int' type=kotlin.Int operator=DIV
+                              $this: CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                                $this: GET_VAR 'value-parameter d: Int' type=kotlin.Int operator=null
+                                other: CONST Int type=kotlin.Int value='2'
+                              other: CONST Int type=kotlin.Int value='10'
+                          VAR val s: kotlin.Int
+                            CALL 'mod(Int): Int' type=kotlin.Int operator=PERC
+                              $this: CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                                $this: GET_VAR 'value-parameter d: Int' type=kotlin.Int operator=null
+                                other: CONST Int type=kotlin.Int value='2'
+                              other: CONST Int type=kotlin.Int value='10'
+                          CALL 'pr((Int) -> Unit) on Int: Int' type=kotlin.Int operator=null
+                            $receiver: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                              $this: GET_VAR 'f: Int' type=kotlin.Int operator=null
+                              other: GET_VAR 's: Int' type=kotlin.Int operator=null
+                            f: BLOCK type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+                              FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Unit
+                                BLOCK_BODY
+                                  RETURN type=kotlin.Nothing from='<anonymous>(Int): Unit'
+                              CALLABLE_REFERENCE '<anonymous>(Int): Unit' type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+                        else: GET_VAR 'value-parameter d: Int' type=kotlin.Int operator=null
+                CALLABLE_REFERENCE '<anonymous>(Int, Int): Int' type=(kotlin.Int, kotlin.Int) -> kotlin.Int operator=LAMBDA
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'mod(Int): Int' type=kotlin.Int operator=PERC
+                $this: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+                other: CONST Int type=kotlin.Int value='10'
+              arg1: CONST Int type=kotlin.Int value='0'
+            then: BLOCK type=kotlin.Unit operator=null
+              CALL 'print(Any?): Unit' type=kotlin.Unit operator=null
+                message: CONST String type=kotlin.String value='s'
+              CALL '<set-toBeMasked>(Int): Unit' type=kotlin.Unit operator=EQ
+                $this: THIS of 'Luhny' type=mask.Luhny
+                <set-?>: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: CALL '<get-digits>(): LinkedList<Int>' type=java.util.LinkedList<kotlin.Int> operator=GET_PROPERTY
+                    $this: THIS of 'Luhny' type=mask.Luhny
+      FUN public final fun printOneDigit(): kotlin.Unit
+        BLOCK_BODY
+          WHILE label=null operator=WHILE_LOOP
+            condition: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+              $this: CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+                $this: CALL '<get-buffer>(): LinkedList<Char>' type=java.util.LinkedList<kotlin.Char> operator=GET_PROPERTY
+                  $this: THIS of 'Luhny' type=mask.Luhny
+            body: BLOCK type=kotlin.Unit operator=null
+              VAR val c: kotlin.Char!
+                CALL 'removeFirst(): Char!' type=kotlin.Char! operator=null
+                  $this: CALL '<get-buffer>(): LinkedList<Char>' type=java.util.LinkedList<kotlin.Char> operator=GET_PROPERTY
+                    $this: THIS of 'Luhny' type=mask.Luhny
+              CALL 'out(Char): Unit' type=kotlin.Unit operator=null
+                $this: THIS of 'Luhny' type=mask.Luhny
+                c: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Char
+                  GET_VAR 'c: Char!' type=kotlin.Char! operator=null
+              WHEN type=kotlin.Unit operator=IF
+                if: CALL 'isDigit() on Char: Boolean' type=kotlin.Boolean operator=null
+                  $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Char
+                    GET_VAR 'c: Char!' type=kotlin.Char! operator=null
+                then: BLOCK type=kotlin.Nothing operator=null
+                  CALL 'removeFirst(): Int!' type=kotlin.Int! operator=null
+                    $this: CALL '<get-digits>(): LinkedList<Int>' type=java.util.LinkedList<kotlin.Int> operator=GET_PROPERTY
+                      $this: THIS of 'Luhny' type=mask.Luhny
+                  RETURN type=kotlin.Nothing from='printOneDigit(): Unit'
+      FUN public final fun printAll(): kotlin.Unit
+        BLOCK_BODY
+          WHILE label=null operator=WHILE_LOOP
+            condition: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+              $this: CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+                $this: CALL '<get-buffer>(): LinkedList<Char>' type=java.util.LinkedList<kotlin.Char> operator=GET_PROPERTY
+                  $this: THIS of 'Luhny' type=mask.Luhny
+            body: CALL 'out(Char): Unit' type=kotlin.Unit operator=null
+              $this: THIS of 'Luhny' type=mask.Luhny
+              c: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Char
+                CALL 'removeFirst(): Char!' type=kotlin.Char! operator=null
+                  $this: CALL '<get-buffer>(): LinkedList<Char>' type=java.util.LinkedList<kotlin.Char> operator=GET_PROPERTY
+                    $this: THIS of 'Luhny' type=mask.Luhny
+      FUN public final fun out(c: kotlin.Char): kotlin.Unit
+        BLOCK_BODY
+          WHEN type=kotlin.Any operator=IF
+            if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+              arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+                $this: CALL '<get-toBeMasked>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'Luhny' type=mask.Luhny
+                other: CONST Int type=kotlin.Int value='0'
+            then: BLOCK type=kotlin.Int operator=null
+              CALL 'print(Char): Unit' type=kotlin.Unit operator=null
+                message: CONST Char type=kotlin.Char value='X'
+              BLOCK type=kotlin.Int operator=POSTFIX_DECR
+                VAR val tmp0_this: mask.Luhny
+                  THIS of 'Luhny' type=mask.Luhny
+                BLOCK type=kotlin.Int operator=POSTFIX_DECR
+                  VAR val tmp1: kotlin.Int
+                    CALL '<get-toBeMasked>(): Int' type=kotlin.Int operator=POSTFIX_DECR
+                      $this: GET_VAR 'tmp0_this: Luhny' type=mask.Luhny operator=null
+                  CALL '<set-toBeMasked>(Int): Unit' type=kotlin.Unit operator=POSTFIX_DECR
+                    $this: GET_VAR 'tmp0_this: Luhny' type=mask.Luhny operator=null
+                    <set-?>: CALL 'dec(): Int' type=kotlin.Int operator=POSTFIX_DECR
+                      $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+            else: BLOCK type=kotlin.Unit operator=null
+    FUN public fun <T> T.pr(f: (T) -> kotlin.Unit): T
+      BLOCK_BODY
+        CALL 'invoke(T): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'value-parameter f: (T) -> Unit' type=(T) -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+          p1: $RECEIVER of 'pr((T) -> Unit) on T: T' type=T
+        RETURN type=kotlin.Nothing from='pr((T) -> Unit) on T: T'
+          $RECEIVER of 'pr((T) -> Unit) on T: T' type=T
+    FUN public fun java.util.LinkedList<kotlin.Int>.sum(f: (kotlin.Int, kotlin.Int) -> kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        VAR var sum: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='1'
+                other: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: $RECEIVER of 'sum((Int, Int) -> Int) on LinkedList<Int>: Int' type=java.util.LinkedList<kotlin.Int>
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                VAR val j: kotlin.Int
+                  CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+                    $this: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                      $this: $RECEIVER of 'sum((Int, Int) -> Int) on LinkedList<Int>: Int' type=java.util.LinkedList<kotlin.Int>
+                    other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                SET_VAR 'sum: Int' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                    $this: GET_VAR 'sum: Int' type=kotlin.Int operator=PLUSEQ
+                    other: CALL 'invoke(Int, Int): Int' type=kotlin.Int operator=INVOKE
+                      $this: GET_VAR 'value-parameter f: (Int, Int) -> Int' type=(kotlin.Int, kotlin.Int) -> kotlin.Int operator=VARIABLE_AS_FUNCTION
+                      p1: GET_VAR 'j: Int' type=kotlin.Int operator=null
+                      p2: CALL 'get(Int): Int' type=kotlin.Int operator=null
+                        $this: $RECEIVER of 'sum((Int, Int) -> Int) on LinkedList<Int>: Int' type=java.util.LinkedList<kotlin.Int>
+                        index: GET_VAR 'j: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='sum((Int, Int) -> Int) on LinkedList<Int>: Int'
+          GET_VAR 'sum: Int' type=kotlin.Int operator=null
+    FUN public fun java.io.Reader.forEachChar(body: (kotlin.Char) -> kotlin.Unit): kotlin.Unit
+      BLOCK_BODY
+        DO_WHILE label=null operator=DO_WHILE_LOOP
+          body: BLOCK type=kotlin.Unit operator=null
+            VAR var i: kotlin.Int
+              CALL 'read(): Int' type=kotlin.Int operator=null
+                $this: $RECEIVER of 'forEachChar((Char) -> Unit) on Reader: Unit' type=java.io.Reader
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                arg1: CONST Int type=kotlin.Int value='-1'
+              then: BREAK label=null loop.label=null depth=0
+            CALL 'invoke(Char): Unit' type=kotlin.Unit operator=INVOKE
+              $this: GET_VAR 'value-parameter body: (Char) -> Unit' type=(kotlin.Char) -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+              p1: CALL 'toChar(): Char' type=kotlin.Char operator=null
+                $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+          condition: CONST Boolean type=kotlin.Boolean value='true'

@@ -1,0 +1,16 @@
+MODULE <test-module>
+  FILE /simple.kt
+    FUN public inline fun foo(x: () -> kotlin.String): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(() -> String): String'
+          CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+            $this: GET_VAR 'value-parameter x: () -> String' type=() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+    FUN public fun kotlin.String.id(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='id() on String: String'
+          $RECEIVER of 'id() on String: String' type=kotlin.String
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(() -> String): String' type=kotlin.String operator=null
+            x: CALLABLE_REFERENCE 'id() on String: String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null

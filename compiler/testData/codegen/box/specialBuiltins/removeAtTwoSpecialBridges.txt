@@ -1,0 +1,121 @@
+MODULE <test-module>
+  FILE /removeAtTwoSpecialBridges.kt
+    CLASS CLASS A0
+      CONSTRUCTOR public constructor A0<E>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A0'
+      FUN public open override fun add(element: E): kotlin.Boolean
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun add(index: kotlin.Int, element: E): kotlin.Unit
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun addAll(index: kotlin.Int, elements: kotlin.collections.Collection<E>): kotlin.Boolean
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun addAll(elements: kotlin.collections.Collection<E>): kotlin.Boolean
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun clear(): kotlin.Unit
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun listIterator(): kotlin.collections.MutableListIterator<E>
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun listIterator(index: kotlin.Int): kotlin.collections.MutableListIterator<E>
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun remove(element: E): kotlin.Boolean
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun removeAll(elements: kotlin.collections.Collection<E>): kotlin.Boolean
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun removeAt(index: kotlin.Int): E
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='removeAt(Int): E'
+            TYPE_OP operator=CAST typeOperand=E
+              CONST String type=kotlin.String value='K'
+      FUN public open override fun retainAll(elements: kotlin.collections.Collection<E>): kotlin.Boolean
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun set(index: kotlin.Int, element: E): E
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun subList(fromIndex: kotlin.Int, toIndex: kotlin.Int): kotlin.collections.MutableList<E>
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            THROW type=kotlin.Nothing
+              CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun contains(element: E): kotlin.Boolean
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun containsAll(elements: kotlin.collections.Collection<E>): kotlin.Boolean
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun get(index: kotlin.Int): E
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun indexOf(element: E): kotlin.Int
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun lastIndexOf(element: E): kotlin.Int
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun iterator(): kotlin.collections.MutableIterator<E>
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+    CLASS CLASS A1
+      CONSTRUCTOR public constructor A1()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A0()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A1'
+      FUN public open override fun removeAt(p0: kotlin.Int): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='removeAt(Int): String'
+            CONST String type=kotlin.String value='O'
+    CLASS CLASS A2
+      CONSTRUCTOR public constructor A2()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A0()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A2'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a1: A1
+          CALL 'constructor A1()' type=A1 operator=null
+        VAR val a2: A2
+          CALL 'constructor A2()' type=A2 operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'removeAt(Int): String' type=kotlin.String operator=null
+              $this: GET_VAR 'a1: A1' type=A1 operator=null
+              p0: CONST Int type=kotlin.Int value='123'
+            other: CALL 'removeAt(Int): String' type=kotlin.String operator=null
+              $this: GET_VAR 'a2: A2' type=A2 operator=null
+              index: CONST Int type=kotlin.Int value='456'

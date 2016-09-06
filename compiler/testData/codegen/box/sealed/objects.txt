@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /objects.kt
+    CLASS CLASS Season
+      CONSTRUCTOR private constructor Season()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Season'
+      CLASS OBJECT Warm
+        CONSTRUCTOR private constructor Warm()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Season()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Warm'
+      CLASS OBJECT Cold
+        CONSTRUCTOR private constructor Cold()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Season()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Cold'
+    FUN public fun foo(): Season
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(): Season'
+          GET_OBJECT 'Warm' type=Season.Warm
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          BLOCK type=kotlin.String operator=WHEN
+            VAR val tmp0_subject: Season
+              CALL 'foo(): Season' type=Season operator=null
+            WHEN type=kotlin.String operator=WHEN
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Season' type=Season operator=null
+                arg1: GET_OBJECT 'Warm' type=Season.Warm
+              then: CONST String type=kotlin.String value='OK'
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Season' type=Season operator=null
+                arg1: GET_OBJECT 'Cold' type=Season.Cold
+              then: CONST String type=kotlin.String value='Fail: Cold, should be Warm'

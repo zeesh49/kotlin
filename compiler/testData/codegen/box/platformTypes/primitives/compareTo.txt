@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /compareTo.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val l: java.util.ArrayList<kotlin.Int>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.Int> operator=null
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'l: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='1'
+        VAR val x: kotlin.Boolean
+          CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+              $this: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'l: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+                index: CONST Int type=kotlin.Int value='0'
+              other: CONST Int type=kotlin.Int value='2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'x: Boolean' type=kotlin.Boolean operator=null
+              arg1: CONST Boolean type=kotlin.Boolean value='true'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'x: Boolean' type=kotlin.Boolean operator=null
+              CONST String type=kotlin.String value='}'
+        VAR val y: kotlin.Int
+          CALL 'compareTo(Int): Int' type=kotlin.Int operator=null
+            $this: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+              $this: GET_VAR 'l: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+              index: CONST Int type=kotlin.Int value='0'
+            other: CONST Int type=kotlin.Int value='2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'y: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='-1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail (y): '
+              GET_VAR 'y: Int' type=kotlin.Int operator=null
+              CONST String type=kotlin.String value='}'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

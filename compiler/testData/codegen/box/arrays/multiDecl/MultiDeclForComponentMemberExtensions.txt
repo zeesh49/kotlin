@@ -1,0 +1,91 @@
+MODULE <test-module>
+  FILE /MultiDeclForComponentMemberExtensions.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C(i: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'i: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'C' type=C
+            value: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      PROPERTY public final val i: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS M
+      CONSTRUCTOR public constructor M()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='M'
+      FUN public final operator fun C.component1(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component1() on C: Int'
+            CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+              $this: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: $RECEIVER of 'component1() on C: Int' type=C
+              other: CONST Int type=kotlin.Int value='1'
+      FUN public final operator fun C.component2(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component2() on C: Int'
+            CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+              $this: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: $RECEIVER of 'component2() on C: Int' type=C
+              other: CONST Int type=kotlin.Int value='2'
+      FUN public final fun doTest(l: kotlin.Array<C>): kotlin.String
+        BLOCK_BODY
+          VAR var s: kotlin.String
+            CONST String type=kotlin.String value=''
+          BLOCK type=kotlin.Unit operator=FOR_LOOP
+            VAR val tmp0_iterator: kotlin.collections.Iterator<C>
+              CALL 'iterator(): Iterator<C>' type=kotlin.collections.Iterator<C> operator=FOR_LOOP_ITERATOR
+                $this: GET_VAR 'value-parameter l: Array<C>' type=kotlin.Array<C> operator=null
+            WHILE label=null operator=FOR_LOOP_INNER_WHILE
+              condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+                $this: GET_VAR 'tmp0_iterator: Iterator<C>' type=kotlin.collections.Iterator<C> operator=null
+              body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+                VAR val tmp1_loop_parameter: C
+                  CALL 'next(): C' type=C operator=FOR_LOOP_NEXT
+                    $this: GET_VAR 'tmp0_iterator: Iterator<C>' type=kotlin.collections.Iterator<C> operator=null
+                VAR val a: kotlin.Int
+                  CALL 'component1() on C: Int' type=kotlin.Int operator=COMPONENT_N(index=1)
+                    $this: THIS of 'M' type=M
+                    $receiver: GET_VAR 'tmp1_loop_parameter: C' type=C operator=null
+                VAR val b: kotlin.Int
+                  CALL 'component2() on C: Int' type=kotlin.Int operator=COMPONENT_N(index=2)
+                    $this: THIS of 'M' type=M
+                    $receiver: GET_VAR 'tmp1_loop_parameter: C' type=C operator=null
+                BLOCK type=kotlin.Unit operator=null
+                  SET_VAR 's: String' type=kotlin.Unit operator=PLUSEQ
+                    CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                      $this: GET_VAR 's: String' type=kotlin.String operator=PLUSEQ
+                      other: STRING_CONCATENATION type=kotlin.String
+                        GET_VAR 'a: Int' type=kotlin.Int operator=null
+                        CONST String type=kotlin.String value=':'
+                        GET_VAR 'b: Int' type=kotlin.Int operator=null
+                        CONST String type=kotlin.String value=';'
+          RETURN type=kotlin.Nothing from='doTest(Array<C>): String'
+            GET_VAR 's: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val l: kotlin.Array<C>
+          CALL 'constructor Array(Int, (Int) -> C)' type=kotlin.Array<C> operator=null
+            size: CONST Int type=kotlin.Int value='3'
+            init: BLOCK type=(kotlin.Int) -> C operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Int): C
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): C'
+                    CALL 'constructor C(Int)' type=C operator=null
+                      i: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+              CALLABLE_REFERENCE '<anonymous>(Int): C' type=(kotlin.Int) -> C operator=LAMBDA
+        VAR val s: kotlin.String
+          CALL 'doTest(Array<C>): String' type=kotlin.String operator=null
+            $this: CALL 'constructor M()' type=M operator=null
+            l: GET_VAR 'l: Array<C>' type=kotlin.Array<C> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 's: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='1:2;2:3;3:4;'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: '
+              GET_VAR 's: String' type=kotlin.String operator=null

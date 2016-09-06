@@ -1,0 +1,50 @@
+MODULE <test-module>
+  FILE /continueInWhile.kt
+    FUN public fun foo(i: kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        VAR var count: kotlin.Int
+          GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+        VAR var result: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+              $this: GET_VAR 'count: Int' type=kotlin.Int operator=null
+              other: CONST Int type=kotlin.Int value='0'
+          body: BLOCK type=kotlin.Unit operator=null
+            SET_VAR 'count: Int' type=kotlin.Unit operator=EQ
+              CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+                $this: GET_VAR 'count: Int' type=kotlin.Int operator=null
+                other: CONST Int type=kotlin.Int value='1'
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'LTEQ0(Int): Boolean' type=kotlin.Boolean operator=LTEQ
+                arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LTEQ
+                  $this: GET_VAR 'count: Int' type=kotlin.Int operator=null
+                  other: CONST Int type=kotlin.Int value='2'
+              then: CONTINUE label=null loop.label=null depth=0
+            SET_VAR 'result: Int' type=kotlin.Unit operator=EQ
+              CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: GET_VAR 'result: Int' type=kotlin.Int operator=null
+                other: GET_VAR 'count: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='foo(Int): Int'
+          GET_VAR 'result: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(Int): Int' type=kotlin.Int operator=null
+                i: CONST Int type=kotlin.Int value='4'
+              arg1: CONST Int type=kotlin.Int value='3'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(Int): Int' type=kotlin.Int operator=null
+                i: CONST Int type=kotlin.Int value='5'
+              arg1: CONST Int type=kotlin.Int value='7'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

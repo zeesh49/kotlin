@@ -1,0 +1,21 @@
+MODULE <test-module>
+  FILE /genericNull.kt
+    FUN public fun <T : kotlin.Number?> foo(t: T): kotlin.Unit
+      BLOCK_BODY
+        BLOCK type=kotlin.Int? operator=SAFE_CALL
+          VAR val tmp0_safe_receiver: T
+            GET_VAR 'value-parameter t: T' type=T operator=null
+          WHEN type=kotlin.Int? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_safe_receiver: T' type=T operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'toInt(): Int' type=kotlin.Int operator=null
+              $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Number
+                GET_VAR 'tmp0_safe_receiver: T' type=T operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'foo(Int?): Unit' type=kotlin.Unit operator=null
+          t: CONST Null type=kotlin.Nothing? value='null'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

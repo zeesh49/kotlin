@@ -1,0 +1,53 @@
+MODULE <test-module>
+  FILE /kt694.kt
+    CLASS ENUM_CLASS Test
+      CONSTRUCTOR private constructor Test()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      ENUM_ENTRY enum entry A
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Test()' A
+      ENUM_ENTRY enum entry B
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Test()' B
+      ENUM_ENTRY enum entry C
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Test()' C
+      FUN public final fun values(): kotlin.Array<Test>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): Test
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun checkA(a: Test): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='checkA(Test): Boolean'
+          BLOCK type=kotlin.Boolean operator=WHEN
+            VAR val tmp0_subject: Test
+              GET_VAR 'value-parameter a: Test' type=Test operator=null
+            WHEN type=kotlin.Boolean operator=WHEN
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Test' type=Test operator=null
+                arg1: GET_ENUM_VALUE 'B' type=Test
+              then: CONST Boolean type=kotlin.Boolean value='false'
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Test' type=Test operator=null
+                arg1: GET_ENUM_VALUE 'A' type=Test
+              then: CONST Boolean type=kotlin.Boolean value='true'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'checkA(Test): Boolean' type=kotlin.Boolean operator=null
+              a: GET_ENUM_VALUE 'A' type=Test
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'checkA(Test): Boolean' type=kotlin.Boolean operator=null
+            a: GET_ENUM_VALUE 'C' type=Test
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'checkA(Test): Boolean' type=kotlin.Boolean operator=null
+            a: GET_ENUM_VALUE 'B' type=Test
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

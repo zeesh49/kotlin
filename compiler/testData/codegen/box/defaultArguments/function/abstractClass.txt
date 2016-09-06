@@ -1,0 +1,35 @@
+MODULE <test-module>
+  FILE /abstractClass.kt
+    CLASS CLASS Base
+      CONSTRUCTOR public constructor Base()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Base'
+      FUN public abstract fun foo(a: kotlin.String = ...): kotlin.String
+        a: EXPRESSION_BODY
+          CONST String type=kotlin.String value='abc'
+    CLASS CLASS Derived
+      CONSTRUCTOR public constructor Derived()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Base()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Derived'
+      FUN public open override fun foo(a: kotlin.String = ...): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(String = ...): String'
+            GET_VAR 'value-parameter a: String = ...' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val result: kotlin.String
+          CALL 'foo(String = ...): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Derived()' type=Derived operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='abc'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'result: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

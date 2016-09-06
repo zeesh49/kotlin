@@ -1,0 +1,201 @@
+MODULE <test-module>
+  FILE /kt1038.kt
+    CLASS CLASS YieldingIterator
+      CONSTRUCTOR public constructor YieldingIterator<T>(yieldingFunction: () -> T?)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'yieldingFunction: () -> T?' type=kotlin.Unit operator=null
+            receiver: THIS of 'YieldingIterator' type=YieldingIterator<T>
+            value: GET_VAR 'value-parameter yieldingFunction: () -> T?' type=() -> T? operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='YieldingIterator'
+      PROPERTY public final val yieldingFunction: () -> T?
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter yieldingFunction: () -> T?' type=() -> T? operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final var current: T?
+        EXPRESSION_BODY
+          CALL 'invoke(): T?' type=T? operator=INVOKE
+            $this: CALL '<get-yieldingFunction>(): () -> T?' type=() -> T? operator=GET_PROPERTY
+              $this: THIS of 'YieldingIterator' type=YieldingIterator<T>
+      FUN public open override fun next(): T
+        BLOCK_BODY
+          VAR val next: T?
+            CALL '<get-current>(): T?' type=T? operator=GET_PROPERTY
+              $this: THIS of 'YieldingIterator' type=YieldingIterator<T>
+          WHEN type=kotlin.Nothing operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'next: T?' type=T? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: BLOCK type=kotlin.Nothing operator=null
+              CALL '<set-current>(T?): Unit' type=kotlin.Unit operator=EQ
+                $this: THIS of 'YieldingIterator' type=YieldingIterator<T>
+                <set-?>: CALL 'invoke(): T?' type=T? operator=INVOKE
+                  $this: CALL '<get-yieldingFunction>(): () -> T?' type=() -> T? operator=GET_PROPERTY
+                    $this: THIS of 'YieldingIterator' type=YieldingIterator<T>
+              RETURN type=kotlin.Nothing from='next(): T'
+                GET_VAR 'next: T?' type=T? operator=null
+            else: THROW type=kotlin.Nothing
+              CALL 'constructor IndexOutOfBoundsException()' type=java.lang.IndexOutOfBoundsException operator=null
+      FUN public open override fun hasNext(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='hasNext(): Boolean'
+            CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-current>(): T?' type=T? operator=GET_PROPERTY
+                  $this: THIS of 'YieldingIterator' type=YieldingIterator<T>
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+    CLASS CLASS YieldingIterable
+      CONSTRUCTOR public constructor YieldingIterable<T>(yielderFactory: () -> () -> T?)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'yielderFactory: () -> () -> T?' type=kotlin.Unit operator=null
+            receiver: THIS of 'YieldingIterable' type=YieldingIterable<T>
+            value: GET_VAR 'value-parameter yielderFactory: () -> () -> T?' type=() -> () -> T? operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='YieldingIterable'
+      PROPERTY public final val yielderFactory: () -> () -> T?
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter yielderFactory: () -> () -> T?' type=() -> () -> T? operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public open override fun iterator(): kotlin.collections.Iterator<T>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='iterator(): Iterator<T>'
+            CALL 'constructor YieldingIterator(() -> T?)' type=YieldingIterator<T> operator=null
+              yieldingFunction: CALL 'invoke(): () -> T?' type=() -> T? operator=INVOKE
+                $this: CALL '<get-yielderFactory>(): () -> () -> T?' type=() -> () -> T? operator=GET_PROPERTY
+                  $this: THIS of 'YieldingIterable' type=YieldingIterable<T>
+    FUN public fun <TItem> kotlin.collections.Iterable<TItem>.lazy(): kotlin.collections.Iterable<TItem>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='lazy() on Iterable<TItem>: Iterable<TItem>'
+          CALL 'constructor YieldingIterable(() -> () -> TItem?)' type=YieldingIterable<TItem> operator=null
+            yielderFactory: BLOCK type=() -> () -> TItem? operator=LAMBDA
+              FUN local final fun <anonymous>(): () -> TItem?
+                BLOCK_BODY
+                  VAR val iterator: kotlin.collections.Iterator<TItem>
+                    CALL 'iterator(): Iterator<TItem>' type=kotlin.collections.Iterator<TItem> operator=null
+                      $this: $RECEIVER of 'lazy() on Iterable<TItem>: Iterable<TItem>' type=kotlin.collections.Iterable<TItem>
+                  RETURN type=kotlin.Nothing from='<anonymous>(): () -> TItem?'
+                    BLOCK type=() -> TItem? operator=LAMBDA
+                      FUN local final fun <anonymous>(): TItem?
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='<anonymous>(): TItem?'
+                            WHEN type=TItem? operator=IF
+                              if: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=null
+                                $this: GET_VAR 'iterator: Iterator<TItem>' type=kotlin.collections.Iterator<TItem> operator=null
+                              then: CALL 'next(): TItem' type=TItem operator=null
+                                $this: GET_VAR 'iterator: Iterator<TItem>' type=kotlin.collections.Iterator<TItem> operator=null
+                              else: CONST Null type=kotlin.Nothing? value='null'
+                      CALLABLE_REFERENCE '<anonymous>(): TItem?' type=() -> TItem? operator=LAMBDA
+              CALLABLE_REFERENCE '<anonymous>(): () -> TItem?' type=() -> () -> TItem? operator=LAMBDA
+    FUN public infix fun <TItem> kotlin.collections.Iterable<TItem>.where(predicate: (TItem) -> kotlin.Boolean): kotlin.collections.Iterable<TItem>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='where((TItem) -> Boolean) on Iterable<TItem>: Iterable<TItem>'
+          CALL 'constructor YieldingIterable(() -> () -> TItem?)' type=YieldingIterable<TItem> operator=null
+            yielderFactory: BLOCK type=() -> () -> TItem? operator=LAMBDA
+              FUN local final fun <anonymous>(): () -> TItem?
+                BLOCK_BODY
+                  VAR val iterator: kotlin.collections.Iterator<TItem>
+                    CALL 'iterator(): Iterator<TItem>' type=kotlin.collections.Iterator<TItem> operator=null
+                      $this: $RECEIVER of 'where((TItem) -> Boolean) on Iterable<TItem>: Iterable<TItem>' type=kotlin.collections.Iterable<TItem>
+                  FUN local final fun yielder(): TItem?
+                    BLOCK_BODY
+                      WHILE label=null operator=WHILE_LOOP
+                        condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=null
+                          $this: GET_VAR 'iterator: Iterator<TItem>' type=kotlin.collections.Iterator<TItem> operator=null
+                        body: BLOCK type=kotlin.Unit operator=null
+                          VAR val next: TItem
+                            CALL 'next(): TItem' type=TItem operator=null
+                              $this: GET_VAR 'iterator: Iterator<TItem>' type=kotlin.collections.Iterator<TItem> operator=null
+                          WHEN type=kotlin.Unit operator=IF
+                            if: CALL 'invoke(TItem): Boolean' type=kotlin.Boolean operator=INVOKE
+                              $this: GET_VAR 'value-parameter predicate: (TItem) -> Boolean' type=(TItem) -> kotlin.Boolean operator=VARIABLE_AS_FUNCTION
+                              p1: GET_VAR 'next: TItem' type=TItem operator=null
+                            then: RETURN type=kotlin.Nothing from='yielder(): TItem?'
+                              GET_VAR 'next: TItem' type=TItem operator=null
+                      RETURN type=kotlin.Nothing from='yielder(): TItem?'
+                        CONST Null type=kotlin.Nothing? value='null'
+                  RETURN type=kotlin.Nothing from='<anonymous>(): () -> TItem?'
+                    BLOCK type=() -> TItem? operator=LAMBDA
+                      FUN local final fun <anonymous>(): TItem?
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='<anonymous>(): TItem?'
+                            CALL 'yielder(): TItem?' type=TItem? operator=null
+                      CALLABLE_REFERENCE '<anonymous>(): TItem?' type=() -> TItem? operator=LAMBDA
+              CALLABLE_REFERENCE '<anonymous>(): () -> TItem?' type=() -> () -> TItem? operator=LAMBDA
+    FUN public infix fun <TItem, TResult> kotlin.collections.Iterable<TItem>.select(selector: (TItem) -> TResult): kotlin.collections.Iterable<TResult>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='select((TItem) -> TResult) on Iterable<TItem>: Iterable<TResult>'
+          CALL 'constructor YieldingIterable(() -> () -> TResult?)' type=YieldingIterable<TResult> operator=null
+            yielderFactory: BLOCK type=() -> () -> TResult? operator=LAMBDA
+              FUN local final fun <anonymous>(): () -> TResult?
+                BLOCK_BODY
+                  VAR val iterator: kotlin.collections.Iterator<TItem>
+                    CALL 'iterator(): Iterator<TItem>' type=kotlin.collections.Iterator<TItem> operator=null
+                      $this: $RECEIVER of 'select((TItem) -> TResult) on Iterable<TItem>: Iterable<TResult>' type=kotlin.collections.Iterable<TItem>
+                  RETURN type=kotlin.Nothing from='<anonymous>(): () -> TResult?'
+                    BLOCK type=() -> TResult? operator=LAMBDA
+                      FUN local final fun <anonymous>(): TResult?
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='<anonymous>(): TResult?'
+                            WHEN type=TResult? operator=IF
+                              if: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=null
+                                $this: GET_VAR 'iterator: Iterator<TItem>' type=kotlin.collections.Iterator<TItem> operator=null
+                              then: CALL 'invoke(TItem): TResult' type=TResult operator=INVOKE
+                                $this: GET_VAR 'value-parameter selector: (TItem) -> TResult' type=(TItem) -> TResult operator=VARIABLE_AS_FUNCTION
+                                p1: CALL 'next(): TItem' type=TItem operator=null
+                                  $this: GET_VAR 'iterator: Iterator<TItem>' type=kotlin.collections.Iterator<TItem> operator=null
+                              else: CONST Null type=kotlin.Nothing? value='null'
+                      CALLABLE_REFERENCE '<anonymous>(): TResult?' type=() -> TResult? operator=LAMBDA
+              CALLABLE_REFERENCE '<anonymous>(): () -> TResult?' type=() -> () -> TResult? operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.ranges.IntRange
+          CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+            $this: CONST Int type=kotlin.Int value='0'
+            other: CONST Int type=kotlin.Int value='100'
+        VAR val filtered: kotlin.collections.Iterable<kotlin.Int>
+          CALL 'where((Int) -> Boolean) on Iterable<Int>: Iterable<Int>' type=kotlin.collections.Iterable<kotlin.Int> operator=null
+            $receiver: GET_VAR 'x: IntRange' type=kotlin.ranges.IntRange operator=null
+            predicate: BLOCK type=(kotlin.Int) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): Boolean'
+                    CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: CALL 'mod(Int): Int' type=kotlin.Int operator=PERC
+                        $this: GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                        other: CONST Int type=kotlin.Int value='2'
+                      arg1: CONST Int type=kotlin.Int value='0'
+              CALLABLE_REFERENCE '<anonymous>(Int): Boolean' type=(kotlin.Int) -> kotlin.Boolean operator=LAMBDA
+        VAR val xx: kotlin.collections.Iterable<kotlin.Int>
+          CALL 'select((Int) -> Int) on Iterable<Int>: Iterable<Int>' type=kotlin.collections.Iterable<kotlin.Int> operator=null
+            $receiver: GET_VAR 'x: IntRange' type=kotlin.ranges.IntRange operator=null
+            selector: BLOCK type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): Int'
+                    CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                      $this: GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='2'
+              CALLABLE_REFERENCE '<anonymous>(Int): Int' type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+        VAR var res: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<kotlin.Int>
+            CALL 'iterator(): Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'xx: Iterable<Int>' type=kotlin.collections.Iterable<kotlin.Int> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val x: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+              SET_VAR 'res: Int' type=kotlin.Unit operator=PLUSEQ
+                CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                  $this: GET_VAR 'res: Int' type=kotlin.Int operator=PLUSEQ
+                  other: GET_VAR 'x: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'res: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='10100'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

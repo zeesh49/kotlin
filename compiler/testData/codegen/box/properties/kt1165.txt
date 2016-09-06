@@ -1,0 +1,23 @@
+MODULE <test-module>
+  FILE /kt1165.kt
+    CLASS CLASS VirtualFile
+      CONSTRUCTOR public constructor VirtualFile()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='VirtualFile'
+      PROPERTY public abstract val size: kotlin.Long
+    CLASS CLASS PhysicalVirtualFile
+      CONSTRUCTOR public constructor PhysicalVirtualFile()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor VirtualFile()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='PhysicalVirtualFile'
+      PROPERTY public open override val size: kotlin.Long
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Long
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-size>(): Long'
+              CONST Long type=kotlin.Long value='11'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'constructor PhysicalVirtualFile()' type=PhysicalVirtualFile operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

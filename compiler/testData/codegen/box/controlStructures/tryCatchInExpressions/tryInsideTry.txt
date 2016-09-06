@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /tryInsideTry.kt
+    CLASS CLASS MyException
+      CONSTRUCTOR public constructor MyException(message: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Exception(String!)'
+            p0: GET_VAR 'value-parameter message: String' type=kotlin.String operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyException'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CONST String type=kotlin.String value='O'
+            other: TRY_CATCH type=kotlin.String
+              try: BLOCK type=kotlin.String operator=null
+                TRY_CATCH type=kotlin.String
+                  try: BLOCK type=kotlin.Nothing operator=null
+                    THROW type=kotlin.Nothing
+                      CALL 'constructor Exception(String!)' type=java.lang.Exception operator=null
+                        p0: CONST String type=kotlin.String value='oops!'
+                  catch mye: BLOCK type=kotlin.String operator=null
+                    CONST String type=kotlin.String value='1'
+              catch e: BLOCK type=kotlin.String operator=null
+                CONST String type=kotlin.String value='K'

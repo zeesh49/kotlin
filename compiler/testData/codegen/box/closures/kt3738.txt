@@ -1,0 +1,43 @@
+MODULE <test-module>
+  FILE /kt3738.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun foo(): kotlin.Unit
+        BLOCK_BODY
+      FUN public final fun bar(f: A.() -> kotlin.Unit = ...): kotlin.Unit
+        f: EXPRESSION_BODY
+          BLOCK type=A.() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun A.<anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>() on A: Unit'
+            CALLABLE_REFERENCE '<anonymous>() on A: Unit' type=A.() -> kotlin.Unit operator=LAMBDA
+        BLOCK_BODY
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      CLASS CLASS D
+        CONSTRUCTOR public constructor D()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='D'
+        ANONYMOUS_INITIALIZER D
+          BLOCK_BODY
+            CALL 'bar(A.() -> Unit = ...): Unit' type=kotlin.Unit operator=null
+              $this: CALL 'constructor A()' type=A operator=null
+              f: BLOCK type=A.() -> kotlin.Unit operator=LAMBDA
+                FUN local final fun A.<anonymous>(): kotlin.Unit
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>() on A: Unit'
+                      CALL 'foo(): Unit' type=kotlin.Unit operator=null
+                        $this: $RECEIVER of '<anonymous>() on A: Unit' type=A
+                CALLABLE_REFERENCE '<anonymous>() on A: Unit' type=A.() -> kotlin.Unit operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'constructor D()' type=B.D operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

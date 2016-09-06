@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /localFunctionInFunction.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        FUN local final fun local(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='local(): Int'
+              CONST Int type=kotlin.Int value='10'
+        CLASS CLASS A
+          CONSTRUCTOR public constructor A()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='A'
+          FUN public final fun test(): kotlin.Int
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='test(): Int'
+                CALL 'local(): Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'test(): Int' type=kotlin.Int operator=null
+                $this: CALL 'constructor A()' type=box.A operator=null
+              arg1: CONST Int type=kotlin.Int value='10'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

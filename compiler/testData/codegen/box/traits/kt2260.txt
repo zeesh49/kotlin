@@ -1,0 +1,27 @@
+MODULE <test-module>
+  FILE /kt2260.kt
+    CLASS INTERFACE Flusher
+      FUN public open fun flush(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='flush(): String'
+            CONST String type=kotlin.String value='OK'
+    FUN public fun myFlusher(): Flusher
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='myFlusher(): Flusher'
+          BLOCK type=myFlusher.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+            CALL 'constructor <no name provided>()' type=myFlusher.<no name provided> operator=OBJECT_LITERAL
+    FUN public fun flushIt(flusher: Flusher): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='flushIt(Flusher): String'
+          CALL 'flush(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'value-parameter flusher: Flusher' type=Flusher operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'flushIt(Flusher): String' type=kotlin.String operator=null
+            flusher: CALL 'myFlusher(): Flusher' type=Flusher operator=null

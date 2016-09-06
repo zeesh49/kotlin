@@ -1,0 +1,13 @@
+MODULE <test-module>
+  FILE /1.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'ok(String = ...): String' type=kotlin.String operator=null
+  FILE /2.kt
+    FUN public fun ok(res: kotlin.String = ...): kotlin.String
+      res: EXPRESSION_BODY
+        CONST String type=kotlin.String value='OK'
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='ok(String = ...): String'
+          GET_VAR 'value-parameter res: String = ...' type=kotlin.String operator=null

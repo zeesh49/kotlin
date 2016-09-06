@@ -1,0 +1,41 @@
+MODULE <test-module>
+  FILE /kt8011.kt
+    FUN public fun testFun1(str: kotlin.String): kotlin.String
+      BLOCK_BODY
+        VAR val local: kotlin.String
+          GET_VAR 'value-parameter str: String' type=kotlin.String operator=null
+        CLASS CLASS Local
+          CONSTRUCTOR public constructor Local()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='Local'
+          FUN public final fun foo(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='foo(): String'
+                GET_VAR 'value-parameter str: String' type=kotlin.String operator=null
+        VAR val list: kotlin.collections.List<testFun1.Local>
+          CALL 'map((Int) -> Local) on Iterable<Int>: List<Local>' type=kotlin.collections.List<testFun1.Local> operator=null
+            $receiver: CALL 'listOf(Int): List<Int>' type=kotlin.collections.List<kotlin.Int> operator=null
+              element: CONST Int type=kotlin.Int value='0'
+            transform: BLOCK type=(kotlin.Int) -> testFun1.Local operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.Int): testFun1.Local
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): Local'
+                    CALL 'constructor Local()' type=testFun1.Local operator=null
+              CALLABLE_REFERENCE '<anonymous>(Int): Local' type=(kotlin.Int) -> testFun1.Local operator=LAMBDA
+        RETURN type=kotlin.Nothing from='testFun1(String): String'
+          CALL 'foo(): String' type=kotlin.String operator=null
+            $this: CALL 'get(Int): Local' type=testFun1.Local operator=GET_ARRAY_ELEMENT
+              $this: GET_VAR 'list: List<Local>' type=kotlin.collections.List<testFun1.Local> operator=null
+              index: CONST Int type=kotlin.Int value='0'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=WHEN
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'testFun1(String): String' type=kotlin.String operator=null
+                  str: CONST String type=kotlin.String value='test1'
+                arg1: CONST String type=kotlin.String value='test1'
+            then: CONST String type=kotlin.String value='Fail #1'
+            else: CONST String type=kotlin.String value='OK'

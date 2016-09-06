@@ -1,0 +1,140 @@
+MODULE <test-module>
+  FILE /kt1538.kt
+    CLASS CLASS Pair
+      CONSTRUCTOR public constructor Pair<First, Second>(first: First, second: Second)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'first: First' type=kotlin.Unit operator=null
+            receiver: THIS of 'Pair' type=Pair<First, Second>
+            value: GET_VAR 'value-parameter first: First' type=First operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'second: Second' type=kotlin.Unit operator=null
+            receiver: THIS of 'Pair' type=Pair<First, Second>
+            value: GET_VAR 'value-parameter second: Second' type=Second operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Pair'
+      PROPERTY public final val first: First
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter first: First' type=First operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val second: Second
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter second: Second' type=Second operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final operator fun component1(): First
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component1(): First'
+            CALL '<get-first>(): First' type=First operator=GET_PROPERTY
+              $this: THIS of 'Pair' type=Pair<First, Second>
+      FUN public final operator fun component2(): Second
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component2(): Second'
+            CALL '<get-second>(): Second' type=Second operator=GET_PROPERTY
+              $this: THIS of 'Pair' type=Pair<First, Second>
+      FUN public final fun copy(first: First = ..., second: Second = ...): Pair<First, Second>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='copy(First = ..., Second = ...): Pair<First, Second>'
+            CALL 'constructor Pair(First, Second)' type=Pair<First, Second> operator=null
+              first: GET_VAR 'value-parameter first: First = ...' type=First operator=null
+              second: GET_VAR 'value-parameter second: Second = ...' type=Second operator=null
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Pair('
+              CONST String type=kotlin.String value='first='
+              CALL '<get-first>(): First' type=First operator=GET_PROPERTY
+                $this: THIS of 'Pair' type=Pair<First, Second>
+              CONST String type=kotlin.String value=', '
+              CONST String type=kotlin.String value='second='
+              CALL '<get-second>(): Second' type=Second operator=GET_PROPERTY
+                $this: THIS of 'Pair' type=Pair<First, Second>
+              CONST String type=kotlin.String value=')'
+      FUN public open override fun hashCode(): kotlin.Int
+        BLOCK_BODY
+          VAR val tmp0_result: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          SET_VAR 'tmp0_result: Int' type=kotlin.Unit operator=EQ
+            CALL 'hashCode(): Int' type=kotlin.Int operator=null
+              $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Any
+                CALL '<get-first>(): First' type=First operator=GET_PROPERTY
+                  $this: THIS of 'Pair' type=Pair<First, Second>
+          SET_VAR 'tmp0_result: Int' type=kotlin.Unit operator=EQ
+            CALL 'plus(Int): Int' type=kotlin.Int operator=null
+              $this: CALL 'times(Int): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'tmp0_result: Int' type=kotlin.Int operator=null
+                other: CONST Int type=kotlin.Int value='31'
+              other: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+                $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Any
+                  CALL '<get-second>(): Second' type=Second operator=GET_PROPERTY
+                    $this: THIS of 'Pair' type=Pair<First, Second>
+          RETURN type=kotlin.Nothing from='hashCode(): Int'
+            GET_VAR 'tmp0_result: Int' type=kotlin.Int operator=null
+      FUN public open override fun equals(other: kotlin.Any?): kotlin.Boolean
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+              arg0: THIS of 'Pair' type=Pair<First, Second>
+              arg1: GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='true'
+          WHEN type=kotlin.Unit operator=null
+            if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=Pair<First, Second>
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          VAR val tmp0_other_with_cast: Pair<First, Second>
+            TYPE_OP operator=CAST typeOperand=Pair<First, Second>
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-first>(): First' type=First operator=GET_PROPERTY
+                  $this: THIS of 'Pair' type=Pair<First, Second>
+                arg1: CALL '<get-first>(): First' type=First operator=GET_PROPERTY
+                  $this: GET_VAR 'tmp0_other_with_cast: Pair<First, Second>' type=Pair<First, Second> operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-second>(): Second' type=Second operator=GET_PROPERTY
+                  $this: THIS of 'Pair' type=Pair<First, Second>
+                arg1: CALL '<get-second>(): Second' type=Second operator=GET_PROPERTY
+                  $this: GET_VAR 'tmp0_other_with_cast: Pair<First, Second>' type=Pair<First, Second> operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun parseCatalogs(hashMap: kotlin.Any?): kotlin.Unit
+      BLOCK_BODY
+        VAR val r: Pair<kotlin.Boolean, java.util.HashMap<kotlin.String, kotlin.Any?>?>
+          CALL 'toHasMap(Any?): Pair<Boolean, HashMap<String, Any?>?>' type=Pair<kotlin.Boolean, java.util.HashMap<kotlin.String, kotlin.Any?>?> operator=null
+            value: GET_VAR 'value-parameter hashMap: Any?' type=kotlin.Any? operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL '<get-first>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+              $this: GET_VAR 'r: Pair<Boolean, HashMap<String, Any?>?>' type=Pair<kotlin.Boolean, java.util.HashMap<kotlin.String, kotlin.Any?>?> operator=null
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='parseCatalogs(Any?): Unit'
+        VAR val nodes: java.util.HashMap<kotlin.String, kotlin.Any?>?
+          CALL '<get-second>(): HashMap<String, Any?>?' type=java.util.HashMap<kotlin.String, kotlin.Any?>? operator=GET_PROPERTY
+            $this: GET_VAR 'r: Pair<Boolean, HashMap<String, Any?>?>' type=Pair<kotlin.Boolean, java.util.HashMap<kotlin.String, kotlin.Any?>?> operator=null
+    FUN public fun toHasMap(value: kotlin.Any?): Pair<kotlin.Boolean, java.util.HashMap<kotlin.String, kotlin.Any?>?>
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: TYPE_OP operator=INSTANCEOF typeOperand=java.util.HashMap<*, *>
+            GET_VAR 'value-parameter value: Any?' type=kotlin.Any? operator=null
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='toHasMap(Any?): Pair<Boolean, HashMap<String, Any?>?>'
+              CALL 'constructor Pair(Boolean, HashMap<String, Any?>?)' type=Pair<kotlin.Boolean, java.util.HashMap<kotlin.String, kotlin.Any?>?> operator=null
+                first: CONST Boolean type=kotlin.Boolean value='true'
+                second: TYPE_OP operator=CAST typeOperand=java.util.HashMap<kotlin.String, kotlin.Any?>
+                  GET_VAR 'value-parameter value: Any?' type=kotlin.Any? operator=null
+        RETURN type=kotlin.Nothing from='toHasMap(Any?): Pair<Boolean, HashMap<String, Any?>?>'
+          CALL 'constructor Pair(Boolean, HashMap<String, Any?>?)' type=Pair<kotlin.Boolean, java.util.HashMap<kotlin.String, kotlin.Any?>?> operator=null
+            first: CONST Boolean type=kotlin.Boolean value='false'
+            second: TYPE_OP operator=CAST typeOperand=java.util.HashMap<kotlin.String, kotlin.Any?>?
+              CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'parseCatalogs(Any?): Unit' type=kotlin.Unit operator=null
+          hashMap: CONST Null type=kotlin.Nothing? value='null'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

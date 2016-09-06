@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /kt1739.kt
+    CLASS CLASS RunnableFunctionWrapper
+      CONSTRUCTOR public constructor RunnableFunctionWrapper(f: () -> kotlin.Unit)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'f: () -> Unit' type=kotlin.Unit operator=null
+            receiver: THIS of 'RunnableFunctionWrapper' type=RunnableFunctionWrapper
+            value: GET_VAR 'value-parameter f: () -> Unit' type=() -> kotlin.Unit operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='RunnableFunctionWrapper'
+      PROPERTY public final val f: () -> kotlin.Unit
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter f: () -> Unit' type=() -> kotlin.Unit operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public open override fun run(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+            $this: CALL '<get-f>(): () -> Unit' type=() -> kotlin.Unit operator=GET_PROPERTY
+              $this: THIS of 'RunnableFunctionWrapper' type=RunnableFunctionWrapper
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var res: kotlin.String
+          CONST String type=kotlin.String value=''
+        CALL 'run(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor RunnableFunctionWrapper(() -> Unit)' type=RunnableFunctionWrapper operator=null
+            f: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                    SET_VAR 'res: String' type=kotlin.Unit operator=EQ
+                      CONST String type=kotlin.String value='OK'
+              CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          GET_VAR 'res: String' type=kotlin.String operator=null

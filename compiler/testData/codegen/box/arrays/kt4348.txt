@@ -1,0 +1,71 @@
+MODULE <test-module>
+  FILE /kt4348.kt
+    FUN public operator fun kotlin.String.get(vararg value: kotlin.Any): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='get(vararg Any) on String: String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL 'get(Int): Any' type=kotlin.Any operator=GET_ARRAY_ELEMENT
+                  $this: GET_VAR 'value-parameter vararg value: Any' type=kotlin.Array<out kotlin.Any> operator=null
+                  index: CONST Int type=kotlin.Int value='0'
+                arg1: CONST Int type=kotlin.Int value='44'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL 'get(Int): Any' type=kotlin.Any operator=GET_ARRAY_ELEMENT
+                  $this: GET_VAR 'value-parameter vararg value: Any' type=kotlin.Array<out kotlin.Any> operator=null
+                  index: CONST Int type=kotlin.Int value='1'
+                arg1: CONST String type=kotlin.String value='example'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'
+    FUN public operator fun kotlin.Int.get(vararg value: kotlin.Any): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='get(vararg Any) on Int: Int'
+          WHEN type=kotlin.Int operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL 'get(Int): Any' type=kotlin.Any operator=GET_ARRAY_ELEMENT
+                  $this: GET_VAR 'value-parameter vararg value: Any' type=kotlin.Array<out kotlin.Any> operator=null
+                  index: CONST Int type=kotlin.Int value='0'
+                arg1: CONST Int type=kotlin.Int value='44'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL 'get(Int): Any' type=kotlin.Any operator=GET_ARRAY_ELEMENT
+                  $this: GET_VAR 'value-parameter vararg value: Any' type=kotlin.Array<out kotlin.Any> operator=null
+                  index: CONST Int type=kotlin.Int value='1'
+                arg1: CONST String type=kotlin.String value='example'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST Int type=kotlin.Int value='1'
+            else: CONST Int type=kotlin.Int value='0'
+    FUN public fun main(args: kotlin.Array<kotlin.String>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'get(vararg Any) on Int: Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+          $receiver: CONST Int type=kotlin.Int value='12'
+          value: VARARG type=Array<out Any> varargElementType=Any
+            CONST Int type=kotlin.Int value='44'
+            CONST String type=kotlin.String value='example'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(vararg Any) on String: String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+                $receiver: CONST String type=kotlin.String value='foo'
+                value: VARARG type=Array<out Any> varargElementType=Any
+                  CONST Int type=kotlin.Int value='44'
+                  CONST String type=kotlin.String value='example'
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(vararg Any) on Int: Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                $receiver: CONST Int type=kotlin.Int value='11'
+                value: VARARG type=Array<out Any> varargElementType=Any
+                  CONST Int type=kotlin.Int value='44'
+                  CONST String type=kotlin.String value='example'
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,70 @@
+MODULE <test-module>
+  FILE /fakeOverrideWithSeveralSuperDeclarations.kt
+    CLASS INTERFACE D1
+      FUN public abstract fun foo(): kotlin.Any
+    CLASS INTERFACE D2
+      FUN public abstract fun foo(): kotlin.Number
+    CLASS INTERFACE F3
+    CLASS CLASS D4
+      CONSTRUCTOR public constructor D4()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='D4'
+      FUN public final fun foo(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): Int'
+            CONST Int type=kotlin.Int value='42'
+    CLASS CLASS F5
+      CONSTRUCTOR public constructor F5()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor D4()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='F5'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val z: F5
+          CALL 'constructor F5()' type=F5 operator=null
+        VAR var result: kotlin.Int
+          CALL 'foo(): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'z: F5' type=F5 operator=null
+        VAR val d4: D4
+          GET_VAR 'z: F5' type=F5 operator=null
+        VAR val f3: F3
+          GET_VAR 'z: F5' type=F5 operator=null
+        VAR val d2: D2
+          GET_VAR 'z: F5' type=F5 operator=null
+        VAR val d1: D1
+          GET_VAR 'z: F5' type=F5 operator=null
+        SET_VAR 'result: Int' type=kotlin.Unit operator=PLUSEQ
+          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+            $this: GET_VAR 'result: Int' type=kotlin.Int operator=PLUSEQ
+            other: CALL 'foo(): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'd4: D4' type=D4 operator=null
+        SET_VAR 'result: Int' type=kotlin.Unit operator=PLUSEQ
+          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+            $this: GET_VAR 'result: Int' type=kotlin.Int operator=PLUSEQ
+            other: TYPE_OP operator=CAST typeOperand=kotlin.Int
+              CALL 'foo(): Number' type=kotlin.Number operator=null
+                $this: GET_VAR 'f3: F3' type=F3 operator=null
+        SET_VAR 'result: Int' type=kotlin.Unit operator=PLUSEQ
+          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+            $this: GET_VAR 'result: Int' type=kotlin.Int operator=PLUSEQ
+            other: TYPE_OP operator=CAST typeOperand=kotlin.Int
+              CALL 'foo(): Number' type=kotlin.Number operator=null
+                $this: GET_VAR 'd2: D2' type=D2 operator=null
+        SET_VAR 'result: Int' type=kotlin.Unit operator=PLUSEQ
+          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+            $this: GET_VAR 'result: Int' type=kotlin.Int operator=PLUSEQ
+            other: TYPE_OP operator=CAST typeOperand=kotlin.Int
+              CALL 'foo(): Any' type=kotlin.Any operator=null
+                $this: GET_VAR 'd1: D1' type=D1 operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                $this: CONST Int type=kotlin.Int value='5'
+                other: CONST Int type=kotlin.Int value='42'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'result: Int' type=kotlin.Int operator=null

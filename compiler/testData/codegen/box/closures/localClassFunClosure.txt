@@ -1,0 +1,23 @@
+MODULE <test-module>
+  FILE /localClassFunClosure.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val o: kotlin.String = "O"
+          CONST String type=kotlin.String value='O'
+        FUN local final fun ok(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='ok(): String'
+              CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: GET_VAR 'o: String' type=kotlin.String operator=null
+                other: CONST String type=kotlin.String value='K'
+        CLASS CLASS OK
+          CONSTRUCTOR public constructor OK()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='OK'
+          PROPERTY public final val ok: kotlin.String
+            EXPRESSION_BODY
+              CALL 'ok(): String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-ok>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor OK()' type=box.OK operator=null

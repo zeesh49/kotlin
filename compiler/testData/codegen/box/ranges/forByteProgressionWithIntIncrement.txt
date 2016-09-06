@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /forByteProgressionWithIntIncrement.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'step(Int) on IntProgression: IntProgression' type=kotlin.ranges.IntProgression operator=null
+                $receiver: CALL 'rangeTo(Byte): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                  $this: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                    $this: CONST Int type=kotlin.Int value='5'
+                  other: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                    $this: CONST Int type=kotlin.Int value='1'
+                step: CONST Int type=kotlin.Int value='255'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val element: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Nothing operator=null
+                RETURN type=kotlin.Nothing from='box(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='Fail: iterating over an empty progression, element: '
+                    GET_VAR 'element: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

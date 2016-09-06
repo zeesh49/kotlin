@@ -1,0 +1,940 @@
+MODULE <test-module>
+  FILE /reifiedAsWithMutable.kt
+    CLASS CLASS Itr
+      CONSTRUCTOR public constructor Itr()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Itr'
+      PROPERTY val `Itr$Iterator$delegate`: kotlin.collections.MutableIterator<kotlin.String>
+        EXPRESSION_BODY
+          CALL 'iterator(): MutableIterator<String>' type=kotlin.collections.MutableIterator<kotlin.String> operator=null
+            $this: CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun hasNext(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='hasNext(): Boolean'
+            CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`Itr$Iterator$delegate`: MutableIterator<String>' type=kotlin.collections.MutableIterator<kotlin.String> operator=null
+      FUN public open override fun next(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='next(): String'
+            CALL 'next(): String' type=kotlin.String operator=null
+              $this: GET_VAR '`Itr$Iterator$delegate`: MutableIterator<String>' type=kotlin.collections.MutableIterator<kotlin.String> operator=null
+    CLASS CLASS MItr
+      CONSTRUCTOR public constructor MItr()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MItr'
+      PROPERTY val `MItr$MutableIterator$delegate`: kotlin.collections.MutableIterator<kotlin.String>
+        EXPRESSION_BODY
+          CALL 'iterator(): MutableIterator<String>' type=kotlin.collections.MutableIterator<kotlin.String> operator=null
+            $this: CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun hasNext(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='hasNext(): Boolean'
+            CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MItr$MutableIterator$delegate`: MutableIterator<String>' type=kotlin.collections.MutableIterator<kotlin.String> operator=null
+      FUN public open override fun next(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='next(): String'
+            CALL 'next(): String' type=kotlin.String operator=null
+              $this: GET_VAR '`MItr$MutableIterator$delegate`: MutableIterator<String>' type=kotlin.collections.MutableIterator<kotlin.String> operator=null
+      FUN public open override fun remove(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'remove(): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR '`MItr$MutableIterator$delegate`: MutableIterator<String>' type=kotlin.collections.MutableIterator<kotlin.String> operator=null
+    CLASS CLASS LItr
+      CONSTRUCTOR public constructor LItr()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='LItr'
+      PROPERTY val `LItr$ListIterator$delegate`: kotlin.collections.MutableListIterator<kotlin.String>
+        EXPRESSION_BODY
+          CALL 'listIterator(): MutableListIterator<String>' type=kotlin.collections.MutableListIterator<kotlin.String> operator=null
+            $this: CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun hasNext(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='hasNext(): Boolean'
+            CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`LItr$ListIterator$delegate`: MutableListIterator<String>' type=kotlin.collections.MutableListIterator<kotlin.String> operator=null
+      FUN public open override fun hasPrevious(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='hasPrevious(): Boolean'
+            CALL 'hasPrevious(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`LItr$ListIterator$delegate`: MutableListIterator<String>' type=kotlin.collections.MutableListIterator<kotlin.String> operator=null
+      FUN public open override fun next(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='next(): String'
+            CALL 'next(): String' type=kotlin.String operator=null
+              $this: GET_VAR '`LItr$ListIterator$delegate`: MutableListIterator<String>' type=kotlin.collections.MutableListIterator<kotlin.String> operator=null
+      FUN public open override fun nextIndex(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='nextIndex(): Int'
+            CALL 'nextIndex(): Int' type=kotlin.Int operator=null
+              $this: GET_VAR '`LItr$ListIterator$delegate`: MutableListIterator<String>' type=kotlin.collections.MutableListIterator<kotlin.String> operator=null
+      FUN public open override fun previous(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='previous(): String'
+            CALL 'previous(): String' type=kotlin.String operator=null
+              $this: GET_VAR '`LItr$ListIterator$delegate`: MutableListIterator<String>' type=kotlin.collections.MutableListIterator<kotlin.String> operator=null
+      FUN public open override fun previousIndex(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='previousIndex(): Int'
+            CALL 'previousIndex(): Int' type=kotlin.Int operator=null
+              $this: GET_VAR '`LItr$ListIterator$delegate`: MutableListIterator<String>' type=kotlin.collections.MutableListIterator<kotlin.String> operator=null
+    CLASS CLASS MLItr
+      CONSTRUCTOR public constructor MLItr()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MLItr'
+      PROPERTY val `MLItr$MutableListIterator$delegate`: kotlin.collections.MutableListIterator<kotlin.String>
+        EXPRESSION_BODY
+          CALL 'listIterator(): MutableListIterator<String>' type=kotlin.collections.MutableListIterator<kotlin.String> operator=null
+            $this: CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun add(element: kotlin.String): kotlin.Unit
+        BLOCK_BODY
+          CALL 'add(String): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR '`MLItr$MutableListIterator$delegate`: MutableListIterator<String>' type=kotlin.collections.MutableListIterator<kotlin.String> operator=null
+            element: GET_VAR 'value-parameter element: String' type=kotlin.String operator=null
+      FUN public open override fun hasNext(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='hasNext(): Boolean'
+            CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MLItr$MutableListIterator$delegate`: MutableListIterator<String>' type=kotlin.collections.MutableListIterator<kotlin.String> operator=null
+      FUN public open override fun hasPrevious(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='hasPrevious(): Boolean'
+            CALL 'hasPrevious(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MLItr$MutableListIterator$delegate`: MutableListIterator<String>' type=kotlin.collections.MutableListIterator<kotlin.String> operator=null
+      FUN public open override fun next(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='next(): String'
+            CALL 'next(): String' type=kotlin.String operator=null
+              $this: GET_VAR '`MLItr$MutableListIterator$delegate`: MutableListIterator<String>' type=kotlin.collections.MutableListIterator<kotlin.String> operator=null
+      FUN public open override fun nextIndex(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='nextIndex(): Int'
+            CALL 'nextIndex(): Int' type=kotlin.Int operator=null
+              $this: GET_VAR '`MLItr$MutableListIterator$delegate`: MutableListIterator<String>' type=kotlin.collections.MutableListIterator<kotlin.String> operator=null
+      FUN public open override fun previous(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='previous(): String'
+            CALL 'previous(): String' type=kotlin.String operator=null
+              $this: GET_VAR '`MLItr$MutableListIterator$delegate`: MutableListIterator<String>' type=kotlin.collections.MutableListIterator<kotlin.String> operator=null
+      FUN public open override fun previousIndex(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='previousIndex(): Int'
+            CALL 'previousIndex(): Int' type=kotlin.Int operator=null
+              $this: GET_VAR '`MLItr$MutableListIterator$delegate`: MutableListIterator<String>' type=kotlin.collections.MutableListIterator<kotlin.String> operator=null
+      FUN public open override fun remove(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'remove(): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR '`MLItr$MutableListIterator$delegate`: MutableListIterator<String>' type=kotlin.collections.MutableListIterator<kotlin.String> operator=null
+      FUN public open override fun set(element: kotlin.String): kotlin.Unit
+        BLOCK_BODY
+          CALL 'set(String): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR '`MLItr$MutableListIterator$delegate`: MutableListIterator<String>' type=kotlin.collections.MutableListIterator<kotlin.String> operator=null
+            element: GET_VAR 'value-parameter element: String' type=kotlin.String operator=null
+    CLASS CLASS It
+      CONSTRUCTOR public constructor It()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='It'
+      PROPERTY val `It$Iterable$delegate`: java.util.ArrayList<kotlin.String>
+        EXPRESSION_BODY
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun iterator(): kotlin.collections.Iterator<kotlin.String>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='iterator(): Iterator<String>'
+            CALL 'iterator(): Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+              $this: GET_VAR '`It$Iterable$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+    CLASS CLASS MIt
+      CONSTRUCTOR public constructor MIt()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MIt'
+      PROPERTY val `MIt$MutableIterable$delegate`: java.util.ArrayList<kotlin.String>
+        EXPRESSION_BODY
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun iterator(): kotlin.collections.MutableIterator<kotlin.String>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='iterator(): MutableIterator<String>'
+            CALL 'iterator(): MutableIterator<String>' type=kotlin.collections.MutableIterator<kotlin.String> operator=null
+              $this: GET_VAR '`MIt$MutableIterable$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      PROPERTY val `C$Collection$delegate`: java.util.ArrayList<kotlin.String>
+        EXPRESSION_BODY
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun contains(element: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='contains(String): Boolean'
+            CALL 'contains(String): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`C$Collection$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              element: GET_VAR 'value-parameter element: String' type=kotlin.String operator=null
+      FUN public open override fun containsAll(elements: kotlin.collections.Collection<kotlin.String>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsAll(Collection<String>): Boolean'
+            CALL 'containsAll(Collection<String>): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`C$Collection$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              elements: GET_VAR 'value-parameter elements: Collection<String>' type=kotlin.collections.Collection<kotlin.String> operator=null
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='isEmpty(): Boolean'
+            CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`C$Collection$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun iterator(): kotlin.collections.Iterator<kotlin.String>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='iterator(): Iterator<String>'
+            CALL 'iterator(): Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+              $this: GET_VAR '`C$Collection$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-size>(): Int'
+              CALL '<get-size>(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR '`C$Collection$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+    CLASS CLASS MC
+      CONSTRUCTOR public constructor MC()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MC'
+      PROPERTY val `MC$MutableCollection$delegate`: java.util.ArrayList<kotlin.String>
+        EXPRESSION_BODY
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun add(element: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='add(String): Boolean'
+            CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MC$MutableCollection$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              element: GET_VAR 'value-parameter element: String' type=kotlin.String operator=null
+      FUN public open override fun addAll(elements: kotlin.collections.Collection<kotlin.String>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='addAll(Collection<String>): Boolean'
+            CALL 'addAll(Collection<String>): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MC$MutableCollection$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              elements: GET_VAR 'value-parameter elements: Collection<String>' type=kotlin.collections.Collection<kotlin.String> operator=null
+      FUN public open override fun clear(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'clear(): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR '`MC$MutableCollection$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun contains(element: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='contains(String): Boolean'
+            CALL 'contains(String): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MC$MutableCollection$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              element: GET_VAR 'value-parameter element: String' type=kotlin.String operator=null
+      FUN public open override fun containsAll(elements: kotlin.collections.Collection<kotlin.String>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsAll(Collection<String>): Boolean'
+            CALL 'containsAll(Collection<String>): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MC$MutableCollection$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              elements: GET_VAR 'value-parameter elements: Collection<String>' type=kotlin.collections.Collection<kotlin.String> operator=null
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='isEmpty(): Boolean'
+            CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MC$MutableCollection$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun iterator(): kotlin.collections.MutableIterator<kotlin.String>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='iterator(): MutableIterator<String>'
+            CALL 'iterator(): MutableIterator<String>' type=kotlin.collections.MutableIterator<kotlin.String> operator=null
+              $this: GET_VAR '`MC$MutableCollection$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun remove(element: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='remove(String): Boolean'
+            CALL 'remove(String): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MC$MutableCollection$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              element: GET_VAR 'value-parameter element: String' type=kotlin.String operator=null
+      FUN public open override fun removeAll(elements: kotlin.collections.Collection<kotlin.String>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='removeAll(Collection<String>): Boolean'
+            CALL 'removeAll(Collection<String>): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MC$MutableCollection$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              elements: GET_VAR 'value-parameter elements: Collection<String>' type=kotlin.collections.Collection<kotlin.String> operator=null
+      FUN public open override fun retainAll(elements: kotlin.collections.Collection<kotlin.String>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='retainAll(Collection<String>): Boolean'
+            CALL 'retainAll(Collection<String>): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MC$MutableCollection$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              elements: GET_VAR 'value-parameter elements: Collection<String>' type=kotlin.collections.Collection<kotlin.String> operator=null
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-size>(): Int'
+              CALL '<get-size>(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR '`MC$MutableCollection$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+    CLASS CLASS L
+      CONSTRUCTOR public constructor L()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='L'
+      PROPERTY val `L$List$delegate`: java.util.ArrayList<kotlin.String>
+        EXPRESSION_BODY
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun contains(element: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='contains(String): Boolean'
+            CALL 'contains(String): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`L$List$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              element: GET_VAR 'value-parameter element: String' type=kotlin.String operator=null
+      FUN public open override fun containsAll(elements: kotlin.collections.Collection<kotlin.String>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsAll(Collection<String>): Boolean'
+            CALL 'containsAll(Collection<String>): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`L$List$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              elements: GET_VAR 'value-parameter elements: Collection<String>' type=kotlin.collections.Collection<kotlin.String> operator=null
+      FUN public open override fun get(index: kotlin.Int): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(Int): String'
+            CALL 'get(Int): String' type=kotlin.String operator=null
+              $this: GET_VAR '`L$List$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              index: GET_VAR 'value-parameter index: Int' type=kotlin.Int operator=null
+      FUN public open override fun indexOf(element: kotlin.String): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='indexOf(String): Int'
+            CALL 'indexOf(String): Int' type=kotlin.Int operator=null
+              $this: GET_VAR '`L$List$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              element: GET_VAR 'value-parameter element: String' type=kotlin.String operator=null
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='isEmpty(): Boolean'
+            CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`L$List$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun iterator(): kotlin.collections.Iterator<kotlin.String>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='iterator(): Iterator<String>'
+            CALL 'iterator(): Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+              $this: GET_VAR '`L$List$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun lastIndexOf(element: kotlin.String): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='lastIndexOf(String): Int'
+            CALL 'lastIndexOf(String): Int' type=kotlin.Int operator=null
+              $this: GET_VAR '`L$List$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              element: GET_VAR 'value-parameter element: String' type=kotlin.String operator=null
+      FUN public open override fun listIterator(): kotlin.collections.ListIterator<kotlin.String>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='listIterator(): ListIterator<String>'
+            CALL 'listIterator(): ListIterator<String>' type=kotlin.collections.ListIterator<kotlin.String> operator=null
+              $this: GET_VAR '`L$List$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun listIterator(index: kotlin.Int): kotlin.collections.ListIterator<kotlin.String>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='listIterator(Int): ListIterator<String>'
+            CALL 'listIterator(Int): ListIterator<String>' type=kotlin.collections.ListIterator<kotlin.String> operator=null
+              $this: GET_VAR '`L$List$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              index: GET_VAR 'value-parameter index: Int' type=kotlin.Int operator=null
+      FUN public open override fun subList(fromIndex: kotlin.Int, toIndex: kotlin.Int): kotlin.collections.List<kotlin.String>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='subList(Int, Int): List<String>'
+            CALL 'subList(Int, Int): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              $this: GET_VAR '`L$List$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              fromIndex: GET_VAR 'value-parameter fromIndex: Int' type=kotlin.Int operator=null
+              toIndex: GET_VAR 'value-parameter toIndex: Int' type=kotlin.Int operator=null
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-size>(): Int'
+              CALL '<get-size>(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR '`L$List$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+    CLASS CLASS ML
+      CONSTRUCTOR public constructor ML()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ML'
+      PROPERTY val `ML$MutableList$delegate`: java.util.ArrayList<kotlin.String>
+        EXPRESSION_BODY
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun add(element: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='add(String): Boolean'
+            CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              element: GET_VAR 'value-parameter element: String' type=kotlin.String operator=null
+      FUN public open override fun add(index: kotlin.Int, element: kotlin.String): kotlin.Unit
+        BLOCK_BODY
+          CALL 'add(Int, String): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+            index: GET_VAR 'value-parameter index: Int' type=kotlin.Int operator=null
+            element: GET_VAR 'value-parameter element: String' type=kotlin.String operator=null
+      FUN public open override fun addAll(elements: kotlin.collections.Collection<kotlin.String>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='addAll(Collection<String>): Boolean'
+            CALL 'addAll(Collection<String>): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              elements: GET_VAR 'value-parameter elements: Collection<String>' type=kotlin.collections.Collection<kotlin.String> operator=null
+      FUN public open override fun addAll(index: kotlin.Int, elements: kotlin.collections.Collection<kotlin.String>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='addAll(Int, Collection<String>): Boolean'
+            CALL 'addAll(Int, Collection<String>): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              index: GET_VAR 'value-parameter index: Int' type=kotlin.Int operator=null
+              elements: GET_VAR 'value-parameter elements: Collection<String>' type=kotlin.collections.Collection<kotlin.String> operator=null
+      FUN public open override fun clear(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'clear(): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun contains(element: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='contains(String): Boolean'
+            CALL 'contains(String): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              element: GET_VAR 'value-parameter element: String' type=kotlin.String operator=null
+      FUN public open override fun containsAll(elements: kotlin.collections.Collection<kotlin.String>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsAll(Collection<String>): Boolean'
+            CALL 'containsAll(Collection<String>): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              elements: GET_VAR 'value-parameter elements: Collection<String>' type=kotlin.collections.Collection<kotlin.String> operator=null
+      FUN public open override fun get(index: kotlin.Int): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(Int): String'
+            CALL 'get(Int): String' type=kotlin.String operator=null
+              $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              index: GET_VAR 'value-parameter index: Int' type=kotlin.Int operator=null
+      FUN public open override fun indexOf(element: kotlin.String): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='indexOf(String): Int'
+            CALL 'indexOf(String): Int' type=kotlin.Int operator=null
+              $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              element: GET_VAR 'value-parameter element: String' type=kotlin.String operator=null
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='isEmpty(): Boolean'
+            CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun iterator(): kotlin.collections.MutableIterator<kotlin.String>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='iterator(): MutableIterator<String>'
+            CALL 'iterator(): MutableIterator<String>' type=kotlin.collections.MutableIterator<kotlin.String> operator=null
+              $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun lastIndexOf(element: kotlin.String): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='lastIndexOf(String): Int'
+            CALL 'lastIndexOf(String): Int' type=kotlin.Int operator=null
+              $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              element: GET_VAR 'value-parameter element: String' type=kotlin.String operator=null
+      FUN public open override fun listIterator(): kotlin.collections.MutableListIterator<kotlin.String>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='listIterator(): MutableListIterator<String>'
+            CALL 'listIterator(): MutableListIterator<String>' type=kotlin.collections.MutableListIterator<kotlin.String> operator=null
+              $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public open override fun listIterator(index: kotlin.Int): kotlin.collections.MutableListIterator<kotlin.String>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='listIterator(Int): MutableListIterator<String>'
+            CALL 'listIterator(Int): MutableListIterator<String>' type=kotlin.collections.MutableListIterator<kotlin.String> operator=null
+              $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              index: GET_VAR 'value-parameter index: Int' type=kotlin.Int operator=null
+      FUN public open override fun remove(element: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='remove(String): Boolean'
+            CALL 'remove(String): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              element: GET_VAR 'value-parameter element: String' type=kotlin.String operator=null
+      FUN public open override fun removeAll(elements: kotlin.collections.Collection<kotlin.String>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='removeAll(Collection<String>): Boolean'
+            CALL 'removeAll(Collection<String>): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              elements: GET_VAR 'value-parameter elements: Collection<String>' type=kotlin.collections.Collection<kotlin.String> operator=null
+      FUN public open override fun removeAt(index: kotlin.Int): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='removeAt(Int): String'
+            CALL 'removeAt(Int): String' type=kotlin.String operator=null
+              $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              index: GET_VAR 'value-parameter index: Int' type=kotlin.Int operator=null
+      FUN public open override fun retainAll(elements: kotlin.collections.Collection<kotlin.String>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='retainAll(Collection<String>): Boolean'
+            CALL 'retainAll(Collection<String>): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              elements: GET_VAR 'value-parameter elements: Collection<String>' type=kotlin.collections.Collection<kotlin.String> operator=null
+      FUN public open override fun set(index: kotlin.Int, element: kotlin.String): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='set(Int, String): String'
+            CALL 'set(Int, String): String' type=kotlin.String operator=null
+              $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              index: GET_VAR 'value-parameter index: Int' type=kotlin.Int operator=null
+              element: GET_VAR 'value-parameter element: String' type=kotlin.String operator=null
+      FUN public open override fun subList(fromIndex: kotlin.Int, toIndex: kotlin.Int): kotlin.collections.MutableList<kotlin.String>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='subList(Int, Int): MutableList<String>'
+            CALL 'subList(Int, Int): MutableList<String>' type=kotlin.collections.MutableList<kotlin.String> operator=null
+              $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              fromIndex: GET_VAR 'value-parameter fromIndex: Int' type=kotlin.Int operator=null
+              toIndex: GET_VAR 'value-parameter toIndex: Int' type=kotlin.Int operator=null
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-size>(): Int'
+              CALL '<get-size>(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR '`ML$MutableList$delegate`: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+    CLASS CLASS S
+      CONSTRUCTOR public constructor S()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='S'
+      PROPERTY val `S$Set$delegate`: java.util.HashSet<kotlin.String>
+        EXPRESSION_BODY
+          CALL 'constructor HashSet()' type=java.util.HashSet<kotlin.String> operator=null
+      FUN public open override fun contains(element: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='contains(String): Boolean'
+            CALL 'contains(String): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`S$Set$delegate`: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+              element: GET_VAR 'value-parameter element: String' type=kotlin.String operator=null
+      FUN public open override fun containsAll(elements: kotlin.collections.Collection<kotlin.String>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsAll(Collection<String>): Boolean'
+            CALL 'containsAll(Collection<String>): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`S$Set$delegate`: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+              elements: GET_VAR 'value-parameter elements: Collection<String>' type=kotlin.collections.Collection<kotlin.String> operator=null
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='isEmpty(): Boolean'
+            CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`S$Set$delegate`: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+      FUN public open override fun iterator(): kotlin.collections.Iterator<kotlin.String>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='iterator(): Iterator<String>'
+            CALL 'iterator(): Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+              $this: GET_VAR '`S$Set$delegate`: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-size>(): Int'
+              CALL '<get-size>(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR '`S$Set$delegate`: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+    CLASS CLASS MS
+      CONSTRUCTOR public constructor MS()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MS'
+      PROPERTY val `MS$MutableSet$delegate`: java.util.HashSet<kotlin.String>
+        EXPRESSION_BODY
+          CALL 'constructor HashSet()' type=java.util.HashSet<kotlin.String> operator=null
+      FUN public open override fun add(element: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='add(String): Boolean'
+            CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MS$MutableSet$delegate`: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+              element: GET_VAR 'value-parameter element: String' type=kotlin.String operator=null
+      FUN public open override fun addAll(elements: kotlin.collections.Collection<kotlin.String>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='addAll(Collection<String>): Boolean'
+            CALL 'addAll(Collection<String>): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MS$MutableSet$delegate`: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+              elements: GET_VAR 'value-parameter elements: Collection<String>' type=kotlin.collections.Collection<kotlin.String> operator=null
+      FUN public open override fun clear(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'clear(): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR '`MS$MutableSet$delegate`: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+      FUN public open override fun contains(element: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='contains(String): Boolean'
+            CALL 'contains(String): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MS$MutableSet$delegate`: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+              element: GET_VAR 'value-parameter element: String' type=kotlin.String operator=null
+      FUN public open override fun containsAll(elements: kotlin.collections.Collection<kotlin.String>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsAll(Collection<String>): Boolean'
+            CALL 'containsAll(Collection<String>): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MS$MutableSet$delegate`: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+              elements: GET_VAR 'value-parameter elements: Collection<String>' type=kotlin.collections.Collection<kotlin.String> operator=null
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='isEmpty(): Boolean'
+            CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MS$MutableSet$delegate`: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+      FUN public open override fun iterator(): kotlin.collections.MutableIterator<kotlin.String>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='iterator(): MutableIterator<String>'
+            CALL 'iterator(): MutableIterator<String>' type=kotlin.collections.MutableIterator<kotlin.String> operator=null
+              $this: GET_VAR '`MS$MutableSet$delegate`: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+      FUN public open override fun remove(element: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='remove(String): Boolean'
+            CALL 'remove(String): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MS$MutableSet$delegate`: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+              element: GET_VAR 'value-parameter element: String' type=kotlin.String operator=null
+      FUN public open override fun removeAll(elements: kotlin.collections.Collection<kotlin.String>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='removeAll(Collection<String>): Boolean'
+            CALL 'removeAll(Collection<String>): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MS$MutableSet$delegate`: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+              elements: GET_VAR 'value-parameter elements: Collection<String>' type=kotlin.collections.Collection<kotlin.String> operator=null
+      FUN public open override fun retainAll(elements: kotlin.collections.Collection<kotlin.String>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='retainAll(Collection<String>): Boolean'
+            CALL 'retainAll(Collection<String>): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MS$MutableSet$delegate`: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+              elements: GET_VAR 'value-parameter elements: Collection<String>' type=kotlin.collections.Collection<kotlin.String> operator=null
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-size>(): Int'
+              CALL '<get-size>(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR '`MS$MutableSet$delegate`: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+    CLASS CLASS M
+      CONSTRUCTOR public constructor M()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='M'
+      PROPERTY val `M$Map$delegate`: java.util.HashMap<kotlin.String, kotlin.String>
+        EXPRESSION_BODY
+          CALL 'constructor HashMap()' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+      FUN public open override fun containsKey(key: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsKey(String): Boolean'
+            CALL 'containsKey(String): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`M$Map$delegate`: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+              key: GET_VAR 'value-parameter key: String' type=kotlin.String operator=null
+      FUN public open override fun containsValue(value: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsValue(String): Boolean'
+            CALL 'containsValue(String): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`M$Map$delegate`: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+              value: GET_VAR 'value-parameter value: String' type=kotlin.String operator=null
+      FUN public open override fun get(key: kotlin.String): kotlin.String?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(String): String?'
+            CALL 'get(String): String?' type=kotlin.String? operator=null
+              $this: GET_VAR '`M$Map$delegate`: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+              key: GET_VAR 'value-parameter key: String' type=kotlin.String operator=null
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='isEmpty(): Boolean'
+            CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`M$Map$delegate`: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+      PROPERTY public open override val entries: kotlin.collections.Set<kotlin.collections.Map.Entry<kotlin.String, kotlin.String>>
+        PROPERTY_GETTER public open override fun <get-entries>(): kotlin.collections.Set<kotlin.collections.Map.Entry<kotlin.String, kotlin.String>>
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-entries>(): Set<Map.Entry<String, String>>'
+              CALL '<get-entries>(): Set<Map.Entry<String, String>>' type=kotlin.collections.Set<kotlin.collections.Map.Entry<kotlin.String, kotlin.String>> operator=null
+                $this: GET_VAR '`M$Map$delegate`: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+      PROPERTY public open override val keys: kotlin.collections.Set<kotlin.String>
+        PROPERTY_GETTER public open override fun <get-keys>(): kotlin.collections.Set<kotlin.String>
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-keys>(): Set<String>'
+              CALL '<get-keys>(): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+                $this: GET_VAR '`M$Map$delegate`: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-size>(): Int'
+              CALL '<get-size>(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR '`M$Map$delegate`: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+      PROPERTY public open override val values: kotlin.collections.Collection<kotlin.String>
+        PROPERTY_GETTER public open override fun <get-values>(): kotlin.collections.Collection<kotlin.String>
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-values>(): Collection<String>'
+              CALL '<get-values>(): Collection<String>' type=kotlin.collections.Collection<kotlin.String> operator=null
+                $this: GET_VAR '`M$Map$delegate`: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+    CLASS CLASS MM
+      CONSTRUCTOR public constructor MM()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MM'
+      PROPERTY val `MM$MutableMap$delegate`: java.util.HashMap<kotlin.String, kotlin.String>
+        EXPRESSION_BODY
+          CALL 'constructor HashMap()' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+      FUN public open override fun clear(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'clear(): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR '`MM$MutableMap$delegate`: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+      FUN public open override fun containsKey(key: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsKey(String): Boolean'
+            CALL 'containsKey(String): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MM$MutableMap$delegate`: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+              key: GET_VAR 'value-parameter key: String' type=kotlin.String operator=null
+      FUN public open override fun containsValue(value: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsValue(String): Boolean'
+            CALL 'containsValue(String): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MM$MutableMap$delegate`: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+              value: GET_VAR 'value-parameter value: String' type=kotlin.String operator=null
+      FUN public open override fun get(key: kotlin.String): kotlin.String?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(String): String?'
+            CALL 'get(String): String?' type=kotlin.String? operator=null
+              $this: GET_VAR '`MM$MutableMap$delegate`: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+              key: GET_VAR 'value-parameter key: String' type=kotlin.String operator=null
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='isEmpty(): Boolean'
+            CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MM$MutableMap$delegate`: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+      FUN public open override fun put(key: kotlin.String, value: kotlin.String): kotlin.String?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='put(String, String): String?'
+            CALL 'put(String, String): String?' type=kotlin.String? operator=null
+              $this: GET_VAR '`MM$MutableMap$delegate`: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+              key: GET_VAR 'value-parameter key: String' type=kotlin.String operator=null
+              value: GET_VAR 'value-parameter value: String' type=kotlin.String operator=null
+      FUN public open override fun putAll(from: kotlin.collections.Map<out kotlin.String, kotlin.String>): kotlin.Unit
+        BLOCK_BODY
+          CALL 'putAll(Map<out String, String>): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR '`MM$MutableMap$delegate`: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+            from: GET_VAR 'value-parameter from: Map<out String, String>' type=kotlin.collections.Map<out kotlin.String, kotlin.String> operator=null
+      FUN public open override fun remove(key: kotlin.String): kotlin.String?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='remove(String): String?'
+            CALL 'remove(String): String?' type=kotlin.String? operator=null
+              $this: GET_VAR '`MM$MutableMap$delegate`: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+              key: GET_VAR 'value-parameter key: String' type=kotlin.String operator=null
+      PROPERTY public open override val entries: kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.String>>
+        PROPERTY_GETTER public open override fun <get-entries>(): kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.String>>
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-entries>(): MutableSet<MutableMap.MutableEntry<String, String>>'
+              CALL '<get-entries>(): MutableSet<MutableMap.MutableEntry<String, String>>' type=kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.String>> operator=null
+                $this: GET_VAR '`MM$MutableMap$delegate`: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+      PROPERTY public open override val keys: kotlin.collections.MutableSet<kotlin.String>
+        PROPERTY_GETTER public open override fun <get-keys>(): kotlin.collections.MutableSet<kotlin.String>
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-keys>(): MutableSet<String>'
+              CALL '<get-keys>(): MutableSet<String>' type=kotlin.collections.MutableSet<kotlin.String> operator=null
+                $this: GET_VAR '`MM$MutableMap$delegate`: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-size>(): Int'
+              CALL '<get-size>(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR '`MM$MutableMap$delegate`: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+      PROPERTY public open override val values: kotlin.collections.MutableCollection<kotlin.String>
+        PROPERTY_GETTER public open override fun <get-values>(): kotlin.collections.MutableCollection<kotlin.String>
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-values>(): MutableCollection<String>'
+              CALL '<get-values>(): MutableCollection<String>' type=kotlin.collections.MutableCollection<kotlin.String> operator=null
+                $this: GET_VAR '`MM$MutableMap$delegate`: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+    CLASS CLASS ME
+      CONSTRUCTOR public constructor ME()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ME'
+      PROPERTY public open override val key: kotlin.String
+        PROPERTY_GETTER public open override fun <get-key>(): kotlin.String
+          BLOCK_BODY
+            THROW type=kotlin.Nothing
+              CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      PROPERTY public open override val value: kotlin.String
+        PROPERTY_GETTER public open override fun <get-value>(): kotlin.String
+          BLOCK_BODY
+            THROW type=kotlin.Nothing
+              CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+    CLASS CLASS MME
+      CONSTRUCTOR public constructor MME()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MME'
+      PROPERTY public open override val key: kotlin.String
+        PROPERTY_GETTER public open override fun <get-key>(): kotlin.String
+          BLOCK_BODY
+            THROW type=kotlin.Nothing
+              CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      PROPERTY public open override val value: kotlin.String
+        PROPERTY_GETTER public open override fun <get-value>(): kotlin.String
+          BLOCK_BODY
+            THROW type=kotlin.Nothing
+              CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun setValue(value: kotlin.String): kotlin.String
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+    FUN public inline fun <reified T> reifiedAsSucceeds(x: kotlin.Any, operation: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        TRY_CATCH type=T
+          try: BLOCK type=T operator=null
+            TYPE_OP operator=CAST typeOperand=T
+              GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=': should not throw exceptions, got '
+                  GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+    FUN public inline fun <reified T> reifiedAsFailsWithCCE(x: kotlin.Any, operation: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        TRY_CATCH type=T
+          try: BLOCK type=T operator=null
+            TYPE_OP operator=CAST typeOperand=T
+              GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='reifiedAsFailsWithCCE(Any, String): Unit'
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=': should throw ClassCastException, got '
+                  GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+        THROW type=kotlin.Nothing
+          CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+            p0: STRING_CONCATENATION type=kotlin.String
+              GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+              CONST String type=kotlin.String value=': should fail with CCE, no exception thrown'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val itr: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALL 'constructor Itr()' type=Itr operator=null
+        VAR val mitr: MItr
+          CALL 'constructor MItr()' type=MItr operator=null
+        CALL 'reifiedAsFailsWithCCE(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'itr: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableIterator<*>>(itr)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'mitr: MItr' type=MItr operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableIterator<*>>(mitr)'
+        VAR val litr: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALL 'constructor LItr()' type=LItr operator=null
+        VAR val mlitr: MLItr
+          CALL 'constructor MLItr()' type=MLItr operator=null
+        CALL 'reifiedAsFailsWithCCE(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'litr: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableIterator<*>>(litr)'
+        CALL 'reifiedAsFailsWithCCE(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'litr: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableListIterator<*>>(litr)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'mlitr: MLItr' type=MLItr operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableListIterator<*>>(mlitr)'
+        VAR val it: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALL 'constructor It()' type=It operator=null
+        VAR val mit: MIt
+          CALL 'constructor MIt()' type=MIt operator=null
+        VAR val arrayList: java.util.ArrayList<kotlin.String>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.String> operator=null
+        CALL 'reifiedAsFailsWithCCE(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'it: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableIterable<*>>(it)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'mit: MIt' type=MIt operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableIterable<*>>(mit)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'arrayList: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableIterable<*>>(arrayList)'
+        VAR val coll: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALL 'constructor C()' type=C operator=null
+        VAR val mcoll: MC
+          CALL 'constructor MC()' type=MC operator=null
+        CALL 'reifiedAsFailsWithCCE(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'coll: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableCollection<*>>(coll)'
+        CALL 'reifiedAsFailsWithCCE(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'coll: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableIterable<*>>(coll)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'mcoll: MC' type=MC operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableCollection<*>>(mcoll)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'mcoll: MC' type=MC operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableIterable<*>>(mcoll)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'arrayList: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableCollection<*>>(arrayList)'
+        VAR val list: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALL 'constructor L()' type=L operator=null
+        VAR val mlist: ML
+          CALL 'constructor ML()' type=ML operator=null
+        CALL 'reifiedAsFailsWithCCE(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'list: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableList<*>>(list)'
+        CALL 'reifiedAsFailsWithCCE(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'list: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableCollection<*>>(list)'
+        CALL 'reifiedAsFailsWithCCE(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'list: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableIterable<*>>(list)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'mlist: ML' type=ML operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableList<*>>(mlist)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'mlist: ML' type=ML operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableCollection<*>>(mlist)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'mlist: ML' type=ML operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableIterable<*>>(mlist)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'arrayList: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableList<*>>(arrayList)'
+        VAR val set: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALL 'constructor S()' type=S operator=null
+        VAR val mset: MS
+          CALL 'constructor MS()' type=MS operator=null
+        VAR val hashSet: java.util.HashSet<kotlin.String>
+          CALL 'constructor HashSet()' type=java.util.HashSet<kotlin.String> operator=null
+        CALL 'reifiedAsFailsWithCCE(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'set: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableSet<*>>(set)'
+        CALL 'reifiedAsFailsWithCCE(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'set: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableCollection<*>>(set)'
+        CALL 'reifiedAsFailsWithCCE(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'set: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableIterable<*>>(set)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'mset: MS' type=MS operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableSet<*>>(mset)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'mset: MS' type=MS operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableCollection<*>>(mset)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'mset: MS' type=MS operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableIterable<*>>(mset)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'hashSet: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableSet<*>>(hashSet)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'hashSet: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableCollection<*>>(hashSet)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'hashSet: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableIterable<*>>(hashSet)'
+        VAR val map: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALL 'constructor M()' type=M operator=null
+        VAR val mmap: MM
+          CALL 'constructor MM()' type=MM operator=null
+        VAR val hashMap: java.util.HashMap<kotlin.String, kotlin.String>
+          CALL 'constructor HashMap()' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+        CALL 'reifiedAsFailsWithCCE(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'map: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableMap<*, *>>(map)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'mmap: MM' type=MM operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableMap<*, *>>(mmap)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'hashMap: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableMap<*, *>>(hashMap)'
+        VAR val entry: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALL 'constructor ME()' type=ME operator=null
+        VAR val mentry: MME
+          CALL 'constructor MME()' type=MME operator=null
+        CALL 'set(String, String) on MutableMap<String, String>: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 'hashMap: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+          key: CONST String type=kotlin.String value=''
+          value: CONST String type=kotlin.String value=''
+        VAR val hashMapEntry: kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.String>
+          CALL 'first() on Iterable<MutableMap.MutableEntry<String, String>>: MutableMap.MutableEntry<String, String>' type=kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.String> operator=null
+            $receiver: CALL '<get-entries>(): MutableSet<MutableMap.MutableEntry<String, String>>' type=kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.String>> operator=GET_PROPERTY
+              $this: GET_VAR 'hashMap: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+        CALL 'reifiedAsFailsWithCCE(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'entry: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableMap.MutableEntry<*, *>>(entry)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'mentry: MME' type=MME operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableMap.MutableEntry<*, *>>(mentry)'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'hashMapEntry: MutableMap.MutableEntry<String, String>' type=kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.String> operator=null
+          operation: CONST String type=kotlin.String value='reifiedAs<MutableMap.MutableEntry<*, *>>(hashMapEntry)'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

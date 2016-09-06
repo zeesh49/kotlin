@@ -1,0 +1,32 @@
+MODULE <test-module>
+  FILE /enumAsOrdinaled.kt
+    CLASS INTERFACE Ordinaled
+      PROPERTY public abstract val ordinal: kotlin.Int
+    CLASS ENUM_CLASS A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      ENUM_ENTRY enum entry X
+        init: ENUM_CONSTRUCTOR_CALL 'constructor A()' X
+      FUN public final fun values(): kotlin.Array<A>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): A
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val result: kotlin.Int
+          CALL '<get-ordinal>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: TYPE_OP operator=CAST typeOperand=Ordinaled
+              GET_ENUM_VALUE 'X' type=A
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              GET_VAR 'result: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,17 @@
+MODULE <test-module>
+  FILE /Kotlin.kt
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor JavaClass()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      FUN public final inline fun bar(): kotlin.String!
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='bar(): String!'
+            GET_BACKING_FIELD 'FIELD: String!' type=kotlin.String! operator=GET_PROPERTY
+              receiver: THIS of 'B' type=test.B
+    FUN public fun box(): kotlin.String!
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String!'
+          CALL 'bar(): String!' type=kotlin.String! operator=null
+            $this: CALL 'constructor B()' type=test.B operator=null

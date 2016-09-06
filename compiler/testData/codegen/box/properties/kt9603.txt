@@ -1,0 +1,27 @@
+MODULE <test-module>
+  FILE /kt9603.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var prop: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+        PROPERTY_SETTER private final fun <set-prop>(<set-?>: kotlin.String): kotlin.Unit
+      FUN public final fun test(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test(): String'
+            CALL 'invoke(): String' type=kotlin.String operator=null
+              $this: BLOCK type=() -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                      CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: THIS of 'A' type=A
+                CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'test(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor A()' type=A operator=null

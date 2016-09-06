@@ -1,0 +1,39 @@
+MODULE <test-module>
+  FILE /postfixNullableClassIncrement.kt
+    CLASS CLASS MyClass
+      CONSTRUCTOR public constructor MyClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyClass'
+    FUN public operator fun MyClass?.inc(): MyClass?
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='inc() on MyClass?: MyClass?'
+          CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var i: MyClass?
+        SET_VAR 'i: MyClass?' type=kotlin.Unit operator=EQ
+          CALL 'constructor MyClass()' type=MyClass operator=null
+        VAR val j: MyClass?
+          BLOCK type=MyClass? operator=POSTFIX_INCR
+            VAR val tmp0: MyClass?
+              GET_VAR 'i: MyClass?' type=MyClass? operator=POSTFIX_INCR
+            SET_VAR 'i: MyClass?' type=kotlin.Unit operator=POSTFIX_INCR
+              CALL 'inc() on MyClass?: MyClass?' type=MyClass? operator=POSTFIX_INCR
+                $receiver: GET_VAR 'tmp0: MyClass?' type=MyClass? operator=null
+            GET_VAR 'tmp0: MyClass?' type=MyClass? operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: TYPE_OP operator=INSTANCEOF typeOperand=MyClass
+                GET_VAR 'j: MyClass?' type=MyClass? operator=null
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CONST Null type=kotlin.Nothing? value='null'
+                arg1: GET_VAR 'i: MyClass?' type=MyClass? operator=null
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail i = '
+              GET_VAR 'i: MyClass?' type=MyClass? operator=null
+              CONST String type=kotlin.String value=' j = '
+              GET_VAR 'j: MyClass?' type=MyClass? operator=null

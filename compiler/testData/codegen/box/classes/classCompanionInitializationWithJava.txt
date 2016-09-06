@@ -1,0 +1,42 @@
+MODULE <test-module>
+  FILE /CompanionInitialization.kt
+    CLASS INTERFACE IStatic
+    CLASS CLASS Static
+      CONSTRUCTOR public constructor Static(x: IStatic)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Static'
+      FUN public final fun doSth(): kotlin.Unit
+        BLOCK_BODY
+    CLASS CLASS ConcreteWithStatic
+      CONSTRUCTOR public constructor ConcreteWithStatic()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ConcreteWithStatic'
+      CLASS OBJECT companion object of ConcreteWithStatic
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Static(IStatic)'
+              x: CALL 'constructor ConcreteWithStatic()' type=ConcreteWithStatic operator=null
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of ConcreteWithStatic'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'doSth(): Unit' type=kotlin.Unit operator=null
+          $this: GET_OBJECT 'companion object of ConcreteWithStatic' type=ConcreteWithStatic.Companion
+        VAR val companion: kotlin.Any?
+          CALL 'getCompanion(): Any!' type=kotlin.Any! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'companion: Any?' type=kotlin.Any? operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'companion: Any?' type=kotlin.Any? operator=null
+              arg1: GET_OBJECT 'companion object of ConcreteWithStatic' type=ConcreteWithStatic.Companion
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

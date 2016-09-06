@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /overriddenInSubclass.kt
+    CLASS CLASS Base
+      CONSTRUCTOR public constructor Base()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Base'
+      PROPERTY public open val foo: kotlin.String = "Base"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='Base'
+    CLASS CLASS Derived
+      CONSTRUCTOR public constructor Derived()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Base()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Derived'
+      PROPERTY public open override val foo: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'get(Base): String' type=kotlin.String operator=null
+            $this: CALLABLE_REFERENCE 'foo: String' type=kotlin.reflect.KProperty1<Base, kotlin.String> operator=null
+            receiver: CALL 'constructor Derived()' type=Derived operator=null

@@ -1,0 +1,63 @@
+MODULE <test-module>
+  FILE /throwableImpl.kt
+    CLASS CLASS MyThrowable
+      CONSTRUCTOR public constructor MyThrowable(message: kotlin.String? = ..., cause: kotlin.Throwable? = ...)
+        message: EXPRESSION_BODY
+          CONST Null type=kotlin.Nothing? value='null'
+        cause: EXPRESSION_BODY
+          CONST Null type=kotlin.Nothing? value='null'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Throwable(String?, Throwable?)'
+            message: GET_VAR 'value-parameter message: String? = ...' type=kotlin.String? operator=null
+            cause: GET_VAR 'value-parameter cause: Throwable? = ...' type=kotlin.Throwable? operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyThrowable'
+      PROPERTY public open override val message: kotlin.String?
+        PROPERTY_GETTER public open override fun <get-message>(): kotlin.String?
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-message>(): String?'
+              CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: CONST String type=kotlin.String value='My message: '
+                other: CALL '<get-message>(): String?' superQualifier=Throwable type=kotlin.String? operator=GET_PROPERTY
+                  $this: THIS of 'MyThrowable' type=kotlin.Throwable
+      PROPERTY public open override val cause: kotlin.Throwable?
+        PROPERTY_GETTER public open override fun <get-cause>(): kotlin.Throwable?
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-cause>(): Throwable?'
+              BLOCK type=kotlin.Throwable? operator=ELVIS
+                VAR val tmp0_elvis_lhs: kotlin.Throwable?
+                  CALL '<get-cause>(): Throwable?' superQualifier=Throwable type=kotlin.Throwable? operator=GET_PROPERTY
+                    $this: THIS of 'MyThrowable' type=kotlin.Throwable
+                WHEN type=kotlin.Throwable? operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_elvis_lhs: Throwable?' type=kotlin.Throwable? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: THIS of 'MyThrowable' type=MyThrowable
+                  else: GET_VAR 'tmp0_elvis_lhs: Throwable?' type=kotlin.Throwable? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor MyThrowable(String? = ..., Throwable? = ...)' type=MyThrowable operator=null
+                message: CONST String type=kotlin.String value='test'
+          catch t: BLOCK type=kotlin.Nothing operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL '<get-cause>(): Throwable?' type=kotlin.Throwable? operator=GET_PROPERTY
+                    $this: GET_VAR 't: MyThrowable' type=MyThrowable operator=null
+                  arg1: GET_VAR 't: MyThrowable' type=MyThrowable operator=null
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                CONST String type=kotlin.String value='fail t.cause'
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                    $this: GET_VAR 't: MyThrowable' type=MyThrowable operator=null
+                  arg1: CONST String type=kotlin.String value='My message: test'
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                CONST String type=kotlin.String value='fail t.message'
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='fail: MyThrowable wasn't catched.'

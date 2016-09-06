@@ -1,0 +1,154 @@
+MODULE <test-module>
+  FILE /unqualifiedSuperWithDeeperHierarchies.kt
+    CLASS CLASS DeeperBase
+      CONSTRUCTOR public constructor DeeperBase()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='DeeperBase'
+      FUN public open fun deeperBaseFun(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='deeperBaseFun(): String'
+            CONST String type=kotlin.String value='DeeperBase.deeperBaseFun()'
+      PROPERTY public open val deeperBaseProp: kotlin.String
+        PROPERTY_GETTER public open fun <get-deeperBaseProp>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-deeperBaseProp>(): String'
+              CONST String type=kotlin.String value='DeeperBase.deeperBaseProp'
+    CLASS CLASS DeepBase
+      CONSTRUCTOR public constructor DeepBase()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor DeeperBase()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='DeepBase'
+    CLASS INTERFACE DeeperInterface
+      FUN public open fun deeperInterfaceFun(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='deeperInterfaceFun(): String'
+            CONST String type=kotlin.String value='DeeperInterface.deeperInterfaceFun()'
+      PROPERTY public open val deeperInterfaceProp: kotlin.String
+        PROPERTY_GETTER public open fun <get-deeperInterfaceProp>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-deeperInterfaceProp>(): String'
+              CONST String type=kotlin.String value='DeeperInterface.deeperInterfaceProp'
+    CLASS INTERFACE DeepInterface
+      FUN public open fun deepInterfaceFun(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='deepInterfaceFun(): String'
+            CONST String type=kotlin.String value='DeepInterface.deepInterfaceFun()'
+    CLASS CLASS DeepDerived
+      CONSTRUCTOR public constructor DeepDerived()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor DeepBase()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='DeepDerived'
+      FUN public open override fun deeperBaseFun(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='deeperBaseFun(): String'
+            CONST String type=kotlin.String value='DeepDerived.deeperBaseFun()'
+      PROPERTY public open override val deeperBaseProp: kotlin.String
+        PROPERTY_GETTER public open override fun <get-deeperBaseProp>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-deeperBaseProp>(): String'
+              CONST String type=kotlin.String value='DeepDerived.deeperBaseProp'
+      FUN public open override fun deeperInterfaceFun(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='deeperInterfaceFun(): String'
+            CONST String type=kotlin.String value='DeepDerived.deeperInterfaceFun()'
+      PROPERTY public open override val deeperInterfaceProp: kotlin.String
+        PROPERTY_GETTER public open override fun <get-deeperInterfaceProp>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-deeperInterfaceProp>(): String'
+              CONST String type=kotlin.String value='DeepDerived.deeperInterfaceProp'
+      FUN public open override fun deepInterfaceFun(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='deepInterfaceFun(): String'
+            CONST String type=kotlin.String value='DeepDerived.deepInterfaceFun()'
+      FUN public final fun callsSuperDeeperBaseFun(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='callsSuperDeeperBaseFun(): String'
+            CALL 'deeperBaseFun(): String' superQualifier=DeepBase type=kotlin.String operator=null
+              $this: THIS of 'DeepDerived' type=DeepBase
+      FUN public final fun getsSuperDeeperBaseProp(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getsSuperDeeperBaseProp(): String'
+            CALL '<get-deeperBaseProp>(): String' superQualifier=DeepBase type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'DeepDerived' type=DeepBase
+      FUN public final fun callsSuperDeepInterfaceFun(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='callsSuperDeepInterfaceFun(): String'
+            CALL 'deepInterfaceFun(): String' superQualifier=DeepInterface type=kotlin.String operator=null
+              $this: THIS of 'DeepDerived' type=DeepInterface
+      FUN public final fun callsSuperDeeperInterfaceFun(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='callsSuperDeeperInterfaceFun(): String'
+            CALL 'deeperInterfaceFun(): String' superQualifier=DeepInterface type=kotlin.String operator=null
+              $this: THIS of 'DeepDerived' type=DeepInterface
+      FUN public final fun getsSuperDeeperInterfaceProp(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getsSuperDeeperInterfaceProp(): String'
+            CALL '<get-deeperInterfaceProp>(): String' superQualifier=DeepInterface type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'DeepDerived' type=DeepInterface
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val dd: DeepDerived
+          CALL 'constructor DeepDerived()' type=DeepDerived operator=null
+        VAR val test1: kotlin.String
+          CALL 'callsSuperDeeperBaseFun(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'dd: DeepDerived' type=DeepDerived operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test1: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='DeeperBase.deeperBaseFun()'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed: dd.callsSuperDeeperBaseFun()=='
+              GET_VAR 'test1: String' type=kotlin.String operator=null
+        VAR val test2: kotlin.String
+          CALL 'getsSuperDeeperBaseProp(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'dd: DeepDerived' type=DeepDerived operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test2: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='DeeperBase.deeperBaseProp'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed: dd.getsSuperDeeperBaseProp()=='
+              GET_VAR 'test2: String' type=kotlin.String operator=null
+        VAR val test3: kotlin.String
+          CALL 'callsSuperDeepInterfaceFun(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'dd: DeepDerived' type=DeepDerived operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test3: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='DeepInterface.deepInterfaceFun()'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed: dd.callsSuperDeepInterfaceFun()=='
+              GET_VAR 'test3: String' type=kotlin.String operator=null
+        VAR val test4: kotlin.String
+          CALL 'callsSuperDeeperInterfaceFun(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'dd: DeepDerived' type=DeepDerived operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test4: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='DeeperInterface.deeperInterfaceFun()'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed: dd.callsSuperDeeperInterfaceFun()=='
+              GET_VAR 'test4: String' type=kotlin.String operator=null
+        VAR val test5: kotlin.String
+          CALL 'getsSuperDeeperInterfaceProp(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'dd: DeepDerived' type=DeepDerived operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test5: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='DeeperInterface.deeperInterfaceProp'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed: dd.getsSuperDeeperInterfaceProp()=='
+              GET_VAR 'test5: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

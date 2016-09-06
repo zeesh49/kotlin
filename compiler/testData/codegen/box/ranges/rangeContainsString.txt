@@ -1,0 +1,17 @@
+MODULE <test-module>
+  FILE /rangeContainsString.kt
+    FUN public operator fun kotlin.ranges.IntRange.contains(s: kotlin.String): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='contains(String) on IntRange: Boolean'
+          CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'contains(String) on IntRange: Boolean' type=kotlin.Boolean operator=IN
+              $receiver: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='0'
+                other: CONST Int type=kotlin.Int value='1'
+              s: CONST String type=kotlin.String value='s'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

@@ -1,0 +1,218 @@
+MODULE <test-module>
+  FILE /comparisonWithNaN.kt
+    FUN public fun _assert(condition: kotlin.Boolean): kotlin.Unit
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: GET_VAR 'value-parameter condition: Boolean' type=kotlin.Boolean operator=null
+          then: THROW type=kotlin.Nothing
+            CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+              p0: CONST String type=kotlin.String value='Fail'
+    FUN public fun _assertFalse(condition: kotlin.Boolean): kotlin.Unit
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='_assertFalse(Boolean): Unit'
+          CALL '_assert(Boolean): Unit' type=kotlin.Unit operator=null
+            condition: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+              $this: GET_VAR 'value-parameter condition: Boolean' type=kotlin.Boolean operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var dnan: kotlin.Double
+          GET_BACKING_FIELD 'NaN: Double' type=kotlin.Double operator=GET_PROPERTY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+              $this: CALL 'nanoTime(): Long' type=kotlin.Long operator=null
+              other: CONST Int type=kotlin.Int value='0'
+          then: SET_VAR 'dnan: Double' type=kotlin.Unit operator=EQ
+            CONST Double type=kotlin.Double value='3.14'
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Double): Int' type=kotlin.Int operator=LT
+              $this: CONST Double type=kotlin.Double value='0.0'
+              other: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+            arg0: CALL 'compareTo(Double): Int' type=kotlin.Int operator=GT
+              $this: CONST Double type=kotlin.Double value='0.0'
+              other: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'LTEQ0(Int): Boolean' type=kotlin.Boolean operator=LTEQ
+            arg0: CALL 'compareTo(Double): Int' type=kotlin.Int operator=LTEQ
+              $this: CONST Double type=kotlin.Double value='0.0'
+              other: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+            arg0: CALL 'compareTo(Double): Int' type=kotlin.Int operator=GTEQ
+              $this: CONST Double type=kotlin.Double value='0.0'
+              other: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CONST Double type=kotlin.Double value='0.0'
+            arg1: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Double): Int' type=kotlin.Int operator=LT
+              $this: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+              other: CONST Double type=kotlin.Double value='0.0'
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+            arg0: CALL 'compareTo(Double): Int' type=kotlin.Int operator=GT
+              $this: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+              other: CONST Double type=kotlin.Double value='0.0'
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'LTEQ0(Int): Boolean' type=kotlin.Boolean operator=LTEQ
+            arg0: CALL 'compareTo(Double): Int' type=kotlin.Int operator=LTEQ
+              $this: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+              other: CONST Double type=kotlin.Double value='0.0'
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+            arg0: CALL 'compareTo(Double): Int' type=kotlin.Int operator=GTEQ
+              $this: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+              other: CONST Double type=kotlin.Double value='0.0'
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+            arg1: CONST Double type=kotlin.Double value='0.0'
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Double): Int' type=kotlin.Int operator=LT
+              $this: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+              other: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+            arg0: CALL 'compareTo(Double): Int' type=kotlin.Int operator=GT
+              $this: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+              other: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'LTEQ0(Int): Boolean' type=kotlin.Boolean operator=LTEQ
+            arg0: CALL 'compareTo(Double): Int' type=kotlin.Int operator=LTEQ
+              $this: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+              other: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+            arg0: CALL 'compareTo(Double): Int' type=kotlin.Int operator=GTEQ
+              $this: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+              other: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+            arg1: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+        CALL '_assert(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'compareTo(Double): Int' type=kotlin.Int operator=null
+              $this: CONST Double type=kotlin.Double value='0.0'
+              other: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+            arg1: CONST Int type=kotlin.Int value='-1'
+        CALL '_assert(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'compareTo(Double): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+              other: CONST Double type=kotlin.Double value='0.0'
+            arg1: CONST Int type=kotlin.Int value='1'
+        CALL '_assert(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'compareTo(Double): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+              other: GET_VAR 'dnan: Double' type=kotlin.Double operator=null
+            arg1: CONST Int type=kotlin.Int value='0'
+        VAR var fnan: kotlin.Float
+          GET_BACKING_FIELD 'NaN: Float' type=kotlin.Float operator=GET_PROPERTY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+              $this: CALL 'nanoTime(): Long' type=kotlin.Long operator=null
+              other: CONST Int type=kotlin.Int value='0'
+          then: SET_VAR 'fnan: Float' type=kotlin.Unit operator=EQ
+            CONST Float type=kotlin.Float value='3.14'
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Float): Int' type=kotlin.Int operator=LT
+              $this: CONST Float type=kotlin.Float value='0.0'
+              other: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+            arg0: CALL 'compareTo(Float): Int' type=kotlin.Int operator=GT
+              $this: CONST Float type=kotlin.Float value='0.0'
+              other: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'LTEQ0(Int): Boolean' type=kotlin.Boolean operator=LTEQ
+            arg0: CALL 'compareTo(Float): Int' type=kotlin.Int operator=LTEQ
+              $this: CONST Float type=kotlin.Float value='0.0'
+              other: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+            arg0: CALL 'compareTo(Float): Int' type=kotlin.Int operator=GTEQ
+              $this: CONST Float type=kotlin.Float value='0.0'
+              other: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CONST Float type=kotlin.Float value='0.0'
+            arg1: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Float): Int' type=kotlin.Int operator=LT
+              $this: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+              other: CONST Float type=kotlin.Float value='0.0'
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+            arg0: CALL 'compareTo(Float): Int' type=kotlin.Int operator=GT
+              $this: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+              other: CONST Float type=kotlin.Float value='0.0'
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'LTEQ0(Int): Boolean' type=kotlin.Boolean operator=LTEQ
+            arg0: CALL 'compareTo(Float): Int' type=kotlin.Int operator=LTEQ
+              $this: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+              other: CONST Float type=kotlin.Float value='0.0'
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+            arg0: CALL 'compareTo(Float): Int' type=kotlin.Int operator=GTEQ
+              $this: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+              other: CONST Float type=kotlin.Float value='0.0'
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+            arg1: CONST Float type=kotlin.Float value='0.0'
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Float): Int' type=kotlin.Int operator=LT
+              $this: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+              other: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+            arg0: CALL 'compareTo(Float): Int' type=kotlin.Int operator=GT
+              $this: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+              other: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'LTEQ0(Int): Boolean' type=kotlin.Boolean operator=LTEQ
+            arg0: CALL 'compareTo(Float): Int' type=kotlin.Int operator=LTEQ
+              $this: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+              other: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+            arg0: CALL 'compareTo(Float): Int' type=kotlin.Int operator=GTEQ
+              $this: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+              other: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+        CALL '_assertFalse(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+            arg1: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+        CALL '_assert(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'compareTo(Float): Int' type=kotlin.Int operator=null
+              $this: CONST Double type=kotlin.Double value='0.0'
+              other: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+            arg1: CONST Int type=kotlin.Int value='-1'
+        CALL '_assert(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'compareTo(Double): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+              other: CONST Double type=kotlin.Double value='0.0'
+            arg1: CONST Int type=kotlin.Int value='1'
+        CALL '_assert(Boolean): Unit' type=kotlin.Unit operator=null
+          condition: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'compareTo(Float): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+              other: GET_VAR 'fnan: Float' type=kotlin.Float operator=null
+            arg1: CONST Int type=kotlin.Int value='0'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

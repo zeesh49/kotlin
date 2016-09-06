@@ -1,0 +1,59 @@
+MODULE <test-module>
+  FILE /K.kt
+    CLASS INTERFACE K
+      PROPERTY public abstract var foo: kotlin.String
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val p: kotlin.reflect.KMutableProperty1<J, kotlin.String>
+          CALLABLE_REFERENCE 'foo: String' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='foo'
+          actual: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_VAR 'p: KMutableProperty1<J, String>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                  $this: GET_VAR 'p: KMutableProperty1<J, String>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Should have only 1 parameter'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-kind>(): KParameter.Kind' type=kotlin.reflect.KParameter.Kind operator=GET_PROPERTY
+                $this: CALL 'single() on List<KParameter>: KParameter' type=kotlin.reflect.KParameter operator=null
+                  $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                    $this: GET_VAR 'p: KMutableProperty1<J, String>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+              arg1: GET_ENUM_VALUE 'INSTANCE' type=kotlin.reflect.KParameter.Kind
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Should have an instance parameter'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'none((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: Boolean' type=kotlin.Boolean operator=null
+            $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'J' type=kotlin.reflect.KClass<J>
+            predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                    CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                      arg1: GET_VAR 'p: KMutableProperty1<J, String>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+              CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='No foo in members'
+        VAR val j: J
+          CALL 'constructor J()' type=J operator=null
+        CALL 'call(vararg Any?): Unit' type=kotlin.Unit operator=null
+          $this: CALL '<get-setter>(): KMutableProperty1.Setter<J, String>' type=kotlin.reflect.KMutableProperty1.Setter<J, kotlin.String> operator=GET_PROPERTY
+            $this: GET_VAR 'p: KMutableProperty1<J, String>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+          args: VARARG type=Array<out Any?> varargElementType=Any?
+            GET_VAR 'j: J' type=J operator=null
+            CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'call(vararg Any?): String' type=kotlin.String operator=null
+            $this: CALL '<get-getter>(): KProperty1.Getter<J, String>' type=kotlin.reflect.KProperty1.Getter<J, kotlin.String> operator=GET_PROPERTY
+              $this: GET_VAR 'p: KMutableProperty1<J, String>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              GET_VAR 'j: J' type=J operator=null

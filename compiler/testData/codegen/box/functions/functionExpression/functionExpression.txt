@@ -1,0 +1,194 @@
+MODULE <test-module>
+  FILE /functionExpression.kt
+    PROPERTY public val foo1: kotlin.Any.() -> kotlin.String
+      EXPRESSION_BODY
+        BLOCK type=kotlin.Any.() -> kotlin.String operator=ANONYMOUS_FUNCTION
+          FUN local final fun kotlin.Any.<no name provided>(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<no name provided>() on Any: String'
+                CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: CONST String type=kotlin.String value='239'
+                  other: $RECEIVER of '<no name provided>() on Any: String' type=kotlin.Any
+          CALLABLE_REFERENCE '<no name provided>() on Any: String' type=kotlin.Any.() -> kotlin.String operator=ANONYMOUS_FUNCTION
+    PROPERTY public val foo2: kotlin.Int.(kotlin.Int) -> kotlin.Int
+      EXPRESSION_BODY
+        BLOCK type=kotlin.Int.(kotlin.Int) -> kotlin.Int operator=ANONYMOUS_FUNCTION
+          FUN local final fun kotlin.Int.<no name provided>(i: kotlin.Int): kotlin.Int
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<no name provided>(Int) on Int: Int'
+                CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                  $this: $RECEIVER of '<no name provided>(Int) on Int: Int' type=kotlin.Int
+                  other: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+          CALLABLE_REFERENCE '<no name provided>(Int) on Int: Int' type=kotlin.Int.(kotlin.Int) -> kotlin.Int operator=ANONYMOUS_FUNCTION
+    FUN public fun <T> fooT1(): (T) -> kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='fooT1(): (T) -> String'
+          BLOCK type=(T) -> kotlin.String operator=ANONYMOUS_FUNCTION
+            FUN local final fun <no name provided>(t: T): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<no name provided>(T): String'
+                  CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                    $receiver: GET_VAR 'value-parameter t: T' type=T operator=null
+            CALLABLE_REFERENCE '<no name provided>(T): String' type=(T) -> kotlin.String operator=ANONYMOUS_FUNCTION
+    CLASS ANNOTATION_CLASS A
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke() on Any: String' type=kotlin.String operator=INVOKE
+                $this: CALL '<get-foo1>(): Any.() -> String' type=kotlin.Any.() -> kotlin.String operator=GET_PROPERTY
+                $receiver: CONST Int type=kotlin.Int value='10'
+              arg1: CONST String type=kotlin.String value='23910'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='foo1 fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(Int) on Int: Int' type=kotlin.Int operator=INVOKE
+                $this: CALL '<get-foo2>(): Int.(Int) -> Int' type=kotlin.Int.(kotlin.Int) -> kotlin.Int operator=GET_PROPERTY
+                $receiver: CONST Int type=kotlin.Int value='10'
+                p2: CONST Int type=kotlin.Int value='1'
+              arg1: CONST Int type=kotlin.Int value='11'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='foo2 fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke() on Int: Int' type=kotlin.Int operator=null
+                $this: BLOCK type=kotlin.Int.() -> kotlin.Int operator=ANONYMOUS_FUNCTION
+                  FUN local final fun kotlin.Int.<no name provided>(): kotlin.Int
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<no name provided>() on Int: Int'
+                        CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                          $this: $RECEIVER of '<no name provided>() on Int: Int' type=kotlin.Int
+                          other: CONST Int type=kotlin.Int value='1'
+                  CALLABLE_REFERENCE '<no name provided>() on Int: Int' type=kotlin.Int.() -> kotlin.Int operator=ANONYMOUS_FUNCTION
+                $receiver: CONST Int type=kotlin.Int value='1'
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test 3 failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): Int' type=kotlin.Int operator=null
+                $this: BLOCK type=() -> kotlin.Int operator=ANONYMOUS_FUNCTION
+                  FUN local final fun <no name provided>(): kotlin.Int
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<no name provided>(): Int'
+                        CONST Int type=kotlin.Int value='1'
+                  CALLABLE_REFERENCE '<no name provided>(): Int' type=() -> kotlin.Int operator=ANONYMOUS_FUNCTION
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test 4 failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(Int): Int' type=kotlin.Int operator=null
+                $this: BLOCK type=(kotlin.Int) -> kotlin.Int operator=ANONYMOUS_FUNCTION
+                  FUN local final fun <no name provided>(i: kotlin.Int): kotlin.Int
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<no name provided>(Int): Int'
+                        GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+                  CALLABLE_REFERENCE '<no name provided>(Int): Int' type=(kotlin.Int) -> kotlin.Int operator=ANONYMOUS_FUNCTION
+                p1: CONST Int type=kotlin.Int value='1'
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test 5 failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(Int) on Int: Int' type=kotlin.Int operator=null
+                $this: BLOCK type=kotlin.Int.(kotlin.Int) -> kotlin.Int operator=ANONYMOUS_FUNCTION
+                  FUN local final fun kotlin.Int.<no name provided>(i: kotlin.Int): kotlin.Int
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<no name provided>(Int) on Int: Int'
+                        CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                          $this: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+                          other: $RECEIVER of '<no name provided>(Int) on Int: Int' type=kotlin.Int
+                  CALLABLE_REFERENCE '<no name provided>(Int) on Int: Int' type=kotlin.Int.(kotlin.Int) -> kotlin.Int operator=ANONYMOUS_FUNCTION
+                $receiver: CONST Int type=kotlin.Int value='1'
+                p2: CONST Int type=kotlin.Int value='1'
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test 6 failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(String): String' type=kotlin.String operator=null
+                $this: CALL 'fooT1(): (String) -> String' type=(kotlin.String) -> kotlin.String operator=null
+                p1: CONST String type=kotlin.String value='mama'
+              arg1: CONST String type=kotlin.String value='mama'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test 7 failed'
+        VAR val a: kotlin.Int.() -> kotlin.Int
+          BLOCK type=kotlin.Int.() -> kotlin.Int operator=ANONYMOUS_FUNCTION
+            FUN @A local final fun kotlin.Int.<no name provided>(): kotlin.Int
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<no name provided>() on Int: Int'
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: $RECEIVER of '<no name provided>() on Int: Int' type=kotlin.Int
+                    other: CONST Int type=kotlin.Int value='1'
+            CALLABLE_REFERENCE '<no name provided>() on Int: Int' type=kotlin.Int.() -> kotlin.Int operator=ANONYMOUS_FUNCTION
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke() on Int: Int' type=kotlin.Int operator=INVOKE
+                $this: GET_VAR 'a: Int.() -> Int' type=kotlin.Int.() -> kotlin.Int operator=VARIABLE_AS_FUNCTION
+                $receiver: CONST Int type=kotlin.Int value='1'
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test 8 failed'
+        VAR val b: kotlin.Int.() -> kotlin.Int
+          BLOCK type=kotlin.Int.() -> kotlin.Int operator=ANONYMOUS_FUNCTION
+            FUN local final fun kotlin.Int.<no name provided>(): kotlin.Int
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<no name provided>() on Int: Int'
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: $RECEIVER of '<no name provided>() on Int: Int' type=kotlin.Int
+                    other: CONST Int type=kotlin.Int value='1'
+            CALLABLE_REFERENCE '<no name provided>() on Int: Int' type=kotlin.Int.() -> kotlin.Int operator=ANONYMOUS_FUNCTION
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke() on Int: Int' type=kotlin.Int operator=INVOKE
+                $this: GET_VAR 'b: Int.() -> Int' type=kotlin.Int.() -> kotlin.Int operator=VARIABLE_AS_FUNCTION
+                $receiver: CONST Int type=kotlin.Int value='1'
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test 9 failed'
+        VAR val c: kotlin.Int.() -> kotlin.Int
+          BLOCK type=kotlin.Int.() -> kotlin.Int operator=ANONYMOUS_FUNCTION
+            FUN local final fun kotlin.Int.<no name provided>(): kotlin.Int
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<no name provided>() on Int: Int'
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: $RECEIVER of '<no name provided>() on Int: Int' type=kotlin.Int
+                    other: CONST Int type=kotlin.Int value='1'
+            CALLABLE_REFERENCE '<no name provided>() on Int: Int' type=kotlin.Int.() -> kotlin.Int operator=ANONYMOUS_FUNCTION
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke() on Int: Int' type=kotlin.Int operator=INVOKE
+                $this: GET_VAR 'c: Int.() -> Int' type=kotlin.Int.() -> kotlin.Int operator=VARIABLE_AS_FUNCTION
+                $receiver: CONST Int type=kotlin.Int value='1'
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test 10 failed'
+        VAR val d: () -> kotlin.Int
+          BLOCK type=() -> kotlin.Int operator=ANONYMOUS_FUNCTION
+            FUN local final fun <no name provided>(): kotlin.Int
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<no name provided>(): Int'
+                  CONST Int type=kotlin.Int value='4'
+            CALLABLE_REFERENCE '<no name provided>(): Int' type=() -> kotlin.Int operator=ANONYMOUS_FUNCTION
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): Int' type=kotlin.Int operator=INVOKE
+                $this: GET_VAR 'd: () -> Int' type=() -> kotlin.Int operator=VARIABLE_AS_FUNCTION
+              arg1: CONST Int type=kotlin.Int value='4'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test 11 failed'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

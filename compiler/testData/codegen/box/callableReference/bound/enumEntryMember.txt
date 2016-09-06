@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /enumEntryMember.kt
+    CLASS ENUM_CLASS E
+      CONSTRUCTOR private constructor E()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='E'
+      ENUM_ENTRY enum entry A
+        init: ENUM_CONSTRUCTOR_CALL 'constructor E()' A
+      ENUM_ENTRY enum entry B
+        init: ENUM_CONSTRUCTOR_CALL 'constructor E()' B
+      FUN public final fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'E' type=E
+      FUN public final fun values(): kotlin.Array<E>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): E
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f: kotlin.reflect.KFunction0<kotlin.String>
+          CALLABLE_REFERENCE 'foo(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+                $this: GET_VAR 'f: KFunction0<String>' type=kotlin.reflect.KFunction0<kotlin.String> operator=VARIABLE_AS_FUNCTION
+              arg1: CONST String type=kotlin.String value='A'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 1: '
+              CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+                $this: GET_VAR 'f: KFunction0<String>' type=kotlin.reflect.KFunction0<kotlin.String> operator=VARIABLE_AS_FUNCTION
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'f: KFunction0<String>' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+              arg1: CALLABLE_REFERENCE 'foo(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

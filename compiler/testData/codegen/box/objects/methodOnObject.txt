@@ -1,0 +1,16 @@
+MODULE <test-module>
+  FILE /methodOnObject.kt
+    CLASS OBJECT A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun result(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='result(): String'
+            CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'result(): String' type=kotlin.String operator=null
+            $this: GET_OBJECT 'A' type=A

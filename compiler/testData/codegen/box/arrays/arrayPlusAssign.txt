@@ -1,0 +1,37 @@
+MODULE <test-module>
+  FILE /arrayPlusAssign.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val s: kotlin.IntArray
+          CALL 'constructor IntArray(Int)' type=kotlin.IntArray operator=null
+            size: CONST Int type=kotlin.Int value='1'
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 's: IntArray' type=kotlin.IntArray operator=null
+          index: CONST Int type=kotlin.Int value='0'
+          value: CONST Int type=kotlin.Int value='5'
+        BLOCK type=kotlin.Unit operator=PLUSEQ
+          VAR val tmp0_array: kotlin.IntArray
+            GET_VAR 's: IntArray' type=kotlin.IntArray operator=null
+          VAR val tmp1_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=PLUSEQ
+            $this: GET_VAR 'tmp0_array: IntArray' type=kotlin.IntArray operator=null
+            index: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+            value: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+              $this: CALL 'get(Int): Int' type=kotlin.Int operator=PLUSEQ
+                $this: GET_VAR 'tmp0_array: IntArray' type=kotlin.IntArray operator=null
+                index: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+              other: CONST Int type=kotlin.Int value='7'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 's: IntArray' type=kotlin.IntArray operator=null
+                index: CONST Int type=kotlin.Int value='0'
+              arg1: CONST Int type=kotlin.Int value='12'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 's: IntArray' type=kotlin.IntArray operator=null
+                index: CONST Int type=kotlin.Int value='0'

@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /kt2269.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Int? operator=SAFE_CALL
+          VAR val tmp1_safe_receiver: kotlin.Byte?
+            BLOCK type=kotlin.Byte? operator=SAFE_CALL
+              VAR val tmp0_safe_receiver: kotlin.Int
+                CONST Int type=kotlin.Int value='230'
+              WHEN type=kotlin.Byte? operator=SAFE_CALL
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_safe_receiver: Int' type=kotlin.Int operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CONST Null type=kotlin.Nothing? value='null'
+                else: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                  $this: GET_VAR 'tmp0_safe_receiver: Int' type=kotlin.Int operator=null
+          WHEN type=kotlin.Int? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp1_safe_receiver: Byte?' type=kotlin.Byte? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'tmp1_safe_receiver: Byte?' type=kotlin.Byte? operator=null
+        CALL 'hashCode(): Int' type=kotlin.Int operator=null
+          $this: CONST Int type=kotlin.Int value='9'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'equals(Any?): Boolean' type=kotlin.Boolean operator=null
+            $this: CONST Int type=kotlin.Int value='230'
+            other: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+              $this: CONST Int type=kotlin.Int value='9'
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CONST Int type=kotlin.Int value='230'
+            arg1: CALL 'toInt(): Int' type=kotlin.Int operator=null
+              $this: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                $this: CONST Int type=kotlin.Int value='9'
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,114 @@
+MODULE <test-module>
+  FILE /kt633.kt
+    CLASS CLASS mInt
+      CONSTRUCTOR public constructor mInt(i: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'i: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'mInt' type=mInt
+            value: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='mInt'
+      PROPERTY public final val i: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='mint: '
+              CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'mInt' type=mInt
+      FUN public final operator fun plus(i: kotlin.Int): mInt
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='plus(Int): mInt'
+            CALL 'constructor mInt(Int)' type=mInt operator=null
+              i: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'mInt' type=mInt
+                other: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+      FUN public final operator fun inc(): mInt
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='inc(): mInt'
+            CALL 'constructor mInt(Int)' type=mInt operator=null
+              i: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'mInt' type=mInt
+                other: CONST Int type=kotlin.Int value='1'
+    CLASS CLASS MyArray
+      CONSTRUCTOR public constructor MyArray()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyArray'
+      PROPERTY public final val a: kotlin.Array<mInt>
+        EXPRESSION_BODY
+          CALL 'constructor Array(Int, (Int) -> mInt)' type=kotlin.Array<mInt> operator=null
+            size: CONST Int type=kotlin.Int value='10'
+            init: BLOCK type=(kotlin.Int) -> mInt operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.Int): mInt
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): mInt'
+                    CALL 'constructor mInt(Int)' type=mInt operator=null
+                      i: CONST Int type=kotlin.Int value='0'
+              CALLABLE_REFERENCE '<anonymous>(Int): mInt' type=(kotlin.Int) -> mInt operator=LAMBDA
+      FUN public final operator fun get(i: mInt): mInt
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(mInt): mInt'
+            CALL 'get(Int): mInt' type=mInt operator=GET_ARRAY_ELEMENT
+              $this: CALL '<get-a>(): Array<mInt>' type=kotlin.Array<mInt> operator=GET_PROPERTY
+                $this: THIS of 'MyArray' type=MyArray
+              index: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'value-parameter i: mInt' type=mInt operator=null
+      FUN public final operator fun set(i: mInt, v: mInt): kotlin.Unit
+        BLOCK_BODY
+          CALL 'set(Int, mInt): Unit' type=kotlin.Unit operator=EQ
+            $this: CALL '<get-a>(): Array<mInt>' type=kotlin.Array<mInt> operator=GET_PROPERTY
+              $this: THIS of 'MyArray' type=MyArray
+            index: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: GET_VAR 'value-parameter i: mInt' type=mInt operator=null
+            value: GET_VAR 'value-parameter v: mInt' type=mInt operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: MyArray
+          CALL 'constructor MyArray()' type=MyArray operator=null
+        VAR var i: mInt
+          CALL 'constructor mInt(Int)' type=mInt operator=null
+            i: CONST Int type=kotlin.Int value='0'
+        CALL 'get(mInt): mInt' type=mInt operator=GET_ARRAY_ELEMENT
+          $this: GET_VAR 'a: MyArray' type=MyArray operator=null
+          i: BLOCK type=mInt operator=POSTFIX_INCR
+            VAR val tmp0: mInt
+              GET_VAR 'i: mInt' type=mInt operator=POSTFIX_INCR
+            SET_VAR 'i: mInt' type=kotlin.Unit operator=POSTFIX_INCR
+              CALL 'inc(): mInt' type=mInt operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp0: mInt' type=mInt operator=null
+            GET_VAR 'tmp0: mInt' type=mInt operator=null
+        CALL 'set(mInt, mInt): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a: MyArray' type=MyArray operator=null
+          i: BLOCK type=mInt operator=POSTFIX_INCR
+            VAR val tmp1: mInt
+              GET_VAR 'i: mInt' type=mInt operator=POSTFIX_INCR
+            SET_VAR 'i: mInt' type=kotlin.Unit operator=POSTFIX_INCR
+              CALL 'inc(): mInt' type=mInt operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp1: mInt' type=mInt operator=null
+            GET_VAR 'tmp1: mInt' type=mInt operator=null
+          v: CALL 'constructor mInt(Int)' type=mInt operator=null
+            i: CONST Int type=kotlin.Int value='1'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp2_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='0'
+                other: CONST Int type=kotlin.Int value='9'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp2_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp2_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              CALL 'get(mInt): mInt' type=mInt operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'a: MyArray' type=MyArray operator=null
+                i: CALL 'constructor mInt(Int)' type=mInt operator=null
+                  i: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

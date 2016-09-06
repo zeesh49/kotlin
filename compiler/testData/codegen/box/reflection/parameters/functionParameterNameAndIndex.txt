@@ -1,0 +1,98 @@
+MODULE <test-module>
+  FILE /functionParameterNameAndIndex.kt
+    FUN public fun foo(bar: kotlin.String): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(String): Int'
+          CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: GET_VAR 'value-parameter bar: String' type=kotlin.String operator=null
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(c: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'c: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter c: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val c: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter c: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun foz(baz: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+      FUN public final fun kotlin.Double.mext(mez: kotlin.Long): kotlin.Unit
+        BLOCK_BODY
+    FUN public fun kotlin.Int.qux(zux: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun checkParameters(f: kotlin.reflect.KFunction<*>, names: kotlin.collections.List<kotlin.String?>): kotlin.Unit
+      BLOCK_BODY
+        VAR val params: kotlin.collections.List<kotlin.reflect.KParameter>
+          CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+            $this: GET_VAR 'value-parameter f: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+        CALL 'assertEquals(List<String?>, List<String?>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'value-parameter names: List<String?>' type=kotlin.collections.List<kotlin.String?> operator=null
+          actual: CALL 'map((KParameter) -> String?) on Iterable<KParameter>: List<String?>' type=kotlin.collections.List<kotlin.String?> operator=null
+            $receiver: GET_VAR 'params: List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=null
+            transform: BLOCK type=(kotlin.reflect.KParameter) -> kotlin.String? operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KParameter): kotlin.String?
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KParameter): String?'
+                    CALL '<get-name>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                      $this: GET_VAR 'value-parameter it: KParameter' type=kotlin.reflect.KParameter operator=null
+              CALLABLE_REFERENCE '<anonymous>(KParameter): String?' type=(kotlin.reflect.KParameter) -> kotlin.String? operator=LAMBDA
+        CALL 'assertEquals(List<Int>, List<Int>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'toList() on Iterable<Int>: List<Int>' type=kotlin.collections.List<kotlin.Int> operator=null
+            $receiver: CALL '<get-indices>() on Collection<*>: IntRange' type=kotlin.ranges.IntRange operator=GET_PROPERTY
+              $receiver: GET_VAR 'params: List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=null
+          actual: CALL 'map((KParameter) -> Int) on Iterable<KParameter>: List<Int>' type=kotlin.collections.List<kotlin.Int> operator=null
+            $receiver: GET_VAR 'params: List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=null
+            transform: BLOCK type=(kotlin.reflect.KParameter) -> kotlin.Int operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KParameter): kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KParameter): Int'
+                    CALL '<get-index>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                      $this: GET_VAR 'value-parameter it: KParameter' type=kotlin.reflect.KParameter operator=null
+              CALLABLE_REFERENCE '<anonymous>(KParameter): Int' type=(kotlin.reflect.KParameter) -> kotlin.Int operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'checkParameters(KFunction<*>, List<String?>): Unit' type=kotlin.Unit operator=null
+          f: CALLABLE_REFERENCE 'box(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+          names: CALL 'listOf(): List<String?>' type=kotlin.collections.List<kotlin.String?> operator=null
+        CALL 'checkParameters(KFunction<*>, List<String?>): Unit' type=kotlin.Unit operator=null
+          f: CALLABLE_REFERENCE 'foo(String): Int' type=kotlin.reflect.KFunction1<kotlin.String, kotlin.Int> operator=null
+          names: CALL 'listOf(String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            element: CONST String type=kotlin.String value='bar'
+        CALL 'checkParameters(KFunction<*>, List<String?>): Unit' type=kotlin.Unit operator=null
+          f: CALLABLE_REFERENCE 'foz(Int): Unit' type=kotlin.reflect.KFunction2<A, kotlin.Int, kotlin.Unit> operator=null
+          names: CALL 'listOf(vararg String?): List<String?>' type=kotlin.collections.List<kotlin.String?> operator=null
+            elements: VARARG type=Array<out String?> varargElementType=String?
+              CONST Null type=kotlin.Nothing? value='null'
+              CONST String type=kotlin.String value='baz'
+        CALL 'checkParameters(KFunction<*>, List<String?>): Unit' type=kotlin.Unit operator=null
+          f: CALLABLE_REFERENCE 'qux(String) on Int: Unit' type=kotlin.reflect.KFunction2<kotlin.Int, kotlin.String, kotlin.Unit> operator=null
+          names: CALL 'listOf(vararg String?): List<String?>' type=kotlin.collections.List<kotlin.String?> operator=null
+            elements: VARARG type=Array<out String?> varargElementType=String?
+              CONST Null type=kotlin.Nothing? value='null'
+              CONST String type=kotlin.String value='zux'
+        CALL 'checkParameters(KFunction<*>, List<String?>): Unit' type=kotlin.Unit operator=null
+          f: CALL 'single((KFunction<*>) -> Boolean) on Iterable<KFunction<*>>: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+            $receiver: CALL '<get-functions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+            predicate: BLOCK type=(kotlin.reflect.KFunction<*>) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KFunction<*>): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KFunction<*>): Boolean'
+                    CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+                      arg1: CONST String type=kotlin.String value='mext'
+              CALLABLE_REFERENCE '<anonymous>(KFunction<*>): Boolean' type=(kotlin.reflect.KFunction<*>) -> kotlin.Boolean operator=LAMBDA
+          names: CALL 'listOf(vararg String?): List<String?>' type=kotlin.collections.List<kotlin.String?> operator=null
+            elements: VARARG type=Array<out String?> varargElementType=String?
+              CONST Null type=kotlin.Nothing? value='null'
+              CONST Null type=kotlin.Nothing? value='null'
+              CONST String type=kotlin.String value='mez'
+        CALL 'checkParameters(KFunction<*>, List<String?>): Unit' type=kotlin.Unit operator=null
+          f: CALLABLE_REFERENCE 'constructor A(String)' type=kotlin.reflect.KFunction1<kotlin.String, A> operator=null
+          names: CALL 'listOf(String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            element: CONST String type=kotlin.String value='c'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

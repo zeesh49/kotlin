@@ -1,0 +1,118 @@
+MODULE <test-module>
+  FILE /ifOrWhenSpecialCall.kt
+    CLASS INTERFACE Option
+      PROPERTY public abstract val s: kotlin.String
+    CLASS CLASS Some
+      CONSTRUCTOR public constructor Some<T>(s: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 's: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Some' type=Some<T>
+            value: GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Some'
+      PROPERTY public open override val s: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS None
+      CONSTRUCTOR public constructor None(s: kotlin.String = ...)
+        s: EXPRESSION_BODY
+          CONST String type=kotlin.String value='None'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 's: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'None' type=None
+            value: GET_VAR 'value-parameter s: String = ...' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='None'
+      PROPERTY public open override val s: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s: String = ...' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun whenTest(a: kotlin.Int): Option<kotlin.Any>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='whenTest(Int): Option<Any>'
+          BLOCK type=Option<kotlin.Any> operator=WHEN
+            VAR val tmp0_subject: kotlin.Int
+              GET_VAR 'value-parameter a: Int' type=kotlin.Int operator=null
+            WHEN type=Option<kotlin.Any> operator=WHEN
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+                arg1: CONST Int type=kotlin.Int value='239'
+              then: BLOCK type=Option<kotlin.Any> operator=null
+                WHEN type=Option<kotlin.Any> operator=IF
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'value-parameter a: Int' type=kotlin.Int operator=null
+                    arg1: CONST Int type=kotlin.Int value='239'
+                  then: CALL 'constructor Some(String)' type=Some<kotlin.Any> operator=null
+                    s: CONST String type=kotlin.String value='239'
+                  else: CALL 'constructor None(String = ...)' type=None operator=null
+              else: WHEN type=Option<kotlin.Any> operator=IF
+                if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                    arg0: GET_VAR 'value-parameter a: Int' type=kotlin.Int operator=null
+                    arg1: CONST Int type=kotlin.Int value='239'
+                then: CALL 'constructor Some(String)' type=Some<kotlin.Any> operator=null
+                  s: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+                    GET_VAR 'value-parameter a: Int' type=kotlin.Int operator=null
+                else: CALL 'constructor None(String = ...)' type=None operator=null
+    FUN public fun ifTest(a: kotlin.Int): Option<kotlin.Any>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='ifTest(Int): Option<Any>'
+          WHEN type=Option<kotlin.Any> operator=WHEN
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'value-parameter a: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='239'
+            then: BLOCK type=Option<kotlin.Any> operator=null
+              WHEN type=Option<kotlin.Any> operator=IF
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'value-parameter a: Int' type=kotlin.Int operator=null
+                  arg1: CONST Int type=kotlin.Int value='239'
+                then: CALL 'constructor Some(String)' type=Some<kotlin.Any> operator=null
+                  s: CONST String type=kotlin.String value='239'
+                else: CALL 'constructor None(String = ...)' type=None operator=null
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'value-parameter a: Int' type=kotlin.Int operator=null
+                arg1: CONST Int type=kotlin.Int value='239'
+            then: CALL 'constructor Some(String)' type=Some<kotlin.Any> operator=null
+              s: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+                GET_VAR 'value-parameter a: Int' type=kotlin.Int operator=null
+            else: CALL 'constructor None(String = ...)' type=None operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: CALL 'whenTest(Int): Option<Any>' type=Option<kotlin.Any> operator=null
+                  a: CONST Int type=kotlin.Int value='2'
+              arg1: CONST String type=kotlin.String value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: CALL 'whenTest(Int): Option<Any>' type=Option<kotlin.Any> operator=null
+                  a: CONST Int type=kotlin.Int value='239'
+              arg1: CONST String type=kotlin.String value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: CALL 'ifTest(Int): Option<Any>' type=Option<kotlin.Any> operator=null
+                  a: CONST Int type=kotlin.Int value='2'
+              arg1: CONST String type=kotlin.String value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: CALL 'ifTest(Int): Option<Any>' type=Option<kotlin.Any> operator=null
+                  a: CONST Int type=kotlin.Int value='239'
+              arg1: CONST String type=kotlin.String value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 4'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

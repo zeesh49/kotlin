@@ -1,0 +1,39 @@
+MODULE <test-module>
+  FILE /K.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f: kotlin.reflect.KMutableProperty0<kotlin.String!>
+          CALLABLE_REFERENCE 'x: String!' type=kotlin.reflect.KMutableProperty0<kotlin.String!> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='x'
+          actual: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_VAR 'f: KMutableProperty0<String!>' type=kotlin.reflect.KMutableProperty0<kotlin.String!> operator=null
+        CALL 'assertEquals(KCallable<Any?>, KCallable<Any?>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'f: KMutableProperty0<String!>' type=kotlin.reflect.KMutableProperty0<kotlin.String!> operator=null
+          actual: CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+            $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'J' type=kotlin.reflect.KClass<J>
+            predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                    CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                      arg1: CONST String type=kotlin.String value='x'
+              CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+        CALL 'set(String!): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'f: KMutableProperty0<String!>' type=kotlin.reflect.KMutableProperty0<kotlin.String!> operator=null
+          value: CONST String type=kotlin.String value='OK'
+        CALL 'assertEquals(String!, String!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='OK'
+          actual: GET_BACKING_FIELD 'x: String!' type=kotlin.String! operator=GET_PROPERTY
+        CALL 'assertEquals(String!, String!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='OK'
+          actual: CALL 'invoke(): String!' type=kotlin.String! operator=INVOKE
+            $this: CALL '<get-getter>(): KProperty0.Getter<String!>' type=kotlin.reflect.KProperty0.Getter<kotlin.String!> operator=GET_PROPERTY
+              $this: GET_VAR 'f: KMutableProperty0<String!>' type=kotlin.reflect.KMutableProperty0<kotlin.String!> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+            CALL 'get(): String!' type=kotlin.String! operator=null
+              $this: GET_VAR 'f: KMutableProperty0<String!>' type=kotlin.reflect.KMutableProperty0<kotlin.String!> operator=null

@@ -1,0 +1,107 @@
+MODULE <test-module>
+  FILE /typeProjection.kt
+    CLASS CLASS G
+      CONSTRUCTOR public constructor G<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='G'
+    FUN public fun number(): G<kotlin.Number>
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun outNumber(): G<out kotlin.Number>
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun inNumber(): G<in kotlin.Number>
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun star(): G<*>
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val n: kotlin.reflect.KType
+          CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'number(): G<Number>' type=kotlin.reflect.KFunction0<G<kotlin.Number>> operator=null
+        VAR val o: kotlin.reflect.KType
+          CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'outNumber(): G<out Number>' type=kotlin.reflect.KFunction0<G<out kotlin.Number>> operator=null
+        VAR val i: kotlin.reflect.KType
+          CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'inNumber(): G<in Number>' type=kotlin.reflect.KFunction0<G<in kotlin.Number>> operator=null
+        VAR val st: kotlin.reflect.KType
+          CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'star(): G<*>' type=kotlin.reflect.KFunction0<G<*>> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'isSubtypeOf(KType) on KType: Boolean' type=kotlin.Boolean operator=null
+            $receiver: GET_VAR 'n: KType' type=kotlin.reflect.KType operator=null
+            other: GET_VAR 'o: KType' type=kotlin.reflect.KType operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'isSubtypeOf(KType) on KType: Boolean' type=kotlin.Boolean operator=null
+            $receiver: GET_VAR 'o: KType' type=kotlin.reflect.KType operator=null
+            other: GET_VAR 'n: KType' type=kotlin.reflect.KType operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'isSubtypeOf(KType) on KType: Boolean' type=kotlin.Boolean operator=null
+            $receiver: GET_VAR 'n: KType' type=kotlin.reflect.KType operator=null
+            other: GET_VAR 'i: KType' type=kotlin.reflect.KType operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'isSubtypeOf(KType) on KType: Boolean' type=kotlin.Boolean operator=null
+            $receiver: GET_VAR 'i: KType' type=kotlin.reflect.KType operator=null
+            other: GET_VAR 'n: KType' type=kotlin.reflect.KType operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'isSubtypeOf(KType) on KType: Boolean' type=kotlin.Boolean operator=null
+            $receiver: GET_VAR 'n: KType' type=kotlin.reflect.KType operator=null
+            other: GET_VAR 'st: KType' type=kotlin.reflect.KType operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'isSubtypeOf(KType) on KType: Boolean' type=kotlin.Boolean operator=null
+            $receiver: GET_VAR 'st: KType' type=kotlin.reflect.KType operator=null
+            other: GET_VAR 'n: KType' type=kotlin.reflect.KType operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'isSubtypeOf(KType) on KType: Boolean' type=kotlin.Boolean operator=null
+            $receiver: GET_VAR 'o: KType' type=kotlin.reflect.KType operator=null
+            other: GET_VAR 'st: KType' type=kotlin.reflect.KType operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'isSubtypeOf(KType) on KType: Boolean' type=kotlin.Boolean operator=null
+            $receiver: GET_VAR 'st: KType' type=kotlin.reflect.KType operator=null
+            other: GET_VAR 'o: KType' type=kotlin.reflect.KType operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'isSubtypeOf(KType) on KType: Boolean' type=kotlin.Boolean operator=null
+            $receiver: GET_VAR 'i: KType' type=kotlin.reflect.KType operator=null
+            other: GET_VAR 'st: KType' type=kotlin.reflect.KType operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'isSubtypeOf(KType) on KType: Boolean' type=kotlin.Boolean operator=null
+            $receiver: GET_VAR 'st: KType' type=kotlin.reflect.KType operator=null
+            other: GET_VAR 'i: KType' type=kotlin.reflect.KType operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

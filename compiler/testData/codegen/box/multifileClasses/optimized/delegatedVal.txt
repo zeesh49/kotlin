@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /box.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-OK>(): String' type=kotlin.String operator=GET_PROPERTY
+  FILE /part1.kt
+    PROPERTY public val OK: kotlin.String
+      delegate: PROPERTY val `OK$delegate`: kotlin.Lazy<kotlin.String>
+        EXPRESSION_BODY
+          CALL 'lazy(() -> String): Lazy<String>' type=kotlin.Lazy<kotlin.String> operator=null
+            initializer: BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    CONST String type=kotlin.String value='OK'
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+      PROPERTY_GETTER public fun <get-OK>(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-OK>(): String'
+            CALL 'getValue(Any?, KProperty<*>) on Lazy<String>: String' type=kotlin.String operator=null
+              $receiver: GET_BACKING_FIELD '`OK$delegate`: Lazy<String>' type=kotlin.Lazy<kotlin.String> operator=null
+              thisRef: CONST Null type=kotlin.Nothing? value='null'
+              property: CALLABLE_REFERENCE 'OK: String' type=kotlin.reflect.KProperty0<kotlin.String> operator=PROPERTY_REFERENCE_FOR_DELEGATE

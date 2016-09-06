@@ -1,0 +1,46 @@
+MODULE <test-module>
+  FILE /Test1.kt
+    FUN public fun getX(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='getX(): Int'
+          CONST Int type=kotlin.Int value='1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='getX'
+          actual: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'getX(): Int' type=kotlin.reflect.KFunction0<kotlin.Int> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='getY'
+          actual: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'getY(): Int' type=kotlin.reflect.KFunction0<kotlin.Int> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='getZ'
+          actual: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'getZ(Int = ...): Int' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Int> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+            $this: CALLABLE_REFERENCE 'getX(): Int' type=kotlin.reflect.KFunction0<kotlin.Int> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='239'
+          actual: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+            $this: CALLABLE_REFERENCE 'getY(): Int' type=kotlin.reflect.KFunction0<kotlin.Int> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='42'
+          actual: CALL 'callBy(Map<KParameter, Any?>): Int' type=kotlin.Int operator=null
+            $this: CALLABLE_REFERENCE 'getZ(Int = ...): Int' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Int> operator=null
+            args: CALL 'emptyMap(): Map<KParameter, Any?>' type=kotlin.collections.Map<kotlin.reflect.KParameter, kotlin.Any?> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+  FILE /Test2.kt
+    FUN public fun getY(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='getY(): Int'
+          CONST Int type=kotlin.Int value='239'
+    FUN public fun getZ(value: kotlin.Int = ...): kotlin.Int
+      value: EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='42'
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='getZ(Int = ...): Int'
+          GET_VAR 'value-parameter value: Int = ...' type=kotlin.Int operator=null

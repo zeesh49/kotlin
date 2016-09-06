@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /inClassWithSetter.kt
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      PROPERTY public final var storage: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='Fail'
+      PROPERTY public final var kotlin.Int.foo: kotlin.String
+        PROPERTY_GETTER public final fun kotlin.Int.<get-foo>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-foo>() on Int: String'
+              CALL '<get-storage>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'Test' type=Test
+        PROPERTY_SETTER public final fun kotlin.Int.<set-foo>(value: kotlin.String): kotlin.Unit
+          BLOCK_BODY
+            CALL '<set-storage>(String): Unit' type=kotlin.Unit operator=EQ
+              $this: THIS of 'Test' type=Test
+              <set-?>: GET_VAR 'value-parameter value: String' type=kotlin.String operator=null
+      FUN public final fun test(): kotlin.String
+        BLOCK_BODY
+          VAR val i: kotlin.Int = 1
+            CONST Int type=kotlin.Int value='1'
+          CALL '<set-foo>(String) on Int: Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'Test' type=Test
+            $receiver: GET_VAR 'i: Int' type=kotlin.Int operator=null
+            value: CONST String type=kotlin.String value='OK'
+          RETURN type=kotlin.Nothing from='test(): String'
+            CALL '<get-foo>() on Int: String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'Test' type=Test
+              $receiver: GET_VAR 'i: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'test(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Test()' type=Test operator=null

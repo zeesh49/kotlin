@@ -1,0 +1,64 @@
+MODULE <test-module>
+  FILE /enclosedVar.kt
+    CLASS CLASS M
+      CONSTRUCTOR public constructor M()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='M'
+      PROPERTY public open var y: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='500'
+    CLASS CLASS N
+      CONSTRUCTOR public constructor N()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor M()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='N'
+      PROPERTY public open override var y: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='200'
+      CLASS CLASS C
+        CONSTRUCTOR public constructor C()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='C'
+        FUN public final fun test5(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='test5(): Int'
+              CALL '<get-y>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'N' type=N
+        FUN public final fun test6(): kotlin.Int
+          BLOCK_BODY
+            BLOCK type=kotlin.Unit operator=PLUSEQ
+              VAR val tmp0_this: M
+                THIS of 'N' type=M
+              CALL '<set-y>(Int): Unit' superQualifier=M type=kotlin.Unit operator=PLUSEQ
+                $this: GET_VAR 'tmp0_this: M' type=M operator=null
+                <set-?>: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                  $this: CALL '<get-y>(): Int' superQualifier=M type=kotlin.Int operator=PLUSEQ
+                    $this: GET_VAR 'tmp0_this: M' type=M operator=null
+                  other: CONST Int type=kotlin.Int value='200'
+            RETURN type=kotlin.Nothing from='test6(): Int'
+              CALL '<get-y>(): Int' superQualifier=M type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'N' type=M
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test5(): Int' type=kotlin.Int operator=null
+                $this: CALL 'constructor C()' type=N.C operator=null
+                  $this: CALL 'constructor N()' type=N operator=null
+              arg1: CONST Int type=kotlin.Int value='200'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test5 fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test6(): Int' type=kotlin.Int operator=null
+                $this: CALL 'constructor C()' type=N.C operator=null
+                  $this: CALL 'constructor N()' type=N operator=null
+              arg1: CONST Int type=kotlin.Int value='700'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test6 fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

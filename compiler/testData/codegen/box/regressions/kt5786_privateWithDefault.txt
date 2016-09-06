@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /kt5786_privateWithDefault.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'run(() -> Unit): Unit' type=kotlin.Unit operator=null
+          block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                CALL 'test(String, Int = ...): Unit' type=kotlin.Unit operator=null
+                  arg1: CONST String type=kotlin.String value='ok'
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  CALL 'test(String, Int = ...): Unit' type=kotlin.Unit operator=null
+                    arg1: CONST String type=kotlin.String value='ok'
+                    default: CONST Int type=kotlin.Int value='200'
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'test(String, Int = ...): Unit' type=kotlin.Unit operator=null
+          arg1: CONST String type=kotlin.String value='ok'
+        CALL 'test(String, Int = ...): Unit' type=kotlin.Unit operator=null
+          arg1: CONST String type=kotlin.String value='ok'
+          default: CONST Int type=kotlin.Int value='300'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN private fun test(arg1: kotlin.String, default: kotlin.Int = ...): kotlin.Unit
+      default: EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='0'
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test(String, Int = ...): Unit'
+          GET_OBJECT 'Unit' type=kotlin.Unit

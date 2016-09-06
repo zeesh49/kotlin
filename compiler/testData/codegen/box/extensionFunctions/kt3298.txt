@@ -1,0 +1,48 @@
+MODULE <test-module>
+  FILE /kt3298.kt
+    PROPERTY public var result: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    FUN public fun result(r: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: GET_VAR 'value-parameter r: String' type=kotlin.String operator=null
+    CLASS OBJECT Foo
+      CONSTRUCTOR private constructor Foo()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      FUN private final operator fun kotlin.String.unaryPlus(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='unaryPlus() on String: String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: CONST String type=kotlin.String value='('
+                other: $RECEIVER of 'unaryPlus() on String: String' type=kotlin.String
+              other: CONST String type=kotlin.String value=')'
+      FUN public final fun foo(): kotlin.Unit
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): Unit'
+            CALL 'invoke(): Unit' type=kotlin.Unit operator=null
+              $this: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.Unit
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                      CALL 'result(String): Unit' type=kotlin.Unit operator=null
+                        r: CALL 'unaryPlus() on String: String' type=kotlin.String operator=UPLUS
+                          $this: THIS of 'Foo' type=Foo
+                          $receiver: CONST String type=kotlin.String value='Stuff'
+                CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          $this: GET_OBJECT 'Foo' type=Foo
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+              arg1: CONST String type=kotlin.String value='(Stuff)'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY

@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /kt248.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val b: kotlin.Boolean? = true
+          TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Boolean
+            CONST Boolean type=kotlin.Boolean value='true'
+        VAR val i: kotlin.Int = 1
+          TYPE_OP operator=CAST typeOperand=kotlin.Int
+            CONST Int type=kotlin.Int value='1'
+        VAR val j: kotlin.Int? = 1
+          TYPE_OP operator=CAST typeOperand=kotlin.Int?
+            CONST Int type=kotlin.Int value='1'
+        VAR val s: kotlin.String = "s"
+          TYPE_OP operator=CAST typeOperand=kotlin.String
+            CONST String type=kotlin.String value='s'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

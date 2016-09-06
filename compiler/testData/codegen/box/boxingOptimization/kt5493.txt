@@ -1,0 +1,19 @@
+MODULE <test-module>
+  FILE /kt5493.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'
+          finally: BLOCK type=kotlin.String? operator=null
+            BLOCK type=kotlin.String? operator=SAFE_CALL
+              VAR val tmp0_safe_receiver: kotlin.Nothing?
+                CONST Null type=kotlin.Nothing? value='null'
+              WHEN type=kotlin.String? operator=SAFE_CALL
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_safe_receiver: Nothing?' type=kotlin.Nothing? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CONST Null type=kotlin.Nothing? value='null'
+                else: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                  $this: GET_VAR 'tmp0_safe_receiver: Nothing?' type=kotlin.Nothing? operator=null

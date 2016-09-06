@@ -1,0 +1,42 @@
+MODULE <test-module>
+  FILE /typeCastException.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Any
+          try: BLOCK type=kotlin.Array<kotlin.String> operator=null
+            VAR val a: kotlin.Any? = null
+              CONST Null type=kotlin.Nothing? value='null'
+            TYPE_OP operator=CAST typeOperand=kotlin.Array<kotlin.String>
+              GET_VAR 'a: Any?' type=kotlin.Any? operator=null
+          catch e: BLOCK type=kotlin.Unit operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                    $this: GET_VAR 'e: TypeCastException' type=kotlin.TypeCastException operator=null
+                  arg1: CONST String type=kotlin.String value='null cannot be cast to non-null type kotlin.Array<kotlin.String>'
+              then: BLOCK type=kotlin.Nothing operator=null
+                RETURN type=kotlin.Nothing from='box(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='Fail 1: '
+                    GET_VAR 'e: TypeCastException' type=kotlin.TypeCastException operator=null
+        TRY_CATCH type=kotlin.Any
+          try: BLOCK type=kotlin.String operator=null
+            VAR val x: kotlin.String? = null
+              CONST Null type=kotlin.Nothing? value='null'
+            TYPE_OP operator=CAST typeOperand=kotlin.String
+              GET_VAR 'x: String?' type=kotlin.String? operator=null
+          catch e: BLOCK type=kotlin.Unit operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                    $this: GET_VAR 'e: TypeCastException' type=kotlin.TypeCastException operator=null
+                  arg1: CONST String type=kotlin.String value='null cannot be cast to non-null type kotlin.String'
+              then: BLOCK type=kotlin.Nothing operator=null
+                RETURN type=kotlin.Nothing from='box(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='Fail 2: '
+                    GET_VAR 'e: TypeCastException' type=kotlin.TypeCastException operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

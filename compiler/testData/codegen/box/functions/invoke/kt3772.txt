@@ -1,0 +1,58 @@
+MODULE <test-module>
+  FILE /kt3772.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun invoke(f: A.() -> kotlin.Unit): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='invoke(A.() -> Unit): Int'
+            CONST Int type=kotlin.Int value='1'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      FUN public final operator fun invoke(f: B.() -> kotlin.Unit): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='invoke(B.() -> Unit): Int'
+            CONST Int type=kotlin.Int value='2'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+    PROPERTY public val C.attr: A
+      PROPERTY_GETTER public fun C.<get-attr>(): A
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-attr>() on C: A'
+            CALL 'constructor A()' type=A operator=null
+    CLASS CLASS D
+      CONSTRUCTOR public constructor D()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor C()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='D'
+    PROPERTY public val D.attr: B
+      PROPERTY_GETTER public fun D.<get-attr>(): B
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-attr>() on D: B'
+            CALL 'constructor B()' type=B operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val d: D
+          CALL 'constructor D()' type=D operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'invoke(B.() -> Unit): Int' type=kotlin.Int operator=INVOKE
+                $this: CALL '<get-attr>() on D: B' type=B operator=GET_PROPERTY
+                  $receiver: GET_VAR 'd: D' type=D operator=null
+                f: BLOCK type=B.() -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun B.<anonymous>(): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>() on B: Unit'
+                  CALLABLE_REFERENCE '<anonymous>() on B: Unit' type=B.() -> kotlin.Unit operator=LAMBDA
+              arg1: CONST Int type=kotlin.Int value='2'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

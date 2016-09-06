@@ -1,0 +1,40 @@
+MODULE <test-module>
+  FILE /inclassobj.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-operatingSystemType>(): Context.Companion.OsType' type=Context.Companion.OsType operator=GET_PROPERTY
+                $this: GET_OBJECT 'companion object of Context' type=Context.Companion
+              arg1: GET_ENUM_VALUE 'OTHER' type=Context.Companion.OsType
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'
+    CLASS CLASS Context
+      CONSTRUCTOR public constructor Context()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Context'
+      CLASS OBJECT companion object of Context
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of Context'
+        CLASS ENUM_CLASS OsType
+          CONSTRUCTOR private constructor OsType()
+            BLOCK_BODY
+              ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+              INSTANCE_INITIALIZER_CALL classDescriptor='OsType'
+          ENUM_ENTRY enum entry LINUX
+            init: ENUM_CONSTRUCTOR_CALL 'constructor OsType()' LINUX
+          ENUM_ENTRY enum entry OTHER
+            init: ENUM_CONSTRUCTOR_CALL 'constructor OsType()' OTHER
+          FUN public final fun values(): kotlin.Array<Context.Companion.OsType>
+            SYNTHETIC_BODY kind=ENUM_VALUES
+          FUN public final fun valueOf(value: kotlin.String): Context.Companion.OsType
+            SYNTHETIC_BODY kind=ENUM_VALUEOF
+        PROPERTY public final val operatingSystemType: Context.Companion.OsType
+          PROPERTY_GETTER public final fun <get-operatingSystemType>(): Context.Companion.OsType
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<get-operatingSystemType>(): Context.Companion.OsType'
+                GET_ENUM_VALUE 'OTHER' type=Context.Companion.OsType

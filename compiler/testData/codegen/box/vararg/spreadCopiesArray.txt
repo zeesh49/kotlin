@@ -1,0 +1,78 @@
+MODULE <test-module>
+  FILE /spreadCopiesArray.kt
+    FUN public fun <T> copyArray(vararg data: T): kotlin.Array<out T>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='copyArray(vararg T): Array<out T>'
+          GET_VAR 'value-parameter vararg data: T' type=kotlin.Array<out T> operator=null
+    FUN public inline fun <reified T> reifiedCopyArray(vararg data: T): kotlin.Array<out T>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='reifiedCopyArray(vararg T): Array<out T>'
+          GET_VAR 'value-parameter vararg data: T' type=kotlin.Array<out T> operator=null
+    FUN public fun copyIntArray(vararg data: kotlin.Int): kotlin.IntArray
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='copyIntArray(vararg Int): IntArray'
+          GET_VAR 'value-parameter vararg data: Int' type=kotlin.IntArray operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val sarr: kotlin.Array<kotlin.String>
+          CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='OK'
+        VAR val sarr2: kotlin.Array<out kotlin.String>
+          CALL 'copyArray(vararg String): Array<out String>' type=kotlin.Array<out kotlin.String> operator=null
+            data: VARARG type=Array<out String> varargElementType=String
+              SPREAD_ELEMENT
+                GET_VAR 'sarr: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+        CALL 'set(Int, String): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'sarr: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+          index: CONST Int type=kotlin.Int value='0'
+          value: CONST String type=kotlin.String value='Array was not copied'
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'sarr2: Array<out String>' type=kotlin.Array<out kotlin.String> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+          actual: CONST String type=kotlin.String value='OK'
+          message: CONST String type=kotlin.String value='Failed: Array<String>'
+        VAR var rsarr: kotlin.Array<kotlin.String>
+          CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='OK'
+        VAR var rsarr2: kotlin.Array<out kotlin.String>
+          CALL 'reifiedCopyArray(vararg String): Array<out String>' type=kotlin.Array<out kotlin.String> operator=null
+            data: VARARG type=Array<out String> varargElementType=String
+              SPREAD_ELEMENT
+                GET_VAR 'rsarr: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+        CALL 'set(Int, String): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'rsarr: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+          index: CONST Int type=kotlin.Int value='0'
+          value: CONST String type=kotlin.String value='Array was not copied'
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'rsarr2: Array<out String>' type=kotlin.Array<out kotlin.String> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+          actual: CONST String type=kotlin.String value='OK'
+          message: CONST String type=kotlin.String value='Failed: Array<String>, reified copy'
+        VAR val iarr: kotlin.IntArray
+          CALL 'constructor IntArray(Int)' type=kotlin.IntArray operator=null
+            size: CONST Int type=kotlin.Int value='1'
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'iarr: IntArray' type=kotlin.IntArray operator=null
+          index: CONST Int type=kotlin.Int value='0'
+          value: CONST Int type=kotlin.Int value='1'
+        VAR val iarr2: kotlin.IntArray
+          CALL 'copyIntArray(vararg Int): IntArray' type=kotlin.IntArray operator=null
+            data: VARARG type=IntArray varargElementType=Int
+              SPREAD_ELEMENT
+                GET_VAR 'iarr: IntArray' type=kotlin.IntArray operator=null
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'iarr: IntArray' type=kotlin.IntArray operator=null
+          index: CONST Int type=kotlin.Int value='0'
+          value: CONST Int type=kotlin.Int value='42'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'iarr2: IntArray' type=kotlin.IntArray operator=null
+            index: CONST Int type=kotlin.Int value='0'
+          actual: CONST Int type=kotlin.Int value='1'
+          message: CONST String type=kotlin.String value='Failed: IntArray'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,57 @@
+MODULE <test-module>
+  FILE /1.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'localUse(): Boolean' type=kotlin.Boolean operator=null
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='local use failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'fromOtherPackage(): Boolean' type=kotlin.Boolean operator=null
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='use from other package failed'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun localUse(): kotlin.Boolean
+      BLOCK_BODY
+        VAR val c: java.lang.Class<java.lang.Runnable>
+          CALL '<get-java>() on KClass<Runnable>: Class<Runnable>' type=java.lang.Class<java.lang.Runnable> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Runnable' type=kotlin.reflect.KClass<java.lang.Runnable>
+        RETURN type=kotlin.Nothing from='localUse(): Boolean'
+          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: BLOCK type=kotlin.String operator=EXCLEXCL
+              VAR val tmp0_notnull: kotlin.String!
+                CALL 'getName(): String!' type=kotlin.String! operator=null
+                  $this: GET_VAR 'c: Class<Runnable>' type=java.lang.Class<java.lang.Runnable> operator=null
+              WHEN type=kotlin.String operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: String!' type=kotlin.String! operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+                  GET_VAR 'tmp0_notnull: String!' type=kotlin.String! operator=null
+            arg1: CONST String type=kotlin.String value='java.lang.Runnable'
+  FILE /2.kt
+    FUN public fun fromOtherPackage(): kotlin.Boolean
+      BLOCK_BODY
+        VAR val c: java.lang.Class<java.lang.Runnable>
+          CALL '<get-java>() on KClass<Runnable>: Class<Runnable>' type=java.lang.Class<java.lang.Runnable> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Runnable' type=kotlin.reflect.KClass<java.lang.Runnable>
+        RETURN type=kotlin.Nothing from='fromOtherPackage(): Boolean'
+          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: BLOCK type=kotlin.String operator=EXCLEXCL
+              VAR val tmp0_notnull: kotlin.String!
+                CALL 'getName(): String!' type=kotlin.String! operator=null
+                  $this: GET_VAR 'c: Class<Runnable>' type=java.lang.Class<java.lang.Runnable> operator=null
+              WHEN type=kotlin.String operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: String!' type=kotlin.String! operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+                  GET_VAR 'tmp0_notnull: String!' type=kotlin.String! operator=null
+            arg1: CONST String type=kotlin.String value='java.lang.Runnable'

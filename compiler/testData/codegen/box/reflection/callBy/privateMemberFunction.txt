@@ -1,0 +1,48 @@
+MODULE <test-module>
+  FILE /privateMemberFunction.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN private final fun foo(default: kotlin.Any? = ...): kotlin.Unit
+        default: EXPRESSION_BODY
+          THIS of 'A' type=A
+        BLOCK_BODY
+      FUN public final fun f(): kotlin.reflect.KFunction2<A, kotlin.Any?, kotlin.Unit>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='f(): KFunction2<A, Any?, Unit>'
+            CALLABLE_REFERENCE 'foo(Any? = ...): Unit' type=kotlin.reflect.KFunction2<A, kotlin.Any?, kotlin.Unit> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          CALL 'constructor A()' type=A operator=null
+        VAR val f: kotlin.reflect.KFunction2<A, kotlin.Any?, kotlin.Unit>
+          CALL 'f(): KFunction2<A, Any?, Unit>' type=kotlin.reflect.KFunction2<A, kotlin.Any?, kotlin.Unit> operator=null
+            $this: GET_VAR 'a: A' type=A operator=null
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'callBy(Map<KParameter, Any?>): Unit' type=kotlin.Unit operator=null
+              $this: GET_VAR 'f: KFunction2<A, Any?, Unit>' type=kotlin.reflect.KFunction2<A, kotlin.Any?, kotlin.Unit> operator=null
+              args: CALL 'mapOf(Pair<KParameter, A>): Map<KParameter, A>' type=kotlin.collections.Map<kotlin.reflect.KParameter, A> operator=null
+                pair: CALL 'to(A) on KParameter: Pair<KParameter, A>' type=kotlin.Pair<kotlin.reflect.KParameter, A> operator=null
+                  $receiver: CALL 'first() on List<KParameter>: KParameter' type=kotlin.reflect.KParameter operator=null
+                    $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                      $this: GET_VAR 'f: KFunction2<A, Any?, Unit>' type=kotlin.reflect.KFunction2<A, kotlin.Any?, kotlin.Unit> operator=null
+                  that: GET_VAR 'a: A' type=A operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail: IllegalCallableAccessException should have been thrown'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        CALL '<set-isAccessible>(Boolean) on KCallable<*>: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 'f: KFunction2<A, Any?, Unit>' type=kotlin.reflect.KFunction2<A, kotlin.Any?, kotlin.Unit> operator=null
+          value: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'callBy(Map<KParameter, Any?>): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'f: KFunction2<A, Any?, Unit>' type=kotlin.reflect.KFunction2<A, kotlin.Any?, kotlin.Unit> operator=null
+          args: CALL 'mapOf(Pair<KParameter, A>): Map<KParameter, A>' type=kotlin.collections.Map<kotlin.reflect.KParameter, A> operator=null
+            pair: CALL 'to(A) on KParameter: Pair<KParameter, A>' type=kotlin.Pair<kotlin.reflect.KParameter, A> operator=null
+              $receiver: CALL 'first() on List<KParameter>: KParameter' type=kotlin.reflect.KParameter operator=null
+                $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                  $this: GET_VAR 'f: KFunction2<A, Any?, Unit>' type=kotlin.reflect.KFunction2<A, kotlin.Any?, kotlin.Unit> operator=null
+              that: GET_VAR 'a: A' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,79 @@
+MODULE <test-module>
+  FILE /sealedInSameFile.kt
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    CLASS CLASS A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CONSTRUCTOR private constructor A(i: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+      CLASS CLASS C
+        CONSTRUCTOR public constructor C()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='C'
+    CLASS OBJECT T
+      CONSTRUCTOR private constructor T()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Y()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='T'
+    CLASS CLASS D
+      CONSTRUCTOR public constructor D()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A(Int)'
+            i: CONST Int type=kotlin.Int value='4'
+          INSTANCE_INITIALIZER_CALL classDescriptor='D'
+    CLASS CLASS E
+      CONSTRUCTOR public constructor E(i: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A(Int)'
+            i: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='E'
+      CONSTRUCTOR public constructor E()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='E'
+    CLASS OBJECT S
+      CONSTRUCTOR private constructor S()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Z()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='S'
+    CLASS CLASS Y
+      CONSTRUCTOR private constructor Y()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor X()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Y'
+    CLASS CLASS Z
+      CONSTRUCTOR private constructor Z()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Y()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Z'
+    CLASS CLASS X
+      CONSTRUCTOR private constructor X()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='X'
+    CLASS CLASS Q
+      CONSTRUCTOR public constructor Q()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Y()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Q'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'constructor B()' type=B operator=null
+        CALL 'constructor C()' type=A.C operator=null
+        CALL 'constructor D()' type=D operator=null
+        CALL 'constructor E()' type=E operator=null
+        CALL 'constructor E(Int)' type=E operator=null
+          i: CONST Int type=kotlin.Int value='4'
+        GET_OBJECT 'T' type=T
+        GET_OBJECT 'S' type=S
+        CALL 'constructor Q()' type=Q operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

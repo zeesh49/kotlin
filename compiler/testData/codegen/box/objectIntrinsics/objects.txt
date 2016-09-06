@@ -1,0 +1,183 @@
+MODULE <test-module>
+  FILE /objects.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            CALL 'testCompanionObjectAccess(): Unit' type=kotlin.Unit operator=null
+            CALL 'testInCall(): Unit' type=kotlin.Unit operator=null
+            CALL 'testDoubleConstants(): Unit' type=kotlin.Unit operator=null
+            CALL 'testFloatConstants(): Unit' type=kotlin.Unit operator=null
+            CALL 'testLocalFun(): Unit' type=kotlin.Unit operator=null
+            CALL 'testTopLevelFun(): Unit' type=kotlin.Unit operator=null
+            CALL 'testVarTopField(): Unit' type=kotlin.Unit operator=null
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='Error: '
+                  CONST String type=kotlin.String value='
+'
+                other: GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun testCompanionObjectAccess(): kotlin.Unit
+      BLOCK_BODY
+        VAR val i: kotlin.Int.Companion
+          GET_OBJECT 'companion object of Int' type=kotlin.Int.Companion
+        VAR val d: kotlin.Double.Companion
+          GET_OBJECT 'companion object of Double' type=kotlin.Double.Companion
+        VAR val f: kotlin.Float.Companion
+          GET_OBJECT 'companion object of Float' type=kotlin.Float.Companion
+        VAR val l: kotlin.Long.Companion
+          GET_OBJECT 'companion object of Long' type=kotlin.Long.Companion
+        VAR val sh: kotlin.Short.Companion
+          GET_OBJECT 'companion object of Short' type=kotlin.Short.Companion
+        VAR val b: kotlin.Byte.Companion
+          GET_OBJECT 'companion object of Byte' type=kotlin.Byte.Companion
+        VAR val ch: kotlin.Char.Companion
+          GET_OBJECT 'companion object of Char' type=kotlin.Char.Companion
+        VAR val st: kotlin.String.Companion
+          GET_OBJECT 'companion object of String' type=kotlin.String.Companion
+        VAR val en: kotlin.Enum.Companion
+          GET_OBJECT 'companion object of Enum' type=kotlin.Enum.Companion
+    FUN public fun testInCall(): kotlin.Unit
+      BLOCK_BODY
+        CALL 'test(Any): Unit' type=kotlin.Unit operator=null
+          a: GET_OBJECT 'companion object of Int' type=kotlin.Int.Companion
+        CALL 'test(Any): Unit' type=kotlin.Unit operator=null
+          a: GET_OBJECT 'companion object of Double' type=kotlin.Double.Companion
+        CALL 'test(Any): Unit' type=kotlin.Unit operator=null
+          a: GET_OBJECT 'companion object of Float' type=kotlin.Float.Companion
+        CALL 'test(Any): Unit' type=kotlin.Unit operator=null
+          a: GET_OBJECT 'companion object of Long' type=kotlin.Long.Companion
+        CALL 'test(Any): Unit' type=kotlin.Unit operator=null
+          a: GET_OBJECT 'companion object of Short' type=kotlin.Short.Companion
+        CALL 'test(Any): Unit' type=kotlin.Unit operator=null
+          a: GET_OBJECT 'companion object of Byte' type=kotlin.Byte.Companion
+        CALL 'test(Any): Unit' type=kotlin.Unit operator=null
+          a: GET_OBJECT 'companion object of Char' type=kotlin.Char.Companion
+        CALL 'test(Any): Unit' type=kotlin.Unit operator=null
+          a: GET_OBJECT 'companion object of String' type=kotlin.String.Companion
+        CALL 'test(Any): Unit' type=kotlin.Unit operator=null
+          a: GET_OBJECT 'companion object of Enum' type=kotlin.Enum.Companion
+    FUN public fun testDoubleConstants(): kotlin.Unit
+      BLOCK_BODY
+        VAR val pi: kotlin.Double
+          CALL '<get-POSITIVE_INFINITY>(): Double' type=kotlin.Double operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Double' type=kotlin.Double.Companion
+        VAR val ni: kotlin.Double
+          CALL '<get-NEGATIVE_INFINITY>(): Double' type=kotlin.Double operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Double' type=kotlin.Double.Companion
+        VAR val nan: kotlin.Double
+          CALL '<get-NaN>(): Double' type=kotlin.Double operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Double' type=kotlin.Double.Companion
+        CALL 'myAssertEquals(Double, Double): Unit' type=kotlin.Unit operator=null
+          a: GET_VAR 'pi: Double' type=kotlin.Double operator=null
+          b: CALL '<get-POSITIVE_INFINITY>(): Double' type=kotlin.Double operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Double' type=kotlin.Double.Companion
+        CALL 'myAssertEquals(Double, Double): Unit' type=kotlin.Unit operator=null
+          a: GET_VAR 'ni: Double' type=kotlin.Double operator=null
+          b: CALL '<get-NEGATIVE_INFINITY>(): Double' type=kotlin.Double operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Double' type=kotlin.Double.Companion
+    FUN public fun testFloatConstants(): kotlin.Unit
+      BLOCK_BODY
+        VAR val pi: kotlin.Float
+          CALL '<get-POSITIVE_INFINITY>(): Float' type=kotlin.Float operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Float' type=kotlin.Float.Companion
+        VAR val ni: kotlin.Float
+          CALL '<get-NEGATIVE_INFINITY>(): Float' type=kotlin.Float operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Float' type=kotlin.Float.Companion
+        VAR val nan: kotlin.Float
+          CALL '<get-NaN>(): Float' type=kotlin.Float operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Float' type=kotlin.Float.Companion
+        CALL 'myAssertEquals(Float, Float): Unit' type=kotlin.Unit operator=null
+          a: GET_VAR 'pi: Float' type=kotlin.Float operator=null
+          b: CALL '<get-POSITIVE_INFINITY>(): Float' type=kotlin.Float operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Float' type=kotlin.Float.Companion
+        CALL 'myAssertEquals(Float, Float): Unit' type=kotlin.Unit operator=null
+          a: GET_VAR 'ni: Float' type=kotlin.Float operator=null
+          b: CALL '<get-NEGATIVE_INFINITY>(): Float' type=kotlin.Float operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Float' type=kotlin.Float.Companion
+    FUN public fun testLocalFun(): kotlin.Unit
+      BLOCK_BODY
+        FUN local final fun kotlin.Int.Companion.LocalFun(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='LocalFun() on Int.Companion: String'
+              CONST String type=kotlin.String value='LocalFun'
+        CALL 'myAssertEquals(String, String): Unit' type=kotlin.Unit operator=null
+          a: CONST String type=kotlin.String value='LocalFun'
+          b: CALL 'LocalFun() on Int.Companion: String' type=kotlin.String operator=null
+            $receiver: GET_OBJECT 'companion object of Int' type=kotlin.Int.Companion
+    FUN public fun testTopLevelFun(): kotlin.Unit
+      BLOCK_BODY
+        CALL 'myAssertEquals(String, String): Unit' type=kotlin.Unit operator=null
+          a: CONST String type=kotlin.String value='TopFun'
+          b: CALL 'TopFun() on Int.Companion: String' type=kotlin.String operator=null
+            $receiver: GET_OBJECT 'companion object of Int' type=kotlin.Int.Companion
+    FUN public fun testVarTopField(): kotlin.Unit
+      BLOCK_BODY
+        CALL 'myAssertEquals(Int, Int): Unit' type=kotlin.Unit operator=null
+          a: CONST Int type=kotlin.Int value='0'
+          b: CALL '<get-TopField>() on Int.Companion: Int' type=kotlin.Int operator=GET_PROPERTY
+            $receiver: GET_OBJECT 'companion object of Int' type=kotlin.Int.Companion
+        BLOCK type=kotlin.Int operator=POSTFIX_INCR
+          VAR val tmp0_receiver: kotlin.Int.Companion
+            GET_OBJECT 'companion object of Int' type=kotlin.Int.Companion
+          BLOCK type=kotlin.Int operator=POSTFIX_INCR
+            VAR val tmp1: kotlin.Int
+              CALL '<get-TopField>() on Int.Companion: Int' type=kotlin.Int operator=POSTFIX_INCR
+                $receiver: GET_VAR 'tmp0_receiver: Int.Companion' type=kotlin.Int.Companion operator=null
+            CALL '<set-TopField>(Int) on Int.Companion: Unit' type=kotlin.Unit operator=POSTFIX_INCR
+              $receiver: GET_VAR 'tmp0_receiver: Int.Companion' type=kotlin.Int.Companion operator=null
+              value: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+            GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        CALL 'myAssertEquals(Int, Int): Unit' type=kotlin.Unit operator=null
+          a: CONST Int type=kotlin.Int value='1'
+          b: CALL '<get-TopField>() on Int.Companion: Int' type=kotlin.Int operator=GET_PROPERTY
+            $receiver: GET_OBJECT 'companion object of Int' type=kotlin.Int.Companion
+        BLOCK type=kotlin.Unit operator=PLUSEQ
+          VAR val tmp2_receiver: kotlin.Int.Companion
+            GET_OBJECT 'companion object of Int' type=kotlin.Int.Companion
+          CALL '<set-TopField>(Int) on Int.Companion: Unit' type=kotlin.Unit operator=PLUSEQ
+            $receiver: GET_VAR 'tmp2_receiver: Int.Companion' type=kotlin.Int.Companion operator=null
+            value: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+              $this: CALL '<get-TopField>() on Int.Companion: Int' type=kotlin.Int operator=PLUSEQ
+                $receiver: GET_VAR 'tmp2_receiver: Int.Companion' type=kotlin.Int.Companion operator=null
+              other: CONST Int type=kotlin.Int value='5'
+        CALL 'myAssertEquals(Int, Int): Unit' type=kotlin.Unit operator=null
+          a: CONST Int type=kotlin.Int value='6'
+          b: CALL '<get-TopField>() on Int.Companion: Int' type=kotlin.Int operator=GET_PROPERTY
+            $receiver: GET_OBJECT 'companion object of Int' type=kotlin.Int.Companion
+    FUN public fun test(a: kotlin.Any): kotlin.Unit
+      BLOCK_BODY
+    PROPERTY public var _field: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='0'
+    PROPERTY public var kotlin.Int.Companion.TopField: kotlin.Int
+      PROPERTY_GETTER public fun kotlin.Int.Companion.<get-TopField>(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-TopField>() on Int.Companion: Int'
+            CALL '<get-_field>(): Int' type=kotlin.Int operator=GET_PROPERTY
+      PROPERTY_SETTER public fun kotlin.Int.Companion.<set-TopField>(value: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-_field>(Int): Unit' type=kotlin.Unit operator=EQ
+            <set-?>: GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=null
+    FUN public fun kotlin.Int.Companion.TopFun(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='TopFun() on Int.Companion: String'
+          CONST String type=kotlin.String value='TopFun'
+    FUN public fun <T> myAssertEquals(a: T, b: T): kotlin.Unit
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'value-parameter a: T' type=T operator=null
+              arg1: GET_VAR 'value-parameter b: T' type=T operator=null
+          then: THROW type=kotlin.Nothing
+            CALL 'constructor Exception(String!)' type=java.lang.Exception operator=null
+              p0: STRING_CONCATENATION type=kotlin.String
+                GET_VAR 'value-parameter a: T' type=T operator=null
+                CONST String type=kotlin.String value=' != '
+                GET_VAR 'value-parameter b: T' type=T operator=null

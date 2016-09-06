@@ -1,0 +1,45 @@
+MODULE <test-module>
+  FILE /kt9711_2.kt
+    CLASS ENUM_CLASS IssueState
+      CONSTRUCTOR private constructor IssueState()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='IssueState'
+      ENUM_ENTRY enum entry FIXED
+        init: ENUM_CONSTRUCTOR_CALL 'constructor FIXED()' FIXED
+        class: CLASS ENUM_ENTRY FIXED
+          CONSTRUCTOR private constructor FIXED()
+            BLOCK_BODY
+              ENUM_CONSTRUCTOR_CALL 'constructor IssueState()' super
+              INSTANCE_INITIALIZER_CALL classDescriptor='FIXED'
+          FUN public open override fun ToString(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='ToString(): String'
+                CALL '<get-k>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: CALL 'constructor D()' type=IssueState.FIXED.D operator=null
+          FUN public final fun s(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='s(): String'
+                CONST String type=kotlin.String value='OK'
+          CLASS CLASS D
+            CONSTRUCTOR public constructor D()
+              BLOCK_BODY
+                DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                INSTANCE_INITIALIZER_CALL classDescriptor='D'
+            PROPERTY public final val k: kotlin.String
+              EXPRESSION_BODY
+                CALL 's(): String' type=kotlin.String operator=null
+                  $this: THIS of 'FIXED' type=IssueState.FIXED
+      FUN public open fun ToString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='ToString(): String'
+            CONST String type=kotlin.String value='fail'
+      FUN public final fun values(): kotlin.Array<IssueState>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): IssueState
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'ToString(): String' type=kotlin.String operator=null
+            $this: GET_ENUM_VALUE 'FIXED' type=IssueState

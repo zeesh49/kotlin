@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /syntheticAccessor.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      CLASS OBJECT companion object of C
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of C'
+        FUN @kotlin.jvm.JvmStatic private final fun foo(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo(): String'
+              CONST String type=kotlin.String value='OK'
+      FUN public final fun bar(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='bar(): String'
+            CALL 'foo(): String' type=kotlin.String operator=null
+              $this: THIS of 'companion object of C' type=C.Companion
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'bar(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor C()' type=C operator=null

@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /classObjectField.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS OBJECT companion object of A
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of A'
+        PROPERTY public final val value: kotlin.Int = 10
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='10'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-value>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_OBJECT 'companion object of A' type=A.Companion
+              arg1: CONST Int type=kotlin.Int value='10'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              CALL '<get-value>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_OBJECT 'companion object of A' type=A.Companion

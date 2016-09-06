@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /kt3517.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: kotlin.Boolean = false
+          CONST Boolean type=kotlin.Boolean value='false'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: CALL 'equals(Any?): Boolean' type=kotlin.Boolean operator=null
+                $this: CONST Boolean type=kotlin.Boolean value='true'
+                other: CONST Boolean type=kotlin.Boolean value='true'
+              then: CALL 'equals(Any?): Boolean' type=kotlin.Boolean operator=null
+                $this: GET_VAR 'a: Boolean' type=kotlin.Boolean operator=null
+                other: CONST Boolean type=kotlin.Boolean value='false'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

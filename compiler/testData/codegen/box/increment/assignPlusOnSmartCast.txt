@@ -1,0 +1,20 @@
+MODULE <test-module>
+  FILE /assignPlusOnSmartCast.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var i: kotlin.Int?
+        SET_VAR 'i: Int?' type=kotlin.Unit operator=EQ
+          CONST Int type=kotlin.Int value='10'
+        SET_VAR 'i: Int?' type=kotlin.Unit operator=PLUSEQ
+          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+            $this: GET_VAR 'i: Int?' type=kotlin.Int? operator=PLUSEQ
+            other: CONST Int type=kotlin.Int value='1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CONST Int type=kotlin.Int value='11'
+              arg1: GET_VAR 'i: Int?' type=kotlin.Int? operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail i = '
+              GET_VAR 'i: Int?' type=kotlin.Int? operator=null

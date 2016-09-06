@@ -1,0 +1,48 @@
+MODULE <test-module>
+  FILE /cloneArray.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val s: kotlin.Array<kotlin.String>
+          CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='live'
+              CONST String type=kotlin.String value='long'
+        VAR val t: kotlin.Array<kotlin.String>
+          CALL 'clone(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            $this: GET_VAR 's: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'equals(Array<(out) Any!>!, Array<(out) Any!>!): Boolean' type=kotlin.Boolean operator=null
+              p0: GET_VAR 's: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+              p1: GET_VAR 't: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail string'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+            arg0: GET_VAR 's: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            arg1: GET_VAR 't: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail string identity'
+        VAR val ss: kotlin.Array<kotlin.Array<kotlin.String>>
+          CALL 'arrayOf(vararg Array<String>): Array<Array<String>>' type=kotlin.Array<kotlin.Array<kotlin.String>> operator=null
+            elements: VARARG type=Array<out Array<String>> varargElementType=Array<String>
+              GET_VAR 's: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+              GET_VAR 's: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+        VAR val tt: kotlin.Array<kotlin.Array<kotlin.String>>
+          CALL 'clone(): Array<Array<String>>' type=kotlin.Array<kotlin.Array<kotlin.String>> operator=null
+            $this: GET_VAR 'ss: Array<Array<String>>' type=kotlin.Array<kotlin.Array<kotlin.String>> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'equals(Array<(out) Any!>!, Array<(out) Any!>!): Boolean' type=kotlin.Boolean operator=null
+              p0: GET_VAR 'ss: Array<Array<String>>' type=kotlin.Array<kotlin.Array<kotlin.String>> operator=null
+              p1: GET_VAR 'tt: Array<Array<String>>' type=kotlin.Array<kotlin.Array<kotlin.String>> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail string[]'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+            arg0: GET_VAR 'ss: Array<Array<String>>' type=kotlin.Array<kotlin.Array<kotlin.String>> operator=null
+            arg1: GET_VAR 'tt: Array<Array<String>>' type=kotlin.Array<kotlin.Array<kotlin.String>> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail string[] identity'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

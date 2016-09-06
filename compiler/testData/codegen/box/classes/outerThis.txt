@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /outerThis.kt
+    CLASS CLASS Outer
+      CONSTRUCTOR public constructor Outer()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+        PROPERTY public final val outer: Outer
+          PROPERTY_GETTER public final fun <get-outer>(): Outer
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<get-outer>(): Outer'
+                THIS of 'Outer' type=Outer
+      PROPERTY public final val x: Outer.Inner
+        EXPRESSION_BODY
+          CALL 'constructor Inner()' type=Outer.Inner operator=null
+            $this: THIS of 'Outer' type=Outer
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val o: Outer
+          CALL 'constructor Outer()' type=Outer operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+              arg0: GET_VAR 'o: Outer' type=Outer operator=null
+              arg1: CALL '<get-outer>(): Outer' type=Outer operator=GET_PROPERTY
+                $this: CALL '<get-x>(): Outer.Inner' type=Outer.Inner operator=GET_PROPERTY
+                  $this: GET_VAR 'o: Outer' type=Outer operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

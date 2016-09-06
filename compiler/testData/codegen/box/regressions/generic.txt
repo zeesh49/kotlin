@@ -1,0 +1,62 @@
+MODULE <test-module>
+  FILE /generic.kt
+    FUN public fun <T> java.util.ArrayList<T>.findAll(predicate: (T) -> kotlin.Boolean): java.util.ArrayList<T>
+      BLOCK_BODY
+        VAR val result: java.util.ArrayList<T>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<T> operator=null
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.MutableIterator<T>
+            CALL 'iterator(): MutableIterator<T>' type=kotlin.collections.MutableIterator<T> operator=FOR_LOOP_ITERATOR
+              $this: $RECEIVER of 'findAll((T) -> Boolean) on ArrayList<T>: ArrayList<T>' type=java.util.ArrayList<T>
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: MutableIterator<T>' type=kotlin.collections.MutableIterator<T> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val t: T
+                CALL 'next(): T' type=T operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: MutableIterator<T>' type=kotlin.collections.MutableIterator<T> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'invoke(T): Boolean' type=kotlin.Boolean operator=INVOKE
+                    $this: GET_VAR 'value-parameter predicate: (T) -> Boolean' type=(T) -> kotlin.Boolean operator=VARIABLE_AS_FUNCTION
+                    p1: GET_VAR 't: T' type=T operator=null
+                  then: CALL 'add(T): Boolean' type=kotlin.Boolean operator=null
+                    $this: GET_VAR 'result: ArrayList<T>' type=java.util.ArrayList<T> operator=null
+                    element: GET_VAR 't: T' type=T operator=null
+        RETURN type=kotlin.Nothing from='findAll((T) -> Boolean) on ArrayList<T>: ArrayList<T>'
+          GET_VAR 'result: ArrayList<T>' type=java.util.ArrayList<T> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val list: java.util.ArrayList<kotlin.String>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.String> operator=null
+        CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'list: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+          element: CONST String type=kotlin.String value='Prague'
+        CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'list: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+          element: CONST String type=kotlin.String value='St.Petersburg'
+        CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'list: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+          element: CONST String type=kotlin.String value='Moscow'
+        CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'list: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+          element: CONST String type=kotlin.String value='Munich'
+        VAR val m: java.util.ArrayList<kotlin.String>
+          CALL 'findAll((String) -> Boolean) on ArrayList<String>: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+            $receiver: GET_VAR 'list: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+            predicate: BLOCK type=(kotlin.String) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(name: kotlin.String): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(String): Boolean'
+                    CALL 'startsWith(String, Boolean = ...) on String: Boolean' type=kotlin.Boolean operator=null
+                      $receiver: GET_VAR 'value-parameter name: String' type=kotlin.String operator=null
+                      prefix: CONST String type=kotlin.String value='M'
+              CALLABLE_REFERENCE '<anonymous>(String): Boolean' type=(kotlin.String) -> kotlin.Boolean operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'm: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

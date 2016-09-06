@@ -1,0 +1,60 @@
+MODULE <test-module>
+  FILE /kt6485.kt
+    CLASS CLASS TypeLiteral
+      CONSTRUCTOR public constructor TypeLiteral<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='TypeLiteral'
+      PROPERTY public final val type: java.lang.reflect.Type
+        PROPERTY_GETTER public final fun <get-type>(): java.lang.reflect.Type
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-type>(): Type'
+              TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Type
+                CALL 'get(Int): Type!' type=java.lang.reflect.Type! operator=GET_ARRAY_ELEMENT
+                  $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<java.lang.reflect.Type!>
+                    TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Type!>
+                      CALL 'getActualTypeArguments(): Array<(out) Type!>!' type=kotlin.Array<(out) java.lang.reflect.Type!>! operator=null
+                        $this: TYPE_OP operator=CAST typeOperand=java.lang.reflect.ParameterizedType
+                          CALL 'getGenericSuperclass(): Type!' type=java.lang.reflect.Type! operator=null
+                            $this: CALL '<get-javaClass>() on TypeLiteral<T>: Class<TypeLiteral<T>>' type=java.lang.Class<TypeLiteral<T>> operator=GET_PROPERTY
+                              $receiver: THIS of 'TypeLiteral' type=TypeLiteral<T>
+                  index: CONST Int type=kotlin.Int value='0'
+    FUN public inline fun <reified T> typeLiteral(): TypeLiteral<T>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='typeLiteral(): TypeLiteral<T>'
+          BLOCK type=typeLiteral.<no name provided><T> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor TypeLiteral()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+            CALL 'constructor <no name provided>()' type=typeLiteral.<no name provided><T> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='class java.lang.String'
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL '<get-type>(): Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+              $this: CALL 'typeLiteral(): TypeLiteral<String>' type=TypeLiteral<kotlin.String> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.util.List<?>'
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL '<get-type>(): Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+              $this: CALL 'typeLiteral(): TypeLiteral<List<*>>' type=TypeLiteral<kotlin.collections.List<*>> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.lang.String[]'
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL '<get-type>(): Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+              $this: CALL 'typeLiteral(): TypeLiteral<Array<String>>' type=TypeLiteral<kotlin.Array<kotlin.String>> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.lang.Integer[]'
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL '<get-type>(): Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+              $this: CALL 'typeLiteral(): TypeLiteral<Array<Int>>' type=TypeLiteral<kotlin.Array<kotlin.Int>> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.lang.String[][]'
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL '<get-type>(): Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+              $this: CALL 'typeLiteral(): TypeLiteral<Array<Array<String>>>' type=TypeLiteral<kotlin.Array<kotlin.Array<kotlin.String>>> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

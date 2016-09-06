@@ -1,0 +1,49 @@
+MODULE <test-module>
+  FILE /inheritedPropertyInClassObject.kt
+    CLASS CLASS Bar
+      CONSTRUCTOR public constructor Bar<T>(prop: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'prop: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Bar' type=Bar<T>
+            value: GET_VAR 'value-parameter prop: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Bar'
+      PROPERTY public final val prop: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter prop: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS Foo
+      CONSTRUCTOR public constructor Foo()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      CLASS OBJECT companion object of Foo
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Bar(String)'
+              prop: CONST String type=kotlin.String value='OK'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of Foo'
+        PROPERTY public final val p: kotlin.String
+          EXPRESSION_BODY
+            CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: GET_OBJECT 'companion object of Foo' type=Foo.Companion
+        PROPERTY public final val p2: kotlin.String
+          EXPRESSION_BODY
+            CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'companion object of Foo' type=Foo.Companion
+        PROPERTY public final val p3: kotlin.String
+          EXPRESSION_BODY
+            CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'companion object of Foo' type=Foo.Companion
+      PROPERTY public final val p4: kotlin.String
+        EXPRESSION_BODY
+          CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Foo' type=Foo.Companion
+      PROPERTY public final val p5: kotlin.String
+        EXPRESSION_BODY
+          CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: THIS of 'companion object of Foo' type=Foo.Companion
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Foo' type=Foo.Companion

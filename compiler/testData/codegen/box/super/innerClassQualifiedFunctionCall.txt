@@ -1,0 +1,150 @@
+MODULE <test-module>
+  FILE /innerClassQualifiedFunctionCall.kt
+    CLASS INTERFACE T
+      FUN public open fun baz(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='baz(): String'
+            CONST String type=kotlin.String value='T.baz'
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public open val foo: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+      FUN public open fun bar(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='bar(): String'
+            CONST String type=kotlin.String value='OK'
+      FUN public open fun boo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='boo(): String'
+            CONST String type=kotlin.String value='OK'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      FUN public open override fun bar(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='bar(): String'
+            CONST String type=kotlin.String value='B'
+      FUN public open override fun baz(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='baz(): String'
+            CONST String type=kotlin.String value='B.baz'
+      CLASS CLASS E
+        CONSTRUCTOR public constructor E()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='E'
+        PROPERTY public final val foo: kotlin.String
+          EXPRESSION_BODY
+            CALL '<get-foo>(): String' superQualifier=A type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'B' type=A
+        FUN public final fun bar(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='bar(): String'
+              CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: CALL 'bar(): String' superQualifier=A type=kotlin.String operator=null
+                    $this: THIS of 'B' type=A
+                  other: CALL 'bar(): String' superQualifier=A type=kotlin.String operator=null
+                    $this: THIS of 'B' type=A
+                other: CALL 'baz(): String' superQualifier=T type=kotlin.String operator=null
+                  $this: THIS of 'B' type=T
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor B()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      FUN public open override fun bar(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='bar(): String'
+            CONST String type=kotlin.String value='C'
+      FUN public open override fun boo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='boo(): String'
+            CONST String type=kotlin.String value='C'
+      CLASS CLASS D
+        CONSTRUCTOR public constructor D()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='D'
+        PROPERTY public final val foo: kotlin.String
+          EXPRESSION_BODY
+            CALL '<get-foo>(): String' superQualifier=B type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'C' type=B
+        FUN public final fun bar(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='bar(): String'
+              CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: CALL 'bar(): String' superQualifier=B type=kotlin.String operator=null
+                  $this: THIS of 'C' type=B
+                other: CALL 'boo(): String' superQualifier=B type=kotlin.String operator=null
+                  $this: THIS of 'C' type=B
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var r: kotlin.String
+          CONST String type=kotlin.String value=''
+        SET_VAR 'r: String' type=kotlin.Unit operator=EQ
+          CALL '<get-foo>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor E()' type=B.E operator=null
+              $this: CALL 'constructor B()' type=B operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'r: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1; r = '
+              GET_VAR 'r: String' type=kotlin.String operator=null
+        SET_VAR 'r: String' type=kotlin.Unit operator=EQ
+          CONST String type=kotlin.String value=''
+        SET_VAR 'r: String' type=kotlin.Unit operator=EQ
+          CALL 'bar(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor E()' type=B.E operator=null
+              $this: CALL 'constructor B()' type=B operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'r: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='OKOKT.baz'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 2; r = '
+              GET_VAR 'r: String' type=kotlin.String operator=null
+        SET_VAR 'r: String' type=kotlin.Unit operator=EQ
+          CONST String type=kotlin.String value=''
+        SET_VAR 'r: String' type=kotlin.Unit operator=EQ
+          CALL '<get-foo>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor D()' type=C.D operator=null
+              $this: CALL 'constructor C()' type=C operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'r: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 3; r = '
+              GET_VAR 'r: String' type=kotlin.String operator=null
+        SET_VAR 'r: String' type=kotlin.Unit operator=EQ
+          CONST String type=kotlin.String value=''
+        SET_VAR 'r: String' type=kotlin.Unit operator=EQ
+          CALL 'bar(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor D()' type=C.D operator=null
+              $this: CALL 'constructor C()' type=C operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'r: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='BOK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 4; r = '
+              GET_VAR 'r: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

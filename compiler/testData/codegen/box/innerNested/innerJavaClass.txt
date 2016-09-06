@@ -1,0 +1,30 @@
+MODULE <test-module>
+  FILE /Kotlin.kt
+    CLASS CLASS MyWallpaperService
+      CONSTRUCTOR public constructor MyWallpaperService()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor JavaClass()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyWallpaperService'
+      FUN public open override fun onCreateInner(): JavaClass.InnerClass
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='onCreateInner(): JavaClass.InnerClass'
+            CALL 'constructor MyEngine()' type=MyWallpaperService.MyEngine operator=null
+              $this: THIS of 'MyWallpaperService' type=MyWallpaperService
+      CLASS CLASS MyEngine
+        CONSTRUCTOR public constructor MyEngine()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor InnerClass()'
+              $this: THIS of 'MyWallpaperService' type=MyWallpaperService
+            INSTANCE_INITIALIZER_CALL classDescriptor='MyEngine'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'onCreateInner(): JavaClass.InnerClass' type=JavaClass.InnerClass operator=null
+                  $this: CALL 'constructor MyWallpaperService()' type=MyWallpaperService operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

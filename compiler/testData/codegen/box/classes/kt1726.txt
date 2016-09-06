@@ -1,0 +1,54 @@
+MODULE <test-module>
+  FILE /kt1726.kt
+    CLASS CLASS Foo
+      CONSTRUCTOR public constructor Foo(state: kotlin.Int, f: (kotlin.Int) -> kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'state: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'Foo' type=Foo
+            value: GET_VAR 'value-parameter state: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'f: (Int) -> Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'Foo' type=Foo
+            value: GET_VAR 'value-parameter f: (Int) -> Int' type=(kotlin.Int) -> kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      PROPERTY public final var state: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter state: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val f: (kotlin.Int) -> kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter f: (Int) -> Int' type=(kotlin.Int) -> kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun next(): kotlin.Int
+        BLOCK_BODY
+          VAR val nextState: kotlin.Int
+            CALL 'invoke(Int): Int' type=kotlin.Int operator=INVOKE
+              $this: CALL '<get-f>(): (Int) -> Int' type=(kotlin.Int) -> kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'Foo' type=Foo
+              p1: CALL '<get-state>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'Foo' type=Foo
+          CALL '<set-state>(Int): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'Foo' type=Foo
+            <set-?>: GET_VAR 'nextState: Int' type=kotlin.Int operator=null
+          RETURN type=kotlin.Nothing from='next(): Int'
+            CALL '<get-state>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'Foo' type=Foo
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f: Foo
+          CALL 'constructor Foo(Int, (Int) -> Int)' type=Foo operator=null
+            state: CONST Int type=kotlin.Int value='23'
+            f: BLOCK type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Int): kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): Int'
+                    CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                      $this: CONST Int type=kotlin.Int value='2'
+                      other: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+              CALLABLE_REFERENCE '<anonymous>(Int): Int' type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'next(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'f: Foo' type=Foo operator=null
+              arg1: CONST Int type=kotlin.Int value='46'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

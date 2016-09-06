@@ -1,0 +1,48 @@
+MODULE <test-module>
+  FILE /kt285.kt
+    CLASS INTERFACE Trait
+      FUN public open fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value='O'
+      FUN public abstract fun bar(): kotlin.String
+    CLASS CLASS SimpleClass
+      CONSTRUCTOR public constructor SimpleClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SimpleClass'
+      FUN public open override fun bar(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='bar(): String'
+            CONST String type=kotlin.String value='K'
+    CLASS CLASS ComplexClass
+      CONSTRUCTOR public constructor ComplexClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ComplexClass'
+      PROPERTY val `ComplexClass$Trait$delegate`: SimpleClass
+        EXPRESSION_BODY
+          CALL 'constructor SimpleClass()' type=SimpleClass operator=null
+      FUN public open override fun bar(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='bar(): String'
+            CALL 'bar(): String' type=kotlin.String operator=null
+              $this: GET_VAR '`ComplexClass$Trait$delegate`: SimpleClass' type=SimpleClass operator=null
+      FUN public open override fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CALL 'foo(): String' type=kotlin.String operator=null
+              $this: GET_VAR '`ComplexClass$Trait$delegate`: SimpleClass' type=SimpleClass operator=null
+      FUN public final fun qux(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='qux(): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CALL 'foo(): String' type=kotlin.String operator=null
+                $this: THIS of 'ComplexClass' type=ComplexClass
+              other: CALL 'bar(): String' type=kotlin.String operator=null
+                $this: THIS of 'ComplexClass' type=ComplexClass
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'qux(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor ComplexClass()' type=ComplexClass operator=null

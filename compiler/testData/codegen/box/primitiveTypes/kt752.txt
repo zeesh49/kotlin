@@ -1,0 +1,58 @@
+MODULE <test-module>
+  FILE /kt752.kt
+    FUN public operator fun kotlin.Int?.rangeTo(other: kotlin.Int?): kotlin.ranges.IntRange
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='rangeTo(Int?) on Int?: IntRange'
+          CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=null
+            $this: BLOCK type=kotlin.Int operator=EXCLEXCL
+              VAR val tmp0_notnull: kotlin.Int?
+                $RECEIVER of 'rangeTo(Int?) on Int?: IntRange' type=kotlin.Int?
+              WHEN type=kotlin.Int operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+            other: BLOCK type=kotlin.Int operator=EXCLEXCL
+              VAR val tmp1_notnull: kotlin.Int?
+                GET_VAR 'value-parameter other: Int?' type=kotlin.Int? operator=null
+              WHEN type=kotlin.Int operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp1_notnull: Int?' type=kotlin.Int? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp1_notnull: Int?' type=kotlin.Int? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.Int? = 10
+          CONST Int type=kotlin.Int value='10'
+        VAR val y: kotlin.Int? = 12
+          CONST Int type=kotlin.Int value='12'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int?) on Int?: IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $receiver: GET_VAR 'x: Int?' type=kotlin.Int? operator=null
+                other: GET_VAR 'y: Int?' type=kotlin.Int? operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit? operator=SAFE_CALL
+                VAR val tmp1_safe_receiver: java.io.PrintStream!
+                  GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+                WHEN type=kotlin.Unit? operator=SAFE_CALL
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp1_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CONST Null type=kotlin.Nothing? value='null'
+                  else: CALL 'println(Int): Unit' type=kotlin.Unit operator=null
+                    $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                      GET_VAR 'tmp1_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+                    p0: CALL 'inv(): Int' type=kotlin.Int operator=null
+                      $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

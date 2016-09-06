@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /unitClassObject.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        GET_OBJECT 'Unit' type=kotlin.Unit
+        VAR val a: kotlin.Unit
+          GET_OBJECT 'Unit' type=kotlin.Unit
+        VAR val b: kotlin.Unit
+          GET_OBJECT 'Unit' type=kotlin.Unit
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'a: Unit' type=kotlin.Unit operator=null
+              arg1: GET_VAR 'b: Unit' type=kotlin.Unit operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail a != b'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_OBJECT 'Unit' type=kotlin.Unit
+              arg1: GET_OBJECT 'Unit' type=kotlin.Unit
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail Unit != Unit'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

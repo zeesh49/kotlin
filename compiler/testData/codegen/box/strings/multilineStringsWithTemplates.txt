@@ -1,0 +1,144 @@
+MODULE <test-module>
+  FILE /multilineStringsWithTemplates.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val s: kotlin.String = "abc"
+          CONST String type=kotlin.String value='abc'
+        VAR val test1: kotlin.String = "abc"
+          GET_VAR 's: String' type=kotlin.String operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test1: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='abc'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 1: '
+              GET_VAR 'test1: String' type=kotlin.String operator=null
+        VAR val test2: kotlin.String = "abc"
+          GET_VAR 's: String' type=kotlin.String operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test2: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='abc'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 2: '
+              GET_VAR 'test2: String' type=kotlin.String operator=null
+        VAR val test3: kotlin.String = " "abc" "
+          STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value=' '
+            CONST String type=kotlin.String value='"'
+            GET_VAR 's: String' type=kotlin.String operator=null
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value=' '
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test3: String' type=kotlin.String operator=null
+              arg1: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value=' '
+                CONST String type=kotlin.String value='"'
+                CONST String type=kotlin.String value='abc'
+                CONST String type=kotlin.String value='"'
+                CONST String type=kotlin.String value=' '
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 3: '
+              GET_VAR 'test3: String' type=kotlin.String operator=null
+        VAR val test4: kotlin.String = " "abc" "
+          STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value=' '
+            CONST String type=kotlin.String value='"'
+            GET_VAR 's: String' type=kotlin.String operator=null
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value=' '
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test4: String' type=kotlin.String operator=null
+              arg1: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value=' '
+                CONST String type=kotlin.String value='"'
+                CONST String type=kotlin.String value='abc'
+                CONST String type=kotlin.String value='"'
+                CONST String type=kotlin.String value=' '
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 4: '
+              GET_VAR 'test4: String' type=kotlin.String operator=null
+        VAR val test5: kotlin.String = "
+  3
+"
+          STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='
+'
+            CONST String type=kotlin.String value='  '
+            CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: GET_VAR 's: String' type=kotlin.String operator=null
+            CONST String type=kotlin.String value='
+'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test5: String' type=kotlin.String operator=null
+              arg1: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='
+'
+                CONST String type=kotlin.String value='  3'
+                CONST String type=kotlin.String value='
+'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 5: '
+              GET_VAR 'test5: String' type=kotlin.String operator=null
+        VAR val test6: kotlin.String = "\n"
+          STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='n'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test6: String' type=kotlin.String operator=null
+              arg1: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='\'
+                CONST String type=kotlin.String value='n'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 6: '
+              GET_VAR 'test6: String' type=kotlin.String operator=null
+        VAR val test7: kotlin.String = "\$foo"
+          STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='\'
+            CONST Char type=kotlin.Char value='$'
+            CONST String type=kotlin.String value='foo'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test7: String' type=kotlin.String operator=null
+              arg1: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='\'
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='foo'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 7: '
+              GET_VAR 'test7: String' type=kotlin.String operator=null
+        VAR val test8: kotlin.String = "$ foo"
+          STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='$'
+            CONST String type=kotlin.String value=' foo'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test8: String' type=kotlin.String operator=null
+              arg1: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value=' foo'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 8: '
+              GET_VAR 'test8: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

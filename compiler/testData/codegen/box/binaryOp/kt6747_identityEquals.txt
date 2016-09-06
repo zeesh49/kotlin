@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /kt6747_identityEquals.kt
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      FUN public final fun check(a: kotlin.Any?): kotlin.String
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+              arg0: THIS of 'Test' type=Test
+              arg1: GET_VAR 'value-parameter a: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='check(Any?): String'
+              CONST String type=kotlin.String value='Fail 1'
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+              $this: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+                arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+                  arg0: THIS of 'Test' type=Test
+                  arg1: GET_VAR 'value-parameter a: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='check(Any?): String'
+              CONST String type=kotlin.String value='Fail 2'
+          RETURN type=kotlin.Nothing from='check(Any?): String'
+            CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'check(Any?): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Test()' type=Test operator=null
+            a: CONST String type=kotlin.String value='String'

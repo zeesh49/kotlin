@@ -1,0 +1,75 @@
+MODULE <test-module>
+  FILE /kt5112.kt
+    CLASS CLASS G
+      CONSTRUCTOR public constructor G<T>(s: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 's: T' type=kotlin.Unit operator=null
+            receiver: THIS of 'G' type=test.G<T>
+            value: GET_VAR 'value-parameter s: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='G'
+      PROPERTY public final val s: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS INTERFACE ErrorsJvmTrait
+      CLASS OBJECT companion object of ErrorsJvmTrait
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of ErrorsJvmTrait'
+        PROPERTY public final val param: test.G<kotlin.String>
+          EXPRESSION_BODY
+            CALL 'constructor G(String)' type=test.G<kotlin.String> operator=null
+              s: CONST String type=kotlin.String value='STRING'
+    CLASS CLASS ErrorsJvmClass
+      CONSTRUCTOR public constructor ErrorsJvmClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ErrorsJvmClass'
+      CLASS OBJECT companion object of ErrorsJvmClass
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of ErrorsJvmClass'
+        PROPERTY @kotlin.jvm.JvmField public final val param: test.G<kotlin.String>
+          EXPRESSION_BODY
+            CALL 'constructor G(String)' type=test.G<kotlin.String> operator=null
+              s: CONST String type=kotlin.String value='STRING'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val genericTypeInClassObject: java.lang.reflect.Type!
+          CALL 'getGenericType(): Type!' type=java.lang.reflect.Type! operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+              CALL 'getDeclaredField(String!): Field!' type=java.lang.reflect.Field! operator=null
+                $this: CALL '<get-javaClass>() on ErrorsJvmTrait.Companion: Class<ErrorsJvmTrait.Companion>' type=java.lang.Class<test.ErrorsJvmTrait.Companion> operator=GET_PROPERTY
+                  $receiver: GET_OBJECT 'companion object of ErrorsJvmTrait' type=test.ErrorsJvmTrait.Companion
+                p0: CONST String type=kotlin.String value='param'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Type
+                  GET_VAR 'genericTypeInClassObject: Type!' type=java.lang.reflect.Type! operator=null
+              arg1: CONST String type=kotlin.String value='test.G<java.lang.String>'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail1: '
+              GET_VAR 'genericTypeInClassObject: Type!' type=java.lang.reflect.Type! operator=null
+        VAR val genericTypeInClass: java.lang.reflect.Type!
+          CALL 'getGenericType(): Type!' type=java.lang.reflect.Type! operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+              CALL 'getField(String!): Field!' type=java.lang.reflect.Field! operator=null
+                $this: CALL '<get-java>() on KClass<ErrorsJvmClass>: Class<ErrorsJvmClass>' type=java.lang.Class<test.ErrorsJvmClass> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'ErrorsJvmClass' type=kotlin.reflect.KClass<test.ErrorsJvmClass>
+                p0: CONST String type=kotlin.String value='param'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Type
+                  GET_VAR 'genericTypeInClass: Type!' type=java.lang.reflect.Type! operator=null
+              arg1: CONST String type=kotlin.String value='test.G<java.lang.String>'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail1: genericTypeInClass'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

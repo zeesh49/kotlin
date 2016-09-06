@@ -1,0 +1,60 @@
+MODULE <test-module>
+  FILE /kt3280.kt
+    FUN public fun foo(): kotlin.Unit
+      BLOCK_BODY
+        VAR var x: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        DO_WHILE label=null operator=DO_WHILE_LOOP
+          body: BLOCK type=kotlin.Unit operator=null
+            BLOCK type=kotlin.Int operator=POSTFIX_INCR
+              VAR val tmp0: kotlin.Int
+                GET_VAR 'x: Int' type=kotlin.Int operator=POSTFIX_INCR
+              SET_VAR 'x: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+            VAR var y: kotlin.Int
+              CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: GET_VAR 'x: Int' type=kotlin.Int operator=null
+                other: CONST Int type=kotlin.Int value='5'
+          condition: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+              $this: GET_VAR 'y: Int' type=kotlin.Int operator=null
+              other: CONST Int type=kotlin.Int value='10'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'x: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='5'
+          then: THROW type=kotlin.Nothing
+            CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+              p0: GET_VAR 'x: Int' type=kotlin.Int operator=null
+    FUN public fun bar(): kotlin.Unit
+      BLOCK_BODY
+        VAR var b: kotlin.Boolean
+          CONST Boolean type=kotlin.Boolean value='false'
+        DO_WHILE label=null operator=DO_WHILE_LOOP
+          body: BLOCK type=kotlin.Unit operator=null
+            VAR var x: kotlin.String
+              CONST String type=kotlin.String value='X'
+            VAR var y: kotlin.String
+              CONST String type=kotlin.String value='Y'
+            SET_VAR 'b: Boolean' type=kotlin.Unit operator=EQ
+              CONST Boolean type=kotlin.Boolean value='true'
+          condition: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: GET_VAR 'x: String' type=kotlin.String operator=null
+                other: GET_VAR 'y: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='XY'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: GET_VAR 'b: Boolean' type=kotlin.Boolean operator=null
+          then: THROW type=kotlin.Nothing
+            CALL 'constructor AssertionError()' type=java.lang.AssertionError operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+        CALL 'bar(): Unit' type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

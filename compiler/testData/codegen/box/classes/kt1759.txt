@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /kt1759.kt
+    CLASS CLASS Greeter
+      CONSTRUCTOR public constructor Greeter(name: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'name: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Greeter' type=Greeter
+            value: GET_VAR 'value-parameter name: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Greeter'
+      PROPERTY public final var name: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter name: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun greet(): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-name>(String): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'Greeter' type=Greeter
+            <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=null
+              $this: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'Greeter' type=Greeter
+              other: CONST String type=kotlin.String value=''
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'greet(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor Greeter(String)' type=Greeter operator=null
+            name: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,45 @@
+MODULE <test-module>
+  FILE /incrementProperty.kt
+    CLASS CLASS Slot
+      CONSTRUCTOR public constructor Slot()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Slot'
+      PROPERTY public final var vitality: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='10000'
+      FUN public final fun increaseVitality(delta: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            VAR val tmp0_this: Slot
+              THIS of 'Slot' type=Slot
+            CALL '<set-vitality>(Int): Unit' type=kotlin.Unit operator=PLUSEQ
+              $this: GET_VAR 'tmp0_this: Slot' type=Slot operator=null
+              <set-?>: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                $this: CALL '<get-vitality>(): Int' type=kotlin.Int operator=PLUSEQ
+                  $this: GET_VAR 'tmp0_this: Slot' type=Slot operator=null
+                other: GET_VAR 'value-parameter delta: Int' type=kotlin.Int operator=null
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+              arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+                $this: CALL '<get-vitality>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'Slot' type=Slot
+                other: CONST Int type=kotlin.Int value='65535'
+            then: CALL '<set-vitality>(Int): Unit' type=kotlin.Unit operator=EQ
+              $this: THIS of 'Slot' type=Slot
+              <set-?>: CONST Int type=kotlin.Int value='65535'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val s: Slot
+          CALL 'constructor Slot()' type=Slot operator=null
+        CALL 'increaseVitality(Int): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 's: Slot' type=Slot operator=null
+          delta: CONST Int type=kotlin.Int value='1000'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-vitality>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 's: Slot' type=Slot operator=null
+              arg1: CONST Int type=kotlin.Int value='11000'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

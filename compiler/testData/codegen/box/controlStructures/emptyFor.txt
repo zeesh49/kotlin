@@ -1,0 +1,74 @@
+MODULE <test-module>
+  FILE /emptyFor.kt
+    PROPERTY public var index: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='0'
+    CLASS INTERFACE IterableIterator
+      FUN public open operator fun iterator(): kotlin.collections.Iterator<kotlin.Int>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='iterator(): Iterator<Int>'
+            THIS of 'IterableIterator' type=IterableIterator
+    PROPERTY public val iterator: IterableIterator
+      EXPRESSION_BODY
+        BLOCK type=iterator.<no name provided> operator=OBJECT_LITERAL
+          CLASS CLASS <no name provided>
+            CONSTRUCTOR public constructor <no name provided>()
+              BLOCK_BODY
+                DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+            FUN public open override fun hasNext(): kotlin.Boolean
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='hasNext(): Boolean'
+                  CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+                    arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+                      $this: CALL '<get-index>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                      other: CONST Int type=kotlin.Int value='5'
+            FUN public open override fun next(): kotlin.Int
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='next(): Int'
+                  BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                    BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                      VAR val tmp0: kotlin.Int
+                        CALL '<get-index>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      CALL '<set-index>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+                        <set-?>: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                          $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                      GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+          CALL 'constructor <no name provided>()' type=iterator.<no name provided> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='1'
+                other: CONST Int type=kotlin.Int value='5'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val x: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp1_iterator: kotlin.collections.Iterator<kotlin.Int>
+            CALL 'iterator(): Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=FOR_LOOP_ITERATOR
+              $this: CALL '<get-iterator>(): IterableIterator' type=IterableIterator operator=GET_PROPERTY
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp1_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val x: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp1_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-index>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              arg1: CONST Int type=kotlin.Int value='5'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              CALL '<get-index>(): Int' type=kotlin.Int operator=GET_PROPERTY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

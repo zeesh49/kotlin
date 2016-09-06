@@ -1,0 +1,52 @@
+MODULE <test-module>
+  FILE /asWithGeneric.kt
+    FUN public fun <T> test1(): T
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test1(): T'
+          TYPE_OP operator=CAST typeOperand=T
+            CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun <T> test2(): T
+      BLOCK_BODY
+        VAR val a: kotlin.Any? = null
+          CONST Null type=kotlin.Nothing? value='null'
+        RETURN type=kotlin.Nothing from='test2(): T'
+          TYPE_OP operator=CAST typeOperand=T
+            GET_VAR 'a: Any?' type=kotlin.Any? operator=null
+    FUN public fun <T : kotlin.Any> test3(): T
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test3(): T'
+          TYPE_OP operator=CAST typeOperand=T
+            CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test1(): Int?' type=kotlin.Int? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail: test1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test2(): Int?' type=kotlin.Int? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail: test2'
+        VAR var result3: kotlin.String
+          CONST String type=kotlin.String value='fail'
+        TRY_CATCH type=kotlin.Any
+          try: BLOCK type=kotlin.Int operator=null
+            CALL 'test3(): Int' type=kotlin.Int operator=null
+          catch e: BLOCK type=kotlin.Unit operator=null
+            SET_VAR 'result3: String' type=kotlin.Unit operator=EQ
+              CONST String type=kotlin.String value='OK'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result3: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail: test3'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

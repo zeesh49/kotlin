@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /kt3579_2.kt
+    CLASS INTERFACE First
+    CLASS INTERFACE Some
+    PROPERTY public val a: Some<*>? = null
+      EXPRESSION_BODY
+        CONST Null type=kotlin.Nothing? value='null'
+    CLASS CLASS MClass
+      CONSTRUCTOR public constructor MClass(p: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'p: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'MClass' type=MClass
+            value: GET_VAR 'value-parameter p: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='MClass'
+      PROPERTY public final val p: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter p: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-p>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor MClass(String)' type=MClass operator=null
+              p: CONST String type=kotlin.String value='OK'

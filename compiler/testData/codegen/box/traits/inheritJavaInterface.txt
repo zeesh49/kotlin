@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /test.kt
+    CLASS INTERFACE A
+      FUN public open override fun test(): kotlin.String?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test(): String?'
+            CONST String type=kotlin.String value='OK'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          BLOCK type=kotlin.String operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.String?
+              CALL 'test(): String?' type=kotlin.String? operator=null
+                $this: CALL 'constructor B()' type=B operator=null
+            WHEN type=kotlin.String operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: String?' type=kotlin.String? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: String?' type=kotlin.String? operator=null

@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /kt2873.kt
+    FUN public fun foo(): kotlin.String
+      BLOCK_BODY
+        VAR val u: () -> kotlin.String
+          BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                CLASS CLASS B
+                  CONSTRUCTOR public constructor B(data: kotlin.String)
+                    BLOCK_BODY
+                      DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                      SET_BACKING_FIELD 'data: String' type=kotlin.Unit operator=null
+                        receiver: THIS of 'B' type=foo.<anonymous>.B
+                        value: GET_VAR 'value-parameter data: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+                      INSTANCE_INITIALIZER_CALL classDescriptor='B'
+                  PROPERTY public final val data: kotlin.String
+                    EXPRESSION_BODY
+                      GET_VAR 'value-parameter data: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CALL '<get-data>(): String' type=kotlin.String operator=GET_PROPERTY
+                    $this: CALL 'constructor B(String)' type=foo.<anonymous>.B operator=null
+                      data: CONST String type=kotlin.String value='OK'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        RETURN type=kotlin.Nothing from='foo(): String'
+          CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+            $this: GET_VAR 'u: () -> String' type=() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+    FUN public fun main(args: kotlin.Array<kotlin.String>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'foo(): String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(): String' type=kotlin.String operator=null

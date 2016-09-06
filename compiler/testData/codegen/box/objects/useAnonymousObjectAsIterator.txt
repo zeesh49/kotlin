@@ -1,0 +1,69 @@
+MODULE <test-module>
+  FILE /useAnonymousObjectAsIterator.kt
+    FUN public operator fun <T> kotlin.collections.Iterator<T>.iterator(): kotlin.collections.Iterator<T>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='iterator() on Iterator<T>: Iterator<T>'
+          $RECEIVER of 'iterator() on Iterator<T>: Iterator<T>' type=kotlin.collections.Iterator<T>
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val iterator: box.<no name provided>
+          BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              PROPERTY public final var i: kotlin.Int
+                EXPRESSION_BODY
+                  CONST Int type=kotlin.Int value='0'
+              FUN public open override fun next(): kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='next(): Int'
+                    BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                      VAR val tmp0_this: box.<no name provided>
+                        THIS of '<no name provided>' type=box.<no name provided>
+                      BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                        VAR val tmp1: kotlin.Int
+                          CALL '<get-i>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                            $this: GET_VAR 'tmp0_this: <no name provided>' type=box.<no name provided> operator=null
+                        CALL '<set-i>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+                          $this: GET_VAR 'tmp0_this: <no name provided>' type=box.<no name provided> operator=null
+                          <set-?>: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                            $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                        GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+              FUN public open override fun hasNext(): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='hasNext(): Boolean'
+                    CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+                      arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+                        $this: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                          $this: THIS of '<no name provided>' type=box.<no name provided>
+                        other: CONST Int type=kotlin.Int value='5'
+            CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL
+        VAR var result: kotlin.String
+          CONST String type=kotlin.String value=''
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<kotlin.Int>
+            CALL 'iterator() on Iterator<Int>: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=FOR_LOOP_ITERATOR
+              $receiver: GET_VAR 'iterator: <no name provided>' type=box.<no name provided> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'result: String' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 'result: String' type=kotlin.String operator=PLUSEQ
+                    other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'result: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='01234'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'result: String' type=kotlin.String operator=null

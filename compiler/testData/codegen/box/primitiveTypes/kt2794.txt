@@ -1,0 +1,50 @@
+MODULE <test-module>
+  FILE /kt2794.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val b: kotlin.Byte = 4.toByte()
+          CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+            $this: CONST Int type=kotlin.Int value='4'
+        VAR val s: kotlin.Short = 5.toShort()
+          CALL 'toShort(): Short' type=kotlin.Short operator=null
+            $this: CONST Int type=kotlin.Int value='5'
+        VAR val c: kotlin.Char = \u0041 ('A')
+          CONST Char type=kotlin.Char value='A'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: WHEN type=kotlin.Boolean operator=ANDAND
+                if: WHEN type=kotlin.Boolean operator=ANDAND
+                  if: WHEN type=kotlin.Boolean operator=ANDAND
+                    if: WHEN type=kotlin.Boolean operator=ANDAND
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+                        arg1: CONST String type=kotlin.String value='4'
+                      then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: STRING_CONCATENATION type=kotlin.String
+                          CONST String type=kotlin.String value=' '
+                          GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+                        arg1: CONST String type=kotlin.String value=' 4'
+                      else: CONST Boolean type=kotlin.Boolean value='false'
+                    then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 's: Short' type=kotlin.Short operator=null
+                      arg1: CONST String type=kotlin.String value='5'
+                    else: CONST Boolean type=kotlin.Boolean value='false'
+                  then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: STRING_CONCATENATION type=kotlin.String
+                      CONST String type=kotlin.String value=' '
+                      GET_VAR 's: Short' type=kotlin.Short operator=null
+                    arg1: CONST String type=kotlin.String value=' 5'
+                  else: CONST Boolean type=kotlin.Boolean value='false'
+                then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'c: Char' type=kotlin.Char operator=null
+                  arg1: CONST String type=kotlin.String value='A'
+                else: CONST Boolean type=kotlin.Boolean value='false'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value=' '
+                  GET_VAR 'c: Char' type=kotlin.Char operator=null
+                arg1: CONST String type=kotlin.String value=' A'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

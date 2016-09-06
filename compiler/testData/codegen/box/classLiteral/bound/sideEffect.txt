@@ -1,0 +1,66 @@
+MODULE <test-module>
+  FILE /sideEffect.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var x: kotlin.Int
+          CONST Int type=kotlin.Int value='42'
+        VAR val k1: kotlin.reflect.KClass<kotlin.Int>
+          GET_CLASS type=kotlin.reflect.KClass<kotlin.Int>
+            BLOCK type=kotlin.Int operator=POSTFIX_INCR
+              VAR val tmp0: kotlin.Int
+                GET_VAR 'x: Int' type=kotlin.Int operator=POSTFIX_INCR
+              SET_VAR 'x: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'k1: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=null
+              arg1: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 1: '
+              GET_VAR 'k1: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'x: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='43'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 2: '
+              GET_VAR 'x: Int' type=kotlin.Int operator=null
+        VAR val k2: kotlin.reflect.KClass<kotlin.Int>
+          GET_CLASS type=kotlin.reflect.KClass<kotlin.Int>
+            CALL 'invoke(): Int' type=kotlin.Int operator=null
+              $this: BLOCK type=() -> kotlin.Int operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.Int
+                  BLOCK_BODY
+                    SET_VAR 'x: Int' type=kotlin.Unit operator=MULTEQ
+                      CALL 'times(Int): Int' type=kotlin.Int operator=MULTEQ
+                        $this: GET_VAR 'x: Int' type=kotlin.Int operator=MULTEQ
+                        other: CONST Int type=kotlin.Int value='2'
+                    RETURN type=kotlin.Nothing from='<anonymous>(): Int'
+                      GET_VAR 'x: Int' type=kotlin.Int operator=null
+                CALLABLE_REFERENCE '<anonymous>(): Int' type=() -> kotlin.Int operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'k2: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=null
+              arg1: CLASS_REFERENCE 'Integer' type=kotlin.reflect.KClass<java.lang.Integer>
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 3: '
+              GET_VAR 'k2: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'x: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='86'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 4: '
+              GET_VAR 'x: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

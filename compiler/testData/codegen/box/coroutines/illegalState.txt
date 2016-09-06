@@ -1,0 +1,121 @@
+MODULE <test-module>
+  FILE /illegalState.kt
+    CLASS CLASS Controller
+      CONSTRUCTOR public constructor Controller()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Controller'
+      FUN public final suspend fun suspendHere(x: kotlin.coroutines.Continuation<kotlin.Unit>): kotlin.Unit
+        BLOCK_BODY
+          CALL 'resume(Unit): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR 'value-parameter x: Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=null
+            data: GET_OBJECT 'Unit' type=kotlin.Unit
+    FUN public fun builder1(coroutine c: Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'resume(Unit): Unit' type=kotlin.Unit operator=null
+          $this: TYPE_OP operator=CAST typeOperand=kotlin.coroutines.Continuation<kotlin.Unit>
+            GET_VAR 'value-parameter coroutine c: Controller.() -> Continuation<Unit>' type=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit> operator=null
+          data: GET_OBJECT 'Unit' type=kotlin.Unit
+    FUN public fun builder2(coroutine c: Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>): kotlin.Unit
+      BLOCK_BODY
+        VAR val continuation: kotlin.coroutines.Continuation<kotlin.Unit>
+          CALL 'invoke(Controller): Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=INVOKE
+            $this: GET_VAR 'value-parameter coroutine c: Controller.() -> Continuation<Unit>' type=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+            p1: CALL 'constructor Controller()' type=Controller operator=null
+        VAR val declaredField: java.lang.reflect.Field!
+          CALL 'getDeclaredField(String!): Field!' type=java.lang.reflect.Field! operator=null
+            $this: CALL '<get-javaClass>() on Continuation<Unit>: Class<Continuation<Unit>>' type=java.lang.Class<kotlin.coroutines.Continuation<kotlin.Unit>> operator=GET_PROPERTY
+              $receiver: BLOCK type=kotlin.coroutines.Continuation<kotlin.Unit> operator=EXCLEXCL
+                VAR val tmp0_notnull: kotlin.coroutines.Continuation<kotlin.Unit>
+                  GET_VAR 'continuation: Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=null
+                WHEN type=kotlin.coroutines.Continuation<kotlin.Unit> operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_notnull: Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: GET_VAR 'tmp0_notnull: Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=null
+            p0: CONST String type=kotlin.String value='label'
+        CALL 'setAccessible(Boolean): Unit' type=kotlin.Unit operator=null
+          $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+            GET_VAR 'declaredField: Field!' type=java.lang.reflect.Field! operator=null
+          p0: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'set(Any!, Any!): Unit' type=kotlin.Unit operator=null
+          $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+            GET_VAR 'declaredField: Field!' type=java.lang.reflect.Field! operator=null
+          p0: GET_VAR 'continuation: Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=null
+          p1: CONST Int type=kotlin.Int value='-3'
+        CALL 'resume(Unit): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'continuation: Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=null
+          data: GET_OBJECT 'Unit' type=kotlin.Unit
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'builder1(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+              c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+                BLOCK type=Controller.() -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun Controller.<anonymous>(): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>() on Controller: Unit'
+                        CALL 'suspendHere(): Unit' type=kotlin.Unit operator=null
+                          $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                  CALLABLE_REFERENCE '<anonymous>() on Controller: Unit' type=Controller.() -> kotlin.Unit operator=LAMBDA
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='fail 1'
+          catch e: BLOCK type=kotlin.Unit operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                    $this: GET_VAR 'e: IllegalStateException' type=java.lang.IllegalStateException operator=null
+                  arg1: CONST String type=kotlin.String value='call to 'resume' before 'invoke' with coroutine'
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='fail 2: '
+                  BLOCK type=kotlin.String operator=EXCLEXCL
+                    VAR val tmp0_notnull: kotlin.String?
+                      CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                        $this: GET_VAR 'e: IllegalStateException' type=java.lang.IllegalStateException operator=null
+                    WHEN type=kotlin.String operator=null
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'tmp0_notnull: String?' type=kotlin.String? operator=null
+                        arg1: CONST Null type=kotlin.Nothing? value='null'
+                      then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                      else: GET_VAR 'tmp0_notnull: String?' type=kotlin.String? operator=null
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'builder2(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+              c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+                BLOCK type=Controller.() -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun Controller.<anonymous>(): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>() on Controller: Unit'
+                        CALL 'suspendHere(): Unit' type=kotlin.Unit operator=null
+                          $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                  CALLABLE_REFERENCE '<anonymous>() on Controller: Unit' type=Controller.() -> kotlin.Unit operator=LAMBDA
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='fail 3'
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                    $this: GET_VAR 'e: IllegalStateException' type=java.lang.IllegalStateException operator=null
+                  arg1: CONST String type=kotlin.String value='call to 'resume' before 'invoke' with coroutine'
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='fail 4: '
+                  BLOCK type=kotlin.String operator=EXCLEXCL
+                    VAR val tmp1_notnull: kotlin.String?
+                      CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                        $this: GET_VAR 'e: IllegalStateException' type=java.lang.IllegalStateException operator=null
+                    WHEN type=kotlin.String operator=null
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'tmp1_notnull: String?' type=kotlin.String? operator=null
+                        arg1: CONST Null type=kotlin.Nothing? value='null'
+                      then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                      else: GET_VAR 'tmp1_notnull: String?' type=kotlin.String? operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='fail'

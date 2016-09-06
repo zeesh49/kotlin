@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /forIntInDownTo.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var sum: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'downTo(Int) on Int: IntProgression' type=kotlin.ranges.IntProgression operator=null
+                $receiver: CONST Int type=kotlin.Int value='4'
+                to: CONST Int type=kotlin.Int value='1'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'sum: Int' type=kotlin.Unit operator=EQ
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                      $this: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='10'
+                    other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='4321'
+          actual: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

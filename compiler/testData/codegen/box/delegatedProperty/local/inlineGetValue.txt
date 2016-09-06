@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /inlineGetValue.kt
+    CLASS CLASS Delegate
+      CONSTRUCTOR public constructor Delegate()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Delegate'
+      FUN public final operator inline fun getValue(t: kotlin.Any?, p: kotlin.reflect.KProperty<*>): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getValue(Any?, KProperty<*>): String'
+            CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: GET_VAR 'value-parameter p: KProperty<*>' type=kotlin.reflect.KProperty<*> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        LOCAL_DELEGATED_PROPERTY val OK: kotlin.String
+          VAR val `OK$delegate`: foo.Delegate
+            CALL 'constructor Delegate()' type=foo.Delegate operator=null
+          LOCAL_PROPERTY_ACCESSOR <get-OK>(): String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<get-OK>(): String'
+                CALL 'getValue(Any?, KProperty<*>): String' type=kotlin.String operator=null
+                  $this: GET_VAR '`OK$delegate`: Delegate' type=foo.Delegate operator=null
+                  t: CONST Null type=kotlin.Nothing? value='null'
+                  p: CALLABLE_REFERENCE 'OK: String' type=kotlin.reflect.KProperty0<kotlin.String> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-OK>(): String' type=kotlin.String operator=GET_LOCAL_PROPERTY

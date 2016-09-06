@@ -1,0 +1,57 @@
+MODULE <test-module>
+  FILE /kt4383.kt
+    CLASS CLASS D
+      CONSTRUCTOR public constructor D()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='D'
+      FUN public final operator fun getValue(a: kotlin.Any, p: kotlin.reflect.KProperty<*>): kotlin.Unit
+        BLOCK_BODY
+    CLASS OBJECT P
+      CONSTRUCTOR private constructor P()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='P'
+      PROPERTY public final val u: kotlin.Unit
+        EXPRESSION_BODY
+          GET_OBJECT 'Unit' type=kotlin.Unit
+      PROPERTY public final val v: kotlin.Unit
+        delegate: PROPERTY val `v$delegate`: D
+          EXPRESSION_BODY
+            CALL 'constructor D()' type=D operator=null
+        PROPERTY_GETTER public final fun <get-v>(): kotlin.Unit
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-v>(): Unit'
+              CALL 'getValue(Any, KProperty<*>): Unit' type=kotlin.Unit operator=null
+                $this: GET_BACKING_FIELD '`v$delegate`: D' type=D operator=null
+                  receiver: THIS of 'P' type=P
+                a: THIS of 'P' type=P
+                p: CALLABLE_REFERENCE 'v: Unit' type=kotlin.reflect.KProperty1<P, kotlin.Unit> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+      PROPERTY public final var w: kotlin.Unit
+        EXPRESSION_BODY
+          GET_OBJECT 'Unit' type=kotlin.Unit
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-u>(): Unit' type=kotlin.Unit operator=GET_PROPERTY
+                $this: GET_OBJECT 'P' type=P
+              arg1: CALL '<get-v>(): Unit' type=kotlin.Unit operator=GET_PROPERTY
+                $this: GET_OBJECT 'P' type=P
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail uv'
+        CALL '<set-w>(Unit): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_OBJECT 'P' type=P
+          <set-?>: GET_OBJECT 'Unit' type=kotlin.Unit
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-w>(): Unit' type=kotlin.Unit operator=GET_PROPERTY
+                $this: GET_OBJECT 'P' type=P
+              arg1: CALL '<get-u>(): Unit' type=kotlin.Unit operator=GET_PROPERTY
+                $this: GET_OBJECT 'P' type=P
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail w'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

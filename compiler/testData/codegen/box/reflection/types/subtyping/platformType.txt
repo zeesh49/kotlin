@@ -1,0 +1,59 @@
+MODULE <test-module>
+  FILE /K.kt
+    FUN public fun string(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun nullableString(): kotlin.String?
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun check(subCallable: kotlin.reflect.KCallable<*>, superCallable: kotlin.reflect.KCallable<*>): kotlin.Unit
+      BLOCK_BODY
+        VAR val subtype: kotlin.reflect.KType
+          CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: GET_VAR 'value-parameter subCallable: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+        VAR val supertype: kotlin.reflect.KType
+          CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: GET_VAR 'value-parameter superCallable: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'isSubtypeOf(KType) on KType: Boolean' type=kotlin.Boolean operator=null
+            $receiver: GET_VAR 'subtype: KType' type=kotlin.reflect.KType operator=null
+            other: GET_VAR 'supertype: KType' type=kotlin.reflect.KType operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'isSupertypeOf(KType) on KType: Boolean' type=kotlin.Boolean operator=null
+            $receiver: GET_VAR 'supertype: KType' type=kotlin.reflect.KType operator=null
+            other: GET_VAR 'subtype: KType' type=kotlin.reflect.KType operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'check(KCallable<*>, KCallable<*>): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'string(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+          superCallable: CALLABLE_REFERENCE 'platformString(): String!' type=kotlin.reflect.KFunction1<J, kotlin.String!> operator=null
+        CALL 'check(KCallable<*>, KCallable<*>): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'platformString(): String!' type=kotlin.reflect.KFunction1<J, kotlin.String!> operator=null
+          superCallable: CALLABLE_REFERENCE 'string(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+        CALL 'check(KCallable<*>, KCallable<*>): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'nullableString(): String?' type=kotlin.reflect.KFunction0<kotlin.String?> operator=null
+          superCallable: CALLABLE_REFERENCE 'platformString(): String!' type=kotlin.reflect.KFunction1<J, kotlin.String!> operator=null
+        CALL 'check(KCallable<*>, KCallable<*>): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'platformString(): String!' type=kotlin.reflect.KFunction1<J, kotlin.String!> operator=null
+          superCallable: CALLABLE_REFERENCE 'nullableString(): String?' type=kotlin.reflect.KFunction0<kotlin.String?> operator=null
+        CALL 'check(KCallable<*>, KCallable<*>): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'platformString(): String!' type=kotlin.reflect.KFunction1<J, kotlin.String!> operator=null
+          superCallable: CALLABLE_REFERENCE 'platformString(): String!' type=kotlin.reflect.KFunction1<J, kotlin.String!> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /extensionToLocalClass.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CLASS CLASS A
+          CONSTRUCTOR public constructor A()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='A'
+        FUN local final fun box.A.foo(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo() on A: String'
+              CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'invoke(A): String' type=kotlin.String operator=null
+            $this: CALLABLE_REFERENCE 'foo() on A: String' type=kotlin.reflect.KFunction1<box.A, kotlin.String> operator=null
+            p1: CALL 'invoke(): A' type=box.A operator=null
+              $this: CALLABLE_REFERENCE 'constructor A()' type=kotlin.reflect.KFunction0<box.A> operator=null

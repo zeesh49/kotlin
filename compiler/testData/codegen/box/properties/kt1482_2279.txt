@@ -1,0 +1,136 @@
+MODULE <test-module>
+  FILE /kt1482_2279.kt
+    CLASS CLASS ClassValAbstract
+      CONSTRUCTOR public constructor ClassValAbstract()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ClassValAbstract'
+      PROPERTY public abstract var a: kotlin.Int
+      CLASS OBJECT companion object of ClassValAbstract
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of ClassValAbstract'
+        PROPERTY public final val methods: kotlin.Array<(out) java.lang.reflect.Method!>
+          EXPRESSION_BODY
+            BLOCK type=kotlin.Array<(out) java.lang.reflect.Method!> operator=EXCLEXCL
+              VAR val tmp3_notnull: kotlin.Array<(out) java.lang.reflect.Method!>?
+                BLOCK type=kotlin.Array<(out) java.lang.reflect.Method!>? operator=SAFE_CALL
+                  VAR val tmp2_safe_receiver: java.lang.Class<*>?
+                    BLOCK type=java.lang.Class<*>? operator=SAFE_CALL
+                      VAR val tmp1_safe_receiver: java.lang.ClassLoader?
+                        BLOCK type=java.lang.ClassLoader? operator=SAFE_CALL
+                          VAR val tmp0_safe_receiver: java.lang.Class<*>!
+                            CALL 'getClass(): Class<*>!' type=java.lang.Class<*>! operator=null
+                              $this: TYPE_OP operator=CAST typeOperand=java.lang.Object
+                                THIS of 'companion object of ClassValAbstract' type=ClassValAbstract.Companion
+                          WHEN type=java.lang.ClassLoader? operator=SAFE_CALL
+                            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                              arg0: GET_VAR 'tmp0_safe_receiver: Class<*>!' type=java.lang.Class<*>! operator=null
+                              arg1: CONST Null type=kotlin.Nothing? value='null'
+                            then: CONST Null type=kotlin.Nothing? value='null'
+                            else: CALL 'getClassLoader(): ClassLoader!' type=java.lang.ClassLoader! operator=null
+                              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+                                GET_VAR 'tmp0_safe_receiver: Class<*>!' type=java.lang.Class<*>! operator=null
+                      WHEN type=java.lang.Class<*>? operator=SAFE_CALL
+                        if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: GET_VAR 'tmp1_safe_receiver: ClassLoader?' type=java.lang.ClassLoader? operator=null
+                          arg1: CONST Null type=kotlin.Nothing? value='null'
+                        then: CONST Null type=kotlin.Nothing? value='null'
+                        else: CALL 'loadClass(String!): Class<*>!' type=java.lang.Class<*>! operator=null
+                          $this: GET_VAR 'tmp1_safe_receiver: ClassLoader?' type=java.lang.ClassLoader? operator=null
+                          p0: CONST String type=kotlin.String value='ClassValAbstract'
+                  WHEN type=kotlin.Array<(out) java.lang.reflect.Method!>? operator=SAFE_CALL
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp2_safe_receiver: Class<*>?' type=java.lang.Class<*>? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CONST Null type=kotlin.Nothing? value='null'
+                    else: CALL 'getMethods(): Array<(out) Method!>!' type=kotlin.Array<(out) java.lang.reflect.Method!>! operator=null
+                      $this: GET_VAR 'tmp2_safe_receiver: Class<*>?' type=java.lang.Class<*>? operator=null
+              WHEN type=kotlin.Array<(out) java.lang.reflect.Method!> operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp3_notnull: Array<(out) Method!>?' type=kotlin.Array<(out) java.lang.reflect.Method!>? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp3_notnull: Array<(out) Method!>?' type=kotlin.Array<(out) java.lang.reflect.Method!>? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<java.lang.reflect.Method!>
+            CALL 'iterator(): Iterator<Method!>' type=kotlin.collections.Iterator<java.lang.reflect.Method!> operator=FOR_LOOP_ITERATOR
+              $this: CALL '<get-methods>(): Array<(out) Method!>' type=kotlin.Array<(out) java.lang.reflect.Method!> operator=GET_PROPERTY
+                $this: GET_OBJECT 'companion object of ClassValAbstract' type=ClassValAbstract.Companion
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<Method!>' type=kotlin.collections.Iterator<java.lang.reflect.Method!> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val m: java.lang.reflect.Method!
+                CALL 'next(): Method!' type=java.lang.reflect.Method! operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<Method!>' type=kotlin.collections.Iterator<java.lang.reflect.Method!> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: CALL 'getName(): String!' type=kotlin.String! operator=null
+                      $this: BLOCK type=java.lang.reflect.Method operator=EXCLEXCL
+                        VAR val tmp1_notnull: java.lang.reflect.Method!
+                          GET_VAR 'm: Method!' type=java.lang.reflect.Method! operator=null
+                        WHEN type=java.lang.reflect.Method operator=null
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: GET_VAR 'tmp1_notnull: Method!' type=java.lang.reflect.Method! operator=null
+                            arg1: CONST Null type=kotlin.Nothing? value='null'
+                          then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                          else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                            GET_VAR 'tmp1_notnull: Method!' type=java.lang.reflect.Method! operator=null
+                    arg1: CONST String type=kotlin.String value='getA'
+                  then: BLOCK type=kotlin.Unit operator=null
+                    WHEN type=kotlin.Unit operator=IF
+                      if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                          arg0: CALL 'getModifiers(): Int' type=kotlin.Int operator=null
+                            $this: BLOCK type=java.lang.reflect.Method operator=EXCLEXCL
+                              VAR val tmp2_notnull: java.lang.reflect.Method!
+                                GET_VAR 'm: Method!' type=java.lang.reflect.Method! operator=null
+                              WHEN type=java.lang.reflect.Method operator=null
+                                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                                  arg0: GET_VAR 'tmp2_notnull: Method!' type=java.lang.reflect.Method! operator=null
+                                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                                else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                                  GET_VAR 'tmp2_notnull: Method!' type=java.lang.reflect.Method! operator=null
+                          arg1: CONST Int type=kotlin.Int value='1025'
+                      then: RETURN type=kotlin.Nothing from='box(): String'
+                        CONST String type=kotlin.String value='get failed'
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: CALL 'getName(): String!' type=kotlin.String! operator=null
+                      $this: BLOCK type=java.lang.reflect.Method operator=EXCLEXCL
+                        VAR val tmp3_notnull: java.lang.reflect.Method!
+                          GET_VAR 'm: Method!' type=java.lang.reflect.Method! operator=null
+                        WHEN type=java.lang.reflect.Method operator=null
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: GET_VAR 'tmp3_notnull: Method!' type=java.lang.reflect.Method! operator=null
+                            arg1: CONST Null type=kotlin.Nothing? value='null'
+                          then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                          else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                            GET_VAR 'tmp3_notnull: Method!' type=java.lang.reflect.Method! operator=null
+                    arg1: CONST String type=kotlin.String value='setA'
+                  then: BLOCK type=kotlin.Unit operator=null
+                    WHEN type=kotlin.Unit operator=IF
+                      if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                          arg0: CALL 'getModifiers(): Int' type=kotlin.Int operator=null
+                            $this: BLOCK type=java.lang.reflect.Method operator=EXCLEXCL
+                              VAR val tmp4_notnull: java.lang.reflect.Method!
+                                GET_VAR 'm: Method!' type=java.lang.reflect.Method! operator=null
+                              WHEN type=java.lang.reflect.Method operator=null
+                                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                                  arg0: GET_VAR 'tmp4_notnull: Method!' type=java.lang.reflect.Method! operator=null
+                                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                                else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                                  GET_VAR 'tmp4_notnull: Method!' type=java.lang.reflect.Method! operator=null
+                          arg1: CONST Int type=kotlin.Int value='1025'
+                      then: RETURN type=kotlin.Nothing from='box(): String'
+                        CONST String type=kotlin.String value='set failed'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

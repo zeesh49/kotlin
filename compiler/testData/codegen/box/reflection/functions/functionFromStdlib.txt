@@ -1,0 +1,13 @@
+MODULE <test-module>
+  FILE /functionFromStdlib.kt
+    FUN public fun doStuff(fn: kotlin.String.() -> kotlin.String): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='doStuff(String.() -> String): String'
+          CALL 'invoke() on String: String' type=kotlin.String operator=INVOKE
+            $this: GET_VAR 'value-parameter fn: String.() -> String' type=kotlin.String.() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+            $receiver: CONST String type=kotlin.String value='ok'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'doStuff(String.() -> String): String' type=kotlin.String operator=null
+            fn: CALLABLE_REFERENCE 'toUpperCase() on String: String' type=kotlin.reflect.KFunction1<kotlin.String, kotlin.String> operator=null

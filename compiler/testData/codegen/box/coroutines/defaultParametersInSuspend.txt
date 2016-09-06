@@ -1,0 +1,110 @@
+MODULE <test-module>
+  FILE /defaultParametersInSuspend.kt
+    CLASS CLASS Controller
+      CONSTRUCTOR public constructor Controller()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Controller'
+      FUN public final suspend fun suspendHere(a: kotlin.String = ..., i: kotlin.Int = ..., x: kotlin.coroutines.Continuation<kotlin.String>): kotlin.Unit
+        a: EXPRESSION_BODY
+          CONST String type=kotlin.String value='abc'
+        i: EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='2'
+        BLOCK_BODY
+          CALL 'resume(String): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR 'value-parameter x: Continuation<String>' type=kotlin.coroutines.Continuation<kotlin.String> operator=null
+            data: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: GET_VAR 'value-parameter a: String = ...' type=kotlin.String operator=null
+                other: CONST String type=kotlin.String value='#'
+              other: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: GET_VAR 'value-parameter i: Int = ...' type=kotlin.Int operator=null
+                other: CONST Int type=kotlin.Int value='1'
+    FUN public fun builder(coroutine c: Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'resume(Unit): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'invoke(Controller): Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=INVOKE
+            $this: GET_VAR 'value-parameter coroutine c: Controller.() -> Continuation<Unit>' type=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+            p1: CALL 'constructor Controller()' type=Controller operator=null
+          data: GET_OBJECT 'Unit' type=kotlin.Unit
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.String
+          CONST String type=kotlin.String value='OK'
+        CALL 'builder(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+            BLOCK type=Controller.() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun Controller.<anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  VAR var a: kotlin.String
+                    CALL 'suspendHere(String = ..., Int = ...): String' type=kotlin.String operator=null
+                      $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                  WHEN type=kotlin.Unit operator=IF
+                    if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                      arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: GET_VAR 'a: String' type=kotlin.String operator=null
+                        arg1: CONST String type=kotlin.String value='abc#3'
+                    then: BLOCK type=kotlin.Nothing operator=null
+                      SET_VAR 'result: String' type=kotlin.Unit operator=EQ
+                        STRING_CONCATENATION type=kotlin.String
+                          CONST String type=kotlin.String value='fail 1: '
+                          GET_VAR 'a: String' type=kotlin.String operator=null
+                      THROW type=kotlin.Nothing
+                        CALL 'constructor RuntimeException(String!)' type=java.lang.RuntimeException operator=null
+                          p0: GET_VAR 'result: String' type=kotlin.String operator=null
+                  SET_VAR 'a: String' type=kotlin.Unit operator=EQ
+                    CALL 'suspendHere(String = ..., Int = ...): String' type=kotlin.String operator=null
+                      $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                      a: CONST String type=kotlin.String value='cde'
+                  WHEN type=kotlin.Unit operator=IF
+                    if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                      arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: GET_VAR 'a: String' type=kotlin.String operator=null
+                        arg1: CONST String type=kotlin.String value='cde#3'
+                    then: BLOCK type=kotlin.Nothing operator=null
+                      SET_VAR 'result: String' type=kotlin.Unit operator=EQ
+                        STRING_CONCATENATION type=kotlin.String
+                          CONST String type=kotlin.String value='fail 2: '
+                          GET_VAR 'a: String' type=kotlin.String operator=null
+                      THROW type=kotlin.Nothing
+                        CALL 'constructor RuntimeException(String!)' type=java.lang.RuntimeException operator=null
+                          p0: GET_VAR 'result: String' type=kotlin.String operator=null
+                  SET_VAR 'a: String' type=kotlin.Unit operator=EQ
+                    CALL 'suspendHere(String = ..., Int = ...): String' type=kotlin.String operator=null
+                      $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                      i: CONST Int type=kotlin.Int value='6'
+                  WHEN type=kotlin.Unit operator=IF
+                    if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                      arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: GET_VAR 'a: String' type=kotlin.String operator=null
+                        arg1: CONST String type=kotlin.String value='abc#7'
+                    then: BLOCK type=kotlin.Nothing operator=null
+                      SET_VAR 'result: String' type=kotlin.Unit operator=EQ
+                        STRING_CONCATENATION type=kotlin.String
+                          CONST String type=kotlin.String value='fail 3: '
+                          GET_VAR 'a: String' type=kotlin.String operator=null
+                      THROW type=kotlin.Nothing
+                        CALL 'constructor RuntimeException(String!)' type=java.lang.RuntimeException operator=null
+                          p0: GET_VAR 'result: String' type=kotlin.String operator=null
+                  SET_VAR 'a: String' type=kotlin.Unit operator=EQ
+                    CALL 'suspendHere(String = ..., Int = ...): String' type=kotlin.String operator=null
+                      $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                      a: CONST String type=kotlin.String value='xyz'
+                      i: CONST Int type=kotlin.Int value='9'
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Controller: Unit'
+                    WHEN type=kotlin.Unit operator=IF
+                      if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                          arg0: GET_VAR 'a: String' type=kotlin.String operator=null
+                          arg1: CONST String type=kotlin.String value='xyz#10'
+                      then: BLOCK type=kotlin.Nothing operator=null
+                        SET_VAR 'result: String' type=kotlin.Unit operator=EQ
+                          STRING_CONCATENATION type=kotlin.String
+                            CONST String type=kotlin.String value='fail 4: '
+                            GET_VAR 'a: String' type=kotlin.String operator=null
+                        THROW type=kotlin.Nothing
+                          CALL 'constructor RuntimeException(String!)' type=java.lang.RuntimeException operator=null
+                            p0: GET_VAR 'result: String' type=kotlin.String operator=null
+              CALLABLE_REFERENCE '<anonymous>() on Controller: Unit' type=Controller.() -> kotlin.Unit operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          GET_VAR 'result: String' type=kotlin.String operator=null

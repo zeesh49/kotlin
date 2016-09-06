@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /kt9855.kt
+    CLASS CLASS MyString
+      CONSTRUCTOR public constructor MyString(content: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'content: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'MyString' type=MyString
+            value: GET_VAR 'value-parameter content: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyString'
+      PROPERTY public final var content: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter content: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS OBJECT Greeter
+      CONSTRUCTOR private constructor Greeter()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Greeter'
+      FUN public final fun sayHello(name: kotlin.String): kotlin.String
+        BLOCK_BODY
+          VAR var result: MyString
+            CALL 'constructor MyString(String)' type=MyString operator=null
+              content: GET_VAR 'value-parameter name: String' type=kotlin.String operator=null
+          SET_VAR 'result: MyString' type=kotlin.Unit operator=PLUSEQ
+            CALL 'plus(String) on MyString: MyString' type=MyString operator=PLUSEQ
+              $receiver: GET_VAR 'result: MyString' type=MyString operator=PLUSEQ
+              suffix: CONST String type=kotlin.String value='K'
+          RETURN type=kotlin.Nothing from='sayHello(String): String'
+            CALL '<get-content>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: GET_VAR 'result: MyString' type=MyString operator=null
+    FUN private operator fun MyString.plus(suffix: kotlin.String): MyString
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='plus(String) on MyString: MyString'
+          CALL 'constructor MyString(String)' type=MyString operator=null
+            content: STRING_CONCATENATION type=kotlin.String
+              CALL '<get-content>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: $RECEIVER of 'plus(String) on MyString: MyString' type=MyString
+              GET_VAR 'value-parameter suffix: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'sayHello(String): String' type=kotlin.String operator=null
+            $this: GET_OBJECT 'Greeter' type=Greeter
+            name: CONST String type=kotlin.String value='O'

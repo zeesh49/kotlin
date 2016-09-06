@@ -1,0 +1,50 @@
+MODULE <test-module>
+  FILE /kt1776.kt
+    CLASS INTERFACE Expr
+      FUN public open fun ttFun(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='ttFun(): Int'
+            CONST Int type=kotlin.Int value='12'
+    CLASS CLASS Num
+      CONSTRUCTOR public constructor Num(value: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'value: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'Num' type=Num
+            value: GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Num'
+      PROPERTY public final val value: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun Expr.sometest(): kotlin.Int
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: TYPE_OP operator=INSTANCEOF typeOperand=Num
+            $RECEIVER of 'sometest() on Expr: Int' type=Expr
+          then: BLOCK type=kotlin.Nothing operator=null
+            CALL '<get-value>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=Num
+                $RECEIVER of 'sometest() on Expr: Int' type=Expr
+            RETURN type=kotlin.Nothing from='sometest() on Expr: Int'
+              CALL '<get-value>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=Num
+                  $RECEIVER of 'sometest() on Expr: Int' type=Expr
+        RETURN type=kotlin.Nothing from='sometest() on Expr: Int'
+          CONST Int type=kotlin.Int value='0'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'sometest() on Expr: Int' type=kotlin.Int operator=null
+                $receiver: CALL 'constructor Num(Int)' type=Num operator=null
+                  value: CONST Int type=kotlin.Int value='11'
+              arg1: CONST Int type=kotlin.Int value='11'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail '
+              CALL 'sometest() on Expr: Int' type=kotlin.Int operator=null
+                $receiver: CALL 'constructor Num(Int)' type=Num operator=null
+                  value: CONST Int type=kotlin.Int value='11'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

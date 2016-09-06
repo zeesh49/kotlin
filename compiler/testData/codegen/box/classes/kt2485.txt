@@ -1,0 +1,30 @@
+MODULE <test-module>
+  FILE /kt2485.kt
+    FUN public fun f1(a: kotlin.Any?): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun f2(a: kotlin.Boolean?): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun f3(a: kotlin.Any): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun f4(a: kotlin.Boolean): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'f1(Any?): Unit' type=kotlin.Unit operator=null
+          a: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CONST Int type=kotlin.Int value='1'
+            arg1: CONST Int type=kotlin.Int value='1'
+        CALL 'f2(Boolean?): Unit' type=kotlin.Unit operator=null
+          a: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CONST Int type=kotlin.Int value='1'
+            arg1: CONST Int type=kotlin.Int value='1'
+        CALL 'f3(Any): Unit' type=kotlin.Unit operator=null
+          a: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CONST Int type=kotlin.Int value='1'
+            arg1: CONST Int type=kotlin.Int value='1'
+        CALL 'f4(Boolean): Unit' type=kotlin.Unit operator=null
+          a: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CONST Int type=kotlin.Int value='1'
+            arg1: CONST Int type=kotlin.Int value='1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

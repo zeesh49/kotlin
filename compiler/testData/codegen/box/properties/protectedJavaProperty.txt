@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /kotlin.kt
+    CLASS OBJECT KotlinExtender
+      CONSTRUCTOR private constructor KotlinExtender()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor JavaBaseClass()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='KotlinExtender'
+      FUN @kotlin.jvm.JvmStatic public final fun test(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test(): String'
+            CALL 'runSlowly(() -> String): String' type=kotlin.String operator=null
+              f: BLOCK type=() -> kotlin.String! operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.String!
+                  BLOCK_BODY
+                    CALL '<set-foo>(String!) on KotlinExtender: Unit' type=kotlin.Unit operator=EQ
+                      $receiver: THIS of 'KotlinExtender' type=z.KotlinExtender
+                      <set-?>: CONST String type=kotlin.String value='OK'
+                    RETURN type=kotlin.Nothing from='<anonymous>(): String!'
+                      CALL '<get-foo>() on KotlinExtender: String!' type=kotlin.String! operator=GET_PROPERTY
+                        $receiver: THIS of 'KotlinExtender' type=z.KotlinExtender
+                CALLABLE_REFERENCE '<anonymous>(): String!' type=() -> kotlin.String! operator=LAMBDA
+    FUN public fun runSlowly(f: () -> kotlin.String): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='runSlowly(() -> String): String'
+          CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+            $this: GET_VAR 'value-parameter f: () -> String' type=() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'test(): String' type=kotlin.String operator=null
+            $this: GET_OBJECT 'KotlinExtender' type=z.KotlinExtender

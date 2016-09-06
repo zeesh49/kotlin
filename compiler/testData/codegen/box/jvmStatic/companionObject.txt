@@ -1,0 +1,67 @@
+MODULE <test-module>
+  FILE /simpleCompanionObject.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS OBJECT companion object of A
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of A'
+        PROPERTY public final val b: kotlin.String = "OK"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='OK'
+        PROPERTY @kotlin.jvm.JvmStatic public final val c: kotlin.String = "OK"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='OK'
+        FUN @kotlin.jvm.JvmStatic public final fun test1(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='test1(): String'
+              CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'companion object of A' type=A.Companion
+        FUN @kotlin.jvm.JvmStatic public final fun test2(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='test2(): String'
+              CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'companion object of A' type=A.Companion
+        FUN @kotlin.jvm.JvmStatic public final fun kotlin.String.test3(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='test3() on String: String'
+              CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: $RECEIVER of 'test3() on String: String' type=kotlin.String
+                other: CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: THIS of 'companion object of A' type=A.Companion
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test1(): String!' type=kotlin.String! operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test2(): String!' type=kotlin.String! operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test3(): String!' type=kotlin.String! operator=null
+              arg1: CONST String type=kotlin.String value='JAVAOK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test4(): String!' type=kotlin.String! operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

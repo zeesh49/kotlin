@@ -1,0 +1,116 @@
+MODULE <test-module>
+  FILE /parameterizedTypes.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(foo: kotlin.collections.List<kotlin.String>)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'foo: List<String>' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter foo: List<String>' type=kotlin.collections.List<kotlin.String> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY private final var foo: kotlin.collections.List<kotlin.String>
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter foo: List<String>' type=kotlin.collections.List<kotlin.String> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS OBJECT O
+      CONSTRUCTOR private constructor O()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='O'
+      PROPERTY @kotlin.jvm.JvmStatic private final var bar: kotlin.collections.List<kotlin.String>
+        EXPRESSION_BODY
+          CALL 'listOf(): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+    FUN public fun topLevel(): kotlin.collections.List<kotlin.String>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='topLevel(): List<String>'
+          CALL 'listOf(): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+    FUN public fun kotlin.Any.extension(): kotlin.collections.List<kotlin.String>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='extension() on Any: List<String>'
+          CALL 'listOf(): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+    FUN public fun assertGenericType(type: kotlin.reflect.KType): kotlin.Unit
+      BLOCK_BODY
+        VAR val javaType: java.lang.reflect.Type
+          CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+            $receiver: GET_VAR 'value-parameter type: KType' type=kotlin.reflect.KType operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=java.lang.reflect.ParameterizedType
+            GET_VAR 'javaType: Type' type=java.lang.reflect.Type operator=null
+          then: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='Type should be a parameterized type, but was '
+                  GET_VAR 'javaType: Type' type=java.lang.reflect.Type operator=null
+                  CONST String type=kotlin.String value=' ('
+                  CALL '<get-javaClass>() on Type: Class<Type>' type=java.lang.Class<java.lang.reflect.Type> operator=GET_PROPERTY
+                    $receiver: GET_VAR 'javaType: Type' type=java.lang.reflect.Type operator=null
+                  CONST String type=kotlin.String value=')'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val foo: kotlin.reflect.KMutableProperty<*>
+          TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty<*>
+            CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+              $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                $this: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+              predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                      CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                          $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                        arg1: CONST String type=kotlin.String value='foo'
+                CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+        CALL 'assertGenericType(KType): Unit' type=kotlin.Unit operator=null
+          type: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: GET_VAR 'foo: KMutableProperty<*>' type=kotlin.reflect.KMutableProperty<*> operator=null
+        CALL 'assertGenericType(KType): Unit' type=kotlin.Unit operator=null
+          type: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALL '<get-getter>(): KProperty.Getter<Any?>' type=kotlin.reflect.KProperty.Getter<kotlin.Any?> operator=GET_PROPERTY
+              $this: GET_VAR 'foo: KMutableProperty<*>' type=kotlin.reflect.KMutableProperty<*> operator=null
+        CALL 'assertGenericType(KType): Unit' type=kotlin.Unit operator=null
+          type: CALL '<get-type>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALL 'last() on List<KParameter>: KParameter' type=kotlin.reflect.KParameter operator=null
+              $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                $this: CALL '<get-setter>(): KMutableProperty.Setter<out Any?>' type=kotlin.reflect.KMutableProperty.Setter<out kotlin.Any?> operator=GET_PROPERTY
+                  $this: GET_VAR 'foo: KMutableProperty<*>' type=kotlin.reflect.KMutableProperty<*> operator=null
+        VAR val bar: kotlin.reflect.KMutableProperty<*>
+          TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty<*>
+            CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+              $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                $this: CLASS_REFERENCE 'O' type=kotlin.reflect.KClass<O>
+              predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                      CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                          $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                        arg1: CONST String type=kotlin.String value='bar'
+                CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+        CALL 'assertGenericType(KType): Unit' type=kotlin.Unit operator=null
+          type: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: GET_VAR 'bar: KMutableProperty<*>' type=kotlin.reflect.KMutableProperty<*> operator=null
+        CALL 'assertGenericType(KType): Unit' type=kotlin.Unit operator=null
+          type: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALL '<get-getter>(): KProperty.Getter<Any?>' type=kotlin.reflect.KProperty.Getter<kotlin.Any?> operator=GET_PROPERTY
+              $this: GET_VAR 'bar: KMutableProperty<*>' type=kotlin.reflect.KMutableProperty<*> operator=null
+        CALL 'assertGenericType(KType): Unit' type=kotlin.Unit operator=null
+          type: CALL '<get-type>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALL 'last() on List<KParameter>: KParameter' type=kotlin.reflect.KParameter operator=null
+              $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                $this: CALL '<get-setter>(): KMutableProperty.Setter<out Any?>' type=kotlin.reflect.KMutableProperty.Setter<out kotlin.Any?> operator=GET_PROPERTY
+                  $this: GET_VAR 'bar: KMutableProperty<*>' type=kotlin.reflect.KMutableProperty<*> operator=null
+        CALL 'assertGenericType(KType): Unit' type=kotlin.Unit operator=null
+          type: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'topLevel(): List<String>' type=kotlin.reflect.KFunction0<kotlin.collections.List<kotlin.String>> operator=null
+        CALL 'assertGenericType(KType): Unit' type=kotlin.Unit operator=null
+          type: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'extension() on Any: List<String>' type=kotlin.reflect.KFunction1<kotlin.Any, kotlin.collections.List<kotlin.String>> operator=null
+        CALL 'assertGenericType(KType): Unit' type=kotlin.Unit operator=null
+          type: CALL '<get-type>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALL 'single() on List<KParameter>: KParameter' type=kotlin.reflect.KParameter operator=null
+              $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                $this: CALLABLE_REFERENCE 'constructor A(List<String>)' type=kotlin.reflect.KFunction1<kotlin.collections.List<kotlin.String>, A> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

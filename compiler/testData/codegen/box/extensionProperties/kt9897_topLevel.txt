@@ -1,0 +1,89 @@
+MODULE <test-module>
+  FILE /kt9897_topLevel.kt
+    PROPERTY public var z: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='0'
+    PROPERTY public var l: kotlin.Long
+      EXPRESSION_BODY
+        CONST Long type=kotlin.Long value='0'
+    FUN public fun changeObject(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=PLUSEQ
+          VAR val tmp0_receiver: kotlin.String
+            CONST String type=kotlin.String value='1'
+          CALL '<set-someProperty>(Int) on String: Unit' type=kotlin.Unit operator=PLUSEQ
+            $receiver: GET_VAR 'tmp0_receiver: String' type=kotlin.String operator=null
+            left: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+              $this: CALL '<get-someProperty>() on String: Int' type=kotlin.Int operator=PLUSEQ
+                $receiver: GET_VAR 'tmp0_receiver: String' type=kotlin.String operator=null
+              other: CONST Int type=kotlin.Int value='1'
+        RETURN type=kotlin.Nothing from='changeObject(): String'
+          CALL '<get-z>(): String' type=kotlin.String operator=GET_PROPERTY
+    FUN public fun changeLong(): kotlin.Long
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=MINUSEQ
+          VAR val tmp0_receiver: kotlin.Long
+            CONST Long type=kotlin.Long value='2'
+          CALL '<set-someProperty>(Long) on Long: Unit' type=kotlin.Unit operator=MINUSEQ
+            $receiver: GET_VAR 'tmp0_receiver: Long' type=kotlin.Long operator=null
+            left: CALL 'minus(Int): Long' type=kotlin.Long operator=MINUSEQ
+              $this: CALL '<get-someProperty>() on Long: Long' type=kotlin.Long operator=MINUSEQ
+                $receiver: GET_VAR 'tmp0_receiver: Long' type=kotlin.Long operator=null
+              other: CONST Int type=kotlin.Int value='1'
+        RETURN type=kotlin.Nothing from='changeLong(): Long'
+          CALL '<get-l>(): Long' type=kotlin.Long operator=GET_PROPERTY
+    PROPERTY public var kotlin.String.someProperty: kotlin.Int
+      PROPERTY_GETTER public fun kotlin.String.<get-someProperty>(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-someProperty>() on String: Int'
+            CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: $RECEIVER of 'someProperty: Int on String' type=kotlin.String
+      PROPERTY_SETTER public fun kotlin.String.<set-someProperty>(left: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            CALL '<set-z>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+              <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: CALL '<get-z>(): String' type=kotlin.String operator=PLUSEQ
+                other: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: $RECEIVER of 'someProperty: Int on String' type=kotlin.String
+                  other: GET_VAR 'value-parameter left: Int' type=kotlin.Int operator=null
+    PROPERTY public var kotlin.Long.someProperty: kotlin.Long
+      PROPERTY_GETTER public fun kotlin.Long.<get-someProperty>(): kotlin.Long
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-someProperty>() on Long: Long'
+            CALL '<get-l>(): Long' type=kotlin.Long operator=GET_PROPERTY
+      PROPERTY_SETTER public fun kotlin.Long.<set-someProperty>(left: kotlin.Long): kotlin.Unit
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            CALL '<set-l>(Long): Unit' type=kotlin.Unit operator=PLUSEQ
+              <set-?>: CALL 'plus(Long): Long' type=kotlin.Long operator=PLUSEQ
+                $this: CALL '<get-l>(): Long' type=kotlin.Long operator=PLUSEQ
+                other: CALL 'plus(Long): Long' type=kotlin.Long operator=PLUS
+                  $this: $RECEIVER of 'someProperty: Long on Long' type=kotlin.Long
+                  other: GET_VAR 'value-parameter left: Long' type=kotlin.Long operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val changeObject: kotlin.String
+          CALL 'changeObject(): String' type=kotlin.String operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'changeObject: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='012'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              GET_VAR 'changeObject: String' type=kotlin.String operator=null
+        VAR val changeLong: kotlin.Long
+          CALL 'changeLong(): Long' type=kotlin.Long operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'changeLong: Long' type=kotlin.Long operator=null
+              arg1: CONST Long type=kotlin.Long value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              GET_VAR 'changeLong: Long' type=kotlin.Long operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

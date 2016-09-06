@@ -1,0 +1,88 @@
+MODULE <test-module>
+  FILE /noOptimization.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    PROPERTY public var holder: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='0'
+    FUN public operator fun A.not(): A
+      BLOCK_BODY
+        BLOCK type=kotlin.Int operator=POSTFIX_INCR
+          BLOCK type=kotlin.Int operator=POSTFIX_INCR
+            VAR val tmp0: kotlin.Int
+              CALL '<get-holder>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+            CALL '<set-holder>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+              <set-?>: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+            GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='not() on A: A'
+          $RECEIVER of 'not() on A: A' type=A
+    FUN public operator fun B.not(): kotlin.Boolean
+      BLOCK_BODY
+        BLOCK type=kotlin.Int operator=POSTFIX_INCR
+          BLOCK type=kotlin.Int operator=POSTFIX_INCR
+            VAR val tmp0: kotlin.Int
+              CALL '<get-holder>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+            CALL '<set-holder>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+              <set-?>: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+            GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='not() on B: Boolean'
+          CONST Boolean type=kotlin.Boolean value='false'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'not() on A: A' type=A operator=EXCL
+          $receiver: CALL 'not() on A: A' type=A operator=EXCL
+            $receiver: CALL 'not() on A: A' type=A operator=EXCL
+              $receiver: CALL 'not() on A: A' type=A operator=EXCL
+                $receiver: CALL 'not() on A: A' type=A operator=EXCL
+                  $receiver: CALL 'constructor A()' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-holder>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              arg1: CONST Int type=kotlin.Int value='5'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        CALL '<set-holder>(Int): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: CONST Int type=kotlin.Int value='0'
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+              $this: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+                $this: CALL 'not() on B: Boolean' type=kotlin.Boolean operator=EXCL
+                  $receiver: CALL 'constructor B()' type=B operator=null
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-holder>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'not() on B: Boolean' type=kotlin.Boolean operator=EXCL
+                $receiver: CALL 'constructor B()' type=B operator=null
+              arg1: CONST Boolean type=kotlin.Boolean value='false'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+                $this: CALL 'not() on B: Boolean' type=kotlin.Boolean operator=EXCL
+                  $receiver: CALL 'constructor B()' type=B operator=null
+              arg1: CONST Boolean type=kotlin.Boolean value='true'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

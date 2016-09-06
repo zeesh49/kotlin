@@ -1,0 +1,37 @@
+MODULE <test-module>
+  FILE /test.kt
+    CLASS CLASS OurTest
+      CONSTRUCTOR public constructor OurTest()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Test()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='OurTest'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val t: OurTest
+          CALL 'constructor OurTest()' type=OurTest operator=null
+        VAR val x: kotlin.collections.MutableCollection<kotlin.String>
+          GET_VAR 't: OurTest' type=OurTest operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 't: OurTest' type=OurTest operator=null
+              arg1: CONST Int type=kotlin.Int value='56'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 't: OurTest' type=OurTest operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'x: MutableCollection<String>' type=kotlin.collections.MutableCollection<kotlin.String> operator=null
+              arg1: CONST Int type=kotlin.Int value='56'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'x: MutableCollection<String>' type=kotlin.collections.MutableCollection<kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

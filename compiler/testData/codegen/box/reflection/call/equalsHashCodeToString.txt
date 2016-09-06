@@ -1,0 +1,184 @@
+MODULE <test-module>
+  FILE /equalsHashCodeToString.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+    CLASS CLASS D
+      CONSTRUCTOR public constructor D(s: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 's: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'D' type=D
+            value: GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='D'
+      PROPERTY public final val s: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final operator fun component1(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component1(): String'
+            CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'D' type=D
+      FUN public final fun copy(s: kotlin.String = ...): D
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='copy(String = ...): D'
+            CALL 'constructor D(String)' type=D operator=null
+              s: GET_VAR 'value-parameter s: String = ...' type=kotlin.String operator=null
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='D('
+              CONST String type=kotlin.String value='s='
+              CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'D' type=D
+              CONST String type=kotlin.String value=')'
+      FUN public open override fun hashCode(): kotlin.Int
+        BLOCK_BODY
+          VAR val tmp0_result: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          SET_VAR 'tmp0_result: Int' type=kotlin.Unit operator=EQ
+            CALL 'hashCode(): Int' type=kotlin.Int operator=null
+              $this: CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'D' type=D
+          RETURN type=kotlin.Nothing from='hashCode(): Int'
+            GET_VAR 'tmp0_result: Int' type=kotlin.Int operator=null
+      FUN public open override fun equals(other: kotlin.Any?): kotlin.Boolean
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+              arg0: THIS of 'D' type=D
+              arg1: GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='true'
+          WHEN type=kotlin.Unit operator=null
+            if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=D
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          VAR val tmp0_other_with_cast: D
+            TYPE_OP operator=CAST typeOperand=D
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: THIS of 'D' type=D
+                arg1: CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: GET_VAR 'tmp0_other_with_cast: D' type=D operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          CALL 'constructor A()' type=A operator=null
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'call(vararg Any?): Boolean' type=kotlin.Boolean operator=null
+            $this: CALLABLE_REFERENCE 'equals(Any?): Boolean' type=kotlin.reflect.KFunction2<A, kotlin.Any?, kotlin.Boolean> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              GET_VAR 'a: A' type=A operator=null
+              GET_VAR 'a: A' type=A operator=null
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'call(vararg Any?): Boolean' type=kotlin.Boolean operator=null
+              $this: CALLABLE_REFERENCE 'equals(Any?): Boolean' type=kotlin.reflect.KFunction2<A, kotlin.Any?, kotlin.Boolean> operator=null
+              args: VARARG type=Array<out Any?> varargElementType=Any?
+                GET_VAR 'a: A' type=A operator=null
+                CONST Int type=kotlin.Int value='0'
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+              $this: CALLABLE_REFERENCE 'hashCode(): Int' type=kotlin.reflect.KFunction1<A, kotlin.Int> operator=null
+              args: VARARG type=Array<out Any?> varargElementType=Any?
+                GET_VAR 'a: A' type=A operator=null
+            arg1: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+              $this: CALLABLE_REFERENCE 'hashCode(): Int' type=kotlin.reflect.KFunction1<A, kotlin.Int> operator=null
+              args: VARARG type=Array<out Any?> varargElementType=Any?
+                GET_VAR 'a: A' type=A operator=null
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'startsWith(String, Boolean = ...) on String: Boolean' type=kotlin.Boolean operator=null
+            $receiver: CALL 'call(vararg Any?): String' type=kotlin.String operator=null
+              $this: CALLABLE_REFERENCE 'toString(): String' type=kotlin.reflect.KFunction1<A, kotlin.String> operator=null
+              args: VARARG type=Array<out Any?> varargElementType=Any?
+                GET_VAR 'a: A' type=A operator=null
+            prefix: CONST String type=kotlin.String value='A@'
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'call(vararg Any?): Boolean' type=kotlin.Boolean operator=null
+            $this: CALLABLE_REFERENCE 'equals(Any?): Boolean' type=kotlin.reflect.KFunction2<D, kotlin.Any?, kotlin.Boolean> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CALL 'constructor D(String)' type=D operator=null
+                s: CONST String type=kotlin.String value='foo'
+              CALL 'constructor D(String)' type=D operator=null
+                s: CONST String type=kotlin.String value='foo'
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'call(vararg Any?): Boolean' type=kotlin.Boolean operator=null
+              $this: CALLABLE_REFERENCE 'equals(Any?): Boolean' type=kotlin.reflect.KFunction2<D, kotlin.Any?, kotlin.Boolean> operator=null
+              args: VARARG type=Array<out Any?> varargElementType=Any?
+                CALL 'constructor D(String)' type=D operator=null
+                  s: CONST String type=kotlin.String value='foo'
+                CALL 'constructor D(String)' type=D operator=null
+                  s: CONST String type=kotlin.String value='bar'
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+              $this: CALLABLE_REFERENCE 'hashCode(): Int' type=kotlin.reflect.KFunction1<D, kotlin.Int> operator=null
+              args: VARARG type=Array<out Any?> varargElementType=Any?
+                CALL 'constructor D(String)' type=D operator=null
+                  s: CONST String type=kotlin.String value='foo'
+            arg1: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+              $this: CALLABLE_REFERENCE 'hashCode(): Int' type=kotlin.reflect.KFunction1<D, kotlin.Int> operator=null
+              args: VARARG type=Array<out Any?> varargElementType=Any?
+                CALL 'constructor D(String)' type=D operator=null
+                  s: CONST String type=kotlin.String value='foo'
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'call(vararg Any?): String' type=kotlin.String operator=null
+              $this: CALLABLE_REFERENCE 'toString(): String' type=kotlin.reflect.KFunction1<D, kotlin.String> operator=null
+              args: VARARG type=Array<out Any?> varargElementType=Any?
+                CALL 'constructor D(String)' type=D operator=null
+                  s: CONST String type=kotlin.String value='foo'
+            arg1: CONST String type=kotlin.String value='D(s=foo)'
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'call(vararg Any?): Boolean' type=kotlin.Boolean operator=null
+            $this: CALLABLE_REFERENCE 'equals(Any?): Boolean' type=kotlin.reflect.KFunction2<kotlin.Int, kotlin.Any?, kotlin.Boolean> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CONST Int type=kotlin.Int value='-1'
+              CONST Int type=kotlin.Int value='-1'
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+                $this: CALLABLE_REFERENCE 'hashCode(): Int' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Int> operator=null
+                args: VARARG type=Array<out Any?> varargElementType=Any?
+                  CONST Int type=kotlin.Int value='0'
+              arg1: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+                $this: CALLABLE_REFERENCE 'hashCode(): Int' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Int> operator=null
+                args: VARARG type=Array<out Any?> varargElementType=Any?
+                  CONST Int type=kotlin.Int value='1'
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'call(vararg Any?): String' type=kotlin.String operator=null
+              $this: CALLABLE_REFERENCE 'toString(): String' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.String> operator=null
+              args: VARARG type=Array<out Any?> varargElementType=Any?
+                CONST Int type=kotlin.Int value='42'
+            arg1: CONST String type=kotlin.String value='42'
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'call(vararg Any?): Boolean' type=kotlin.Boolean operator=null
+            $this: CALLABLE_REFERENCE 'equals(Any?): Boolean' type=kotlin.reflect.KFunction2<kotlin.String, kotlin.Any?, kotlin.Boolean> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CONST String type=kotlin.String value='beer'
+              CONST String type=kotlin.String value='beer'
+        CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+          $this: CALLABLE_REFERENCE 'hashCode(): Int' type=kotlin.reflect.KFunction1<kotlin.String, kotlin.Int> operator=null
+          args: VARARG type=Array<out Any?> varargElementType=Any?
+            CONST String type=kotlin.String value='beer'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'call(vararg Any?): String' type=kotlin.String operator=null
+            $this: CALLABLE_REFERENCE 'toString(): String' type=kotlin.reflect.KFunction1<kotlin.String, kotlin.String> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CONST String type=kotlin.String value='OK'

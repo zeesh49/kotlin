@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /primaryConstructor.kt
+    CLASS CLASS C
+      CONSTRUCTOR @kotlin.jvm.JvmOverloads public constructor C(s1: kotlin.String, s2: kotlin.String = ...)
+        s2: EXPRESSION_BODY
+          CONST String type=kotlin.String value='K'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      PROPERTY public final val status: kotlin.String
+        EXPRESSION_BODY
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: GET_VAR 'value-parameter s1: String' type=kotlin.String operator=null
+            other: GET_VAR 'value-parameter s2: String = ...' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val c: C!
+          CALL 'newInstance(vararg Any!): C!' type=C! operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Constructor<C!>
+              CALL 'getConstructor(vararg Class<*>!): Constructor<C!>!' type=java.lang.reflect.Constructor<C!>! operator=null
+                $this: CALL '<get-java>() on KClass<C>: Class<C>' type=java.lang.Class<C> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'C' type=kotlin.reflect.KClass<C>
+                p0: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+                  CALL '<get-java>() on KClass<String>: Class<String>' type=java.lang.Class<kotlin.String> operator=GET_PROPERTY
+                    $receiver: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+            p0: VARARG type=(kotlin.Array<(kotlin.Any..kotlin.Any?)>..kotlin.Array<out (kotlin.Any..kotlin.Any?)>?) varargElementType=(kotlin.Any..kotlin.Any?)
+              CONST String type=kotlin.String value='O'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-status>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=C
+              GET_VAR 'c: C!' type=C! operator=null

@@ -1,0 +1,14 @@
+MODULE <test-module>
+  FILE /extension.kt
+    FUN public fun kotlin.Any.foo(): kotlin.Unit
+      BLOCK_BODY
+    PROPERTY public val kotlin.Any.bar: kotlin.String
+      PROPERTY_GETTER public fun kotlin.Any.<get-bar>(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-bar>() on Any: String'
+            CONST String type=kotlin.String value=''
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+            CALL 'invokeFoo(): String!' type=kotlin.String! operator=null

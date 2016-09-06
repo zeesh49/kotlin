@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /retentions.kt
+    CLASS ANNOTATION_CLASS SourceAnno
+    CLASS ANNOTATION_CLASS BinaryAnno
+    CLASS ANNOTATION_CLASS RuntimeAnno
+    FUN @SourceAnno @BinaryAnno @RuntimeAnno public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(List<Class<out Annotation>>, List<Class<out Annotation>>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(Class<RuntimeAnno>): List<Class<RuntimeAnno>>' type=kotlin.collections.List<java.lang.Class<RuntimeAnno>> operator=null
+            element: CALL '<get-java>() on KClass<RuntimeAnno>: Class<RuntimeAnno>' type=java.lang.Class<RuntimeAnno> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'RuntimeAnno' type=kotlin.reflect.KClass<RuntimeAnno>
+          actual: CALL 'map((Annotation) -> Class<out Annotation>) on Iterable<Annotation>: List<Class<out Annotation>>' type=kotlin.collections.List<java.lang.Class<out kotlin.Annotation>> operator=null
+            $receiver: CALL '<get-annotations>(): List<Annotation>' type=kotlin.collections.List<kotlin.Annotation> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'box(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+            transform: BLOCK type=(kotlin.Annotation) -> java.lang.Class<out kotlin.Annotation> operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.Annotation): java.lang.Class<out kotlin.Annotation>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Annotation): Class<out Annotation>'
+                    CALL '<get-java>() on KClass<out Annotation>: Class<out Annotation>' type=java.lang.Class<out kotlin.Annotation> operator=GET_PROPERTY
+                      $receiver: CALL '<get-annotationClass>() on Annotation: KClass<out Annotation>' type=kotlin.reflect.KClass<out kotlin.Annotation> operator=GET_PROPERTY
+                        $receiver: GET_VAR 'value-parameter it: Annotation' type=kotlin.Annotation operator=null
+              CALLABLE_REFERENCE '<anonymous>(Annotation): Class<out Annotation>' type=(kotlin.Annotation) -> java.lang.Class<out kotlin.Annotation> operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

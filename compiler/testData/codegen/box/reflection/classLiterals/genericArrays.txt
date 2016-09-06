@@ -1,0 +1,71 @@
+MODULE <test-module>
+  FILE /genericArrays.kt
+    CLASS CLASS Klass
+      CONSTRUCTOR public constructor Klass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Klass'
+    FUN public inline fun <reified T> arrayClass(): kotlin.reflect.KClass<kotlin.Array<T>>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='arrayClass(): KClass<Array<T>>'
+          CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<T>>
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Array'
+          actual: CALL '<get-simpleName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CALL 'arrayClass(): KClass<Array<Int>>' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Int>> operator=null
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Array'
+          actual: CALL '<get-simpleName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CALL 'arrayClass(): KClass<Array<Int?>>' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Int?>> operator=null
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Array'
+          actual: CALL '<get-simpleName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CALL 'arrayClass(): KClass<Array<Array<Int>>>' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Array<kotlin.Int>>> operator=null
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Array'
+          actual: CALL '<get-simpleName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CALL 'arrayClass(): KClass<Array<Klass>>' type=kotlin.reflect.KClass<kotlin.Array<Klass>> operator=null
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Array'
+          actual: CALL '<get-simpleName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CALL 'arrayClass(): KClass<Array<Klass?>>' type=kotlin.reflect.KClass<kotlin.Array<Klass?>> operator=null
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Array'
+          actual: CALL '<get-simpleName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CALL 'arrayClass(): KClass<Array<Array<Klass>>>' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Array<Klass>>> operator=null
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Array'
+          actual: CALL '<get-simpleName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CALL 'arrayClass(): KClass<Array<Array<Klass?>>>' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Array<Klass?>>> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='[Ljava.lang.Object;'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CALL 'arrayClass(): KClass<Array<Int>>' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Int>> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='[Ljava.lang.Object;'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CALL 'arrayClass(): KClass<Array<Int?>>' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Int?>> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='[Ljava.lang.Object;'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CALL 'arrayClass(): KClass<Array<Array<Int>>>' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Array<kotlin.Int>>> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='[Ljava.lang.Object;'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CALL 'arrayClass(): KClass<Array<Klass>>' type=kotlin.reflect.KClass<kotlin.Array<Klass>> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='[Ljava.lang.Object;'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CALL 'arrayClass(): KClass<Array<Klass?>>' type=kotlin.reflect.KClass<kotlin.Array<Klass?>> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='[Ljava.lang.Object;'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CALL 'arrayClass(): KClass<Array<Array<Klass>>>' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Array<Klass>>> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='[Ljava.lang.Object;'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CALL 'arrayClass(): KClass<Array<Array<Klass?>>>' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Array<Klass?>>> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

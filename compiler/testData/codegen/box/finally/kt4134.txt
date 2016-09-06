@@ -1,0 +1,27 @@
+MODULE <test-module>
+  FILE /kt4134.kt
+    FUN public fun <T, R> io(s: R, a: (R) -> T): T
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='io(R, (R) -> T): T'
+              CALL 'invoke(R): T' type=T operator=INVOKE
+                $this: GET_VAR 'value-parameter a: (R) -> T' type=(R) -> T operator=VARIABLE_AS_FUNCTION
+                p1: GET_VAR 'value-parameter s: R' type=R operator=null
+          finally: BLOCK type=kotlin.Any operator=null
+            TRY_CATCH type=kotlin.Any
+              try: BLOCK type=kotlin.String operator=null
+                CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                  $receiver: GET_VAR 'value-parameter s: R' type=R operator=null
+              catch e: BLOCK type=kotlin.Unit operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'io(String, (String) -> String): String' type=kotlin.String operator=null
+            s: CONST String type=kotlin.String value='OK'
+            a: BLOCK type=(kotlin.String) -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.String): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(String): String'
+                    GET_VAR 'value-parameter it: String' type=kotlin.String operator=null
+              CALLABLE_REFERENCE '<anonymous>(String): String' type=(kotlin.String) -> kotlin.String operator=LAMBDA

@@ -1,0 +1,49 @@
+MODULE <test-module>
+  FILE /kt4262.kt
+    FUN public fun <E : kotlin.Enum<E>> kotlin.Byte.toEnum(clazz: java.lang.Class<E>): E
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='toEnum(Class<E>) on Byte: E'
+          CALL 'get(Int): E' type=E operator=GET_ARRAY_ELEMENT
+            $this: TYPE_OP operator=CAST typeOperand=kotlin.Array<E>
+              CALL 'invoke(Any!, vararg Any!): Any!' type=kotlin.Any! operator=null
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                  CALL 'getMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+                    $this: GET_VAR 'value-parameter clazz: Class<E>' type=java.lang.Class<E> operator=null
+                    p0: CONST String type=kotlin.String value='values'
+                p0: CONST Null type=kotlin.Nothing? value='null'
+            index: CALL 'toInt(): Int' type=kotlin.Int operator=null
+              $this: $RECEIVER of 'toEnum(Class<E>) on Byte: E' type=kotlin.Byte
+    CLASS ENUM_CLASS Letters
+      CONSTRUCTOR private constructor Letters()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='Letters'
+      ENUM_ENTRY enum entry A
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Letters()' A
+      ENUM_ENTRY enum entry B
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Letters()' B
+      ENUM_ENTRY enum entry C
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Letters()' C
+      FUN public final fun values(): kotlin.Array<Letters>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): Letters
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val clazz: java.lang.Class<Letters>
+          CALL '<get-java>() on KClass<Letters>: Class<Letters>' type=java.lang.Class<Letters> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Letters' type=kotlin.reflect.KClass<Letters>
+        VAR val r: Letters
+          CALL 'toEnum(Class<Letters>) on Byte: Letters' type=Letters operator=null
+            $receiver: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+              $this: CONST Int type=kotlin.Int value='1'
+            clazz: GET_VAR 'clazz: Class<Letters>' type=java.lang.Class<Letters> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'r: Letters' type=Letters operator=null
+              arg1: GET_ENUM_VALUE 'B' type=Letters
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'r: Letters' type=Letters operator=null

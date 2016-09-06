@@ -1,0 +1,22 @@
+MODULE <test-module>
+  FILE /javaClass.kt
+    FUN public inline fun <reified T : kotlin.Any> javaClassName(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='javaClassName(): String'
+          TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+            CALL 'getName(): String!' type=kotlin.String! operator=null
+              $this: CALL '<get-java>() on KClass<T>: Class<T>' type=java.lang.Class<T> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE '<reified T : Any>' type=kotlin.reflect.KClass<T>
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.lang.String'
+          actual: CALL 'javaClassName(): String' type=kotlin.String operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.lang.Integer'
+          actual: CALL 'javaClassName(): String' type=kotlin.String operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.lang.Object'
+          actual: CALL 'javaClassName(): String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

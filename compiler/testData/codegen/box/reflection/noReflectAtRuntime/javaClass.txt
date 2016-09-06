@@ -1,0 +1,86 @@
+MODULE <test-module>
+  FILE /javaClass.kt
+    CLASS CLASS Klass
+      CONSTRUCTOR public constructor Klass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Klass'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val kClass: kotlin.reflect.KClass<Klass>
+          CLASS_REFERENCE 'Klass' type=kotlin.reflect.KClass<Klass>
+        VAR val jClass: java.lang.Class<Klass>
+          CALL '<get-java>() on KClass<Klass>: Class<Klass>' type=java.lang.Class<Klass> operator=GET_PROPERTY
+            $receiver: GET_VAR 'kClass: KClass<Klass>' type=kotlin.reflect.KClass<Klass> operator=null
+        VAR val kjClass: java.lang.Class<Klass>
+          CALL '<get-java>() on KClass<Klass>: Class<Klass>' type=java.lang.Class<Klass> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Klass' type=kotlin.reflect.KClass<Klass>
+        VAR val kkClass: kotlin.reflect.KClass<Klass>
+          CALL '<get-kotlin>() on Class<Klass>: KClass<Klass>' type=kotlin.reflect.KClass<Klass> operator=GET_PROPERTY
+            $receiver: GET_VAR 'jClass: Class<Klass>' type=java.lang.Class<Klass> operator=null
+        VAR val jjClass: java.lang.Class<Klass>
+          CALL '<get-java>() on KClass<Klass>: Class<Klass>' type=java.lang.Class<Klass> operator=GET_PROPERTY
+            $receiver: GET_VAR 'kkClass: KClass<Klass>' type=kotlin.reflect.KClass<Klass> operator=null
+        CALL 'assertEquals(String!, String!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Klass'
+          actual: CALL 'getSimpleName(): String!' type=kotlin.String! operator=null
+            $this: GET_VAR 'jClass: Class<Klass>' type=java.lang.Class<Klass> operator=null
+        CALL 'assertEquals(String!, String!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Klass'
+          actual: CALL 'getSimpleName(): String!' type=kotlin.String! operator=null
+            $this: GET_VAR 'kjClass: Class<Klass>' type=java.lang.Class<Klass> operator=null
+        CALL 'assertEquals(String!, String!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Klass'
+          actual: CALL '<get-simpleName>() on Class<Klass>: String!' type=kotlin.String! operator=GET_PROPERTY
+            $receiver: CALL '<get-java>() on KClass<Klass>: Class<Klass>' type=java.lang.Class<Klass> operator=GET_PROPERTY
+              $receiver: GET_VAR 'kkClass: KClass<Klass>' type=kotlin.reflect.KClass<Klass> operator=null
+        CALL 'assertEquals(Class<Klass>, Class<Klass>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'kjClass: Class<Klass>' type=java.lang.Class<Klass> operator=null
+          actual: GET_VAR 'jjClass: Class<Klass>' type=java.lang.Class<Klass> operator=null
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL '<get-simpleName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+              $this: GET_VAR 'kClass: KClass<Klass>' type=kotlin.reflect.KClass<Klass> operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail 1'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL '<get-qualifiedName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+              $this: GET_VAR 'kClass: KClass<Klass>' type=kotlin.reflect.KClass<Klass> operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail 2'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+              $this: GET_VAR 'kClass: KClass<Klass>' type=kotlin.reflect.KClass<Klass> operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail 3'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        VAR val jlError: java.lang.Class<kotlin.Error /* = java.lang.Error */>
+          CALL '<get-java>() on KClass<Error /* = Error */>: Class<Error /* = Error */>' type=java.lang.Class<kotlin.Error /* = java.lang.Error */> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Error' type=kotlin.reflect.KClass<kotlin.Error /* = java.lang.Error */>
+        VAR val kljError: kotlin.reflect.KClass<kotlin.Error /* = java.lang.Error */>
+          CLASS_REFERENCE 'Error' type=kotlin.reflect.KClass<kotlin.Error /* = java.lang.Error */>
+        VAR val jljError: java.lang.Class<kotlin.Error /* = java.lang.Error */>
+          CALL '<get-java>() on KClass<Error /* = Error */>: Class<Error /* = Error */>' type=java.lang.Class<kotlin.Error /* = java.lang.Error */> operator=GET_PROPERTY
+            $receiver: GET_VAR 'kljError: KClass<Error /* = Error */>' type=kotlin.reflect.KClass<kotlin.Error /* = java.lang.Error */> operator=null
+        VAR val jlkError: kotlin.reflect.KClass<kotlin.Error /* = java.lang.Error */>
+          CALL '<get-kotlin>() on Class<Error /* = Error */>: KClass<Error /* = Error */>' type=kotlin.reflect.KClass<kotlin.Error /* = java.lang.Error */> operator=GET_PROPERTY
+            $receiver: GET_VAR 'jlError: Class<Error /* = Error */>' type=java.lang.Class<kotlin.Error /* = java.lang.Error */> operator=null
+        CALL 'assertEquals(String!, String!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Error'
+          actual: CALL 'getSimpleName(): String!' type=kotlin.String! operator=null
+            $this: GET_VAR 'jlError: Class<Error /* = Error */>' type=java.lang.Class<kotlin.Error /* = java.lang.Error */> operator=null
+        CALL 'assertEquals(String!, String!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Error'
+          actual: CALL 'getSimpleName(): String!' type=kotlin.String! operator=null
+            $this: GET_VAR 'jljError: Class<Error /* = Error */>' type=java.lang.Class<kotlin.Error /* = java.lang.Error */> operator=null
+        CALL 'assertEquals(String!, String!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Error'
+          actual: CALL '<get-simpleName>() on Class<Error /* = Error */>: String!' type=kotlin.String! operator=GET_PROPERTY
+            $receiver: CALL '<get-java>() on KClass<Error /* = Error */>: Class<Error /* = Error */>' type=java.lang.Class<kotlin.Error /* = java.lang.Error */> operator=GET_PROPERTY
+              $receiver: GET_VAR 'jlkError: KClass<Error /* = Error */>' type=kotlin.reflect.KClass<kotlin.Error /* = java.lang.Error */> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

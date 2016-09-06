@@ -1,0 +1,103 @@
+MODULE <test-module>
+  FILE /typeParametersAndNames.kt
+    CLASS CLASS F
+      CONSTRUCTOR public constructor F()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='F'
+      FUN public final fun <A> foo(): kotlin.Unit
+        BLOCK_BODY
+      PROPERTY public final val <B> B.bar: B
+        PROPERTY_GETTER public final fun B.<get-bar>(): B
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-bar>() on B: B'
+              $RECEIVER of 'bar: B on B' type=B
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C<D>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      FUN public final fun baz(): kotlin.Unit
+        BLOCK_BODY
+      FUN public final fun <E, G> quux(): kotlin.Unit
+        BLOCK_BODY
+    FUN public fun get(klass: kotlin.reflect.KClass<*>, memberName: kotlin.String? = ...): kotlin.collections.List<kotlin.String>
+      memberName: EXPRESSION_BODY
+        CONST Null type=kotlin.Nothing? value='null'
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='get(KClass<*>, String? = ...): List<String>'
+          CALL 'map((KTypeParameter) -> String) on Iterable<KTypeParameter>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            $receiver: WHEN type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: GET_VAR 'value-parameter memberName: String? = ...' type=kotlin.String? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+                $this: CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                  $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                    $this: GET_VAR 'value-parameter klass: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+                  predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                    FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                              $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                            arg1: GET_VAR 'value-parameter memberName: String? = ...' type=kotlin.String? operator=null
+                    CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+              else: CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+                $this: GET_VAR 'value-parameter klass: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+            transform: BLOCK type=(kotlin.reflect.KTypeParameter) -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KTypeParameter): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KTypeParameter): String'
+                    CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                      $this: GET_VAR 'value-parameter it: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+              CALLABLE_REFERENCE '<anonymous>(KTypeParameter): String' type=(kotlin.reflect.KTypeParameter) -> kotlin.String operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+          actual: CALL 'get(KClass<*>, String? = ...): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            klass: CLASS_REFERENCE 'F' type=kotlin.reflect.KClass<F>
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            element: CONST String type=kotlin.String value='A'
+          actual: CALL 'get(KClass<*>, String? = ...): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            klass: CLASS_REFERENCE 'F' type=kotlin.reflect.KClass<F>
+            memberName: CONST String type=kotlin.String value='foo'
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            element: CONST String type=kotlin.String value='B'
+          actual: CALL 'get(KClass<*>, String? = ...): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            klass: CLASS_REFERENCE 'F' type=kotlin.reflect.KClass<F>
+            memberName: CONST String type=kotlin.String value='bar'
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            element: CONST String type=kotlin.String value='D'
+          actual: CALL 'get(KClass<*>, String? = ...): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            klass: CLASS_REFERENCE 'C' type=kotlin.reflect.KClass<C<*>>
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+          actual: CALL 'get(KClass<*>, String? = ...): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            klass: CLASS_REFERENCE 'C' type=kotlin.reflect.KClass<C<*>>
+            memberName: CONST String type=kotlin.String value='baz'
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(vararg String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='E'
+              CONST String type=kotlin.String value='G'
+          actual: CALL 'get(KClass<*>, String? = ...): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            klass: CLASS_REFERENCE 'C' type=kotlin.reflect.KClass<C<*>>
+            memberName: CONST String type=kotlin.String value='quux'
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            element: CONST String type=kotlin.String value='T'
+          actual: CALL 'get(KClass<*>, String? = ...): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            klass: CLASS_REFERENCE 'Comparable' type=kotlin.reflect.KClass<kotlin.Comparable<*>>
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+          actual: CALL 'get(KClass<*>, String? = ...): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            klass: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

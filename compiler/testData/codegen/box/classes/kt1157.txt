@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /kt1157.kt
+    CLASS OBJECT SomeClass
+      CONSTRUCTOR private constructor SomeClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SomeClass'
+      PROPERTY private final val work: SomeClass.work.<no name provided>
+        EXPRESSION_BODY
+          BLOCK type=SomeClass.work.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              FUN public open override fun run(): kotlin.Unit
+                BLOCK_BODY
+                  CALL 'foo(): Unit' type=kotlin.Unit operator=null
+                    $this: THIS of 'SomeClass' type=SomeClass
+            CALL 'constructor <no name provided>()' type=SomeClass.work.<no name provided> operator=OBJECT_LITERAL
+      FUN private final fun foo(): kotlin.Unit
+        BLOCK_BODY
+      FUN public final fun run(): kotlin.Unit
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='run(): Unit'
+            CALL 'run(): Unit' type=kotlin.Unit operator=null
+              $this: CALL '<get-work>(): <no name provided>' type=SomeClass.work.<no name provided> operator=GET_PROPERTY
+                $this: THIS of 'SomeClass' type=SomeClass
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'run(): Unit' type=kotlin.Unit operator=null
+          $this: GET_OBJECT 'SomeClass' type=SomeClass
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

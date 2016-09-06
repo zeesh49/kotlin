@@ -1,0 +1,151 @@
+MODULE <test-module>
+  FILE /classFieldReflection.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(s1: kotlin.String, s2: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 's1: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=zzz.A
+            value: GET_VAR 'value-parameter s1: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 's2: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=zzz.A
+            value: GET_VAR 'value-parameter s2: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val s1: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s1: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val s2: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s2: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY @kotlin.jvm.JvmField public final var publicField: kotlin.String
+        EXPRESSION_BODY
+          CALL '<get-s1>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: THIS of 'A' type=zzz.A
+      PROPERTY @kotlin.jvm.JvmField internal final var internalField: kotlin.String
+        EXPRESSION_BODY
+          CALL '<get-s2>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: THIS of 'A' type=zzz.A
+      FUN public final fun testAccessors(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'checkAccessor(KMutableProperty1<A, String>, String, String, A): Unit' type=kotlin.Unit operator=null
+            prop: TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty1<zzz.A, kotlin.String>
+              CALL 'firstOrNull((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>?' type=kotlin.reflect.KCallable<*>? operator=null
+                $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                  $this: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<zzz.A>
+                predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                        CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                            $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                          arg1: CONST String type=kotlin.String value='publicField'
+                  CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+            value: CALL '<get-s1>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'A' type=zzz.A
+            newValue: CONST String type=kotlin.String value='3'
+            receiver: THIS of 'A' type=zzz.A
+          CALL 'checkAccessor(KMutableProperty1<A, String>, String, String, A): Unit' type=kotlin.Unit operator=null
+            prop: TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty1<zzz.A, kotlin.String>
+              CALL 'firstOrNull((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>?' type=kotlin.reflect.KCallable<*>? operator=null
+                $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                  $this: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<zzz.A>
+                predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                        CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                            $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                          arg1: CONST String type=kotlin.String value='internalField'
+                  CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+            value: CALL '<get-s2>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'A' type=zzz.A
+            newValue: CONST String type=kotlin.String value='4'
+            receiver: THIS of 'A' type=zzz.A
+    CLASS CLASS AWithCompanion
+      CONSTRUCTOR public constructor AWithCompanion()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='AWithCompanion'
+      CLASS OBJECT companion object of AWithCompanion
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of AWithCompanion'
+        PROPERTY @kotlin.jvm.JvmField public final var publicField: kotlin.String
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='1'
+        PROPERTY @kotlin.jvm.JvmField internal final var internalField: kotlin.String
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='2'
+        FUN public final fun testAccessors(): kotlin.Unit
+          BLOCK_BODY
+            CALL 'checkAccessor(KMutableProperty1<AWithCompanion.Companion, String>, String, String, AWithCompanion.Companion): Unit' type=kotlin.Unit operator=null
+              prop: TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty1<zzz.AWithCompanion.Companion, kotlin.String>
+                CALL 'firstOrNull((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>?' type=kotlin.reflect.KCallable<*>? operator=null
+                  $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                    $this: CLASS_REFERENCE 'companion object of AWithCompanion' type=kotlin.reflect.KClass<zzz.AWithCompanion.Companion>
+                  predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                    FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                              $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                            arg1: CONST String type=kotlin.String value='publicField'
+                    CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+              value: CONST String type=kotlin.String value='1'
+              newValue: CONST String type=kotlin.String value='3'
+              receiver: GET_OBJECT 'companion object of AWithCompanion' type=zzz.AWithCompanion.Companion
+            CALL 'checkAccessor(KMutableProperty1<AWithCompanion.Companion, String>, String, String, AWithCompanion.Companion): Unit' type=kotlin.Unit operator=null
+              prop: TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty1<zzz.AWithCompanion.Companion, kotlin.String>
+                CALL 'firstOrNull((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>?' type=kotlin.reflect.KCallable<*>? operator=null
+                  $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                    $this: CLASS_REFERENCE 'companion object of AWithCompanion' type=kotlin.reflect.KClass<zzz.AWithCompanion.Companion>
+                  predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                    FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                              $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                            arg1: CONST String type=kotlin.String value='internalField'
+                    CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+              value: CONST String type=kotlin.String value='2'
+              newValue: CONST String type=kotlin.String value='4'
+              receiver: GET_OBJECT 'companion object of AWithCompanion' type=zzz.AWithCompanion.Companion
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'testAccessors(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor A(String, String)' type=zzz.A operator=null
+            s1: CONST String type=kotlin.String value='1'
+            s2: CONST String type=kotlin.String value='2'
+        CALL 'testAccessors(): Unit' type=kotlin.Unit operator=null
+          $this: GET_OBJECT 'companion object of AWithCompanion' type=zzz.AWithCompanion.Companion
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun <T, R> checkAccessor(prop: kotlin.reflect.KMutableProperty1<T, R>, value: R, newValue: R, receiver: T): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assertEquals(R, R, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'get(T): R' type=R operator=null
+            $this: GET_VAR 'value-parameter prop: KMutableProperty1<T, R>' type=kotlin.reflect.KMutableProperty1<T, R> operator=null
+            receiver: GET_VAR 'value-parameter receiver: T' type=T operator=null
+          actual: GET_VAR 'value-parameter value: R' type=R operator=null
+          message: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='Property '
+            GET_VAR 'value-parameter prop: KMutableProperty1<T, R>' type=kotlin.reflect.KMutableProperty1<T, R> operator=null
+            CONST String type=kotlin.String value=' has wrong value'
+        CALL 'set(T, R): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'value-parameter prop: KMutableProperty1<T, R>' type=kotlin.reflect.KMutableProperty1<T, R> operator=null
+          receiver: GET_VAR 'value-parameter receiver: T' type=T operator=null
+          value: GET_VAR 'value-parameter newValue: R' type=R operator=null
+        CALL 'assertEquals(R, R, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'get(T): R' type=R operator=null
+            $this: GET_VAR 'value-parameter prop: KMutableProperty1<T, R>' type=kotlin.reflect.KMutableProperty1<T, R> operator=null
+            receiver: GET_VAR 'value-parameter receiver: T' type=T operator=null
+          actual: GET_VAR 'value-parameter newValue: R' type=R operator=null
+          message: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='Property '
+            GET_VAR 'value-parameter prop: KMutableProperty1<T, R>' type=kotlin.reflect.KMutableProperty1<T, R> operator=null
+            CONST String type=kotlin.String value=' has wrong value'

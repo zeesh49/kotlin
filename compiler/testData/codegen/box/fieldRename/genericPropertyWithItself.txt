@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /genericPropertyWithItself.kt
+    CLASS CLASS MPair
+      CONSTRUCTOR public constructor MPair<out A>(first: A)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'first: A' type=kotlin.Unit operator=null
+            receiver: THIS of 'MPair' type=MPair<A>
+            value: GET_VAR 'value-parameter first: A' type=A operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='MPair'
+      PROPERTY public final val first: A
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter first: A' type=A operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public open override fun equals(o: kotlin.Any?): kotlin.Boolean
+        BLOCK_BODY
+          VAR val t: MPair<*>
+            TYPE_OP operator=CAST typeOperand=MPair<*>
+              GET_VAR 'value-parameter o: Any?' type=kotlin.Any? operator=null
+          RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+            CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-first>(): A' type=A operator=GET_PROPERTY
+                $this: THIS of 'MPair' type=MPair<A>
+              arg1: CALL '<get-first>(): Any?' type=kotlin.Any? operator=GET_PROPERTY
+                $this: GET_VAR 't: MPair<*>' type=MPair<*> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: MPair<kotlin.String>
+          CALL 'constructor MPair(String)' type=MPair<kotlin.String> operator=null
+            first: CONST String type=kotlin.String value='O'
+        CALL 'equals(Any?): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: MPair<String>' type=MPair<kotlin.String> operator=null
+          o: GET_VAR 'a: MPair<String>' type=MPair<kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

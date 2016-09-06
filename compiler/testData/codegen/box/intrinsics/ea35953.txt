@@ -1,0 +1,14 @@
+MODULE <test-module>
+  FILE /ea35953.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'equals(Any?): Boolean' type=kotlin.Boolean operator=null
+            $this: CALL 'toString(): String' type=kotlin.String operator=null
+              $this: CONST Int type=kotlin.Int value='12'
+            other: CONST String type=kotlin.String value='13'
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

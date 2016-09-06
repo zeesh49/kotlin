@@ -1,0 +1,30 @@
+MODULE <test-module>
+  FILE /enumValueOfMethod.kt
+    CLASS ENUM_CLASS E
+      CONSTRUCTOR private constructor E()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='E'
+      ENUM_ENTRY enum entry ENTRY
+        init: ENUM_CONSTRUCTOR_CALL 'constructor E()' ENTRY
+      FUN public final fun values(): kotlin.Array<E>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): E
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f: kotlin.reflect.KFunction1<kotlin.String, E>
+          CALLABLE_REFERENCE 'valueOf(String): E' type=kotlin.reflect.KFunction1<kotlin.String, E> operator=null
+        VAR val result: E
+          CALL 'invoke(String): E' type=E operator=INVOKE
+            $this: GET_VAR 'f: KFunction1<String, E>' type=kotlin.reflect.KFunction1<kotlin.String, E> operator=VARIABLE_AS_FUNCTION
+            p1: CONST String type=kotlin.String value='ENTRY'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'result: E' type=E operator=null
+              arg1: GET_ENUM_VALUE 'ENTRY' type=E
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'result: E' type=E operator=null

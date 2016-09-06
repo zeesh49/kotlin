@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /extensionFunction.kt
+    FUN public fun kotlin.String.sum(other: kotlin.String = ...): kotlin.String
+      other: EXPRESSION_BODY
+        CONST String type=kotlin.String value='b'
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='sum(String = ...) on String: String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: $RECEIVER of 'sum(String = ...) on String: String' type=kotlin.String
+            other: GET_VAR 'value-parameter other: String = ...' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f: kotlin.reflect.KFunction2<kotlin.String, kotlin.String, kotlin.String>
+          CALLABLE_REFERENCE 'sum(String = ...) on String: String' type=kotlin.reflect.KFunction2<kotlin.String, kotlin.String, kotlin.String> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='ab'
+          actual: CALL 'callBy(Map<KParameter, Any?>): String' type=kotlin.String operator=null
+            $this: GET_VAR 'f: KFunction2<String, String, String>' type=kotlin.reflect.KFunction2<kotlin.String, kotlin.String, kotlin.String> operator=null
+            args: CALL 'mapOf(Pair<KParameter, String>): Map<KParameter, String>' type=kotlin.collections.Map<kotlin.reflect.KParameter, kotlin.String> operator=null
+              pair: CALL 'to(String) on KParameter: Pair<KParameter, String>' type=kotlin.Pair<kotlin.reflect.KParameter, kotlin.String> operator=null
+                $receiver: CALL 'first() on List<KParameter>: KParameter' type=kotlin.reflect.KParameter operator=null
+                  $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                    $this: GET_VAR 'f: KFunction2<String, String, String>' type=kotlin.reflect.KFunction2<kotlin.String, kotlin.String, kotlin.String> operator=null
+                that: CONST String type=kotlin.String value='a'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

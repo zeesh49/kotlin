@@ -1,0 +1,66 @@
+MODULE <test-module>
+  FILE /innerGeneric.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<T1>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS CLASS B
+        CONSTRUCTOR public constructor B<T2, T3>()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='B'
+        CLASS CLASS C
+          CONSTRUCTOR public constructor C<T4>()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      CLASS CLASS D
+        CONSTRUCTOR public constructor D()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='D'
+    FUN public fun foo(): A<kotlin.Int>.B<kotlin.Double, kotlin.Float>.C<kotlin.Long>
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        FUN local final fun kotlin.reflect.KClass<*>.inv(): kotlin.reflect.KTypeProjection
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='inv() on KClass<*>: KTypeProjection'
+              CALL 'invariant(KType): KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+                $this: GET_OBJECT 'companion object of KTypeProjection' type=kotlin.reflect.KTypeProjection.Companion
+                type: CALL 'createType(List<KTypeProjection> = ..., Boolean = ..., List<Annotation> = ...) on KClassifier: KType' type=kotlin.reflect.KType operator=null
+                  $receiver: $RECEIVER of 'inv() on KClass<*>: KTypeProjection' type=kotlin.reflect.KClass<*>
+        VAR val type: kotlin.reflect.KType
+          CALL 'createType(List<KTypeProjection> = ..., Boolean = ..., List<Annotation> = ...) on KClassifier: KType' type=kotlin.reflect.KType operator=null
+            $receiver: CLASS_REFERENCE 'C' type=kotlin.reflect.KClass<A<*>.B<*, *>.C<*>>
+            arguments: CALL 'listOf(vararg KTypeProjection): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+              elements: VARARG type=Array<out KTypeProjection> varargElementType=KTypeProjection
+                CALL 'inv() on KClass<*>: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+                  $receiver: CLASS_REFERENCE 'Long' type=kotlin.reflect.KClass<kotlin.Long>
+                CALL 'inv() on KClass<*>: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+                  $receiver: CLASS_REFERENCE 'Double' type=kotlin.reflect.KClass<kotlin.Double>
+                CALL 'inv() on KClass<*>: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+                  $receiver: CLASS_REFERENCE 'Float' type=kotlin.reflect.KClass<kotlin.Float>
+                CALL 'inv() on KClass<*>: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+                  $receiver: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='A<kotlin.Int>.B<kotlin.Double, kotlin.Float>.C<kotlin.Long>'
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'type: KType' type=kotlin.reflect.KType operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='A.D'
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL 'createType(List<KTypeProjection> = ..., Boolean = ..., List<Annotation> = ...) on KClassifier: KType' type=kotlin.reflect.KType operator=null
+              $receiver: CLASS_REFERENCE 'D' type=kotlin.reflect.KClass<A.D>
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

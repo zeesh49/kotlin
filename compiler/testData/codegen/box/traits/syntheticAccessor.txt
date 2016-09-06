@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /syntheticAccessor.kt
+    PROPERTY public var result: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='fail'
+    CLASS INTERFACE B
+      FUN private final fun test(): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+            <set-?>: CONST String type=kotlin.String value='OK'
+      CLASS CLASS Z
+        CONSTRUCTOR public constructor Z()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Z'
+        FUN public final fun ztest(b: B): kotlin.Unit
+          BLOCK_BODY
+            CALL 'test(): Unit' type=kotlin.Unit operator=null
+              $this: GET_VAR 'value-parameter b: B' type=B operator=null
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'ztest(B): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor Z()' type=B.Z operator=null
+          b: CALL 'constructor C()' type=C operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY

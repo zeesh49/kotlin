@@ -1,0 +1,12 @@
+MODULE <test-module>
+  FILE /topLevel.kt
+    PROPERTY public val kotlin.Int.foo: kotlin.String
+      PROPERTY_GETTER public fun kotlin.Int.<get-foo>(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-foo>() on Int: String'
+            CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-foo>() on Int: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CONST Int type=kotlin.Int value='1'

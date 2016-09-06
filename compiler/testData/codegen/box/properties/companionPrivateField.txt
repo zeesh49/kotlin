@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /companionPrivateField.kt
+    CLASS CLASS My
+      CONSTRUCTOR public constructor My()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='My'
+      CLASS OBJECT companion object of My
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of My'
+        PROPERTY private final val my: kotlin.String = "O"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='O'
+          PROPERTY_GETTER private final fun <get-my>(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<get-my>(): String'
+                CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: GET_VAR 'field: String' type=kotlin.String operator=null
+                  other: CONST String type=kotlin.String value='K'
+        FUN public final fun getValue(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='getValue(): String'
+              CALL '<get-my>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'companion object of My' type=My.Companion
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'getValue(): String' type=kotlin.String operator=null
+            $this: GET_OBJECT 'companion object of My' type=My.Companion

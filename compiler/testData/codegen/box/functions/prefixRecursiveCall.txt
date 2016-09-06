@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /prefixRecursiveCall.kt
+    FUN public operator fun kotlin.String.unaryPlus(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: $RECEIVER of 'unaryPlus() on String: String' type=kotlin.String
+            arg1: CONST String type=kotlin.String value=''
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='unaryPlus() on String: String'
+              CONST String type=kotlin.String value='done'
+        RETURN type=kotlin.Nothing from='unaryPlus() on String: String'
+          CALL 'unaryPlus() on String: String' type=kotlin.String operator=UPLUS
+            $receiver: CONST String type=kotlin.String value=''
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'unaryPlus() on String: String' type=kotlin.String operator=UPLUS
+                $receiver: CONST String type=kotlin.String value='11'
+              arg1: CONST String type=kotlin.String value='done'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='FAIL'

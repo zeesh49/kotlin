@@ -1,0 +1,32 @@
+MODULE <test-module>
+  FILE /kt1119.kt
+    CLASS ENUM_CLASS Direction
+      CONSTRUCTOR private constructor Direction()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='Direction'
+      ENUM_ENTRY enum entry NORTH
+        init: ENUM_CONSTRUCTOR_CALL 'constructor NORTH()' NORTH
+        class: CLASS ENUM_ENTRY NORTH
+          CONSTRUCTOR private constructor NORTH()
+            BLOCK_BODY
+              ENUM_CONSTRUCTOR_CALL 'constructor Direction()' super
+              INSTANCE_INITIALIZER_CALL classDescriptor='NORTH'
+          PROPERTY public final val someSpecialValue: kotlin.String = "OK"
+            EXPRESSION_BODY
+              CONST String type=kotlin.String value='OK'
+          FUN public open override fun f(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='f(): String'
+                CALL '<get-someSpecialValue>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: THIS of 'NORTH' type=Direction.NORTH
+      FUN public abstract fun f(): kotlin.String
+      FUN public final fun values(): kotlin.Array<Direction>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): Direction
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'f(): String' type=kotlin.String operator=null
+            $this: GET_ENUM_VALUE 'NORTH' type=Direction

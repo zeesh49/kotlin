@@ -1,0 +1,77 @@
+MODULE <test-module>
+  FILE /javaPrimitiveTypeReified.kt
+    FUN public inline fun <reified T : kotlin.Any> check(expected: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        VAR val clazz: java.lang.Class<T>
+          BLOCK type=java.lang.Class<T> operator=EXCLEXCL
+            VAR val tmp0_notnull: java.lang.Class<T>?
+              CALL '<get-javaPrimitiveType>() on KClass<T>: Class<T>?' type=java.lang.Class<T>? operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE '<reified T : Any>' type=kotlin.reflect.KClass<T>
+            WHEN type=java.lang.Class<T> operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Class<T>?' type=java.lang.Class<T>? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Class<T>?' type=java.lang.Class<T>? operator=null
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL '<get-canonicalName>() on Class<T>: String!' type=kotlin.String! operator=GET_PROPERTY
+              $receiver: GET_VAR 'clazz: Class<T>' type=java.lang.Class<T> operator=null
+            arg1: GET_VAR 'value-parameter expected: String' type=kotlin.String operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='clazz name: '
+                    CALL '<get-canonicalName>() on Class<T>: String!' type=kotlin.String! operator=GET_PROPERTY
+                      $receiver: GET_VAR 'clazz: Class<T>' type=java.lang.Class<T> operator=null
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+    FUN public inline fun <reified T : kotlin.Any> checkNull(): kotlin.Unit
+      BLOCK_BODY
+        VAR val clazz: java.lang.Class<T>?
+          CALL '<get-javaPrimitiveType>() on KClass<T>: Class<T>?' type=java.lang.Class<T>? operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE '<reified T : Any>' type=kotlin.reflect.KClass<T>
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'clazz: Class<T>?' type=java.lang.Class<T>? operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='clazz should be null: '
+                    CALL '<get-canonicalName>() on Class<T>: String!' type=kotlin.String! operator=GET_PROPERTY
+                      $receiver: BLOCK type=java.lang.Class<T> operator=EXCLEXCL
+                        VAR val tmp0_notnull: java.lang.Class<T>?
+                          GET_VAR 'clazz: Class<T>?' type=java.lang.Class<T>? operator=null
+                        WHEN type=java.lang.Class<T> operator=null
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: GET_VAR 'tmp0_notnull: Class<T>?' type=java.lang.Class<T>? operator=null
+                            arg1: CONST Null type=kotlin.Nothing? value='null'
+                          then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                          else: GET_VAR 'tmp0_notnull: Class<T>?' type=java.lang.Class<T>? operator=null
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'check(String): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='boolean'
+        CALL 'check(String): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='char'
+        CALL 'check(String): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='byte'
+        CALL 'check(String): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='short'
+        CALL 'check(String): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='int'
+        CALL 'check(String): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='float'
+        CALL 'check(String): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='long'
+        CALL 'check(String): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='double'
+        CALL 'checkNull(): Unit' type=kotlin.Unit operator=null
+        CALL 'checkNull(): Unit' type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

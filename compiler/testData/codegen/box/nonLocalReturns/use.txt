@@ -1,0 +1,468 @@
+MODULE <test-module>
+  FILE /use.kt
+    CLASS CLASS MyException
+      CONSTRUCTOR public constructor MyException(message: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Exception(String!)'
+            p0: GET_VAR 'value-parameter message: String' type=kotlin.String operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyException'
+    CLASS CLASS Holder
+      CONSTRUCTOR public constructor Holder(value: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'value: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Holder' type=Holder
+            value: GET_VAR 'value-parameter value: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Holder'
+      PROPERTY public final var value: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final operator fun plusAssign(s: kotlin.String?): kotlin.Unit
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            VAR val tmp0_this: Holder
+              THIS of 'Holder' type=Holder
+            CALL '<set-value>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+              $this: GET_VAR 'tmp0_this: Holder' type=Holder operator=null
+              <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: CALL '<get-value>(): String' type=kotlin.String operator=PLUSEQ
+                  $this: GET_VAR 'tmp0_this: Holder' type=Holder operator=null
+                other: GET_VAR 'value-parameter s: String?' type=kotlin.String? operator=null
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'value-parameter s: String?' type=kotlin.String? operator=null
+                arg1: CONST String type=kotlin.String value='closed'
+            then: BLOCK type=kotlin.Unit operator=null
+              BLOCK type=kotlin.Unit operator=PLUSEQ
+                VAR val tmp1_this: Holder
+                  THIS of 'Holder' type=Holder
+                CALL '<set-value>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+                  $this: GET_VAR 'tmp1_this: Holder' type=Holder operator=null
+                  <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                    $this: CALL '<get-value>(): String' type=kotlin.String operator=PLUSEQ
+                      $this: GET_VAR 'tmp1_this: Holder' type=Holder operator=null
+                    other: CONST String type=kotlin.String value='->'
+    CLASS CLASS TestLocal
+      CONSTRUCTOR public constructor TestLocal()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='TestLocal'
+      PROPERTY public final var status: Holder
+        EXPRESSION_BODY
+          CALL 'constructor Holder(String)' type=Holder operator=null
+            value: CONST String type=kotlin.String value=''
+      FUN private final fun underMutexFun(): kotlin.Unit
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            VAR val tmp0_this: TestLocal
+              THIS of 'TestLocal' type=TestLocal
+            CALL 'plusAssign(String?): Unit' type=kotlin.Unit operator=PLUSEQ
+              $this: CALL '<get-status>(): Holder' type=Holder operator=PLUSEQ
+                $this: GET_VAR 'tmp0_this: TestLocal' type=TestLocal operator=null
+              s: CONST String type=kotlin.String value='called'
+      FUN public final fun local(): Holder
+        BLOCK_BODY
+          CALL 'use((TestLocal) -> Unit) on TestLocal: Unit' type=kotlin.Unit operator=null
+            $receiver: THIS of 'TestLocal' type=TestLocal
+            block: BLOCK type=(TestLocal) -> kotlin.Unit operator=LAMBDA
+              FUN local final fun <anonymous>(it: TestLocal): kotlin.Unit
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(TestLocal): Unit'
+                    CALL 'underMutexFun(): Unit' type=kotlin.Unit operator=null
+                      $this: THIS of 'TestLocal' type=TestLocal
+              CALLABLE_REFERENCE '<anonymous>(TestLocal): Unit' type=(TestLocal) -> kotlin.Unit operator=LAMBDA
+          RETURN type=kotlin.Nothing from='local(): Holder'
+            CALL '<get-status>(): Holder' type=Holder operator=GET_PROPERTY
+              $this: THIS of 'TestLocal' type=TestLocal
+      FUN public final fun nonLocalSimple(): Holder
+        BLOCK_BODY
+          CALL 'use((TestLocal) -> Nothing) on TestLocal: Nothing' type=kotlin.Nothing operator=null
+            $receiver: THIS of 'TestLocal' type=TestLocal
+            block: BLOCK type=(TestLocal) -> kotlin.Nothing operator=LAMBDA
+              FUN local final fun <anonymous>(it: TestLocal): kotlin.Nothing
+                BLOCK_BODY
+                  CALL 'underMutexFun(): Unit' type=kotlin.Unit operator=null
+                    $this: THIS of 'TestLocal' type=TestLocal
+                  RETURN type=kotlin.Nothing from='nonLocalSimple(): Holder'
+                    CALL '<get-status>(): Holder' type=Holder operator=GET_PROPERTY
+                      $this: THIS of 'TestLocal' type=TestLocal
+              CALLABLE_REFERENCE '<anonymous>(TestLocal): Nothing' type=(TestLocal) -> kotlin.Nothing operator=LAMBDA
+          RETURN type=kotlin.Nothing from='nonLocalSimple(): Holder'
+            CALL 'constructor Holder(String)' type=Holder operator=null
+              value: CONST String type=kotlin.String value='fail'
+      FUN public final fun nonLocalWithException(): Holder
+        BLOCK_BODY
+          CALL 'use((TestLocal) -> Nothing) on TestLocal: Nothing' type=kotlin.Nothing operator=null
+            $receiver: THIS of 'TestLocal' type=TestLocal
+            block: BLOCK type=(TestLocal) -> kotlin.Nothing operator=LAMBDA
+              FUN local final fun <anonymous>(it: TestLocal): kotlin.Nothing
+                BLOCK_BODY
+                  TRY_CATCH type=kotlin.Nothing
+                    try: BLOCK type=kotlin.Nothing operator=null
+                      CALL 'underMutexFun(): Unit' type=kotlin.Unit operator=null
+                        $this: THIS of 'TestLocal' type=TestLocal
+                      THROW type=kotlin.Nothing
+                        CALL 'constructor MyException(String)' type=MyException operator=null
+                          message: CONST String type=kotlin.String value='exception'
+                    catch e: BLOCK type=kotlin.Nothing operator=null
+                      BLOCK type=kotlin.Unit operator=PLUSEQ
+                        VAR val tmp0_this: TestLocal
+                          THIS of 'TestLocal' type=TestLocal
+                        CALL 'plusAssign(String?): Unit' type=kotlin.Unit operator=PLUSEQ
+                          $this: CALL '<get-status>(): Holder' type=Holder operator=PLUSEQ
+                            $this: GET_VAR 'tmp0_this: TestLocal' type=TestLocal operator=null
+                          s: BLOCK type=kotlin.String operator=EXCLEXCL
+                            VAR val tmp2_notnull: kotlin.String?
+                              CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                                $this: GET_VAR 'e: MyException' type=MyException operator=null
+                            WHEN type=kotlin.String operator=null
+                              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                                arg0: GET_VAR 'tmp2_notnull: String?' type=kotlin.String? operator=null
+                                arg1: CONST Null type=kotlin.Nothing? value='null'
+                              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                              else: GET_VAR 'tmp2_notnull: String?' type=kotlin.String? operator=null
+                      RETURN type=kotlin.Nothing from='nonLocalWithException(): Holder'
+                        CALL '<get-status>(): Holder' type=Holder operator=GET_PROPERTY
+                          $this: THIS of 'TestLocal' type=TestLocal
+              CALLABLE_REFERENCE '<anonymous>(TestLocal): Nothing' type=(TestLocal) -> kotlin.Nothing operator=LAMBDA
+          RETURN type=kotlin.Nothing from='nonLocalWithException(): Holder'
+            CALL 'constructor Holder(String)' type=Holder operator=null
+              value: CONST String type=kotlin.String value='fail'
+      FUN public final fun nonLocalWithFinally(): Holder
+        BLOCK_BODY
+          CALL 'use((TestLocal) -> Nothing) on TestLocal: Nothing' type=kotlin.Nothing operator=null
+            $receiver: THIS of 'TestLocal' type=TestLocal
+            block: BLOCK type=(TestLocal) -> kotlin.Nothing operator=LAMBDA
+              FUN local final fun <anonymous>(it: TestLocal): kotlin.Nothing
+                BLOCK_BODY
+                  TRY_CATCH type=kotlin.Nothing
+                    try: BLOCK type=kotlin.Nothing operator=null
+                      CALL 'underMutexFun(): Unit' type=kotlin.Unit operator=null
+                        $this: THIS of 'TestLocal' type=TestLocal
+                      RETURN type=kotlin.Nothing from='nonLocalWithFinally(): Holder'
+                        CALL 'constructor Holder(String)' type=Holder operator=null
+                          value: CONST String type=kotlin.String value='fail'
+                    finally: BLOCK type=kotlin.Nothing operator=null
+                      BLOCK type=kotlin.Unit operator=PLUSEQ
+                        VAR val tmp0_this: TestLocal
+                          THIS of 'TestLocal' type=TestLocal
+                        CALL 'plusAssign(String?): Unit' type=kotlin.Unit operator=PLUSEQ
+                          $this: CALL '<get-status>(): Holder' type=Holder operator=PLUSEQ
+                            $this: GET_VAR 'tmp0_this: TestLocal' type=TestLocal operator=null
+                          s: CONST String type=kotlin.String value='finally'
+                      RETURN type=kotlin.Nothing from='nonLocalWithFinally(): Holder'
+                        CALL '<get-status>(): Holder' type=Holder operator=GET_PROPERTY
+                          $this: THIS of 'TestLocal' type=TestLocal
+              CALLABLE_REFERENCE '<anonymous>(TestLocal): Nothing' type=(TestLocal) -> kotlin.Nothing operator=LAMBDA
+          RETURN type=kotlin.Nothing from='nonLocalWithFinally(): Holder'
+            CALL 'constructor Holder(String)' type=Holder operator=null
+              value: CONST String type=kotlin.String value='fail'
+      FUN public final fun nonLocalWithExceptionAndFinally(): Holder
+        BLOCK_BODY
+          CALL 'use((TestLocal) -> Nothing) on TestLocal: Nothing' type=kotlin.Nothing operator=null
+            $receiver: THIS of 'TestLocal' type=TestLocal
+            block: BLOCK type=(TestLocal) -> kotlin.Nothing operator=LAMBDA
+              FUN local final fun <anonymous>(it: TestLocal): kotlin.Nothing
+                BLOCK_BODY
+                  TRY_CATCH type=kotlin.Nothing
+                    try: BLOCK type=kotlin.Nothing operator=null
+                      CALL 'underMutexFun(): Unit' type=kotlin.Unit operator=null
+                        $this: THIS of 'TestLocal' type=TestLocal
+                      THROW type=kotlin.Nothing
+                        CALL 'constructor MyException(String)' type=MyException operator=null
+                          message: CONST String type=kotlin.String value='exception'
+                    catch e: BLOCK type=kotlin.Nothing operator=null
+                      BLOCK type=kotlin.Unit operator=PLUSEQ
+                        VAR val tmp0_this: TestLocal
+                          THIS of 'TestLocal' type=TestLocal
+                        CALL 'plusAssign(String?): Unit' type=kotlin.Unit operator=PLUSEQ
+                          $this: CALL '<get-status>(): Holder' type=Holder operator=PLUSEQ
+                            $this: GET_VAR 'tmp0_this: TestLocal' type=TestLocal operator=null
+                          s: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                            $this: GET_VAR 'e: MyException' type=MyException operator=null
+                      RETURN type=kotlin.Nothing from='nonLocalWithExceptionAndFinally(): Holder'
+                        CALL '<get-status>(): Holder' type=Holder operator=GET_PROPERTY
+                          $this: THIS of 'TestLocal' type=TestLocal
+                    finally: BLOCK type=kotlin.Unit operator=null
+                      BLOCK type=kotlin.Unit operator=PLUSEQ
+                        VAR val tmp1_this: TestLocal
+                          THIS of 'TestLocal' type=TestLocal
+                        CALL 'plusAssign(String?): Unit' type=kotlin.Unit operator=PLUSEQ
+                          $this: CALL '<get-status>(): Holder' type=Holder operator=PLUSEQ
+                            $this: GET_VAR 'tmp1_this: TestLocal' type=TestLocal operator=null
+                          s: CONST String type=kotlin.String value='finally'
+              CALLABLE_REFERENCE '<anonymous>(TestLocal): Nothing' type=(TestLocal) -> kotlin.Nothing operator=LAMBDA
+          RETURN type=kotlin.Nothing from='nonLocalWithExceptionAndFinally(): Holder'
+            CALL 'constructor Holder(String)' type=Holder operator=null
+              value: CONST String type=kotlin.String value='fail'
+      FUN public final fun nonLocalWithExceptionAndFinallyWithReturn(): Holder
+        BLOCK_BODY
+          CALL 'use((TestLocal) -> Nothing) on TestLocal: Nothing' type=kotlin.Nothing operator=null
+            $receiver: THIS of 'TestLocal' type=TestLocal
+            block: BLOCK type=(TestLocal) -> kotlin.Nothing operator=LAMBDA
+              FUN local final fun <anonymous>(it: TestLocal): kotlin.Nothing
+                BLOCK_BODY
+                  TRY_CATCH type=kotlin.Nothing
+                    try: BLOCK type=kotlin.Nothing operator=null
+                      CALL 'underMutexFun(): Unit' type=kotlin.Unit operator=null
+                        $this: THIS of 'TestLocal' type=TestLocal
+                      THROW type=kotlin.Nothing
+                        CALL 'constructor MyException(String)' type=MyException operator=null
+                          message: CONST String type=kotlin.String value='exception'
+                    catch e: BLOCK type=kotlin.Nothing operator=null
+                      BLOCK type=kotlin.Unit operator=PLUSEQ
+                        VAR val tmp0_this: TestLocal
+                          THIS of 'TestLocal' type=TestLocal
+                        CALL 'plusAssign(String?): Unit' type=kotlin.Unit operator=PLUSEQ
+                          $this: CALL '<get-status>(): Holder' type=Holder operator=PLUSEQ
+                            $this: GET_VAR 'tmp0_this: TestLocal' type=TestLocal operator=null
+                          s: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                            $this: GET_VAR 'e: MyException' type=MyException operator=null
+                      RETURN type=kotlin.Nothing from='nonLocalWithExceptionAndFinallyWithReturn(): Holder'
+                        CALL 'constructor Holder(String)' type=Holder operator=null
+                          value: CONST String type=kotlin.String value='fail'
+                    finally: BLOCK type=kotlin.Nothing operator=null
+                      BLOCK type=kotlin.Unit operator=PLUSEQ
+                        VAR val tmp1_this: TestLocal
+                          THIS of 'TestLocal' type=TestLocal
+                        CALL 'plusAssign(String?): Unit' type=kotlin.Unit operator=PLUSEQ
+                          $this: CALL '<get-status>(): Holder' type=Holder operator=PLUSEQ
+                            $this: GET_VAR 'tmp1_this: TestLocal' type=TestLocal operator=null
+                          s: CONST String type=kotlin.String value='finally'
+                      RETURN type=kotlin.Nothing from='nonLocalWithExceptionAndFinallyWithReturn(): Holder'
+                        CALL '<get-status>(): Holder' type=Holder operator=GET_PROPERTY
+                          $this: THIS of 'TestLocal' type=TestLocal
+              CALLABLE_REFERENCE '<anonymous>(TestLocal): Nothing' type=(TestLocal) -> kotlin.Nothing operator=LAMBDA
+          RETURN type=kotlin.Nothing from='nonLocalWithExceptionAndFinallyWithReturn(): Holder'
+            CALL 'constructor Holder(String)' type=Holder operator=null
+              value: CONST String type=kotlin.String value='fail'
+      FUN public final fun nonLocalNestedWithException(): Holder
+        BLOCK_BODY
+          CALL 'use((TestLocal) -> Nothing) on TestLocal: Nothing' type=kotlin.Nothing operator=null
+            $receiver: THIS of 'TestLocal' type=TestLocal
+            block: BLOCK type=(TestLocal) -> kotlin.Nothing operator=LAMBDA
+              FUN local final fun <anonymous>(it: TestLocal): kotlin.Nothing
+                BLOCK_BODY
+                  TRY_CATCH type=kotlin.Nothing
+                    try: BLOCK type=kotlin.Nothing operator=null
+                      TRY_CATCH type=kotlin.Nothing
+                        try: BLOCK type=kotlin.Nothing operator=null
+                          CALL 'underMutexFun(): Unit' type=kotlin.Unit operator=null
+                            $this: THIS of 'TestLocal' type=TestLocal
+                          THROW type=kotlin.Nothing
+                            CALL 'constructor MyException(String)' type=MyException operator=null
+                              message: CONST String type=kotlin.String value='exception'
+                        catch e: BLOCK type=kotlin.Nothing operator=null
+                          BLOCK type=kotlin.Unit operator=PLUSEQ
+                            VAR val tmp0_this: TestLocal
+                              THIS of 'TestLocal' type=TestLocal
+                            CALL 'plusAssign(String?): Unit' type=kotlin.Unit operator=PLUSEQ
+                              $this: CALL '<get-status>(): Holder' type=Holder operator=PLUSEQ
+                                $this: GET_VAR 'tmp0_this: TestLocal' type=TestLocal operator=null
+                              s: CONST String type=kotlin.String value='exception'
+                          RETURN type=kotlin.Nothing from='nonLocalNestedWithException(): Holder'
+                            CALL 'constructor Holder(String)' type=Holder operator=null
+                              value: CONST String type=kotlin.String value='fail'
+                        finally: BLOCK type=kotlin.Nothing operator=null
+                          BLOCK type=kotlin.Unit operator=PLUSEQ
+                            VAR val tmp1_this: TestLocal
+                              THIS of 'TestLocal' type=TestLocal
+                            CALL 'plusAssign(String?): Unit' type=kotlin.Unit operator=PLUSEQ
+                              $this: CALL '<get-status>(): Holder' type=Holder operator=PLUSEQ
+                                $this: GET_VAR 'tmp1_this: TestLocal' type=TestLocal operator=null
+                              s: CONST String type=kotlin.String value='finally1'
+                          RETURN type=kotlin.Nothing from='nonLocalNestedWithException(): Holder'
+                            CALL '<get-status>(): Holder' type=Holder operator=GET_PROPERTY
+                              $this: THIS of 'TestLocal' type=TestLocal
+                    finally: BLOCK type=kotlin.Unit operator=null
+                      BLOCK type=kotlin.Unit operator=PLUSEQ
+                        VAR val tmp2_this: TestLocal
+                          THIS of 'TestLocal' type=TestLocal
+                        CALL 'plusAssign(String?): Unit' type=kotlin.Unit operator=PLUSEQ
+                          $this: CALL '<get-status>(): Holder' type=Holder operator=PLUSEQ
+                            $this: GET_VAR 'tmp2_this: TestLocal' type=TestLocal operator=null
+                          s: CONST String type=kotlin.String value='finally2'
+              CALLABLE_REFERENCE '<anonymous>(TestLocal): Nothing' type=(TestLocal) -> kotlin.Nothing operator=LAMBDA
+          RETURN type=kotlin.Nothing from='nonLocalNestedWithException(): Holder'
+            CALL 'constructor Holder(String)' type=Holder operator=null
+              value: CONST String type=kotlin.String value='fail'
+      FUN public final fun nonLocalNestedFinally(): Holder
+        BLOCK_BODY
+          CALL 'use((TestLocal) -> Nothing) on TestLocal: Nothing' type=kotlin.Nothing operator=null
+            $receiver: THIS of 'TestLocal' type=TestLocal
+            block: BLOCK type=(TestLocal) -> kotlin.Nothing operator=LAMBDA
+              FUN local final fun <anonymous>(it: TestLocal): kotlin.Nothing
+                BLOCK_BODY
+                  TRY_CATCH type=kotlin.Nothing
+                    try: BLOCK type=kotlin.Nothing operator=null
+                      TRY_CATCH type=kotlin.Nothing
+                        try: BLOCK type=kotlin.Nothing operator=null
+                          CALL 'underMutexFun(): Unit' type=kotlin.Unit operator=null
+                            $this: THIS of 'TestLocal' type=TestLocal
+                          RETURN type=kotlin.Nothing from='nonLocalNestedFinally(): Holder'
+                            CALL '<get-status>(): Holder' type=Holder operator=GET_PROPERTY
+                              $this: THIS of 'TestLocal' type=TestLocal
+                        finally: BLOCK type=Holder operator=null
+                          BLOCK type=kotlin.Unit operator=PLUSEQ
+                            VAR val tmp0_this: TestLocal
+                              THIS of 'TestLocal' type=TestLocal
+                            CALL 'plusAssign(String?): Unit' type=kotlin.Unit operator=PLUSEQ
+                              $this: CALL '<get-status>(): Holder' type=Holder operator=PLUSEQ
+                                $this: GET_VAR 'tmp0_this: TestLocal' type=TestLocal operator=null
+                              s: CONST String type=kotlin.String value='finally1'
+                          CALL '<get-status>(): Holder' type=Holder operator=GET_PROPERTY
+                            $this: THIS of 'TestLocal' type=TestLocal
+                    finally: BLOCK type=kotlin.Unit operator=null
+                      BLOCK type=kotlin.Unit operator=PLUSEQ
+                        VAR val tmp1_this: TestLocal
+                          THIS of 'TestLocal' type=TestLocal
+                        CALL 'plusAssign(String?): Unit' type=kotlin.Unit operator=PLUSEQ
+                          $this: CALL '<get-status>(): Holder' type=Holder operator=PLUSEQ
+                            $this: GET_VAR 'tmp1_this: TestLocal' type=TestLocal operator=null
+                          s: CONST String type=kotlin.String value='finally2'
+              CALLABLE_REFERENCE '<anonymous>(TestLocal): Nothing' type=(TestLocal) -> kotlin.Nothing operator=LAMBDA
+          RETURN type=kotlin.Nothing from='nonLocalNestedFinally(): Holder'
+            CALL 'constructor Holder(String)' type=Holder operator=null
+              value: CONST String type=kotlin.String value='fail'
+      FUN public open override fun close(): kotlin.Unit
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            VAR val tmp0_this: TestLocal
+              THIS of 'TestLocal' type=TestLocal
+            CALL 'plusAssign(String?): Unit' type=kotlin.Unit operator=PLUSEQ
+              $this: CALL '<get-status>(): Holder' type=Holder operator=PLUSEQ
+                $this: GET_VAR 'tmp0_this: TestLocal' type=TestLocal operator=null
+              s: CONST String type=kotlin.String value='closed'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var callable: TestLocal
+          CALL 'constructor TestLocal()' type=TestLocal operator=null
+        VAR var result: Holder
+          CALL 'local(): Holder' type=Holder operator=null
+            $this: GET_VAR 'callable: TestLocal' type=TestLocal operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'result: Holder' type=Holder operator=null
+              arg1: CONST String type=kotlin.String value='called->closed'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CONST String type=kotlin.String value='fail local: '
+              other: CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'result: Holder' type=Holder operator=null
+        SET_VAR 'callable: TestLocal' type=kotlin.Unit operator=EQ
+          CALL 'constructor TestLocal()' type=TestLocal operator=null
+        SET_VAR 'result: Holder' type=kotlin.Unit operator=EQ
+          CALL 'nonLocalSimple(): Holder' type=Holder operator=null
+            $this: GET_VAR 'callable: TestLocal' type=TestLocal operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'result: Holder' type=Holder operator=null
+              arg1: CONST String type=kotlin.String value='called->closed'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CONST String type=kotlin.String value='fail nonLocalSimple: '
+              other: CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'result: Holder' type=Holder operator=null
+        SET_VAR 'callable: TestLocal' type=kotlin.Unit operator=EQ
+          CALL 'constructor TestLocal()' type=TestLocal operator=null
+        SET_VAR 'result: Holder' type=kotlin.Unit operator=EQ
+          CALL 'nonLocalWithException(): Holder' type=Holder operator=null
+            $this: GET_VAR 'callable: TestLocal' type=TestLocal operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'result: Holder' type=Holder operator=null
+              arg1: CONST String type=kotlin.String value='called->exception->closed'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CONST String type=kotlin.String value='fail nonLocalWithException: '
+              other: CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'result: Holder' type=Holder operator=null
+        SET_VAR 'callable: TestLocal' type=kotlin.Unit operator=EQ
+          CALL 'constructor TestLocal()' type=TestLocal operator=null
+        SET_VAR 'result: Holder' type=kotlin.Unit operator=EQ
+          CALL 'nonLocalWithFinally(): Holder' type=Holder operator=null
+            $this: GET_VAR 'callable: TestLocal' type=TestLocal operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'result: Holder' type=Holder operator=null
+              arg1: CONST String type=kotlin.String value='called->finally->closed'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CONST String type=kotlin.String value='fail nonLocalWithFinally: '
+              other: CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'result: Holder' type=Holder operator=null
+        SET_VAR 'callable: TestLocal' type=kotlin.Unit operator=EQ
+          CALL 'constructor TestLocal()' type=TestLocal operator=null
+        SET_VAR 'result: Holder' type=kotlin.Unit operator=EQ
+          CALL 'nonLocalWithExceptionAndFinally(): Holder' type=Holder operator=null
+            $this: GET_VAR 'callable: TestLocal' type=TestLocal operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'result: Holder' type=Holder operator=null
+              arg1: CONST String type=kotlin.String value='called->exception->finally->closed'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CONST String type=kotlin.String value='fail nonLocalWithExceptionAndFinally: '
+              other: CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'result: Holder' type=Holder operator=null
+        SET_VAR 'callable: TestLocal' type=kotlin.Unit operator=EQ
+          CALL 'constructor TestLocal()' type=TestLocal operator=null
+        SET_VAR 'result: Holder' type=kotlin.Unit operator=EQ
+          CALL 'nonLocalWithExceptionAndFinallyWithReturn(): Holder' type=Holder operator=null
+            $this: GET_VAR 'callable: TestLocal' type=TestLocal operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'result: Holder' type=Holder operator=null
+              arg1: CONST String type=kotlin.String value='called->exception->finally->closed'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CONST String type=kotlin.String value='fail nonLocalWithExceptionAndFinallyWithReturn: '
+              other: CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'result: Holder' type=Holder operator=null
+        SET_VAR 'callable: TestLocal' type=kotlin.Unit operator=EQ
+          CALL 'constructor TestLocal()' type=TestLocal operator=null
+        SET_VAR 'result: Holder' type=kotlin.Unit operator=EQ
+          CALL 'nonLocalNestedWithException(): Holder' type=Holder operator=null
+            $this: GET_VAR 'callable: TestLocal' type=TestLocal operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'result: Holder' type=Holder operator=null
+              arg1: CONST String type=kotlin.String value='called->exception->finally1->finally2->closed'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CONST String type=kotlin.String value='fail nonLocalNestedWithException: '
+              other: CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'result: Holder' type=Holder operator=null
+        SET_VAR 'callable: TestLocal' type=kotlin.Unit operator=EQ
+          CALL 'constructor TestLocal()' type=TestLocal operator=null
+        SET_VAR 'result: Holder' type=kotlin.Unit operator=EQ
+          CALL 'nonLocalNestedFinally(): Holder' type=Holder operator=null
+            $this: GET_VAR 'callable: TestLocal' type=TestLocal operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'result: Holder' type=Holder operator=null
+              arg1: CONST String type=kotlin.String value='called->finally1->finally2->closed'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CONST String type=kotlin.String value='fail nonLocalNestedFinally: '
+              other: CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'result: Holder' type=Holder operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,113 @@
+MODULE <test-module>
+  FILE /functionNtoString.kt
+    FUN public fun check(expected: kotlin.String, obj: kotlin.Any?): kotlin.Unit
+      BLOCK_BODY
+        VAR val actual: kotlin.String
+          CALL 'toString() on Any?: String' type=kotlin.String operator=null
+            $receiver: GET_VAR 'value-parameter obj: Any?' type=kotlin.Any? operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'actual: String' type=kotlin.String operator=null
+              arg1: GET_VAR 'value-parameter expected: String' type=kotlin.String operator=null
+          then: THROW type=kotlin.Nothing
+            CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+              p0: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='Expected: '
+                GET_VAR 'value-parameter expected: String' type=kotlin.String operator=null
+                CONST String type=kotlin.String value=', actual: '
+                GET_VAR 'actual: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'check(String, Any?): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='() -> kotlin.Unit'
+          obj: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'check(String, Any?): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='() -> kotlin.Int'
+          obj: BLOCK type=() -> kotlin.Int operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Int
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Int'
+                  CONST Int type=kotlin.Int value='42'
+            CALLABLE_REFERENCE '<anonymous>(): Int' type=() -> kotlin.Int operator=LAMBDA
+        CALL 'check(String, Any?): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='(kotlin.String) -> kotlin.Long'
+          obj: BLOCK type=(kotlin.String) -> kotlin.Long operator=ANONYMOUS_FUNCTION
+            FUN local final fun <no name provided>(s: kotlin.String): kotlin.Long
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<no name provided>(String): Long'
+                  CALL 'toLong(): Long' type=kotlin.Long operator=null
+                    $this: CONST Int type=kotlin.Int value='42'
+            CALLABLE_REFERENCE '<no name provided>(String): Long' type=(kotlin.String) -> kotlin.Long operator=ANONYMOUS_FUNCTION
+        CALL 'check(String, Any?): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='(kotlin.Int, kotlin.Int) -> kotlin.Unit'
+          obj: BLOCK type=(kotlin.Int, kotlin.Int) -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(x: kotlin.Int, y: kotlin.Int): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(Int, Int): Unit'
+            CALLABLE_REFERENCE '<anonymous>(Int, Int): Unit' type=(kotlin.Int, kotlin.Int) -> kotlin.Unit operator=LAMBDA
+        CALL 'check(String, Any?): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Int.() -> kotlin.Unit'
+          obj: BLOCK type=kotlin.Int.() -> kotlin.Unit operator=ANONYMOUS_FUNCTION
+            FUN local final fun kotlin.Int.<no name provided>(): kotlin.Unit
+              BLOCK_BODY
+            CALLABLE_REFERENCE '<no name provided>() on Int: Unit' type=kotlin.Int.() -> kotlin.Unit operator=ANONYMOUS_FUNCTION
+        CALL 'check(String, Any?): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Unit.() -> kotlin.Int?'
+          obj: BLOCK type=kotlin.Unit.() -> kotlin.Int? operator=ANONYMOUS_FUNCTION
+            FUN local final fun kotlin.Unit.<no name provided>(): kotlin.Int?
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<no name provided>() on Unit: Int?'
+                  CONST Int type=kotlin.Int value='42'
+            CALLABLE_REFERENCE '<no name provided>() on Unit: Int?' type=kotlin.Unit.() -> kotlin.Int? operator=ANONYMOUS_FUNCTION
+        CALL 'check(String, Any?): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.String.(kotlin.String?) -> kotlin.Long'
+          obj: BLOCK type=kotlin.String.(kotlin.String?) -> kotlin.Long operator=ANONYMOUS_FUNCTION
+            FUN local final fun kotlin.String.<no name provided>(s: kotlin.String?): kotlin.Long
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<no name provided>(String?) on String: Long'
+                  CALL 'toLong(): Long' type=kotlin.Long operator=null
+                    $this: CONST Int type=kotlin.Int value='42'
+            CALLABLE_REFERENCE '<no name provided>(String?) on String: Long' type=kotlin.String.(kotlin.String?) -> kotlin.Long operator=ANONYMOUS_FUNCTION
+        CALL 'check(String, Any?): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.collections.List<kotlin.String>.(kotlin.collections.MutableSet<*>, kotlin.Nothing) -> kotlin.Unit'
+          obj: BLOCK type=kotlin.collections.List<kotlin.String>.(kotlin.collections.MutableSet<*>, kotlin.Nothing) -> kotlin.Unit operator=ANONYMOUS_FUNCTION
+            FUN local final fun kotlin.collections.List<kotlin.String>.<no name provided>(x: kotlin.collections.MutableSet<*>, y: kotlin.Nothing): kotlin.Unit
+              BLOCK_BODY
+            CALLABLE_REFERENCE '<no name provided>(MutableSet<*>, Nothing) on List<String>: Unit' type=kotlin.collections.List<kotlin.String>.(kotlin.collections.MutableSet<*>, kotlin.Nothing) -> kotlin.Unit operator=ANONYMOUS_FUNCTION
+        CALL 'check(String, Any?): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='(kotlin.IntArray, kotlin.ByteArray, kotlin.ShortArray, kotlin.CharArray, kotlin.LongArray, kotlin.BooleanArray, kotlin.FloatArray, kotlin.DoubleArray) -> kotlin.Array<kotlin.Int>'
+          obj: BLOCK type=(kotlin.IntArray, kotlin.ByteArray, kotlin.ShortArray, kotlin.CharArray, kotlin.LongArray, kotlin.BooleanArray, kotlin.FloatArray, kotlin.DoubleArray) -> kotlin.Array<kotlin.Int> operator=ANONYMOUS_FUNCTION
+            FUN local final fun <no name provided>(ia: kotlin.IntArray, ba: kotlin.ByteArray, sa: kotlin.ShortArray, ca: kotlin.CharArray, la: kotlin.LongArray, za: kotlin.BooleanArray, fa: kotlin.FloatArray, da: kotlin.DoubleArray): kotlin.Array<kotlin.Int>
+              BLOCK_BODY
+                BLOCK type=kotlin.Nothing operator=EXCLEXCL
+                  VAR val tmp0_notnull: kotlin.Nothing?
+                    CONST Null type=kotlin.Nothing? value='null'
+                  WHEN type=kotlin.Nothing operator=null
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                    else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+            CALLABLE_REFERENCE '<no name provided>(IntArray, ByteArray, ShortArray, CharArray, LongArray, BooleanArray, FloatArray, DoubleArray): Array<Int>' type=(kotlin.IntArray, kotlin.ByteArray, kotlin.ShortArray, kotlin.CharArray, kotlin.LongArray, kotlin.BooleanArray, kotlin.FloatArray, kotlin.DoubleArray) -> kotlin.Array<kotlin.Int> operator=ANONYMOUS_FUNCTION
+        CALL 'check(String, Any?): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='(kotlin.Array<kotlin.Array<kotlin.Array<kotlin.collections.List<kotlin.String>>>>) -> kotlin.Comparable<kotlin.String>'
+          obj: BLOCK type=(kotlin.Array<kotlin.Array<kotlin.Array<kotlin.collections.List<kotlin.String>>>>) -> kotlin.Comparable<kotlin.String> operator=ANONYMOUS_FUNCTION
+            FUN local final fun <no name provided>(a: kotlin.Array<kotlin.Array<kotlin.Array<kotlin.collections.List<kotlin.String>>>>): kotlin.Comparable<kotlin.String>
+              BLOCK_BODY
+                BLOCK type=kotlin.Nothing operator=EXCLEXCL
+                  VAR val tmp0_notnull: kotlin.Nothing?
+                    CONST Null type=kotlin.Nothing? value='null'
+                  WHEN type=kotlin.Nothing operator=null
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                    else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+            CALLABLE_REFERENCE '<no name provided>(Array<Array<Array<List<String>>>>): Comparable<String>' type=(kotlin.Array<kotlin.Array<kotlin.Array<kotlin.collections.List<kotlin.String>>>>) -> kotlin.Comparable<kotlin.String> operator=ANONYMOUS_FUNCTION
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

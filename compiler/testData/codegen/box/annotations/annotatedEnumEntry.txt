@@ -1,0 +1,120 @@
+MODULE <test-module>
+  FILE /annotatedEnumEntry.kt
+    CLASS ANNOTATION_CLASS First
+    CLASS ANNOTATION_CLASS Second
+      PROPERTY public final val value: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS ENUM_CLASS E
+      CONSTRUCTOR private constructor E()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='E'
+      ENUM_ENTRY @First enum entry E1
+        init: ENUM_CONSTRUCTOR_CALL 'constructor E1()' E1
+        class: CLASS ENUM_ENTRY E1
+          CONSTRUCTOR private constructor E1()
+            BLOCK_BODY
+              ENUM_CONSTRUCTOR_CALL 'constructor E()' super
+              INSTANCE_INITIALIZER_CALL classDescriptor='E1'
+          FUN public final fun foo(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='foo(): String'
+                CONST String type=kotlin.String value='something'
+      ENUM_ENTRY @Second enum entry E2
+        init: ENUM_CONSTRUCTOR_CALL 'constructor E()' E2
+      FUN public final fun values(): kotlin.Array<E>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): E
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val e: java.lang.Class<E>
+          CALL '<get-java>() on KClass<E>: Class<E>' type=java.lang.Class<E> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'E' type=kotlin.reflect.KClass<E>
+        VAR val e1: kotlin.Array<(out) kotlin.Annotation!>!
+          CALL 'getAnnotations(): Array<(out) Annotation!>!' type=kotlin.Array<(out) kotlin.Annotation!>! operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+              CALL 'getDeclaredField(String!): Field!' type=java.lang.reflect.Field! operator=null
+                $this: GET_VAR 'e: Class<E>' type=java.lang.Class<E> operator=null
+                p0: CALL 'toString(): String' type=kotlin.String operator=null
+                  $this: GET_ENUM_VALUE 'E1' type=E
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<kotlin.Annotation!>
+                  TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out kotlin.Annotation!>
+                    GET_VAR 'e1: Array<(out) Annotation!>!' type=kotlin.Array<(out) kotlin.Annotation!>! operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail E1 size: '
+              CALL 'toList() on Array<out Annotation!>: List<Annotation!>' type=kotlin.collections.List<kotlin.Annotation!> operator=null
+                $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out kotlin.Annotation!>
+                  GET_VAR 'e1: Array<(out) Annotation!>!' type=kotlin.Array<(out) kotlin.Annotation!>! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-java>() on KClass<out Annotation!>: Class<out Annotation!>' type=java.lang.Class<out kotlin.Annotation!> operator=GET_PROPERTY
+                $receiver: CALL '<get-annotationClass>() on Annotation!: KClass<out Annotation!>' type=kotlin.reflect.KClass<out kotlin.Annotation!> operator=GET_PROPERTY
+                  $receiver: CALL 'get(Int): Annotation!' type=kotlin.Annotation! operator=GET_ARRAY_ELEMENT
+                    $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<kotlin.Annotation!>
+                      TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out kotlin.Annotation!>
+                        GET_VAR 'e1: Array<(out) Annotation!>!' type=kotlin.Array<(out) kotlin.Annotation!>! operator=null
+                    index: CONST Int type=kotlin.Int value='0'
+              arg1: CALL '<get-java>() on KClass<First>: Class<First>' type=java.lang.Class<First> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'First' type=kotlin.reflect.KClass<First>
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail E1: '
+              CALL 'toList() on Array<out Annotation!>: List<Annotation!>' type=kotlin.collections.List<kotlin.Annotation!> operator=null
+                $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out kotlin.Annotation!>
+                  GET_VAR 'e1: Array<(out) Annotation!>!' type=kotlin.Array<(out) kotlin.Annotation!>! operator=null
+        VAR val e2: kotlin.Array<(out) kotlin.Annotation!>!
+          CALL 'getAnnotations(): Array<(out) Annotation!>!' type=kotlin.Array<(out) kotlin.Annotation!>! operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+              CALL 'getDeclaredField(String!): Field!' type=java.lang.reflect.Field! operator=null
+                $this: GET_VAR 'e: Class<E>' type=java.lang.Class<E> operator=null
+                p0: CALL 'toString(): String' type=kotlin.String operator=null
+                  $this: GET_ENUM_VALUE 'E2' type=E
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<kotlin.Annotation!>
+                  TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out kotlin.Annotation!>
+                    GET_VAR 'e2: Array<(out) Annotation!>!' type=kotlin.Array<(out) kotlin.Annotation!>! operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail E2 size: '
+              CALL 'toList() on Array<out Annotation!>: List<Annotation!>' type=kotlin.collections.List<kotlin.Annotation!> operator=null
+                $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out kotlin.Annotation!>
+                  GET_VAR 'e2: Array<(out) Annotation!>!' type=kotlin.Array<(out) kotlin.Annotation!>! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-java>() on KClass<out Annotation!>: Class<out Annotation!>' type=java.lang.Class<out kotlin.Annotation!> operator=GET_PROPERTY
+                $receiver: CALL '<get-annotationClass>() on Annotation!: KClass<out Annotation!>' type=kotlin.reflect.KClass<out kotlin.Annotation!> operator=GET_PROPERTY
+                  $receiver: CALL 'get(Int): Annotation!' type=kotlin.Annotation! operator=GET_ARRAY_ELEMENT
+                    $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<kotlin.Annotation!>
+                      TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out kotlin.Annotation!>
+                        GET_VAR 'e2: Array<(out) Annotation!>!' type=kotlin.Array<(out) kotlin.Annotation!>! operator=null
+                    index: CONST Int type=kotlin.Int value='0'
+              arg1: CALL '<get-java>() on KClass<Second>: Class<Second>' type=java.lang.Class<Second> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'Second' type=kotlin.reflect.KClass<Second>
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail E2: '
+              CALL 'toList() on Array<out Annotation!>: List<Annotation!>' type=kotlin.collections.List<kotlin.Annotation!> operator=null
+                $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out kotlin.Annotation!>
+                  GET_VAR 'e2: Array<(out) Annotation!>!' type=kotlin.Array<(out) kotlin.Annotation!>! operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: TYPE_OP operator=CAST typeOperand=Second
+              CALL 'get(Int): Annotation!' type=kotlin.Annotation! operator=GET_ARRAY_ELEMENT
+                $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<kotlin.Annotation!>
+                  TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out kotlin.Annotation!>
+                    GET_VAR 'e2: Array<(out) Annotation!>!' type=kotlin.Array<(out) kotlin.Annotation!>! operator=null
+                index: CONST Int type=kotlin.Int value='0'

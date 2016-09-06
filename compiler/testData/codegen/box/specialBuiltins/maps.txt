@@ -1,0 +1,73 @@
+MODULE <test-module>
+  FILE /maps.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-size>(): Int'
+              CONST Int type=kotlin.Int value='56'
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun containsKey(key: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun containsValue(value: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun get(key: kotlin.String): kotlin.String?
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      PROPERTY public open override val keys: kotlin.collections.Set<kotlin.String>
+        PROPERTY_GETTER public open override fun <get-keys>(): kotlin.collections.Set<kotlin.String>
+          BLOCK_BODY
+            THROW type=kotlin.Nothing
+              CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      PROPERTY public open override val values: kotlin.collections.Collection<kotlin.String>
+        PROPERTY_GETTER public open override fun <get-values>(): kotlin.collections.Collection<kotlin.String>
+          BLOCK_BODY
+            THROW type=kotlin.Nothing
+              CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      PROPERTY public open override val entries: kotlin.collections.Set<kotlin.collections.Map.Entry<kotlin.String, kotlin.String>>
+        PROPERTY_GETTER public open override fun <get-entries>(): kotlin.collections.Set<kotlin.collections.Map.Entry<kotlin.String, kotlin.String>>
+          BLOCK_BODY
+            THROW type=kotlin.Nothing
+              CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          CALL 'constructor A()' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='56'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+        VAR val x: kotlin.collections.Map<kotlin.String, kotlin.String>
+          GET_VAR 'a: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'x: Map<String, String>' type=kotlin.collections.Map<kotlin.String, kotlin.String> operator=null
+              arg1: CONST Int type=kotlin.Int value='56'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 2: '
+              CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'x: Map<String, String>' type=kotlin.collections.Map<kotlin.String, kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

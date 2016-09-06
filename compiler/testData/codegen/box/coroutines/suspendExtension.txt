@@ -1,0 +1,84 @@
+MODULE <test-module>
+  FILE /suspendExtension.kt
+    CLASS CLASS Controller
+      CONSTRUCTOR public constructor Controller()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Controller'
+      FUN public final suspend fun kotlin.String.suspendHere(x: kotlin.coroutines.Continuation<kotlin.String>): kotlin.Unit
+        BLOCK_BODY
+          CALL 'resume(String): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR 'value-parameter x: Continuation<String>' type=kotlin.coroutines.Continuation<kotlin.String> operator=null
+            data: $RECEIVER of 'suspendHere(Continuation<String>) on String: Unit' type=kotlin.String
+      FUN public final inline suspend fun kotlin.String.inlineSuspendHere(x: kotlin.coroutines.Continuation<kotlin.String>): kotlin.Unit
+        BLOCK_BODY
+          CALL 'suspendHere(Continuation<String>) on String: Unit' type=kotlin.Unit operator=null
+            $this: THIS of 'Controller' type=Controller
+            $receiver: $RECEIVER of 'inlineSuspendHere(Continuation<String>) on String: Unit' type=kotlin.String
+            x: GET_VAR 'value-parameter x: Continuation<String>' type=kotlin.coroutines.Continuation<kotlin.String> operator=null
+    FUN public suspend fun Controller.suspendExtension(v: kotlin.String, x: kotlin.coroutines.Continuation<kotlin.String>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'suspendHere(Continuation<String>) on String: Unit' type=kotlin.Unit operator=null
+          $this: $RECEIVER of 'suspendExtension(String, Continuation<String>) on Controller: Unit' type=Controller
+          $receiver: GET_VAR 'value-parameter v: String' type=kotlin.String operator=null
+          x: GET_VAR 'value-parameter x: Continuation<String>' type=kotlin.coroutines.Continuation<kotlin.String> operator=null
+    FUN public inline suspend fun Controller.inlineSuspendExtension(v: kotlin.String, x: kotlin.coroutines.Continuation<kotlin.String>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'inlineSuspendHere(Continuation<String>) on String: Unit' type=kotlin.Unit operator=null
+          $this: $RECEIVER of 'inlineSuspendExtension(String, Continuation<String>) on Controller: Unit' type=Controller
+          $receiver: GET_VAR 'value-parameter v: String' type=kotlin.String operator=null
+          x: GET_VAR 'value-parameter x: Continuation<String>' type=kotlin.coroutines.Continuation<kotlin.String> operator=null
+    FUN public fun builder(coroutine c: Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'resume(Unit): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'invoke(Controller): Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=INVOKE
+            $this: GET_VAR 'value-parameter coroutine c: Controller.() -> Continuation<Unit>' type=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+            p1: CALL 'constructor Controller()' type=Controller operator=null
+          data: GET_OBJECT 'Unit' type=kotlin.Unit
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.String
+          CONST String type=kotlin.String value=''
+        CALL 'builder(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+            BLOCK type=Controller.() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun Controller.<anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  WHEN type=kotlin.Unit operator=IF
+                    if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                      arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: CALL 'suspendHere() on String: String' type=kotlin.String operator=null
+                          $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                          $receiver: CONST String type=kotlin.String value='56'
+                        arg1: CONST String type=kotlin.String value='56'
+                    then: THROW type=kotlin.Nothing
+                      CALL 'constructor RuntimeException(String!)' type=java.lang.RuntimeException operator=null
+                        p0: CONST String type=kotlin.String value='fail 1'
+                  WHEN type=kotlin.Unit operator=IF
+                    if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                      arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: CALL 'inlineSuspendHere() on String: String' type=kotlin.String operator=null
+                          $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                          $receiver: CONST String type=kotlin.String value='28'
+                        arg1: CONST String type=kotlin.String value='28'
+                    then: THROW type=kotlin.Nothing
+                      CALL 'constructor RuntimeException(String!)' type=java.lang.RuntimeException operator=null
+                        p0: CONST String type=kotlin.String value='fail 2'
+                  WHEN type=kotlin.Unit operator=IF
+                    if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                      arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: CALL 'suspendExtension(String) on Controller: String' type=kotlin.String operator=null
+                          $receiver: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                          v: CONST String type=kotlin.String value='123'
+                        arg1: CONST String type=kotlin.String value='123'
+                    then: THROW type=kotlin.Nothing
+                      CALL 'constructor RuntimeException(String!)' type=java.lang.RuntimeException operator=null
+                        p0: CONST String type=kotlin.String value='fail 3'
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Controller: Unit'
+                    SET_VAR 'result: String' type=kotlin.Unit operator=EQ
+                      CALL 'inlineSuspendExtension(String) on Controller: String' type=kotlin.String operator=null
+                        $receiver: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                        v: CONST String type=kotlin.String value='OK'
+              CALLABLE_REFERENCE '<anonymous>() on Controller: Unit' type=Controller.() -> kotlin.Unit operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          GET_VAR 'result: String' type=kotlin.String operator=null

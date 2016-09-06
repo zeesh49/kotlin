@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /smartCastThis.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun bar(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='bar(): String'
+            WHEN type=kotlin.String operator=IF
+              if: TYPE_OP operator=INSTANCEOF typeOperand=h.B
+                THIS of 'A' type=h.A
+              then: CALL 'foo(): String' type=kotlin.String operator=null
+                $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=h.B
+                  THIS of 'A' type=h.A
+              else: CONST String type=kotlin.String value='fail'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      FUN public final fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'bar(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor B()' type=h.B operator=null

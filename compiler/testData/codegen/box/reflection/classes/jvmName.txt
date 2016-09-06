@@ -1,0 +1,169 @@
+MODULE <test-module>
+  FILE /jvmName.kt
+    CLASS CLASS Klass
+      CONSTRUCTOR public constructor Klass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Klass'
+      CLASS CLASS Nested
+        CONSTRUCTOR public constructor Nested()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Nested'
+      CLASS OBJECT companion object of Klass
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of Klass'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Klass'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Klass' type=kotlin.reflect.KClass<Klass>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='Klass'
+            CONST String type=kotlin.String value='$'
+            CONST String type=kotlin.String value='Nested'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Nested' type=kotlin.reflect.KClass<Klass.Nested>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='Klass'
+            CONST String type=kotlin.String value='$'
+            CONST String type=kotlin.String value='Companion'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'companion object of Klass' type=kotlin.reflect.KClass<Klass.Companion>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.lang.Object'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='int'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='[I'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'IntArray' type=kotlin.reflect.KClass<kotlin.IntArray>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.util.List'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'List' type=kotlin.reflect.KClass<kotlin.collections.List<*>>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.util.List'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'MutableList' type=kotlin.reflect.KClass<kotlin.collections.MutableList<*>>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.lang.String'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.lang.String'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<java.lang.String>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='[Ljava.lang.Object;'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Any>>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='[Ljava.lang.Integer;'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Int>>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='[[Ljava.lang.String;'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Array<kotlin.String>>>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.util.Date'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Date' type=kotlin.reflect.KClass<java.util.Date>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='kotlin.jvm.internal.Ref'
+            CONST String type=kotlin.String value='$'
+            CONST String type=kotlin.String value='ObjectRef'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'ObjectRef' type=kotlin.reflect.KClass<kotlin.jvm.internal.Ref.ObjectRef<*>>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.lang.Void'
+          actual: CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Void' type=kotlin.reflect.KClass<java.lang.Void>
+        CLASS CLASS Local
+          CONSTRUCTOR public constructor Local()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='Local'
+        VAR val l: kotlin.String
+          CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Local' type=kotlin.reflect.KClass<box.Local>
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: WHEN type=kotlin.Boolean operator=ANDAND
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: WHEN type=kotlin.Boolean operator=ANDAND
+                if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                    arg0: GET_VAR 'l: String' type=kotlin.String operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'startsWith(String, Boolean = ...) on String: Boolean' type=kotlin.Boolean operator=null
+                  $receiver: GET_VAR 'l: String' type=kotlin.String operator=null
+                  prefix: STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='JvmNameKt'
+                    CONST String type=kotlin.String value='$'
+                else: CONST Boolean type=kotlin.Boolean value='false'
+              then: CALL 'contains(CharSequence, Boolean = ...) on CharSequence: Boolean' type=kotlin.Boolean operator=IN
+                $receiver: GET_VAR 'l: String' type=kotlin.String operator=null
+                other: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='$'
+                  CONST String type=kotlin.String value='box'
+                  CONST String type=kotlin.String value='$'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CALL 'endsWith(String, Boolean = ...) on String: Boolean' type=kotlin.Boolean operator=null
+              $receiver: GET_VAR 'l: String' type=kotlin.String operator=null
+              suffix: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='Local'
+            else: CONST Boolean type=kotlin.Boolean value='false'
+        VAR val obj: box.<no name provided>
+          BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+            CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL
+        VAR val o: kotlin.String
+          CALL '<get-jvmName>() on KClass<*>: String' type=kotlin.String operator=GET_PROPERTY
+            $receiver: CALL '<get-kotlin>() on Class<<no name provided>>: KClass<<no name provided>>' type=kotlin.reflect.KClass<box.<no name provided>> operator=GET_PROPERTY
+              $receiver: CALL '<get-javaClass>() on <no name provided>: Class<<no name provided>>' type=java.lang.Class<box.<no name provided>> operator=GET_PROPERTY
+                $receiver: GET_VAR 'obj: <no name provided>' type=box.<no name provided> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: WHEN type=kotlin.Boolean operator=ANDAND
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: WHEN type=kotlin.Boolean operator=ANDAND
+                if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                    arg0: GET_VAR 'o: String' type=kotlin.String operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'startsWith(String, Boolean = ...) on String: Boolean' type=kotlin.Boolean operator=null
+                  $receiver: GET_VAR 'o: String' type=kotlin.String operator=null
+                  prefix: STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='JvmNameKt'
+                    CONST String type=kotlin.String value='$'
+                else: CONST Boolean type=kotlin.Boolean value='false'
+              then: CALL 'contains(CharSequence, Boolean = ...) on CharSequence: Boolean' type=kotlin.Boolean operator=IN
+                $receiver: GET_VAR 'o: String' type=kotlin.String operator=null
+                other: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='$'
+                  CONST String type=kotlin.String value='box'
+                  CONST String type=kotlin.String value='$'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CALL 'endsWith(String, Boolean = ...) on String: Boolean' type=kotlin.Boolean operator=null
+              $receiver: GET_VAR 'o: String' type=kotlin.String operator=null
+              suffix: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='1'
+            else: CONST Boolean type=kotlin.Boolean value='false'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

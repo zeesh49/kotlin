@@ -1,0 +1,21 @@
+MODULE <test-module>
+  FILE /Kotlin.kt
+    CLASS CLASS TestApp
+      CONSTRUCTOR public constructor TestApp()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='TestApp'
+      CLASS OBJECT companion object of TestApp
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of TestApp'
+        PROPERTY @kotlin.jvm.JvmStatic public final var value: kotlin.String
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='OK'
+          PROPERTY_SETTER private final fun <set-value>(<set-?>: kotlin.String): kotlin.Unit
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+            CALL 'test(): String!' type=kotlin.String! operator=null

@@ -1,0 +1,61 @@
+MODULE <test-module>
+  FILE /getGenericInterfaces.kt
+    CLASS CLASS SimpleClass
+      CONSTRUCTOR public constructor SimpleClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SimpleClass'
+    CLASS CLASS ClassWithNonGenericSuperInterface
+      CONSTRUCTOR public constructor ClassWithNonGenericSuperInterface()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ClassWithNonGenericSuperInterface'
+    CLASS CLASS ClassWithGenericSuperInterface
+      CONSTRUCTOR public constructor ClassWithGenericSuperInterface()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ClassWithGenericSuperInterface'
+      FUN public open override fun compare(a: kotlin.String, b: kotlin.String): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='compare(String, String): Int'
+            CONST Int type=kotlin.Int value='0'
+    FUN public fun check(klass: java.lang.Class<*>): kotlin.Unit
+      BLOCK_BODY
+        VAR val interfaces: kotlin.collections.List<java.lang.Class<*>!>
+          CALL 'toList() on Array<out Class<*>!>: List<Class<*>!>' type=kotlin.collections.List<java.lang.Class<*>!> operator=null
+            $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.Class<*>!>
+              CALL 'getInterfaces(): Array<(out) Class<*>!>!' type=kotlin.Array<(out) java.lang.Class<*>!>! operator=null
+                $this: GET_VAR 'value-parameter klass: Class<*>' type=java.lang.Class<*> operator=null
+        VAR val genericInterfaces: kotlin.collections.List<java.lang.reflect.Type!>
+          CALL 'toList() on Array<out Type!>: List<Type!>' type=kotlin.collections.List<java.lang.reflect.Type!> operator=null
+            $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Type!>
+              CALL 'getGenericInterfaces(): Array<(out) Type!>!' type=kotlin.Array<(out) java.lang.reflect.Type!>! operator=null
+                $this: GET_VAR 'value-parameter klass: Class<*>' type=java.lang.Class<*> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'interfaces: List<Class<*>!>' type=kotlin.collections.List<java.lang.Class<*>!> operator=null
+              arg1: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'genericInterfaces: List<Type!>' type=kotlin.collections.List<java.lang.reflect.Type!> operator=null
+          then: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='interfaces='
+                  GET_VAR 'interfaces: List<Class<*>!>' type=kotlin.collections.List<java.lang.Class<*>!> operator=null
+                  CONST String type=kotlin.String value=', genericInterfaces='
+                  GET_VAR 'genericInterfaces: List<Type!>' type=kotlin.collections.List<java.lang.reflect.Type!> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'check(Class<*>): Unit' type=kotlin.Unit operator=null
+          klass: CALL '<get-java>() on KClass<SimpleClass>: Class<SimpleClass>' type=java.lang.Class<SimpleClass> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'SimpleClass' type=kotlin.reflect.KClass<SimpleClass>
+        CALL 'check(Class<*>): Unit' type=kotlin.Unit operator=null
+          klass: CALL '<get-java>() on KClass<ClassWithNonGenericSuperInterface>: Class<ClassWithNonGenericSuperInterface>' type=java.lang.Class<ClassWithNonGenericSuperInterface> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'ClassWithNonGenericSuperInterface' type=kotlin.reflect.KClass<ClassWithNonGenericSuperInterface>
+        CALL 'check(Class<*>): Unit' type=kotlin.Unit operator=null
+          klass: CALL '<get-java>() on KClass<ClassWithGenericSuperInterface>: Class<ClassWithGenericSuperInterface>' type=java.lang.Class<ClassWithGenericSuperInterface> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'ClassWithGenericSuperInterface' type=kotlin.reflect.KClass<ClassWithGenericSuperInterface>
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

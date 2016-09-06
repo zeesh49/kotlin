@@ -1,0 +1,13 @@
+MODULE <test-module>
+  FILE /asUnit.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: TYPE_OP operator=SAFE_CAST typeOperand=kotlin.Unit
+                  CONST Int type=kotlin.Int value='4'
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST String type=kotlin.String value='Fail'
+            else: CONST String type=kotlin.String value='OK'

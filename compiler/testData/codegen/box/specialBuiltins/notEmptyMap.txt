@@ -1,0 +1,147 @@
+MODULE <test-module>
+  FILE /notEmptyMap.kt
+    CLASS OBJECT NotEmptyMap
+      CONSTRUCTOR private constructor NotEmptyMap()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='NotEmptyMap'
+      FUN public open override fun containsKey(key: kotlin.Any): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsKey(Any): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+      FUN public open override fun containsValue(value: kotlin.Any): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsValue(Any): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+      FUN public open override fun get(key: kotlin.Any): kotlin.Any?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(Any): Any?'
+            CALL 'constructor Any()' type=kotlin.Any operator=null
+      FUN public open override fun remove(key: kotlin.Any): kotlin.Any?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='remove(Any): Any?'
+            CALL 'constructor Any()' type=kotlin.Any operator=null
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-size>(): Int'
+              CONST Int type=kotlin.Int value='0'
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='isEmpty(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+      FUN public open override fun put(key: kotlin.Any, value: kotlin.Any): kotlin.Any?
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun putAll(from: kotlin.collections.Map<out kotlin.Any, kotlin.Any>): kotlin.Unit
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun clear(): kotlin.Unit
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      PROPERTY public open override val entries: kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<kotlin.Any, kotlin.Any>>
+        PROPERTY_GETTER public open override fun <get-entries>(): kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<kotlin.Any, kotlin.Any>>
+          BLOCK_BODY
+            BLOCK type=kotlin.Nothing operator=EXCLEXCL
+              VAR val tmp0_notnull: kotlin.Nothing?
+                CONST Null type=kotlin.Nothing? value='null'
+              WHEN type=kotlin.Nothing operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+      PROPERTY public open override val keys: kotlin.collections.MutableSet<kotlin.Any>
+        PROPERTY_GETTER public open override fun <get-keys>(): kotlin.collections.MutableSet<kotlin.Any>
+          BLOCK_BODY
+            BLOCK type=kotlin.Nothing operator=EXCLEXCL
+              VAR val tmp0_notnull: kotlin.Nothing?
+                CONST Null type=kotlin.Nothing? value='null'
+              WHEN type=kotlin.Nothing operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+      PROPERTY public open override val values: kotlin.collections.MutableCollection<kotlin.Any>
+        PROPERTY_GETTER public open override fun <get-values>(): kotlin.collections.MutableCollection<kotlin.Any>
+          BLOCK_BODY
+            BLOCK type=kotlin.Nothing operator=EXCLEXCL
+              VAR val tmp0_notnull: kotlin.Nothing?
+                CONST Null type=kotlin.Nothing? value='null'
+              WHEN type=kotlin.Nothing operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val n: kotlin.collections.MutableMap<kotlin.Any?, kotlin.Any?>
+          TYPE_OP operator=CAST typeOperand=kotlin.collections.MutableMap<kotlin.Any?, kotlin.Any?>
+            GET_OBJECT 'NotEmptyMap' type=NotEmptyMap
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Any?): Any?' type=kotlin.Any? operator=null
+                $this: GET_VAR 'n: MutableMap<Any?, Any?>' type=kotlin.collections.MutableMap<kotlin.Any?, kotlin.Any?> operator=null
+                key: CONST Null type=kotlin.Nothing? value='null'
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'containsKey(Any?): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'n: MutableMap<Any?, Any?>' type=kotlin.collections.MutableMap<kotlin.Any?, kotlin.Any?> operator=null
+            key: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'containsValue(Any?): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'n: MutableMap<Any?, Any?>' type=kotlin.collections.MutableMap<kotlin.Any?, kotlin.Any?> operator=null
+            value: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'remove(Any?): Any?' type=kotlin.Any? operator=null
+                $this: GET_VAR 'n: MutableMap<Any?, Any?>' type=kotlin.collections.MutableMap<kotlin.Any?, kotlin.Any?> operator=null
+                key: CONST Null type=kotlin.Nothing? value='null'
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'get(Any?): Any?' type=kotlin.Any? operator=null
+              $this: GET_VAR 'n: MutableMap<Any?, Any?>' type=kotlin.collections.MutableMap<kotlin.Any?, kotlin.Any?> operator=null
+              key: CONST String type=kotlin.String value=''
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 5'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'containsKey(Any?): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR 'n: MutableMap<Any?, Any?>' type=kotlin.collections.MutableMap<kotlin.Any?, kotlin.Any?> operator=null
+              key: CONST String type=kotlin.String value=''
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 6'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'containsValue(Any?): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR 'n: MutableMap<Any?, Any?>' type=kotlin.collections.MutableMap<kotlin.Any?, kotlin.Any?> operator=null
+              value: CONST String type=kotlin.String value=''
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 7'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'remove(Any?): Any?' type=kotlin.Any? operator=null
+              $this: GET_VAR 'n: MutableMap<Any?, Any?>' type=kotlin.collections.MutableMap<kotlin.Any?, kotlin.Any?> operator=null
+              key: CONST String type=kotlin.String value=''
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 8'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

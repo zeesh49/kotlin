@@ -1,0 +1,12 @@
+MODULE <test-module>
+  FILE /kt10131.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'fold(String, (String, Char) -> String) on Iterable<Char>: String' type=kotlin.String operator=null
+            $receiver: CALL 'listOf(vararg Char): List<Char>' type=kotlin.collections.List<kotlin.Char> operator=null
+              elements: VARARG type=Array<out Char> varargElementType=Char
+                CONST Char type=kotlin.Char value='O'
+                CONST Char type=kotlin.Char value='K'
+            initial: CONST String type=kotlin.String value=''
+            operation: CALLABLE_REFERENCE 'plus(Any?): String' type=kotlin.reflect.KFunction2<kotlin.String, kotlin.Any?, kotlin.String> operator=null

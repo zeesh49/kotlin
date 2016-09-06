@@ -1,0 +1,107 @@
+MODULE <test-module>
+  FILE /kt9532.kt
+    CLASS OBJECT A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public const final val a: kotlin.String = "$"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='$'
+      PROPERTY public const final val b: kotlin.String = "1234$"
+        EXPRESSION_BODY
+          STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='1234'
+            CALL '<get-a>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+      PROPERTY public const final val c: kotlin.Int = 10000
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='10000'
+      PROPERTY public final val bNonConst: kotlin.String = "1234$"
+        EXPRESSION_BODY
+          STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='1234'
+            CALL '<get-a>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+      PROPERTY public final val bNullable: kotlin.String = "1234$"
+        EXPRESSION_BODY
+          STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='1234'
+            CALL '<get-a>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+    CLASS OBJECT B
+      CONSTRUCTOR private constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public const final val a: kotlin.String = "$"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='$'
+      PROPERTY public const final val b: kotlin.String = "1234$"
+        EXPRESSION_BODY
+          STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='1234'
+            CALL '<get-a>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'B' type=B
+      PROPERTY public const final val c: kotlin.Int = 10000
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='10000'
+      PROPERTY public final val bNonConst: kotlin.String = "1234$"
+        EXPRESSION_BODY
+          STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='1234'
+            CALL '<get-a>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'B' type=B
+      PROPERTY public final val bNullable: kotlin.String = "1234$"
+        EXPRESSION_BODY
+          STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='1234'
+            CALL '<get-a>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'B' type=B
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: CALL '<get-a>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_OBJECT 'A' type=A
+              arg1: CALL '<get-a>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_OBJECT 'B' type=B
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 1: A.a !== B.a'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_OBJECT 'A' type=A
+              arg1: CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_OBJECT 'B' type=B
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 2: A.b !== B.b'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: CALL '<get-c>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_OBJECT 'A' type=A
+              arg1: CALL '<get-c>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_OBJECT 'B' type=B
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 3: A.c !== B.c'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+            arg0: CALL '<get-bNonConst>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: GET_OBJECT 'A' type=A
+            arg1: CALL '<get-bNonConst>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: GET_OBJECT 'B' type=B
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 5: A.bNonConst == B.bNonConst'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+            arg0: CALL '<get-bNullable>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: GET_OBJECT 'A' type=A
+            arg1: CALL '<get-bNullable>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: GET_OBJECT 'B' type=B
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 6: A.bNullable == B.bNullable'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

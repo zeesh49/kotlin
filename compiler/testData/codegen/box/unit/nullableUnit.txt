@@ -1,0 +1,64 @@
+MODULE <test-module>
+  FILE /nullableUnit.kt
+    FUN public fun isNull(x: kotlin.Unit?): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='isNull(Unit?): Boolean'
+          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'value-parameter x: Unit?' type=kotlin.Unit? operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun <T : kotlin.Any> isNullGeneric(x: T?): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='isNullGeneric(T?): Boolean'
+          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'value-parameter x: T?' type=T? operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun deepIsNull0(x: kotlin.Unit?): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='deepIsNull0(Unit?): Boolean'
+          CALL 'isNull(Unit?): Boolean' type=kotlin.Boolean operator=null
+            x: GET_VAR 'value-parameter x: Unit?' type=kotlin.Unit? operator=null
+    FUN public fun deepIsNull(x: kotlin.Unit?): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='deepIsNull(Unit?): Boolean'
+          CALL 'deepIsNull0(Unit?): Boolean' type=kotlin.Boolean operator=null
+            x: GET_VAR 'value-parameter x: Unit?' type=kotlin.Unit? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'isNull(Unit?): Boolean' type=kotlin.Boolean operator=null
+              x: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 1'
+        VAR val x: kotlin.Unit? = null
+          CONST Null type=kotlin.Nothing? value='null'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'isNull(Unit?): Boolean' type=kotlin.Boolean operator=null
+              x: GET_VAR 'x: Unit?' type=kotlin.Unit? operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 2'
+        VAR val y: kotlin.Unit? = null
+          GET_VAR 'x: Unit?' type=kotlin.Unit? operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'isNullGeneric(Unit?): Boolean' type=kotlin.Boolean operator=null
+              x: GET_VAR 'y: Unit?' type=kotlin.Unit? operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'deepIsNull(Unit?): Boolean' type=kotlin.Boolean operator=null
+              x: BLOCK type=kotlin.Unit? operator=ELVIS
+                VAR val tmp0_elvis_lhs: kotlin.Unit?
+                  GET_VAR 'x: Unit?' type=kotlin.Unit? operator=null
+                WHEN type=kotlin.Unit? operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_elvis_lhs: Unit?' type=kotlin.Unit? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CONST Null type=kotlin.Nothing? value='null'
+                  else: GET_VAR 'tmp0_elvis_lhs: Unit?' type=kotlin.Unit? operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 4'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,83 @@
+MODULE <test-module>
+  FILE /kt8148_continue.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(value: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'value: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter value: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var value: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          CALL 'constructor A(String)' type=A operator=null
+            value: CONST String type=kotlin.String value='start'
+        TRY_CATCH type=kotlin.Any
+          try: BLOCK type=kotlin.String operator=null
+            CALL 'test(A): String' type=kotlin.String operator=null
+              a: GET_VAR 'a: A' type=A operator=null
+          catch e: BLOCK type=kotlin.Unit operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='start, try, finally1, finally2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: '
+              CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun test(a: A): kotlin.String
+      BLOCK_BODY
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: GET_VAR 'value-parameter a: A' type=A operator=null
+            arg1: CONST String type=kotlin.String value='start'
+          body: BLOCK type=kotlin.Nothing operator=null
+            TRY_CATCH type=kotlin.Nothing
+              try: BLOCK type=kotlin.Nothing operator=null
+                TRY_CATCH type=kotlin.Nothing
+                  try: BLOCK type=kotlin.Nothing operator=null
+                    BLOCK type=kotlin.Unit operator=PLUSEQ
+                      VAR val tmp0_this: A
+                        GET_VAR 'value-parameter a: A' type=A operator=null
+                      CALL '<set-value>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+                        $this: GET_VAR 'tmp0_this: A' type=A operator=null
+                        <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                          $this: CALL '<get-value>(): String' type=kotlin.String operator=PLUSEQ
+                            $this: GET_VAR 'tmp0_this: A' type=A operator=null
+                          other: CONST String type=kotlin.String value=', try'
+                    CONTINUE label=null loop.label=null depth=0
+                  finally: BLOCK type=kotlin.Unit operator=null
+                    BLOCK type=kotlin.Unit operator=PLUSEQ
+                      VAR val tmp1_this: A
+                        GET_VAR 'value-parameter a: A' type=A operator=null
+                      CALL '<set-value>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+                        $this: GET_VAR 'tmp1_this: A' type=A operator=null
+                        <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                          $this: CALL '<get-value>(): String' type=kotlin.String operator=PLUSEQ
+                            $this: GET_VAR 'tmp1_this: A' type=A operator=null
+                          other: CONST String type=kotlin.String value=', finally1'
+              finally: BLOCK type=kotlin.Nothing operator=null
+                BLOCK type=kotlin.Unit operator=PLUSEQ
+                  VAR val tmp2_this: A
+                    GET_VAR 'value-parameter a: A' type=A operator=null
+                  CALL '<set-value>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+                    $this: GET_VAR 'tmp2_this: A' type=A operator=null
+                    <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                      $this: CALL '<get-value>(): String' type=kotlin.String operator=PLUSEQ
+                        $this: GET_VAR 'tmp2_this: A' type=A operator=null
+                      other: CONST String type=kotlin.String value=', finally2'
+                THROW type=kotlin.Nothing
+                  CALL 'constructor RuntimeException(String!)' type=java.lang.RuntimeException operator=null
+                    p0: CONST String type=kotlin.String value='fail'
+        RETURN type=kotlin.Nothing from='test(A): String'
+          CONST String type=kotlin.String value='fail'

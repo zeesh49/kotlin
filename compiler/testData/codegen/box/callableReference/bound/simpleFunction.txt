@@ -1,0 +1,14 @@
+MODULE <test-module>
+  FILE /simpleFunction.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f: kotlin.reflect.KFunction1<kotlin.Int, kotlin.Char>
+          CALLABLE_REFERENCE 'get(Int): Char' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Char> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          STRING_CONCATENATION type=kotlin.String
+            CALL 'invoke(Int): Char' type=kotlin.Char operator=INVOKE
+              $this: GET_VAR 'f: KFunction1<Int, Char>' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Char> operator=VARIABLE_AS_FUNCTION
+              p1: CONST Int type=kotlin.Int value='1'
+            CALL 'invoke(Int): Char' type=kotlin.Char operator=INVOKE
+              $this: GET_VAR 'f: KFunction1<Int, Char>' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Char> operator=VARIABLE_AS_FUNCTION
+              p1: CONST Int type=kotlin.Int value='0'

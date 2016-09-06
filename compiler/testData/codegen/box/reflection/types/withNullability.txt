@@ -1,0 +1,53 @@
+MODULE <test-module>
+  FILE /K.kt
+    FUN public fun nonNull(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='nonNull(): String'
+          CONST String type=kotlin.String value=''
+    FUN public fun nullable(): kotlin.String?
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='nullable(): String?'
+          CONST String type=kotlin.String value=''
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val nonNull: kotlin.reflect.KType
+          CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'nonNull(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+        VAR val nullable: kotlin.reflect.KType
+          CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'nullable(): String?' type=kotlin.reflect.KFunction0<kotlin.String?> operator=null
+        VAR val platform: kotlin.reflect.KType
+          CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'platform(): String!' type=kotlin.reflect.KFunction1<J, kotlin.String!> operator=null
+        CALL 'assertEquals(KType, KType, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'nonNull: KType' type=kotlin.reflect.KType operator=null
+          actual: CALL 'withNullability(Boolean) on KType: KType' type=kotlin.reflect.KType operator=null
+            $receiver: GET_VAR 'nullable: KType' type=kotlin.reflect.KType operator=null
+            nullable: CONST Boolean type=kotlin.Boolean value='false'
+        CALL 'assertEquals(KType, KType, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'nullable: KType' type=kotlin.reflect.KType operator=null
+          actual: CALL 'withNullability(Boolean) on KType: KType' type=kotlin.reflect.KType operator=null
+            $receiver: GET_VAR 'nullable: KType' type=kotlin.reflect.KType operator=null
+            nullable: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'assertEquals(KType, KType, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'nonNull: KType' type=kotlin.reflect.KType operator=null
+          actual: CALL 'withNullability(Boolean) on KType: KType' type=kotlin.reflect.KType operator=null
+            $receiver: GET_VAR 'nonNull: KType' type=kotlin.reflect.KType operator=null
+            nullable: CONST Boolean type=kotlin.Boolean value='false'
+        CALL 'assertEquals(KType, KType, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'nullable: KType' type=kotlin.reflect.KType operator=null
+          actual: CALL 'withNullability(Boolean) on KType: KType' type=kotlin.reflect.KType operator=null
+            $receiver: GET_VAR 'nonNull: KType' type=kotlin.reflect.KType operator=null
+            nullable: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'assertEquals(KType, KType, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'nonNull: KType' type=kotlin.reflect.KType operator=null
+          actual: CALL 'withNullability(Boolean) on KType: KType' type=kotlin.reflect.KType operator=null
+            $receiver: GET_VAR 'platform: KType' type=kotlin.reflect.KType operator=null
+            nullable: CONST Boolean type=kotlin.Boolean value='false'
+        CALL 'assertEquals(KType, KType, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'nullable: KType' type=kotlin.reflect.KType operator=null
+          actual: CALL 'withNullability(Boolean) on KType: KType' type=kotlin.reflect.KType operator=null
+            $receiver: GET_VAR 'platform: KType' type=kotlin.reflect.KType operator=null
+            nullable: CONST Boolean type=kotlin.Boolean value='true'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,11 @@
+MODULE <test-module>
+  FILE /kt2592.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'constructor String()' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CALL 'constructor String()' type=kotlin.String operator=null
+              other: CONST String type=kotlin.String value='OK'
+            other: CALL 'constructor String()' type=kotlin.String operator=null

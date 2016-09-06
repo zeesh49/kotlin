@@ -1,0 +1,123 @@
+MODULE <test-module>
+  FILE /parametersEqualsHashCode.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun foo(s: kotlin.String, x: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+      FUN public final fun bar(x: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+      PROPERTY public final val baz: kotlin.Int = 42
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='42'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertNotEquals(KParameter, KParameter, String? = ...): Unit' type=kotlin.Unit operator=null
+          illegal: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+            $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'foo(String, Int): Unit' type=kotlin.reflect.KFunction3<A, kotlin.String, kotlin.Int, kotlin.Unit> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+          actual: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+            $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'bar(Int): Unit' type=kotlin.reflect.KFunction2<A, kotlin.Int, kotlin.Unit> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+        CALL 'assertNotEquals(KParameter, KParameter, String? = ...): Unit' type=kotlin.Unit operator=null
+          illegal: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+            $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'foo(String, Int): Unit' type=kotlin.reflect.KFunction3<A, kotlin.String, kotlin.Int, kotlin.Unit> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+          actual: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+            $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'baz: Int' type=kotlin.reflect.KProperty1<A, kotlin.Int> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+        CALL 'assertNotEquals(KParameter, KParameter, String? = ...): Unit' type=kotlin.Unit operator=null
+          illegal: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+            $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'foo(String, Int): Unit' type=kotlin.reflect.KFunction3<A, kotlin.String, kotlin.Int, kotlin.Unit> operator=null
+            index: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+            $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'bar(Int): Unit' type=kotlin.reflect.KFunction2<A, kotlin.Int, kotlin.Unit> operator=null
+            index: CONST Int type=kotlin.Int value='1'
+        CALL 'assertNotEquals(KParameter, KParameter, String? = ...): Unit' type=kotlin.Unit operator=null
+          illegal: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+            $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'foo(String, Int): Unit' type=kotlin.reflect.KFunction3<A, kotlin.String, kotlin.Int, kotlin.Unit> operator=null
+            index: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+            $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'foo(String, Int): Unit' type=kotlin.reflect.KFunction3<A, kotlin.String, kotlin.Int, kotlin.Unit> operator=null
+            index: CONST Int type=kotlin.Int value='2'
+        CALL 'assertNotEquals(KParameter, KParameter, String? = ...): Unit' type=kotlin.Unit operator=null
+          illegal: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+            $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'bar(Int): Unit' type=kotlin.reflect.KFunction2<A, kotlin.Int, kotlin.Unit> operator=null
+            index: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+            $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'foo(String, Int): Unit' type=kotlin.reflect.KFunction3<A, kotlin.String, kotlin.Int, kotlin.Unit> operator=null
+            index: CONST Int type=kotlin.Int value='2'
+        CALL 'assertEquals(KParameter, KParameter, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+            $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'foo(String, Int): Unit' type=kotlin.reflect.KFunction3<A, kotlin.String, kotlin.Int, kotlin.Unit> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+          actual: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+            $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'foo(String, Int): Unit' type=kotlin.reflect.KFunction3<A, kotlin.String, kotlin.Int, kotlin.Unit> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+              $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                $this: CALLABLE_REFERENCE 'foo(String, Int): Unit' type=kotlin.reflect.KFunction3<A, kotlin.String, kotlin.Int, kotlin.Unit> operator=null
+              index: CONST Int type=kotlin.Int value='0'
+          actual: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+              $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                $this: CALLABLE_REFERENCE 'foo(String, Int): Unit' type=kotlin.reflect.KFunction3<A, kotlin.String, kotlin.Int, kotlin.Unit> operator=null
+              index: CONST Int type=kotlin.Int value='0'
+        CALL 'assertEquals(KParameter, KParameter, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+            $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'foo(String, Int): Unit' type=kotlin.reflect.KFunction3<A, kotlin.String, kotlin.Int, kotlin.Unit> operator=null
+            index: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+            $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'foo(String, Int): Unit' type=kotlin.reflect.KFunction3<A, kotlin.String, kotlin.Int, kotlin.Unit> operator=null
+            index: CONST Int type=kotlin.Int value='1'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+              $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                $this: CALLABLE_REFERENCE 'foo(String, Int): Unit' type=kotlin.reflect.KFunction3<A, kotlin.String, kotlin.Int, kotlin.Unit> operator=null
+              index: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+              $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                $this: CALLABLE_REFERENCE 'foo(String, Int): Unit' type=kotlin.reflect.KFunction3<A, kotlin.String, kotlin.Int, kotlin.Unit> operator=null
+              index: CONST Int type=kotlin.Int value='1'
+        CALL 'assertEquals(KParameter, KParameter, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+            $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'bar(Int): Unit' type=kotlin.reflect.KFunction2<A, kotlin.Int, kotlin.Unit> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+          actual: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+            $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'bar(Int): Unit' type=kotlin.reflect.KFunction2<A, kotlin.Int, kotlin.Unit> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+              $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                $this: CALLABLE_REFERENCE 'bar(Int): Unit' type=kotlin.reflect.KFunction2<A, kotlin.Int, kotlin.Unit> operator=null
+              index: CONST Int type=kotlin.Int value='0'
+          actual: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+              $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                $this: CALLABLE_REFERENCE 'bar(Int): Unit' type=kotlin.reflect.KFunction2<A, kotlin.Int, kotlin.Unit> operator=null
+              index: CONST Int type=kotlin.Int value='0'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

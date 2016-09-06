@@ -1,0 +1,40 @@
+MODULE <test-module>
+  FILE /K.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(KClassifier?, KClassifier?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+          actual: CALL '<get-classifier>(): KClassifier?' type=kotlin.reflect.KClassifier? operator=GET_PROPERTY
+            $this: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'string(): String!' type=kotlin.reflect.KFunction0<kotlin.String!> operator=null
+        CALL 'assertEquals(KClassifier?, KClassifier?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CLASS_REFERENCE 'List' type=kotlin.reflect.KClass<kotlin.collections.List<*>>
+          actual: CALL '<get-classifier>(): KClassifier?' type=kotlin.reflect.KClassifier? operator=GET_PROPERTY
+            $this: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'list(): (Mutable)List<Any!>!' type=kotlin.reflect.KFunction0<kotlin.collections.(Mutable)List<kotlin.Any!>!> operator=null
+        CALL 'assertEquals(Class<out Any>, Class<out Any>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: BLOCK type=java.lang.Class<kotlin.Int> operator=EXCLEXCL
+            VAR val tmp0_notnull: java.lang.Class<kotlin.Int>?
+              CALL '<get-javaPrimitiveType>() on KClass<Int>: Class<Int>?' type=java.lang.Class<kotlin.Int>? operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+            WHEN type=java.lang.Class<kotlin.Int> operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Class<Int>?' type=java.lang.Class<kotlin.Int>? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Class<Int>?' type=java.lang.Class<kotlin.Int>? operator=null
+          actual: CALL '<get-java>() on KClass<*>: Class<out Any>' type=java.lang.Class<out kotlin.Any> operator=GET_PROPERTY
+            $receiver: TYPE_OP operator=CAST typeOperand=kotlin.reflect.KClass<*>
+              CALL '<get-classifier>(): KClassifier?' type=kotlin.reflect.KClassifier? operator=GET_PROPERTY
+                $this: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                  $this: CALLABLE_REFERENCE 'primitiveInt(): Int' type=kotlin.reflect.KFunction0<kotlin.Int> operator=null
+        CALL 'assertEquals(Class<out Any>, Class<out Any>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-javaObjectType>() on KClass<Int>: Class<Int>' type=java.lang.Class<kotlin.Int> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+          actual: CALL '<get-java>() on KClass<*>: Class<out Any>' type=java.lang.Class<out kotlin.Any> operator=GET_PROPERTY
+            $receiver: TYPE_OP operator=CAST typeOperand=kotlin.reflect.KClass<*>
+              CALL '<get-classifier>(): KClassifier?' type=kotlin.reflect.KClassifier? operator=GET_PROPERTY
+                $this: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                  $this: CALLABLE_REFERENCE 'wrapperInt(): Int!' type=kotlin.reflect.KFunction0<kotlin.Int!> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,53 @@
+MODULE <test-module>
+  FILE /approximateCapturedTypes.kt
+    CLASS CLASS SwOperator
+      CONSTRUCTOR public constructor SwOperator<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SwOperator'
+    CLASS INTERFACE Operator
+    CLASS CLASS Inv
+      CONSTRUCTOR public constructor Inv<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Inv'
+    CLASS CLASS Obs
+      CONSTRUCTOR public constructor Obs<Y>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Obs'
+      FUN public final inline fun <reified X> lift(lift: Operator<out X, in Y>): Inv<X>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='lift(Operator<out X, in Y>): Inv<X>'
+            BLOCK type=Obs.lift.<no name provided><X, Y> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Inv()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              CALL 'constructor <no name provided>()' type=Obs.lift.<no name provided><X, Y> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val o: Obs<kotlin.CharSequence>
+          CALL 'constructor Obs()' type=Obs<kotlin.CharSequence> operator=null
+        VAR val inv: Inv<out kotlin.collections.List<kotlin.Any?>>
+          CALL 'lift(Operator<out List<*>, in CharSequence>): Inv<out List<Any?>>' type=Inv<out kotlin.collections.List<kotlin.Any?>> operator=null
+            $this: GET_VAR 'o: Obs<CharSequence>' type=Obs<kotlin.CharSequence> operator=null
+            lift: CALL 'constructor SwOperator()' type=SwOperator<kotlin.CharSequence> operator=null
+        VAR val signature: kotlin.String
+          CALL 'toString(): String' type=kotlin.String operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Type
+              CALL '<get-genericSuperclass>() on Class<Inv<out List<Any?>>>: Type!' type=java.lang.reflect.Type! operator=GET_PROPERTY
+                $receiver: CALL '<get-javaClass>() on Inv<out List<Any?>>: Class<Inv<out List<Any?>>>' type=java.lang.Class<Inv<out kotlin.collections.List<kotlin.Any?>>> operator=GET_PROPERTY
+                  $receiver: GET_VAR 'inv: Inv<out List<Any?>>' type=Inv<out kotlin.collections.List<kotlin.Any?>> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'signature: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='Inv<java.util.List<?>>'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              GET_VAR 'signature: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

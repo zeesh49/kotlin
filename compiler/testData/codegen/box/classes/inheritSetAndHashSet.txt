@@ -1,0 +1,19 @@
+MODULE <test-module>
+  FILE /inheritSetAndHashSet.kt
+    CLASS INTERFACE A
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor HashSet()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val b: B
+          CALL 'constructor B()' type=B operator=null
+        CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'b: B' type=B operator=null
+          element: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'next(): String' type=kotlin.String operator=null
+            $this: CALL 'iterator(): MutableIterator<String>' type=kotlin.collections.MutableIterator<kotlin.String> operator=null
+              $this: GET_VAR 'b: B' type=B operator=null

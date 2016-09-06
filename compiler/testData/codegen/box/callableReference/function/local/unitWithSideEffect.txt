@@ -1,0 +1,37 @@
+MODULE <test-module>
+  FILE /unitWithSideEffect.kt
+    PROPERTY public var state: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='23'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        FUN local final fun incrementState(inc: kotlin.Int): kotlin.Unit
+          BLOCK_BODY
+            BLOCK type=kotlin.Unit operator=PLUSEQ
+              CALL '<set-state>(Int): Unit' type=kotlin.Unit operator=PLUSEQ
+                <set-?>: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                  $this: CALL '<get-state>(): Int' type=kotlin.Int operator=PLUSEQ
+                  other: GET_VAR 'value-parameter inc: Int' type=kotlin.Int operator=null
+        VAR val inc: kotlin.reflect.KFunction1<kotlin.Int, kotlin.Unit>
+          CALLABLE_REFERENCE 'incrementState(Int): Unit' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Unit> operator=null
+        CALL 'invoke(Int): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'inc: KFunction1<Int, Unit>' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+          p1: CONST Int type=kotlin.Int value='12'
+        CALL 'invoke(Int): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'inc: KFunction1<Int, Unit>' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+          p1: CONST Int type=kotlin.Int value='-5'
+        CALL 'invoke(Int): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'inc: KFunction1<Int, Unit>' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+          p1: CONST Int type=kotlin.Int value='27'
+        CALL 'invoke(Int): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'inc: KFunction1<Int, Unit>' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+          p1: CONST Int type=kotlin.Int value='-15'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-state>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              arg1: CONST Int type=kotlin.Int value='42'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              CALL '<get-state>(): Int' type=kotlin.Int operator=GET_PROPERTY

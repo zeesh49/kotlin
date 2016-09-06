@@ -1,0 +1,70 @@
+MODULE <test-module>
+  FILE /kt2399.kt
+    CLASS CLASS JsonObject
+      CONSTRUCTOR public constructor JsonObject()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='JsonObject'
+    CLASS CLASS JsonArray
+      CONSTRUCTOR public constructor JsonArray()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='JsonArray'
+    CLASS CLASS ProjectInfo
+      CONSTRUCTOR public constructor ProjectInfo()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ProjectInfo'
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            CONST String type=kotlin.String value='OK'
+    CLASS INTERFACE Parser
+      FUN public abstract fun parse(source: IN): OUT
+    CLASS INTERFACE MultiParser
+      FUN public abstract fun parse(source: IN): kotlin.collections.Collection<OUT>
+    CLASS INTERFACE JsonParser
+      FUN public open override fun parse(source: JsonArray): kotlin.collections.Collection<T>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='parse(JsonArray): Collection<T>'
+            CALL 'constructor ArrayList()' type=java.util.ArrayList<T> operator=null
+    CLASS CLASS ProjectInfoJsonParser
+      CONSTRUCTOR public constructor ProjectInfoJsonParser()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ProjectInfoJsonParser'
+      FUN public open override fun parse(source: JsonObject): ProjectInfo
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='parse(JsonObject): ProjectInfo'
+            CALL 'constructor ProjectInfo()' type=ProjectInfo operator=null
+    CLASS CLASS ProjectApiContext
+      CONSTRUCTOR public constructor ProjectApiContext()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ProjectApiContext'
+      PROPERTY public final val projectInfoJsonParser: ProjectInfoJsonParser
+        EXPRESSION_BODY
+          BLOCK type=ProjectApiContext.projectInfoJsonParser.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor ProjectInfoJsonParser()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+            CALL 'constructor <no name provided>()' type=ProjectApiContext.projectInfoJsonParser.<no name provided> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val context: ProjectApiContext
+          CALL 'constructor ProjectApiContext()' type=ProjectApiContext operator=null
+        VAR val array: kotlin.collections.Collection<ProjectInfo>
+          CALL 'parse(JsonArray): Collection<ProjectInfo>' type=kotlin.collections.Collection<ProjectInfo> operator=null
+            $this: CALL '<get-projectInfoJsonParser>(): ProjectInfoJsonParser' type=ProjectInfoJsonParser operator=GET_PROPERTY
+              $this: GET_VAR 'context: ProjectApiContext' type=ProjectApiContext operator=null
+            source: CALL 'constructor JsonArray()' type=JsonArray operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'array: Collection<ProjectInfo>' type=kotlin.collections.Collection<ProjectInfo> operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /property.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<T>(t: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 't: T' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A<T>
+            value: GET_VAR 'value-parameter t: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val t: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter t: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public open val foo: T
+        EXPRESSION_BODY
+          CALL '<get-t>(): T' type=T operator=GET_PROPERTY
+            $this: THIS of 'A' type=A<T>
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A(String)'
+            t: CONST String type=kotlin.String value='Fail'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    CLASS CLASS Z
+      CONSTRUCTOR public constructor Z()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor B()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Z'
+      PROPERTY public open override val foo: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A<kotlin.String>
+          CALL 'constructor Z()' type=Z operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-foo>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_VAR 'a: A<String>' type=A<kotlin.String> operator=null

@@ -1,0 +1,271 @@
+MODULE <test-module>
+  FILE /mutabilityMarkerInterfaces.kt
+    CLASS CLASS Itr
+      CONSTRUCTOR public constructor Itr()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Itr'
+    CLASS CLASS MItr
+      CONSTRUCTOR public constructor MItr()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MItr'
+    CLASS CLASS LItr
+      CONSTRUCTOR public constructor LItr()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='LItr'
+    CLASS CLASS MLItr
+      CONSTRUCTOR public constructor MLItr()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MLItr'
+    CLASS CLASS It
+      CONSTRUCTOR public constructor It()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='It'
+    CLASS CLASS MIt
+      CONSTRUCTOR public constructor MIt()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MIt'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+    CLASS CLASS MC
+      CONSTRUCTOR public constructor MC()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MC'
+    CLASS CLASS L
+      CONSTRUCTOR public constructor L()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='L'
+    CLASS CLASS ML
+      CONSTRUCTOR public constructor ML()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ML'
+    CLASS CLASS S
+      CONSTRUCTOR public constructor S()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='S'
+    CLASS CLASS MS
+      CONSTRUCTOR public constructor MS()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MS'
+    CLASS CLASS M
+      CONSTRUCTOR public constructor M()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='M'
+    CLASS CLASS MM
+      CONSTRUCTOR public constructor MM()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MM'
+    CLASS CLASS ME
+      CONSTRUCTOR public constructor ME()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ME'
+    CLASS CLASS MME
+      CONSTRUCTOR public constructor MME()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MME'
+    CLASS CLASS L2
+      CONSTRUCTOR public constructor L2()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor L()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='L2'
+    CLASS CLASS ML2
+      CONSTRUCTOR public constructor ML2()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor ML()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ML2'
+    CLASS CLASS Weird
+      CONSTRUCTOR public constructor Weird()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Weird'
+    FUN public fun expectInterfaces(jClass: java.lang.Class<*>, expectedInterfaceNames: kotlin.collections.Set<kotlin.String>): kotlin.Unit
+      BLOCK_BODY
+        VAR val actualInterfaceNames: java.util.LinkedHashSet<kotlin.String>
+          CALL 'mapTo(LinkedHashSet<String>, (Class<*>!) -> String!) on Array<out Class<*>!>: LinkedHashSet<String>' type=java.util.LinkedHashSet<kotlin.String> operator=null
+            $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.Class<*>!>
+              CALL 'getInterfaces(): Array<(out) Class<*>!>!' type=kotlin.Array<(out) java.lang.Class<*>!>! operator=null
+                $this: GET_VAR 'value-parameter jClass: Class<*>' type=java.lang.Class<*> operator=null
+            destination: CALL 'linkedSetOf(vararg String): LinkedHashSet<String>' type=java.util.LinkedHashSet<kotlin.String> operator=null
+            transform: BLOCK type=(java.lang.Class<*>!) -> kotlin.String! operator=LAMBDA
+              FUN local final fun <anonymous>(it: java.lang.Class<*>!): kotlin.String!
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Class<*>!): String!'
+                    CALL '<get-name>() on Class<*>: String!' type=kotlin.String! operator=GET_PROPERTY
+                      $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+                        GET_VAR 'value-parameter it: Class<*>!' type=java.lang.Class<*>! operator=null
+              CALLABLE_REFERENCE '<anonymous>(Class<*>!): String!' type=(java.lang.Class<*>!) -> kotlin.String! operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'actualInterfaceNames: LinkedHashSet<String>' type=java.util.LinkedHashSet<kotlin.String> operator=null
+            arg1: GET_VAR 'value-parameter expectedInterfaceNames: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CALL '<get-name>() on Class<*>: String!' type=kotlin.String! operator=GET_PROPERTY
+                      $receiver: GET_VAR 'value-parameter jClass: Class<*>' type=java.lang.Class<*> operator=null
+                    CONST String type=kotlin.String value=': interfaces: expected: '
+                    GET_VAR 'value-parameter expectedInterfaceNames: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+                    CONST String type=kotlin.String value='; actual: '
+                    GET_VAR 'actualInterfaceNames: LinkedHashSet<String>' type=java.util.LinkedHashSet<kotlin.String> operator=null
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'expectInterfaces(Class<*>, Set<String>): Unit' type=kotlin.Unit operator=null
+          jClass: CALL '<get-java>() on KClass<Itr>: Class<Itr>' type=java.lang.Class<Itr> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Itr' type=kotlin.reflect.KClass<Itr>
+          expectedInterfaceNames: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='java.util.Iterator'
+              CONST String type=kotlin.String value='kotlin.jvm.internal.markers.KMappedMarker'
+        CALL 'expectInterfaces(Class<*>, Set<String>): Unit' type=kotlin.Unit operator=null
+          jClass: CALL '<get-java>() on KClass<MItr>: Class<MItr>' type=java.lang.Class<MItr> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'MItr' type=kotlin.reflect.KClass<MItr>
+          expectedInterfaceNames: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='java.util.Iterator'
+              CONST String type=kotlin.String value='kotlin.jvm.internal.markers.KMutableIterator'
+        CALL 'expectInterfaces(Class<*>, Set<String>): Unit' type=kotlin.Unit operator=null
+          jClass: CALL '<get-java>() on KClass<LItr>: Class<LItr>' type=java.lang.Class<LItr> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'LItr' type=kotlin.reflect.KClass<LItr>
+          expectedInterfaceNames: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='java.util.ListIterator'
+              CONST String type=kotlin.String value='kotlin.jvm.internal.markers.KMappedMarker'
+        CALL 'expectInterfaces(Class<*>, Set<String>): Unit' type=kotlin.Unit operator=null
+          jClass: CALL '<get-java>() on KClass<MLItr>: Class<MLItr>' type=java.lang.Class<MLItr> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'MLItr' type=kotlin.reflect.KClass<MLItr>
+          expectedInterfaceNames: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='java.util.ListIterator'
+              CONST String type=kotlin.String value='kotlin.jvm.internal.markers.KMutableListIterator'
+        CALL 'expectInterfaces(Class<*>, Set<String>): Unit' type=kotlin.Unit operator=null
+          jClass: CALL '<get-java>() on KClass<It>: Class<It>' type=java.lang.Class<It> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'It' type=kotlin.reflect.KClass<It>
+          expectedInterfaceNames: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='java.lang.Iterable'
+              CONST String type=kotlin.String value='kotlin.jvm.internal.markers.KMappedMarker'
+        CALL 'expectInterfaces(Class<*>, Set<String>): Unit' type=kotlin.Unit operator=null
+          jClass: CALL '<get-java>() on KClass<MIt>: Class<MIt>' type=java.lang.Class<MIt> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'MIt' type=kotlin.reflect.KClass<MIt>
+          expectedInterfaceNames: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='java.lang.Iterable'
+              CONST String type=kotlin.String value='kotlin.jvm.internal.markers.KMutableIterable'
+        CALL 'expectInterfaces(Class<*>, Set<String>): Unit' type=kotlin.Unit operator=null
+          jClass: CALL '<get-java>() on KClass<C>: Class<C>' type=java.lang.Class<C> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'C' type=kotlin.reflect.KClass<C>
+          expectedInterfaceNames: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='java.util.Collection'
+              CONST String type=kotlin.String value='kotlin.jvm.internal.markers.KMappedMarker'
+        CALL 'expectInterfaces(Class<*>, Set<String>): Unit' type=kotlin.Unit operator=null
+          jClass: CALL '<get-java>() on KClass<MC>: Class<MC>' type=java.lang.Class<MC> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'MC' type=kotlin.reflect.KClass<MC>
+          expectedInterfaceNames: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='java.util.Collection'
+              CONST String type=kotlin.String value='kotlin.jvm.internal.markers.KMutableCollection'
+        CALL 'expectInterfaces(Class<*>, Set<String>): Unit' type=kotlin.Unit operator=null
+          jClass: CALL '<get-java>() on KClass<L>: Class<L>' type=java.lang.Class<L> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'L' type=kotlin.reflect.KClass<L>
+          expectedInterfaceNames: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='java.util.List'
+              CONST String type=kotlin.String value='kotlin.jvm.internal.markers.KMappedMarker'
+        CALL 'expectInterfaces(Class<*>, Set<String>): Unit' type=kotlin.Unit operator=null
+          jClass: CALL '<get-java>() on KClass<ML>: Class<ML>' type=java.lang.Class<ML> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'ML' type=kotlin.reflect.KClass<ML>
+          expectedInterfaceNames: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='java.util.List'
+              CONST String type=kotlin.String value='kotlin.jvm.internal.markers.KMutableList'
+        CALL 'expectInterfaces(Class<*>, Set<String>): Unit' type=kotlin.Unit operator=null
+          jClass: CALL '<get-java>() on KClass<S>: Class<S>' type=java.lang.Class<S> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'S' type=kotlin.reflect.KClass<S>
+          expectedInterfaceNames: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='java.util.Set'
+              CONST String type=kotlin.String value='kotlin.jvm.internal.markers.KMappedMarker'
+        CALL 'expectInterfaces(Class<*>, Set<String>): Unit' type=kotlin.Unit operator=null
+          jClass: CALL '<get-java>() on KClass<MS>: Class<MS>' type=java.lang.Class<MS> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'MS' type=kotlin.reflect.KClass<MS>
+          expectedInterfaceNames: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='java.util.Set'
+              CONST String type=kotlin.String value='kotlin.jvm.internal.markers.KMutableSet'
+        CALL 'expectInterfaces(Class<*>, Set<String>): Unit' type=kotlin.Unit operator=null
+          jClass: CALL '<get-java>() on KClass<M>: Class<M>' type=java.lang.Class<M> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'M' type=kotlin.reflect.KClass<M>
+          expectedInterfaceNames: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='java.util.Map'
+              CONST String type=kotlin.String value='kotlin.jvm.internal.markers.KMappedMarker'
+        CALL 'expectInterfaces(Class<*>, Set<String>): Unit' type=kotlin.Unit operator=null
+          jClass: CALL '<get-java>() on KClass<MM>: Class<MM>' type=java.lang.Class<MM> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'MM' type=kotlin.reflect.KClass<MM>
+          expectedInterfaceNames: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='java.util.Map'
+              CONST String type=kotlin.String value='kotlin.jvm.internal.markers.KMutableMap'
+        CALL 'expectInterfaces(Class<*>, Set<String>): Unit' type=kotlin.Unit operator=null
+          jClass: CALL '<get-java>() on KClass<ME>: Class<ME>' type=java.lang.Class<ME> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'ME' type=kotlin.reflect.KClass<ME>
+          expectedInterfaceNames: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='java.util.Map'
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='Entry'
+              CONST String type=kotlin.String value='kotlin.jvm.internal.markers.KMappedMarker'
+        CALL 'expectInterfaces(Class<*>, Set<String>): Unit' type=kotlin.Unit operator=null
+          jClass: CALL '<get-java>() on KClass<MME>: Class<MME>' type=java.lang.Class<MME> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'MME' type=kotlin.reflect.KClass<MME>
+          expectedInterfaceNames: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='java.util.Map'
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='Entry'
+              STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='kotlin.jvm.internal.markers.KMutableMap'
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='Entry'
+        CALL 'expectInterfaces(Class<*>, Set<String>): Unit' type=kotlin.Unit operator=null
+          jClass: CALL '<get-java>() on KClass<L2>: Class<L2>' type=java.lang.Class<L2> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'L2' type=kotlin.reflect.KClass<L2>
+          expectedInterfaceNames: CALL 'setOf(): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+        CALL 'expectInterfaces(Class<*>, Set<String>): Unit' type=kotlin.Unit operator=null
+          jClass: CALL '<get-java>() on KClass<ML2>: Class<ML2>' type=java.lang.Class<ML2> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'ML2' type=kotlin.reflect.KClass<ML2>
+          expectedInterfaceNames: CALL 'setOf(): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+        CALL 'expectInterfaces(Class<*>, Set<String>): Unit' type=kotlin.Unit operator=null
+          jClass: CALL '<get-java>() on KClass<Weird>: Class<Weird>' type=java.lang.Class<Weird> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Weird' type=kotlin.reflect.KClass<Weird>
+          expectedInterfaceNames: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='java.util.Iterator'
+              CONST String type=kotlin.String value='kotlin.jvm.internal.markers.KMappedMarker'
+              CONST String type=kotlin.String value='java.util.List'
+              CONST String type=kotlin.String value='kotlin.jvm.internal.markers.KMutableList'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

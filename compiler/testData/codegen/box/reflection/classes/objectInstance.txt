@@ -1,0 +1,99 @@
+MODULE <test-module>
+  FILE /objectInstance.kt
+    CLASS OBJECT Obj
+      CONSTRUCTOR private constructor Obj()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Obj'
+      FUN public final fun foo(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): Int'
+            CONST Int type=kotlin.Int value='1'
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS OBJECT companion object of A
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of A'
+        FUN public final fun foo(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo(): Int'
+              CONST Int type=kotlin.Int value='2'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      CLASS OBJECT companion object of BFactory
+        CONSTRUCTOR private constructor Factory()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of BFactory'
+        FUN public final fun foo(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo(): Int'
+              CONST Int type=kotlin.Int value='3'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'foo(): Int' type=kotlin.Int operator=null
+            $this: BLOCK type=Obj operator=EXCLEXCL
+              VAR val tmp0_notnull: Obj?
+                CALL '<get-objectInstance>(): Obj?' type=Obj? operator=GET_PROPERTY
+                  $this: CLASS_REFERENCE 'Obj' type=kotlin.reflect.KClass<Obj>
+              WHEN type=Obj operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: Obj?' type=Obj? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: Obj?' type=Obj? operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='2'
+          actual: CALL 'foo(): Int' type=kotlin.Int operator=null
+            $this: BLOCK type=A.Companion operator=EXCLEXCL
+              VAR val tmp1_notnull: A.Companion?
+                CALL '<get-objectInstance>(): A.Companion?' type=A.Companion? operator=GET_PROPERTY
+                  $this: CLASS_REFERENCE 'companion object of A' type=kotlin.reflect.KClass<A.Companion>
+              WHEN type=A.Companion operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp1_notnull: A.Companion?' type=A.Companion? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp1_notnull: A.Companion?' type=A.Companion? operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='3'
+          actual: CALL 'foo(): Int' type=kotlin.Int operator=null
+            $this: BLOCK type=B.Factory operator=EXCLEXCL
+              VAR val tmp2_notnull: B.Factory?
+                CALL '<get-objectInstance>(): B.Factory?' type=B.Factory? operator=GET_PROPERTY
+                  $this: CLASS_REFERENCE 'companion object of BFactory' type=kotlin.reflect.KClass<B.Factory>
+              WHEN type=B.Factory operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp2_notnull: B.Factory?' type=B.Factory? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp2_notnull: B.Factory?' type=B.Factory? operator=null
+        CALL 'assertEquals(C?, C?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Null type=kotlin.Nothing? value='null'
+          actual: CALL '<get-objectInstance>(): C?' type=C? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'C' type=kotlin.reflect.KClass<C>
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Null type=kotlin.Nothing? value='null'
+          actual: CALL '<get-objectInstance>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+        CALL 'assertEquals(Unit?, Unit?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_OBJECT 'Unit' type=kotlin.Unit
+          actual: CALL '<get-objectInstance>(): Unit?' type=kotlin.Unit? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'Unit' type=kotlin.reflect.KClass<kotlin.Unit>
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,37 @@
+MODULE <test-module>
+  FILE /test.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN internal open fun test(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test(): String'
+            CONST String type=kotlin.String value='Kotlin'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test(): String' type=kotlin.String operator=null
+                $this: CALL 'constructor A()' type=A operator=null
+              arg1: CONST String type=kotlin.String value='Kotlin'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              CALL 'test(): String' type=kotlin.String operator=null
+                $this: CALL 'constructor A()' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test(): String' type=kotlin.String operator=null
+                $this: CALL 'constructor JavaClass()' type=JavaClass operator=null
+              arg1: CONST String type=kotlin.String value='Java'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 2: '
+              CALL 'test(): String' type=kotlin.String operator=null
+                $this: CALL 'constructor JavaClass()' type=JavaClass operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

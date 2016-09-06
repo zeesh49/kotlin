@@ -1,0 +1,84 @@
+MODULE <test-module>
+  FILE /genericProperty.kt
+    CLASS CLASS Box
+      CONSTRUCTOR public constructor Box<T>(element: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'element: T' type=kotlin.Unit operator=null
+            receiver: THIS of 'Box' type=Box<T>
+            value: GET_VAR 'value-parameter element: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Box'
+      PROPERTY public final val element: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter element: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final operator fun component1(): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component1(): T'
+            CALL '<get-element>(): T' type=T operator=GET_PROPERTY
+              $this: THIS of 'Box' type=Box<T>
+      FUN public final fun copy(element: T = ...): Box<T>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='copy(T = ...): Box<T>'
+            CALL 'constructor Box(T)' type=Box<T> operator=null
+              element: GET_VAR 'value-parameter element: T = ...' type=T operator=null
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Box('
+              CONST String type=kotlin.String value='element='
+              CALL '<get-element>(): T' type=T operator=GET_PROPERTY
+                $this: THIS of 'Box' type=Box<T>
+              CONST String type=kotlin.String value=')'
+      FUN public open override fun hashCode(): kotlin.Int
+        BLOCK_BODY
+          VAR val tmp0_result: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          SET_VAR 'tmp0_result: Int' type=kotlin.Unit operator=EQ
+            CALL 'hashCode(): Int' type=kotlin.Int operator=null
+              $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Any
+                CALL '<get-element>(): T' type=T operator=GET_PROPERTY
+                  $this: THIS of 'Box' type=Box<T>
+          RETURN type=kotlin.Nothing from='hashCode(): Int'
+            GET_VAR 'tmp0_result: Int' type=kotlin.Int operator=null
+      FUN public open override fun equals(other: kotlin.Any?): kotlin.Boolean
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+              arg0: THIS of 'Box' type=Box<T>
+              arg1: GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='true'
+          WHEN type=kotlin.Unit operator=null
+            if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=Box<T>
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          VAR val tmp0_other_with_cast: Box<T>
+            TYPE_OP operator=CAST typeOperand=Box<T>
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-element>(): T' type=T operator=GET_PROPERTY
+                  $this: THIS of 'Box' type=Box<T>
+                arg1: CALL '<get-element>(): T' type=T operator=GET_PROPERTY
+                  $this: GET_VAR 'tmp0_other_with_cast: Box<T>' type=Box<T> operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val p: kotlin.reflect.KProperty1<Box<kotlin.String>, kotlin.String>
+          CALLABLE_REFERENCE 'element: String' type=kotlin.reflect.KProperty1<Box<kotlin.String>, kotlin.String> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='val Box<T>.element: T'
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'p: KProperty1<Box<String>, String>' type=kotlin.reflect.KProperty1<Box<kotlin.String>, kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'call(vararg Any?): String' type=kotlin.String operator=null
+            $this: GET_VAR 'p: KProperty1<Box<String>, String>' type=kotlin.reflect.KProperty1<Box<kotlin.String>, kotlin.String> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CALL 'constructor Box(String)' type=Box<kotlin.String> operator=null
+                element: CONST String type=kotlin.String value='OK'

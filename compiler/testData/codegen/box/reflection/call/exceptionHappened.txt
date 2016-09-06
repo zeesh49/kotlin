@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /exceptionHappened.kt
+    FUN public fun fail(message: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        THROW type=kotlin.Nothing
+          CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+            p0: GET_VAR 'value-parameter message: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            CALL 'call(vararg Any?): Unit' type=kotlin.Unit operator=null
+              $this: CALLABLE_REFERENCE 'fail(String): Unit' type=kotlin.reflect.KFunction1<kotlin.String, kotlin.Unit> operator=null
+              args: VARARG type=Array<out Any?> varargElementType=Any?
+                CONST String type=kotlin.String value='OK'
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                $receiver: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                  $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Throwable
+                    CALL 'getTargetException(): Throwable!' type=kotlin.Throwable! operator=null
+                      $this: GET_VAR 'e: InvocationTargetException' type=java.lang.reflect.InvocationTargetException operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='Fail: no exception was thrown'

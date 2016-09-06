@@ -1,0 +1,41 @@
+MODULE <test-module>
+  FILE /sealedWhenInitialization.kt
+    CLASS CLASS A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS OBJECT B
+        CONSTRUCTOR private constructor B()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      CLASS CLASS C
+        CONSTRUCTOR public constructor C()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='C'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          CALL 'constructor C()' type=A.C operator=null
+        VAR val b: kotlin.Boolean
+        BLOCK type=kotlin.Unit operator=WHEN
+          VAR val tmp0_subject: A
+            GET_VAR 'a: A' type=A operator=null
+          WHEN type=kotlin.Unit operator=WHEN
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_subject: A' type=A operator=null
+              arg1: GET_OBJECT 'B' type=A.B
+            then: SET_VAR 'b: Boolean' type=kotlin.Unit operator=EQ
+              CONST Boolean type=kotlin.Boolean value='true'
+            if: TYPE_OP operator=INSTANCEOF typeOperand=A.C
+              GET_VAR 'tmp0_subject: A' type=A operator=null
+            then: SET_VAR 'b: Boolean' type=kotlin.Unit operator=EQ
+              CONST Boolean type=kotlin.Boolean value='false'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+              $this: GET_VAR 'b: Boolean' type=kotlin.Boolean operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='FAIL'

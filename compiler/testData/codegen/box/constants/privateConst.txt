@@ -1,0 +1,15 @@
+MODULE <test-module>
+  FILE /privateConst.kt
+    PROPERTY private const val z: kotlin.String = "OK"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'invoke(): String' type=kotlin.String operator=null
+            $this: BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    CALL '<get-z>(): String' type=kotlin.String operator=GET_PROPERTY
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA

@@ -1,0 +1,23 @@
+MODULE <test-module>
+  FILE /kt3706.kt
+    FUN public fun f(): kotlin.Int
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='f(): Int'
+              CONST Int type=kotlin.Int value='0'
+          finally: BLOCK type=kotlin.Unit operator=null
+            TRY_CATCH type=kotlin.Unit
+              try: BLOCK type=kotlin.Unit operator=null
+              catch ignore: BLOCK type=kotlin.Unit operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'f(): Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

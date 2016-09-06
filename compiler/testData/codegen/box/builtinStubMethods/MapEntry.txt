@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /MapEntry.kt
+    CLASS CLASS MyMapEntry
+      CONSTRUCTOR public constructor MyMapEntry<K, V>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyMapEntry'
+      FUN public open override fun hashCode(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='hashCode(): Int'
+            CONST Int type=kotlin.Int value='0'
+      FUN public open override fun equals(other: kotlin.Any?): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+      PROPERTY public open override val key: K
+        PROPERTY_GETTER public open override fun <get-key>(): K
+          BLOCK_BODY
+            THROW type=kotlin.Nothing
+              CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      PROPERTY public open override val value: V
+        PROPERTY_GETTER public open override fun <get-value>(): V
+          BLOCK_BODY
+            THROW type=kotlin.Nothing
+              CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'setValue(Int!): Int!' type=kotlin.Int! operator=null
+              $this: TYPE_OP operator=CAST typeOperand=java.util.Map.Entry<kotlin.String, kotlin.Int>
+                CALL 'constructor MyMapEntry()' type=MyMapEntry<kotlin.String, kotlin.Int> operator=null
+              p0: CONST Int type=kotlin.Int value='1'
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError()' type=java.lang.AssertionError operator=null
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'

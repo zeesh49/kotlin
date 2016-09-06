@@ -1,0 +1,49 @@
+MODULE <test-module>
+  FILE /nonInlineableLambdaInReifiedFunction.kt
+    FUN public fun foo(block: () -> kotlin.String): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(() -> String): String'
+          CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+            $this: GET_VAR 'value-parameter block: () -> String' type=() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+    FUN public inline fun <reified T : kotlin.Any> bar1(x: T): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='bar1(T): String'
+          CALL 'foo(() -> String): String' type=kotlin.String operator=null
+            block: BLOCK type=() -> kotlin.String! operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String!
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String!'
+                    CALL 'getName(): String!' type=kotlin.String! operator=null
+                      $this: CALL '<get-java>() on KClass<T>: Class<T>' type=java.lang.Class<T> operator=GET_PROPERTY
+                        $receiver: CLASS_REFERENCE '<reified T : Any>' type=kotlin.reflect.KClass<T>
+              CALLABLE_REFERENCE '<anonymous>(): String!' type=() -> kotlin.String! operator=LAMBDA
+    FUN public inline fun <reified T : kotlin.Any> bar2(x: T, y: kotlin.String): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='bar2(T, String): String'
+          CALL 'foo(() -> String): String' type=kotlin.String operator=null
+            block: BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                      $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                        $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+                          CALL 'getName(): String!' type=kotlin.String! operator=null
+                            $this: CALL '<get-java>() on KClass<T>: Class<T>' type=java.lang.Class<T> operator=GET_PROPERTY
+                              $receiver: CLASS_REFERENCE '<reified T : Any>' type=kotlin.reflect.KClass<T>
+                        other: CONST String type=kotlin.String value='#'
+                      other: GET_VAR 'value-parameter y: String' type=kotlin.String operator=null
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.lang.Integer'
+          actual: CALL 'bar1(Int): String' type=kotlin.String operator=null
+            x: CONST Int type=kotlin.Int value='1'
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.lang.String#OK'
+          actual: CALL 'bar2(String, String): String' type=kotlin.String operator=null
+            x: CONST String type=kotlin.String value='abc'
+            y: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

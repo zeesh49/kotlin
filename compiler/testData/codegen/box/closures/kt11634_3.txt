@@ -1,0 +1,70 @@
+MODULE <test-module>
+  FILE /kt11634_3.kt
+    CLASS INTERFACE A
+      FUN public abstract fun foo(): kotlin.String
+    CLASS CLASS AImpl
+      CONSTRUCTOR public constructor AImpl(z: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'z: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'AImpl' type=AImpl
+            value: GET_VAR 'value-parameter z: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='AImpl'
+      PROPERTY public final val z: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter z: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public open override fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CALL '<get-z>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'AImpl' type=AImpl
+    CLASS CLASS AFabric
+      CONSTRUCTOR public constructor AFabric()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='AFabric'
+      FUN public open fun createA(z: kotlin.String): A
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='createA(String): A'
+            CALL 'constructor AImpl(String)' type=AImpl operator=null
+              z: GET_VAR 'value-parameter z: String' type=kotlin.String operator=null
+    CLASS CLASS AWrapperFabric
+      CONSTRUCTOR public constructor AWrapperFabric()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor AFabric()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='AWrapperFabric'
+      FUN public open override fun createA(z: kotlin.String): A
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='createA(String): A'
+            CALL 'constructor AImpl(String)' type=AImpl operator=null
+              z: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='fail: '
+                GET_VAR 'value-parameter z: String' type=kotlin.String operator=null
+      FUN public final fun createMyA(): A
+        BLOCK_BODY
+          VAR val z: kotlin.String = "OK"
+            CONST String type=kotlin.String value='OK'
+          RETURN type=kotlin.Nothing from='createMyA(): A'
+            BLOCK type=AWrapperFabric.createMyA.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                PROPERTY val `<no name provided>$A$delegate`: A
+                  EXPRESSION_BODY
+                    CALL 'createA(String): A' superQualifier=AFabric type=A operator=null
+                      $this: THIS of 'AWrapperFabric' type=AFabric
+                      z: GET_VAR 'z: String' type=kotlin.String operator=null
+                FUN public open override fun foo(): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='foo(): String'
+                      CALL 'foo(): String' type=kotlin.String operator=null
+                        $this: GET_VAR '`<no name provided>$A$delegate`: A' type=A operator=null
+              CALL 'constructor <no name provided>()' type=AWrapperFabric.createMyA.<no name provided> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(): String' type=kotlin.String operator=null
+            $this: CALL 'createMyA(): A' type=A operator=null
+              $this: CALL 'constructor AWrapperFabric()' type=AWrapperFabric operator=null

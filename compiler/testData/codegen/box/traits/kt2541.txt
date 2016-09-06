@@ -1,0 +1,19 @@
+MODULE <test-module>
+  FILE /kt2541.kt
+    CLASS INTERFACE A
+      FUN public open fun foo(t: T, u: U): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(T, U): String'
+            CONST String type=kotlin.String value='OK'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(Int, Int): String' type=kotlin.String operator=null
+            $this: CALL 'constructor B()' type=B<kotlin.Int> operator=null
+            t: CONST Int type=kotlin.Int value='1'
+            u: CONST Int type=kotlin.Int value='2'

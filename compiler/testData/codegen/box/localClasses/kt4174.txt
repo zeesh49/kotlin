@@ -1,0 +1,73 @@
+MODULE <test-module>
+  FILE /kt4174.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C(s: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 's: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'C' type=C
+            value: GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      PROPERTY public final val s: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun test(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test(): String'
+            CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'C' type=C
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B(x: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'x: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'B' type=B
+            value: GET_VAR 'value-parameter x: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public final var x: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter x: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun foo(): kotlin.String
+        BLOCK_BODY
+          VAR var s: kotlin.String
+            CONST String type=kotlin.String value='OK'
+          CLASS CLASS Z
+            CONSTRUCTOR public constructor Z()
+              BLOCK_BODY
+                DELEGATING_CONSTRUCTOR_CALL 'constructor C(String)'
+                  s: GET_VAR 's: String' type=kotlin.String operator=null
+                INSTANCE_INITIALIZER_CALL classDescriptor='Z'
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CALL 'test(): String' type=kotlin.String operator=null
+              $this: CALL 'constructor Z()' type=B.foo.Z operator=null
+      FUN public final fun foo2(): kotlin.String
+        BLOCK_BODY
+          CLASS CLASS Y
+            CONSTRUCTOR public constructor Y()
+              BLOCK_BODY
+                DELEGATING_CONSTRUCTOR_CALL 'constructor C(String)'
+                  s: CALL '<get-x>(): String' type=kotlin.String operator=GET_PROPERTY
+                    $this: THIS of 'B' type=B
+                INSTANCE_INITIALIZER_CALL classDescriptor='Y'
+          RETURN type=kotlin.Nothing from='foo2(): String'
+            CALL 'test(): String' type=kotlin.String operator=null
+              $this: CALL 'constructor Y()' type=B.foo2.Y operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val b: B
+          CALL 'constructor B(String)' type=B operator=null
+            x: CONST String type=kotlin.String value='OK'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'b: B' type=B operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: '
+              CALL 'foo(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'b: B' type=B operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo2(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'b: B' type=B operator=null

@@ -1,0 +1,29 @@
+MODULE <test-module>
+  FILE /main.kt
+    CLASS INTERFACE A
+      FUN public open fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val result: kotlin.String!
+          CALL 'test(A!): String!' type=kotlin.String! operator=null
+            x: BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: String!' type=kotlin.String! operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: '
+              GET_VAR 'result: String!' type=kotlin.String! operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

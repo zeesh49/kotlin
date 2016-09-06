@@ -1,0 +1,109 @@
+MODULE <test-module>
+  FILE /invoke.kt
+    FUN public fun test1(predicate: (kotlin.Int) -> kotlin.Int, i: kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test1((Int) -> Int, Int): Int'
+          CALL 'invoke(Int): Int' type=kotlin.Int operator=INVOKE
+            $this: GET_VAR 'value-parameter predicate: (Int) -> Int' type=(kotlin.Int) -> kotlin.Int operator=VARIABLE_AS_FUNCTION
+            p1: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+    FUN public fun test2(predicate: (kotlin.Int) -> kotlin.Int, i: kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test2((Int) -> Int, Int): Int'
+          CALL 'invoke(Int): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'value-parameter predicate: (Int) -> Int' type=(kotlin.Int) -> kotlin.Int operator=null
+            p1: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+    CLASS CLASS Method
+      CONSTRUCTOR public constructor Method()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Method'
+      FUN public final operator fun invoke(i: kotlin.Int): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='invoke(Int): Int'
+            GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+    FUN public fun test3(method: invoke.Method, i: kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test3(Method, Int): Int'
+          CALL 'invoke(Int): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'value-parameter method: Method' type=invoke.Method operator=null
+            i: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+    FUN public fun test4(method: invoke.Method, i: kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test4(Method, Int): Int'
+          CALL 'invoke(Int): Int' type=kotlin.Int operator=INVOKE
+            $this: GET_VAR 'value-parameter method: Method' type=invoke.Method operator=VARIABLE_AS_FUNCTION
+            i: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+    CLASS CLASS Method2
+      CONSTRUCTOR public constructor Method2()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Method2'
+    FUN public operator fun invoke.Method2.invoke(s: kotlin.String): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='invoke(String) on Method2: String'
+          GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+    FUN public fun test5(method2: invoke.Method2, s: kotlin.String): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test5(Method2, String): String'
+          CALL 'invoke(String) on Method2: String' type=kotlin.String operator=INVOKE
+            $receiver: GET_VAR 'value-parameter method2: Method2' type=invoke.Method2 operator=VARIABLE_AS_FUNCTION
+            s: GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test1((Int) -> Int, Int): Int' type=kotlin.Int operator=null
+                predicate: BLOCK type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Int
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Int): Int'
+                        GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Int): Int' type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+                i: CONST Int type=kotlin.Int value='1'
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test2((Int) -> Int, Int): Int' type=kotlin.Int operator=null
+                predicate: BLOCK type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Int
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Int): Int'
+                        GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Int): Int' type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+                i: CONST Int type=kotlin.Int value='2'
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test3(Method, Int): Int' type=kotlin.Int operator=null
+                method: CALL 'constructor Method()' type=invoke.Method operator=null
+                i: CONST Int type=kotlin.Int value='3'
+              arg1: CONST Int type=kotlin.Int value='3'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test4(Method, Int): Int' type=kotlin.Int operator=null
+                method: CALL 'constructor Method()' type=invoke.Method operator=null
+                i: CONST Int type=kotlin.Int value='4'
+              arg1: CONST Int type=kotlin.Int value='4'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test5(Method2, String): String' type=kotlin.String operator=null
+                method2: CALL 'constructor Method2()' type=invoke.Method2 operator=null
+                s: CONST String type=kotlin.String value='s'
+              arg1: CONST String type=kotlin.String value='s'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail5'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

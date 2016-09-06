@@ -1,0 +1,68 @@
+MODULE <test-module>
+  FILE /objectFunction.kt
+    CLASS OBJECT O
+      CONSTRUCTOR private constructor O()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='O'
+      FUN @kotlin.jvm.JvmStatic public final fun foo(s: kotlin.String): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(String): Int'
+            CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val foo: kotlin.reflect.KFunction<*>
+          TYPE_OP operator=CAST typeOperand=kotlin.reflect.KFunction<*>
+            CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+              $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                $this: CLASS_REFERENCE 'O' type=kotlin.reflect.KClass<O>
+              predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                      CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                          $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                        arg1: CONST String type=kotlin.String value='foo'
+                CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+        VAR val j: java.lang.reflect.Method
+          BLOCK type=java.lang.reflect.Method operator=ELVIS
+            VAR val tmp0_elvis_lhs: java.lang.reflect.Method?
+              CALL '<get-javaMethod>() on KFunction<*>: Method?' type=java.lang.reflect.Method? operator=GET_PROPERTY
+                $receiver: GET_VAR 'foo: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+            WHEN type=java.lang.reflect.Method operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_elvis_lhs: Method?' type=java.lang.reflect.Method? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                CONST String type=kotlin.String value='Fail: no Java method found for O::foo'
+              else: GET_VAR 'tmp0_elvis_lhs: Method?' type=java.lang.reflect.Method? operator=null
+        CALL 'assertEquals(Any!, Any!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='3'
+          actual: CALL 'invoke(Any!, vararg Any!): Any!' type=kotlin.Any! operator=null
+            $this: GET_VAR 'j: Method' type=java.lang.reflect.Method operator=null
+            p0: CONST Null type=kotlin.Nothing? value='null'
+            p1: VARARG type=(kotlin.Array<(kotlin.Any..kotlin.Any?)>..kotlin.Array<out (kotlin.Any..kotlin.Any?)>?) varargElementType=(kotlin.Any..kotlin.Any?)
+              CONST String type=kotlin.String value='abc'
+        VAR val k: kotlin.reflect.KFunction<*>
+          BLOCK type=kotlin.reflect.KFunction<*> operator=ELVIS
+            VAR val tmp1_elvis_lhs: kotlin.reflect.KFunction<*>?
+              CALL '<get-kotlinFunction>() on Method: KFunction<*>?' type=kotlin.reflect.KFunction<*>? operator=GET_PROPERTY
+                $receiver: GET_VAR 'j: Method' type=java.lang.reflect.Method operator=null
+            WHEN type=kotlin.reflect.KFunction<*> operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp1_elvis_lhs: KFunction<*>?' type=kotlin.reflect.KFunction<*>? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                CONST String type=kotlin.String value='Fail: no Kotlin function found for Java method O::foo'
+              else: GET_VAR 'tmp1_elvis_lhs: KFunction<*>?' type=kotlin.reflect.KFunction<*>? operator=null
+        CALL 'assertEquals(Any?, Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='3'
+          actual: CALL 'call(vararg Any?): Any?' type=kotlin.Any? operator=null
+            $this: GET_VAR 'k: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              GET_OBJECT 'O' type=O
+              CONST String type=kotlin.String value='def'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

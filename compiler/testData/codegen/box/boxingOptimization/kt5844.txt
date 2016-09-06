@@ -1,0 +1,54 @@
+MODULE <test-module>
+  FILE /kt5844.kt
+    FUN public fun test1(): kotlin.Unit
+      BLOCK_BODY
+        VAR val u: kotlin.Any
+          BLOCK type=kotlin.Any operator=WHEN
+            VAR val tmp0_subject: kotlin.Boolean
+              CONST Boolean type=kotlin.Boolean value='true'
+            WHEN type=kotlin.Any operator=WHEN
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Boolean' type=kotlin.Boolean operator=null
+                arg1: CONST Boolean type=kotlin.Boolean value='true'
+              then: CONST Int type=kotlin.Int value='42'
+              else: CONST Double type=kotlin.Double value='1.0'
+        CALL 'assertEquals(Any, Any, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='42'
+          actual: GET_VAR 'u: Any' type=kotlin.Any operator=null
+    FUN public fun test2(): kotlin.Unit
+      BLOCK_BODY
+        VAR val u: kotlin.Any
+          CALL 'let((Long) -> Any) on Long: Any' type=kotlin.Any operator=null
+            $receiver: CONST Long type=kotlin.Long value='1'
+            block: BLOCK type=(kotlin.Long) -> kotlin.Any operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.Long): kotlin.Any
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Long): Any'
+                    BLOCK type=kotlin.Any operator=WHEN
+                      VAR val tmp0_subject: kotlin.Long
+                        GET_VAR 'value-parameter it: Long' type=kotlin.Long operator=null
+                      WHEN type=kotlin.Any operator=WHEN
+                        if: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.Long
+                          GET_VAR 'tmp0_subject: Long' type=kotlin.Long operator=null
+                        then: WHEN type=kotlin.Long operator=IF
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: CALL 'toLong(): Long' type=kotlin.Long operator=null
+                              $this: GET_VAR 'value-parameter it: Long' type=kotlin.Long operator=null
+                            arg1: CONST Long type=kotlin.Long value='2'
+                          then: CALL 'toLong(): Long' type=kotlin.Long operator=null
+                            $this: GET_VAR 'value-parameter it: Long' type=kotlin.Long operator=null
+                          else: CALL 'times(Long): Long' type=kotlin.Long operator=MUL
+                            $this: GET_VAR 'value-parameter it: Long' type=kotlin.Long operator=null
+                            other: CONST Long type=kotlin.Long value='2'
+                        else: CALL 'toDouble(): Double' type=kotlin.Double operator=null
+                          $this: GET_VAR 'value-parameter it: Long' type=kotlin.Long operator=null
+              CALLABLE_REFERENCE '<anonymous>(Long): Any' type=(kotlin.Long) -> kotlin.Any operator=LAMBDA
+        CALL 'assertEquals(Any, Any, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Long type=kotlin.Long value='2'
+          actual: GET_VAR 'u: Any' type=kotlin.Any operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'test1(): Unit' type=kotlin.Unit operator=null
+        CALL 'test2(): Unit' type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

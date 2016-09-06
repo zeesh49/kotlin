@@ -1,0 +1,52 @@
+MODULE <test-module>
+  FILE /test.kt
+    CLASS CLASS Klass
+      CONSTRUCTOR public constructor Klass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Klass'
+      CLASS OBJECT companion object of Klass
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of Klass'
+        PROPERTY public const final val NAME: kotlin.String = "Klass"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='Klass'
+        PROPERTY @kotlin.jvm.JvmField public final val JVM_NAME: kotlin.String = "JvmKlass"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='JvmKlass'
+    CLASS INTERFACE Trait
+      CLASS OBJECT companion object of Trait
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of Trait'
+        PROPERTY public const final val NAME: kotlin.String = "Trait"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='Trait'
+    CLASS ENUM_CLASS Enoom
+      CONSTRUCTOR private constructor Enoom()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='Enoom'
+      CLASS OBJECT companion object of Enoom
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of Enoom'
+        PROPERTY public const final val NAME: kotlin.String = "Enum"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='Enum'
+        PROPERTY @kotlin.jvm.JvmField public final val JVM_NAME: kotlin.String = "JvmEnum"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='JvmEnum'
+      FUN public final fun values(): kotlin.Array<Enoom>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): Enoom
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String!
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String!'
+          CALL 'test(): String!' type=kotlin.String! operator=null
+            $this: CALL 'constructor Test()' type=Test operator=null

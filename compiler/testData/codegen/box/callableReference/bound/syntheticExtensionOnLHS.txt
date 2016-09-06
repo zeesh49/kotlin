@@ -1,0 +1,16 @@
+MODULE <test-module>
+  FILE /test.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'with(A, A.() -> Nothing): Nothing' type=kotlin.Nothing operator=null
+          receiver: CALL 'constructor A(String!)' type=A operator=null
+            field: CONST String type=kotlin.String value='OK'
+          block: BLOCK type=A.() -> kotlin.Nothing operator=LAMBDA
+            FUN local final fun A.<anonymous>(): kotlin.Nothing
+              BLOCK_BODY
+                VAR val k: kotlin.reflect.KFunction0<kotlin.String>
+                  CALLABLE_REFERENCE 'toString(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+                RETURN type=kotlin.Nothing from='box(): String'
+                  CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+                    $this: GET_VAR 'k: KFunction0<String>' type=kotlin.reflect.KFunction0<kotlin.String> operator=VARIABLE_AS_FUNCTION
+            CALLABLE_REFERENCE '<anonymous>() on A: Nothing' type=A.() -> kotlin.Nothing operator=LAMBDA

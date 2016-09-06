@@ -1,0 +1,46 @@
+MODULE <test-module>
+  FILE /overflowLong.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: kotlin.Long = -2147483648.toLong()
+          TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Long
+            CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+              $this: CONST Int type=kotlin.Int value='2147483647'
+              other: CONST Int type=kotlin.Int value='1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'a: Long' type=kotlin.Long operator=null
+              arg1: CONST Long type=kotlin.Long value='-2147483648'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail: in this case we should add to ints and than cast the result to long - overflow expected'
+        VAR val l1: kotlin.Long = 9223372036854775807.toLong()
+          CALL '<get-MAX_VALUE>(): Long' type=kotlin.Long operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Long' type=kotlin.Long.Companion
+        VAR val l2: kotlin.Long = -9223372036854775808.toLong()
+          CALL 'plus(Int): Long' type=kotlin.Long operator=PLUS
+            $this: GET_VAR 'l1: Long' type=kotlin.Long operator=null
+            other: CONST Int type=kotlin.Int value='1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+            arg0: CALL 'compareTo(Long): Int' type=kotlin.Int operator=GT
+              $this: GET_VAR 'l2: Long' type=kotlin.Long operator=null
+              other: GET_VAR 'l1: Long' type=kotlin.Long operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail: Long.MAX_VALUE + 1 should overflow to negative.'
+        VAR val l3: kotlin.Long = -9223372036854775808.toLong()
+          CALL '<get-MIN_VALUE>(): Long' type=kotlin.Long operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Long' type=kotlin.Long.Companion
+        VAR val l4: kotlin.Long = 9223372036854775807.toLong()
+          CALL 'minus(Int): Long' type=kotlin.Long operator=MINUS
+            $this: GET_VAR 'l3: Long' type=kotlin.Long operator=null
+            other: CONST Int type=kotlin.Int value='1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Long): Int' type=kotlin.Int operator=LT
+              $this: GET_VAR 'l4: Long' type=kotlin.Long operator=null
+              other: GET_VAR 'l3: Long' type=kotlin.Long operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail: Long.MIN_VALUE - 1 should overflow to positive.'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

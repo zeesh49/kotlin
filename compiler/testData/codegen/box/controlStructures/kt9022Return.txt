@@ -1,0 +1,86 @@
+MODULE <test-module>
+  FILE /kt9022Return.kt
+    FUN public fun testOr(b: kotlin.Boolean): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='testOr(Boolean): Boolean'
+          WHEN type=kotlin.Boolean operator=OROR
+            if: GET_VAR 'value-parameter b: Boolean' type=kotlin.Boolean operator=null
+            then: CONST Boolean type=kotlin.Nothing value='true'
+            else: RETURN type=kotlin.Nothing from='testOr(Boolean): Boolean'
+              CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+                $this: GET_VAR 'value-parameter b: Boolean' type=kotlin.Boolean operator=null
+    FUN public fun testOr(): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='testOr(): Boolean'
+          WHEN type=kotlin.Boolean operator=OROR
+            if: CONST Boolean type=kotlin.Boolean value='true'
+            then: CONST Boolean type=kotlin.Nothing value='true'
+            else: RETURN type=kotlin.Nothing from='testOr(): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+    FUN public fun testAnd(b: kotlin.Boolean): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='testAnd(Boolean): Boolean'
+          WHEN type=kotlin.Boolean operator=ANDAND
+            if: GET_VAR 'value-parameter b: Boolean' type=kotlin.Boolean operator=null
+            then: RETURN type=kotlin.Nothing from='testAnd(Boolean): Boolean'
+              CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+                $this: GET_VAR 'value-parameter b: Boolean' type=kotlin.Boolean operator=null
+            else: CONST Boolean type=kotlin.Nothing value='false'
+    FUN public fun testAnd(): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='testAnd(): Boolean'
+          WHEN type=kotlin.Boolean operator=ANDAND
+            if: CONST Boolean type=kotlin.Boolean value='true'
+            then: RETURN type=kotlin.Nothing from='testAnd(): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+            else: CONST Boolean type=kotlin.Nothing value='false'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'testOr(Boolean): Boolean' type=kotlin.Boolean operator=null
+                b: CONST Boolean type=kotlin.Boolean value='false'
+              arg1: CONST Boolean type=kotlin.Boolean value='true'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'testOr(Boolean): Boolean' type=kotlin.Boolean operator=null
+                b: CONST Boolean type=kotlin.Boolean value='true'
+              arg1: CONST Boolean type=kotlin.Boolean value='true'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'testAnd(Boolean): Boolean' type=kotlin.Boolean operator=null
+                b: CONST Boolean type=kotlin.Boolean value='false'
+              arg1: CONST Boolean type=kotlin.Boolean value='false'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'testAnd(Boolean): Boolean' type=kotlin.Boolean operator=null
+                b: CONST Boolean type=kotlin.Boolean value='true'
+              arg1: CONST Boolean type=kotlin.Boolean value='false'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'testOr(): Boolean' type=kotlin.Boolean operator=null
+              arg1: CONST Boolean type=kotlin.Boolean value='true'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 5'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'testAnd(): Boolean' type=kotlin.Boolean operator=null
+              arg1: CONST Boolean type=kotlin.Boolean value='false'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 6'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /overflowInt.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val i1: kotlin.Int = 2147483647
+          CALL '<get-MAX_VALUE>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Int' type=kotlin.Int.Companion
+        VAR val i2: kotlin.Int = -2147483648
+          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+            $this: GET_VAR 'i1: Int' type=kotlin.Int operator=null
+            other: CONST Int type=kotlin.Int value='1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+              $this: GET_VAR 'i2: Int' type=kotlin.Int operator=null
+              other: GET_VAR 'i1: Int' type=kotlin.Int operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail: Int.MAX_VALUE + 1 should overflow to negative.'
+        VAR val i3: kotlin.Int = -2147483648
+          CALL '<get-MIN_VALUE>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Int' type=kotlin.Int.Companion
+        VAR val i4: kotlin.Int = 2147483647
+          CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+            $this: GET_VAR 'i3: Int' type=kotlin.Int operator=null
+            other: CONST Int type=kotlin.Int value='1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+              $this: GET_VAR 'i4: Int' type=kotlin.Int operator=null
+              other: GET_VAR 'i3: Int' type=kotlin.Int operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail: Int.MIN_VALUE - 1 should overflow to positive.'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

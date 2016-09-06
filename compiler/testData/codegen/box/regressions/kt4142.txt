@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /kt4142.kt
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public final val name: kotlin.String
+        PROPERTY_GETTER public final fun <get-name>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-name>(): String'
+              CONST String type=kotlin.String value='OK'
+    CLASS INTERFACE A
+      PROPERTY public abstract val name: kotlin.String
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor B()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor C()' type=C operator=null

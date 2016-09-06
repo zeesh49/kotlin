@@ -1,0 +1,387 @@
+MODULE <test-module>
+  FILE /varargInFunParam.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test1(vararg Int): String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value=''
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test1(vararg Int): String' type=kotlin.String operator=null
+                p: VARARG type=IntArray varargElementType=Int
+                  CONST Int type=kotlin.Int value='1'
+              arg1: CONST String type=kotlin.String value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test1(vararg Int): String' type=kotlin.String operator=null
+                p: VARARG type=IntArray varargElementType=Int
+                  CONST Int type=kotlin.Int value='1'
+                  CONST Int type=kotlin.Int value='2'
+              arg1: CONST String type=kotlin.String value='12'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test1(vararg Int): String' type=kotlin.String operator=null
+                p: VARARG type=IntArray varargElementType=Int
+                  SPREAD_ELEMENT
+                    CALL 'intArrayOf(vararg Int): IntArray' type=kotlin.IntArray operator=null
+              arg1: CONST String type=kotlin.String value=''
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test1(vararg Int): String' type=kotlin.String operator=null
+                p: VARARG type=IntArray varargElementType=Int
+                  SPREAD_ELEMENT
+                    CALL 'intArrayOf(vararg Int): IntArray' type=kotlin.IntArray operator=null
+                      elements: VARARG type=IntArray varargElementType=Int
+                        CONST Int type=kotlin.Int value='1'
+              arg1: CONST String type=kotlin.String value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 5'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test1(vararg Int): String' type=kotlin.String operator=null
+                p: VARARG type=IntArray varargElementType=Int
+                  SPREAD_ELEMENT
+                    CALL 'intArrayOf(vararg Int): IntArray' type=kotlin.IntArray operator=null
+                      elements: VARARG type=IntArray varargElementType=Int
+                        CONST Int type=kotlin.Int value='1'
+                        CONST Int type=kotlin.Int value='2'
+              arg1: CONST String type=kotlin.String value='12'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 6'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test1(vararg Int): String' type=kotlin.String operator=null
+                p: VARARG type=IntArray varargElementType=Int
+                  CONST Int type=kotlin.Int value='1'
+              arg1: CONST String type=kotlin.String value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 7'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test1(vararg Int): String' type=kotlin.String operator=null
+                p: VARARG type=IntArray varargElementType=Int
+                  SPREAD_ELEMENT
+                    CALL 'intArrayOf(vararg Int): IntArray' type=kotlin.IntArray operator=null
+              arg1: CONST String type=kotlin.String value=''
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 8'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test1(vararg Int): String' type=kotlin.String operator=null
+                p: VARARG type=IntArray varargElementType=Int
+                  SPREAD_ELEMENT
+                    CALL 'intArrayOf(vararg Int): IntArray' type=kotlin.IntArray operator=null
+                      elements: VARARG type=IntArray varargElementType=Int
+                        CONST Int type=kotlin.Int value='1'
+              arg1: CONST String type=kotlin.String value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 9'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test1(vararg Int): String' type=kotlin.String operator=null
+                p: VARARG type=IntArray varargElementType=Int
+                  SPREAD_ELEMENT
+                    CALL 'intArrayOf(vararg Int): IntArray' type=kotlin.IntArray operator=null
+                      elements: VARARG type=IntArray varargElementType=Int
+                        CONST Int type=kotlin.Int value='1'
+                        CONST Int type=kotlin.Int value='2'
+              arg1: CONST String type=kotlin.String value='12'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 10'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test2(vararg String): String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value=''
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 11'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test2(vararg String): String' type=kotlin.String operator=null
+                p: VARARG type=Array<out String> varargElementType=String
+                  CONST String type=kotlin.String value='1'
+              arg1: CONST String type=kotlin.String value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 12'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test2(vararg String): String' type=kotlin.String operator=null
+                p: VARARG type=Array<out String> varargElementType=String
+                  CONST String type=kotlin.String value='1'
+                  CONST String type=kotlin.String value='2'
+              arg1: CONST String type=kotlin.String value='12'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 13'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test2(vararg String): String' type=kotlin.String operator=null
+                p: VARARG type=Array<out String> varargElementType=String
+                  SPREAD_ELEMENT
+                    CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+              arg1: CONST String type=kotlin.String value=''
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 14'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test2(vararg String): String' type=kotlin.String operator=null
+                p: VARARG type=Array<out String> varargElementType=String
+                  SPREAD_ELEMENT
+                    CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                      elements: VARARG type=Array<out String> varargElementType=String
+                        CONST String type=kotlin.String value='1'
+              arg1: CONST String type=kotlin.String value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 15'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test2(vararg String): String' type=kotlin.String operator=null
+                p: VARARG type=Array<out String> varargElementType=String
+                  SPREAD_ELEMENT
+                    CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                      elements: VARARG type=Array<out String> varargElementType=String
+                        CONST String type=kotlin.String value='1'
+                        CONST String type=kotlin.String value='2'
+              arg1: CONST String type=kotlin.String value='12'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 16'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test2(vararg String): String' type=kotlin.String operator=null
+                p: VARARG type=Array<out String> varargElementType=String
+                  CONST String type=kotlin.String value='1'
+              arg1: CONST String type=kotlin.String value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 17'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test2(vararg String): String' type=kotlin.String operator=null
+                p: VARARG type=Array<out String> varargElementType=String
+                  SPREAD_ELEMENT
+                    CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+              arg1: CONST String type=kotlin.String value=''
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 18'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test2(vararg String): String' type=kotlin.String operator=null
+                p: VARARG type=Array<out String> varargElementType=String
+                  SPREAD_ELEMENT
+                    CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                      elements: VARARG type=Array<out String> varargElementType=String
+                        CONST String type=kotlin.String value='1'
+              arg1: CONST String type=kotlin.String value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 19'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test2(vararg String): String' type=kotlin.String operator=null
+                p: VARARG type=Array<out String> varargElementType=String
+                  SPREAD_ELEMENT
+                    CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                      elements: VARARG type=Array<out String> varargElementType=String
+                        CONST String type=kotlin.String value='1'
+                        CONST String type=kotlin.String value='2'
+              arg1: CONST String type=kotlin.String value='12'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 20'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test3(vararg String): String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value=''
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 21'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test3(vararg String): String' type=kotlin.String operator=null
+                p: VARARG type=Array<out String> varargElementType=String
+                  CONST String type=kotlin.String value='1'
+              arg1: CONST String type=kotlin.String value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 22'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test3(vararg String): String' type=kotlin.String operator=null
+                p: VARARG type=Array<out String> varargElementType=String
+                  CONST String type=kotlin.String value='1'
+                  CONST String type=kotlin.String value='2'
+              arg1: CONST String type=kotlin.String value='12'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 23'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test3(vararg String): String' type=kotlin.String operator=null
+                p: VARARG type=Array<out String> varargElementType=String
+                  SPREAD_ELEMENT
+                    CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+              arg1: CONST String type=kotlin.String value=''
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 24'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test3(vararg String): String' type=kotlin.String operator=null
+                p: VARARG type=Array<out String> varargElementType=String
+                  SPREAD_ELEMENT
+                    CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                      elements: VARARG type=Array<out String> varargElementType=String
+                        CONST String type=kotlin.String value='1'
+              arg1: CONST String type=kotlin.String value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 25'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test3(vararg String): String' type=kotlin.String operator=null
+                p: VARARG type=Array<out String> varargElementType=String
+                  SPREAD_ELEMENT
+                    CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                      elements: VARARG type=Array<out String> varargElementType=String
+                        CONST String type=kotlin.String value='1'
+                        CONST String type=kotlin.String value='2'
+              arg1: CONST String type=kotlin.String value='12'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 26'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test3(vararg String): String' type=kotlin.String operator=null
+                p: VARARG type=Array<out String> varargElementType=String
+                  CONST String type=kotlin.String value='1'
+              arg1: CONST String type=kotlin.String value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 27'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test3(vararg String): String' type=kotlin.String operator=null
+                p: VARARG type=Array<out String> varargElementType=String
+                  SPREAD_ELEMENT
+                    CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+              arg1: CONST String type=kotlin.String value=''
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 28'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test3(vararg String): String' type=kotlin.String operator=null
+                p: VARARG type=Array<out String> varargElementType=String
+                  SPREAD_ELEMENT
+                    CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                      elements: VARARG type=Array<out String> varargElementType=String
+                        CONST String type=kotlin.String value='1'
+              arg1: CONST String type=kotlin.String value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 29'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test3(vararg String): String' type=kotlin.String operator=null
+                p: VARARG type=Array<out String> varargElementType=String
+                  SPREAD_ELEMENT
+                    CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                      elements: VARARG type=Array<out String> varargElementType=String
+                        CONST String type=kotlin.String value='1'
+                        CONST String type=kotlin.String value='2'
+              arg1: CONST String type=kotlin.String value='12'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 30'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun test1(vararg p: kotlin.Int): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.String
+          CONST String type=kotlin.String value=''
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'value-parameter vararg p: Int' type=kotlin.IntArray operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'result: String' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 'result: String' type=kotlin.String operator=PLUSEQ
+                    other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='test1(vararg Int): String'
+          GET_VAR 'result: String' type=kotlin.String operator=null
+    FUN public fun test2(vararg p: kotlin.String): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.String
+          CONST String type=kotlin.String value=''
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<kotlin.String>
+            CALL 'iterator(): Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'value-parameter vararg p: String' type=kotlin.Array<out kotlin.String> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.String
+                CALL 'next(): String' type=kotlin.String operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'result: String' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 'result: String' type=kotlin.String operator=PLUSEQ
+                    other: GET_VAR 'i: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='test2(vararg String): String'
+          GET_VAR 'result: String' type=kotlin.String operator=null
+    FUN public fun <T> test3(vararg p: T): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.String
+          CONST String type=kotlin.String value=''
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<T>
+            CALL 'iterator(): Iterator<T>' type=kotlin.collections.Iterator<T> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'value-parameter vararg p: T' type=kotlin.Array<out T> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<T>' type=kotlin.collections.Iterator<T> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: T
+                CALL 'next(): T' type=T operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<T>' type=kotlin.collections.Iterator<T> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'result: String' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 'result: String' type=kotlin.String operator=PLUSEQ
+                    other: GET_VAR 'i: T' type=T operator=null
+        RETURN type=kotlin.Nothing from='test3(vararg T): String'
+          GET_VAR 'result: String' type=kotlin.String operator=null

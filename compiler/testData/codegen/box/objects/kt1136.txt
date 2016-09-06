@@ -1,0 +1,102 @@
+MODULE <test-module>
+  FILE /kt1136.kt
+    CLASS OBJECT SomeObject
+      CONSTRUCTOR private constructor SomeObject()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SomeObject'
+      PROPERTY private final val workerThread: SomeObject.workerThread.<no name provided>
+        EXPRESSION_BODY
+          BLOCK type=SomeObject.workerThread.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Thread()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              FUN public open override fun run(): kotlin.Unit
+                BLOCK_BODY
+                  CALL 'foo(): Unit' type=kotlin.Unit operator=null
+                    $this: THIS of 'SomeObject' type=SomeObject
+            CALL 'constructor <no name provided>()' type=SomeObject.workerThread.<no name provided> operator=OBJECT_LITERAL
+      ANONYMOUS_INITIALIZER SomeObject
+        BLOCK_BODY
+          CALL 'start(): Unit' type=kotlin.Unit operator=null
+            $this: CALL '<get-workerThread>(): <no name provided>' type=SomeObject.workerThread.<no name provided> operator=GET_PROPERTY
+              $this: THIS of 'SomeObject' type=SomeObject
+      FUN private final fun foo(): kotlin.Unit
+        BLOCK_BODY
+    CLASS CLASS SomeClass
+      CONSTRUCTOR public constructor SomeClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SomeClass'
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+        PROPERTY public final val copy: java.util.ArrayList<kotlin.String>
+          EXPRESSION_BODY
+            CALL '<get-list>(): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=GET_PROPERTY
+              $this: THIS of 'SomeClass' type=SomeClass
+      PROPERTY private final val list: java.util.ArrayList<kotlin.String>
+        EXPRESSION_BODY
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.String> operator=null
+      PROPERTY public final var status: kotlin.Throwable?
+        EXPRESSION_BODY
+          CONST Null type=kotlin.Nothing? value='null'
+      PROPERTY private final val workerThread: SomeClass.workerThread.<no name provided>
+        EXPRESSION_BODY
+          BLOCK type=SomeClass.workerThread.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Thread()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              FUN public open override fun run(): kotlin.Unit
+                BLOCK_BODY
+                  TRY_CATCH type=kotlin.Any
+                    try: BLOCK type=kotlin.Boolean operator=null
+                      CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+                        $this: CALL '<get-list>(): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=GET_PROPERTY
+                          $this: THIS of 'SomeClass' type=SomeClass
+                        element: CONST String type=kotlin.String value='123'
+                      CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+                        $this: CALL '<get-list>(): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=GET_PROPERTY
+                          $this: THIS of 'SomeClass' type=SomeClass
+                        element: CONST String type=kotlin.String value='33'
+                      CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+                        $this: CALL '<get-copy>(): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=GET_PROPERTY
+                          $this: CALL 'constructor Inner()' type=SomeClass.Inner operator=null
+                            $this: THIS of 'SomeClass' type=SomeClass
+                        element: CONST String type=kotlin.String value='444'
+                    catch t: BLOCK type=kotlin.Unit operator=null
+                      CALL '<set-status>(Throwable?): Unit' type=kotlin.Unit operator=EQ
+                        $this: THIS of 'SomeClass' type=SomeClass
+                        <set-?>: GET_VAR 't: Throwable' type=kotlin.Throwable operator=null
+            CALL 'constructor <no name provided>()' type=SomeClass.workerThread.<no name provided> operator=OBJECT_LITERAL
+      ANONYMOUS_INITIALIZER SomeClass
+        BLOCK_BODY
+          CALL 'start(): Unit' type=kotlin.Unit operator=null
+            $this: CALL '<get-workerThread>(): <no name provided>' type=SomeClass.workerThread.<no name provided> operator=GET_PROPERTY
+              $this: THIS of 'SomeClass' type=SomeClass
+          CALL 'join(): Unit' type=kotlin.Unit operator=null
+            $this: CALL '<get-workerThread>(): <no name provided>' type=SomeClass.workerThread.<no name provided> operator=GET_PROPERTY
+              $this: THIS of 'SomeClass' type=SomeClass
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var obj: SomeClass
+          CALL 'constructor SomeClass()' type=SomeClass operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-status>(): Throwable?' type=kotlin.Throwable? operator=GET_PROPERTY
+                $this: GET_VAR 'obj: SomeClass' type=SomeClass operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST String type=kotlin.String value='OK'
+            else: BLOCK type=kotlin.String operator=null
+              CALL 'printStackTrace(): Unit' type=kotlin.Unit operator=null
+                $this: TYPE_OP operator=CAST typeOperand=java.lang.Throwable
+                  CALL '<get-status>(): Throwable?' type=kotlin.Throwable? operator=GET_PROPERTY
+                    $this: GET_VAR 'obj: SomeClass' type=SomeClass operator=null
+              CONST String type=kotlin.String value='failed'

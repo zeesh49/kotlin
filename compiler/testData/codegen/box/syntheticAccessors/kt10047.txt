@@ -1,0 +1,73 @@
+MODULE <test-module>
+  FILE /a.kt
+    CLASS CLASS CompositeActor
+      CONSTRUCTOR public constructor CompositeActor()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Actor()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='CompositeActor'
+    CLASS CLASS O2dDialog
+      CONSTRUCTOR public constructor O2dDialog()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor O2dScriptAction()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='O2dDialog'
+      FUN public final fun test(): test2.CompositeActor?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test(): CompositeActor?'
+            CALL 'invoke(): CompositeActor?' type=test2.CompositeActor? operator=null
+              $this: BLOCK type=() -> test2.CompositeActor? operator=LAMBDA
+                FUN local final fun <anonymous>(): test2.CompositeActor?
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(): CompositeActor?'
+                      CALL '<get-owner>(): CompositeActor?' type=test2.CompositeActor? operator=GET_PROPERTY
+                        $this: THIS of 'O2dDialog' type=test2.O2dDialog
+                CALLABLE_REFERENCE '<anonymous>(): CompositeActor?' type=() -> test2.CompositeActor? operator=LAMBDA
+      FUN public final fun test2(): test2.CompositeActor?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test2(): CompositeActor?'
+            CALL 'invoke(): CompositeActor?' type=test2.CompositeActor? operator=null
+              $this: BLOCK type=() -> test2.CompositeActor? operator=LAMBDA
+                FUN local final fun <anonymous>(): test2.CompositeActor?
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(): CompositeActor?'
+                      CALL 'calc(): CompositeActor?' type=test2.CompositeActor? operator=null
+                        $this: THIS of 'O2dDialog' type=test2.O2dDialog
+                CALLABLE_REFERENCE '<anonymous>(): CompositeActor?' type=() -> test2.CompositeActor? operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test(): CompositeActor?' type=test2.CompositeActor? operator=null
+                $this: CALL 'constructor O2dDialog()' type=test2.O2dDialog operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test2(): CompositeActor?' type=test2.CompositeActor? operator=null
+                $this: CALL 'constructor O2dDialog()' type=test2.O2dDialog operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+  FILE /b.kt
+    CLASS CLASS Actor
+      CONSTRUCTOR public constructor Actor()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Actor'
+    CLASS CLASS O2dScriptAction
+      CONSTRUCTOR public constructor O2dScriptAction<T : test.Actor>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='O2dScriptAction'
+      PROPERTY protected final var owner: T?
+        EXPRESSION_BODY
+          CONST Null type=kotlin.Nothing? value='null'
+        PROPERTY_SETTER private final fun <set-owner>(<set-?>: T?): kotlin.Unit
+      FUN protected final fun calc(): T?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='calc(): T?'
+            CONST Null type=kotlin.Nothing? value='null'

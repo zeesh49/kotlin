@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /kt5395.kt
+    CLASS CLASS D
+      CONSTRUCTOR public constructor D()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='D'
+      CLASS OBJECT companion object of D
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of D'
+        PROPERTY protected final val F: kotlin.String = "OK"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='OK'
+      CLASS CLASS E
+        CONSTRUCTOR public constructor E()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='E'
+        FUN public final fun foo(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo(): String'
+              CALL '<get-F>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'companion object of D' type=D.Companion
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor E()' type=D.E operator=null
+              $this: CALL 'constructor D()' type=D operator=null

@@ -1,0 +1,84 @@
+MODULE <test-module>
+  FILE /checkNoAccessors.kt
+    PROPERTY @kotlin.jvm.JvmField public val field: kotlin.String = "OK"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='OK'
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY @kotlin.jvm.JvmField public final val field: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+      CLASS OBJECT companion object of A
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of A'
+        PROPERTY @kotlin.jvm.JvmField public final val cfield: kotlin.String = "OK"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='OK'
+    CLASS OBJECT Object
+      CONSTRUCTOR private constructor Object()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Object'
+      PROPERTY @kotlin.jvm.JvmField public final val field: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.String
+          CALL '<get-field>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor A()' type=A operator=null
+        CALL 'checkNoAccessors(Class<*>): Unit' type=kotlin.Unit operator=null
+          clazz: CALL '<get-java>() on KClass<A>: Class<A>' type=java.lang.Class<A> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+        CALL 'checkNoAccessors(Class<*>): Unit' type=kotlin.Unit operator=null
+          clazz: CALL '<get-java>() on KClass<A.Companion>: Class<A.Companion>' type=java.lang.Class<A.Companion> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'companion object of A' type=kotlin.reflect.KClass<A.Companion>
+        CALL 'checkNoAccessors(Class<*>): Unit' type=kotlin.Unit operator=null
+          clazz: CALL '<get-java>() on KClass<Object>: Class<Object>' type=java.lang.Class<Object> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Object' type=kotlin.reflect.KClass<Object>
+        CALL 'checkNoAccessors(Class<*>): Unit' type=kotlin.Unit operator=null
+          clazz: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+            CALL 'forName(String!): Class<*>!' type=java.lang.Class<*>! operator=null
+              p0: CONST String type=kotlin.String value='CheckNoAccessorsKt'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun checkNoAccessors(clazz: java.lang.Class<*>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'forEach((Method!) -> Unit) on Array<out Method!>: Unit' type=kotlin.Unit operator=null
+          $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Method!>
+            CALL '<get-declaredMethods>() on Class<*>: Array<(out) Method!>!' type=kotlin.Array<(out) java.lang.reflect.Method!>! operator=GET_PROPERTY
+              $receiver: GET_VAR 'value-parameter clazz: Class<*>' type=java.lang.Class<*> operator=null
+          action: BLOCK type=(java.lang.reflect.Method!) -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(it: java.lang.reflect.Method!): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(Method!): Unit'
+                  CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+                    actual: WHEN type=kotlin.Boolean operator=OROR
+                      if: CALL 'startsWith(String, Boolean = ...) on String: Boolean' type=kotlin.Boolean operator=null
+                        $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+                          CALL '<get-name>() on Method: String!' type=kotlin.String! operator=GET_PROPERTY
+                            $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                              GET_VAR 'value-parameter it: Method!' type=java.lang.reflect.Method! operator=null
+                        prefix: CONST String type=kotlin.String value='get'
+                      then: CONST Boolean type=kotlin.Boolean value='true'
+                      else: CALL 'startsWith(String, Boolean = ...) on String: Boolean' type=kotlin.Boolean operator=null
+                        $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+                          CALL '<get-name>() on Method: String!' type=kotlin.String! operator=GET_PROPERTY
+                            $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                              GET_VAR 'value-parameter it: Method!' type=java.lang.reflect.Method! operator=null
+                        prefix: CONST String type=kotlin.String value='set'
+                    message: STRING_CONCATENATION type=kotlin.String
+                      CONST String type=kotlin.String value='Class '
+                      CALL '<get-name>() on Class<*>: String!' type=kotlin.String! operator=GET_PROPERTY
+                        $receiver: GET_VAR 'value-parameter clazz: Class<*>' type=java.lang.Class<*> operator=null
+                      CONST String type=kotlin.String value=' has accessor ''
+                      CALL '<get-name>() on Method: String!' type=kotlin.String! operator=GET_PROPERTY
+                        $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                          GET_VAR 'value-parameter it: Method!' type=java.lang.reflect.Method! operator=null
+                      CONST String type=kotlin.String value='''
+            CALLABLE_REFERENCE '<anonymous>(Method!): Unit' type=(java.lang.reflect.Method!) -> kotlin.Unit operator=LAMBDA

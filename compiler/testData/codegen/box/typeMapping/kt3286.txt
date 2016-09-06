@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /kt3286.kt
+    FUN public fun test(x: kotlin.Int): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test(Int): String'
+          BLOCK type=kotlin.String operator=WHEN
+            VAR val tmp0_subject: kotlin.Int
+              GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+            WHEN type=kotlin.String operator=WHEN
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+                arg1: CONST Int type=kotlin.Int value='0'
+              then: CONST String type=kotlin.String value='zero'
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+                arg1: CONST Int type=kotlin.Int value='1'
+              then: CONST String type=kotlin.String value='one'
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+                arg1: CONST Int type=kotlin.Int value='2'
+              then: CONST String type=kotlin.String value='two'
+              else: CALL 'blowUpHorribly(): Nothing' type=kotlin.Nothing operator=null
+    FUN public fun blowUpHorribly(): kotlin.Nothing
+      BLOCK_BODY
+        THROW type=kotlin.Nothing
+          CALL 'constructor RuntimeException(String!)' type=java.lang.RuntimeException operator=null
+            p0: CONST String type=kotlin.String value='Blow up!'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'test(Int): String' type=kotlin.String operator=null
+          x: CONST Int type=kotlin.Int value='1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

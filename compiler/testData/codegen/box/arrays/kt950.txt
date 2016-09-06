@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /kt950.kt
+    FUN public operator fun <K, V> kotlin.collections.MutableMap<K, V>.set(k: K, v: V): V?
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='set(K, V) on MutableMap<K, V>: V?'
+          CALL 'put(K, V): V?' type=V? operator=null
+            $this: $RECEIVER of 'set(K, V) on MutableMap<K, V>: V?' type=kotlin.collections.MutableMap<K, V>
+            key: GET_VAR 'value-parameter k: K' type=K operator=null
+            value: GET_VAR 'value-parameter v: V' type=V operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val map: java.util.HashMap<kotlin.String, kotlin.String>
+          CALL 'constructor HashMap()' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+        CALL 'set(String, String) on MutableMap<String, String>: String?' type=kotlin.String? operator=EQ
+          $receiver: GET_VAR 'map: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+          k: CONST String type=kotlin.String value='239'
+          v: CONST String type=kotlin.String value='932'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'get(String): String?' type=kotlin.String? operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'map: HashMap<String, String>' type=java.util.HashMap<kotlin.String, kotlin.String> operator=null
+                key: CONST String type=kotlin.String value='239'
+              arg1: CONST String type=kotlin.String value='932'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

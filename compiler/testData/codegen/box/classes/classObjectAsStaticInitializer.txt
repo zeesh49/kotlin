@@ -1,0 +1,43 @@
+MODULE <test-module>
+  FILE /classObjectAsStaticInitializer.kt
+    PROPERTY public var global: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='0'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      CLASS OBJECT companion object of C
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of C'
+        ANONYMOUS_INITIALIZER companion object of C
+          BLOCK_BODY
+            CALL '<set-global>(Int): Unit' type=kotlin.Unit operator=EQ
+              <set-?>: CONST Int type=kotlin.Int value='1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-global>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              arg1: CONST Int type=kotlin.Int value='0'
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='fail1: global = '
+                CALL '<get-global>(): Int' type=kotlin.Int operator=GET_PROPERTY
+        VAR val c: C
+          CALL 'constructor C()' type=C operator=null
+        WHEN type=kotlin.Nothing operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL '<get-global>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='OK'
+          else: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail2: global = '
+              CALL '<get-global>(): Int' type=kotlin.Int operator=GET_PROPERTY

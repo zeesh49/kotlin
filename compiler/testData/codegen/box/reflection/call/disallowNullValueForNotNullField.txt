@@ -1,0 +1,119 @@
+MODULE <test-module>
+  FILE /disallowNullValueForNotNullField.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY private final var foo: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value=''
+    CLASS OBJECT O
+      CONSTRUCTOR private constructor O()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='O'
+      PROPERTY @kotlin.jvm.JvmStatic private final var bar: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value=''
+    CLASS CLASS CounterTest
+      CONSTRUCTOR public constructor CounterTest<T>(t: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='CounterTest'
+      PROPERTY private final var baz: kotlin.String?
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value=''
+      PROPERTY private final var generic: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter t: T' type=T operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val p: kotlin.reflect.KMutableProperty1<A, kotlin.String?>
+          TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty1<A, kotlin.String?>
+            CALL 'single() on Iterable<KProperty1<A, *>>: KProperty1<A, *>' type=kotlin.reflect.KProperty1<A, *> operator=null
+              $receiver: CALL '<get-memberProperties>() on KClass<A>: Collection<KProperty1<A, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<A, *>> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+        CALL '<set-isAccessible>(Boolean) on KCallable<*>: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 'p: KMutableProperty1<A, String?>' type=kotlin.reflect.KMutableProperty1<A, kotlin.String?> operator=null
+          value: CONST Boolean type=kotlin.Boolean value='true'
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'call(vararg Any?): Unit' type=kotlin.Unit operator=null
+              $this: CALL '<get-setter>(): KMutableProperty1.Setter<A, String?>' type=kotlin.reflect.KMutableProperty1.Setter<A, kotlin.String?> operator=GET_PROPERTY
+                $this: GET_VAR 'p: KMutableProperty1<A, String?>' type=kotlin.reflect.KMutableProperty1<A, kotlin.String?> operator=null
+              args: VARARG type=Array<out Any?> varargElementType=Any?
+                CALL 'constructor A()' type=A operator=null
+                CONST Null type=kotlin.Nothing? value='null'
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail: exception should have been thrown'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        VAR val o: kotlin.reflect.KMutableProperty1<O, kotlin.String?>
+          TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty1<O, kotlin.String?>
+            CALL 'single() on Iterable<KProperty1<O, *>>: KProperty1<O, *>' type=kotlin.reflect.KProperty1<O, *> operator=null
+              $receiver: CALL '<get-memberProperties>() on KClass<O>: Collection<KProperty1<O, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<O, *>> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'O' type=kotlin.reflect.KClass<O>
+        CALL '<set-isAccessible>(Boolean) on KCallable<*>: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 'o: KMutableProperty1<O, String?>' type=kotlin.reflect.KMutableProperty1<O, kotlin.String?> operator=null
+          value: CONST Boolean type=kotlin.Boolean value='true'
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'call(vararg Any?): Unit' type=kotlin.Unit operator=null
+              $this: CALL '<get-setter>(): KMutableProperty1.Setter<O, String?>' type=kotlin.reflect.KMutableProperty1.Setter<O, kotlin.String?> operator=GET_PROPERTY
+                $this: GET_VAR 'o: KMutableProperty1<O, String?>' type=kotlin.reflect.KMutableProperty1<O, kotlin.String?> operator=null
+              args: VARARG type=Array<out Any?> varargElementType=Any?
+                GET_OBJECT 'O' type=O
+                CONST Null type=kotlin.Nothing? value='null'
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail: exception should have been thrown'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        VAR val c: kotlin.reflect.KMutableProperty1<CounterTest<*>, kotlin.String?>
+          TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty1<CounterTest<*>, kotlin.String?>
+            CALL 'single((KProperty1<CounterTest<*>, *>) -> Boolean) on Iterable<KProperty1<CounterTest<*>, *>>: KProperty1<CounterTest<*>, *>' type=kotlin.reflect.KProperty1<CounterTest<*>, *> operator=null
+              $receiver: CALL '<get-memberProperties>() on KClass<CounterTest<*>>: Collection<KProperty1<CounterTest<*>, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<CounterTest<*>, *>> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'CounterTest' type=kotlin.reflect.KClass<CounterTest<*>>
+              predicate: BLOCK type=(kotlin.reflect.KProperty1<CounterTest<*>, *>) -> kotlin.Boolean operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KProperty1<CounterTest<*>, *>): kotlin.Boolean
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KProperty1<CounterTest<*>, *>): Boolean'
+                      CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                          $this: GET_VAR 'value-parameter it: KProperty1<CounterTest<*>, *>' type=kotlin.reflect.KProperty1<CounterTest<*>, *> operator=null
+                        arg1: CONST String type=kotlin.String value='baz'
+                CALLABLE_REFERENCE '<anonymous>(KProperty1<CounterTest<*>, *>): Boolean' type=(kotlin.reflect.KProperty1<CounterTest<*>, *>) -> kotlin.Boolean operator=LAMBDA
+        CALL '<set-isAccessible>(Boolean) on KCallable<*>: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 'c: KMutableProperty1<CounterTest<*>, String?>' type=kotlin.reflect.KMutableProperty1<CounterTest<*>, kotlin.String?> operator=null
+          value: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'call(vararg Any?): Unit' type=kotlin.Unit operator=null
+          $this: CALL '<get-setter>(): KMutableProperty1.Setter<CounterTest<*>, String?>' type=kotlin.reflect.KMutableProperty1.Setter<CounterTest<*>, kotlin.String?> operator=GET_PROPERTY
+            $this: GET_VAR 'c: KMutableProperty1<CounterTest<*>, String?>' type=kotlin.reflect.KMutableProperty1<CounterTest<*>, kotlin.String?> operator=null
+          args: VARARG type=Array<out Any?> varargElementType=Any?
+            CALL 'constructor CounterTest(String)' type=CounterTest<kotlin.String> operator=null
+              t: CONST String type=kotlin.String value=''
+            CONST Null type=kotlin.Nothing? value='null'
+        VAR val d: kotlin.reflect.KMutableProperty1<CounterTest<*>, kotlin.String?>
+          TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty1<CounterTest<*>, kotlin.String?>
+            CALL 'single((KProperty1<CounterTest<*>, *>) -> Boolean) on Iterable<KProperty1<CounterTest<*>, *>>: KProperty1<CounterTest<*>, *>' type=kotlin.reflect.KProperty1<CounterTest<*>, *> operator=null
+              $receiver: CALL '<get-memberProperties>() on KClass<CounterTest<*>>: Collection<KProperty1<CounterTest<*>, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<CounterTest<*>, *>> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'CounterTest' type=kotlin.reflect.KClass<CounterTest<*>>
+              predicate: BLOCK type=(kotlin.reflect.KProperty1<CounterTest<*>, *>) -> kotlin.Boolean operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KProperty1<CounterTest<*>, *>): kotlin.Boolean
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KProperty1<CounterTest<*>, *>): Boolean'
+                      CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                          $this: GET_VAR 'value-parameter it: KProperty1<CounterTest<*>, *>' type=kotlin.reflect.KProperty1<CounterTest<*>, *> operator=null
+                        arg1: CONST String type=kotlin.String value='generic'
+                CALLABLE_REFERENCE '<anonymous>(KProperty1<CounterTest<*>, *>): Boolean' type=(kotlin.reflect.KProperty1<CounterTest<*>, *>) -> kotlin.Boolean operator=LAMBDA
+        CALL '<set-isAccessible>(Boolean) on KCallable<*>: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 'd: KMutableProperty1<CounterTest<*>, String?>' type=kotlin.reflect.KMutableProperty1<CounterTest<*>, kotlin.String?> operator=null
+          value: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'call(vararg Any?): Unit' type=kotlin.Unit operator=null
+          $this: CALL '<get-setter>(): KMutableProperty1.Setter<CounterTest<*>, String?>' type=kotlin.reflect.KMutableProperty1.Setter<CounterTest<*>, kotlin.String?> operator=GET_PROPERTY
+            $this: GET_VAR 'd: KMutableProperty1<CounterTest<*>, String?>' type=kotlin.reflect.KMutableProperty1<CounterTest<*>, kotlin.String?> operator=null
+          args: VARARG type=Array<out Any?> varargElementType=Any?
+            CALL 'constructor CounterTest(String)' type=CounterTest<kotlin.String> operator=null
+              t: CONST String type=kotlin.String value=''
+            CONST Null type=kotlin.Nothing? value='null'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,48 @@
+MODULE <test-module>
+  FILE /localExtendsInner.kt
+    CLASS CLASS Father
+      CONSTRUCTOR public constructor Father(param: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'param: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Father' type=Father
+            value: GET_VAR 'value-parameter param: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Father'
+      PROPERTY public final val param: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter param: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CLASS CLASS InClass
+        CONSTRUCTOR public constructor InClass()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='InClass'
+        FUN public final fun work(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='work(): String'
+              CALL '<get-param>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'Father' type=Father
+      CLASS CLASS Child
+        CONSTRUCTOR public constructor Child(p: kotlin.String)
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Father(String)'
+              param: GET_VAR 'value-parameter p: String' type=kotlin.String operator=null
+            INSTANCE_INITIALIZER_CALL classDescriptor='Child'
+        FUN public final fun test(): Father.InClass
+          BLOCK_BODY
+            CLASS CLASS Local
+              CONSTRUCTOR public constructor Local()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor InClass()'
+                    $this: THIS of 'Child' type=Father.Child
+                  INSTANCE_INITIALIZER_CALL classDescriptor='Local'
+            RETURN type=kotlin.Nothing from='test(): Father.InClass'
+              CALL 'constructor Local()' type=Father.Child.test.Local operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'work(): String' type=kotlin.String operator=null
+            $this: CALL 'test(): Father.InClass' type=Father.InClass operator=null
+              $this: CALL 'constructor Child(String)' type=Father.Child operator=null
+                $this: CALL 'constructor Father(String)' type=Father operator=null
+                  param: CONST String type=kotlin.String value='fail'
+                p: CONST String type=kotlin.String value='OK'

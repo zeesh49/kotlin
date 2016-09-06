@@ -1,0 +1,32 @@
+MODULE <test-module>
+  FILE /bottles.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var bottles: kotlin.Int
+          CONST Int type=kotlin.Int value='99'
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+              $this: GET_VAR 'bottles: Int' type=kotlin.Int operator=null
+              other: CONST Int type=kotlin.Int value='0'
+          body: BLOCK type=kotlin.Int operator=null
+            SET_VAR 'bottles: Int' type=kotlin.Unit operator=MINUSEQ
+              CALL 'minus(Int): Int' type=kotlin.Int operator=MINUSEQ
+                $this: GET_VAR 'bottles: Int' type=kotlin.Int operator=MINUSEQ
+                other: CONST Int type=kotlin.Int value='1'
+            BLOCK type=kotlin.Int operator=POSTFIX_DECR
+              VAR val tmp0: kotlin.Int
+                GET_VAR 'bottles: Int' type=kotlin.Int operator=POSTFIX_DECR
+              SET_VAR 'bottles: Int' type=kotlin.Unit operator=POSTFIX_DECR
+                CALL 'dec(): Int' type=kotlin.Int operator=POSTFIX_DECR
+                  $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'bottles: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='-1'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'bottles: Int' type=kotlin.Int operator=null

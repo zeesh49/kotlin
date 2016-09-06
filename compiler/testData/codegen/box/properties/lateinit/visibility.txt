@@ -1,0 +1,70 @@
+MODULE <test-module>
+  FILE /visibility.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY private final lateinit var privateField: kotlin.String
+      PROPERTY protected final lateinit var protectedField: kotlin.String
+      PROPERTY public final lateinit var publicField: kotlin.String
+      FUN public final fun test(): kotlin.String
+        BLOCK_BODY
+          VAR val clazz: java.lang.Class<A>
+            CALL '<get-java>() on KClass<A>: Class<A>' type=java.lang.Class<A> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+          VAR val cond: java.util.ArrayList<kotlin.String>
+            CALL 'arrayListOf(vararg String): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+              $this: CALL 'isPrivate(Int): Boolean' type=kotlin.Boolean operator=null
+                p0: CALL '<get-modifiers>() on Field: Int' type=kotlin.Int operator=GET_PROPERTY
+                  $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+                    CALL 'getDeclaredField(String!): Field!' type=java.lang.reflect.Field! operator=null
+                      $this: GET_VAR 'clazz: Class<A>' type=java.lang.Class<A> operator=null
+                      p0: CONST String type=kotlin.String value='privateField'
+            then: CALL 'plusAssign(String) on MutableCollection<in String>: Unit' type=kotlin.Unit operator=PLUSEQ
+              $receiver: GET_VAR 'cond: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=PLUSEQ
+              element: CONST String type=kotlin.String value='NOT_PRIVATE'
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+              $this: CALL 'isProtected(Int): Boolean' type=kotlin.Boolean operator=null
+                p0: CALL '<get-modifiers>() on Field: Int' type=kotlin.Int operator=GET_PROPERTY
+                  $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+                    CALL 'getDeclaredField(String!): Field!' type=java.lang.reflect.Field! operator=null
+                      $this: GET_VAR 'clazz: Class<A>' type=java.lang.Class<A> operator=null
+                      p0: CONST String type=kotlin.String value='protectedField'
+            then: CALL 'plusAssign(String) on MutableCollection<in String>: Unit' type=kotlin.Unit operator=PLUSEQ
+              $receiver: GET_VAR 'cond: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=PLUSEQ
+              element: CONST String type=kotlin.String value='NOT_PROTECTED'
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+              $this: CALL 'isPublic(Int): Boolean' type=kotlin.Boolean operator=null
+                p0: CALL '<get-modifiers>() on Field: Int' type=kotlin.Int operator=GET_PROPERTY
+                  $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+                    CALL 'getDeclaredField(String!): Field!' type=java.lang.reflect.Field! operator=null
+                      $this: GET_VAR 'clazz: Class<A>' type=java.lang.Class<A> operator=null
+                      p0: CONST String type=kotlin.String value='publicField'
+            then: CALL 'plusAssign(String) on MutableCollection<in String>: Unit' type=kotlin.Unit operator=PLUSEQ
+              $receiver: GET_VAR 'cond: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=PLUSEQ
+              element: CONST String type=kotlin.String value='NOT_PUBLIC'
+          TRY_CATCH type=kotlin.Unit
+            try: BLOCK type=kotlin.Unit operator=null
+              VAR val a: kotlin.String
+                CALL '<get-privateField>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: THIS of 'A' type=A
+            catch e: BLOCK type=kotlin.Nothing operator=null
+              RETURN type=kotlin.Nothing from='test(): String'
+                WHEN type=kotlin.String operator=IF
+                  if: CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+                    $this: GET_VAR 'cond: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+                  then: CONST String type=kotlin.String value='OK'
+                  else: CALL 'joinToString(CharSequence = ..., CharSequence = ..., CharSequence = ..., Int = ..., CharSequence = ..., ((String) -> CharSequence)? = ...) on Iterable<String>: String' type=kotlin.String operator=null
+                    $receiver: GET_VAR 'cond: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+          RETURN type=kotlin.Nothing from='test(): String'
+            CONST String type=kotlin.String value='EXCEPTION WAS NOT CAUGHT'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'test(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor A()' type=A operator=null

@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /changeMonitor.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var obj0: java.lang.Object
+          TYPE_OP operator=CAST typeOperand=java.lang.Object
+            CONST String type=kotlin.String value='0'
+        VAR var obj1: java.lang.Object
+          TYPE_OP operator=CAST typeOperand=java.lang.Object
+            CONST String type=kotlin.String value='1'
+        VAR var v: java.lang.Object
+          GET_VAR 'obj0: Object' type=java.lang.Object operator=null
+        CALL 'synchronized(Any, () -> Unit): Unit' type=kotlin.Unit operator=null
+          lock: GET_VAR 'v: Object' type=java.lang.Object operator=null
+          block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  SET_VAR 'v: Object' type=kotlin.Unit operator=EQ
+                    GET_VAR 'obj1: Object' type=java.lang.Object operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'assertThatThreadDoesNotOwnMonitor(Object): Unit' type=kotlin.Unit operator=null
+          obj: GET_VAR 'obj0: Object' type=java.lang.Object operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun assertThatThreadDoesNotOwnMonitor(obj: java.lang.Object): kotlin.Unit
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'wait(Long): Unit' type=kotlin.Unit operator=null
+              $this: GET_VAR 'value-parameter obj: Object' type=java.lang.Object operator=null
+              p0: CONST Long type=kotlin.Long value='1'
+            THROW type=kotlin.Nothing
+              CALL 'constructor IllegalStateException(String!)' type=java.lang.IllegalStateException operator=null
+                p0: CONST String type=kotlin.String value='Not owning a monitor!'
+          catch e: BLOCK type=kotlin.Unit operator=null

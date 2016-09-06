@@ -1,0 +1,55 @@
+MODULE <test-module>
+  FILE /test.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS OBJECT companion object of A
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of A'
+        PROPERTY public final val i1: kotlin.Int = 1
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='1'
+        PROPERTY public final val i2: kotlin.Int = 2
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='2'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      CLASS OBJECT companion object of BNamed
+        CONSTRUCTOR private constructor Named()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of BNamed'
+        PROPERTY public final val i1: kotlin.Int = 3
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='3'
+        PROPERTY public final val i2: kotlin.Int = 4
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='4'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'f(): Int' type=kotlin.Int operator=null
+              arg1: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                  $this: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: CALL '<get-i1>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                      $this: GET_OBJECT 'companion object of A' type=A.Companion
+                    other: CALL '<get-i2>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                      $this: GET_OBJECT 'companion object of A' type=A.Companion
+                  other: CALL '<get-i1>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                    $this: GET_OBJECT 'companion object of BNamed' type=B.Named
+                other: CALL '<get-i2>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_OBJECT 'companion object of BNamed' type=B.Named
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              CALL 'f(): Int' type=kotlin.Int operator=null

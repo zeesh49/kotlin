@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /kt2895.kt
+    FUN public fun outer(): kotlin.Unit
+      BLOCK_BODY
+        FUN local final fun inner(i: kotlin.Int): kotlin.Unit
+          BLOCK_BODY
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+                arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+                  $this: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+                  other: CONST Int type=kotlin.Int value='0'
+              then: BLOCK type=kotlin.Unit operator=null
+                CALL 'invoke(Int): Unit' type=kotlin.Unit operator=null
+                  $this: BLOCK type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+                    FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Unit
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(Int): Unit'
+                          CALL 'inner(Int): Unit' type=kotlin.Unit operator=null
+                            i: CONST Int type=kotlin.Int value='0'
+                    CALLABLE_REFERENCE '<anonymous>(Int): Unit' type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+                  p1: CONST Int type=kotlin.Int value='1'
+        CALL 'inner(Int): Unit' type=kotlin.Unit operator=null
+          i: CONST Int type=kotlin.Int value='1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'outer(): Unit' type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

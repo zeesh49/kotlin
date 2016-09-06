@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /constValInAnnotationDefault.kt
+    PROPERTY public const val z: kotlin.String = "OK"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='OK'
+    CLASS ANNOTATION_CLASS A
+      PROPERTY public final val value: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: String = ...' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=A
+              CALL 'getAnnotation(Class<A!>!): A!' type=A! operator=null
+                $this: CALL '<get-java>() on KClass<Test>: Class<Test>' type=java.lang.Class<Test> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'Test' type=kotlin.reflect.KClass<Test>
+                p0: CALL '<get-java>() on KClass<A>: Class<A>' type=java.lang.Class<A> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>

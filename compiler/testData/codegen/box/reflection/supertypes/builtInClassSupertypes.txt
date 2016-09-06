@@ -1,0 +1,178 @@
+MODULE <test-module>
+  FILE /builtInClassSupertypes.kt
+    FUN public inline fun <reified T : kotlin.Any> check(vararg callables: kotlin.reflect.KCallable<*>): kotlin.Unit
+      BLOCK_BODY
+        VAR val types: kotlin.collections.List<kotlin.reflect.KType>
+          CALL 'map((KCallable<*>) -> KType) on Array<out KCallable<*>>: List<KType>' type=kotlin.collections.List<kotlin.reflect.KType> operator=null
+            $receiver: GET_VAR 'value-parameter vararg callables: KCallable<*>' type=kotlin.Array<out kotlin.reflect.KCallable<*>> operator=null
+            transform: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.reflect.KType operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.reflect.KType
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): KType'
+                    CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                      $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+              CALLABLE_REFERENCE '<anonymous>(KCallable<*>): KType' type=(kotlin.reflect.KCallable<*>) -> kotlin.reflect.KType operator=LAMBDA
+        CALL 'assertEquals(List<KType>, List<KType>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'types: List<KType>' type=kotlin.collections.List<kotlin.reflect.KType> operator=null
+          actual: CALL '<get-supertypes>(): List<KType>' type=kotlin.collections.List<kotlin.reflect.KType> operator=GET_PROPERTY
+            $this: CLASS_REFERENCE '<reified T : Any>' type=kotlin.reflect.KClass<T>
+        CALL 'assertEquals(List<KClass<*>>, List<KClass<*>>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'map((KType) -> KClass<*>) on Iterable<KType>: List<KClass<*>>' type=kotlin.collections.List<kotlin.reflect.KClass<*>> operator=null
+            $receiver: GET_VAR 'types: List<KType>' type=kotlin.collections.List<kotlin.reflect.KType> operator=null
+            transform: BLOCK type=(kotlin.reflect.KType) -> kotlin.reflect.KClass<*> operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KType): kotlin.reflect.KClass<*>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KType): KClass<*>'
+                    TYPE_OP operator=CAST typeOperand=kotlin.reflect.KClass<*>
+                      CALL '<get-classifier>(): KClassifier?' type=kotlin.reflect.KClassifier? operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KType' type=kotlin.reflect.KType operator=null
+              CALLABLE_REFERENCE '<anonymous>(KType): KClass<*>' type=(kotlin.reflect.KType) -> kotlin.reflect.KClass<*> operator=LAMBDA
+          actual: CALL '<get-superclasses>() on KClass<*>: List<KClass<*>>' type=kotlin.collections.List<kotlin.reflect.KClass<*>> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE '<reified T : Any>' type=kotlin.reflect.KClass<T>
+    FUN public inline fun <reified T : kotlin.Any> checkAll(vararg callables: kotlin.reflect.KCallable<*>): kotlin.Unit
+      BLOCK_BODY
+        VAR val types: kotlin.collections.List<kotlin.reflect.KType>
+          CALL 'map((KCallable<*>) -> KType) on Array<out KCallable<*>>: List<KType>' type=kotlin.collections.List<kotlin.reflect.KType> operator=null
+            $receiver: GET_VAR 'value-parameter vararg callables: KCallable<*>' type=kotlin.Array<out kotlin.reflect.KCallable<*>> operator=null
+            transform: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.reflect.KType operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.reflect.KType
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): KType'
+                    CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                      $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+              CALLABLE_REFERENCE '<anonymous>(KCallable<*>): KType' type=(kotlin.reflect.KCallable<*>) -> kotlin.reflect.KType operator=LAMBDA
+        CALL 'assertEquals(Set<KType>, Set<KType>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'toSet() on Iterable<KType>: Set<KType>' type=kotlin.collections.Set<kotlin.reflect.KType> operator=null
+            $receiver: GET_VAR 'types: List<KType>' type=kotlin.collections.List<kotlin.reflect.KType> operator=null
+          actual: CALL 'toSet() on Iterable<KType>: Set<KType>' type=kotlin.collections.Set<kotlin.reflect.KType> operator=null
+            $receiver: CALL '<get-allSupertypes>() on KClass<*>: Collection<KType>' type=kotlin.collections.Collection<kotlin.reflect.KType> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE '<reified T : Any>' type=kotlin.reflect.KClass<T>
+        CALL 'assertEquals(Set<KClass<*>>, Set<KClass<*>>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'toSet() on Iterable<KClass<*>>: Set<KClass<*>>' type=kotlin.collections.Set<kotlin.reflect.KClass<*>> operator=null
+            $receiver: CALL 'map((KType) -> KClass<*>) on Iterable<KType>: List<KClass<*>>' type=kotlin.collections.List<kotlin.reflect.KClass<*>> operator=null
+              $receiver: GET_VAR 'types: List<KType>' type=kotlin.collections.List<kotlin.reflect.KType> operator=null
+              transform: BLOCK type=(kotlin.reflect.KType) -> kotlin.reflect.KClass<*> operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KType): kotlin.reflect.KClass<*>
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KType): KClass<*>'
+                      TYPE_OP operator=CAST typeOperand=kotlin.reflect.KClass<*>
+                        CALL '<get-classifier>(): KClassifier?' type=kotlin.reflect.KClassifier? operator=GET_PROPERTY
+                          $this: GET_VAR 'value-parameter it: KType' type=kotlin.reflect.KType operator=null
+                CALLABLE_REFERENCE '<anonymous>(KType): KClass<*>' type=(kotlin.reflect.KType) -> kotlin.reflect.KClass<*> operator=LAMBDA
+          actual: CALL 'toSet() on Iterable<KClass<*>>: Set<KClass<*>>' type=kotlin.collections.Set<kotlin.reflect.KClass<*>> operator=null
+            $receiver: CALL '<get-allSuperclasses>() on KClass<*>: Collection<KClass<*>>' type=kotlin.collections.Collection<kotlin.reflect.KClass<*>> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE '<reified T : Any>' type=kotlin.reflect.KClass<T>
+    FUN public fun comparableOfString(): kotlin.Comparable<kotlin.String>
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun charSequence(): kotlin.CharSequence
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun serializable(): java.io.Serializable
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun any(): kotlin.Any
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun number(): kotlin.Number
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun comparableOfInt(): kotlin.Comparable<kotlin.Int>
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun cloneable(): kotlin.Cloneable
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'check(vararg KCallable<*>): Unit' type=kotlin.Unit operator=null
+        CALL 'checkAll(vararg KCallable<*>): Unit' type=kotlin.Unit operator=null
+        CALL 'check(vararg KCallable<*>): Unit' type=kotlin.Unit operator=null
+          callables: VARARG type=Array<out KCallable<*>> varargElementType=KCallable<*>
+            CALLABLE_REFERENCE 'comparableOfString(): Comparable<String>' type=kotlin.reflect.KFunction0<kotlin.Comparable<kotlin.String>> operator=null
+            CALLABLE_REFERENCE 'charSequence(): CharSequence' type=kotlin.reflect.KFunction0<kotlin.CharSequence> operator=null
+            CALLABLE_REFERENCE 'serializable(): Serializable' type=kotlin.reflect.KFunction0<java.io.Serializable> operator=null
+        CALL 'checkAll(vararg KCallable<*>): Unit' type=kotlin.Unit operator=null
+          callables: VARARG type=Array<out KCallable<*>> varargElementType=KCallable<*>
+            CALLABLE_REFERENCE 'comparableOfString(): Comparable<String>' type=kotlin.reflect.KFunction0<kotlin.Comparable<kotlin.String>> operator=null
+            CALLABLE_REFERENCE 'charSequence(): CharSequence' type=kotlin.reflect.KFunction0<kotlin.CharSequence> operator=null
+            CALLABLE_REFERENCE 'serializable(): Serializable' type=kotlin.reflect.KFunction0<java.io.Serializable> operator=null
+            CALLABLE_REFERENCE 'any(): Any' type=kotlin.reflect.KFunction0<kotlin.Any> operator=null
+        CALL 'check(vararg KCallable<*>): Unit' type=kotlin.Unit operator=null
+          callables: VARARG type=Array<out KCallable<*>> varargElementType=KCallable<*>
+            CALLABLE_REFERENCE 'number(): Number' type=kotlin.reflect.KFunction0<kotlin.Number> operator=null
+            CALLABLE_REFERENCE 'comparableOfInt(): Comparable<Int>' type=kotlin.reflect.KFunction0<kotlin.Comparable<kotlin.Int>> operator=null
+            CALLABLE_REFERENCE 'serializable(): Serializable' type=kotlin.reflect.KFunction0<java.io.Serializable> operator=null
+        CALL 'checkAll(vararg KCallable<*>): Unit' type=kotlin.Unit operator=null
+          callables: VARARG type=Array<out KCallable<*>> varargElementType=KCallable<*>
+            CALLABLE_REFERENCE 'number(): Number' type=kotlin.reflect.KFunction0<kotlin.Number> operator=null
+            CALLABLE_REFERENCE 'comparableOfInt(): Comparable<Int>' type=kotlin.reflect.KFunction0<kotlin.Comparable<kotlin.Int>> operator=null
+            CALLABLE_REFERENCE 'serializable(): Serializable' type=kotlin.reflect.KFunction0<java.io.Serializable> operator=null
+            CALLABLE_REFERENCE 'any(): Any' type=kotlin.reflect.KFunction0<kotlin.Any> operator=null
+        CALL 'check(vararg KCallable<*>): Unit' type=kotlin.Unit operator=null
+          callables: VARARG type=Array<out KCallable<*>> varargElementType=KCallable<*>
+            CALLABLE_REFERENCE 'cloneable(): Cloneable' type=kotlin.reflect.KFunction0<kotlin.Cloneable> operator=null
+            CALLABLE_REFERENCE 'serializable(): Serializable' type=kotlin.reflect.KFunction0<java.io.Serializable> operator=null
+        CALL 'checkAll(vararg KCallable<*>): Unit' type=kotlin.Unit operator=null
+          callables: VARARG type=Array<out KCallable<*>> varargElementType=KCallable<*>
+            CALLABLE_REFERENCE 'cloneable(): Cloneable' type=kotlin.reflect.KFunction0<kotlin.Cloneable> operator=null
+            CALLABLE_REFERENCE 'serializable(): Serializable' type=kotlin.reflect.KFunction0<java.io.Serializable> operator=null
+            CALLABLE_REFERENCE 'any(): Any' type=kotlin.reflect.KFunction0<kotlin.Any> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

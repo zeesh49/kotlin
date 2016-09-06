@@ -1,0 +1,29 @@
+MODULE <test-module>
+  FILE /kt2275.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Byte? operator=SAFE_CALL
+          VAR val tmp0_safe_receiver: kotlin.Number?
+            TYPE_OP operator=CAST typeOperand=kotlin.Number?
+              CALL 'toLong(): Long' type=kotlin.Long operator=null
+                $this: CONST Int type=kotlin.Int value='0'
+          WHEN type=kotlin.Byte? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_safe_receiver: Number?' type=kotlin.Number? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+              $this: GET_VAR 'tmp0_safe_receiver: Number?' type=kotlin.Number? operator=null
+        BLOCK type=kotlin.Double? operator=SAFE_CALL
+          VAR val tmp1_safe_receiver: kotlin.Int?
+            TYPE_OP operator=CAST typeOperand=kotlin.Int?
+              CONST Int type=kotlin.Int value='0'
+          WHEN type=kotlin.Double? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp1_safe_receiver: Int?' type=kotlin.Int? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'toDouble(): Double' type=kotlin.Double operator=null
+              $this: GET_VAR 'tmp1_safe_receiver: Int?' type=kotlin.Int? operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

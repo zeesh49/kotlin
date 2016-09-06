@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /tryInsideCatch.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CONST String type=kotlin.String value='O'
+            other: TRY_CATCH type=kotlin.String
+              try: BLOCK type=kotlin.Nothing operator=null
+                THROW type=kotlin.Nothing
+                  CALL 'constructor Exception(String!)' type=java.lang.Exception operator=null
+                    p0: CONST String type=kotlin.String value='oops!'
+              catch e: BLOCK type=kotlin.String operator=null
+                TRY_CATCH type=kotlin.String
+                  try: BLOCK type=kotlin.String operator=null
+                    CONST String type=kotlin.String value='K'
+                  catch e: BLOCK type=kotlin.String operator=null
+                    CONST String type=kotlin.String value='2'

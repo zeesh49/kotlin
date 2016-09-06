@@ -1,0 +1,112 @@
+MODULE <test-module>
+  FILE /sameIndexRecursive.kt
+    FUN public inline fun <reified T1, reified T2> createArray(n: kotlin.Int, crossinline block: () -> kotlin.Pair<T1, T2>): kotlin.Pair<kotlin.Array<T1>, kotlin.Array<T2>>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='createArray(Int, crossinline () -> Pair<T1, T2>): Pair<Array<T1>, Array<T2>>'
+          CALL 'constructor Pair(Array<T1>, Array<T2>)' type=kotlin.Pair<kotlin.Array<T1>, kotlin.Array<T2>> operator=null
+            first: CALL 'constructor Array(Int, (Int) -> T1)' type=kotlin.Array<T1> operator=null
+              size: GET_VAR 'value-parameter n: Int' type=kotlin.Int operator=null
+              init: BLOCK type=(kotlin.Int) -> T1 operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.Int): T1
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(Int): T1'
+                      CALL '<get-first>(): T1' type=T1 operator=GET_PROPERTY
+                        $this: CALL 'invoke(): Pair<T1, T2>' type=kotlin.Pair<T1, T2> operator=INVOKE
+                          $this: GET_VAR 'value-parameter crossinline block: () -> Pair<T1, T2>' type=() -> kotlin.Pair<T1, T2> operator=VARIABLE_AS_FUNCTION
+                CALLABLE_REFERENCE '<anonymous>(Int): T1' type=(kotlin.Int) -> T1 operator=LAMBDA
+            second: CALL 'constructor Array(Int, (Int) -> T2)' type=kotlin.Array<T2> operator=null
+              size: GET_VAR 'value-parameter n: Int' type=kotlin.Int operator=null
+              init: BLOCK type=(kotlin.Int) -> T2 operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.Int): T2
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(Int): T2'
+                      CALL '<get-second>(): T2' type=T2 operator=GET_PROPERTY
+                        $this: CALL 'invoke(): Pair<T1, T2>' type=kotlin.Pair<T1, T2> operator=INVOKE
+                          $this: GET_VAR 'value-parameter crossinline block: () -> Pair<T1, T2>' type=() -> kotlin.Pair<T1, T2> operator=VARIABLE_AS_FUNCTION
+                CALLABLE_REFERENCE '<anonymous>(Int): T2' type=(kotlin.Int) -> T2 operator=LAMBDA
+    FUN public inline fun <T1, T2, T3, T4, T5, T6, reified R> recursive(crossinline block: () -> R): kotlin.Pair<kotlin.Array<R>, kotlin.Array<R>>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='recursive(crossinline () -> R): Pair<Array<R>, Array<R>>'
+          CALL 'createArray(Int, crossinline () -> Pair<R, R>): Pair<Array<R>, Array<R>>' type=kotlin.Pair<kotlin.Array<R>, kotlin.Array<R>> operator=null
+            n: CONST Int type=kotlin.Int value='5'
+            block: BLOCK type=() -> kotlin.Pair<R, R> operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Pair<R, R>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Pair<R, R>'
+                    CALL 'constructor Pair(R, R)' type=kotlin.Pair<R, R> operator=null
+                      first: CALL 'invoke(): R' type=R operator=INVOKE
+                        $this: GET_VAR 'value-parameter crossinline block: () -> R' type=() -> R operator=VARIABLE_AS_FUNCTION
+                      second: CALL 'invoke(): R' type=R operator=INVOKE
+                        $this: GET_VAR 'value-parameter crossinline block: () -> R' type=() -> R operator=VARIABLE_AS_FUNCTION
+              CALLABLE_REFERENCE '<anonymous>(): Pair<R, R>' type=() -> kotlin.Pair<R, R> operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val y: kotlin.Pair<kotlin.Array<kotlin.Int>, kotlin.Array<kotlin.String>>
+          CALL 'createArray(Int, crossinline () -> Pair<Int, String>): Pair<Array<Int>, Array<String>>' type=kotlin.Pair<kotlin.Array<kotlin.Int>, kotlin.Array<kotlin.String>> operator=null
+            n: CONST Int type=kotlin.Int value='5'
+            block: BLOCK type=() -> kotlin.Pair<kotlin.Int, kotlin.String> operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Pair<kotlin.Int, kotlin.String>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Pair<Int, String>'
+                    CALL 'constructor Pair(Int, String)' type=kotlin.Pair<kotlin.Int, kotlin.String> operator=null
+                      first: CONST Int type=kotlin.Int value='1'
+                      second: CONST String type=kotlin.String value='test'
+              CALLABLE_REFERENCE '<anonymous>(): Pair<Int, String>' type=() -> kotlin.Pair<kotlin.Int, kotlin.String> operator=LAMBDA
+        VAR val x: kotlin.Pair<kotlin.Array<kotlin.String>, kotlin.Array<kotlin.String>>
+          CALL 'recursive(crossinline () -> String): Pair<Array<String>, Array<String>>' type=kotlin.Pair<kotlin.Array<kotlin.String>, kotlin.Array<kotlin.String>> operator=null
+            block: BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    CONST String type=kotlin.String value='abc'
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'all((Int) -> Boolean) on Array<out Int>: Boolean' type=kotlin.Boolean operator=null
+            $receiver: CALL '<get-first>(): Array<Int>' type=kotlin.Array<kotlin.Int> operator=GET_PROPERTY
+              $this: GET_VAR 'y: Pair<Array<Int>, Array<String>>' type=kotlin.Pair<kotlin.Array<kotlin.Int>, kotlin.Array<kotlin.String>> operator=null
+            predicate: BLOCK type=(kotlin.Int) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): Boolean'
+                    CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                      arg1: CONST Int type=kotlin.Int value='1'
+              CALLABLE_REFERENCE '<anonymous>(Int): Boolean' type=(kotlin.Int) -> kotlin.Boolean operator=LAMBDA
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'all((String) -> Boolean) on Array<out String>: Boolean' type=kotlin.Boolean operator=null
+            $receiver: CALL '<get-second>(): Array<String>' type=kotlin.Array<kotlin.String> operator=GET_PROPERTY
+              $this: GET_VAR 'y: Pair<Array<Int>, Array<String>>' type=kotlin.Pair<kotlin.Array<kotlin.Int>, kotlin.Array<kotlin.String>> operator=null
+            predicate: BLOCK type=(kotlin.String) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.String): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(String): Boolean'
+                    CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'value-parameter it: String' type=kotlin.String operator=null
+                      arg1: CONST String type=kotlin.String value='test'
+              CALLABLE_REFERENCE '<anonymous>(String): Boolean' type=(kotlin.String) -> kotlin.Boolean operator=LAMBDA
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'all((String) -> Boolean) on Array<out String>: Boolean' type=kotlin.Boolean operator=null
+            $receiver: CALL '<get-first>(): Array<String>' type=kotlin.Array<kotlin.String> operator=GET_PROPERTY
+              $this: GET_VAR 'x: Pair<Array<String>, Array<String>>' type=kotlin.Pair<kotlin.Array<kotlin.String>, kotlin.Array<kotlin.String>> operator=null
+            predicate: BLOCK type=(kotlin.String) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.String): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(String): Boolean'
+                    CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'value-parameter it: String' type=kotlin.String operator=null
+                      arg1: CONST String type=kotlin.String value='abc'
+              CALLABLE_REFERENCE '<anonymous>(String): Boolean' type=(kotlin.String) -> kotlin.Boolean operator=LAMBDA
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'all((String) -> Boolean) on Array<out String>: Boolean' type=kotlin.Boolean operator=null
+            $receiver: CALL '<get-second>(): Array<String>' type=kotlin.Array<kotlin.String> operator=GET_PROPERTY
+              $this: GET_VAR 'x: Pair<Array<String>, Array<String>>' type=kotlin.Pair<kotlin.Array<kotlin.String>, kotlin.Array<kotlin.String>> operator=null
+            predicate: BLOCK type=(kotlin.String) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.String): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(String): Boolean'
+                    CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'value-parameter it: String' type=kotlin.String operator=null
+                      arg1: CONST String type=kotlin.String value='abc'
+              CALLABLE_REFERENCE '<anonymous>(String): Boolean' type=(kotlin.String) -> kotlin.Boolean operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,84 @@
+MODULE <test-module>
+  FILE /tryFinally.kt
+    FUN public fun unsupportedEx(): kotlin.Unit
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CONST Boolean type=kotlin.Boolean value='true'
+          then: THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+    FUN public fun runtimeEx(): kotlin.Unit
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CONST Boolean type=kotlin.Boolean value='true'
+          then: THROW type=kotlin.Nothing
+            CALL 'constructor RuntimeException()' type=java.lang.RuntimeException operator=null
+    FUN public fun test1WithFinally(): kotlin.String
+      BLOCK_BODY
+        VAR var s: kotlin.String
+          CONST String type=kotlin.String value=''
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            TRY_CATCH type=kotlin.Unit
+              try: BLOCK type=kotlin.Unit operator=null
+                SET_VAR 's: String' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 's: String' type=kotlin.String operator=PLUSEQ
+                    other: CONST String type=kotlin.String value='Try'
+                CALL 'unsupportedEx(): Unit' type=kotlin.Unit operator=null
+              finally: BLOCK type=kotlin.Unit operator=null
+                SET_VAR 's: String' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 's: String' type=kotlin.String operator=PLUSEQ
+                    other: CONST String type=kotlin.String value='Finally'
+          catch x: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='test1WithFinally(): String'
+              GET_VAR 's: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='test1WithFinally(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: GET_VAR 's: String' type=kotlin.String operator=null
+            other: CONST String type=kotlin.String value='Failed'
+    FUN public fun test2WithFinally(): kotlin.String
+      BLOCK_BODY
+        VAR var s: kotlin.String
+          CONST String type=kotlin.String value=''
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            TRY_CATCH type=kotlin.Nothing
+              try: BLOCK type=kotlin.Nothing operator=null
+                SET_VAR 's: String' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 's: String' type=kotlin.String operator=PLUSEQ
+                    other: CONST String type=kotlin.String value='Try'
+                CALL 'unsupportedEx(): Unit' type=kotlin.Unit operator=null
+                RETURN type=kotlin.Nothing from='test2WithFinally(): String'
+                  GET_VAR 's: String' type=kotlin.String operator=null
+              finally: BLOCK type=kotlin.Unit operator=null
+                SET_VAR 's: String' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 's: String' type=kotlin.String operator=PLUSEQ
+                    other: CONST String type=kotlin.String value='Finally'
+          catch x: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='test2WithFinally(): String'
+              GET_VAR 's: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test1WithFinally(): String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='TryFinally'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail2: '
+              CALL 'test1WithFinally(): String' type=kotlin.String operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test2WithFinally(): String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='TryFinally'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail4: '
+              CALL 'test2WithFinally(): String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

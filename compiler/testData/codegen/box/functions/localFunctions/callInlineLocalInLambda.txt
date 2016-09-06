@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /callInlineLocalInLambda.kt
+    FUN public inline fun foo(x: kotlin.String, block: (kotlin.String) -> kotlin.String): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(String, (String) -> String): String'
+          CALL 'invoke(String): String' type=kotlin.String operator=INVOKE
+            $this: GET_VAR 'value-parameter block: (String) -> String' type=(kotlin.String) -> kotlin.String operator=VARIABLE_AS_FUNCTION
+            p1: GET_VAR 'value-parameter x: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        FUN local final fun bar(y: kotlin.String): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='bar(String): String'
+              CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: GET_VAR 'value-parameter y: String' type=kotlin.String operator=null
+                other: CONST String type=kotlin.String value='cde'
+        VAR val res: kotlin.String
+          CALL 'foo(String, (String) -> String): String' type=kotlin.String operator=null
+            x: CONST String type=kotlin.String value='abc'
+            block: BLOCK type=(kotlin.String) -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.String): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(String): String'
+                    CALL 'bar(String): String' type=kotlin.String operator=null
+                      y: GET_VAR 'value-parameter it: String' type=kotlin.String operator=null
+              CALLABLE_REFERENCE '<anonymous>(String): String' type=(kotlin.String) -> kotlin.String operator=LAMBDA
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='abccde'
+          actual: GET_VAR 'res: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

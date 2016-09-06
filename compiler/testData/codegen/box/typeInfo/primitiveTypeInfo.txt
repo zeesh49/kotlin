@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /primitiveTypeInfo.kt
+    CLASS CLASS Box
+      CONSTRUCTOR public constructor Box<T>(t: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Box'
+      PROPERTY public final var value: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter t: T' type=T operator=null
+    FUN public fun isIntBox(box: Box<out kotlin.Any?>): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='isIntBox(Box<out Any?>): Boolean'
+          TYPE_OP operator=INSTANCEOF typeOperand=Box<*>
+            GET_VAR 'value-parameter box: Box<out Any?>' type=Box<out kotlin.Any?> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val box: Box<kotlin.Int>
+          CALL 'constructor Box(Int)' type=Box<kotlin.Int> operator=null
+            t: CONST Int type=kotlin.Int value='1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'isIntBox(Box<out Any?>): Boolean' type=kotlin.Boolean operator=null
+              box: GET_VAR 'box: Box<Int>' type=Box<kotlin.Int> operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

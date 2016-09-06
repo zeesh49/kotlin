@@ -1,0 +1,23 @@
+MODULE <test-module>
+  FILE /ea35743.kt
+    PROPERTY public val kotlin.Int.test: kotlin.String
+      PROPERTY_GETTER public fun kotlin.Int.<get-test>(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-test>() on Int: String'
+            CONST String type=kotlin.String value='test'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.String
+          STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='a '
+            CALL '<get-test>() on Int: String' type=kotlin.String operator=GET_PROPERTY
+              $receiver: CONST Int type=kotlin.Int value='1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'x: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='a test'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'x: String' type=kotlin.String operator=null

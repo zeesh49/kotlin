@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /privateMemberFunction.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN private final fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value='A'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f: kotlin.reflect.KFunction<kotlin.String>
+          TYPE_OP operator=CAST typeOperand=kotlin.reflect.KFunction<kotlin.String>
+            CALL 'single() on Iterable<KFunction<*>>: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+              $receiver: CALL '<get-declaredFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'call(vararg Any?): String' type=kotlin.String operator=null
+              $this: GET_VAR 'f: KFunction<String>' type=kotlin.reflect.KFunction<kotlin.String> operator=null
+              args: VARARG type=Array<out Any?> varargElementType=Any?
+                CALL 'constructor A()' type=A operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail: no exception was thrown'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        CALL '<set-isAccessible>(Boolean) on KCallable<*>: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 'f: KFunction<String>' type=kotlin.reflect.KFunction<kotlin.String> operator=null
+          value: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='A'
+          actual: CALL 'call(vararg Any?): String' type=kotlin.String operator=null
+            $this: GET_VAR 'f: KFunction<String>' type=kotlin.reflect.KFunction<kotlin.String> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CALL 'constructor A()' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

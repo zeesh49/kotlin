@@ -1,0 +1,20 @@
+MODULE <test-module>
+  FILE /genericMember.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CLASS CLASS Id
+          CONSTRUCTOR public constructor Id<T>()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='Id'
+          FUN public final fun invoke(t: T): T
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='invoke(T): T'
+                GET_VAR 'value-parameter t: T' type=T operator=null
+        VAR val ref: kotlin.reflect.KFunction2<box.Id<kotlin.String>, kotlin.String, kotlin.String>
+          CALLABLE_REFERENCE 'invoke(String): String' type=kotlin.reflect.KFunction2<box.Id<kotlin.String>, kotlin.String, kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'invoke(Id<String>, String): String' type=kotlin.String operator=INVOKE
+            $this: GET_VAR 'ref: KFunction2<Id<String>, String, String>' type=kotlin.reflect.KFunction2<box.Id<kotlin.String>, kotlin.String, kotlin.String> operator=VARIABLE_AS_FUNCTION
+            p1: CALL 'constructor Id()' type=box.Id<kotlin.String> operator=null
+            p2: CONST String type=kotlin.String value='OK'

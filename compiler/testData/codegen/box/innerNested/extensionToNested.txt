@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /extensionToNested.kt
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      CLASS CLASS Nested
+        CONSTRUCTOR public constructor Nested()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Nested'
+        PROPERTY public final val value: kotlin.String = "OK"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='OK'
+    FUN public fun Test.Nested.foo(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo() on Test.Nested: String'
+          CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: $RECEIVER of 'foo() on Test.Nested: String' type=Test.Nested
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo() on Test.Nested: String' type=kotlin.String operator=null
+            $receiver: CALL 'constructor Nested()' type=Test.Nested operator=null

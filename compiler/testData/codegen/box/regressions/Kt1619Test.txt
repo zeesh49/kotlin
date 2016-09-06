@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /Kt1619Test.kt
+    CLASS CLASS Kt1619Test
+      CONSTRUCTOR public constructor Kt1619Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Kt1619Test'
+      FUN public final fun doSomething(list: kotlin.collections.List<kotlin.String?>): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='doSomething(List<String?>): Int'
+            CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: GET_VAR 'value-parameter list: List<String?>' type=kotlin.collections.List<kotlin.String?> operator=null
+      FUN public final fun testCollectionNotNullCanBeUsedForNullables(): kotlin.Int
+        BLOCK_BODY
+          VAR val list: kotlin.collections.List<kotlin.String>
+            CALL 'arrayListOf(vararg String): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              elements: VARARG type=Array<out String> varargElementType=String
+                CONST String type=kotlin.String value='foo'
+                CONST String type=kotlin.String value='bar'
+          RETURN type=kotlin.Nothing from='testCollectionNotNullCanBeUsedForNullables(): Int'
+            CALL 'doSomething(List<String?>): Int' type=kotlin.Int operator=null
+              $this: THIS of 'Kt1619Test' type=regressions.Kt1619Test
+              list: GET_VAR 'list: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'testCollectionNotNullCanBeUsedForNullables(): Int' type=kotlin.Int operator=null
+                $this: CALL 'constructor Kt1619Test()' type=regressions.Kt1619Test operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

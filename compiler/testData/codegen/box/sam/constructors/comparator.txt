@@ -1,0 +1,45 @@
+MODULE <test-module>
+  FILE /comparator.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val list: java.util.ArrayList<kotlin.Int!>
+          CALL 'constructor ArrayList((MutableCollection<out Int!>..Collection<Int!>?))' type=java.util.ArrayList<kotlin.Int!> operator=null
+            p0: CALL 'asList(vararg Int!): (Mutable)List<Int!>!' type=kotlin.collections.(Mutable)List<kotlin.Int!>! operator=null
+              p0: VARARG type=(kotlin.Array<(kotlin.Int..kotlin.Int?)>..kotlin.Array<out (kotlin.Int..kotlin.Int?)>?) varargElementType=(kotlin.Int..kotlin.Int?)
+                CONST Int type=kotlin.Int value='3'
+                CONST Int type=kotlin.Int value='2'
+                CONST Int type=kotlin.Int value='4'
+                CONST Int type=kotlin.Int value='8'
+                CONST Int type=kotlin.Int value='1'
+                CONST Int type=kotlin.Int value='5'
+        VAR val expected: java.util.ArrayList<kotlin.Int!>
+          CALL 'constructor ArrayList((MutableCollection<out Int!>..Collection<Int!>?))' type=java.util.ArrayList<kotlin.Int!> operator=null
+            p0: CALL 'asList(vararg Int!): (Mutable)List<Int!>!' type=kotlin.collections.(Mutable)List<kotlin.Int!>! operator=null
+              p0: VARARG type=(kotlin.Array<(kotlin.Int..kotlin.Int?)>..kotlin.Array<out (kotlin.Int..kotlin.Int?)>?) varargElementType=(kotlin.Int..kotlin.Int?)
+                CONST Int type=kotlin.Int value='8'
+                CONST Int type=kotlin.Int value='5'
+                CONST Int type=kotlin.Int value='4'
+                CONST Int type=kotlin.Int value='3'
+                CONST Int type=kotlin.Int value='2'
+                CONST Int type=kotlin.Int value='1'
+        CALL 'sort((Mutable)List<Int!>!, Comparator<in Int!>!): Unit' type=kotlin.Unit operator=null
+          p0: GET_VAR 'list: ArrayList<Int!>' type=java.util.ArrayList<kotlin.Int!> operator=null
+          p1: CALL 'Comparator((Int!, Int!) -> Int): Comparator<Int!>' type=java.util.Comparator<kotlin.Int!> operator=null
+            function: BLOCK type=(kotlin.Int!, kotlin.Int!) -> kotlin.Int operator=LAMBDA
+              FUN local final fun <anonymous>(a: kotlin.Int!, b: kotlin.Int!): kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int!, Int!): Int'
+                    CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+                      $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Int
+                        GET_VAR 'value-parameter b: Int!' type=kotlin.Int! operator=null
+                      other: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Int
+                        GET_VAR 'value-parameter a: Int!' type=kotlin.Int! operator=null
+              CALLABLE_REFERENCE '<anonymous>(Int!, Int!): Int' type=(kotlin.Int!, kotlin.Int!) -> kotlin.Int operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'list: ArrayList<Int!>' type=java.util.ArrayList<kotlin.Int!> operator=null
+              arg1: GET_VAR 'expected: ArrayList<Int!>' type=java.util.ArrayList<kotlin.Int!> operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: CALL 'toString(): String' type=kotlin.String operator=null
+              $this: GET_VAR 'list: ArrayList<Int!>' type=java.util.ArrayList<kotlin.Int!> operator=null

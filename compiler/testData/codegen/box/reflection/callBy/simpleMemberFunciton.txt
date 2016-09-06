@@ -1,0 +1,43 @@
+MODULE <test-module>
+  FILE /simpleMemberFunciton.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(result: kotlin.String = ...)
+        result: EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'result: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter result: String = ...' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val result: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter result: String = ...' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun foo(x: kotlin.Int = ...): kotlin.String
+        x: EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='42'
+        BLOCK_BODY
+          CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+            value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'value-parameter x: Int = ...' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='42'
+            lazyMessage: BLOCK type=() -> kotlin.Int operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Int'
+                    GET_VAR 'value-parameter x: Int = ...' type=kotlin.Int operator=null
+              CALLABLE_REFERENCE '<anonymous>(): Int' type=() -> kotlin.Int operator=LAMBDA
+          RETURN type=kotlin.Nothing from='foo(Int = ...): String'
+            CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'callBy(Map<KParameter, Any?>): String' type=kotlin.String operator=null
+            $this: CALLABLE_REFERENCE 'foo(Int = ...): String' type=kotlin.reflect.KFunction2<A, kotlin.Int, kotlin.String> operator=null
+            args: CALL 'mapOf(Pair<KParameter, A>): Map<KParameter, A>' type=kotlin.collections.Map<kotlin.reflect.KParameter, A> operator=null
+              pair: CALL 'to(A) on KParameter: Pair<KParameter, A>' type=kotlin.Pair<kotlin.reflect.KParameter, A> operator=null
+                $receiver: CALL 'first() on List<KParameter>: KParameter' type=kotlin.reflect.KParameter operator=null
+                  $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                    $this: CALLABLE_REFERENCE 'foo(Int = ...): String' type=kotlin.reflect.KFunction2<A, kotlin.Int, kotlin.String> operator=null
+                that: CALL 'constructor A(String = ...)' type=A operator=null

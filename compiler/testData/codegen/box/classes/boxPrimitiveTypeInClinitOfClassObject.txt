@@ -1,0 +1,80 @@
+MODULE <test-module>
+  FILE /boxPrimitiveTypeInClinitOfClassObject.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS OBJECT companion object of A
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of A'
+        PROPERTY public final var xi: kotlin.Int
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='0'
+        PROPERTY public final var xin: kotlin.Int?
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='0'
+        PROPERTY public final var xinn: kotlin.Int?
+          EXPRESSION_BODY
+            CONST Null type=kotlin.Nothing? value='null'
+        PROPERTY public final var xl: kotlin.Long
+          EXPRESSION_BODY
+            CALL 'toLong(): Long' type=kotlin.Long operator=null
+              $this: CONST Int type=kotlin.Int value='0'
+        PROPERTY public final var xln: kotlin.Long?
+          EXPRESSION_BODY
+            CALL 'toLong(): Long' type=kotlin.Long operator=null
+              $this: CONST Int type=kotlin.Int value='0'
+        PROPERTY public final var xlnn: kotlin.Long?
+          EXPRESSION_BODY
+            CONST Null type=kotlin.Nothing? value='null'
+        PROPERTY public final var xb: kotlin.Byte
+          EXPRESSION_BODY
+            CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+              $this: CONST Int type=kotlin.Int value='0'
+        PROPERTY public final var xbn: kotlin.Byte?
+          EXPRESSION_BODY
+            CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+              $this: CONST Int type=kotlin.Int value='0'
+        PROPERTY public final var xbnn: kotlin.Byte?
+          EXPRESSION_BODY
+            CONST Null type=kotlin.Nothing? value='null'
+        PROPERTY public final var xf: kotlin.Float
+          EXPRESSION_BODY
+            CALL 'toFloat(): Float' type=kotlin.Float operator=null
+              $this: CONST Int type=kotlin.Int value='0'
+        PROPERTY public final var xfn: kotlin.Float?
+          EXPRESSION_BODY
+            CALL 'toFloat(): Float' type=kotlin.Float operator=null
+              $this: CONST Int type=kotlin.Int value='0'
+        PROPERTY public final var xfnn: kotlin.Float?
+          EXPRESSION_BODY
+            CONST Null type=kotlin.Nothing? value='null'
+        PROPERTY public final var xd: kotlin.Double
+          EXPRESSION_BODY
+            CALL 'toDouble(): Double' type=kotlin.Double operator=null
+              $this: CONST Int type=kotlin.Int value='0'
+        PROPERTY public final var xdn: kotlin.Double?
+          EXPRESSION_BODY
+            CALL 'toDouble(): Double' type=kotlin.Double operator=null
+              $this: CONST Int type=kotlin.Int value='0'
+        PROPERTY public final var xdnn: kotlin.Double?
+          EXPRESSION_BODY
+            CONST Null type=kotlin.Nothing? value='null'
+        PROPERTY public final var xs: kotlin.Short
+          EXPRESSION_BODY
+            CALL 'toShort(): Short' type=kotlin.Short operator=null
+              $this: CONST Int type=kotlin.Int value='0'
+        PROPERTY public final var xsn: kotlin.Short?
+          EXPRESSION_BODY
+            CALL 'toShort(): Short' type=kotlin.Short operator=null
+              $this: CONST Int type=kotlin.Int value='0'
+        PROPERTY public final var xsnn: kotlin.Short?
+          EXPRESSION_BODY
+            CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

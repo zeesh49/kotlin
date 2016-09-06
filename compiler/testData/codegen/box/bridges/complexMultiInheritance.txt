@@ -1,0 +1,71 @@
+MODULE <test-module>
+  FILE /complexMultiInheritance.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public open fun foo(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): Any'
+            CONST String type=kotlin.String value='A'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      FUN public open override fun foo(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): Int'
+            CONST Int type=kotlin.Int value='222'
+    CLASS INTERFACE D
+      FUN public abstract fun foo(): kotlin.Number
+    CLASS CLASS E
+      CONSTRUCTOR public constructor E()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor C()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='E'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val e: E
+          CALL 'constructor E()' type=E operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'e: E' type=E operator=null
+              arg1: CONST Int type=kotlin.Int value='222'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 1'
+        VAR val d: D
+          GET_VAR 'e: E' type=E operator=null
+        VAR val c: C
+          GET_VAR 'e: E' type=E operator=null
+        VAR val a: A
+          GET_VAR 'e: E' type=E operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(): Number' type=kotlin.Number operator=null
+                $this: GET_VAR 'd: D' type=D operator=null
+              arg1: CONST Int type=kotlin.Int value='222'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'c: C' type=C operator=null
+              arg1: CONST Int type=kotlin.Int value='222'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(): Any' type=kotlin.Any operator=null
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='222'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 4'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

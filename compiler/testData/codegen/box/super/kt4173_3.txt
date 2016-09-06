@@ -1,0 +1,67 @@
+MODULE <test-module>
+  FILE /kt4173_3.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C(s: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      FUN public final fun test(): kotlin.Unit
+        BLOCK_BODY
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B(x: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'x: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'B' type=B
+            value: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public final var x: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun foo(): kotlin.Unit
+        BLOCK_BODY
+          CLASS CLASS A
+            CONSTRUCTOR public constructor A(a: kotlin.Int)
+              BLOCK_BODY
+                DELEGATING_CONSTRUCTOR_CALL 'constructor C(Int)'
+                  s: CALL 'invoke(): Int' type=kotlin.Int operator=null
+                    $this: BLOCK type=() -> kotlin.Int operator=LAMBDA
+                      FUN local final fun <anonymous>(): kotlin.Int
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='<anonymous>(): Int'
+                            GET_VAR 'value-parameter a: Int' type=kotlin.Int operator=null
+                      CALLABLE_REFERENCE '<anonymous>(): Int' type=() -> kotlin.Int operator=LAMBDA
+                SET_BACKING_FIELD 'a: Int' type=kotlin.Unit operator=null
+                  receiver: THIS of 'A' type=B.foo.A
+                  value: GET_VAR 'value-parameter a: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+                INSTANCE_INITIALIZER_CALL classDescriptor='A'
+            PROPERTY public final val a: kotlin.Int
+              EXPRESSION_BODY
+                GET_VAR 'value-parameter a: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          CALL 'test(): Unit' type=kotlin.Unit operator=null
+            $this: CALL 'constructor A(Int)' type=B.foo.A operator=null
+              a: CONST Int type=kotlin.Int value='11'
+          CLASS CLASS B
+            CONSTRUCTOR public constructor B(a: kotlin.Int)
+              BLOCK_BODY
+                DELEGATING_CONSTRUCTOR_CALL 'constructor C(Int)'
+                  s: GET_VAR 'value-parameter a: Int' type=kotlin.Int operator=null
+                SET_BACKING_FIELD 'a: Int' type=kotlin.Unit operator=null
+                  receiver: THIS of 'B' type=B.foo.B
+                  value: GET_VAR 'value-parameter a: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+                INSTANCE_INITIALIZER_CALL classDescriptor='B'
+            PROPERTY public final val a: kotlin.Int
+              EXPRESSION_BODY
+                GET_VAR 'value-parameter a: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          CALL 'test(): Unit' type=kotlin.Unit operator=null
+            $this: CALL 'constructor B(Int)' type=B.foo.B operator=null
+              a: CONST Int type=kotlin.Int value='11'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val b: B
+          CALL 'constructor B(Int)' type=B operator=null
+            x: CONST Int type=kotlin.Int value='1'
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'b: B' type=B operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

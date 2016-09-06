@@ -1,0 +1,43 @@
+MODULE <test-module>
+  FILE /kt6382.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'run(): String' type=kotlin.String operator=null
+                $this: CALL 'constructor A()' type=A operator=null
+              arg1: CONST String type=kotlin.String value='Aabc'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun run(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='run(): String'
+            CALL 'with(String, String.() -> String): String' type=kotlin.String operator=null
+              receiver: CONST String type=kotlin.String value='abc'
+              block: BLOCK type=kotlin.String.() -> kotlin.String operator=LAMBDA
+                FUN local final fun kotlin.String.<anonymous>(): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>() on String: String'
+                      CALL 'show(Boolean = ...) on String: String' type=kotlin.String operator=null
+                        $this: THIS of 'A' type=A
+                        $receiver: $RECEIVER of '<anonymous>() on String: String' type=kotlin.String
+                CALLABLE_REFERENCE '<anonymous>() on String: String' type=kotlin.String.() -> kotlin.String operator=LAMBDA
+      FUN private final fun kotlin.String.show(p: kotlin.Boolean = ...): kotlin.String
+        p: EXPRESSION_BODY
+          CONST Boolean type=kotlin.Boolean value='false'
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='show(Boolean = ...) on String: String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CALL 'getName(): String' type=kotlin.String operator=null
+                $this: THIS of 'A' type=A
+              other: $RECEIVER of 'show(Boolean = ...) on String: String' type=kotlin.String
+      FUN private final fun getName(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getName(): String'
+            CONST String type=kotlin.String value='A'

@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /kt11833_1.kt
+    CLASS CLASS Father
+      CONSTRUCTOR public constructor Father()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Father'
+      CLASS CLASS InClass
+        CONSTRUCTOR public constructor InClass()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='InClass'
+        FUN public abstract fun work(): kotlin.String
+    CLASS CLASS Child
+      CONSTRUCTOR public constructor Child()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Father()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Child'
+      PROPERTY public final val ChildInClass: Father.InClass
+        EXPRESSION_BODY
+          BLOCK type=Child.ChildInClass.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor InClass()'
+                    $this: THIS of 'Child' type=Child
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              FUN public open override fun work(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='work(): String'
+                    CONST String type=kotlin.String value='OK'
+            CALL 'constructor <no name provided>()' type=Child.ChildInClass.<no name provided> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'work(): String' type=kotlin.String operator=null
+            $this: CALL '<get-ChildInClass>(): Father.InClass' type=Father.InClass operator=GET_PROPERTY
+              $this: CALL 'constructor Child()' type=Child operator=null

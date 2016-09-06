@@ -1,0 +1,78 @@
+MODULE <test-module>
+  FILE /lambdaInLocalFunction.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        FUN local final fun foo(): kotlin.Any
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo(): Any'
+              BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.Unit
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        VAR val javaClass: java.lang.Class<kotlin.Any>
+          CALL '<get-javaClass>() on Any: Class<Any>' type=java.lang.Class<kotlin.Any> operator=GET_PROPERTY
+            $receiver: CALL 'foo(): Any' type=kotlin.Any operator=null
+        VAR val enclosingMethod: java.lang.reflect.Method!
+          CALL 'getEnclosingMethod(): Method!' type=java.lang.reflect.Method! operator=null
+            $this: GET_VAR 'javaClass: Class<Any>' type=java.lang.Class<kotlin.Any> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: BLOCK type=kotlin.String? operator=SAFE_CALL
+                VAR val tmp0_safe_receiver: java.lang.reflect.Method!
+                  GET_VAR 'enclosingMethod: Method!' type=java.lang.reflect.Method! operator=null
+                WHEN type=kotlin.String? operator=SAFE_CALL
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_safe_receiver: Method!' type=java.lang.reflect.Method! operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CONST Null type=kotlin.Nothing? value='null'
+                  else: CALL 'getName(): String!' type=kotlin.String! operator=null
+                    $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                      GET_VAR 'tmp0_safe_receiver: Method!' type=java.lang.reflect.Method! operator=null
+              arg1: CONST String type=kotlin.String value='invoke'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='method: '
+              GET_VAR 'enclosingMethod: Method!' type=java.lang.reflect.Method! operator=null
+        VAR val enclosingClass: kotlin.String!
+          CALL 'getName(): String!' type=kotlin.String! operator=null
+            $this: BLOCK type=java.lang.Class<*> operator=EXCLEXCL
+              VAR val tmp1_notnull: java.lang.Class<*>!
+                CALL 'getEnclosingClass(): Class<*>!' type=java.lang.Class<*>! operator=null
+                  $this: GET_VAR 'javaClass: Class<Any>' type=java.lang.Class<kotlin.Any> operator=null
+              WHEN type=java.lang.Class<*> operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp1_notnull: Class<*>!' type=java.lang.Class<*>! operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+                  GET_VAR 'tmp1_notnull: Class<*>!' type=java.lang.Class<*>! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'enclosingClass: String!' type=kotlin.String! operator=null
+              arg1: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='LambdaInLocalFunctionKt'
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='box'
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='enclosing class: '
+              GET_VAR 'enclosingClass: String!' type=kotlin.String! operator=null
+        VAR val declaringClass: java.lang.Class<*>!
+          CALL 'getDeclaringClass(): Class<*>!' type=java.lang.Class<*>! operator=null
+            $this: GET_VAR 'javaClass: Class<Any>' type=java.lang.Class<kotlin.Any> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'declaringClass: Class<*>!' type=java.lang.Class<*>! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='anonymous function has a declaring class: '
+              GET_VAR 'declaringClass: Class<*>!' type=java.lang.Class<*>! operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

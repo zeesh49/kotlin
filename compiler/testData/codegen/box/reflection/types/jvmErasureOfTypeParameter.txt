@@ -1,0 +1,213 @@
+MODULE <test-module>
+  FILE /jvmErasureOfTypeParameter.kt
+    CLASS CLASS O
+      CONSTRUCTOR public constructor O()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='O'
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun <T> simple(): T
+        BLOCK_BODY
+          BLOCK type=kotlin.Nothing operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+            WHEN type=kotlin.Nothing operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+      FUN public final fun <T : kotlin.String> string(): T
+        BLOCK_BODY
+          BLOCK type=kotlin.Nothing operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+            WHEN type=kotlin.Nothing operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+      FUN public final fun <T : kotlin.String?> nullableString(): T
+        BLOCK_BODY
+          BLOCK type=kotlin.Nothing operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+            WHEN type=kotlin.Nothing operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+      FUN public final fun <T : U, U> otherTypeParameter(): T
+        BLOCK_BODY
+          BLOCK type=kotlin.Nothing operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+            WHEN type=kotlin.Nothing operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+      FUN public final fun <T : U, U : kotlin.collections.List<kotlin.String>> otherTypeParameterWithBound(): T
+        BLOCK_BODY
+          BLOCK type=kotlin.Nothing operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+            WHEN type=kotlin.Nothing operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+      FUN public final fun <T : kotlin.Cloneable> twoInterfaces1(): T where T : kotlin.Comparable<*>
+        BLOCK_BODY
+          BLOCK type=kotlin.Nothing operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+            WHEN type=kotlin.Nothing operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+      FUN public final fun <T : kotlin.Comparable<*>> twoInterfaces2(): T where T : kotlin.Cloneable
+        BLOCK_BODY
+          BLOCK type=kotlin.Nothing operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+            WHEN type=kotlin.Nothing operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+      FUN public final fun <T : kotlin.Cloneable> interfaceAndClass1(): T where T : O
+        BLOCK_BODY
+          BLOCK type=kotlin.Nothing operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+            WHEN type=kotlin.Nothing operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+      FUN public final fun <T : O> interfaceAndClass2(): T where T : kotlin.Cloneable
+        BLOCK_BODY
+          BLOCK type=kotlin.Nothing operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+            WHEN type=kotlin.Nothing operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+      FUN public final fun <T> arrayOfAny(): kotlin.Array<T>
+        BLOCK_BODY
+          BLOCK type=kotlin.Nothing operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+            WHEN type=kotlin.Nothing operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+      FUN public final fun <T : kotlin.Number> arrayOfNumber(): kotlin.Array<T>
+        BLOCK_BODY
+          BLOCK type=kotlin.Nothing operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+            WHEN type=kotlin.Nothing operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+      FUN public final fun <T : kotlin.Cloneable> arrayOfArrayOfCloneable(): kotlin.Array<kotlin.Array<T>> where T : kotlin.Comparable<*>
+        BLOCK_BODY
+          BLOCK type=kotlin.Nothing operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+            WHEN type=kotlin.Nothing operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun get(name: kotlin.String): kotlin.reflect.KClass<*>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='get(String): KClass<*>'
+          CALL '<get-jvmErasure>() on KType: KClass<*>' type=kotlin.reflect.KClass<*> operator=GET_PROPERTY
+            $receiver: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                  $this: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+                predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                        CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                            $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                          arg1: GET_VAR 'value-parameter name: String' type=kotlin.String operator=null
+                  CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(KClass<out Any>, KClass<out Any>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+          actual: CALL 'get(String): KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+            name: CONST String type=kotlin.String value='simple'
+        CALL 'assertEquals(KClass<out Any>, KClass<out Any>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+          actual: CALL 'get(String): KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+            name: CONST String type=kotlin.String value='string'
+        CALL 'assertEquals(KClass<out Any>, KClass<out Any>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+          actual: CALL 'get(String): KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+            name: CONST String type=kotlin.String value='nullableString'
+        CALL 'assertEquals(KClass<out Any>, KClass<out Any>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+          actual: CALL 'get(String): KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+            name: CONST String type=kotlin.String value='otherTypeParameter'
+        CALL 'assertEquals(KClass<out Any>, KClass<out Any>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CLASS_REFERENCE 'List' type=kotlin.reflect.KClass<kotlin.collections.List<*>>
+          actual: CALL 'get(String): KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+            name: CONST String type=kotlin.String value='otherTypeParameterWithBound'
+        CALL 'assertEquals(KClass<out Any>, KClass<out Any>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CLASS_REFERENCE 'Cloneable' type=kotlin.reflect.KClass<kotlin.Cloneable>
+          actual: CALL 'get(String): KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+            name: CONST String type=kotlin.String value='twoInterfaces1'
+        CALL 'assertEquals(KClass<out Any>, KClass<out Any>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CLASS_REFERENCE 'Comparable' type=kotlin.reflect.KClass<kotlin.Comparable<*>>
+          actual: CALL 'get(String): KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+            name: CONST String type=kotlin.String value='twoInterfaces2'
+        CALL 'assertEquals(KClass<out Any>, KClass<out Any>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CLASS_REFERENCE 'O' type=kotlin.reflect.KClass<O>
+          actual: CALL 'get(String): KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+            name: CONST String type=kotlin.String value='interfaceAndClass1'
+        CALL 'assertEquals(KClass<out Any>, KClass<out Any>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CLASS_REFERENCE 'O' type=kotlin.reflect.KClass<O>
+          actual: CALL 'get(String): KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+            name: CONST String type=kotlin.String value='interfaceAndClass2'
+        CALL 'assertEquals(KClass<out Any>, KClass<out Any>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Any>>
+          actual: CALL 'get(String): KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+            name: CONST String type=kotlin.String value='arrayOfAny'
+        CALL 'assertEquals(KClass<out Any>, KClass<out Any>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Number>>
+          actual: CALL 'get(String): KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+            name: CONST String type=kotlin.String value='arrayOfNumber'
+        CALL 'assertEquals(KClass<out Any>, KClass<out Any>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Array<kotlin.Cloneable>>>
+          actual: CALL 'get(String): KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+            name: CONST String type=kotlin.String value='arrayOfArrayOfCloneable'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,15 @@
+MODULE <test-module>
+  FILE /classNamedAsOldPackageFacade.kt
+    CLASS CLASS TestPackage
+      CONSTRUCTOR public constructor TestPackage()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='TestPackage'
+      PROPERTY public final val OK: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-OK>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor TestPackage()' type=test.TestPackage operator=null

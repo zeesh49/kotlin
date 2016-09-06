@@ -1,0 +1,45 @@
+MODULE <test-module>
+  FILE /K.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f: kotlin.reflect.KFunction3<kotlin.Int, kotlin.IntArray!, kotlin.Array<(out) kotlin.Any!>!, kotlin.String!>
+          CALLABLE_REFERENCE 'foo(Int, IntArray!, Array<(out) Any!>!): String!' type=kotlin.reflect.KFunction3<kotlin.Int, kotlin.IntArray!, kotlin.Array<(out) kotlin.Any!>!, kotlin.String!> operator=null
+        CALL 'assertEquals(List<Type!>, List<Type!>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(vararg Class<out Serializable!>!): List<Class<out Serializable!>!>' type=kotlin.collections.List<java.lang.Class<out java.io.Serializable!>!> operator=null
+            elements: VARARG type=Array<out (java.lang.Class<out (java.io.Serializable..java.io.Serializable?)>..java.lang.Class<out (java.io.Serializable..java.io.Serializable?)>?)> varargElementType=(java.lang.Class<out (java.io.Serializable..java.io.Serializable?)>..java.lang.Class<out (java.io.Serializable..java.io.Serializable?)>?)
+              GET_BACKING_FIELD 'TYPE: Class<Int!>!' type=java.lang.Class<kotlin.Int!>! operator=GET_PROPERTY
+              CALL '<get-java>() on KClass<IntArray>: Class<IntArray>' type=java.lang.Class<kotlin.IntArray> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'IntArray' type=kotlin.reflect.KClass<kotlin.IntArray>
+              CALL '<get-java>() on KClass<Array<Any>>: Class<Array<Any>>' type=java.lang.Class<kotlin.Array<kotlin.Any>> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Any>>
+          actual: CALL 'map((KParameter) -> Type) on Iterable<KParameter>: List<Type>' type=kotlin.collections.List<java.lang.reflect.Type> operator=null
+            $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: GET_VAR 'f: KFunction3<Int, IntArray!, Array<(out) Any!>!, String!>' type=kotlin.reflect.KFunction3<kotlin.Int, kotlin.IntArray!, kotlin.Array<(out) kotlin.Any!>!, kotlin.String!> operator=null
+            transform: BLOCK type=(kotlin.reflect.KParameter) -> java.lang.reflect.Type operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KParameter): java.lang.reflect.Type
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KParameter): Type'
+                    CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+                      $receiver: CALL '<get-type>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KParameter' type=kotlin.reflect.KParameter operator=null
+              CALLABLE_REFERENCE '<anonymous>(KParameter): Type' type=(kotlin.reflect.KParameter) -> java.lang.reflect.Type operator=LAMBDA
+        CALL 'assertEquals(Type, Type, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-java>() on KClass<String>: Class<String>' type=java.lang.Class<kotlin.String> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+          actual: CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+            $receiver: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: GET_VAR 'f: KFunction3<Int, IntArray!, Array<(out) Any!>!, String!>' type=kotlin.reflect.KFunction3<kotlin.Int, kotlin.IntArray!, kotlin.Array<(out) kotlin.Any!>!, kotlin.String!> operator=null
+        CALL 'assertEquals(String!, String!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='01A'
+          actual: CALL 'call(vararg Any?): String!' type=kotlin.String! operator=null
+            $this: GET_VAR 'f: KFunction3<Int, IntArray!, Array<(out) Any!>!, String!>' type=kotlin.reflect.KFunction3<kotlin.Int, kotlin.IntArray!, kotlin.Array<(out) kotlin.Any!>!, kotlin.String!> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CONST Int type=kotlin.Int value='0'
+              CALL 'intArrayOf(vararg Int): IntArray' type=kotlin.IntArray operator=null
+                elements: VARARG type=IntArray varargElementType=Int
+                  CONST Int type=kotlin.Int value='1'
+              CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                elements: VARARG type=Array<out String> varargElementType=String
+                  CONST String type=kotlin.String value='A'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

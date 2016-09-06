@@ -1,0 +1,32 @@
+MODULE <test-module>
+  FILE /throwable.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor Throwable(String?, Throwable?)' type=kotlin.Throwable operator=null
+                message: CONST String type=kotlin.String value='OK'
+                cause: CONST Null type=kotlin.Nothing? value='null'
+          catch t: BLOCK type=kotlin.Nothing operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL '<get-cause>(): Throwable?' type=kotlin.Throwable? operator=GET_PROPERTY
+                    $this: GET_VAR 't: Throwable' type=kotlin.Throwable operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                CONST String type=kotlin.String value='fail 1'
+            RETURN type=kotlin.Nothing from='box(): String'
+              BLOCK type=kotlin.String operator=EXCLEXCL
+                VAR val tmp0_notnull: kotlin.String?
+                  CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                    $this: GET_VAR 't: Throwable' type=kotlin.Throwable operator=null
+                WHEN type=kotlin.String operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_notnull: String?' type=kotlin.String? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: GET_VAR 'tmp0_notnull: String?' type=kotlin.String? operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='fail 2'

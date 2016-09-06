@@ -1,0 +1,49 @@
+MODULE <test-module>
+  FILE /kt3203_2.kt
+    FUN public fun check1(): kotlin.Unit
+      BLOCK_BODY
+        VAR val result: kotlin.Int
+          WHEN type=kotlin.Int operator=IF
+            if: CONST Boolean type=kotlin.Boolean value='true'
+            then: BLOCK type=kotlin.Int operator=null
+              WHEN type=kotlin.Int operator=IF
+                if: CONST Boolean type=kotlin.Boolean value='true'
+                then: CONST Int type=kotlin.Int value='1'
+                else: CONST Int type=kotlin.Int value='2'
+            else: CONST Int type=kotlin.Int value='3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: THROW type=kotlin.Nothing
+            CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+              p0: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='result: '
+                GET_VAR 'result: Int' type=kotlin.Int operator=null
+    FUN public fun check2(): kotlin.Unit
+      BLOCK_BODY
+        VAR val result: kotlin.Int
+          WHEN type=kotlin.Int operator=IF
+            if: CONST Boolean type=kotlin.Boolean value='true'
+            then: WHEN type=kotlin.Int operator=IF
+              if: CONST Boolean type=kotlin.Boolean value='true'
+              then: CONST Int type=kotlin.Int value='1'
+              else: CONST Int type=kotlin.Int value='2'
+            else: CONST Int type=kotlin.Int value='3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: THROW type=kotlin.Nothing
+            CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+              p0: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='result: '
+                GET_VAR 'result: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'check1(): Unit' type=kotlin.Unit operator=null
+        CALL 'check2(): Unit' type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

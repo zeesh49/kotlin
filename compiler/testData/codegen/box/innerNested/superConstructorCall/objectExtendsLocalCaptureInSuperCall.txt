@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /objectExtendsLocalCaptureInSuperCall.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(s: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 's: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val s: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CLASS CLASS B
+          CONSTRUCTOR public constructor B()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='B'
+          PROPERTY public final val result: kotlin.String = "OK"
+            EXPRESSION_BODY
+              CONST String type=kotlin.String value='OK'
+          PROPERTY public final val f: kotlin.String
+            EXPRESSION_BODY
+              CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: BLOCK type=box.B.f.<no name provided> operator=OBJECT_LITERAL
+                  CLASS CLASS <no name provided>
+                    CONSTRUCTOR public constructor <no name provided>()
+                      BLOCK_BODY
+                        DELEGATING_CONSTRUCTOR_CALL 'constructor A(String)'
+                          s: CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+                            $this: THIS of 'B' type=box.B
+                        INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                  CALL 'constructor <no name provided>()' type=box.B.f.<no name provided> operator=OBJECT_LITERAL
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-f>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor B()' type=box.B operator=null

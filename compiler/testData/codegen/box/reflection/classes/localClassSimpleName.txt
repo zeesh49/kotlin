@@ -1,0 +1,90 @@
+MODULE <test-module>
+  FILE /localClassSimpleName.kt
+    FUN public fun check(klass: kotlin.reflect.KClass<*>, expectedName: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'value-parameter expectedName: String' type=kotlin.String operator=null
+          actual: CALL '<get-simpleName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: GET_VAR 'value-parameter klass: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+    FUN public fun localInMethod(): kotlin.Unit
+      BLOCK_BODY
+        FUN local final fun localInMethod(unused: kotlin.Any?): kotlin.Unit
+          BLOCK_BODY
+            CLASS CLASS Local
+              CONSTRUCTOR public constructor Local()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='Local'
+            CALL 'check(KClass<*>, String): Unit' type=kotlin.Unit operator=null
+              klass: CLASS_REFERENCE 'Local' type=kotlin.reflect.KClass<localInMethod.localInMethod.Local>
+              expectedName: CONST String type=kotlin.String value='Local'
+            CLASS CLASS `Local$With$Dollars`
+              CONSTRUCTOR public constructor `Local$With$Dollars`()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='`Local$With$Dollars`'
+            CALL 'check(KClass<*>, String): Unit' type=kotlin.Unit operator=null
+              klass: CLASS_REFERENCE '`Local$With$Dollars`' type=kotlin.reflect.KClass<localInMethod.localInMethod.`Local$With$Dollars`>
+              expectedName: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='Local'
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='With'
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='Dollars'
+        CALL 'localInMethod(Any?): Unit' type=kotlin.Unit operator=null
+          unused: CONST Null type=kotlin.Nothing? value='null'
+        CLASS CLASS Local
+          CONSTRUCTOR public constructor Local()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='Local'
+        CALL 'check(KClass<*>, String): Unit' type=kotlin.Unit operator=null
+          klass: CLASS_REFERENCE 'Local' type=kotlin.reflect.KClass<localInMethod.Local>
+          expectedName: CONST String type=kotlin.String value='Local'
+        CLASS CLASS `Local$With$Dollars`
+          CONSTRUCTOR public constructor `Local$With$Dollars`()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='`Local$With$Dollars`'
+        CALL 'check(KClass<*>, String): Unit' type=kotlin.Unit operator=null
+          klass: CLASS_REFERENCE '`Local$With$Dollars`' type=kotlin.reflect.KClass<localInMethod.`Local$With$Dollars`>
+          expectedName: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='Local'
+            CONST String type=kotlin.String value='$'
+            CONST String type=kotlin.String value='With'
+            CONST String type=kotlin.String value='$'
+            CONST String type=kotlin.String value='Dollars'
+    CLASS CLASS LocalInConstructor
+      CONSTRUCTOR public constructor LocalInConstructor()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='LocalInConstructor'
+      ANONYMOUS_INITIALIZER LocalInConstructor
+        BLOCK_BODY
+          CLASS CLASS Local
+            CONSTRUCTOR public constructor Local()
+              BLOCK_BODY
+                DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                INSTANCE_INITIALIZER_CALL classDescriptor='Local'
+          CALL 'check(KClass<*>, String): Unit' type=kotlin.Unit operator=null
+            klass: CLASS_REFERENCE 'Local' type=kotlin.reflect.KClass<LocalInConstructor.<init>.Local>
+            expectedName: CONST String type=kotlin.String value='Local'
+          CLASS CLASS `Local$With$Dollars`
+            CONSTRUCTOR public constructor `Local$With$Dollars`()
+              BLOCK_BODY
+                DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                INSTANCE_INITIALIZER_CALL classDescriptor='`Local$With$Dollars`'
+          CALL 'check(KClass<*>, String): Unit' type=kotlin.Unit operator=null
+            klass: CLASS_REFERENCE '`Local$With$Dollars`' type=kotlin.reflect.KClass<LocalInConstructor.<init>.`Local$With$Dollars`>
+            expectedName: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Local'
+              CONST String type=kotlin.String value='$'
+              CONST String type=kotlin.String value='With'
+              CONST String type=kotlin.String value='$'
+              CONST String type=kotlin.String value='Dollars'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'localInMethod(): Unit' type=kotlin.Unit operator=null
+        CALL 'constructor LocalInConstructor()' type=LocalInConstructor operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

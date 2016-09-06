@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /kt715.kt
+    FUN @kotlin.Suppress public inline fun <reified T : kotlin.Any> javaClass(): java.lang.Class<T>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='javaClass(): Class<T>'
+          CALL '<get-java>() on KClass<T>: Class<T>' type=java.lang.Class<T> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE '<reified T : Any>' type=kotlin.reflect.KClass<T>
+    PROPERTY public val test: java.lang.Class<kotlin.String>
+      EXPRESSION_BODY
+        CALL '<get-javaClass>() on String: Class<String>' type=java.lang.Class<kotlin.String> operator=GET_PROPERTY
+          $receiver: CONST String type=kotlin.String value='lala'
+    PROPERTY public val test2: java.lang.Class<kotlin.collections.Iterator<kotlin.Int>>
+      EXPRESSION_BODY
+        CALL 'javaClass(): Class<Iterator<Int>>' type=java.lang.Class<kotlin.collections.Iterator<kotlin.Int>> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'getCanonicalName(): String!' type=kotlin.String! operator=null
+                $this: CALL '<get-test>(): Class<String>' type=java.lang.Class<kotlin.String> operator=GET_PROPERTY
+              arg1: CONST String type=kotlin.String value='java.lang.String'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'getCanonicalName(): String!' type=kotlin.String! operator=null
+                $this: CALL '<get-test2>(): Class<Iterator<Int>>' type=java.lang.Class<kotlin.collections.Iterator<kotlin.Int>> operator=GET_PROPERTY
+              arg1: CONST String type=kotlin.String value='java.util.Iterator'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

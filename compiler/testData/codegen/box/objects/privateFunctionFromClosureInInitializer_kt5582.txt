@@ -1,0 +1,51 @@
+MODULE <test-module>
+  FILE /privateFunctionFromClosureInInitializer_kt5582.kt
+    CLASS INTERFACE T
+    CLASS OBJECT Foo
+      CONSTRUCTOR private constructor Foo()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      FUN private final fun foo(p: T): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(T): T'
+            GET_VAR 'value-parameter p: T' type=T operator=null
+      PROPERTY private final val v: kotlin.Int
+        EXPRESSION_BODY
+          CALL 'invoke(): Int' type=kotlin.Int operator=null
+            $this: BLOCK type=() -> kotlin.Int operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Int
+                BLOCK_BODY
+                  VAR val x: T
+                    CALL 'foo(T): T' type=T operator=null
+                      $this: THIS of 'Foo' type=Foo
+                      p: GET_OBJECT 'O' type=Foo.O
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Int'
+                    CONST Int type=kotlin.Int value='42'
+              CALLABLE_REFERENCE '<anonymous>(): Int' type=() -> kotlin.Int operator=LAMBDA
+      CLASS OBJECT O
+        CONSTRUCTOR private constructor O()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='O'
+      PROPERTY public final val result: kotlin.Int
+        EXPRESSION_BODY
+          CALL '<get-v>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: THIS of 'Foo' type=Foo
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val foo: Foo
+          GET_OBJECT 'Foo' type=Foo
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-result>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'foo: Foo' type=Foo operator=null
+              arg1: CONST Int type=kotlin.Int value='42'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              CALL '<get-result>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'foo: Foo' type=Foo operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

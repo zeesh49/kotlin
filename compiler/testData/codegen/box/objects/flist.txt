@@ -1,0 +1,146 @@
+MODULE <test-module>
+  FILE /flist.kt
+    CLASS CLASS FList
+      CONSTRUCTOR public constructor FList<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='FList'
+      PROPERTY public abstract val head: T
+      PROPERTY public abstract val tail: FList<T>
+      PROPERTY public abstract val empty: kotlin.Boolean
+      CLASS OBJECT companion object of FList
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of FList'
+        PROPERTY public final val emptyFList: FList<kotlin.Any>
+          EXPRESSION_BODY
+            BLOCK type=FList.Companion.emptyFList.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor FList()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                PROPERTY public open override val head: kotlin.Any
+                  PROPERTY_GETTER public open override fun <get-head>(): kotlin.Any
+                    BLOCK_BODY
+                      THROW type=kotlin.Nothing
+                        CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+                PROPERTY public open override val tail: FList<kotlin.Any>
+                  PROPERTY_GETTER public open override fun <get-tail>(): FList<kotlin.Any>
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<get-tail>(): FList<Any>'
+                        THIS of '<no name provided>' type=FList.Companion.emptyFList.<no name provided>
+                PROPERTY public open override val empty: kotlin.Boolean
+                  PROPERTY_GETTER public open override fun <get-empty>(): kotlin.Boolean
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<get-empty>(): Boolean'
+                        CONST Boolean type=kotlin.Boolean value='true'
+              CALL 'constructor <no name provided>()' type=FList.Companion.emptyFList.<no name provided> operator=OBJECT_LITERAL
+      FUN public final operator fun plus(head: T): FList<T>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='plus(T): FList<T>'
+            BLOCK type=FList.plus.<no name provided><T> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor FList()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                PROPERTY public open override val head: T
+                  PROPERTY_GETTER public open override fun <get-head>(): T
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<get-head>(): T'
+                        GET_VAR 'value-parameter head: T' type=T operator=null
+                PROPERTY public open override val empty: kotlin.Boolean
+                  PROPERTY_GETTER public open override fun <get-empty>(): kotlin.Boolean
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<get-empty>(): Boolean'
+                        CONST Boolean type=kotlin.Boolean value='false'
+                PROPERTY public open override val tail: FList<T>
+                  PROPERTY_GETTER public open override fun <get-tail>(): FList<T>
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<get-tail>(): FList<T>'
+                        THIS of 'FList' type=FList<T>
+              CALL 'constructor <no name provided>()' type=FList.plus.<no name provided><T> operator=OBJECT_LITERAL
+    FUN public fun <T> emptyFList(): FList<T>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='emptyFList(): FList<T>'
+          TYPE_OP operator=CAST typeOperand=FList<T>
+            CALL '<get-emptyFList>(): FList<Any>' type=FList<kotlin.Any> operator=GET_PROPERTY
+              $this: GET_OBJECT 'companion object of FList' type=FList.Companion
+    FUN public fun <T> FList<T>.reverse(where: FList<T> = ...): FList<T>
+      where: EXPRESSION_BODY
+        CALL 'emptyFList(): FList<T>' type=FList<T> operator=null
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='reverse(FList<T> = ...) on FList<T>: FList<T>'
+          WHEN type=FList<T> operator=IF
+            if: CALL '<get-empty>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+              $this: $RECEIVER of 'reverse(FList<T> = ...) on FList<T>: FList<T>' type=FList<T>
+            then: GET_VAR 'value-parameter where: FList<T> = ...' type=FList<T> operator=null
+            else: CALL 'reverse(FList<T> = ...) on FList<T>: FList<T>' type=FList<T> operator=null
+              $receiver: CALL '<get-tail>(): FList<T>' type=FList<T> operator=GET_PROPERTY
+                $this: $RECEIVER of 'reverse(FList<T> = ...) on FList<T>: FList<T>' type=FList<T>
+              where: CALL 'plus(T): FList<T>' type=FList<T> operator=PLUS
+                $this: GET_VAR 'value-parameter where: FList<T> = ...' type=FList<T> operator=null
+                head: CALL '<get-head>(): T' type=T operator=GET_PROPERTY
+                  $this: $RECEIVER of 'reverse(FList<T> = ...) on FList<T>: FList<T>' type=FList<T>
+    FUN public operator fun <T> FList<T>.iterator(): kotlin.collections.Iterator<T>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='iterator() on FList<T>: Iterator<T>'
+          BLOCK type=iterator.<no name provided><T> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              PROPERTY private final var cur: FList<T>
+                EXPRESSION_BODY
+                  $RECEIVER of 'iterator() on FList<T>: Iterator<T>' type=FList<T>
+              FUN public open override fun next(): T
+                BLOCK_BODY
+                  VAR val res: T
+                    CALL '<get-head>(): T' type=T operator=GET_PROPERTY
+                      $this: CALL '<get-cur>(): FList<T>' type=FList<T> operator=GET_PROPERTY
+                        $this: THIS of '<no name provided>' type=iterator.<no name provided><T>
+                  CALL '<set-cur>(FList<T>): Unit' type=kotlin.Unit operator=EQ
+                    $this: THIS of '<no name provided>' type=iterator.<no name provided><T>
+                    <set-?>: CALL '<get-tail>(): FList<T>' type=FList<T> operator=GET_PROPERTY
+                      $this: CALL '<get-cur>(): FList<T>' type=FList<T> operator=GET_PROPERTY
+                        $this: THIS of '<no name provided>' type=iterator.<no name provided><T>
+                  RETURN type=kotlin.Nothing from='next(): T'
+                    GET_VAR 'res: T' type=T operator=null
+              FUN public open override fun hasNext(): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='hasNext(): Boolean'
+                    CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+                      $this: CALL '<get-empty>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+                        $this: CALL '<get-cur>(): FList<T>' type=FList<T> operator=GET_PROPERTY
+                          $this: THIS of '<no name provided>' type=iterator.<no name provided><T>
+            CALL 'constructor <no name provided>()' type=iterator.<no name provided><T> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var r: kotlin.String
+          CONST String type=kotlin.String value=''
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<kotlin.String>
+            CALL 'iterator() on FList<String>: Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=FOR_LOOP_ITERATOR
+              $receiver: CALL 'reverse(FList<String> = ...) on FList<String>: FList<String>' type=FList<kotlin.String> operator=null
+                $receiver: CALL 'plus(String): FList<String>' type=FList<kotlin.String> operator=PLUS
+                  $this: CALL 'plus(String): FList<String>' type=FList<kotlin.String> operator=PLUS
+                    $this: CALL 'emptyFList(): FList<String>' type=FList<kotlin.String> operator=null
+                    head: CONST String type=kotlin.String value='O'
+                  head: CONST String type=kotlin.String value='K'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val s: kotlin.String
+                CALL 'next(): String' type=kotlin.String operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'r: String' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 'r: String' type=kotlin.String operator=PLUSEQ
+                    other: GET_VAR 's: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          GET_VAR 'r: String' type=kotlin.String operator=null

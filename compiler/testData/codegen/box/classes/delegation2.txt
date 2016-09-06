@@ -1,0 +1,69 @@
+MODULE <test-module>
+  FILE /delegation2.kt
+    CLASS INTERFACE Trait1
+      FUN public abstract fun foo(): kotlin.String
+    CLASS INTERFACE Trait2
+      FUN public abstract fun bar(): kotlin.String
+    CLASS CLASS T1
+      CONSTRUCTOR public constructor T1()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='T1'
+      FUN public open override fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value='aaa'
+    CLASS CLASS T2
+      CONSTRUCTOR public constructor T2()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='T2'
+      FUN public open override fun bar(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='bar(): String'
+            CONST String type=kotlin.String value='bbb'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C(a: Trait1, b: Trait2)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      PROPERTY val `C$Trait1$delegate`: Trait1
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter a: Trait1' type=Trait1 operator=null
+      FUN public open override fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CALL 'foo(): String' type=kotlin.String operator=null
+              $this: GET_VAR '`C$Trait1$delegate`: Trait1' type=Trait1 operator=null
+      PROPERTY val `C$Trait2$delegate`: Trait2
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter b: Trait2' type=Trait2 operator=null
+      FUN public open override fun bar(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='bar(): String'
+            CALL 'bar(): String' type=kotlin.String operator=null
+              $this: GET_VAR '`C$Trait2$delegate`: Trait2' type=Trait2 operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val c: C
+          CALL 'constructor C(Trait1, Trait2)' type=C operator=null
+            a: CALL 'constructor T1()' type=T1 operator=null
+            b: CALL 'constructor T2()' type=T2 operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'c: C' type=C operator=null
+              arg1: CONST String type=kotlin.String value='aaa'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'bar(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'c: C' type=C operator=null
+              arg1: CONST String type=kotlin.String value='bbb'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

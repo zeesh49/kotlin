@@ -1,0 +1,15 @@
+MODULE <test-module>
+  FILE /packageQualifiedMethod.kt
+    FUN public fun bar(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='bar(): Int'
+          CONST Int type=kotlin.Int value='610'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'bar(): Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='610'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

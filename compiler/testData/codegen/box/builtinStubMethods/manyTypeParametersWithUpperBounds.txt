@@ -1,0 +1,103 @@
+MODULE <test-module>
+  FILE /manyTypeParametersWithUpperBounds.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<U : kotlin.Number, V : U, W : V>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-size>(): Int'
+              CONST Int type=kotlin.Int value='0'
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='isEmpty(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+      FUN public open override fun contains(o: W): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='contains(W): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+      FUN public open override fun iterator(): kotlin.collections.Iterator<W>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='iterator(): Iterator<W>'
+            CALL 'iterator(): MutableIterator<W!>' type=kotlin.collections.MutableIterator<W!> operator=null
+              $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.collections.MutableSet<W!>
+                TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.collections.Set<W!>
+                  CALL 'emptySet(): (Mutable)Set<W!>!' type=kotlin.collections.(Mutable)Set<W!>! operator=null
+      FUN public open override fun containsAll(c: kotlin.collections.Collection<W>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsAll(Collection<W>): Boolean'
+            CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR 'value-parameter c: Collection<W>' type=kotlin.collections.Collection<W> operator=null
+    FUN public fun expectUoe(block: () -> kotlin.Any): kotlin.Unit
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'invoke(): Any' type=kotlin.Any operator=INVOKE
+              $this: GET_VAR 'value-parameter block: () -> Any' type=() -> kotlin.Any operator=VARIABLE_AS_FUNCTION
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError()' type=java.lang.AssertionError operator=null
+          catch e: BLOCK type=kotlin.Unit operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: java.util.Set<kotlin.Int>
+          TYPE_OP operator=CAST typeOperand=java.util.Set<kotlin.Int>
+            CALL 'constructor A()' type=A<kotlin.Int, kotlin.Int, kotlin.Int> operator=null
+        CALL 'iterator(): MutableIterator<Int!>' type=kotlin.collections.MutableIterator<kotlin.Int!> operator=null
+          $this: GET_VAR 'a: Set<Int>' type=java.util.Set<kotlin.Int> operator=null
+        CALL 'expectUoe(() -> Any): Unit' type=kotlin.Unit operator=null
+          block: BLOCK type=() -> kotlin.Boolean operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Boolean
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Boolean'
+                  CALL 'add(Int!): Boolean' type=kotlin.Boolean operator=null
+                    $this: GET_VAR 'a: Set<Int>' type=java.util.Set<kotlin.Int> operator=null
+                    element: CONST Int type=kotlin.Int value='42'
+            CALLABLE_REFERENCE '<anonymous>(): Boolean' type=() -> kotlin.Boolean operator=LAMBDA
+        CALL 'expectUoe(() -> Any): Unit' type=kotlin.Unit operator=null
+          block: BLOCK type=() -> kotlin.Boolean operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Boolean
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Boolean'
+                  CALL 'remove(Int!): Boolean' type=kotlin.Boolean operator=null
+                    $this: GET_VAR 'a: Set<Int>' type=java.util.Set<kotlin.Int> operator=null
+                    element: CONST Int type=kotlin.Int value='42'
+            CALLABLE_REFERENCE '<anonymous>(): Boolean' type=() -> kotlin.Boolean operator=LAMBDA
+        CALL 'expectUoe(() -> Any): Unit' type=kotlin.Unit operator=null
+          block: BLOCK type=() -> kotlin.Boolean operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Boolean
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Boolean'
+                  CALL 'addAll(Collection<Int!>): Boolean' type=kotlin.Boolean operator=null
+                    $this: GET_VAR 'a: Set<Int>' type=java.util.Set<kotlin.Int> operator=null
+                    elements: GET_VAR 'a: Set<Int>' type=java.util.Set<kotlin.Int> operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Boolean' type=() -> kotlin.Boolean operator=LAMBDA
+        CALL 'expectUoe(() -> Any): Unit' type=kotlin.Unit operator=null
+          block: BLOCK type=() -> kotlin.Boolean operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Boolean
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Boolean'
+                  CALL 'removeAll(Collection<Int!>): Boolean' type=kotlin.Boolean operator=null
+                    $this: GET_VAR 'a: Set<Int>' type=java.util.Set<kotlin.Int> operator=null
+                    elements: GET_VAR 'a: Set<Int>' type=java.util.Set<kotlin.Int> operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Boolean' type=() -> kotlin.Boolean operator=LAMBDA
+        CALL 'expectUoe(() -> Any): Unit' type=kotlin.Unit operator=null
+          block: BLOCK type=() -> kotlin.Boolean operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Boolean
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Boolean'
+                  CALL 'retainAll(Collection<Int!>): Boolean' type=kotlin.Boolean operator=null
+                    $this: GET_VAR 'a: Set<Int>' type=java.util.Set<kotlin.Int> operator=null
+                    elements: GET_VAR 'a: Set<Int>' type=java.util.Set<kotlin.Int> operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Boolean' type=() -> kotlin.Boolean operator=LAMBDA
+        CALL 'expectUoe(() -> Any): Unit' type=kotlin.Unit operator=null
+          block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  CALL 'clear(): Unit' type=kotlin.Unit operator=null
+                    $this: GET_VAR 'a: Set<Int>' type=java.util.Set<kotlin.Int> operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

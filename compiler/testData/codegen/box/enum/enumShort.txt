@@ -1,0 +1,48 @@
+MODULE <test-module>
+  FILE /enumShort.kt
+    CLASS ENUM_CLASS Color
+      CONSTRUCTOR private constructor Color(rgb: kotlin.Int)
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          SET_BACKING_FIELD 'rgb: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'Color' type=Color
+            value: GET_VAR 'value-parameter rgb: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Color'
+      PROPERTY public final val rgb: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter rgb: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      ENUM_ENTRY enum entry RED
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Color(Int)' RED
+          rgb: CONST Int type=kotlin.Int value='16711680'
+      ENUM_ENTRY enum entry GREEN
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Color(Int)' GREEN
+          rgb: CONST Int type=kotlin.Int value='65280'
+      ENUM_ENTRY enum entry BLUE
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Color(Int)' BLUE
+          rgb: CONST Int type=kotlin.Int value='255'
+      FUN public final fun values(): kotlin.Array<Color>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): Color
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun foo(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(): Int'
+          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+            $this: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+              $this: CALL '<get-rgb>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_ENUM_VALUE 'RED' type=Color
+              other: CALL '<get-rgb>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_ENUM_VALUE 'GREEN' type=Color
+            other: CALL '<get-rgb>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: GET_ENUM_VALUE 'BLUE' type=Color
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'foo(): Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='16777215'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              CALL 'foo(): Int' type=kotlin.Int operator=null

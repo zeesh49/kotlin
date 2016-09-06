@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /nullAsNullableIntIsNull.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: BLOCK type=kotlin.Int operator=EXCLEXCL
+                  VAR val tmp0_notnull: kotlin.Int?
+                    TYPE_OP operator=CAST typeOperand=kotlin.Int?
+                      CONST Null type=kotlin.Nothing? value='null'
+                  WHEN type=kotlin.Int operator=null
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                    else: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+                arg1: CONST Int type=kotlin.Int value='10'
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                CONST String type=kotlin.String value='Fail #1'
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail #2'
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'

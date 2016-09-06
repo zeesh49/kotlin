@@ -1,0 +1,43 @@
+MODULE <test-module>
+  FILE /Kt2495Test.kt
+    FUN public fun f(xs: kotlin.collections.Iterator<kotlin.Int>): kotlin.Int
+      BLOCK_BODY
+        VAR var answer: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<kotlin.Int>
+            CALL 'iterator() on Iterator<Int>: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=FOR_LOOP_ITERATOR
+              $receiver: GET_VAR 'value-parameter xs: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val x: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'answer: Int' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                    $this: GET_VAR 'answer: Int' type=kotlin.Int operator=PLUSEQ
+                    other: GET_VAR 'x: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='f(Iterator<Int>): Int'
+          GET_VAR 'answer: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val list: java.util.ArrayList<kotlin.Int>
+          CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+            elements: VARARG type=Array<out Int> varargElementType=Int
+              CONST Int type=kotlin.Int value='1'
+              CONST Int type=kotlin.Int value='2'
+              CONST Int type=kotlin.Int value='3'
+        VAR val result: kotlin.Int
+          CALL 'f(Iterator<Int>): Int' type=kotlin.Int operator=null
+            xs: CALL 'iterator(): MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+              $this: GET_VAR 'list: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CONST Int type=kotlin.Int value='6'
+              arg1: GET_VAR 'result: Int' type=kotlin.Int operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

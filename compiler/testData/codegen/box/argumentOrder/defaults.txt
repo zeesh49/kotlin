@@ -1,0 +1,96 @@
+MODULE <test-module>
+  FILE /defaults.kt
+    PROPERTY public var invokeOrder: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    FUN public fun test(x: kotlin.Double = ..., a: kotlin.String, y: kotlin.Long = ..., b: kotlin.String): kotlin.String
+      x: EXPRESSION_BODY
+        CALL 'invoke(): Double' type=kotlin.Double operator=null
+          $this: BLOCK type=() -> kotlin.Double operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Double
+              BLOCK_BODY
+                BLOCK type=kotlin.Unit operator=PLUSEQ
+                  CALL '<set-invokeOrder>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+                    <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                      $this: CALL '<get-invokeOrder>(): String' type=kotlin.String operator=PLUSEQ
+                      other: CONST String type=kotlin.String value='x'
+                RETURN type=kotlin.Nothing from='<anonymous>(): Double'
+                  CONST Double type=kotlin.Double value='1.0'
+            CALLABLE_REFERENCE '<anonymous>(): Double' type=() -> kotlin.Double operator=LAMBDA
+      y: EXPRESSION_BODY
+        CALL 'invoke(): Long' type=kotlin.Long operator=null
+          $this: BLOCK type=() -> kotlin.Long operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Long
+              BLOCK_BODY
+                BLOCK type=kotlin.Unit operator=PLUSEQ
+                  CALL '<set-invokeOrder>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+                    <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                      $this: CALL '<get-invokeOrder>(): String' type=kotlin.String operator=PLUSEQ
+                      other: CONST String type=kotlin.String value='y'
+                RETURN type=kotlin.Nothing from='<anonymous>(): Long'
+                  CONST Long type=kotlin.Long value='1'
+            CALLABLE_REFERENCE '<anonymous>(): Long' type=() -> kotlin.Long operator=LAMBDA
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test(Double = ..., String, Long = ..., String): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: CONST String type=kotlin.String value=''
+                  other: GET_VAR 'value-parameter x: Double = ...' type=kotlin.Double operator=null
+                other: GET_VAR 'value-parameter a: String' type=kotlin.String operator=null
+              other: GET_VAR 'value-parameter b: String' type=kotlin.String operator=null
+            other: GET_VAR 'value-parameter y: Long = ...' type=kotlin.Long operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val funResult: kotlin.String
+          BLOCK type=kotlin.String operator=ARGUMENTS_REORDERING_FOR_CALL
+            VAR val tmp0_b: kotlin.String
+              CALL 'invoke(): String' type=kotlin.String operator=null
+                $this: BLOCK type=() -> kotlin.String operator=LAMBDA
+                  FUN local final fun <anonymous>(): kotlin.String
+                    BLOCK_BODY
+                      BLOCK type=kotlin.Unit operator=PLUSEQ
+                        CALL '<set-invokeOrder>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+                          <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                            $this: CALL '<get-invokeOrder>(): String' type=kotlin.String operator=PLUSEQ
+                            other: CONST String type=kotlin.String value='K'
+                      RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                        CONST String type=kotlin.String value='K'
+                  CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+            VAR val tmp1_a: kotlin.String
+              CALL 'invoke(): String' type=kotlin.String operator=null
+                $this: BLOCK type=() -> kotlin.String operator=LAMBDA
+                  FUN local final fun <anonymous>(): kotlin.String
+                    BLOCK_BODY
+                      BLOCK type=kotlin.Unit operator=PLUSEQ
+                        CALL '<set-invokeOrder>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+                          <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                            $this: CALL '<get-invokeOrder>(): String' type=kotlin.String operator=PLUSEQ
+                            other: CONST String type=kotlin.String value='O'
+                      RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                        CONST String type=kotlin.String value='O'
+                  CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+            CALL 'test(Double = ..., String, Long = ..., String): String' type=kotlin.String operator=null
+              a: GET_VAR 'tmp1_a: String' type=kotlin.String operator=null
+              b: GET_VAR 'tmp0_b: String' type=kotlin.String operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-invokeOrder>(): String' type=kotlin.String operator=GET_PROPERTY
+                arg1: CONST String type=kotlin.String value='KOxy'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'funResult: String' type=kotlin.String operator=null
+                arg1: CONST String type=kotlin.String value='1.0OK1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: '
+              CALL '<get-invokeOrder>(): String' type=kotlin.String operator=GET_PROPERTY
+              CONST String type=kotlin.String value=' != KOxy or '
+              GET_VAR 'funResult: String' type=kotlin.String operator=null
+              CONST String type=kotlin.String value=' != 1.0OK1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

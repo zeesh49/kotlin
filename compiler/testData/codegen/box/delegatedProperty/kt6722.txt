@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /kt6722.kt
+    CLASS INTERFACE T
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: kotlin.String = "OK"
+          CONST String type=kotlin.String value='OK'
+        VAR val t: box.<no name provided>
+          BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              PROPERTY public final val foo: kotlin.String
+                delegate: PROPERTY val `foo$delegate`: kotlin.Lazy<kotlin.String>
+                  EXPRESSION_BODY
+                    CALL 'lazy(() -> String): Lazy<String>' type=kotlin.Lazy<kotlin.String> operator=null
+                      initializer: BLOCK type=() -> kotlin.String operator=LAMBDA
+                        FUN local final fun <anonymous>(): kotlin.String
+                          BLOCK_BODY
+                            RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                              GET_VAR 'a: String' type=kotlin.String operator=null
+                        CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+                PROPERTY_GETTER public final fun <get-foo>(): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<get-foo>(): String'
+                      CALL 'getValue(Any?, KProperty<*>) on Lazy<String>: String' type=kotlin.String operator=null
+                        $receiver: GET_BACKING_FIELD '`foo$delegate`: Lazy<String>' type=kotlin.Lazy<kotlin.String> operator=null
+                          receiver: THIS of '<no name provided>' type=box.<no name provided>
+                        thisRef: THIS of '<no name provided>' type=box.<no name provided>
+                        property: CALLABLE_REFERENCE 'foo: String' type=kotlin.reflect.KProperty1<box.<no name provided>, kotlin.String> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+            CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-foo>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_VAR 't: <no name provided>' type=box.<no name provided> operator=null

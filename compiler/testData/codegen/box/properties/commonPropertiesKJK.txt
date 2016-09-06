@@ -1,0 +1,257 @@
+MODULE <test-module>
+  FILE /test.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public open val valProp: kotlin.Int = -1
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='-1'
+      PROPERTY public open var varProp: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='-1'
+      PROPERTY public open var isProp: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='-1'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor J()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public open override val valProp: kotlin.Int
+        EXPRESSION_BODY
+          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+            $this: CALL '<get-valProp>(): Int' superQualifier=J type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'B' type=J
+            other: CONST Int type=kotlin.Int value='1'
+      PROPERTY public open override var varProp: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-varProp>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-varProp>(): Int'
+              CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CALL '<get-varProp>(): Int' superQualifier=J type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'B' type=J
+                other: CONST Int type=kotlin.Int value='1'
+        PROPERTY_SETTER public open override fun <set-varProp>(value: kotlin.Int): kotlin.Unit
+          BLOCK_BODY
+            CALL '<set-varProp>(Int): Unit' superQualifier=J type=kotlin.Unit operator=EQ
+              $this: THIS of 'B' type=J
+              <set-?>: GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=null
+      PROPERTY public open override var isProp: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-isProp>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-isProp>(): Int'
+              CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CALL '<get-isProp>(): Int' superQualifier=J type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'B' type=J
+                other: CONST Int type=kotlin.Int value='1'
+        PROPERTY_SETTER public open override fun <set-isProp>(value: kotlin.Int): kotlin.Unit
+          BLOCK_BODY
+            CALL '<set-isProp>(Int): Unit' superQualifier=J type=kotlin.Unit operator=EQ
+              $this: THIS of 'B' type=J
+              <set-?>: GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val j: J
+          CALL 'constructor J()' type=J operator=null
+        VAR var a: A
+          GET_VAR 'j: J' type=J operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-valProp>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'j: J' type=J operator=null
+              arg1: CONST Int type=kotlin.Int value='123'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-valProp>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='123'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        CALL '<set-varProp>(Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'j: J' type=J operator=null
+          <set-?>: CONST Int type=kotlin.Int value='-1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: GET_BACKING_FIELD 'okField: Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+              receiver: GET_VAR 'j: J' type=J operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        SET_BACKING_FIELD 'okField: Boolean' type=kotlin.Unit operator=EQ
+          receiver: GET_VAR 'j: J' type=J operator=null
+          value: CONST Boolean type=kotlin.Boolean value='false'
+        CALL '<set-varProp>(Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a: A' type=A operator=null
+          <set-?>: CONST Int type=kotlin.Int value='-1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: GET_BACKING_FIELD 'okField: Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+              receiver: GET_VAR 'j: J' type=J operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        SET_BACKING_FIELD 'okField: Boolean' type=kotlin.Unit operator=EQ
+          receiver: GET_VAR 'j: J' type=J operator=null
+          value: CONST Boolean type=kotlin.Boolean value='false'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-varProp>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'j: J' type=J operator=null
+              arg1: CONST Int type=kotlin.Int value='456'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 5'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-varProp>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='456'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 6'
+        CALL '<set-isProp>(Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'j: J' type=J operator=null
+          <set-?>: CONST Int type=kotlin.Int value='-1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: GET_BACKING_FIELD 'okField: Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+              receiver: GET_VAR 'j: J' type=J operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 7'
+        SET_BACKING_FIELD 'okField: Boolean' type=kotlin.Unit operator=EQ
+          receiver: GET_VAR 'j: J' type=J operator=null
+          value: CONST Boolean type=kotlin.Boolean value='false'
+        CALL '<set-isProp>(Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a: A' type=A operator=null
+          <set-?>: CONST Int type=kotlin.Int value='-1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: GET_BACKING_FIELD 'okField: Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+              receiver: GET_VAR 'j: J' type=J operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 8'
+        SET_BACKING_FIELD 'okField: Boolean' type=kotlin.Unit operator=EQ
+          receiver: GET_VAR 'j: J' type=J operator=null
+          value: CONST Boolean type=kotlin.Boolean value='false'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-isProp>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'j: J' type=J operator=null
+              arg1: CONST Int type=kotlin.Int value='789'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 9'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-isProp>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='789'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 10'
+        VAR val b: B
+          CALL 'constructor B()' type=B operator=null
+        SET_VAR 'a: A' type=kotlin.Unit operator=EQ
+          GET_VAR 'b: B' type=B operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-valProp>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'b: B' type=B operator=null
+              arg1: CONST Int type=kotlin.Int value='124'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 11'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-valProp>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='124'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 12'
+        CALL '<set-varProp>(Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'b: B' type=B operator=null
+          value: CONST Int type=kotlin.Int value='-1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: GET_BACKING_FIELD 'okField: Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+              receiver: GET_VAR 'b: B' type=B operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 13'
+        SET_BACKING_FIELD 'okField: Boolean' type=kotlin.Unit operator=EQ
+          receiver: GET_VAR 'b: B' type=B operator=null
+          value: CONST Boolean type=kotlin.Boolean value='false'
+        CALL '<set-varProp>(Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a: A' type=A operator=null
+          <set-?>: CONST Int type=kotlin.Int value='-1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: GET_BACKING_FIELD 'okField: Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+              receiver: GET_VAR 'b: B' type=B operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 14'
+        SET_BACKING_FIELD 'okField: Boolean' type=kotlin.Unit operator=EQ
+          receiver: GET_VAR 'b: B' type=B operator=null
+          value: CONST Boolean type=kotlin.Boolean value='false'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-varProp>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'b: B' type=B operator=null
+              arg1: CONST Int type=kotlin.Int value='457'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 15'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-varProp>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='457'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 16'
+        CALL '<set-isProp>(Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'b: B' type=B operator=null
+          value: CONST Int type=kotlin.Int value='-1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: GET_BACKING_FIELD 'okField: Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+              receiver: GET_VAR 'b: B' type=B operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 17'
+        SET_BACKING_FIELD 'okField: Boolean' type=kotlin.Unit operator=EQ
+          receiver: GET_VAR 'b: B' type=B operator=null
+          value: CONST Boolean type=kotlin.Boolean value='false'
+        CALL '<set-isProp>(Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a: A' type=A operator=null
+          <set-?>: CONST Int type=kotlin.Int value='-1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: GET_BACKING_FIELD 'okField: Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+              receiver: GET_VAR 'b: B' type=B operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 18'
+        SET_BACKING_FIELD 'okField: Boolean' type=kotlin.Unit operator=EQ
+          receiver: GET_VAR 'b: B' type=B operator=null
+          value: CONST Boolean type=kotlin.Boolean value='false'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-isProp>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'b: B' type=B operator=null
+              arg1: CONST Int type=kotlin.Int value='790'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 19'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-isProp>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='790'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 20'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

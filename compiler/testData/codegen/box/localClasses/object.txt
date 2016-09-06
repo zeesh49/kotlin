@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /object.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val k: box.<no name provided>
+          BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              PROPERTY public final val ok: kotlin.String = "OK"
+                EXPRESSION_BODY
+                  CONST String type=kotlin.String value='OK'
+            CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-ok>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_VAR 'k: <no name provided>' type=box.<no name provided> operator=null

@@ -1,0 +1,39 @@
+MODULE <test-module>
+  FILE /protectedVarWithPrivateSet.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<T : kotlin.Any>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY protected final var value: T
+        delegate: PROPERTY val `value$delegate`: kotlin.properties.ReadWriteProperty<kotlin.Any?, T>
+          EXPRESSION_BODY
+            CALL 'notNull(): ReadWriteProperty<Any?, T>' type=kotlin.properties.ReadWriteProperty<kotlin.Any?, T> operator=null
+              $this: GET_OBJECT 'Delegates' type=kotlin.properties.Delegates
+        PROPERTY_GETTER protected final fun <get-value>(): T
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-value>(): T'
+              CALL 'getValue(Any?, KProperty<*>): T' type=T operator=null
+                $this: GET_BACKING_FIELD '`value$delegate`: ReadWriteProperty<Any?, T>' type=kotlin.properties.ReadWriteProperty<kotlin.Any?, T> operator=null
+                  receiver: THIS of 'A' type=A<T>
+                thisRef: THIS of 'A' type=A<T>
+                property: CALLABLE_REFERENCE 'value: T' type=kotlin.reflect.KMutableProperty1<A<T>, T> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+        PROPERTY_SETTER private final fun <set-value>(<set-?>: T): kotlin.Unit
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<set-value>(T): Unit'
+              CALL 'setValue(Any?, KProperty<*>, T): Unit' type=kotlin.Unit operator=null
+                $this: GET_BACKING_FIELD '`value$delegate`: ReadWriteProperty<Any?, T>' type=kotlin.properties.ReadWriteProperty<kotlin.Any?, T> operator=null
+                  receiver: THIS of 'A' type=A<T>
+                thisRef: THIS of 'A' type=A<T>
+                property: CALLABLE_REFERENCE 'value: T' type=kotlin.reflect.KMutableProperty1<A<T>, T> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+                value: GET_VAR 'value-parameter <set-?>: T' type=T operator=null
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'constructor B()' type=B operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

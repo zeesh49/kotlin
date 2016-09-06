@@ -1,0 +1,63 @@
+MODULE <test-module>
+  FILE /simpleMutableExtension.kt
+    PROPERTY public var storage: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='0'
+    PROPERTY public var kotlin.Int.foo: kotlin.Int
+      PROPERTY_GETTER public fun kotlin.Int.<get-foo>(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-foo>() on Int: Int'
+            CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+              $this: $RECEIVER of 'foo: Int on Int' type=kotlin.Int
+              other: CALL '<get-storage>(): Int' type=kotlin.Int operator=GET_PROPERTY
+      PROPERTY_SETTER public fun kotlin.Int.<set-foo>(value: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-storage>(Int): Unit' type=kotlin.Unit operator=EQ
+            <set-?>: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+              $this: $RECEIVER of 'foo: Int on Int' type=kotlin.Int
+              other: GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val pr: kotlin.reflect.KMutableProperty1<kotlin.Int, kotlin.Int>
+          CALLABLE_REFERENCE 'foo: Int on Int' type=kotlin.reflect.KMutableProperty1<kotlin.Int, kotlin.Int> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'pr: KMutableProperty1<Int, Int>' type=kotlin.reflect.KMutableProperty1<kotlin.Int, kotlin.Int> operator=null
+                receiver: CONST Int type=kotlin.Int value='42'
+              arg1: CONST Int type=kotlin.Int value='42'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 1: '
+              CALL 'get(Int): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'pr: KMutableProperty1<Int, Int>' type=kotlin.reflect.KMutableProperty1<kotlin.Int, kotlin.Int> operator=null
+                receiver: CONST Int type=kotlin.Int value='42'
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'pr: KMutableProperty1<Int, Int>' type=kotlin.reflect.KMutableProperty1<kotlin.Int, kotlin.Int> operator=null
+          receiver: CONST Int type=kotlin.Int value='200'
+          value: CONST Int type=kotlin.Int value='39'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'pr: KMutableProperty1<Int, Int>' type=kotlin.reflect.KMutableProperty1<kotlin.Int, kotlin.Int> operator=null
+                receiver: CONST Int type=kotlin.Int value='-239'
+              arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 2: '
+              CALL 'get(Int): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'pr: KMutableProperty1<Int, Int>' type=kotlin.reflect.KMutableProperty1<kotlin.Int, kotlin.Int> operator=null
+                receiver: CONST Int type=kotlin.Int value='-239'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-storage>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              arg1: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 3: '
+              CALL '<get-storage>(): Int' type=kotlin.Int operator=GET_PROPERTY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

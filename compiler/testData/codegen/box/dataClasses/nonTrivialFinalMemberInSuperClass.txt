@@ -1,0 +1,72 @@
+MODULE <test-module>
+  FILE /nonTrivialFinalMemberInSuperClass.kt
+    CLASS CLASS Base
+      CONSTRUCTOR public constructor Base()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Base'
+      FUN public final override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            CONST String type=kotlin.String value='OK'
+      FUN public final override fun hashCode(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='hashCode(): Int'
+            CONST Int type=kotlin.Int value='42'
+      FUN public final override fun equals(other: kotlin.Any?): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+    CLASS CLASS DataClass
+      CONSTRUCTOR public constructor DataClass(field: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Base()'
+          SET_BACKING_FIELD 'field: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'DataClass' type=DataClass
+            value: GET_VAR 'value-parameter field: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='DataClass'
+      PROPERTY public final val field: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter field: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final operator fun component1(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component1(): String'
+            CALL '<get-field>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'DataClass' type=DataClass
+      FUN public final fun copy(field: kotlin.String = ...): DataClass
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='copy(String = ...): DataClass'
+            CALL 'constructor DataClass(String)' type=DataClass operator=null
+              field: GET_VAR 'value-parameter field: String = ...' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val d: DataClass
+          CALL 'constructor DataClass(String)' type=DataClass operator=null
+            field: CONST String type=kotlin.String value='x'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'd: DataClass' type=DataClass operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail toString'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'd: DataClass' type=DataClass operator=null
+              arg1: CONST Int type=kotlin.Int value='42'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail hashCode'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'equals(Any?): Boolean' type=kotlin.Boolean operator=null
+                $this: GET_VAR 'd: DataClass' type=DataClass operator=null
+                other: GET_VAR 'd: DataClass' type=DataClass operator=null
+              arg1: CONST Boolean type=kotlin.Boolean value='false'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail equals'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

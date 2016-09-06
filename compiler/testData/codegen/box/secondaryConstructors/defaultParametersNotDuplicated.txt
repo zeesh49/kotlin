@@ -1,0 +1,73 @@
+MODULE <test-module>
+  FILE /defaultParametersNotDuplicated.kt
+    PROPERTY public var global: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='0'
+    FUN public fun sideEffect(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='sideEffect(): Int'
+          BLOCK type=kotlin.Int operator=POSTFIX_INCR
+            BLOCK type=kotlin.Int operator=POSTFIX_INCR
+              VAR val tmp0: kotlin.Int
+                CALL '<get-global>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+              CALL '<set-global>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+                <set-?>: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(x: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'x: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter x: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val x: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter x: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CONSTRUCTOR public constructor A(y: kotlin.Int = ..., z: (kotlin.Int) -> kotlin.Int = ...)
+        y: EXPRESSION_BODY
+          CALL 'sideEffect(): Int' type=kotlin.Int operator=null
+        z: EXPRESSION_BODY
+          BLOCK type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+            FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Int
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(Int): Int'
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                    other: CALL 'sideEffect(): Int' type=kotlin.Int operator=null
+            CALLABLE_REFERENCE '<anonymous>(Int): Int' type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A(String)'
+            x: STRING_CONCATENATION type=kotlin.String
+              GET_VAR 'value-parameter y: Int = ...' type=kotlin.Int operator=null
+              CONST String type=kotlin.String value=':'
+              CALL 'invoke(Int): Int' type=kotlin.Int operator=INVOKE
+                $this: GET_VAR 'value-parameter z: (Int) -> Int = ...' type=(kotlin.Int) -> kotlin.Int operator=VARIABLE_AS_FUNCTION
+                p1: GET_VAR 'value-parameter y: Int = ...' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var a: A
+          CALL 'constructor A(Int = ..., (Int) -> Int = ...)' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-x>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='0:1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='failed1: '
+              CALL '<get-x>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-global>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='failed2: '
+              CALL '<get-global>(): Int' type=kotlin.Int operator=GET_PROPERTY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

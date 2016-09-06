@@ -1,0 +1,52 @@
+MODULE <test-module>
+  FILE /kt242.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val i: kotlin.Int? = 7
+          CONST Int type=kotlin.Int value='7'
+        VAR val j: kotlin.Int? = null
+          CONST Null type=kotlin.Nothing? value='null'
+        VAR val k: kotlin.Int = 7
+          CONST Int type=kotlin.Int value='7'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'i: Int?' type=kotlin.Int? operator=null
+            arg1: CONST Int type=kotlin.Int value='7'
+          then: BLOCK type=kotlin.Unit operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CONST Int type=kotlin.Int value='7'
+            arg1: GET_VAR 'i: Int?' type=kotlin.Int? operator=null
+          then: BLOCK type=kotlin.Unit operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'j: Int?' type=kotlin.Int? operator=null
+            arg1: CONST Int type=kotlin.Int value='7'
+          then: BLOCK type=kotlin.Unit operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CONST Int type=kotlin.Int value='7'
+            arg1: GET_VAR 'j: Int?' type=kotlin.Int? operator=null
+          then: BLOCK type=kotlin.Unit operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'i: Int?' type=kotlin.Int? operator=null
+            arg1: GET_VAR 'k: Int' type=kotlin.Int operator=null
+          then: BLOCK type=kotlin.Unit operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'k: Int' type=kotlin.Int operator=null
+            arg1: GET_VAR 'i: Int?' type=kotlin.Int? operator=null
+          then: BLOCK type=kotlin.Unit operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'j: Int?' type=kotlin.Int? operator=null
+            arg1: GET_VAR 'k: Int' type=kotlin.Int operator=null
+          then: BLOCK type=kotlin.Unit operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'k: Int' type=kotlin.Int operator=null
+            arg1: GET_VAR 'j: Int?' type=kotlin.Int? operator=null
+          then: BLOCK type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

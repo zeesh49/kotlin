@@ -1,0 +1,182 @@
+MODULE <test-module>
+  FILE /kt6136.kt
+    CLASS INTERFACE Id
+      PROPERTY public abstract val id: T
+    CLASS CLASS Actor
+      CONSTRUCTOR public constructor Actor(id: kotlin.Int, firstName: kotlin.String, lastName: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'id: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'Actor' type=Actor
+            value: GET_VAR 'value-parameter id: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'firstName: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Actor' type=Actor
+            value: GET_VAR 'value-parameter firstName: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'lastName: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Actor' type=Actor
+            value: GET_VAR 'value-parameter lastName: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Actor'
+      PROPERTY public open override val id: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter id: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val firstName: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter firstName: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val lastName: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter lastName: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final operator fun component1(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component1(): Int'
+            CALL '<get-id>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'Actor' type=Actor
+      FUN public final operator fun component2(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component2(): String'
+            CALL '<get-firstName>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'Actor' type=Actor
+      FUN public final operator fun component3(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component3(): String'
+            CALL '<get-lastName>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'Actor' type=Actor
+      FUN public final fun copy(id: kotlin.Int = ..., firstName: kotlin.String = ..., lastName: kotlin.String = ...): Actor
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='copy(Int = ..., String = ..., String = ...): Actor'
+            CALL 'constructor Actor(Int, String, String)' type=Actor operator=null
+              id: GET_VAR 'value-parameter id: Int = ...' type=kotlin.Int operator=null
+              firstName: GET_VAR 'value-parameter firstName: String = ...' type=kotlin.String operator=null
+              lastName: GET_VAR 'value-parameter lastName: String = ...' type=kotlin.String operator=null
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Actor('
+              CONST String type=kotlin.String value='id='
+              CALL '<get-id>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'Actor' type=Actor
+              CONST String type=kotlin.String value=', '
+              CONST String type=kotlin.String value='firstName='
+              CALL '<get-firstName>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'Actor' type=Actor
+              CONST String type=kotlin.String value=', '
+              CONST String type=kotlin.String value='lastName='
+              CALL '<get-lastName>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'Actor' type=Actor
+              CONST String type=kotlin.String value=')'
+      FUN public open override fun hashCode(): kotlin.Int
+        BLOCK_BODY
+          VAR val tmp0_result: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          SET_VAR 'tmp0_result: Int' type=kotlin.Unit operator=EQ
+            CALL 'hashCode(): Int' type=kotlin.Int operator=null
+              $this: CALL '<get-id>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'Actor' type=Actor
+          SET_VAR 'tmp0_result: Int' type=kotlin.Unit operator=EQ
+            CALL 'plus(Int): Int' type=kotlin.Int operator=null
+              $this: CALL 'times(Int): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'tmp0_result: Int' type=kotlin.Int operator=null
+                other: CONST Int type=kotlin.Int value='31'
+              other: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+                $this: CALL '<get-firstName>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: THIS of 'Actor' type=Actor
+          SET_VAR 'tmp0_result: Int' type=kotlin.Unit operator=EQ
+            CALL 'plus(Int): Int' type=kotlin.Int operator=null
+              $this: CALL 'times(Int): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'tmp0_result: Int' type=kotlin.Int operator=null
+                other: CONST Int type=kotlin.Int value='31'
+              other: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+                $this: CALL '<get-lastName>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: THIS of 'Actor' type=Actor
+          RETURN type=kotlin.Nothing from='hashCode(): Int'
+            GET_VAR 'tmp0_result: Int' type=kotlin.Int operator=null
+      FUN public open override fun equals(other: kotlin.Any?): kotlin.Boolean
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+              arg0: THIS of 'Actor' type=Actor
+              arg1: GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='true'
+          WHEN type=kotlin.Unit operator=null
+            if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=Actor
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          VAR val tmp0_other_with_cast: Actor
+            TYPE_OP operator=CAST typeOperand=Actor
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-id>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'Actor' type=Actor
+                arg1: CALL '<get-id>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'tmp0_other_with_cast: Actor' type=Actor operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-firstName>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: THIS of 'Actor' type=Actor
+                arg1: CALL '<get-firstName>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: GET_VAR 'tmp0_other_with_cast: Actor' type=Actor operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-lastName>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: THIS of 'Actor' type=Actor
+                arg1: CALL '<get-lastName>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: GET_VAR 'tmp0_other_with_cast: Actor' type=Actor operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a1: Actor
+          CALL 'constructor Actor(Int, String, String)' type=Actor operator=null
+            id: CONST Int type=kotlin.Int value='1'
+            firstName: CONST String type=kotlin.String value='Jeff'
+            lastName: CONST String type=kotlin.String value='Bridges'
+        VAR val a1c: Actor
+          CALL 'copy(Int = ..., String = ..., String = ...): Actor' type=Actor operator=null
+            $this: GET_VAR 'a1: Actor' type=Actor operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-id>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a1c: Actor' type=Actor operator=null
+              arg1: CALL '<get-id>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a1: Actor' type=Actor operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed: a1.copy().id=='
+              CALL '<get-id>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a1c: Actor' type=Actor operator=null
+        VAR val a2: Actor
+          CALL 'constructor Actor(Int, String, String)' type=Actor operator=null
+            id: CONST Int type=kotlin.Int value='2'
+            firstName: CONST String type=kotlin.String value='Jeff'
+            lastName: CONST String type=kotlin.String value='Bridges'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'a2: Actor' type=Actor operator=null
+            arg1: GET_VAR 'a1: Actor' type=Actor operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Failed: a2==a1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'a2: Actor' type=Actor operator=null
+            arg1: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'a1: Actor' type=Actor operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Failed: a2.hashCode()==a1.hashCode()'
+        CALL 'toString(): String' type=kotlin.String operator=null
+          $this: GET_VAR 'a1: Actor' type=Actor operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,203 @@
+MODULE <test-module>
+  FILE /assignmentOperations.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var x: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+    FUN public operator fun A.plusAssign(y: kotlin.Int): kotlin.Unit
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=PLUSEQ
+          VAR val tmp0_this: A
+            $RECEIVER of 'plusAssign(Int) on A: Unit' type=A
+          CALL '<set-x>(Int): Unit' type=kotlin.Unit operator=PLUSEQ
+            $this: GET_VAR 'tmp0_this: A' type=A operator=null
+            <set-?>: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+              $this: CALL '<get-x>(): Int' type=kotlin.Int operator=PLUSEQ
+                $this: GET_VAR 'tmp0_this: A' type=A operator=null
+              other: GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=null
+    FUN public operator fun A.minusAssign(y: kotlin.Int): kotlin.Unit
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=MINUSEQ
+          VAR val tmp0_this: A
+            $RECEIVER of 'minusAssign(Int) on A: Unit' type=A
+          CALL '<set-x>(Int): Unit' type=kotlin.Unit operator=MINUSEQ
+            $this: GET_VAR 'tmp0_this: A' type=A operator=null
+            <set-?>: CALL 'minus(Int): Int' type=kotlin.Int operator=MINUSEQ
+              $this: CALL '<get-x>(): Int' type=kotlin.Int operator=MINUSEQ
+                $this: GET_VAR 'tmp0_this: A' type=A operator=null
+              other: GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=null
+    FUN public operator fun A.timesAssign(y: kotlin.Int): kotlin.Unit
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=MULTEQ
+          VAR val tmp0_this: A
+            $RECEIVER of 'timesAssign(Int) on A: Unit' type=A
+          CALL '<set-x>(Int): Unit' type=kotlin.Unit operator=MULTEQ
+            $this: GET_VAR 'tmp0_this: A' type=A operator=null
+            <set-?>: CALL 'times(Int): Int' type=kotlin.Int operator=MULTEQ
+              $this: CALL '<get-x>(): Int' type=kotlin.Int operator=MULTEQ
+                $this: GET_VAR 'tmp0_this: A' type=A operator=null
+              other: GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=null
+    FUN public operator fun A.divAssign(y: kotlin.Int): kotlin.Unit
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=DIVEQ
+          VAR val tmp0_this: A
+            $RECEIVER of 'divAssign(Int) on A: Unit' type=A
+          CALL '<set-x>(Int): Unit' type=kotlin.Unit operator=DIVEQ
+            $this: GET_VAR 'tmp0_this: A' type=A operator=null
+            <set-?>: CALL 'div(Int): Int' type=kotlin.Int operator=DIVEQ
+              $this: CALL '<get-x>(): Int' type=kotlin.Int operator=DIVEQ
+                $this: GET_VAR 'tmp0_this: A' type=A operator=null
+              other: GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=null
+    FUN public operator fun A.modAssign(y: kotlin.Int): kotlin.Unit
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=PERCEQ
+          VAR val tmp0_this: A
+            $RECEIVER of 'modAssign(Int) on A: Unit' type=A
+          CALL '<set-x>(Int): Unit' type=kotlin.Unit operator=PERCEQ
+            $this: GET_VAR 'tmp0_this: A' type=A operator=null
+            <set-?>: CALL 'mod(Int): Int' type=kotlin.Int operator=PERCEQ
+              $this: CALL '<get-x>(): Int' type=kotlin.Int operator=PERCEQ
+                $this: GET_VAR 'tmp0_this: A' type=A operator=null
+              other: GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val original: A
+          CALL 'constructor A()' type=A operator=null
+        VAR val a: A
+          GET_VAR 'original: A' type=A operator=null
+        CALL 'plusAssign(Int) on A: Unit' type=kotlin.Unit operator=PLUSEQ
+          $receiver: GET_VAR 'a: A' type=A operator=PLUSEQ
+          y: CONST Int type=kotlin.Int value='1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: GET_VAR 'a: A' type=A operator=null
+              arg1: GET_VAR 'original: A' type=A operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 1: '
+              GET_VAR 'a: A' type=A operator=null
+              CONST String type=kotlin.String value=' !== '
+              GET_VAR 'original: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 2: '
+              CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              CONST String type=kotlin.String value=' != 1'
+        CALL 'minusAssign(Int) on A: Unit' type=kotlin.Unit operator=MINUSEQ
+          $receiver: GET_VAR 'a: A' type=A operator=MINUSEQ
+          y: CONST Int type=kotlin.Int value='2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: GET_VAR 'a: A' type=A operator=null
+              arg1: GET_VAR 'original: A' type=A operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 3: '
+              GET_VAR 'a: A' type=A operator=null
+              CONST String type=kotlin.String value=' !== '
+              GET_VAR 'original: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='-1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 4: '
+              CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              CONST String type=kotlin.String value=' != -1'
+        CALL 'timesAssign(Int) on A: Unit' type=kotlin.Unit operator=MULTEQ
+          $receiver: GET_VAR 'a: A' type=A operator=MULTEQ
+          y: CONST Int type=kotlin.Int value='-10'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: GET_VAR 'a: A' type=A operator=null
+              arg1: GET_VAR 'original: A' type=A operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 5: '
+              GET_VAR 'a: A' type=A operator=null
+              CONST String type=kotlin.String value=' !== '
+              GET_VAR 'original: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='10'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 6: '
+              CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              CONST String type=kotlin.String value=' != 10'
+        CALL 'divAssign(Int) on A: Unit' type=kotlin.Unit operator=DIVEQ
+          $receiver: GET_VAR 'a: A' type=A operator=DIVEQ
+          y: CONST Int type=kotlin.Int value='3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: GET_VAR 'a: A' type=A operator=null
+              arg1: GET_VAR 'original: A' type=A operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 7: '
+              GET_VAR 'a: A' type=A operator=null
+              CONST String type=kotlin.String value=' !== '
+              GET_VAR 'original: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='3'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 8: '
+              CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              CONST String type=kotlin.String value=' != 3'
+        CALL 'modAssign(Int) on A: Unit' type=kotlin.Unit operator=PERCEQ
+          $receiver: GET_VAR 'a: A' type=A operator=PERCEQ
+          y: CONST Int type=kotlin.Int value='2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: GET_VAR 'a: A' type=A operator=null
+              arg1: GET_VAR 'original: A' type=A operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 9: '
+              GET_VAR 'a: A' type=A operator=null
+              CONST String type=kotlin.String value=' !== '
+              GET_VAR 'original: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 10: '
+              CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              CONST String type=kotlin.String value=' != 1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

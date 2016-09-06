@@ -1,0 +1,46 @@
+MODULE <test-module>
+  FILE /fakeOverrideSubstituted.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<T>(t: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 't: T' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A<T>
+            value: GET_VAR 'value-parameter t: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val t: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter t: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun foo(): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): T'
+            CALL '<get-t>(): T' type=T operator=GET_PROPERTY
+              $this: THIS of 'A' type=A<T>
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B(s: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A(String)'
+            t: GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val foo: kotlin.reflect.KCallable<*>
+          CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+            $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'B' type=kotlin.reflect.KClass<B>
+            predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                    CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                      arg1: CONST String type=kotlin.String value='foo'
+              CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          TYPE_OP operator=CAST typeOperand=kotlin.String
+            CALL 'call(vararg Any?): Any?' type=kotlin.Any? operator=null
+              $this: GET_VAR 'foo: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+              args: VARARG type=Array<out Any?> varargElementType=Any?
+                CALL 'constructor B(String)' type=B operator=null
+                  s: CONST String type=kotlin.String value='OK'

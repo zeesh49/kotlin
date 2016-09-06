@@ -1,0 +1,56 @@
+MODULE <test-module>
+  FILE /starProjectedType.kt
+    CLASS CLASS Foo
+      CONSTRUCTOR public constructor Foo<K, V>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val foo: kotlin.reflect.KType
+          CALL '<get-starProjectedType>() on KClassifier: KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Foo' type=kotlin.reflect.KClass<Foo<*, *>>
+        CALL 'assertEquals(KClassifier?, KClassifier?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CLASS_REFERENCE 'Foo' type=kotlin.reflect.KClass<Foo<*, *>>
+          actual: CALL '<get-classifier>(): KClassifier?' type=kotlin.reflect.KClassifier? operator=GET_PROPERTY
+            $this: GET_VAR 'foo: KType' type=kotlin.reflect.KType operator=null
+        CALL 'assertEquals(List<KTypeProjection>, List<KTypeProjection>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(vararg KTypeProjection): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+            elements: VARARG type=Array<out KTypeProjection> varargElementType=KTypeProjection
+              CALL '<get-STAR>(): KTypeProjection' type=kotlin.reflect.KTypeProjection operator=GET_PROPERTY
+                $this: GET_OBJECT 'companion object of KTypeProjection' type=kotlin.reflect.KTypeProjection.Companion
+              CALL '<get-STAR>(): KTypeProjection' type=kotlin.reflect.KTypeProjection operator=GET_PROPERTY
+                $this: GET_OBJECT 'companion object of KTypeProjection' type=kotlin.reflect.KTypeProjection.Companion
+          actual: CALL '<get-arguments>(): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=GET_PROPERTY
+            $this: GET_VAR 'foo: KType' type=kotlin.reflect.KType operator=null
+        CALL 'assertEquals(KType, KType, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'foo: KType' type=kotlin.reflect.KType operator=null
+          actual: CALL 'createType(List<KTypeProjection> = ..., Boolean = ..., List<Annotation> = ...) on KClassifier: KType' type=kotlin.reflect.KType operator=null
+            $receiver: CLASS_REFERENCE 'Foo' type=kotlin.reflect.KClass<Foo<*, *>>
+            arguments: CALL 'listOf(vararg KTypeProjection): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+              elements: VARARG type=Array<out KTypeProjection> varargElementType=KTypeProjection
+                CALL '<get-STAR>(): KTypeProjection' type=kotlin.reflect.KTypeProjection operator=GET_PROPERTY
+                  $this: GET_OBJECT 'companion object of KTypeProjection' type=kotlin.reflect.KTypeProjection.Companion
+                CALL '<get-STAR>(): KTypeProjection' type=kotlin.reflect.KTypeProjection operator=GET_PROPERTY
+                  $this: GET_OBJECT 'companion object of KTypeProjection' type=kotlin.reflect.KTypeProjection.Companion
+        CALL 'assertEquals(KClassifier?, KClassifier?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+          actual: CALL '<get-classifier>(): KClassifier?' type=kotlin.reflect.KClassifier? operator=GET_PROPERTY
+            $this: CALL '<get-starProjectedType>() on KClassifier: KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+        CALL 'assertEquals(List<KTypeProjection>, List<KTypeProjection>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+          actual: CALL '<get-arguments>(): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=GET_PROPERTY
+            $this: CALL '<get-starProjectedType>() on KClassifier: KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+        VAR val tp: kotlin.reflect.KTypeParameter
+          CALL 'first() on List<KTypeParameter>: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+            $receiver: CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'Foo' type=kotlin.reflect.KClass<Foo<*, *>>
+        CALL 'assertEquals(KType, KType, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'createType(List<KTypeProjection> = ..., Boolean = ..., List<Annotation> = ...) on KClassifier: KType' type=kotlin.reflect.KType operator=null
+            $receiver: GET_VAR 'tp: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+          actual: CALL '<get-starProjectedType>() on KClassifier: KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $receiver: GET_VAR 'tp: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

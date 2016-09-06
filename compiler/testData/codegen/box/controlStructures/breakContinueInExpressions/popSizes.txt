@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /popSizes.kt
+    FUN public fun foo(x: kotlin.Long, y: kotlin.Int, z: kotlin.Double, s: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHILE label=null operator=WHILE_LOOP
+          condition: CONST Boolean type=kotlin.Boolean value='true'
+          body: BLOCK type=kotlin.Unit operator=null
+            TRY_CATCH type=kotlin.Unit
+              try: BLOCK type=kotlin.Unit operator=null
+                CALL 'foo(Long, Int, Double, String): Unit' type=kotlin.Unit operator=null
+                  x: CONST Long type=kotlin.Long value='0'
+                  y: CONST Int type=kotlin.Int value='0'
+                  z: CONST Double type=kotlin.Double value='0.0'
+                  s: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                    $this: CONST String type=kotlin.String value=''
+                    other: CONTINUE label=null loop.label=null depth=0
+              finally: BLOCK type=kotlin.Unit operator=null
+                CALL 'foo(Long, Int, Double, String): Unit' type=kotlin.Unit operator=null
+                  x: CONST Long type=kotlin.Long value='0'
+                  y: CONST Int type=kotlin.Int value='0'
+                  z: CONST Double type=kotlin.Double value='0.0'
+                  s: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                    $this: CONST String type=kotlin.String value=''
+                    other: BREAK label=null loop.label=null depth=0
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

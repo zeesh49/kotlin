@@ -1,0 +1,202 @@
+MODULE <test-module>
+  FILE /quicksort.kt
+    FUN public fun kotlin.IntArray.swap(i: kotlin.Int, j: kotlin.Int): kotlin.Unit
+      BLOCK_BODY
+        VAR val temp: kotlin.Int
+          CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+            $this: $RECEIVER of 'swap(Int, Int) on IntArray: Unit' type=kotlin.IntArray
+            index: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+          $this: $RECEIVER of 'swap(Int, Int) on IntArray: Unit' type=kotlin.IntArray
+          index: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+          value: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+            $this: $RECEIVER of 'swap(Int, Int) on IntArray: Unit' type=kotlin.IntArray
+            index: GET_VAR 'value-parameter j: Int' type=kotlin.Int operator=null
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+          $this: $RECEIVER of 'swap(Int, Int) on IntArray: Unit' type=kotlin.IntArray
+          index: GET_VAR 'value-parameter j: Int' type=kotlin.Int operator=null
+          value: GET_VAR 'temp: Int' type=kotlin.Int operator=null
+    FUN public fun kotlin.IntArray.quicksort(): kotlin.Unit
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='quicksort() on IntArray: Unit'
+          CALL 'quicksort(Int, Int) on IntArray: Unit' type=kotlin.Unit operator=null
+            $receiver: $RECEIVER of 'quicksort() on IntArray: Unit' type=kotlin.IntArray
+            L: CONST Int type=kotlin.Int value='0'
+            R: CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+              $this: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: $RECEIVER of 'quicksort() on IntArray: Unit' type=kotlin.IntArray
+              other: CONST Int type=kotlin.Int value='1'
+    FUN public fun kotlin.IntArray.quicksort(L: kotlin.Int, R: kotlin.Int): kotlin.Unit
+      BLOCK_BODY
+        VAR val m: kotlin.Int
+          CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+            $this: $RECEIVER of 'quicksort(Int, Int) on IntArray: Unit' type=kotlin.IntArray
+            index: CALL 'div(Int): Int' type=kotlin.Int operator=DIV
+              $this: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: GET_VAR 'value-parameter L: Int' type=kotlin.Int operator=null
+                other: GET_VAR 'value-parameter R: Int' type=kotlin.Int operator=null
+              other: CONST Int type=kotlin.Int value='2'
+        VAR var i: kotlin.Int
+          GET_VAR 'value-parameter L: Int' type=kotlin.Int operator=null
+        VAR var j: kotlin.Int
+          GET_VAR 'value-parameter R: Int' type=kotlin.Int operator=null
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'LTEQ0(Int): Boolean' type=kotlin.Boolean operator=LTEQ
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LTEQ
+              $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+              other: GET_VAR 'j: Int' type=kotlin.Int operator=null
+          body: BLOCK type=kotlin.Unit operator=null
+            WHILE label=null operator=WHILE_LOOP
+              condition: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+                arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+                  $this: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                    $this: $RECEIVER of 'quicksort(Int, Int) on IntArray: Unit' type=kotlin.IntArray
+                    index: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                  other: GET_VAR 'm: Int' type=kotlin.Int operator=null
+              body: BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                VAR val tmp0: kotlin.Int
+                  GET_VAR 'i: Int' type=kotlin.Int operator=POSTFIX_INCR
+                SET_VAR 'i: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                  CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                    $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+            WHILE label=null operator=WHILE_LOOP
+              condition: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+                arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+                  $this: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                    $this: $RECEIVER of 'quicksort(Int, Int) on IntArray: Unit' type=kotlin.IntArray
+                    index: GET_VAR 'j: Int' type=kotlin.Int operator=null
+                  other: GET_VAR 'm: Int' type=kotlin.Int operator=null
+              body: BLOCK type=kotlin.Int operator=POSTFIX_DECR
+                VAR val tmp1: kotlin.Int
+                  GET_VAR 'j: Int' type=kotlin.Int operator=POSTFIX_DECR
+                SET_VAR 'j: Int' type=kotlin.Unit operator=POSTFIX_DECR
+                  CALL 'dec(): Int' type=kotlin.Int operator=POSTFIX_DECR
+                    $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'LTEQ0(Int): Boolean' type=kotlin.Boolean operator=LTEQ
+                arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LTEQ
+                  $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                  other: GET_VAR 'j: Int' type=kotlin.Int operator=null
+              then: BLOCK type=kotlin.Unit operator=null
+                CALL 'swap(Int, Int) on IntArray: Unit' type=kotlin.Unit operator=null
+                  $receiver: $RECEIVER of 'quicksort(Int, Int) on IntArray: Unit' type=kotlin.IntArray
+                  i: BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                    VAR val tmp2: kotlin.Int
+                      GET_VAR 'i: Int' type=kotlin.Int operator=POSTFIX_INCR
+                    SET_VAR 'i: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                      CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                        $this: GET_VAR 'tmp2: Int' type=kotlin.Int operator=null
+                    GET_VAR 'tmp2: Int' type=kotlin.Int operator=null
+                  j: BLOCK type=kotlin.Int operator=POSTFIX_DECR
+                    VAR val tmp3: kotlin.Int
+                      GET_VAR 'j: Int' type=kotlin.Int operator=POSTFIX_DECR
+                    SET_VAR 'j: Int' type=kotlin.Unit operator=POSTFIX_DECR
+                      CALL 'dec(): Int' type=kotlin.Int operator=POSTFIX_DECR
+                        $this: GET_VAR 'tmp3: Int' type=kotlin.Int operator=null
+                    GET_VAR 'tmp3: Int' type=kotlin.Int operator=null
+              else: BLOCK type=kotlin.Unit operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+              $this: GET_VAR 'value-parameter L: Int' type=kotlin.Int operator=null
+              other: GET_VAR 'j: Int' type=kotlin.Int operator=null
+          then: CALL 'quicksort(Int, Int) on IntArray: Unit' type=kotlin.Unit operator=null
+            $receiver: $RECEIVER of 'quicksort(Int, Int) on IntArray: Unit' type=kotlin.IntArray
+            L: GET_VAR 'value-parameter L: Int' type=kotlin.Int operator=null
+            R: GET_VAR 'j: Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+              $this: GET_VAR 'value-parameter R: Int' type=kotlin.Int operator=null
+              other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+          then: CALL 'quicksort(Int, Int) on IntArray: Unit' type=kotlin.Unit operator=null
+            $receiver: $RECEIVER of 'quicksort(Int, Int) on IntArray: Unit' type=kotlin.IntArray
+            L: GET_VAR 'i: Int' type=kotlin.Int operator=null
+            R: GET_VAR 'value-parameter R: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: kotlin.IntArray
+          CALL 'constructor IntArray(Int)' type=kotlin.IntArray operator=null
+            size: CONST Int type=kotlin.Int value='10'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='0'
+                other: CONST Int type=kotlin.Int value='4'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+                  $this: GET_VAR 'a: IntArray' type=kotlin.IntArray operator=null
+                  index: CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                    $this: CONST Int type=kotlin.Int value='2'
+                    other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                  value: CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                    $this: CONST Int type=kotlin.Int value='2'
+                    other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+                  $this: GET_VAR 'a: IntArray' type=kotlin.IntArray operator=null
+                  index: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                      $this: CONST Int type=kotlin.Int value='2'
+                      other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                    other: CONST Int type=kotlin.Int value='1'
+                  value: CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+                    $this: CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                      $this: CONST Int type=kotlin.Int value='-2'
+                      other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                    other: CONST Int type=kotlin.Int value='1'
+        CALL 'quicksort() on IntArray: Unit' type=kotlin.Unit operator=null
+          $receiver: GET_VAR 'a: IntArray' type=kotlin.IntArray operator=null
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp1_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='0'
+                other: CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+                  $this: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                    $this: GET_VAR 'a: IntArray' type=kotlin.IntArray operator=null
+                  other: CONST Int type=kotlin.Int value='2'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp1_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp1_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+                    arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+                      $this: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                        $this: GET_VAR 'a: IntArray' type=kotlin.IntArray operator=null
+                        index: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                      other: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                        $this: GET_VAR 'a: IntArray' type=kotlin.IntArray operator=null
+                        index: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                          $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                          other: CONST Int type=kotlin.Int value='1'
+                  then: RETURN type=kotlin.Nothing from='box(): String'
+                    STRING_CONCATENATION type=kotlin.String
+                      CONST String type=kotlin.String value='Fail '
+                      GET_VAR 'i: Int' type=kotlin.Int operator=null
+                      CONST String type=kotlin.String value=': '
+                      CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                        $this: GET_VAR 'a: IntArray' type=kotlin.IntArray operator=null
+                        index: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                      CONST String type=kotlin.String value=' > '
+                      CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                        $this: GET_VAR 'a: IntArray' type=kotlin.IntArray operator=null
+                        index: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                          $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                          other: CONST Int type=kotlin.Int value='1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /callWithCommonType.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'foo(Any): Boolean' type=kotlin.Boolean operator=null
+              p: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                $this: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'foo(Any): Boolean' type=kotlin.Boolean operator=null
+              p: CALL 'inc(): Byte' type=kotlin.Byte operator=null
+                $this: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                  $this: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun foo(p: kotlin.Any): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(Any): Boolean'
+          TYPE_OP operator=INSTANCEOF typeOperand=kotlin.Byte
+            GET_VAR 'value-parameter p: Any' type=kotlin.Any operator=null

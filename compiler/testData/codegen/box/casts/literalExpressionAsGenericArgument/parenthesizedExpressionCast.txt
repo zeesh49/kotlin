@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /parenthesizedExpressionCast.kt
+    CLASS CLASS Box
+      CONSTRUCTOR public constructor Box<T>(value: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'value: T' type=kotlin.Unit operator=null
+            receiver: THIS of 'Box' type=Box<T>
+            value: GET_VAR 'value-parameter value: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Box'
+      PROPERTY public final val value: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val b: Box<kotlin.Long>
+          CALL 'constructor Box(Long)' type=Box<kotlin.Long> operator=null
+            value: CONST Long type=kotlin.Long value='-1'
+        VAR val expected: kotlin.Long? = -1.toLong()
+          CONST Long type=kotlin.Long value='-1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-value>(): Long' type=kotlin.Long operator=GET_PROPERTY
+                $this: GET_VAR 'b: Box<Long>' type=Box<kotlin.Long> operator=null
+              arg1: GET_VAR 'expected: Long?' type=kotlin.Long? operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

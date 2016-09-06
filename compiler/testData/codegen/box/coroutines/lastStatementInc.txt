@@ -1,0 +1,116 @@
+MODULE <test-module>
+  FILE /lastStatementInc.kt
+    CLASS CLASS Controller
+      CONSTRUCTOR public constructor Controller()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Controller'
+      PROPERTY public final var wasHandleResultCalled: kotlin.Boolean
+        EXPRESSION_BODY
+          CONST Boolean type=kotlin.Boolean value='false'
+      FUN public final suspend fun suspendHere(x: kotlin.coroutines.Continuation<kotlin.String>): kotlin.Unit
+        BLOCK_BODY
+          CALL 'resume(String): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR 'value-parameter x: Continuation<String>' type=kotlin.coroutines.Continuation<kotlin.String> operator=null
+            data: CONST String type=kotlin.String value='OK'
+      FUN public final operator fun handleResult(x: kotlin.Unit, y: kotlin.coroutines.Continuation<kotlin.Nothing>): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-wasHandleResultCalled>(Boolean): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'Controller' type=Controller
+            <set-?>: CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun builder(coroutine c: Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>): kotlin.Unit
+      BLOCK_BODY
+        VAR val controller: Controller
+          CALL 'constructor Controller()' type=Controller operator=null
+        CALL 'resume(Unit): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'invoke(Controller): Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=INVOKE
+            $this: GET_VAR 'value-parameter coroutine c: Controller.() -> Continuation<Unit>' type=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+            p1: GET_VAR 'controller: Controller' type=Controller operator=null
+          data: GET_OBJECT 'Unit' type=kotlin.Unit
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL '<get-wasHandleResultCalled>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+              $this: GET_VAR 'controller: Controller' type=Controller operator=null
+          then: THROW type=kotlin.Nothing
+            CALL 'constructor RuntimeException(String!)' type=java.lang.RuntimeException operator=null
+              p0: CONST String type=kotlin.String value='fail 1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        CALL 'builder(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+            BLOCK type=Controller.() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun Controller.<anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                    VAR val tmp0: kotlin.Int
+                      GET_VAR 'result: Int' type=kotlin.Int operator=POSTFIX_INCR
+                    SET_VAR 'result: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                      CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                        $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                    GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                  WHEN type=kotlin.Unit operator=IF
+                    if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                      arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: CALL 'suspendHere(): String' type=kotlin.String operator=null
+                          $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                        arg1: CONST String type=kotlin.String value='OK'
+                    then: THROW type=kotlin.Nothing
+                      CALL 'constructor RuntimeException(String!)' type=java.lang.RuntimeException operator=null
+                        p0: CONST String type=kotlin.String value='fail 2'
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Controller: Unit'
+                    BLOCK type=kotlin.Int operator=POSTFIX_DECR
+                      VAR val tmp1: kotlin.Int
+                        GET_VAR 'result: Int' type=kotlin.Int operator=POSTFIX_DECR
+                      SET_VAR 'result: Int' type=kotlin.Unit operator=POSTFIX_DECR
+                        CALL 'dec(): Int' type=kotlin.Int operator=POSTFIX_DECR
+                          $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                      GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+              CALLABLE_REFERENCE '<anonymous>() on Controller: Unit' type=Controller.() -> kotlin.Unit operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        CALL 'builder(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+            BLOCK type=Controller.() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun Controller.<anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  BLOCK type=kotlin.Int operator=PREFIX_DECR
+                    VAR val tmp0: kotlin.Int
+                      CALL 'dec(): Int' type=kotlin.Int operator=PREFIX_DECR
+                        $this: GET_VAR 'result: Int' type=kotlin.Int operator=PREFIX_DECR
+                    SET_VAR 'result: Int' type=kotlin.Unit operator=PREFIX_DECR
+                      GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                    GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                  WHEN type=kotlin.Unit operator=IF
+                    if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                      arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: CALL 'suspendHere(): String' type=kotlin.String operator=null
+                          $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                        arg1: CONST String type=kotlin.String value='OK'
+                    then: THROW type=kotlin.Nothing
+                      CALL 'constructor RuntimeException(String!)' type=java.lang.RuntimeException operator=null
+                        p0: CONST String type=kotlin.String value='fail 4'
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Controller: Unit'
+                    BLOCK type=kotlin.Int operator=PREFIX_INCR
+                      VAR val tmp1: kotlin.Int
+                        CALL 'inc(): Int' type=kotlin.Int operator=PREFIX_INCR
+                          $this: GET_VAR 'result: Int' type=kotlin.Int operator=PREFIX_INCR
+                      SET_VAR 'result: Int' type=kotlin.Unit operator=PREFIX_INCR
+                        GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                      GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+              CALLABLE_REFERENCE '<anonymous>() on Controller: Unit' type=Controller.() -> kotlin.Unit operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 5'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

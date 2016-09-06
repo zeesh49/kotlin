@@ -1,0 +1,104 @@
+MODULE <test-module>
+  FILE /variables.kt
+    FUN public inline fun <R, T> foo(x: R, block: (R) -> T): T
+      BLOCK_BODY
+        VAR var y: R
+          GET_VAR 'value-parameter x: R' type=R operator=null
+        VAR var z: R
+          GET_VAR 'y: R' type=R operator=null
+        SET_VAR 'z: R' type=kotlin.Unit operator=EQ
+          GET_VAR 'value-parameter x: R' type=R operator=null
+        RETURN type=kotlin.Nothing from='foo(R, (R) -> T): T'
+          CALL 'invoke(R): T' type=T operator=INVOKE
+            $this: GET_VAR 'value-parameter block: (R) -> T' type=(R) -> T operator=VARIABLE_AS_FUNCTION
+            p1: GET_VAR 'z: R' type=R operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'foo(Int, (Int) -> Int): Int' type=kotlin.Int operator=null
+            x: CONST Int type=kotlin.Int value='1'
+            block: BLOCK type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Int): kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): Int'
+                    GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+              CALLABLE_REFERENCE '<anonymous>(Int): Int' type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+        CALL 'assertEquals(Float, Float, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Float type=kotlin.Float value='1.0'
+          actual: CALL 'foo(Float, (Float) -> Float): Float' type=kotlin.Float operator=null
+            x: CONST Float type=kotlin.Float value='1.0'
+            block: BLOCK type=(kotlin.Float) -> kotlin.Float operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Float): kotlin.Float
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Float): Float'
+                    GET_VAR 'value-parameter x: Float' type=kotlin.Float operator=null
+              CALLABLE_REFERENCE '<anonymous>(Float): Float' type=(kotlin.Float) -> kotlin.Float operator=LAMBDA
+        CALL 'assertEquals(Long, Long, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Long type=kotlin.Long value='1'
+          actual: CALL 'foo(Long, (Long) -> Long): Long' type=kotlin.Long operator=null
+            x: CONST Long type=kotlin.Long value='1'
+            block: BLOCK type=(kotlin.Long) -> kotlin.Long operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Long): kotlin.Long
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Long): Long'
+                    GET_VAR 'value-parameter x: Long' type=kotlin.Long operator=null
+              CALLABLE_REFERENCE '<anonymous>(Long): Long' type=(kotlin.Long) -> kotlin.Long operator=LAMBDA
+        CALL 'assertEquals(Double, Double, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'toDouble(): Double' type=kotlin.Double operator=null
+            $this: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'foo(Double, (Double) -> Double): Double' type=kotlin.Double operator=null
+            x: CALL 'toDouble(): Double' type=kotlin.Double operator=null
+              $this: CONST Int type=kotlin.Int value='1'
+            block: BLOCK type=(kotlin.Double) -> kotlin.Double operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Double): kotlin.Double
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Double): Double'
+                    GET_VAR 'value-parameter x: Double' type=kotlin.Double operator=null
+              CALLABLE_REFERENCE '<anonymous>(Double): Double' type=(kotlin.Double) -> kotlin.Double operator=LAMBDA
+        CALL 'assertEquals(Short, Short, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'toShort(): Short' type=kotlin.Short operator=null
+            $this: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'foo(Short, (Short) -> Short): Short' type=kotlin.Short operator=null
+            x: CALL 'toShort(): Short' type=kotlin.Short operator=null
+              $this: CONST Int type=kotlin.Int value='1'
+            block: BLOCK type=(kotlin.Short) -> kotlin.Short operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Short): kotlin.Short
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Short): Short'
+                    GET_VAR 'value-parameter x: Short' type=kotlin.Short operator=null
+              CALLABLE_REFERENCE '<anonymous>(Short): Short' type=(kotlin.Short) -> kotlin.Short operator=LAMBDA
+        CALL 'assertEquals(Byte, Byte, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+            $this: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'foo(Byte, (Byte) -> Byte): Byte' type=kotlin.Byte operator=null
+            x: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+              $this: CONST Int type=kotlin.Int value='1'
+            block: BLOCK type=(kotlin.Byte) -> kotlin.Byte operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Byte): kotlin.Byte
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Byte): Byte'
+                    GET_VAR 'value-parameter x: Byte' type=kotlin.Byte operator=null
+              CALLABLE_REFERENCE '<anonymous>(Byte): Byte' type=(kotlin.Byte) -> kotlin.Byte operator=LAMBDA
+        CALL 'assertEquals(Char, Char, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Char type=kotlin.Char value='a'
+          actual: CALL 'foo(Char, (Char) -> Char): Char' type=kotlin.Char operator=null
+            x: CONST Char type=kotlin.Char value='a'
+            block: BLOCK type=(kotlin.Char) -> kotlin.Char operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Char): kotlin.Char
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Char): Char'
+                    GET_VAR 'value-parameter x: Char' type=kotlin.Char operator=null
+              CALLABLE_REFERENCE '<anonymous>(Char): Char' type=(kotlin.Char) -> kotlin.Char operator=LAMBDA
+        CALL 'assertEquals(Boolean, Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Boolean type=kotlin.Boolean value='true'
+          actual: CALL 'foo(Boolean, (Boolean) -> Boolean): Boolean' type=kotlin.Boolean operator=null
+            x: CONST Boolean type=kotlin.Boolean value='true'
+            block: BLOCK type=(kotlin.Boolean) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Boolean): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Boolean): Boolean'
+                    GET_VAR 'value-parameter x: Boolean' type=kotlin.Boolean operator=null
+              CALLABLE_REFERENCE '<anonymous>(Boolean): Boolean' type=(kotlin.Boolean) -> kotlin.Boolean operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

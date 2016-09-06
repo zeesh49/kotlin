@@ -1,0 +1,56 @@
+MODULE <test-module>
+  FILE /publicOverrideSuperCall.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY internal open val field: kotlin.String = "F"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='F'
+      FUN internal open fun test(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test(): String'
+            CONST String type=kotlin.String value='A'
+    CLASS CLASS Z
+      CONSTRUCTOR public constructor Z()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Z'
+      FUN public open override fun test(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test(): String'
+            CALL 'test(): String' superQualifier=A type=kotlin.String operator=null
+              $this: THIS of 'Z' type=A
+      PROPERTY public open override val field: kotlin.String
+        EXPRESSION_BODY
+          CALL '<get-field>(): String' superQualifier=A type=kotlin.String operator=GET_PROPERTY
+            $this: THIS of 'Z' type=A
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val z: kotlin.String
+          CALL 'test(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Z()' type=Z operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'z: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='A'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              GET_VAR 'z: String' type=kotlin.String operator=null
+        VAR val f: kotlin.String
+          CALL '<get-field>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor Z()' type=Z operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'f: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='F'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 2: '
+              GET_VAR 'f: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

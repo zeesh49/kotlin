@@ -1,0 +1,65 @@
+MODULE <test-module>
+  FILE /topLevelFieldReflection.kt
+    PROPERTY public var publicField: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='1'
+    PROPERTY internal var internalField: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='2'
+    FUN public fun testAccessors(): kotlin.Unit
+      BLOCK_BODY
+        VAR val packageClass: java.lang.Class<*>!
+          CALL 'forName(String!): Class<*>!' type=java.lang.Class<*>! operator=null
+            p0: CONST String type=kotlin.String value='test.TopLevelFieldReflectionKt'
+        CALL '<get-kotlinProperty>() on Field: KProperty<*>?' type=kotlin.reflect.KProperty<*>? operator=GET_PROPERTY
+          $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+            CALL 'getDeclaredField(String!): Field!' type=java.lang.reflect.Field! operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+                GET_VAR 'packageClass: Class<*>!' type=java.lang.Class<*>! operator=null
+              p0: CONST String type=kotlin.String value='publicField'
+        CALL 'checkAccessor(KMutableProperty0<String>, String, String): Unit' type=kotlin.Unit operator=null
+          prop: TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty0<kotlin.String>
+            CALL '<get-kotlinProperty>() on Field: KProperty<*>?' type=kotlin.reflect.KProperty<*>? operator=GET_PROPERTY
+              $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+                CALL 'getDeclaredField(String!): Field!' type=java.lang.reflect.Field! operator=null
+                  $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+                    GET_VAR 'packageClass: Class<*>!' type=java.lang.Class<*>! operator=null
+                  p0: CONST String type=kotlin.String value='publicField'
+          value: CONST String type=kotlin.String value='1'
+          newValue: CONST String type=kotlin.String value='3'
+        CALL 'checkAccessor(KMutableProperty0<String>, String, String): Unit' type=kotlin.Unit operator=null
+          prop: TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty0<kotlin.String>
+            CALL '<get-kotlinProperty>() on Field: KProperty<*>?' type=kotlin.reflect.KProperty<*>? operator=GET_PROPERTY
+              $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+                CALL 'getDeclaredField(String!): Field!' type=java.lang.reflect.Field! operator=null
+                  $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+                    GET_VAR 'packageClass: Class<*>!' type=java.lang.Class<*>! operator=null
+                  p0: CONST String type=kotlin.String value='internalField'
+          value: CONST String type=kotlin.String value='2'
+          newValue: CONST String type=kotlin.String value='4'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'testAccessors(): Unit' type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun <R> checkAccessor(prop: kotlin.reflect.KMutableProperty0<R>, value: R, newValue: R): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assertEquals(R, R, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'get(): R' type=R operator=null
+            $this: GET_VAR 'value-parameter prop: KMutableProperty0<R>' type=kotlin.reflect.KMutableProperty0<R> operator=null
+          actual: GET_VAR 'value-parameter value: R' type=R operator=null
+          message: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='Property '
+            GET_VAR 'value-parameter prop: KMutableProperty0<R>' type=kotlin.reflect.KMutableProperty0<R> operator=null
+            CONST String type=kotlin.String value=' has wrong value'
+        CALL 'set(R): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'value-parameter prop: KMutableProperty0<R>' type=kotlin.reflect.KMutableProperty0<R> operator=null
+          value: GET_VAR 'value-parameter newValue: R' type=R operator=null
+        CALL 'assertEquals(R, R, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'get(): R' type=R operator=null
+            $this: GET_VAR 'value-parameter prop: KMutableProperty0<R>' type=kotlin.reflect.KMutableProperty0<R> operator=null
+          actual: GET_VAR 'value-parameter newValue: R' type=R operator=null
+          message: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='Property '
+            GET_VAR 'value-parameter prop: KMutableProperty0<R>' type=kotlin.reflect.KMutableProperty0<R> operator=null
+            CONST String type=kotlin.String value=' has wrong value'

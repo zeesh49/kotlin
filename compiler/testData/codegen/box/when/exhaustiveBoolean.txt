@@ -1,0 +1,19 @@
+MODULE <test-module>
+  FILE /exhaustiveBoolean.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          BLOCK type=kotlin.String operator=WHEN
+            VAR val tmp0_subject: kotlin.Boolean
+              CONST Boolean type=kotlin.Boolean value='true'
+            WHEN type=kotlin.String operator=WHEN
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Boolean' type=kotlin.Boolean operator=null
+                arg1: CONST Boolean type=kotlin.Boolean value='true'
+              then: CONST String type=kotlin.String value='OK'
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Boolean' type=kotlin.Boolean operator=null
+                arg1: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: CONST Int type=kotlin.Int value='1'
+                  arg1: CONST Int type=kotlin.Int value='2'
+              then: CONST String type=kotlin.String value='Not ok'

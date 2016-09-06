@@ -1,0 +1,43 @@
+MODULE <test-module>
+  FILE /kt5467.kt
+    FUN public fun kotlin.String.foo(): kotlin.String
+      BLOCK_BODY
+        FUN local final fun kotlin.Int.bar(): kotlin.String
+          BLOCK_BODY
+            FUN local final fun kotlin.Long.baz(): kotlin.String
+              BLOCK_BODY
+                VAR val x: kotlin.String
+                  $RECEIVER of 'foo() on String: String' type=kotlin.String
+                VAR val y: kotlin.Int
+                  $RECEIVER of 'bar() on Int: String' type=kotlin.Int
+                VAR val z: kotlin.Long
+                  $RECEIVER of 'baz() on Long: String' type=kotlin.Long
+                RETURN type=kotlin.Nothing from='baz() on Long: String'
+                  STRING_CONCATENATION type=kotlin.String
+                    GET_VAR 'x: String' type=kotlin.String operator=null
+                    CONST String type=kotlin.String value=' '
+                    GET_VAR 'y: Int' type=kotlin.Int operator=null
+                    CONST String type=kotlin.String value=' '
+                    GET_VAR 'z: Long' type=kotlin.Long operator=null
+            RETURN type=kotlin.Nothing from='bar() on Int: String'
+              CALL 'baz() on Long: String' type=kotlin.String operator=null
+                $receiver: CONST Long type=kotlin.Long value='0'
+        RETURN type=kotlin.Nothing from='foo() on String: String'
+          CALL 'bar() on Int: String' type=kotlin.String operator=null
+            $receiver: CONST Int type=kotlin.Int value='42'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val result: kotlin.String
+          CALL 'foo() on String: String' type=kotlin.String operator=null
+            $receiver: CONST String type=kotlin.String value='OK'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='OK 42 0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: '
+              GET_VAR 'result: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

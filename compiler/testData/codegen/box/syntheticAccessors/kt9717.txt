@@ -1,0 +1,20 @@
+MODULE <test-module>
+  FILE /Vars.kt
+    PROPERTY public var OK: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='OK'
+      PROPERTY_SETTER private fun <set-OK>(<set-?>: kotlin.String): kotlin.Unit
+  FILE /box.kt
+    CLASS OBJECT Test
+      CONSTRUCTOR private constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      PROPERTY public final val test: kotlin.String
+        EXPRESSION_BODY
+          CALL '<get-OK>(): String' type=kotlin.String operator=GET_PROPERTY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-test>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_OBJECT 'Test' type=Test

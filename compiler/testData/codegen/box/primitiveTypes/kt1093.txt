@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /kt1093.kt
+    PROPERTY public val f: (kotlin.Any) -> kotlin.String
+      EXPRESSION_BODY
+        BLOCK type=(kotlin.Any) -> kotlin.String operator=LAMBDA
+          FUN local final fun <anonymous>(it: kotlin.Any): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<anonymous>(Any): String'
+                CALL 'toString(): String' type=kotlin.String operator=null
+                  $this: GET_VAR 'value-parameter it: Any' type=kotlin.Any operator=null
+          CALLABLE_REFERENCE '<anonymous>(Any): String' type=(kotlin.Any) -> kotlin.String operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+              arg0: CALL '<get-f>(): (Any) -> String' type=(kotlin.Any) -> kotlin.String operator=GET_PROPERTY
+              arg1: CALL '<get-f>(): (Any) -> String' type=(kotlin.Any) -> kotlin.String operator=GET_PROPERTY
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-f>(): (Any) -> String' type=(kotlin.Any) -> kotlin.String operator=GET_PROPERTY
+              arg1: CALL '<get-f>(): (Any) -> String' type=(kotlin.Any) -> kotlin.String operator=GET_PROPERTY
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'equals(Any?): Boolean' type=kotlin.Boolean operator=null
+              $this: CALL '<get-f>(): (Any) -> String' type=(kotlin.Any) -> kotlin.String operator=GET_PROPERTY
+              other: CALL '<get-f>(): (Any) -> String' type=(kotlin.Any) -> kotlin.String operator=GET_PROPERTY
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,43 @@
+MODULE <test-module>
+  FILE /doubleParameters.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      FUN @kotlin.jvm.JvmOverloads public final fun foo(d1: kotlin.Double, d2: kotlin.Double, status: kotlin.String = ...): kotlin.String
+        status: EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(Double, Double, String = ...): String'
+            WHEN type=kotlin.String operator=IF
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL 'plus(Double): Double' type=kotlin.Double operator=PLUS
+                  $this: GET_VAR 'value-parameter d1: Double' type=kotlin.Double operator=null
+                  other: GET_VAR 'value-parameter d2: Double' type=kotlin.Double operator=null
+                arg1: CONST Double type=kotlin.Double value='3.0'
+              then: GET_VAR 'value-parameter status: String = ...' type=kotlin.String operator=null
+              else: CONST String type=kotlin.String value='fail'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val c: C
+          CALL 'constructor C()' type=C operator=null
+        VAR val m: java.lang.reflect.Method!
+          CALL 'getMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+            $this: CALL '<get-javaClass>() on C: Class<C>' type=java.lang.Class<C> operator=GET_PROPERTY
+              $receiver: GET_VAR 'c: C' type=C operator=null
+            p0: CONST String type=kotlin.String value='foo'
+            p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+              CALL '<get-java>() on KClass<Double>: Class<Double>' type=java.lang.Class<kotlin.Double> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'Double' type=kotlin.reflect.KClass<kotlin.Double>
+              CALL '<get-java>() on KClass<Double>: Class<Double>' type=java.lang.Class<kotlin.Double> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'Double' type=kotlin.reflect.KClass<kotlin.Double>
+        RETURN type=kotlin.Nothing from='box(): String'
+          TYPE_OP operator=CAST typeOperand=kotlin.String
+            CALL 'invoke(Any!, vararg Any!): Any!' type=kotlin.Any! operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                GET_VAR 'm: Method!' type=java.lang.reflect.Method! operator=null
+              p0: GET_VAR 'c: C' type=C operator=null
+              p1: VARARG type=(kotlin.Array<(kotlin.Any..kotlin.Any?)>..kotlin.Array<out (kotlin.Any..kotlin.Any?)>?) varargElementType=(kotlin.Any..kotlin.Any?)
+                CONST Double type=kotlin.Double value='1.0'
+                CONST Double type=kotlin.Double value='2.0'

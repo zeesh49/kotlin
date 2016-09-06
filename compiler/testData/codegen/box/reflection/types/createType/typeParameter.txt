@@ -1,0 +1,86 @@
+MODULE <test-module>
+  FILE /typeParameter.kt
+    CLASS CLASS Foo
+      CONSTRUCTOR public constructor Foo<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      FUN public final fun nonNull(): T
+        BLOCK_BODY
+          BLOCK type=kotlin.Nothing operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+            WHEN type=kotlin.Nothing operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+      FUN public final fun nullable(): T?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='nullable(): T?'
+            CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val tp: kotlin.reflect.KTypeParameter
+          CALL 'single() on List<KTypeParameter>: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+            $receiver: CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'Foo' type=kotlin.reflect.KClass<Foo<*>>
+        CALL 'assertEquals(KType, KType, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+              $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                $this: CLASS_REFERENCE 'Foo' type=kotlin.reflect.KClass<Foo<*>>
+              predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                      CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                          $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                        arg1: CONST String type=kotlin.String value='nonNull'
+                CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+          actual: CALL 'createType(List<KTypeProjection> = ..., Boolean = ..., List<Annotation> = ...) on KClassifier: KType' type=kotlin.reflect.KType operator=null
+            $receiver: GET_VAR 'tp: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+        CALL 'assertEquals(KType, KType, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+              $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                $this: CLASS_REFERENCE 'Foo' type=kotlin.reflect.KClass<Foo<*>>
+              predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                      CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                          $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                        arg1: CONST String type=kotlin.String value='nullable'
+                CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+          actual: CALL 'createType(List<KTypeProjection> = ..., Boolean = ..., List<Annotation> = ...) on KClassifier: KType' type=kotlin.reflect.KType operator=null
+            $receiver: GET_VAR 'tp: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+            nullable: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'assertEquals(KType, KType, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'createType(List<KTypeProjection> = ..., Boolean = ..., List<Annotation> = ...) on KClassifier: KType' type=kotlin.reflect.KType operator=null
+            $receiver: GET_VAR 'tp: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+          actual: CALL 'createType(List<KTypeProjection> = ..., Boolean = ..., List<Annotation> = ...) on KClassifier: KType' type=kotlin.reflect.KType operator=null
+            $receiver: GET_VAR 'tp: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+        CALL 'assertEquals(KType, KType, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'createType(List<KTypeProjection> = ..., Boolean = ..., List<Annotation> = ...) on KClassifier: KType' type=kotlin.reflect.KType operator=null
+            $receiver: GET_VAR 'tp: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+            nullable: CONST Boolean type=kotlin.Boolean value='true'
+          actual: CALL 'createType(List<KTypeProjection> = ..., Boolean = ..., List<Annotation> = ...) on KClassifier: KType' type=kotlin.reflect.KType operator=null
+            $receiver: GET_VAR 'tp: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+            nullable: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='T'
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL 'createType(List<KTypeProjection> = ..., Boolean = ..., List<Annotation> = ...) on KClassifier: KType' type=kotlin.reflect.KType operator=null
+              $receiver: GET_VAR 'tp: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='T?'
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL 'createType(List<KTypeProjection> = ..., Boolean = ..., List<Annotation> = ...) on KClassifier: KType' type=kotlin.reflect.KType operator=null
+              $receiver: GET_VAR 'tp: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+              nullable: CONST Boolean type=kotlin.Boolean value='true'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,39 @@
+MODULE <test-module>
+  FILE /forInSmartCastToArray.kt
+    FUN public fun f(x: kotlin.Any?): kotlin.Any?
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.Array<*>
+            GET_VAR 'value-parameter x: Any?' type=kotlin.Any? operator=null
+          then: BLOCK type=kotlin.Unit operator=null
+            BLOCK type=kotlin.Unit operator=FOR_LOOP
+              VAR val tmp0_iterator: kotlin.collections.Iterator<kotlin.Any?>
+                CALL 'iterator(): Iterator<Any?>' type=kotlin.collections.Iterator<kotlin.Any?> operator=FOR_LOOP_ITERATOR
+                  $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<out kotlin.Any?>
+                    GET_VAR 'value-parameter x: Any?' type=kotlin.Any? operator=null
+              WHILE label=null operator=FOR_LOOP_INNER_WHILE
+                condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<Any?>' type=kotlin.collections.Iterator<kotlin.Any?> operator=null
+                body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+                  VAR val i: kotlin.Any?
+                    CALL 'next(): Any?' type=kotlin.Any? operator=FOR_LOOP_NEXT
+                      $this: GET_VAR 'tmp0_iterator: Iterator<Any?>' type=kotlin.collections.Iterator<kotlin.Any?> operator=null
+                  BLOCK type=kotlin.Nothing operator=null
+                    RETURN type=kotlin.Nothing from='f(Any?): Any?'
+                      GET_VAR 'i: Any?' type=kotlin.Any? operator=null
+        RETURN type=kotlin.Nothing from='f(Any?): Any?'
+          CONST String type=kotlin.String value='FAIL'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: kotlin.Array<kotlin.String>
+          TYPE_OP operator=CAST typeOperand=kotlin.Array<kotlin.String>
+            CALL 'arrayOfNulls(Int): Array<String?>' type=kotlin.Array<kotlin.String?> operator=null
+              size: CONST Int type=kotlin.Int value='1'
+        CALL 'set(Int, String): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+          index: CONST Int type=kotlin.Int value='0'
+          value: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          TYPE_OP operator=CAST typeOperand=kotlin.String
+            CALL 'f(Any?): Any?' type=kotlin.Any? operator=null
+              x: GET_VAR 'a: Array<String>' type=kotlin.Array<kotlin.String> operator=null

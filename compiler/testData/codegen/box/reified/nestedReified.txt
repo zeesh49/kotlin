@@ -1,0 +1,144 @@
+MODULE <test-module>
+  FILE /nestedReified.kt
+    FUN public inline fun <reified T : kotlin.Any, reified R : kotlin.Any> foo(): kotlin.Array<kotlin.String>
+      BLOCK_BODY
+        VAR val x: foo.<no name provided><T, R>
+          BLOCK type=foo.<no name provided><T, R> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              FUN public final inline fun <reified T1 : kotlin.Any, reified T : kotlin.Any> bar(): kotlin.Array<kotlin.String>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='bar(): Array<String>'
+                    CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                      elements: VARARG type=Array<out String> varargElementType=String
+                        TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+                          CALL 'getName(): String!' type=kotlin.String! operator=null
+                            $this: CALL '<get-java>() on KClass<T1>: Class<T1>' type=java.lang.Class<T1> operator=GET_PROPERTY
+                              $receiver: CLASS_REFERENCE '<reified T1 : Any>' type=kotlin.reflect.KClass<T1>
+                        TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+                          CALL 'getName(): String!' type=kotlin.String! operator=null
+                            $this: CALL '<get-java>() on KClass<T>: Class<T>' type=java.lang.Class<T> operator=GET_PROPERTY
+                              $receiver: CLASS_REFERENCE '<reified T : Any>' type=kotlin.reflect.KClass<T>
+                        TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+                          CALL 'getName(): String!' type=kotlin.String! operator=null
+                            $this: CALL '<get-java>() on KClass<R>: Class<R>' type=java.lang.Class<R> operator=GET_PROPERTY
+                              $receiver: CLASS_REFERENCE '<reified R : Any>' type=kotlin.reflect.KClass<R>
+              FUN public final fun f1(): kotlin.Array<kotlin.String>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='f1(): Array<String>'
+                    CALL 'bar(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                      $this: THIS of '<no name provided>' type=foo.<no name provided><T, R>
+              FUN public final fun f2(): kotlin.Array<kotlin.String>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='f2(): Array<String>'
+                    CALL 'bar(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                      $this: THIS of '<no name provided>' type=foo.<no name provided><T, R>
+              FUN public final fun f3(): kotlin.Array<kotlin.String>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='f3(): Array<String>'
+                    CALL 'bar(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                      $this: THIS of '<no name provided>' type=foo.<no name provided><T, R>
+              FUN public final fun f4(): kotlin.Array<kotlin.String>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='f4(): Array<String>'
+                    CALL 'bar(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                      $this: THIS of '<no name provided>' type=foo.<no name provided><T, R>
+            CALL 'constructor <no name provided>()' type=foo.<no name provided><T, R> operator=OBJECT_LITERAL
+        VAR val x1: kotlin.Array<kotlin.String>
+          CALL 'f1(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            $this: GET_VAR 'x: <no name provided><T, R>' type=foo.<no name provided><T, R> operator=null
+        VAR val x2: kotlin.Array<kotlin.String>
+          CALL 'f2(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            $this: GET_VAR 'x: <no name provided><T, R>' type=foo.<no name provided><T, R> operator=null
+        VAR val x3: kotlin.Array<kotlin.String>
+          CALL 'f3(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            $this: GET_VAR 'x: <no name provided><T, R>' type=foo.<no name provided><T, R> operator=null
+        VAR val x4: kotlin.Array<kotlin.String>
+          CALL 'f4(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            $this: GET_VAR 'x: <no name provided><T, R>' type=foo.<no name provided><T, R> operator=null
+        RETURN type=kotlin.Nothing from='foo(): Array<String>'
+          CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'x1: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                index: CONST Int type=kotlin.Int value='0'
+              CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'x1: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                index: CONST Int type=kotlin.Int value='1'
+              CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'x1: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                index: CONST Int type=kotlin.Int value='2'
+              CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'x2: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                index: CONST Int type=kotlin.Int value='0'
+              CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'x2: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                index: CONST Int type=kotlin.Int value='1'
+              CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'x2: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                index: CONST Int type=kotlin.Int value='2'
+              CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'x3: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                index: CONST Int type=kotlin.Int value='0'
+              CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'x3: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                index: CONST Int type=kotlin.Int value='1'
+              CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'x3: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                index: CONST Int type=kotlin.Int value='2'
+              CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'x4: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                index: CONST Int type=kotlin.Int value='0'
+              CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'x4: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                index: CONST Int type=kotlin.Int value='1'
+              CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'x4: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                index: CONST Int type=kotlin.Int value='2'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val result: kotlin.Array<kotlin.String>
+          CALL 'foo(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+        VAR val expected: kotlin.Array<kotlin.String>
+          CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='java.lang.Double'
+              CONST String type=kotlin.String value='java.lang.Integer'
+              CONST String type=kotlin.String value='java.lang.Integer'
+              CONST String type=kotlin.String value='java.lang.Integer'
+              CONST String type=kotlin.String value='java.lang.Double'
+              CONST String type=kotlin.String value='java.lang.Integer'
+              CONST String type=kotlin.String value='java.lang.Boolean'
+              CONST String type=kotlin.String value='java.lang.Double'
+              CONST String type=kotlin.String value='java.lang.Integer'
+              CONST String type=kotlin.String value='java.lang.Double'
+              CONST String type=kotlin.String value='java.lang.Boolean'
+              CONST String type=kotlin.String value='java.lang.Integer'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL '<get-indices>() on Array<out String>: IntRange' type=kotlin.ranges.IntRange operator=GET_PROPERTY
+                $receiver: GET_VAR 'expected: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+                  expected: CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+                    $this: GET_VAR 'expected: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                    index: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                  actual: CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+                    $this: GET_VAR 'result: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                    index: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                  message: STRING_CONCATENATION type=kotlin.String
+                    GET_VAR 'i: Int' type=kotlin.Int operator=null
+                    CONST String type=kotlin.String value='-th element'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

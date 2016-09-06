@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /kt2147.kt
+    CLASS CLASS Foo
+      CONSTRUCTOR public constructor Foo()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      FUN public final fun isOk(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='isOk(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val foo: Foo?
+          CALL 'constructor Foo()' type=Foo operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: BLOCK type=kotlin.Boolean operator=EXCLEXCL
+            VAR val tmp1_notnull: kotlin.Boolean?
+              BLOCK type=kotlin.Boolean? operator=SAFE_CALL
+                VAR val tmp0_safe_receiver: Foo?
+                  GET_VAR 'foo: Foo?' type=Foo? operator=null
+                WHEN type=kotlin.Boolean? operator=SAFE_CALL
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_safe_receiver: Foo?' type=Foo? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CONST Null type=kotlin.Nothing? value='null'
+                  else: CALL 'isOk(): Boolean' type=kotlin.Boolean operator=null
+                    $this: GET_VAR 'tmp0_safe_receiver: Foo?' type=Foo? operator=null
+            WHEN type=kotlin.Boolean operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp1_notnull: Boolean?' type=kotlin.Boolean? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp1_notnull: Boolean?' type=kotlin.Boolean? operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='fail'

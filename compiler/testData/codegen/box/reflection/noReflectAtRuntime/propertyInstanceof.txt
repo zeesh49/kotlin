@@ -1,0 +1,71 @@
+MODULE <test-module>
+  FILE /propertyInstanceof.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val readonly: kotlin.String = ""
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value=''
+      PROPERTY public final var mutable: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value=''
+    PROPERTY public val readonly: kotlin.String = ""
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    PROPERTY public var mutable: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.reflect.KProperty0<*>
+            CALLABLE_REFERENCE 'readonly: String' type=kotlin.reflect.KProperty0<kotlin.String> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.reflect.KMutableProperty0<*>
+            CALLABLE_REFERENCE 'readonly: String' type=kotlin.reflect.KProperty0<kotlin.String> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.reflect.KProperty1<*, *>
+            CALLABLE_REFERENCE 'readonly: String' type=kotlin.reflect.KProperty0<kotlin.String> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.reflect.KProperty2<*, *, *>
+            CALLABLE_REFERENCE 'readonly: String' type=kotlin.reflect.KProperty0<kotlin.String> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.reflect.KProperty0<*>
+            CALLABLE_REFERENCE 'mutable: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.reflect.KMutableProperty0<*>
+            CALLABLE_REFERENCE 'mutable: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.reflect.KProperty1<*, *>
+            CALLABLE_REFERENCE 'mutable: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.reflect.KProperty2<*, *, *>
+            CALLABLE_REFERENCE 'mutable: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.reflect.KProperty0<*>
+            CALLABLE_REFERENCE 'readonly: String' type=kotlin.reflect.KProperty1<A, kotlin.String> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.reflect.KProperty1<*, *>
+            CALLABLE_REFERENCE 'readonly: String' type=kotlin.reflect.KProperty1<A, kotlin.String> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.reflect.KMutableProperty1<*, *>
+            CALLABLE_REFERENCE 'readonly: String' type=kotlin.reflect.KProperty1<A, kotlin.String> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.reflect.KProperty2<*, *, *>
+            CALLABLE_REFERENCE 'readonly: String' type=kotlin.reflect.KProperty1<A, kotlin.String> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.reflect.KProperty0<*>
+            CALLABLE_REFERENCE 'mutable: String' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.reflect.KProperty1<*, *>
+            CALLABLE_REFERENCE 'mutable: String' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.reflect.KMutableProperty1<*, *>
+            CALLABLE_REFERENCE 'mutable: String' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.reflect.KProperty2<*, *, *>
+            CALLABLE_REFERENCE 'mutable: String' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

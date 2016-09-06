@@ -1,0 +1,42 @@
+MODULE <test-module>
+  FILE /1.kt
+    CLASS CLASS HelloServer
+      CONSTRUCTOR public constructor HelloServer()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor ClassWithInternals()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='HelloServer'
+      FUN public open override fun start(): kotlin.Unit
+        BLOCK_BODY
+          VAR val test: kotlin.Int
+            CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+              $this: CALL 'foo(): Int' type=kotlin.Int operator=null
+                $this: THIS of 'HelloServer' type=HelloServer
+              other: CALL '<get-someGetter>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'HelloServer' type=HelloServer
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'start(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor HelloServer()' type=HelloServer operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+  FILE /2.kt
+    CLASS CLASS ClassWithInternals
+      CONSTRUCTOR public constructor ClassWithInternals()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ClassWithInternals'
+      PROPERTY protected final var some: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+      PROPERTY protected final var someGetter: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+        PROPERTY_GETTER protected final fun <get-someGetter>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-someGetter>(): Int'
+              CONST Int type=kotlin.Int value='5'
+      FUN protected final fun foo(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): Int'
+            CONST Int type=kotlin.Int value='0'
+      FUN public abstract fun start(): kotlin.Unit

@@ -1,0 +1,108 @@
+MODULE <test-module>
+  FILE /qualifiedName.kt
+    CLASS CLASS Klass
+      CONSTRUCTOR public constructor Klass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Klass'
+      CLASS CLASS Nested
+        CONSTRUCTOR public constructor Nested()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Nested'
+      CLASS OBJECT companion object of Klass
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of Klass'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Klass'
+          actual: CALL '<get-qualifiedName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'Klass' type=kotlin.reflect.KClass<Klass>
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Klass.Nested'
+          actual: CALL '<get-qualifiedName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'Nested' type=kotlin.reflect.KClass<Klass.Nested>
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Klass.Companion'
+          actual: CALL '<get-qualifiedName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'companion object of Klass' type=kotlin.reflect.KClass<Klass.Companion>
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Any'
+          actual: CALL '<get-qualifiedName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Int'
+          actual: CALL '<get-qualifiedName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Int.Companion'
+          actual: CALL '<get-qualifiedName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'companion object of Int' type=kotlin.reflect.KClass<kotlin.Int.Companion>
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.IntArray'
+          actual: CALL '<get-qualifiedName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'IntArray' type=kotlin.reflect.KClass<kotlin.IntArray>
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.collections.List'
+          actual: CALL '<get-qualifiedName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'List' type=kotlin.reflect.KClass<kotlin.collections.List<*>>
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.String'
+          actual: CALL '<get-qualifiedName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.String'
+          actual: CALL '<get-qualifiedName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<java.lang.String>
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Array'
+          actual: CALL '<get-qualifiedName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Any>>
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Array'
+          actual: CALL '<get-qualifiedName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Int>>
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Array'
+          actual: CALL '<get-qualifiedName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Array<kotlin.String>>>
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.util.Date'
+          actual: CALL '<get-qualifiedName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'Date' type=kotlin.reflect.KClass<java.util.Date>
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.jvm.internal.Ref.ObjectRef'
+          actual: CALL '<get-qualifiedName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'ObjectRef' type=kotlin.reflect.KClass<kotlin.jvm.internal.Ref.ObjectRef<*>>
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.lang.Void'
+          actual: CALL '<get-qualifiedName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'Void' type=kotlin.reflect.KClass<java.lang.Void>
+        CLASS CLASS Local
+          CONSTRUCTOR public constructor Local()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='Local'
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Null type=kotlin.Nothing? value='null'
+          actual: CALL '<get-qualifiedName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'Local' type=kotlin.reflect.KClass<box.Local>
+        VAR val o: box.<no name provided>
+          BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+            CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Null type=kotlin.Nothing? value='null'
+          actual: CALL '<get-qualifiedName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CALL '<get-kotlin>() on Class<<no name provided>>: KClass<<no name provided>>' type=kotlin.reflect.KClass<box.<no name provided>> operator=GET_PROPERTY
+              $receiver: CALL '<get-javaClass>() on <no name provided>: Class<<no name provided>>' type=java.lang.Class<box.<no name provided>> operator=GET_PROPERTY
+                $receiver: GET_VAR 'o: <no name provided>' type=box.<no name provided> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

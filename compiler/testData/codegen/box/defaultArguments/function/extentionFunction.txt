@@ -1,0 +1,29 @@
+MODULE <test-module>
+  FILE /extentionFunction.kt
+    FUN public fun kotlin.Int.foo(a: kotlin.Int = ...): kotlin.Int
+      a: EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='1'
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(Int = ...) on Int: Int'
+          GET_VAR 'value-parameter a: Int = ...' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(Int = ...) on Int: Int' type=kotlin.Int operator=null
+                $receiver: CONST Int type=kotlin.Int value='1'
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(Int = ...) on Int: Int' type=kotlin.Int operator=null
+                $receiver: CONST Int type=kotlin.Int value='1'
+                a: CONST Int type=kotlin.Int value='2'
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,98 @@
+MODULE <test-module>
+  FILE /classForEnumEntry.kt
+    CLASS ENUM_CLASS IssueState
+      CONSTRUCTOR private constructor IssueState()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='IssueState'
+      ENUM_ENTRY enum entry DEFAULT
+        init: ENUM_CONSTRUCTOR_CALL 'constructor IssueState()' DEFAULT
+      ENUM_ENTRY enum entry FIXED
+        init: ENUM_CONSTRUCTOR_CALL 'constructor FIXED()' FIXED
+        class: CLASS ENUM_ENTRY FIXED
+          CONSTRUCTOR private constructor FIXED()
+            BLOCK_BODY
+              ENUM_CONSTRUCTOR_CALL 'constructor IssueState()' super
+              INSTANCE_INITIALIZER_CALL classDescriptor='FIXED'
+          FUN public open override fun ToString(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='ToString(): String'
+                CONST String type=kotlin.String value='K'
+      FUN public open fun ToString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='ToString(): String'
+            CONST String type=kotlin.String value='O'
+      FUN public final fun values(): kotlin.Array<IssueState>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): IssueState
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val field: java.lang.reflect.Field!
+          CALL 'getField(String!): Field!' type=java.lang.reflect.Field! operator=null
+            $this: CALL '<get-java>() on KClass<IssueState>: Class<IssueState>' type=java.lang.Class<IssueState> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'IssueState' type=kotlin.reflect.KClass<IssueState>
+            p0: CONST String type=kotlin.String value='FIXED'
+        VAR val typeName: kotlin.String!
+          CALL '<get-name>() on Class<*>: String!' type=kotlin.String! operator=GET_PROPERTY
+            $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+              CALL '<get-type>() on Field: Class<*>!' type=java.lang.Class<*>! operator=GET_PROPERTY
+                $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+                  GET_VAR 'field: Field!' type=java.lang.reflect.Field! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'typeName: String!' type=kotlin.String! operator=null
+              arg1: CONST String type=kotlin.String value='IssueState'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail type name: '
+              GET_VAR 'typeName: String!' type=kotlin.String! operator=null
+        VAR val className: kotlin.String!
+          CALL '<get-name>() on Class<Any!>: String!' type=kotlin.String! operator=GET_PROPERTY
+            $receiver: CALL '<get-javaClass>() on Any!: Class<Any!>' type=java.lang.Class<kotlin.Any!> operator=GET_PROPERTY
+              $receiver: CALL 'get(Any!): Any!' type=kotlin.Any! operator=null
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+                  GET_VAR 'field: Field!' type=java.lang.reflect.Field! operator=null
+                p0: CONST Null type=kotlin.Nothing? value='null'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'className: String!' type=kotlin.String! operator=null
+              arg1: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='IssueState'
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='FIXED'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail class name: '
+              GET_VAR 'className: String!' type=kotlin.String! operator=null
+        VAR val classLoader: java.lang.ClassLoader!
+          CALL '<get-classLoader>() on Class<IssueState>: ClassLoader!' type=java.lang.ClassLoader! operator=GET_PROPERTY
+            $receiver: CALL '<get-java>() on KClass<IssueState>: Class<IssueState>' type=java.lang.Class<IssueState> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'IssueState' type=kotlin.reflect.KClass<IssueState>
+        CALL 'loadClass(String!): Class<*>!' type=java.lang.Class<*>! operator=null
+          $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.ClassLoader
+            GET_VAR 'classLoader: ClassLoader!' type=java.lang.ClassLoader! operator=null
+          p0: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='IssueState'
+            CONST String type=kotlin.String value='$'
+            CONST String type=kotlin.String value='FIXED'
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'loadClass(String!): Class<*>!' type=java.lang.Class<*>! operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.ClassLoader
+                GET_VAR 'classLoader: ClassLoader!' type=java.lang.ClassLoader! operator=null
+              p0: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='IssueState'
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='DEFAULT'
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail: no class should have been generated for DEFAULT'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'ToString(): String' type=kotlin.String operator=null
+              $this: GET_ENUM_VALUE 'DEFAULT' type=IssueState
+            other: CALL 'ToString(): String' type=kotlin.String operator=null
+              $this: GET_ENUM_VALUE 'FIXED' type=IssueState

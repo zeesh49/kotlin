@@ -1,0 +1,70 @@
+MODULE <test-module>
+  FILE /delegation4.kt
+    CLASS INTERFACE First
+      FUN public abstract fun foo(): kotlin.Int
+    CLASS INTERFACE Second
+      FUN public abstract fun bar(): kotlin.Int
+    CLASS CLASS Impl
+      CONSTRUCTOR public constructor Impl()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Impl'
+      FUN public open override fun foo(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): Int'
+            CONST Int type=kotlin.Int value='1'
+      FUN public open override fun bar(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='bar(): Int'
+            CONST Int type=kotlin.Int value='2'
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test(s: Second)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      PROPERTY val `Test$Second$delegate`: Second
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s: Second' type=Second operator=null
+      FUN public open override fun bar(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='bar(): Int'
+            CALL 'bar(): Int' type=kotlin.Int operator=null
+              $this: GET_VAR '`Test$Second$delegate`: Second' type=Second operator=null
+      FUN public open override fun foo(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): Int'
+            CALL 'foo(): Int' type=kotlin.Int operator=null
+              $this: GET_VAR '`Test$Second$delegate`: Second' type=Second operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var t: Test
+          CALL 'constructor Test(Second)' type=Test operator=null
+            s: CALL 'constructor Impl()' type=Impl operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 't: Test' type=Test operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail #1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'bar(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 't: Test' type=Test operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail #2'
+        WHEN type=kotlin.Unit operator=IF
+          if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=First
+            GET_VAR 't: Test' type=Test operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail #3'
+        WHEN type=kotlin.Unit operator=IF
+          if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=Second
+            GET_VAR 't: Test' type=Test operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail #4'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

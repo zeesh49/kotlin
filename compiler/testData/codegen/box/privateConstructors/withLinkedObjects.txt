@@ -1,0 +1,41 @@
+MODULE <test-module>
+  FILE /withLinkedObjects.kt
+    CLASS CLASS Outer
+      CONSTRUCTOR private constructor Outer(p: Outer?)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'p: Outer?' type=kotlin.Unit operator=null
+            receiver: THIS of 'Outer' type=Outer
+            value: GET_VAR 'value-parameter p: Outer?' type=Outer? operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+      PROPERTY public final val p: Outer?
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter p: Outer?' type=Outer? operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CLASS OBJECT Inner
+        CONSTRUCTOR private constructor Inner()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Outer(Outer?)'
+              p: CONST Null type=kotlin.Nothing? value='null'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+      CLASS OBJECT Other
+        CONSTRUCTOR private constructor Other()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Outer(Outer?)'
+              p: GET_OBJECT 'Inner' type=Outer.Inner
+            INSTANCE_INITIALIZER_CALL classDescriptor='Other'
+      CLASS OBJECT Another
+        CONSTRUCTOR private constructor Another()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Outer(Outer?)'
+              p: GET_OBJECT 'Other' type=Outer.Other
+            INSTANCE_INITIALIZER_CALL classDescriptor='Another'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val outer: Outer.Inner
+          GET_OBJECT 'Inner' type=Outer.Inner
+        VAR val other: Outer.Other
+          GET_OBJECT 'Other' type=Outer.Other
+        VAR val another: Outer.Another
+          GET_OBJECT 'Another' type=Outer.Another
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

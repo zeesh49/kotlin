@@ -1,0 +1,60 @@
+MODULE <test-module>
+  FILE /kt606.kt
+    CLASS CLASS StandardPipelineFactory
+      CONSTRUCTOR public constructor StandardPipelineFactory(config: kt606.ChannelPipeline.() -> kotlin.Unit)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'config: ChannelPipeline.() -> Unit' type=kotlin.Unit operator=null
+            receiver: THIS of 'StandardPipelineFactory' type=kt606.StandardPipelineFactory
+            value: GET_VAR 'value-parameter config: ChannelPipeline.() -> Unit' type=kt606.ChannelPipeline.() -> kotlin.Unit operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='StandardPipelineFactory'
+      PROPERTY public final val config: kt606.ChannelPipeline.() -> kotlin.Unit
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter config: ChannelPipeline.() -> Unit' type=kt606.ChannelPipeline.() -> kotlin.Unit operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public open override fun getPipeline(): kt606.ChannelPipeline
+        BLOCK_BODY
+          VAR val pipeline: kt606.ChannelPipeline
+            CALL 'constructor DefaultChannelPipeline()' type=kt606.DefaultChannelPipeline operator=null
+          CALL 'invoke() on ChannelPipeline: Unit' type=kotlin.Unit operator=INVOKE
+            $this: CALL '<get-config>(): ChannelPipeline.() -> Unit' type=kt606.ChannelPipeline.() -> kotlin.Unit operator=GET_PROPERTY
+              $this: THIS of 'StandardPipelineFactory' type=kt606.StandardPipelineFactory
+            $receiver: GET_VAR 'pipeline: ChannelPipeline' type=kt606.ChannelPipeline operator=null
+          RETURN type=kotlin.Nothing from='getPipeline(): ChannelPipeline'
+            GET_VAR 'pipeline: ChannelPipeline' type=kt606.ChannelPipeline operator=null
+    CLASS INTERFACE ChannelPipeline
+      FUN public abstract fun print(any: kotlin.Any): kotlin.Unit
+    CLASS CLASS DefaultChannelPipeline
+      CONSTRUCTOR public constructor DefaultChannelPipeline()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='DefaultChannelPipeline'
+      FUN public open override fun print(any: kotlin.Any): kotlin.Unit
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit? operator=SAFE_CALL
+            VAR val tmp0_safe_receiver: java.io.PrintStream!
+              GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+            WHEN type=kotlin.Unit? operator=SAFE_CALL
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CONST Null type=kotlin.Nothing? value='null'
+              else: CALL 'println(Any!): Unit' type=kotlin.Unit operator=null
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                  GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+                p0: GET_VAR 'value-parameter any: Any' type=kotlin.Any operator=null
+    CLASS INTERFACE ChannelPipelineFactory
+      FUN public abstract fun getPipeline(): kt606.ChannelPipeline
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'getPipeline(): ChannelPipeline' type=kt606.ChannelPipeline operator=null
+          $this: CALL 'constructor StandardPipelineFactory(ChannelPipeline.() -> Unit)' type=kt606.StandardPipelineFactory operator=null
+            config: BLOCK type=kt606.ChannelPipeline.() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun kt606.ChannelPipeline.<anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>() on ChannelPipeline: Unit'
+                    CALL 'print(Any): Unit' type=kotlin.Unit operator=null
+                      $this: $RECEIVER of '<anonymous>() on ChannelPipeline: Unit' type=kt606.ChannelPipeline
+                      any: CONST String type=kotlin.String value='OK'
+              CALLABLE_REFERENCE '<anonymous>() on ChannelPipeline: Unit' type=kt606.ChannelPipeline.() -> kotlin.Unit operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

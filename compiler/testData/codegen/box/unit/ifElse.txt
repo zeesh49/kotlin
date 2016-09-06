@@ -1,0 +1,86 @@
+MODULE <test-module>
+  FILE /ifElse.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(p: kotlin.String, p1: kotlin.String, p2: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'p: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter p: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val p: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter p: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final var cond1: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value=''
+      PROPERTY public final var cond2: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value=''
+      PROPERTY public final val prop1: kotlin.String?
+        EXPRESSION_BODY
+          WHEN type=kotlin.String? operator=IF
+            if: CALL 'cond1(String): Boolean' type=kotlin.Boolean operator=null
+              $this: THIS of 'A' type=A
+              p: CALL '<get-p>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+            then: GET_VAR 'value-parameter p1: String' type=kotlin.String operator=null
+            else: CONST Null type=kotlin.Nothing? value='null'
+      PROPERTY public final val prop2: kotlin.String?
+        EXPRESSION_BODY
+          WHEN type=kotlin.String? operator=IF
+            if: CALL 'cond2(String): Boolean' type=kotlin.Boolean operator=null
+              $this: THIS of 'A' type=A
+              p: CALL '<get-p>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+            then: GET_VAR 'value-parameter p2: String' type=kotlin.String operator=null
+            else: CONST Null type=kotlin.Nothing? value='null'
+      FUN public final fun cond1(p: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          CALL '<set-cond1>(String): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'A' type=A
+            <set-?>: CONST String type=kotlin.String value='cond1'
+          RETURN type=kotlin.Nothing from='cond1(String): Boolean'
+            CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'value-parameter p: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='test'
+      FUN public final fun cond2(p: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          CALL '<set-cond2>(String): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'A' type=A
+            <set-?>: CONST String type=kotlin.String value='cond2'
+          RETURN type=kotlin.Nothing from='cond2(String): Boolean'
+            CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'value-parameter p: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='test'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          CALL 'constructor A(String, String, String)' type=A operator=null
+            p: CONST String type=kotlin.String value='test'
+            p1: CONST String type=kotlin.String value='OK'
+            p2: CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-cond1>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='cond1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 2 : '
+              CALL '<get-cond1>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-cond2>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='cond2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 3 : '
+              CALL '<get-cond2>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

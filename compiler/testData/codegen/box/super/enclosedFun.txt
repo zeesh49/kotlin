@@ -1,0 +1,98 @@
+MODULE <test-module>
+  FILE /enclosedFun.kt
+    CLASS INTERFACE BK
+      FUN public open fun x(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='x(): Int'
+            CONST Int type=kotlin.Int value='50'
+    CLASS INTERFACE K
+      FUN public open override fun x(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='x(): Int'
+            CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+              $this: CALL 'x(): Int' superQualifier=BK type=kotlin.Int operator=null
+                $this: THIS of 'K' type=BK
+              other: CONST Int type=kotlin.Int value='2'
+    CLASS CLASS M
+      CONSTRUCTOR public constructor M()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='M'
+      FUN public open fun x(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='x(): Int'
+            CONST Int type=kotlin.Int value='10'
+    CLASS CLASS N
+      CONSTRUCTOR public constructor N()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor M()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='N'
+      FUN public open override fun x(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='x(): Int'
+            CONST Int type=kotlin.Int value='20'
+      CLASS CLASS C
+        CONSTRUCTOR public constructor C()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='C'
+        FUN public final fun test1(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='test1(): Int'
+              CALL 'x(): Int' type=kotlin.Int operator=null
+                $this: THIS of 'C' type=N.C
+        FUN public final fun test2(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='test2(): Int'
+              CALL 'x(): Int' superQualifier=M type=kotlin.Int operator=null
+                $this: THIS of 'N' type=M
+        FUN public final fun test3(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='test3(): Int'
+              CALL 'x(): Int' superQualifier=K type=kotlin.Int operator=null
+                $this: THIS of 'N' type=K
+        FUN public final fun test4(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='test4(): Int'
+              CALL 'x(): Int' superQualifier=K type=kotlin.Int operator=null
+                $this: THIS of 'C' type=K
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test1(): Int' type=kotlin.Int operator=null
+                $this: CALL 'constructor C()' type=N.C operator=null
+                  $this: CALL 'constructor N()' type=N operator=null
+              arg1: CONST Int type=kotlin.Int value='100'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test1 fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test2(): Int' type=kotlin.Int operator=null
+                $this: CALL 'constructor C()' type=N.C operator=null
+                  $this: CALL 'constructor N()' type=N operator=null
+              arg1: CONST Int type=kotlin.Int value='10'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test2 fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test3(): Int' type=kotlin.Int operator=null
+                $this: CALL 'constructor C()' type=N.C operator=null
+                  $this: CALL 'constructor N()' type=N operator=null
+              arg1: CONST Int type=kotlin.Int value='100'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test3 fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test4(): Int' type=kotlin.Int operator=null
+                $this: CALL 'constructor C()' type=N.C operator=null
+                  $this: CALL 'constructor N()' type=N operator=null
+              arg1: CONST Int type=kotlin.Int value='100'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test4 fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

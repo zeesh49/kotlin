@@ -1,0 +1,428 @@
+MODULE <test-module>
+  FILE /kt684.kt
+    FUN public fun escapeChar(c: kotlin.Char): kotlin.String?
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='escapeChar(Char): String?'
+          BLOCK type=kotlin.String? operator=WHEN
+            VAR val tmp0_subject: kotlin.Char
+              GET_VAR 'value-parameter c: Char' type=kotlin.Char operator=null
+            WHEN type=kotlin.String? operator=WHEN
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Char' type=kotlin.Char operator=null
+                arg1: CONST Char type=kotlin.Char value='\'
+              then: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='\'
+                CONST String type=kotlin.String value='\'
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Char' type=kotlin.Char operator=null
+                arg1: CONST Char type=kotlin.Char value='
+'
+              then: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='\'
+                CONST String type=kotlin.String value='n'
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Char' type=kotlin.Char operator=null
+                arg1: CONST Char type=kotlin.Char value='"'
+              then: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='\'
+                CONST String type=kotlin.String value='"'
+              else: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: CONST String type=kotlin.String value=''
+                other: GET_VAR 'value-parameter c: Char' type=kotlin.Char operator=null
+    FUN public fun kotlin.String.escape(i: kotlin.Int = ..., result: kotlin.String = ...): kotlin.String
+      i: EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='0'
+      result: EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='escape(Int = ..., String = ...) on String: String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'value-parameter i: Int = ...' type=kotlin.Int operator=null
+              arg1: CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: $RECEIVER of 'escape(Int = ..., String = ...) on String: String' type=kotlin.String
+            then: GET_VAR 'value-parameter result: String = ...' type=kotlin.String operator=null
+            else: CALL 'escape(Int = ..., String = ...) on String: String' type=kotlin.String operator=null
+              $receiver: $RECEIVER of 'escape(Int = ..., String = ...) on String: String' type=kotlin.String
+              i: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: GET_VAR 'value-parameter i: Int = ...' type=kotlin.Int operator=null
+                other: CONST Int type=kotlin.Int value='1'
+              result: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: GET_VAR 'value-parameter result: String = ...' type=kotlin.String operator=null
+                other: CALL 'escapeChar(Char): String?' type=kotlin.String? operator=null
+                  c: CALL 'get(Int): Char' type=kotlin.Char operator=null
+                    $this: $RECEIVER of 'escape(Int = ..., String = ...) on String: String' type=kotlin.String
+                    index: GET_VAR 'value-parameter i: Int = ...' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val s: kotlin.String = "  System.out?.println("fun escapeChar(c : Char) : String? = when (c) {");
+  System.out?.println("  '\\\\' => \"\\\\\\\\\"");
+  System.out?.println("  '\\n' => \"\\\\n\"");
+  System.out?.println("  '\"'  => \"\\\\\\\"\"");
+  System.out?.println("  else => String.valueOf(c)");
+  System.out?.println("}");
+  System.out?.println();
+  System.out?.println("fun String.escape(i : Int = 0, result : String = \"\") : String =");
+  System.out?.println("  if (i == length) result");
+  System.out?.println("  else escape(i + 1, result + escapeChar(this.get(i)))");
+  System.out?.println();
+  System.out?.println("fun main(args : Array<String>) {");
+  System.out?.println("  val s = \"" + s.escape() + "\";");
+  System.out?.println(s);
+}
+"
+          STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='  System.out?.println('
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='fun escapeChar(c : Char) : String? = when (c) {'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value=');'
+            CONST String type=kotlin.String value='
+'
+            CONST String type=kotlin.String value='  System.out?.println('
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='  ''
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='' => '
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value=');'
+            CONST String type=kotlin.String value='
+'
+            CONST String type=kotlin.String value='  System.out?.println('
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='  ''
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='n' => '
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='n'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value=');'
+            CONST String type=kotlin.String value='
+'
+            CONST String type=kotlin.String value='  System.out?.println('
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='  ''
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value=''  => '
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value=');'
+            CONST String type=kotlin.String value='
+'
+            CONST String type=kotlin.String value='  System.out?.println('
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='  else => String.valueOf(c)'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value=');'
+            CONST String type=kotlin.String value='
+'
+            CONST String type=kotlin.String value='  System.out?.println('
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='}'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value=');'
+            CONST String type=kotlin.String value='
+'
+            CONST String type=kotlin.String value='  System.out?.println();'
+            CONST String type=kotlin.String value='
+'
+            CONST String type=kotlin.String value='  System.out?.println('
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='fun String.escape(i : Int = 0, result : String = '
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value=') : String ='
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value=');'
+            CONST String type=kotlin.String value='
+'
+            CONST String type=kotlin.String value='  System.out?.println('
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='  if (i == length) result'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value=');'
+            CONST String type=kotlin.String value='
+'
+            CONST String type=kotlin.String value='  System.out?.println('
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='  else escape(i + 1, result + escapeChar(this.get(i)))'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value=');'
+            CONST String type=kotlin.String value='
+'
+            CONST String type=kotlin.String value='  System.out?.println();'
+            CONST String type=kotlin.String value='
+'
+            CONST String type=kotlin.String value='  System.out?.println('
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='fun main(args : Array<String>) {'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value=');'
+            CONST String type=kotlin.String value='
+'
+            CONST String type=kotlin.String value='  System.out?.println('
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='  val s = '
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value=' + s.escape() + '
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value=';'
+            CONST String type=kotlin.String value='"'
+            CONST String type=kotlin.String value=');'
+            CONST String type=kotlin.String value='
+'
+            CONST String type=kotlin.String value='  System.out?.println(s);'
+            CONST String type=kotlin.String value='
+'
+            CONST String type=kotlin.String value='}'
+            CONST String type=kotlin.String value='
+'
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp0_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(String!): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: CONST String type=kotlin.String value='fun escapeChar(c : Char) : String? = when (c) {'
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp1_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp1_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(String!): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp1_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='  ''
+                CONST String type=kotlin.String value='\'
+                CONST String type=kotlin.String value='\'
+                CONST String type=kotlin.String value='' => '
+                CONST String type=kotlin.String value='"'
+                CONST String type=kotlin.String value='\'
+                CONST String type=kotlin.String value='\'
+                CONST String type=kotlin.String value='\'
+                CONST String type=kotlin.String value='\'
+                CONST String type=kotlin.String value='"'
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp2_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp2_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(String!): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp2_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='  ''
+                CONST String type=kotlin.String value='\'
+                CONST String type=kotlin.String value='n' => '
+                CONST String type=kotlin.String value='"'
+                CONST String type=kotlin.String value='\'
+                CONST String type=kotlin.String value='\'
+                CONST String type=kotlin.String value='n'
+                CONST String type=kotlin.String value='"'
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp3_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp3_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(String!): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp3_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='  ''
+                CONST String type=kotlin.String value='"'
+                CONST String type=kotlin.String value=''  => '
+                CONST String type=kotlin.String value='"'
+                CONST String type=kotlin.String value='\'
+                CONST String type=kotlin.String value='\'
+                CONST String type=kotlin.String value='\'
+                CONST String type=kotlin.String value='"'
+                CONST String type=kotlin.String value='"'
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp4_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp4_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(String!): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp4_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: CONST String type=kotlin.String value='  else => String.valueOf(c)'
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp5_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp5_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(String!): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp5_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: CONST String type=kotlin.String value='}'
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp6_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp6_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp6_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp7_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp7_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(String!): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp7_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='fun String.escape(i : Int = 0, result : String = '
+                CONST String type=kotlin.String value='"'
+                CONST String type=kotlin.String value='"'
+                CONST String type=kotlin.String value=') : String ='
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp8_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp8_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(String!): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp8_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: CONST String type=kotlin.String value='  if (i == length) result'
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp9_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp9_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(String!): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp9_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: CONST String type=kotlin.String value='  else escape(i + 1, result + escapeChar(this.get(i)))'
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp10_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp10_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp10_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp11_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp11_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(String!): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp11_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: CONST String type=kotlin.String value='fun main(args : Array<String>) {'
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp12_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp12_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(String!): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp12_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='  val s = '
+                    CONST String type=kotlin.String value='"'
+                  other: CALL 'escape(Int = ..., String = ...) on String: String' type=kotlin.String operator=null
+                    $receiver: GET_VAR 's: String' type=kotlin.String operator=null
+                other: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='"'
+                  CONST String type=kotlin.String value=';'
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp13_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp13_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(String!): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp13_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: GET_VAR 's: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

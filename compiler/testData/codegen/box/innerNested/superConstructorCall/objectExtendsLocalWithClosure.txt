@@ -1,0 +1,55 @@
+MODULE <test-module>
+  FILE /objectExtendsLocalWithClosure.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val d: kotlin.Double = 42.0.toDouble()
+          CONST Double type=kotlin.Double value='42.0'
+        VAR val c: kotlin.Char = \u0043 ('C')
+          CONST Char type=kotlin.Char value='C'
+        CLASS CLASS Local
+          CONSTRUCTOR public constructor Local(l: kotlin.Long)
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              SET_BACKING_FIELD 'l: Long' type=kotlin.Unit operator=null
+                receiver: THIS of 'Local' type=box.Local
+                value: GET_VAR 'value-parameter l: Long' type=kotlin.Long operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+              INSTANCE_INITIALIZER_CALL classDescriptor='Local'
+          PROPERTY public final val l: kotlin.Long
+            EXPRESSION_BODY
+              GET_VAR 'value-parameter l: Long' type=kotlin.Long operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          FUN public final fun foo(): kotlin.Boolean
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='foo(): Boolean'
+                WHEN type=kotlin.Boolean operator=ANDAND
+                  if: WHEN type=kotlin.Boolean operator=ANDAND
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'd: Double' type=kotlin.Double operator=null
+                      arg1: CONST Double type=kotlin.Double value='42.0'
+                    then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'c: Char' type=kotlin.Char operator=null
+                      arg1: CONST Char type=kotlin.Char value='C'
+                    else: CONST Boolean type=kotlin.Boolean value='false'
+                  then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: CALL '<get-l>(): Long' type=kotlin.Long operator=GET_PROPERTY
+                      $this: THIS of 'Local' type=box.Local
+                    arg1: CONST Long type=kotlin.Long value='239'
+                  else: CONST Boolean type=kotlin.Boolean value='false'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'bar(): Boolean' type=kotlin.Boolean operator=null
+            $this: BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Local(Long)'
+                      l: CONST Long type=kotlin.Long value='239'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                FUN public final fun bar(): kotlin.Boolean
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='bar(): Boolean'
+                      CALL 'foo(): Boolean' type=kotlin.Boolean operator=null
+                        $this: THIS of '<no name provided>' type=box.<no name provided>
+              CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='Fail'

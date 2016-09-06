@@ -1,0 +1,42 @@
+MODULE <test-module>
+  FILE /inFunction.kt
+    CLASS INTERFACE T
+      FUN public abstract fun result(): kotlin.String
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(x: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'x: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter x: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val x: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter x: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun foo(): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): T'
+            BLOCK type=A.foo.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                FUN public final fun bar(): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='bar(): String'
+                      CALL '<get-x>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: THIS of 'A' type=A
+                FUN public open override fun result(): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='result(): String'
+                      CALL 'bar(): String' type=kotlin.String operator=null
+                        $this: THIS of '<no name provided>' type=A.foo.<no name provided>
+              CALL 'constructor <no name provided>()' type=A.foo.<no name provided> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'result(): String' type=kotlin.String operator=null
+            $this: CALL 'foo(): T' type=T operator=null
+              $this: CALL 'constructor A(String)' type=A operator=null
+                x: CONST String type=kotlin.String value='OK'

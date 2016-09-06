@@ -1,0 +1,12 @@
+MODULE <test-module>
+  FILE /box.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'invoke(): String' type=kotlin.String operator=null
+            $this: CALLABLE_REFERENCE 'ok(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+  FILE /part1.kt
+    FUN public fun ok(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='ok(): String'
+          CONST String type=kotlin.String value='OK'

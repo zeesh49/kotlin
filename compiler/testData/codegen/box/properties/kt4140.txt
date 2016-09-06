@@ -1,0 +1,45 @@
+MODULE <test-module>
+  FILE /kt4140.kt
+    CLASS CLASS TestObject
+      CONSTRUCTOR public constructor TestObject()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='TestObject'
+      CLASS OBJECT companion object of TestObject
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of TestObject'
+        PROPERTY public final var prop: kotlin.Int
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='1'
+          PROPERTY_GETTER public final fun <get-prop>(): kotlin.Int
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<get-prop>(): Int'
+                BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                  VAR val tmp0: kotlin.Int
+                    GET_BACKING_FIELD 'prop: Int' type=kotlin.Int operator=POSTFIX_INCR
+                  SET_BACKING_FIELD 'prop: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                    value: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_OBJECT 'companion object of TestObject' type=TestObject.Companion
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_OBJECT 'companion object of TestObject' type=TestObject.Companion
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

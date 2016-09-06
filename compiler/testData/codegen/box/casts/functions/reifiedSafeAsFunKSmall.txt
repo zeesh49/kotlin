@@ -1,0 +1,84 @@
+MODULE <test-module>
+  FILE /reifiedSafeAsFunKSmall.kt
+    FUN public fun fn0(): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun fn1(x: kotlin.Any): kotlin.Unit
+      BLOCK_BODY
+    FUN public inline fun <reified T> reifiedSafeAsReturnsNonNull(x: kotlin.Any?, operation: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        VAR val y: T?
+          TRY_CATCH type=T?
+            try: BLOCK type=T? operator=null
+              TYPE_OP operator=SAFE_CAST typeOperand=T
+                GET_VAR 'value-parameter x: Any?' type=kotlin.Any? operator=null
+            catch e: BLOCK type=kotlin.Nothing operator=null
+              THROW type=kotlin.Nothing
+                CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                  p0: STRING_CONCATENATION type=kotlin.String
+                    GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                    CONST String type=kotlin.String value=': should not throw exceptions, got '
+                    GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'y: T?' type=T? operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=': should return non-null, got null'
+    FUN public inline fun <reified T> reifiedSafeAsReturnsNull(x: kotlin.Any?, operation: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        VAR val y: T?
+          TRY_CATCH type=T?
+            try: BLOCK type=T? operator=null
+              TYPE_OP operator=SAFE_CAST typeOperand=T
+                GET_VAR 'value-parameter x: Any?' type=kotlin.Any? operator=null
+            catch e: BLOCK type=kotlin.Nothing operator=null
+              THROW type=kotlin.Nothing
+                CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                  p0: STRING_CONCATENATION type=kotlin.String
+                    GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                    CONST String type=kotlin.String value=': should not throw exceptions, got '
+                    GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'y: T?' type=T? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=': should return null, got '
+                  GET_VAR 'y: T?' type=T? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f0: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALLABLE_REFERENCE 'fn0(): Unit' type=kotlin.reflect.KFunction0<kotlin.Unit> operator=null
+        VAR val f1: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALLABLE_REFERENCE 'fn1(Any): Unit' type=kotlin.reflect.KFunction1<kotlin.Any, kotlin.Unit> operator=null
+        CALL 'reifiedSafeAsReturnsNonNull(Any?, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'f0: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='f0 as Function0<*>'
+        CALL 'reifiedSafeAsReturnsNull(Any?, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'f0: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='f0 as Function1<*, *>'
+        CALL 'reifiedSafeAsReturnsNull(Any?, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'f1: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='f1 as Function0<*>'
+        CALL 'reifiedSafeAsReturnsNonNull(Any?, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'f1: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='f1 as Function1<*, *>'
+        CALL 'reifiedSafeAsReturnsNull(Any?, String): Unit' type=kotlin.Unit operator=null
+          x: CONST Null type=kotlin.Nothing? value='null'
+          operation: CONST String type=kotlin.String value='null as Function0<*>'
+        CALL 'reifiedSafeAsReturnsNull(Any?, String): Unit' type=kotlin.Unit operator=null
+          x: CONST Null type=kotlin.Nothing? value='null'
+          operation: CONST String type=kotlin.String value='null as Function1<*, *>'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

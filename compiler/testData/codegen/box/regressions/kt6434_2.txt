@@ -1,0 +1,21 @@
+MODULE <test-module>
+  FILE /kt6434_2.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val p: kotlin.Pair<kotlin.Int, kotlin.Int>
+          CALL 'to(Int) on Int: Pair<Int, Int>' type=kotlin.Pair<kotlin.Int, kotlin.Int> operator=null
+            $receiver: CONST Int type=kotlin.Int value='1'
+            that: CONST Int type=kotlin.Int value='1'
+        BLOCK type=kotlin.Unit operator=DESTRUCTURING_DECLARATION
+          VAR val tmp0_container: kotlin.Pair<kotlin.Int, kotlin.Int>
+            GET_VAR 'p: Pair<Int, Int>' type=kotlin.Pair<kotlin.Int, kotlin.Int> operator=null
+          VAR val e: kotlin.Int
+            CALL 'component1(): Int' type=kotlin.Int operator=COMPONENT_N(index=1)
+              $this: GET_VAR 'tmp0_container: Pair<Int, Int>' type=kotlin.Pair<kotlin.Int, kotlin.Int> operator=null
+          VAR val num: kotlin.Int
+            CALL 'component2(): Int' type=kotlin.Int operator=COMPONENT_N(index=2)
+              $this: GET_VAR 'tmp0_container: Pair<Int, Int>' type=kotlin.Pair<kotlin.Int, kotlin.Int> operator=null
+        VAR val a: kotlin.Float = 1.0.toFloat()
+          CONST Float type=kotlin.Float value='1.0'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

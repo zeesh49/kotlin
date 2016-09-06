@@ -1,0 +1,60 @@
+MODULE <test-module>
+  FILE /1.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'test(): String' type=kotlin.String operator=null
+                $this: CALL 'constructor B()' type=b.B operator=null
+              arg1: CALL 'test(): String' type=kotlin.String operator=null
+                $this: CALL 'constructor BSamePackage()' type=a.BSamePackage operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'
+  FILE /2.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN protected final fun protectedFun(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='protectedFun(): String'
+            CONST String type=kotlin.String value='OK'
+    CLASS CLASS BSamePackage
+      CONSTRUCTOR public constructor BSamePackage()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='BSamePackage'
+      FUN public final fun test(): kotlin.String
+        BLOCK_BODY
+          VAR val a: () -> kotlin.String
+            BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    CALL 'protectedFun(): String' type=kotlin.String operator=null
+                      $this: THIS of 'BSamePackage' type=a.BSamePackage
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+          RETURN type=kotlin.Nothing from='test(): String'
+            CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+              $this: GET_VAR 'a: () -> String' type=() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+  FILE /3.kt
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      FUN public final fun test(): kotlin.String
+        BLOCK_BODY
+          VAR val a: () -> kotlin.String
+            BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    CALL 'protectedFun(): String' type=kotlin.String operator=null
+                      $this: THIS of 'B' type=b.B
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+          RETURN type=kotlin.Nothing from='test(): String'
+            CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+              $this: GET_VAR 'a: () -> String' type=() -> kotlin.String operator=VARIABLE_AS_FUNCTION

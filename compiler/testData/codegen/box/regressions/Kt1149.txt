@@ -1,0 +1,42 @@
+MODULE <test-module>
+  FILE /Kt1149.kt
+    CLASS INTERFACE SomeTrait
+      FUN public abstract fun foo(): kotlin.Unit
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val list: java.util.ArrayList<test.regressions.kt1149.SomeTrait>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<test.regressions.kt1149.SomeTrait> operator=null
+        VAR var res: java.util.ArrayList<kotlin.String>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.String> operator=null
+        CALL 'add(SomeTrait): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'list: ArrayList<SomeTrait>' type=java.util.ArrayList<test.regressions.kt1149.SomeTrait> operator=null
+          element: BLOCK type=test.regressions.kt1149.box.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              FUN public open override fun foo(): kotlin.Unit
+                BLOCK_BODY
+                  CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+                    $this: GET_VAR 'res: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+                    element: CONST String type=kotlin.String value='anonymous.foo()'
+            CALL 'constructor <no name provided>()' type=test.regressions.kt1149.box.<no name provided> operator=OBJECT_LITERAL
+        CALL 'forEach((SomeTrait) -> Unit) on Iterable<SomeTrait>: Unit' type=kotlin.Unit operator=null
+          $receiver: GET_VAR 'list: ArrayList<SomeTrait>' type=java.util.ArrayList<test.regressions.kt1149.SomeTrait> operator=null
+          action: BLOCK type=(test.regressions.kt1149.SomeTrait) -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(it: test.regressions.kt1149.SomeTrait): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(SomeTrait): Unit'
+                  CALL 'foo(): Unit' type=kotlin.Unit operator=null
+                    $this: GET_VAR 'value-parameter it: SomeTrait' type=test.regressions.kt1149.SomeTrait operator=null
+            CALLABLE_REFERENCE '<anonymous>(SomeTrait): Unit' type=(test.regressions.kt1149.SomeTrait) -> kotlin.Unit operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CONST String type=kotlin.String value='anonymous.foo()'
+              arg1: CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'res: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+                index: CONST Int type=kotlin.Int value='0'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

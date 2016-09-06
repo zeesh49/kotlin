@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /primitives.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val primitiveInt: kotlin.reflect.KClass<kotlin.Int>
+          CALL '<get-kotlin>() on Class<Int>: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=GET_PROPERTY
+            $receiver: BLOCK type=java.lang.Class<kotlin.Int> operator=EXCLEXCL
+              VAR val tmp0_notnull: java.lang.Class<kotlin.Int>?
+                CALL '<get-javaPrimitiveType>() on KClass<Int>: Class<Int>?' type=java.lang.Class<kotlin.Int>? operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+              WHEN type=java.lang.Class<kotlin.Int> operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: Class<Int>?' type=java.lang.Class<kotlin.Int>? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: Class<Int>?' type=java.lang.Class<kotlin.Int>? operator=null
+        VAR val wrapperInt: kotlin.reflect.KClass<kotlin.Int>
+          CALL '<get-kotlin>() on Class<Int>: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=GET_PROPERTY
+            $receiver: CALL '<get-javaObjectType>() on KClass<Int>: Class<Int>' type=java.lang.Class<kotlin.Int> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'isSubclassOf(KClass<*>) on KClass<*>: Boolean' type=kotlin.Boolean operator=null
+            $receiver: GET_VAR 'primitiveInt: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=null
+            base: GET_VAR 'primitiveInt: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'isSubclassOf(KClass<*>) on KClass<*>: Boolean' type=kotlin.Boolean operator=null
+            $receiver: GET_VAR 'wrapperInt: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=null
+            base: GET_VAR 'wrapperInt: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'isSubclassOf(KClass<*>) on KClass<*>: Boolean' type=kotlin.Boolean operator=null
+            $receiver: GET_VAR 'primitiveInt: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=null
+            base: GET_VAR 'wrapperInt: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'isSubclassOf(KClass<*>) on KClass<*>: Boolean' type=kotlin.Boolean operator=null
+            $receiver: GET_VAR 'wrapperInt: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=null
+            base: GET_VAR 'primitiveInt: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

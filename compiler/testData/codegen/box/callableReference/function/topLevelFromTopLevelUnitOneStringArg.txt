@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /topLevelFromTopLevelUnitOneStringArg.kt
+    PROPERTY public var result: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='Fail'
+    FUN public fun foo(newResult: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: GET_VAR 'value-parameter newResult: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.reflect.KFunction1<kotlin.String, kotlin.Unit>
+          CALLABLE_REFERENCE 'foo(String): Unit' type=kotlin.reflect.KFunction1<kotlin.String, kotlin.Unit> operator=null
+        CALL 'invoke(String): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'x: KFunction1<String, Unit>' type=kotlin.reflect.KFunction1<kotlin.String, kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+          p1: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY

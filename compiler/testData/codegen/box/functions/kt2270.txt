@@ -1,0 +1,32 @@
+MODULE <test-module>
+  FILE /kt2270.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(i: kotlin.Int, j: kotlin.Int = ...)
+        j: EXPRESSION_BODY
+          GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'i: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'j: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter j: Int = ...' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val i: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val j: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter j: Int = ...' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-j>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL 'constructor A(Int, Int = ...)' type=A operator=null
+                  i: CONST Int type=kotlin.Int value='1'
+              arg1: CONST Int type=kotlin.Int value='1'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

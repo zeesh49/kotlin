@@ -1,0 +1,39 @@
+MODULE <test-module>
+  FILE /simpleExtension.kt
+    PROPERTY public val kotlin.String.id: kotlin.String
+      PROPERTY_GETTER public fun kotlin.String.<get-id>(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-id>() on String: String'
+            $RECEIVER of 'id: String on String' type=kotlin.String
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val pr: kotlin.reflect.KProperty1<kotlin.String, kotlin.String>
+          CALLABLE_REFERENCE 'id: String on String' type=kotlin.reflect.KProperty1<kotlin.String, kotlin.String> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(String): String' type=kotlin.String operator=null
+                $this: GET_VAR 'pr: KProperty1<String, String>' type=kotlin.reflect.KProperty1<kotlin.String, kotlin.String> operator=null
+                receiver: CONST String type=kotlin.String value='123'
+              arg1: CONST String type=kotlin.String value='123'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail value: '
+              CALL 'get(String): String' type=kotlin.String operator=null
+                $this: GET_VAR 'pr: KProperty1<String, String>' type=kotlin.reflect.KProperty1<kotlin.String, kotlin.String> operator=null
+                receiver: CONST String type=kotlin.String value='123'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'pr: KProperty1<String, String>' type=kotlin.reflect.KProperty1<kotlin.String, kotlin.String> operator=null
+              arg1: CONST String type=kotlin.String value='id'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail name: '
+              CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'pr: KProperty1<String, String>' type=kotlin.reflect.KProperty1<kotlin.String, kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'get(String): String' type=kotlin.String operator=null
+            $this: GET_VAR 'pr: KProperty1<String, String>' type=kotlin.reflect.KProperty1<kotlin.String, kotlin.String> operator=null
+            receiver: CONST String type=kotlin.String value='OK'

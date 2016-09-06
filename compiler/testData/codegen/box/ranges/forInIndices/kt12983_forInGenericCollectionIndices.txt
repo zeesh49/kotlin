@@ -1,0 +1,75 @@
+MODULE <test-module>
+  FILE /kt12983_forInGenericCollectionIndices.kt
+    CLASS CLASS BaseGeneric
+      CONSTRUCTOR public constructor BaseGeneric<T>(t: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 't: T' type=kotlin.Unit operator=null
+            receiver: THIS of 'BaseGeneric' type=BaseGeneric<T>
+            value: GET_VAR 'value-parameter t: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='BaseGeneric'
+      PROPERTY public final val t: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter t: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public abstract fun iterate(): kotlin.Unit
+    CLASS CLASS Derived
+      CONSTRUCTOR public constructor Derived<T>(t: kotlin.collections.List<T>)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor BaseGeneric(List<T>)'
+            t: GET_VAR 'value-parameter t: List<T>' type=kotlin.collections.List<T> operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='Derived'
+      PROPERTY public final var test: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+      FUN public open override fun iterate(): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-test>(Int): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'Derived' type=Derived<T>
+            <set-?>: CONST Int type=kotlin.Int value='0'
+          BLOCK type=kotlin.Unit operator=FOR_LOOP
+            VAR val tmp0_iterator: kotlin.collections.IntIterator
+              CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+                $this: CALL '<get-indices>() on Collection<*>: IntRange' type=kotlin.ranges.IntRange operator=GET_PROPERTY
+                  $receiver: CALL '<get-t>(): List<T>' type=kotlin.collections.List<T> operator=GET_PROPERTY
+                    $this: THIS of 'Derived' type=Derived<T>
+            WHILE label=null operator=FOR_LOOP_INNER_WHILE
+              condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+                $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+                VAR val i: kotlin.Int
+                  CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                    $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+                BLOCK type=kotlin.Unit operator=null
+                  CALL '<set-test>(Int): Unit' type=kotlin.Unit operator=EQ
+                    $this: THIS of 'Derived' type=Derived<T>
+                    <set-?>: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                      $this: CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                        $this: CALL '<get-test>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                          $this: THIS of 'Derived' type=Derived<T>
+                        other: CONST Int type=kotlin.Int value='10'
+                      other: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                        $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                        other: CONST Int type=kotlin.Int value='1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val t: Derived<kotlin.String>
+          CALL 'constructor Derived(List<String>)' type=Derived<kotlin.String> operator=null
+            t: CALL 'listOf(vararg String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              elements: VARARG type=Array<out String> varargElementType=String
+                CONST String type=kotlin.String value=''
+                CONST String type=kotlin.String value=''
+                CONST String type=kotlin.String value=''
+                CONST String type=kotlin.String value=''
+        CALL 'iterate(): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 't: Derived<String>' type=Derived<kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-test>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 't: Derived<String>' type=Derived<kotlin.String> operator=null
+              arg1: CONST Int type=kotlin.Int value='1234'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              CALL '<get-test>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 't: Derived<String>' type=Derived<kotlin.String> operator=null

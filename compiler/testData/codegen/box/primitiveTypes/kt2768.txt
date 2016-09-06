@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /kt2768.kt
+    FUN public fun <T> assertEquals(a: T, b: T): kotlin.Unit
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'value-parameter a: T' type=T operator=null
+              arg1: GET_VAR 'value-parameter b: T' type=T operator=null
+          then: THROW type=kotlin.Nothing
+            CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+              p0: STRING_CONCATENATION type=kotlin.String
+                GET_VAR 'value-parameter a: T' type=T operator=null
+                CONST String type=kotlin.String value=' != '
+                GET_VAR 'value-parameter b: T' type=T operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val bytePos: kotlin.Byte = -128.toByte()
+          CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+            $this: CONST Int type=kotlin.Int value='128'
+        CALL 'assertEquals(Int, Int): Unit' type=kotlin.Unit operator=null
+          a: CONST Int type=kotlin.Int value='-128'
+          b: CALL 'toInt(): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'bytePos: Byte' type=kotlin.Byte operator=null
+        VAR val shortPos: kotlin.Short = -32768.toShort()
+          CALL 'toShort(): Short' type=kotlin.Short operator=null
+            $this: CONST Int type=kotlin.Int value='32768'
+        CALL 'assertEquals(Int, Int): Unit' type=kotlin.Unit operator=null
+          a: CONST Int type=kotlin.Int value='-32768'
+          b: CALL 'toInt(): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'shortPos: Short' type=kotlin.Short operator=null
+        CALL 'assertEquals(String, String): Unit' type=kotlin.Unit operator=null
+          a: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+              $this: CONST Int type=kotlin.Int value='-128'
+          b: CONST String type=kotlin.String value='-128'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

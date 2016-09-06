@@ -1,0 +1,21 @@
+MODULE <test-module>
+  FILE /exceptionConstructor.kt
+    CLASS CLASS GameError
+      CONSTRUCTOR public constructor GameError(msg: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Exception(String!)'
+            p0: GET_VAR 'value-parameter msg: String' type=kotlin.String operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='GameError'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val e: GameError
+          CALL 'constructor GameError(String)' type=GameError operator=null
+            msg: CONST String type=kotlin.String value='foo'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                $this: GET_VAR 'e: GameError' type=GameError operator=null
+              arg1: CONST String type=kotlin.String value='foo'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

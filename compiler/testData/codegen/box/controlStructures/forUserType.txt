@@ -1,0 +1,499 @@
+MODULE <test-module>
+  FILE /forUserType.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var sum: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        VAR var i: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        VAR val c6: MyCollection4
+          CALL 'constructor MyCollection4()' type=MyCollection4 operator=null
+        SET_VAR 'sum: Int' type=kotlin.Unit operator=EQ
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: MyCollection4.MyIterator
+            CALL 'iterator(): MyCollection4.MyIterator' type=MyCollection4.MyIterator operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'c6: MyCollection4' type=MyCollection4 operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: MyCollection4.MyIterator' type=MyCollection4.MyIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val el: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: MyCollection4.MyIterator' type=MyCollection4.MyIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'sum: Int' type=kotlin.Unit operator=EQ
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+                    other: GET_VAR 'el: Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='15'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='c6 failed'
+        VAR val c5: MyCollection3
+          CALL 'constructor MyCollection3()' type=MyCollection3 operator=null
+        SET_VAR 'sum: Int' type=kotlin.Unit operator=EQ
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp1_iterator: MyCollection3.MyIterator
+            CALL 'iterator(): MyCollection3.MyIterator' type=MyCollection3.MyIterator operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'c5: MyCollection3' type=MyCollection3 operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp1_iterator: MyCollection3.MyIterator' type=MyCollection3.MyIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val el: kotlin.Int?
+                CALL 'next(): Int?' type=kotlin.Int? operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp1_iterator: MyCollection3.MyIterator' type=MyCollection3.MyIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'sum: Int' type=kotlin.Unit operator=EQ
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+                    other: BLOCK type=kotlin.Int operator=ELVIS
+                      VAR val tmp2_elvis_lhs: kotlin.Int?
+                        GET_VAR 'el: Int?' type=kotlin.Int? operator=null
+                      WHEN type=kotlin.Int operator=null
+                        if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: GET_VAR 'tmp2_elvis_lhs: Int?' type=kotlin.Int? operator=null
+                          arg1: CONST Null type=kotlin.Nothing? value='null'
+                        then: CONST Int type=kotlin.Int value='0'
+                        else: GET_VAR 'tmp2_elvis_lhs: Int?' type=kotlin.Int? operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='15'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='c5 failed'
+        VAR val c1: kotlin.collections.Iterable<kotlin.Int>
+          CALL 'constructor MyCollection1()' type=MyCollection1 operator=null
+        SET_VAR 'sum: Int' type=kotlin.Unit operator=EQ
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp3_iterator: kotlin.collections.Iterator<kotlin.Int>
+            CALL 'iterator(): Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'c1: Iterable<Int>' type=kotlin.collections.Iterable<kotlin.Int> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp3_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val el: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp3_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'sum: Int' type=kotlin.Unit operator=EQ
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+                    other: BLOCK type=kotlin.Int operator=EXCLEXCL
+                      VAR val tmp4_notnull: kotlin.Int
+                        GET_VAR 'el: Int' type=kotlin.Int operator=null
+                      WHEN type=kotlin.Int operator=null
+                        if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: GET_VAR 'tmp4_notnull: Int' type=kotlin.Int operator=null
+                          arg1: CONST Null type=kotlin.Nothing? value='null'
+                        then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                        else: GET_VAR 'tmp4_notnull: Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='15'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='c1 failed'
+        VAR val c2: MyCollection1
+          CALL 'constructor MyCollection1()' type=MyCollection1 operator=null
+        SET_VAR 'sum: Int' type=kotlin.Unit operator=EQ
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp5_iterator: kotlin.collections.Iterator<kotlin.Int>
+            CALL 'iterator(): Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'c2: MyCollection1' type=MyCollection1 operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp5_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val el: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp5_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'sum: Int' type=kotlin.Unit operator=EQ
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+                    other: BLOCK type=kotlin.Int operator=EXCLEXCL
+                      VAR val tmp6_notnull: kotlin.Int
+                        GET_VAR 'el: Int' type=kotlin.Int operator=null
+                      WHEN type=kotlin.Int operator=null
+                        if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: GET_VAR 'tmp6_notnull: Int' type=kotlin.Int operator=null
+                          arg1: CONST Null type=kotlin.Nothing? value='null'
+                        then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                        else: GET_VAR 'tmp6_notnull: Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='15'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='c2 failed'
+        VAR val c3: kotlin.collections.Iterable<kotlin.Int>
+          CALL 'constructor MyCollection2()' type=MyCollection2 operator=null
+        SET_VAR 'sum: Int' type=kotlin.Unit operator=EQ
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp7_iterator: kotlin.collections.Iterator<kotlin.Int>
+            CALL 'iterator(): Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'c3: Iterable<Int>' type=kotlin.collections.Iterable<kotlin.Int> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp7_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val el: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp7_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'sum: Int' type=kotlin.Unit operator=EQ
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+                    other: BLOCK type=kotlin.Int operator=EXCLEXCL
+                      VAR val tmp8_notnull: kotlin.Int
+                        GET_VAR 'el: Int' type=kotlin.Int operator=null
+                      WHEN type=kotlin.Int operator=null
+                        if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: GET_VAR 'tmp8_notnull: Int' type=kotlin.Int operator=null
+                          arg1: CONST Null type=kotlin.Nothing? value='null'
+                        then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                        else: GET_VAR 'tmp8_notnull: Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='15'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='c3 failed'
+        VAR val c4: MyCollection2
+          CALL 'constructor MyCollection2()' type=MyCollection2 operator=null
+        SET_VAR 'sum: Int' type=kotlin.Unit operator=EQ
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp9_iterator: kotlin.collections.Iterator<kotlin.Int>
+            CALL 'iterator(): Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'c4: MyCollection2' type=MyCollection2 operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp9_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val el: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp9_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'sum: Int' type=kotlin.Unit operator=EQ
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+                    other: BLOCK type=kotlin.Int operator=EXCLEXCL
+                      VAR val tmp10_notnull: kotlin.Int
+                        GET_VAR 'el: Int' type=kotlin.Int operator=null
+                      WHEN type=kotlin.Int operator=null
+                        if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: GET_VAR 'tmp10_notnull: Int' type=kotlin.Int operator=null
+                          arg1: CONST Null type=kotlin.Nothing? value='null'
+                        then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                        else: GET_VAR 'tmp10_notnull: Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='15'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='c4 failed'
+        VAR val a: kotlin.Array<kotlin.Int>
+          TYPE_OP operator=CAST typeOperand=kotlin.Array<kotlin.Int>
+            CALL 'arrayOfNulls(Int): Array<Int?>' type=kotlin.Array<kotlin.Int?> operator=null
+              size: CONST Int type=kotlin.Int value='5'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp11_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='0'
+                other: CONST Int type=kotlin.Int value='4'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp11_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val el: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp11_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+                  $this: GET_VAR 'a: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+                  index: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                  value: BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                    VAR val tmp12: kotlin.Int
+                      GET_VAR 'i: Int' type=kotlin.Int operator=POSTFIX_INCR
+                    SET_VAR 'i: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                      CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                        $this: GET_VAR 'tmp12: Int' type=kotlin.Int operator=null
+                    GET_VAR 'tmp12: Int' type=kotlin.Int operator=null
+        SET_VAR 'sum: Int' type=kotlin.Unit operator=EQ
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp13_iterator: kotlin.collections.Iterator<kotlin.Int>
+            CALL 'iterator(): Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'a: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp13_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val el: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp13_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'sum: Int' type=kotlin.Unit operator=EQ
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+                    other: BLOCK type=kotlin.Int operator=EXCLEXCL
+                      VAR val tmp14_notnull: kotlin.Int
+                        GET_VAR 'el: Int' type=kotlin.Int operator=null
+                      WHEN type=kotlin.Int operator=null
+                        if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: GET_VAR 'tmp14_notnull: Int' type=kotlin.Int operator=null
+                          arg1: CONST Null type=kotlin.Nothing? value='null'
+                        then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                        else: GET_VAR 'tmp14_notnull: Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='10'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='a failed'
+        VAR val b: kotlin.Array<kotlin.Int?>
+          CALL 'arrayOfNulls(Int): Array<Int?>' type=kotlin.Array<kotlin.Int?> operator=null
+            size: CONST Int type=kotlin.Int value='5'
+        SET_VAR 'i: Int' type=kotlin.Unit operator=EQ
+          CONST Int type=kotlin.Int value='0'
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+              $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+              other: CONST Int type=kotlin.Int value='5'
+          body: BLOCK type=kotlin.Unit operator=null
+            CALL 'set(Int, Int?): Unit' type=kotlin.Unit operator=EQ
+              $this: GET_VAR 'b: Array<Int?>' type=kotlin.Array<kotlin.Int?> operator=null
+              index: GET_VAR 'i: Int' type=kotlin.Int operator=null
+              value: BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                VAR val tmp15: kotlin.Int
+                  GET_VAR 'i: Int' type=kotlin.Int operator=POSTFIX_INCR
+                SET_VAR 'i: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                  CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                    $this: GET_VAR 'tmp15: Int' type=kotlin.Int operator=null
+                GET_VAR 'tmp15: Int' type=kotlin.Int operator=null
+        SET_VAR 'sum: Int' type=kotlin.Unit operator=EQ
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp16_iterator: kotlin.collections.Iterator<kotlin.Int?>
+            CALL 'iterator(): Iterator<Int?>' type=kotlin.collections.Iterator<kotlin.Int?> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'b: Array<Int?>' type=kotlin.Array<kotlin.Int?> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp16_iterator: Iterator<Int?>' type=kotlin.collections.Iterator<kotlin.Int?> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val el: kotlin.Int?
+                CALL 'next(): Int?' type=kotlin.Int? operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp16_iterator: Iterator<Int?>' type=kotlin.collections.Iterator<kotlin.Int?> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'sum: Int' type=kotlin.Unit operator=EQ
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+                    other: BLOCK type=kotlin.Int operator=ELVIS
+                      VAR val tmp17_elvis_lhs: kotlin.Int?
+                        GET_VAR 'el: Int?' type=kotlin.Int? operator=null
+                      WHEN type=kotlin.Int operator=null
+                        if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: GET_VAR 'tmp17_elvis_lhs: Int?' type=kotlin.Int? operator=null
+                          arg1: CONST Null type=kotlin.Nothing? value='null'
+                        then: CONST Int type=kotlin.Int value='0'
+                        else: GET_VAR 'tmp17_elvis_lhs: Int?' type=kotlin.Int? operator=null
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp18_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp18_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(Int): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp18_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='10'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='b failed'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    CLASS CLASS MyCollection1
+      CONSTRUCTOR public constructor MyCollection1()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyCollection1'
+      FUN public open override fun iterator(): kotlin.collections.Iterator<kotlin.Int>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='iterator(): Iterator<Int>'
+            CALL 'constructor MyIterator()' type=MyCollection1.MyIterator operator=null
+      CLASS CLASS MyIterator
+        CONSTRUCTOR public constructor MyIterator()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='MyIterator'
+        PROPERTY public final var k: kotlin.Int
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='5'
+        FUN public open override fun next(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='next(): Int'
+              BLOCK type=kotlin.Int operator=POSTFIX_DECR
+                VAR val tmp0_this: MyCollection1.MyIterator
+                  THIS of 'MyIterator' type=MyCollection1.MyIterator
+                BLOCK type=kotlin.Int operator=POSTFIX_DECR
+                  VAR val tmp1: kotlin.Int
+                    CALL '<get-k>(): Int' type=kotlin.Int operator=POSTFIX_DECR
+                      $this: GET_VAR 'tmp0_this: MyCollection1.MyIterator' type=MyCollection1.MyIterator operator=null
+                  CALL '<set-k>(Int): Unit' type=kotlin.Unit operator=POSTFIX_DECR
+                    $this: GET_VAR 'tmp0_this: MyCollection1.MyIterator' type=MyCollection1.MyIterator operator=null
+                    <set-?>: CALL 'dec(): Int' type=kotlin.Int operator=POSTFIX_DECR
+                      $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        FUN public open override fun hasNext(): kotlin.Boolean
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='hasNext(): Boolean'
+              CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+                arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+                  $this: CALL '<get-k>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                    $this: THIS of 'MyIterator' type=MyCollection1.MyIterator
+                  other: CONST Int type=kotlin.Int value='0'
+    CLASS CLASS MyCollection2
+      CONSTRUCTOR public constructor MyCollection2()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyCollection2'
+      FUN public open override fun iterator(): kotlin.collections.Iterator<kotlin.Int>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='iterator(): Iterator<Int>'
+            CALL 'constructor MyIterator()' type=MyCollection2.MyIterator operator=null
+      CLASS CLASS MyIterator
+        CONSTRUCTOR public constructor MyIterator()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='MyIterator'
+        PROPERTY public final var k: kotlin.Int
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='5'
+        FUN public open override fun next(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='next(): Int'
+              BLOCK type=kotlin.Int operator=POSTFIX_DECR
+                VAR val tmp0_this: MyCollection2.MyIterator
+                  THIS of 'MyIterator' type=MyCollection2.MyIterator
+                BLOCK type=kotlin.Int operator=POSTFIX_DECR
+                  VAR val tmp1: kotlin.Int
+                    CALL '<get-k>(): Int' type=kotlin.Int operator=POSTFIX_DECR
+                      $this: GET_VAR 'tmp0_this: MyCollection2.MyIterator' type=MyCollection2.MyIterator operator=null
+                  CALL '<set-k>(Int): Unit' type=kotlin.Unit operator=POSTFIX_DECR
+                    $this: GET_VAR 'tmp0_this: MyCollection2.MyIterator' type=MyCollection2.MyIterator operator=null
+                    <set-?>: CALL 'dec(): Int' type=kotlin.Int operator=POSTFIX_DECR
+                      $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        FUN public open override fun hasNext(): kotlin.Boolean
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='hasNext(): Boolean'
+              CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+                arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+                  $this: CALL '<get-k>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                    $this: THIS of 'MyIterator' type=MyCollection2.MyIterator
+                  other: CONST Int type=kotlin.Int value='0'
+    CLASS CLASS MyCollection3
+      CONSTRUCTOR public constructor MyCollection3()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyCollection3'
+      FUN public final operator fun iterator(): MyCollection3.MyIterator
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='iterator(): MyCollection3.MyIterator'
+            CALL 'constructor MyIterator()' type=MyCollection3.MyIterator operator=null
+      CLASS CLASS MyIterator
+        CONSTRUCTOR public constructor MyIterator()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='MyIterator'
+        PROPERTY public final var k: kotlin.Int
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='5'
+        FUN public final operator fun next(): kotlin.Int?
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='next(): Int?'
+              BLOCK type=kotlin.Int operator=POSTFIX_DECR
+                VAR val tmp0_this: MyCollection3.MyIterator
+                  THIS of 'MyIterator' type=MyCollection3.MyIterator
+                BLOCK type=kotlin.Int operator=POSTFIX_DECR
+                  VAR val tmp1: kotlin.Int
+                    CALL '<get-k>(): Int' type=kotlin.Int operator=POSTFIX_DECR
+                      $this: GET_VAR 'tmp0_this: MyCollection3.MyIterator' type=MyCollection3.MyIterator operator=null
+                  CALL '<set-k>(Int): Unit' type=kotlin.Unit operator=POSTFIX_DECR
+                    $this: GET_VAR 'tmp0_this: MyCollection3.MyIterator' type=MyCollection3.MyIterator operator=null
+                    <set-?>: CALL 'dec(): Int' type=kotlin.Int operator=POSTFIX_DECR
+                      $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        FUN public final operator fun hasNext(): kotlin.Boolean
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='hasNext(): Boolean'
+              CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+                arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+                  $this: CALL '<get-k>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                    $this: THIS of 'MyIterator' type=MyCollection3.MyIterator
+                  other: CONST Int type=kotlin.Int value='0'
+    CLASS CLASS MyCollection4
+      CONSTRUCTOR public constructor MyCollection4()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyCollection4'
+      FUN public final operator fun iterator(): MyCollection4.MyIterator
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='iterator(): MyCollection4.MyIterator'
+            CALL 'constructor MyIterator()' type=MyCollection4.MyIterator operator=null
+      CLASS CLASS MyIterator
+        CONSTRUCTOR public constructor MyIterator()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='MyIterator'
+        PROPERTY public final var k: kotlin.Int
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='5'
+        FUN public final operator fun next(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='next(): Int'
+              BLOCK type=kotlin.Int operator=POSTFIX_DECR
+                VAR val tmp0_this: MyCollection4.MyIterator
+                  THIS of 'MyIterator' type=MyCollection4.MyIterator
+                BLOCK type=kotlin.Int operator=POSTFIX_DECR
+                  VAR val tmp1: kotlin.Int
+                    CALL '<get-k>(): Int' type=kotlin.Int operator=POSTFIX_DECR
+                      $this: GET_VAR 'tmp0_this: MyCollection4.MyIterator' type=MyCollection4.MyIterator operator=null
+                  CALL '<set-k>(Int): Unit' type=kotlin.Unit operator=POSTFIX_DECR
+                    $this: GET_VAR 'tmp0_this: MyCollection4.MyIterator' type=MyCollection4.MyIterator operator=null
+                    <set-?>: CALL 'dec(): Int' type=kotlin.Int operator=POSTFIX_DECR
+                      $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        FUN public final operator fun hasNext(): kotlin.Boolean
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='hasNext(): Boolean'
+              CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+                arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+                  $this: CALL '<get-k>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                    $this: THIS of 'MyIterator' type=MyCollection4.MyIterator
+                  other: CONST Int type=kotlin.Int value='0'

@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /incWithLabel.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var x: kotlin.Int
+          CONST Int type=kotlin.Int value='1'
+        BLOCK type=kotlin.Int operator=POSTFIX_INCR
+          VAR val tmp0: kotlin.Int
+            GET_VAR 'x: Int' type=kotlin.Int operator=POSTFIX_INCR
+          SET_VAR 'x: Int' type=kotlin.Unit operator=POSTFIX_INCR
+            CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+          GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+        BLOCK type=kotlin.Int operator=PREFIX_INCR
+          VAR val tmp1: kotlin.Int
+            CALL 'inc(): Int' type=kotlin.Int operator=PREFIX_INCR
+              $this: GET_VAR 'x: Int' type=kotlin.Int operator=PREFIX_INCR
+          SET_VAR 'x: Int' type=kotlin.Unit operator=PREFIX_INCR
+            GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+          GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'x: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='3'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'x: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

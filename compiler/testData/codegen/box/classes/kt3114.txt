@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /kt3114.kt
+    CLASS CLASS KeySpan
+      CONSTRUCTOR public constructor KeySpan(left: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'left: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'KeySpan' type=KeySpan
+            value: GET_VAR 'value-parameter left: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='KeySpan'
+      PROPERTY public final val left: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter left: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun matches(value: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='matches(String): Boolean'
+            WHEN type=kotlin.Boolean operator=ANDAND
+              if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+                arg0: CALL 'compareTo(String): Int' type=kotlin.Int operator=GT
+                  $this: CALL '<get-left>(): String' type=kotlin.String operator=GET_PROPERTY
+                    $this: THIS of 'KeySpan' type=KeySpan
+                  other: GET_VAR 'value-parameter value: String' type=kotlin.String operator=null
+              then: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+                arg0: CALL 'compareTo(String): Int' type=kotlin.Int operator=GT
+                  $this: CALL '<get-left>(): String' type=kotlin.String operator=GET_PROPERTY
+                    $this: THIS of 'KeySpan' type=KeySpan
+                  other: GET_VAR 'value-parameter value: String' type=kotlin.String operator=null
+              else: CONST Boolean type=kotlin.Boolean value='false'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'matches(String): Boolean' type=kotlin.Boolean operator=null
+          $this: CALL 'constructor KeySpan(String)' type=KeySpan operator=null
+            left: CONST String type=kotlin.String value='1'
+          value: CONST String type=kotlin.String value='3'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

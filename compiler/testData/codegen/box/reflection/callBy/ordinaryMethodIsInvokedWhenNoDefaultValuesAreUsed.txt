@@ -1,0 +1,57 @@
+MODULE <test-module>
+  FILE /ordinaryMethodIsInvokedWhenNoDefaultValuesAreUsed.kt
+    FUN public fun foo(result: kotlin.String = ...): kotlin.Unit
+      result: EXPRESSION_BODY
+        CONST String type=kotlin.String value='foo'
+      BLOCK_BODY
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='box'
+          actual: GET_VAR 'value-parameter result: String = ...' type=kotlin.String operator=null
+        VAR val st: kotlin.Array<(out) java.lang.StackTraceElement!>!
+          CALL '<get-stackTrace>() on Thread: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=GET_PROPERTY
+            $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Thread
+              CALL 'currentThread(): Thread!' type=java.lang.Thread! operator=null
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='0'
+                other: CONST Int type=kotlin.Int value='5'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'contains(CharSequence, Boolean = ...) on CharSequence: Boolean' type=kotlin.Boolean operator=IN
+                    $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+                      CALL '<get-methodName>() on StackTraceElement: String!' type=kotlin.String! operator=GET_PROPERTY
+                        $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.StackTraceElement
+                          CALL 'get(Int): StackTraceElement!' type=java.lang.StackTraceElement! operator=GET_ARRAY_ELEMENT
+                            $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<java.lang.StackTraceElement!>
+                              TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.StackTraceElement!>
+                                GET_VAR 'st: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=null
+                            index: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                    other: STRING_CONCATENATION type=kotlin.String
+                      CONST String type=kotlin.String value='foo'
+                      CONST String type=kotlin.String value='$'
+                      CONST String type=kotlin.String value='default'
+                  then: BLOCK type=kotlin.Nothing operator=null
+                    THROW type=kotlin.Nothing
+                      CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                        p0: CONST String type=kotlin.String value='KCallable.call should invoke the method directly if all arguments are provided'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'callBy(Map<KParameter, Any?>): Unit' type=kotlin.Unit operator=null
+          $this: CALLABLE_REFERENCE 'foo(String = ...): Unit' type=kotlin.reflect.KFunction1<kotlin.String, kotlin.Unit> operator=null
+          args: CALL 'mapOf(Pair<KParameter, String>): Map<KParameter, String>' type=kotlin.collections.Map<kotlin.reflect.KParameter, kotlin.String> operator=null
+            pair: CALL 'to(String) on KParameter: Pair<KParameter, String>' type=kotlin.Pair<kotlin.reflect.KParameter, kotlin.String> operator=null
+              $receiver: CALL 'single() on List<KParameter>: KParameter' type=kotlin.reflect.KParameter operator=null
+                $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                  $this: CALLABLE_REFERENCE 'foo(String = ...): Unit' type=kotlin.reflect.KFunction1<kotlin.String, kotlin.Unit> operator=null
+              that: CONST String type=kotlin.String value='box'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

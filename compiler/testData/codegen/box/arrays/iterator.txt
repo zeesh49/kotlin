@@ -1,0 +1,39 @@
+MODULE <test-module>
+  FILE /iterator.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.collections.Iterator<kotlin.Int>
+          CALL 'iterator(): Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+            $this: CALL 'constructor Array(Int, (Int) -> Int)' type=kotlin.Array<kotlin.Int> operator=null
+              size: CONST Int type=kotlin.Int value='5'
+              init: BLOCK type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Int
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(Int): Int'
+                      GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                CALLABLE_REFERENCE '<anonymous>(Int): Int' type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+        VAR var i: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'x: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+          body: BLOCK type=kotlin.Int operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL 'next(): Int' type=kotlin.Int operator=null
+                    $this: GET_VAR 'x: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+                  arg1: GET_VAR 'i: Int' type=kotlin.Int operator=null
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='Fail '
+                  GET_VAR 'i: Int' type=kotlin.Int operator=null
+            BLOCK type=kotlin.Int operator=POSTFIX_INCR
+              VAR val tmp0: kotlin.Int
+                GET_VAR 'i: Int' type=kotlin.Int operator=POSTFIX_INCR
+              SET_VAR 'i: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

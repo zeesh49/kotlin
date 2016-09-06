@@ -1,0 +1,23 @@
+MODULE <test-module>
+  FILE /simpleBox.kt
+    CLASS CLASS Box
+      CONSTRUCTOR public constructor Box<T>(t: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Box'
+      PROPERTY public final var value: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter t: T' type=T operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val box: Box<kotlin.Int>
+          CALL 'constructor Box(Int)' type=Box<kotlin.Int> operator=null
+            t: CONST Int type=kotlin.Int value='1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-value>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'box: Box<Int>' type=Box<kotlin.Int> operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

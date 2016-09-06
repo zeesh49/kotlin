@@ -1,0 +1,60 @@
+MODULE <test-module>
+  FILE /noRefToOuter.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun f(): () -> kotlin.String
+        BLOCK_BODY
+          VAR val s: kotlin.String = "OK"
+            CONST String type=kotlin.String value='OK'
+          RETURN type=kotlin.Nothing from='f(): () -> String'
+            BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    GET_VAR 's: String' type=kotlin.String operator=null
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val lambdaClass: java.lang.Class<() -> kotlin.String>
+          CALL '<get-javaClass>() on () -> String: Class<() -> String>' type=java.lang.Class<() -> kotlin.String> operator=GET_PROPERTY
+            $receiver: CALL 'f(): () -> String' type=() -> kotlin.String operator=null
+              $this: CALL 'constructor A()' type=A operator=null
+        VAR val fields: kotlin.collections.List<java.lang.reflect.Field!>
+          CALL 'toList() on Array<out Field!>: List<Field!>' type=kotlin.collections.List<java.lang.reflect.Field!> operator=null
+            $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Field!>
+              CALL 'getDeclaredFields(): Array<(out) Field!>!' type=kotlin.Array<(out) java.lang.reflect.Field!>! operator=null
+                $this: GET_VAR 'lambdaClass: Class<() -> String>' type=java.lang.Class<() -> kotlin.String> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'fields: List<Field!>' type=kotlin.collections.List<java.lang.reflect.Field!> operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: lambda should only capture 's': '
+              GET_VAR 'fields: List<Field!>' type=kotlin.collections.List<java.lang.reflect.Field!> operator=null
+        VAR val fieldName: kotlin.String!
+          CALL 'getName(): String!' type=kotlin.String! operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+              CALL 'get(Int): Field!' type=java.lang.reflect.Field! operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'fields: List<Field!>' type=kotlin.collections.List<java.lang.reflect.Field!> operator=null
+                index: CONST Int type=kotlin.Int value='0'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'fieldName: String!' type=kotlin.String! operator=null
+              arg1: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='s'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: captured variable should be named ''
+              CONST String type=kotlin.String value='$'
+              CONST String type=kotlin.String value='s': '
+              GET_VAR 'fields: List<Field!>' type=kotlin.collections.List<java.lang.reflect.Field!> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

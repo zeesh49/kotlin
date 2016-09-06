@@ -1,0 +1,56 @@
+MODULE <test-module>
+  FILE /implicitMemberReceiver.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public open val a: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public open override val a: kotlin.String = "FAIL"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='FAIL'
+      FUN public final fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value='CRUSH'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      FUN public final fun A?.complex(): kotlin.String
+        BLOCK_BODY
+          WHEN type=kotlin.Nothing operator=WHEN
+            if: TYPE_OP operator=INSTANCEOF typeOperand=B
+              $RECEIVER of 'complex() on A?: String' type=A?
+            then: RETURN type=kotlin.Nothing from='complex() on A?: String'
+              CALL 'foo(): String' type=kotlin.String operator=null
+                $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=B
+                  $RECEIVER of 'complex() on A?: String' type=A?
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: $RECEIVER of 'complex() on A?: String' type=A?
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: RETURN type=kotlin.Nothing from='complex() on A?: String'
+              CALL '<get-a>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: $RECEIVER of 'complex() on A?: String' type=A?
+            else: RETURN type=kotlin.Nothing from='complex() on A?: String'
+              CONST String type=kotlin.String value='???'
+      FUN public final fun bar(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='bar(): String'
+            CALL 'complex() on A?: String' type=kotlin.String operator=null
+              $this: THIS of 'C' type=C
+              $receiver: CALL 'constructor A()' type=A operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'bar(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor C()' type=C operator=null

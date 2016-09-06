@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /kt4251.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: kotlin.Char? = \u0061 ('a')
+          CONST Char type=kotlin.Char value='a'
+        VAR val result: kotlin.Boolean
+          CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Char): Int' type=kotlin.Int operator=LT
+              $this: BLOCK type=kotlin.Char operator=EXCLEXCL
+                VAR val tmp0_notnull: kotlin.Char?
+                  GET_VAR 'a: Char?' type=kotlin.Char? operator=null
+                WHEN type=kotlin.Char operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_notnull: Char?' type=kotlin.Char? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: GET_VAR 'tmp0_notnull: Char?' type=kotlin.Char? operator=null
+              other: CONST Char type=kotlin.Char value='b'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: GET_VAR 'result: Boolean' type=kotlin.Boolean operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='Fail'

@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /booleanNotIntrinsic.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(Boolean): Boolean' type=kotlin.Boolean operator=null
+                $this: CALLABLE_REFERENCE 'not(): Boolean' type=kotlin.reflect.KFunction1<kotlin.Boolean, kotlin.Boolean> operator=null
+                p1: CONST Boolean type=kotlin.Boolean value='true'
+              arg1: CONST Boolean type=kotlin.Boolean value='false'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(Boolean): Boolean' type=kotlin.Boolean operator=null
+                $this: CALLABLE_REFERENCE 'not(): Boolean' type=kotlin.reflect.KFunction1<kotlin.Boolean, kotlin.Boolean> operator=null
+                p1: CONST Boolean type=kotlin.Boolean value='false'
+              arg1: CONST Boolean type=kotlin.Boolean value='true'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

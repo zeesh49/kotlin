@@ -1,0 +1,14 @@
+MODULE <test-module>
+  FILE /1.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(): String' type=kotlin.String operator=null
+  FILE /2.kt
+    PROPERTY private val a: kotlin.String = "OK"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='OK'
+    FUN public fun foo(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(): String'
+          CALL '<get-a>(): String' type=kotlin.String operator=GET_PROPERTY

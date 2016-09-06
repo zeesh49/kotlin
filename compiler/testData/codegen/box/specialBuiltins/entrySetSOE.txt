@@ -1,0 +1,51 @@
+MODULE <test-module>
+  FILE /entrySetSOE.kt
+    CLASS CLASS Map1
+      CONSTRUCTOR public constructor Map1()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor HashMap()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Map1'
+    CLASS CLASS Map2
+      CONSTRUCTOR public constructor Map2()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Map1()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Map2'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val m: Map2
+          CALL 'constructor Map2()' type=Map2 operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL '<get-entries>(): MutableSet<MutableMap.MutableEntry<String, Any?>>' type=kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.Any?>> operator=GET_PROPERTY
+                  $this: GET_VAR 'm: Map2' type=Map2 operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        CALL 'put(String, Any?): Any?' type=kotlin.Any? operator=null
+          $this: GET_VAR 'm: Map2' type=Map2 operator=null
+          key: CONST String type=kotlin.String value='56'
+          value: CONST String type=kotlin.String value='OK'
+        VAR val x: kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.Any?>
+          CALL 'next(): MutableMap.MutableEntry<String, Any?>' type=kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.Any?> operator=null
+            $this: CALL 'iterator(): MutableIterator<MutableMap.MutableEntry<String, Any?>>' type=kotlin.collections.MutableIterator<kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.Any?>> operator=null
+              $this: CALL '<get-entries>(): MutableSet<MutableMap.MutableEntry<String, Any?>>' type=kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.Any?>> operator=GET_PROPERTY
+                $this: GET_VAR 'm: Map2' type=Map2 operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-key>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: GET_VAR 'x: MutableMap.MutableEntry<String, Any?>' type=kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.Any?> operator=null
+                arg1: CONST String type=kotlin.String value='56'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-value>(): Any?' type=kotlin.Any? operator=GET_PROPERTY
+                  $this: GET_VAR 'x: MutableMap.MutableEntry<String, Any?>' type=kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.Any?> operator=null
+                arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

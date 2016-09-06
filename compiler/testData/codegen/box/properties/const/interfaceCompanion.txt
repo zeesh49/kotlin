@@ -1,0 +1,60 @@
+MODULE <test-module>
+  FILE /interfaceCompanion.kt
+    CLASS INTERFACE KInt
+      CLASS OBJECT companion object of KInt
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of KInt'
+        PROPERTY public const final val a: kotlin.String = "a"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='a'
+        PROPERTY public const final val b: kotlin.String = "ba"
+          EXPRESSION_BODY
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='b'
+              CALL '<get-a>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'companion object of KInt' type=KInt.Companion
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: kotlin.Any!
+          CALL 'get(Any!): Any!' type=kotlin.Any! operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+              CALL 'getField(String!): Field!' type=java.lang.reflect.Field! operator=null
+                $this: CALL '<get-java>() on KClass<KInt>: Class<KInt>' type=java.lang.Class<KInt> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'KInt' type=kotlin.reflect.KClass<KInt>
+                p0: CONST String type=kotlin.String value='a'
+            p0: CONST Null type=kotlin.Nothing? value='null'
+        VAR val b: kotlin.Any!
+          CALL 'get(Any!): Any!' type=kotlin.Any! operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+              CALL 'getField(String!): Field!' type=java.lang.reflect.Field! operator=null
+                $this: CALL '<get-java>() on KClass<KInt>: Class<KInt>' type=java.lang.Class<KInt> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'KInt' type=kotlin.reflect.KClass<KInt>
+                p0: CONST String type=kotlin.String value='b'
+            p0: CONST Null type=kotlin.Nothing? value='null'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: GET_VAR 'a: Any!' type=kotlin.Any! operator=null
+              arg1: CALL '<get-a>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_OBJECT 'companion object of KInt' type=KInt.Companion
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1: KInt.a !== KInt.Companion.a'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: GET_VAR 'b: Any!' type=kotlin.Any! operator=null
+              arg1: CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_OBJECT 'companion object of KInt' type=KInt.Companion
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2: KInt.b !== KInt.Companion.b'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: GET_VAR 'b: Any!' type=kotlin.Any! operator=null
+              arg1: CONST String type=kotlin.String value='ba'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2: 'ba' !== KInt.Companion.b'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /nestedSameObject.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val obj: java.lang.Object
+          TYPE_OP operator=CAST typeOperand=java.lang.Object
+            CONST String type=kotlin.String value=''
+        CALL 'synchronized(Any, () -> Unit): Unit' type=kotlin.Unit operator=null
+          lock: GET_VAR 'obj: Object' type=java.lang.Object operator=null
+          block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  CALL 'synchronized(Any, () -> Unit): Unit' type=kotlin.Unit operator=null
+                    lock: GET_VAR 'obj: Object' type=java.lang.Object operator=null
+                    block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                      FUN local final fun <anonymous>(): kotlin.Unit
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                            CALL 'wait(Long): Unit' type=kotlin.Unit operator=null
+                              $this: GET_VAR 'obj: Object' type=java.lang.Object operator=null
+                              p0: CONST Long type=kotlin.Long value='1'
+                      CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

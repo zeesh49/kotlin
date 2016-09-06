@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /kt3822invokeOnThis.kt
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      FUN public open override fun invoke(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='invoke(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+      FUN public final fun foo(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): Boolean'
+            CALL 'invoke(): Boolean' type=kotlin.Boolean operator=null
+              $this: THIS of 'B' type=B
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'foo(): Boolean' type=kotlin.Boolean operator=null
+              $this: CALL 'constructor B()' type=B operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

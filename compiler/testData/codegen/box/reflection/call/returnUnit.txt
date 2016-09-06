@@ -1,0 +1,68 @@
+MODULE <test-module>
+  FILE /returnUnit.kt
+    FUN public fun foo(): kotlin.Unit
+      BLOCK_BODY
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun bar(): kotlin.Unit
+        BLOCK_BODY
+    CLASS OBJECT O
+      CONSTRUCTOR private constructor O()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='O'
+      FUN @kotlin.jvm.JvmStatic public final fun baz(): kotlin.Unit
+        BLOCK_BODY
+    FUN public fun nullableUnit(unit: kotlin.Boolean): kotlin.Unit?
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='nullableUnit(Boolean): Unit?'
+          WHEN type=kotlin.Unit? operator=IF
+            if: GET_VAR 'value-parameter unit: Boolean' type=kotlin.Boolean operator=null
+            then: GET_OBJECT 'Unit' type=kotlin.Unit
+            else: CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(Unit, Unit, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_OBJECT 'Unit' type=kotlin.Unit
+          actual: CALL 'call(vararg Any?): Unit' type=kotlin.Unit operator=null
+            $this: CALLABLE_REFERENCE 'foo(): Unit' type=kotlin.reflect.KFunction0<kotlin.Unit> operator=null
+        CALL 'assertEquals(Unit, Unit, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_OBJECT 'Unit' type=kotlin.Unit
+          actual: CALL 'call(vararg Any?): Unit' type=kotlin.Unit operator=null
+            $this: CALLABLE_REFERENCE 'bar(): Unit' type=kotlin.reflect.KFunction1<A, kotlin.Unit> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CALL 'constructor A()' type=A operator=null
+        CALL 'assertEquals(Any?, Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_OBJECT 'Unit' type=kotlin.Unit
+          actual: CALL 'call(vararg Any?): Any?' type=kotlin.Any? operator=null
+            $this: CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+              $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                $this: CLASS_REFERENCE 'O' type=kotlin.reflect.KClass<O>
+              predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                      CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                          $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                        arg1: CONST String type=kotlin.String value='baz'
+                CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              GET_OBJECT 'O' type=O
+        CALL 'assertEquals(Unit?, Unit?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_OBJECT 'Unit' type=kotlin.Unit
+          actual: CALL 'call(vararg Any?): Unit?' type=kotlin.Unit? operator=null
+            $this: CALLABLE_REFERENCE 'nullableUnit(Boolean): Unit?' type=kotlin.reflect.KFunction1<kotlin.Boolean, kotlin.Unit?> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'assertEquals(Unit?, Unit?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Null type=kotlin.Nothing? value='null'
+          actual: CALL 'call(vararg Any?): Unit?' type=kotlin.Unit? operator=null
+            $this: CALLABLE_REFERENCE 'nullableUnit(Boolean): Unit?' type=kotlin.reflect.KFunction1<kotlin.Boolean, kotlin.Unit?> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CONST Boolean type=kotlin.Boolean value='false'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

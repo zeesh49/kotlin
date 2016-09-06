@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /kt2663.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var a: kotlin.Int
+          CONST Int type=kotlin.Int value='1'
+        BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+          CLASS CLASS <no name provided>
+            CONSTRUCTOR public constructor <no name provided>()
+              BLOCK_BODY
+                DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+            ANONYMOUS_INITIALIZER <no name provided>
+              BLOCK_BODY
+                SET_VAR 'a: Int' type=kotlin.Unit operator=EQ
+                  CONST Int type=kotlin.Int value='2'
+          CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'a: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

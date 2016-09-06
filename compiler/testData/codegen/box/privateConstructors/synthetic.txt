@@ -1,0 +1,68 @@
+MODULE <test-module>
+  FILE /synthetic.kt
+    CLASS CLASS PrivateConstructor
+      CONSTRUCTOR private constructor PrivateConstructor()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='PrivateConstructor'
+      CLASS CLASS Nested
+        CONSTRUCTOR public constructor Nested()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Nested'
+        PROPERTY public final val a: PrivateConstructor
+          EXPRESSION_BODY
+            CALL 'constructor PrivateConstructor()' type=PrivateConstructor operator=null
+    FUN public fun check(klass: java.lang.Class<*>): kotlin.Unit
+      BLOCK_BODY
+        VAR var hasSynthetic: kotlin.Boolean
+          CONST Boolean type=kotlin.Boolean value='false'
+        VAR var hasSimple: kotlin.Boolean
+          CONST Boolean type=kotlin.Boolean value='false'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<java.lang.reflect.Constructor<*>!>
+            CALL 'iterator(): Iterator<Constructor<*>!>' type=kotlin.collections.Iterator<java.lang.reflect.Constructor<*>!> operator=FOR_LOOP_ITERATOR
+              $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<java.lang.reflect.Constructor<*>!>
+                TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Constructor<*>!>
+                  CALL 'getDeclaredConstructors(): Array<(out) Constructor<*>!>!' type=kotlin.Array<(out) java.lang.reflect.Constructor<*>!>! operator=null
+                    $this: GET_VAR 'value-parameter klass: Class<*>' type=java.lang.Class<*> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<Constructor<*>!>' type=kotlin.collections.Iterator<java.lang.reflect.Constructor<*>!> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val method: java.lang.reflect.Constructor<*>!
+                CALL 'next(): Constructor<*>!' type=java.lang.reflect.Constructor<*>! operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<Constructor<*>!>' type=kotlin.collections.Iterator<java.lang.reflect.Constructor<*>!> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'isSynthetic(): Boolean' type=kotlin.Boolean operator=null
+                    $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Constructor<*>
+                      GET_VAR 'method: Constructor<*>!' type=java.lang.reflect.Constructor<*>! operator=null
+                  then: BLOCK type=kotlin.Unit operator=null
+                    SET_VAR 'hasSynthetic: Boolean' type=kotlin.Unit operator=EQ
+                      CONST Boolean type=kotlin.Boolean value='true'
+                  else: BLOCK type=kotlin.Unit operator=null
+                    SET_VAR 'hasSimple: Boolean' type=kotlin.Unit operator=EQ
+                      CONST Boolean type=kotlin.Boolean value='true'
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=ANDAND
+            if: GET_VAR 'hasSynthetic: Boolean' type=kotlin.Boolean operator=null
+            then: GET_VAR 'hasSimple: Boolean' type=kotlin.Boolean operator=null
+            else: CONST Boolean type=kotlin.Boolean value='false'
+          then: RETURN type=kotlin.Nothing from='check(Class<*>): Unit'
+        THROW type=kotlin.Nothing
+          CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+            p0: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Class should have both synthetic and non-synthetic constructor: ('
+              GET_VAR 'hasSynthetic: Boolean' type=kotlin.Boolean operator=null
+              CONST String type=kotlin.String value=', '
+              GET_VAR 'hasSimple: Boolean' type=kotlin.Boolean operator=null
+              CONST String type=kotlin.String value=')'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'check(Class<*>): Unit' type=kotlin.Unit operator=null
+          klass: CALL '<get-java>() on KClass<PrivateConstructor>: Class<PrivateConstructor>' type=java.lang.Class<PrivateConstructor> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'PrivateConstructor' type=kotlin.reflect.KClass<PrivateConstructor>
+        CALL 'constructor Nested()' type=PrivateConstructor.Nested operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

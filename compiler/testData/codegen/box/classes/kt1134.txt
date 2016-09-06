@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /kt1134.kt
+    CLASS CLASS SomeClass
+      CONSTRUCTOR public constructor SomeClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Object()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SomeClass'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp0_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(Any!): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: CALL 'getClass(): Class<*>!' type=java.lang.Class<*>! operator=null
+                $this: CALL 'constructor SomeClass()' type=SomeClass operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

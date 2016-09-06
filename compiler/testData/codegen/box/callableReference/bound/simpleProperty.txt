@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /simpleProperty.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f: kotlin.reflect.KProperty0<kotlin.Int>
+          CALLABLE_REFERENCE 'length: Int' type=kotlin.reflect.KProperty0<kotlin.Int> operator=null
+        VAR val result: kotlin.Int
+          CALL 'get(): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'f: KProperty0<Int>' type=kotlin.reflect.KProperty0<kotlin.Int> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='6'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'result: Int' type=kotlin.Int operator=null

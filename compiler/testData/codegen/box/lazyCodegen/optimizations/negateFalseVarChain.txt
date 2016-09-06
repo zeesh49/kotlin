@@ -1,0 +1,22 @@
+MODULE <test-module>
+  FILE /negateFalseVarChain.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val p: kotlin.Boolean = false
+          CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+              $this: CONST Int type=kotlin.Int value='2'
+              other: CONST Int type=kotlin.Int value='1'
+        WHEN type=kotlin.Nothing operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+              $this: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+                $this: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+                  $this: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+                    $this: GET_VAR 'p: Boolean' type=kotlin.Boolean operator=null
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'
+          else: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='fail'

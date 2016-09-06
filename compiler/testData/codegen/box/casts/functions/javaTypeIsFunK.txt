@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /test.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val jfun: JFun
+          CALL 'constructor JFun()' type=JFun operator=null
+        VAR val jf: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            GET_VAR 'jfun: JFun' type=JFun operator=null
+        WHEN type=kotlin.Nothing operator=IF
+          if: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.Function0<*>
+            GET_VAR 'jf: Any' type=kotlin.Any operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+              CALL 'invoke(): String!' type=kotlin.String! operator=INVOKE
+                $this: GET_VAR 'jfun: JFun' type=JFun operator=VARIABLE_AS_FUNCTION
+          else: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Failed: jf is Function0<*>'

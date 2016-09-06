@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /localFunctionInObjectInitializer_kt4516.kt
+    CLASS OBJECT O
+      CONSTRUCTOR private constructor O()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='O'
+      PROPERTY public final val mmmap: java.util.HashMap<kotlin.String, kotlin.Int>
+        EXPRESSION_BODY
+          CALL 'constructor HashMap()' type=java.util.HashMap<kotlin.String, kotlin.Int> operator=null
+      ANONYMOUS_INITIALIZER O
+        BLOCK_BODY
+          FUN local final fun doStuff(): kotlin.Unit
+            BLOCK_BODY
+              CALL 'put(String, Int): Int?' type=kotlin.Int? operator=null
+                $this: CALL '<get-mmmap>(): HashMap<String, Int>' type=java.util.HashMap<kotlin.String, kotlin.Int> operator=GET_PROPERTY
+                  $this: THIS of 'O' type=O
+                key: CONST String type=kotlin.String value='two'
+                value: CONST Int type=kotlin.Int value='2'
+          CALL 'doStuff(): Unit' type=kotlin.Unit operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val r: kotlin.Int?
+          CALL 'get(String): Int?' type=kotlin.Int? operator=GET_ARRAY_ELEMENT
+            $this: CALL '<get-mmmap>(): HashMap<String, Int>' type=java.util.HashMap<kotlin.String, kotlin.Int> operator=GET_PROPERTY
+              $this: GET_OBJECT 'O' type=O
+            key: CONST String type=kotlin.String value='two'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'r: Int?' type=kotlin.Int? operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'r: Int?' type=kotlin.Int? operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /varAsFunInsideLocalFun.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        FUN local final fun rec(n: kotlin.Int): kotlin.Unit
+          BLOCK_BODY
+            VAR val x: (kotlin.Int) -> kotlin.Unit
+              BLOCK type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+                FUN local final fun <anonymous>(m: kotlin.Int): kotlin.Unit
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(Int): Unit'
+                      WHEN type=kotlin.Unit operator=IF
+                        if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+                          arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+                            $this: GET_VAR 'value-parameter n: Int' type=kotlin.Int operator=null
+                            other: CONST Int type=kotlin.Int value='0'
+                        then: CALL 'rec(Int): Unit' type=kotlin.Unit operator=null
+                          n: CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+                            $this: GET_VAR 'value-parameter n: Int' type=kotlin.Int operator=null
+                            other: CONST Int type=kotlin.Int value='1'
+                CALLABLE_REFERENCE '<anonymous>(Int): Unit' type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+            CALL 'invoke(Int): Unit' type=kotlin.Unit operator=INVOKE
+              $this: GET_VAR 'x: (Int) -> Unit' type=(kotlin.Int) -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+              p1: CONST Int type=kotlin.Int value='0'
+        CALL 'rec(Int): Unit' type=kotlin.Unit operator=null
+          n: CONST Int type=kotlin.Int value='5'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

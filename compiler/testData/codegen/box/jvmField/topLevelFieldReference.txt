@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /topLevelFieldReference.kt
+    PROPERTY @kotlin.jvm.JvmField public val publicField: kotlin.String = "1"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='1'
+    PROPERTY @kotlin.jvm.JvmField internal val internalField: kotlin.String = "2"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='2'
+    FUN public fun testAccessors(): kotlin.Unit
+      BLOCK_BODY
+        VAR val kProperty: kotlin.reflect.KProperty0<kotlin.String>
+          CALLABLE_REFERENCE 'publicField: String' type=kotlin.reflect.KProperty0<kotlin.String> operator=null
+        CALL 'checkAccessor(KProperty0<String>, String): Unit' type=kotlin.Unit operator=null
+          prop: GET_VAR 'kProperty: KProperty0<String>' type=kotlin.reflect.KProperty0<kotlin.String> operator=null
+          value: CONST String type=kotlin.String value='1'
+        CALL 'checkAccessor(KProperty0<String>, String): Unit' type=kotlin.Unit operator=null
+          prop: CALLABLE_REFERENCE 'internalField: String' type=kotlin.reflect.KProperty0<kotlin.String> operator=null
+          value: CONST String type=kotlin.String value='2'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'testAccessors(): Unit' type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun <T, R> checkAccessor(prop: kotlin.reflect.KProperty0<T>, value: R): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assertEquals(Any?, Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'get(): T' type=T operator=null
+            $this: GET_VAR 'value-parameter prop: KProperty0<T>' type=kotlin.reflect.KProperty0<T> operator=null
+          actual: GET_VAR 'value-parameter value: R' type=R operator=null
+          message: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='Property '
+            GET_VAR 'value-parameter prop: KProperty0<T>' type=kotlin.reflect.KProperty0<T> operator=null
+            CONST String type=kotlin.String value=' has wrong value'

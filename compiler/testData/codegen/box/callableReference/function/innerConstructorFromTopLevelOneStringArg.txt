@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /innerConstructorFromTopLevelOneStringArg.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner(result: kotlin.Int)
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            SET_BACKING_FIELD 'result: Int' type=kotlin.Unit operator=null
+              receiver: THIS of 'Inner' type=A.Inner
+              value: GET_VAR 'value-parameter result: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+        PROPERTY public final val result: kotlin.Int
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter result: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val result: kotlin.Int
+          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+            $this: CALL '<get-result>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: CALL 'invoke(A, Int): A.Inner' type=A.Inner operator=null
+                $this: CALLABLE_REFERENCE 'constructor Inner(Int)' type=kotlin.reflect.KFunction2<A, kotlin.Int, A.Inner> operator=null
+                p1: CALL 'invoke(): A' type=A operator=null
+                  $this: CALLABLE_REFERENCE 'constructor A()' type=kotlin.reflect.KFunction0<A> operator=null
+                p2: CONST Int type=kotlin.Int value='111'
+            other: CALL '<get-result>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: CALL 'invoke(A, Int): A.Inner' type=A.Inner operator=null
+                $this: CALLABLE_REFERENCE 'constructor Inner(Int)' type=kotlin.reflect.KFunction2<A, kotlin.Int, A.Inner> operator=null
+                p1: CALL 'constructor A()' type=A operator=null
+                p2: CONST Int type=kotlin.Int value='222'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='333'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'result: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

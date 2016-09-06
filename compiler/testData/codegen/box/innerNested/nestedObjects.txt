@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /nestedObjects.kt
+    CLASS OBJECT A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS OBJECT B
+        CONSTRUCTOR private constructor B()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='B'
+        CLASS OBJECT C
+          CONSTRUCTOR private constructor C()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='C'
+          PROPERTY public final val ok: kotlin.String = "OK"
+            EXPRESSION_BODY
+              CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-ok>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_OBJECT 'C' type=A.B.C

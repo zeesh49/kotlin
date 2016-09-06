@@ -1,0 +1,66 @@
+MODULE <test-module>
+  FILE /doubleLong.kt
+    FUN public fun checkLess(x: kotlin.Double, y: kotlin.Long): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='checkLess(Double, Long): String'
+          WHEN type=kotlin.String operator=WHEN
+            if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+              arg0: CALL 'compareTo(Long): Int' type=kotlin.Int operator=GTEQ
+                $this: GET_VAR 'value-parameter x: Double' type=kotlin.Double operator=null
+                other: GET_VAR 'value-parameter y: Long' type=kotlin.Long operator=null
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'value-parameter x: Double' type=kotlin.Double operator=null
+              CONST String type=kotlin.String value=' >= '
+              GET_VAR 'value-parameter y: Long' type=kotlin.Long operator=null
+            if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+              $this: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+                arg0: CALL 'compareTo(Long): Int' type=kotlin.Int operator=LT
+                  $this: GET_VAR 'value-parameter x: Double' type=kotlin.Double operator=null
+                  other: GET_VAR 'value-parameter y: Long' type=kotlin.Long operator=null
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail !('
+              GET_VAR 'value-parameter x: Double' type=kotlin.Double operator=null
+              CONST String type=kotlin.String value=' < '
+              GET_VAR 'value-parameter y: Long' type=kotlin.Long operator=null
+              CONST String type=kotlin.String value=')'
+            if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+              $this: CALL 'LTEQ0(Int): Boolean' type=kotlin.Boolean operator=LTEQ
+                arg0: CALL 'compareTo(Long): Int' type=kotlin.Int operator=LTEQ
+                  $this: GET_VAR 'value-parameter x: Double' type=kotlin.Double operator=null
+                  other: GET_VAR 'value-parameter y: Long' type=kotlin.Long operator=null
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail !('
+              GET_VAR 'value-parameter x: Double' type=kotlin.Double operator=null
+              CONST String type=kotlin.String value=' <= '
+              GET_VAR 'value-parameter y: Long' type=kotlin.Long operator=null
+              CONST String type=kotlin.String value=')'
+            if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+              arg0: CALL 'compareTo(Long): Int' type=kotlin.Int operator=GT
+                $this: GET_VAR 'value-parameter x: Double' type=kotlin.Double operator=null
+                other: GET_VAR 'value-parameter y: Long' type=kotlin.Long operator=null
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'value-parameter x: Double' type=kotlin.Double operator=null
+              CONST String type=kotlin.String value=' > '
+              GET_VAR 'value-parameter y: Long' type=kotlin.Long operator=null
+            if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+              arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GTEQ
+                $this: CALL 'compareTo(Long): Int' type=kotlin.Int operator=null
+                  $this: GET_VAR 'value-parameter x: Double' type=kotlin.Double operator=null
+                  other: GET_VAR 'value-parameter y: Long' type=kotlin.Long operator=null
+                other: CONST Int type=kotlin.Int value='0'
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'value-parameter x: Double' type=kotlin.Double operator=null
+              CONST String type=kotlin.String value='.compareTo('
+              GET_VAR 'value-parameter y: Long' type=kotlin.Long operator=null
+              CONST String type=kotlin.String value=') >= 0'
+            else: CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'checkLess(Double, Long): String' type=kotlin.String operator=null
+            x: CONST Double type=kotlin.Double value='0.5'
+            y: CALL 'toLong(): Long' type=kotlin.Long operator=null
+              $this: CONST Int type=kotlin.Int value='1'

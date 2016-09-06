@@ -1,0 +1,21 @@
+MODULE <test-module>
+  FILE /instanceof.kt
+    FUN public inline fun <reified T> isinstance(x: kotlin.Any?): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='isinstance(Any?): Boolean'
+          TYPE_OP operator=INSTANCEOF typeOperand=T
+            GET_VAR 'value-parameter x: Any?' type=kotlin.Any? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'isinstance(Any?): Boolean' type=kotlin.Boolean operator=null
+            x: CONST String type=kotlin.String value='abc'
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'isinstance(Any?): Boolean' type=kotlin.Boolean operator=null
+            x: CONST Int type=kotlin.Int value='1'
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'isinstance(Any?): Boolean' type=kotlin.Boolean operator=null
+              x: CONST String type=kotlin.String value='abc'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

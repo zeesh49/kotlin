@@ -1,0 +1,145 @@
+MODULE <test-module>
+  FILE /defaultargs2.kt
+    CLASS CLASS T4
+      CONSTRUCTOR public constructor T4(c1: kotlin.Boolean, c2: kotlin.Boolean, c3: kotlin.Boolean, c4: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'c1: Boolean' type=kotlin.Unit operator=null
+            receiver: THIS of 'T4' type=T4
+            value: GET_VAR 'value-parameter c1: Boolean' type=kotlin.Boolean operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'c2: Boolean' type=kotlin.Unit operator=null
+            receiver: THIS of 'T4' type=T4
+            value: GET_VAR 'value-parameter c2: Boolean' type=kotlin.Boolean operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'c3: Boolean' type=kotlin.Unit operator=null
+            receiver: THIS of 'T4' type=T4
+            value: GET_VAR 'value-parameter c3: Boolean' type=kotlin.Boolean operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'c4: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'T4' type=T4
+            value: GET_VAR 'value-parameter c4: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='T4'
+      PROPERTY public final val c1: kotlin.Boolean
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter c1: Boolean' type=kotlin.Boolean operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val c2: kotlin.Boolean
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter c2: Boolean' type=kotlin.Boolean operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val c3: kotlin.Boolean
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter c3: Boolean' type=kotlin.Boolean operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val c4: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter c4: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public open override fun equals(o: kotlin.Any?): kotlin.Boolean
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=IF
+            if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=T4
+              GET_VAR 'value-parameter o: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+            WHEN type=kotlin.Boolean operator=ANDAND
+              if: WHEN type=kotlin.Boolean operator=ANDAND
+                if: WHEN type=kotlin.Boolean operator=ANDAND
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: CALL '<get-c1>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+                      $this: THIS of 'T4' type=T4
+                    arg1: CALL '<get-c1>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+                      $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=T4
+                        GET_VAR 'value-parameter o: Any?' type=kotlin.Any? operator=null
+                  then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: CALL '<get-c2>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+                      $this: THIS of 'T4' type=T4
+                    arg1: CALL '<get-c2>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+                      $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=T4
+                        GET_VAR 'value-parameter o: Any?' type=kotlin.Any? operator=null
+                  else: CONST Boolean type=kotlin.Boolean value='false'
+                then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: CALL '<get-c3>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+                    $this: THIS of 'T4' type=T4
+                  arg1: CALL '<get-c3>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+                    $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=T4
+                      GET_VAR 'value-parameter o: Any?' type=kotlin.Any? operator=null
+                else: CONST Boolean type=kotlin.Boolean value='false'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL '<get-c4>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: THIS of 'T4' type=T4
+                arg1: CALL '<get-c4>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=T4
+                    GET_VAR 'value-parameter o: Any?' type=kotlin.Any? operator=null
+              else: CONST Boolean type=kotlin.Boolean value='false'
+    FUN public fun reformat(str: kotlin.String, normalizeCase: kotlin.Boolean = ..., uppercaseFirstLetter: kotlin.Boolean = ..., divideByCamelHumps: kotlin.Boolean = ..., wordSeparator: kotlin.String = ...): T4
+      normalizeCase: EXPRESSION_BODY
+        CONST Boolean type=kotlin.Boolean value='true'
+      uppercaseFirstLetter: EXPRESSION_BODY
+        CONST Boolean type=kotlin.Boolean value='true'
+      divideByCamelHumps: EXPRESSION_BODY
+        CONST Boolean type=kotlin.Boolean value='true'
+      wordSeparator: EXPRESSION_BODY
+        CONST String type=kotlin.String value=' '
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='reformat(String, Boolean = ..., Boolean = ..., Boolean = ..., String = ...): T4'
+          CALL 'constructor T4(Boolean, Boolean, Boolean, String)' type=T4 operator=null
+            c1: GET_VAR 'value-parameter normalizeCase: Boolean = ...' type=kotlin.Boolean operator=null
+            c2: GET_VAR 'value-parameter uppercaseFirstLetter: Boolean = ...' type=kotlin.Boolean operator=null
+            c3: GET_VAR 'value-parameter divideByCamelHumps: Boolean = ...' type=kotlin.Boolean operator=null
+            c4: GET_VAR 'value-parameter wordSeparator: String = ...' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val expected: T4
+          CALL 'constructor T4(Boolean, Boolean, Boolean, String)' type=T4 operator=null
+            c1: CONST Boolean type=kotlin.Boolean value='true'
+            c2: CONST Boolean type=kotlin.Boolean value='true'
+            c3: CONST Boolean type=kotlin.Boolean value='true'
+            c4: CONST String type=kotlin.String value=' '
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'reformat(String, Boolean = ..., Boolean = ..., Boolean = ..., String = ...): T4' type=T4 operator=null
+                str: CONST String type=kotlin.String value=''
+                normalizeCase: CONST Boolean type=kotlin.Boolean value='true'
+                uppercaseFirstLetter: CONST Boolean type=kotlin.Boolean value='true'
+                divideByCamelHumps: CONST Boolean type=kotlin.Boolean value='true'
+                wordSeparator: CONST String type=kotlin.String value=' '
+              arg1: GET_VAR 'expected: T4' type=T4 operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'reformat(String, Boolean = ..., Boolean = ..., Boolean = ..., String = ...): T4' type=T4 operator=null
+                str: CONST String type=kotlin.String value=''
+                normalizeCase: CONST Boolean type=kotlin.Boolean value='true'
+                uppercaseFirstLetter: CONST Boolean type=kotlin.Boolean value='true'
+                divideByCamelHumps: CONST Boolean type=kotlin.Boolean value='true'
+              arg1: GET_VAR 'expected: T4' type=T4 operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'reformat(String, Boolean = ..., Boolean = ..., Boolean = ..., String = ...): T4' type=T4 operator=null
+                str: CONST String type=kotlin.String value=''
+                normalizeCase: CONST Boolean type=kotlin.Boolean value='true'
+                uppercaseFirstLetter: CONST Boolean type=kotlin.Boolean value='true'
+              arg1: GET_VAR 'expected: T4' type=T4 operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'reformat(String, Boolean = ..., Boolean = ..., Boolean = ..., String = ...): T4' type=T4 operator=null
+                str: CONST String type=kotlin.String value=''
+                normalizeCase: CONST Boolean type=kotlin.Boolean value='true'
+              arg1: GET_VAR 'expected: T4' type=T4 operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'reformat(String, Boolean = ..., Boolean = ..., Boolean = ..., String = ...): T4' type=T4 operator=null
+                str: CONST String type=kotlin.String value=''
+              arg1: GET_VAR 'expected: T4' type=T4 operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

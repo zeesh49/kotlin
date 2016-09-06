@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /kt1600.kt
+    CLASS CLASS Foo
+      CONSTRUCTOR public constructor Foo<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      FUN public final fun hello(id: T): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='hello(T): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='O'
+              GET_VAR 'value-parameter id: T' type=T operator=null
+    CLASS CLASS Bar
+      CONSTRUCTOR public constructor Bar()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Foo()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Bar'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'hello(String): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Bar()' type=Bar operator=null
+            id: CONST String type=kotlin.String value='K'

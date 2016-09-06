@@ -1,0 +1,168 @@
+MODULE <test-module>
+  FILE /kt4210.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val s: kotlin.String? = "abc"
+          CONST String type=kotlin.String value='abc'
+        VAR val c: kotlin.Int
+          CALL 'minus(Char): Int' type=kotlin.Int operator=MINUS
+            $this: BLOCK type=kotlin.Char operator=EXCLEXCL
+              VAR val tmp1_notnull: kotlin.Char?
+                BLOCK type=kotlin.Char? operator=SAFE_CALL
+                  VAR val tmp0_safe_receiver: kotlin.String?
+                    GET_VAR 's: String?' type=kotlin.String? operator=null
+                  WHEN type=kotlin.Char? operator=SAFE_CALL
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp0_safe_receiver: String?' type=kotlin.String? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CONST Null type=kotlin.Nothing? value='null'
+                    else: CALL 'get(Int): Char' type=kotlin.Char operator=null
+                      $this: GET_VAR 'tmp0_safe_receiver: String?' type=kotlin.String? operator=null
+                      index: CONST Int type=kotlin.Int value='0'
+              WHEN type=kotlin.Char operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp1_notnull: Char?' type=kotlin.Char? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp1_notnull: Char?' type=kotlin.Char? operator=null
+            other: CONST Char type=kotlin.Char value='b'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'c: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='-1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail c: '
+              GET_VAR 'c: Int' type=kotlin.Int operator=null
+        VAR val d: kotlin.Int
+          CALL 'minus(Char): Int' type=kotlin.Int operator=MINUS
+            $this: CONST Char type=kotlin.Char value='b'
+            other: BLOCK type=kotlin.Char operator=EXCLEXCL
+              VAR val tmp3_notnull: kotlin.Char?
+                BLOCK type=kotlin.Char? operator=SAFE_CALL
+                  VAR val tmp2_safe_receiver: kotlin.String?
+                    GET_VAR 's: String?' type=kotlin.String? operator=null
+                  WHEN type=kotlin.Char? operator=SAFE_CALL
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp2_safe_receiver: String?' type=kotlin.String? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CONST Null type=kotlin.Nothing? value='null'
+                    else: CALL 'get(Int): Char' type=kotlin.Char operator=null
+                      $this: GET_VAR 'tmp2_safe_receiver: String?' type=kotlin.String? operator=null
+                      index: CONST Int type=kotlin.Int value='2'
+              WHEN type=kotlin.Char operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp3_notnull: Char?' type=kotlin.Char? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp3_notnull: Char?' type=kotlin.Char? operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'd: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='-1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail d: '
+              GET_VAR 'd: Int' type=kotlin.Int operator=null
+        VAR val e: kotlin.Int
+          CALL 'minus(Char): Int' type=kotlin.Int operator=MINUS
+            $this: BLOCK type=kotlin.Char operator=EXCLEXCL
+              VAR val tmp5_notnull: kotlin.Char?
+                BLOCK type=kotlin.Char? operator=SAFE_CALL
+                  VAR val tmp4_safe_receiver: kotlin.String?
+                    GET_VAR 's: String?' type=kotlin.String? operator=null
+                  WHEN type=kotlin.Char? operator=SAFE_CALL
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp4_safe_receiver: String?' type=kotlin.String? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CONST Null type=kotlin.Nothing? value='null'
+                    else: CALL 'get(Int): Char' type=kotlin.Char operator=null
+                      $this: GET_VAR 'tmp4_safe_receiver: String?' type=kotlin.String? operator=null
+                      index: CONST Int type=kotlin.Int value='2'
+              WHEN type=kotlin.Char operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp5_notnull: Char?' type=kotlin.Char? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp5_notnull: Char?' type=kotlin.Char? operator=null
+            other: BLOCK type=kotlin.Char operator=EXCLEXCL
+              VAR val tmp7_notnull: kotlin.Char?
+                BLOCK type=kotlin.Char? operator=SAFE_CALL
+                  VAR val tmp6_safe_receiver: kotlin.String?
+                    GET_VAR 's: String?' type=kotlin.String? operator=null
+                  WHEN type=kotlin.Char? operator=SAFE_CALL
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp6_safe_receiver: String?' type=kotlin.String? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CONST Null type=kotlin.Nothing? value='null'
+                    else: CALL 'get(Int): Char' type=kotlin.Char operator=null
+                      $this: GET_VAR 'tmp6_safe_receiver: String?' type=kotlin.String? operator=null
+                      index: CONST Int type=kotlin.Int value='0'
+              WHEN type=kotlin.Char operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp7_notnull: Char?' type=kotlin.Char? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp7_notnull: Char?' type=kotlin.Char? operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'e: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail e: '
+              GET_VAR 'e: Int' type=kotlin.Int operator=null
+        VAR val f: kotlin.Int
+          CALL 'minus(Char): Int' type=kotlin.Int operator=null
+            $this: BLOCK type=kotlin.Char operator=EXCLEXCL
+              VAR val tmp9_notnull: kotlin.Char?
+                BLOCK type=kotlin.Char? operator=SAFE_CALL
+                  VAR val tmp8_safe_receiver: kotlin.String?
+                    GET_VAR 's: String?' type=kotlin.String? operator=null
+                  WHEN type=kotlin.Char? operator=SAFE_CALL
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp8_safe_receiver: String?' type=kotlin.String? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CONST Null type=kotlin.Nothing? value='null'
+                    else: CALL 'get(Int): Char' type=kotlin.Char operator=null
+                      $this: GET_VAR 'tmp8_safe_receiver: String?' type=kotlin.String? operator=null
+                      index: CONST Int type=kotlin.Int value='2'
+              WHEN type=kotlin.Char operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp9_notnull: Char?' type=kotlin.Char? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp9_notnull: Char?' type=kotlin.Char? operator=null
+            other: BLOCK type=kotlin.Char operator=EXCLEXCL
+              VAR val tmp11_notnull: kotlin.Char?
+                BLOCK type=kotlin.Char? operator=SAFE_CALL
+                  VAR val tmp10_safe_receiver: kotlin.String?
+                    GET_VAR 's: String?' type=kotlin.String? operator=null
+                  WHEN type=kotlin.Char? operator=SAFE_CALL
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp10_safe_receiver: String?' type=kotlin.String? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CONST Null type=kotlin.Nothing? value='null'
+                    else: CALL 'get(Int): Char' type=kotlin.Char operator=null
+                      $this: GET_VAR 'tmp10_safe_receiver: String?' type=kotlin.String? operator=null
+                      index: CONST Int type=kotlin.Int value='0'
+              WHEN type=kotlin.Char operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp11_notnull: Char?' type=kotlin.Char? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp11_notnull: Char?' type=kotlin.Char? operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'f: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail f: '
+              GET_VAR 'f: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

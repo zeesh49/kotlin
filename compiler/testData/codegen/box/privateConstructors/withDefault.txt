@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /withDefault.kt
+    CLASS CLASS Outer
+      CONSTRUCTOR private constructor Outer(x: kotlin.Int = ...)
+        x: EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'x: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'Outer' type=Outer
+            value: GET_VAR 'value-parameter x: Int = ...' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+      PROPERTY public final val x: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter x: Int = ...' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Outer(Int = ...)'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+      CLASS CLASS Other
+        CONSTRUCTOR public constructor Other()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Outer(Int = ...)'
+              x: CONST Int type=kotlin.Int value='42'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Other'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val outer: Outer.Inner
+          CALL 'constructor Inner()' type=Outer.Inner operator=null
+        VAR val other: Outer.Other
+          CALL 'constructor Other()' type=Outer.Other operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

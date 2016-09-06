@@ -1,0 +1,274 @@
+MODULE <test-module>
+  FILE /closureWithSelfInstantiation.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val capturedInConstructor: kotlin.Int = 1
+          CONST Int type=kotlin.Int value='1'
+        VAR val capturedInBody: kotlin.Int = 10
+          CONST Int type=kotlin.Int value='10'
+        VAR var log: kotlin.String
+          CONST String type=kotlin.String value=''
+        CLASS CLASS A
+          CONSTRUCTOR public constructor A(x: kotlin.Int)
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              SET_BACKING_FIELD 'x: Int' type=kotlin.Unit operator=null
+                receiver: THIS of 'A' type=box.A
+                value: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+              INSTANCE_INITIALIZER_CALL classDescriptor='A'
+          PROPERTY public final var x: kotlin.Int
+            EXPRESSION_BODY
+              GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          PROPERTY public final var y: kotlin.Int
+            EXPRESSION_BODY
+              CONST Int type=kotlin.Int value='0'
+          FUN public final fun copy(): box.A
+            BLOCK_BODY
+              SET_VAR 'log: String' type=kotlin.Unit operator=PLUSEQ
+                CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                  $this: GET_VAR 'log: String' type=kotlin.String operator=PLUSEQ
+                  other: CONST String type=kotlin.String value='A.copy;'
+              VAR val result: box.A
+                CALL 'constructor A(Int)' type=box.A operator=null
+                  x: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                    $this: THIS of 'A' type=box.A
+              BLOCK type=kotlin.Unit operator=PLUSEQ
+                VAR val tmp0_this: box.A
+                  GET_VAR 'result: A' type=box.A operator=null
+                CALL '<set-y>(Int): Unit' type=kotlin.Unit operator=PLUSEQ
+                  $this: GET_VAR 'tmp0_this: A' type=box.A operator=null
+                  <set-?>: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                    $this: CALL '<get-y>(): Int' type=kotlin.Int operator=PLUSEQ
+                      $this: GET_VAR 'tmp0_this: A' type=box.A operator=null
+                    other: GET_VAR 'capturedInBody: Int' type=kotlin.Int operator=null
+              RETURN type=kotlin.Nothing from='copy(): A'
+                GET_VAR 'result: A' type=box.A operator=null
+          ANONYMOUS_INITIALIZER A
+            BLOCK_BODY
+              SET_VAR 'log: String' type=kotlin.Unit operator=PLUSEQ
+                CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                  $this: GET_VAR 'log: String' type=kotlin.String operator=PLUSEQ
+                  other: CONST String type=kotlin.String value='A.<init>;'
+              BLOCK type=kotlin.Unit operator=PLUSEQ
+                VAR val tmp0_this: box.A
+                  THIS of 'A' type=box.A
+                CALL '<set-y>(Int): Unit' type=kotlin.Unit operator=PLUSEQ
+                  $this: GET_VAR 'tmp0_this: A' type=box.A operator=null
+                  <set-?>: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                    $this: CALL '<get-y>(): Int' type=kotlin.Int operator=PLUSEQ
+                      $this: GET_VAR 'tmp0_this: A' type=box.A operator=null
+                    other: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                      $this: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                        $this: THIS of 'A' type=box.A
+                      other: GET_VAR 'capturedInConstructor: Int' type=kotlin.Int operator=null
+        VAR val a: box.A
+          CALL 'copy(): A' type=box.A operator=null
+            $this: CALL 'constructor A(Int)' type=box.A operator=null
+              x: CONST Int type=kotlin.Int value='100'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-y>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=box.A operator=null
+              arg1: CONST Int type=kotlin.Int value='111'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail1a: '
+              CALL '<get-y>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=box.A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=box.A operator=null
+              arg1: CONST Int type=kotlin.Int value='100'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail1b: '
+              CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=box.A operator=null
+        CLASS CLASS B
+          CONSTRUCTOR public constructor B(x: kotlin.Int)
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              SET_BACKING_FIELD 'x: Int' type=kotlin.Unit operator=null
+                receiver: THIS of 'B' type=box.B
+                value: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+              INSTANCE_INITIALIZER_CALL classDescriptor='B'
+          PROPERTY public final var x: kotlin.Int
+            EXPRESSION_BODY
+              GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          PROPERTY public final var y: kotlin.Int
+            EXPRESSION_BODY
+              CONST Int type=kotlin.Int value='0'
+          FUN public final fun copier(): () -> box.B
+            BLOCK_BODY
+              SET_VAR 'log: String' type=kotlin.Unit operator=PLUSEQ
+                CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                  $this: GET_VAR 'log: String' type=kotlin.String operator=PLUSEQ
+                  other: CONST String type=kotlin.String value='B.copier;'
+              RETURN type=kotlin.Nothing from='copier(): () -> B'
+                BLOCK type=() -> box.B operator=LAMBDA
+                  FUN local final fun <anonymous>(): box.B
+                    BLOCK_BODY
+                      SET_VAR 'log: String' type=kotlin.Unit operator=PLUSEQ
+                        CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                          $this: GET_VAR 'log: String' type=kotlin.String operator=PLUSEQ
+                          other: CONST String type=kotlin.String value='B.copy;'
+                      VAR val result: box.B
+                        CALL 'constructor B(Int)' type=box.B operator=null
+                          x: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                            $this: THIS of 'B' type=box.B
+                      BLOCK type=kotlin.Unit operator=PLUSEQ
+                        VAR val tmp0_this: box.B
+                          GET_VAR 'result: B' type=box.B operator=null
+                        CALL '<set-y>(Int): Unit' type=kotlin.Unit operator=PLUSEQ
+                          $this: GET_VAR 'tmp0_this: B' type=box.B operator=null
+                          <set-?>: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                            $this: CALL '<get-y>(): Int' type=kotlin.Int operator=PLUSEQ
+                              $this: GET_VAR 'tmp0_this: B' type=box.B operator=null
+                            other: GET_VAR 'capturedInBody: Int' type=kotlin.Int operator=null
+                      RETURN type=kotlin.Nothing from='<anonymous>(): B'
+                        GET_VAR 'result: B' type=box.B operator=null
+                  CALLABLE_REFERENCE '<anonymous>(): B' type=() -> box.B operator=LAMBDA
+          ANONYMOUS_INITIALIZER B
+            BLOCK_BODY
+              BLOCK type=kotlin.Unit operator=PLUSEQ
+                VAR val tmp0_this: box.B
+                  THIS of 'B' type=box.B
+                CALL '<set-y>(Int): Unit' type=kotlin.Unit operator=PLUSEQ
+                  $this: GET_VAR 'tmp0_this: B' type=box.B operator=null
+                  <set-?>: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                    $this: CALL '<get-y>(): Int' type=kotlin.Int operator=PLUSEQ
+                      $this: GET_VAR 'tmp0_this: B' type=box.B operator=null
+                    other: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                      $this: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                        $this: THIS of 'B' type=box.B
+                      other: GET_VAR 'capturedInConstructor: Int' type=kotlin.Int operator=null
+              SET_VAR 'log: String' type=kotlin.Unit operator=PLUSEQ
+                CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                  $this: GET_VAR 'log: String' type=kotlin.String operator=PLUSEQ
+                  other: CONST String type=kotlin.String value='B.<init>;'
+        VAR val b: box.B
+          CALL 'invoke(): B' type=box.B operator=null
+            $this: CALL 'copier(): () -> B' type=() -> box.B operator=null
+              $this: CALL 'constructor B(Int)' type=box.B operator=null
+                x: CONST Int type=kotlin.Int value='100'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-y>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'b: B' type=box.B operator=null
+              arg1: CONST Int type=kotlin.Int value='111'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail2a: '
+              CALL '<get-y>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'b: B' type=box.B operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'b: B' type=box.B operator=null
+              arg1: CONST Int type=kotlin.Int value='100'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail2b: '
+              CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'b: B' type=box.B operator=null
+        CLASS CLASS C
+          CONSTRUCTOR public constructor C(x: kotlin.Int)
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              SET_BACKING_FIELD 'x: Int' type=kotlin.Unit operator=null
+                receiver: THIS of 'C' type=box.C
+                value: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+              INSTANCE_INITIALIZER_CALL classDescriptor='C'
+          PROPERTY public final var x: kotlin.Int
+            EXPRESSION_BODY
+              GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          PROPERTY public final var y: kotlin.Int
+            EXPRESSION_BODY
+              CONST Int type=kotlin.Int value='0'
+          CLASS CLASS D
+            CONSTRUCTOR public constructor D()
+              BLOCK_BODY
+                DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                INSTANCE_INITIALIZER_CALL classDescriptor='D'
+            FUN public final fun copyOuter(): box.C
+              BLOCK_BODY
+                SET_VAR 'log: String' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 'log: String' type=kotlin.String operator=PLUSEQ
+                    other: CONST String type=kotlin.String value='D.copyOuter;'
+                VAR val result: box.C
+                  CALL 'constructor C(Int)' type=box.C operator=null
+                    x: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                      $this: THIS of 'C' type=box.C
+                BLOCK type=kotlin.Unit operator=PLUSEQ
+                  VAR val tmp0_this: box.C
+                    GET_VAR 'result: C' type=box.C operator=null
+                  CALL '<set-y>(Int): Unit' type=kotlin.Unit operator=PLUSEQ
+                    $this: GET_VAR 'tmp0_this: C' type=box.C operator=null
+                    <set-?>: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                      $this: CALL '<get-y>(): Int' type=kotlin.Int operator=PLUSEQ
+                        $this: GET_VAR 'tmp0_this: C' type=box.C operator=null
+                      other: GET_VAR 'capturedInBody: Int' type=kotlin.Int operator=null
+                RETURN type=kotlin.Nothing from='copyOuter(): C'
+                  GET_VAR 'result: C' type=box.C operator=null
+          ANONYMOUS_INITIALIZER C
+            BLOCK_BODY
+              SET_VAR 'log: String' type=kotlin.Unit operator=PLUSEQ
+                CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                  $this: GET_VAR 'log: String' type=kotlin.String operator=PLUSEQ
+                  other: CONST String type=kotlin.String value='C.<init>;'
+              BLOCK type=kotlin.Unit operator=PLUSEQ
+                VAR val tmp0_this: box.C
+                  THIS of 'C' type=box.C
+                CALL '<set-y>(Int): Unit' type=kotlin.Unit operator=PLUSEQ
+                  $this: GET_VAR 'tmp0_this: C' type=box.C operator=null
+                  <set-?>: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                    $this: CALL '<get-y>(): Int' type=kotlin.Int operator=PLUSEQ
+                      $this: GET_VAR 'tmp0_this: C' type=box.C operator=null
+                    other: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                      $this: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                        $this: THIS of 'C' type=box.C
+                      other: GET_VAR 'capturedInConstructor: Int' type=kotlin.Int operator=null
+        VAR val c: box.C
+          CALL 'copyOuter(): C' type=box.C operator=null
+            $this: CALL 'constructor D()' type=box.C.D operator=null
+              $this: CALL 'constructor C(Int)' type=box.C operator=null
+                x: CONST Int type=kotlin.Int value='100'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-y>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'c: C' type=box.C operator=null
+              arg1: CONST Int type=kotlin.Int value='111'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail3a: '
+              CALL '<get-y>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'c: C' type=box.C operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'c: C' type=box.C operator=null
+              arg1: CONST Int type=kotlin.Int value='100'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail3b: '
+              CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'c: C' type=box.C operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'log: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='A.<init>;A.copy;A.<init>;B.<init>;B.copier;B.copy;B.<init>;C.<init>;D.copyOuter;C.<init>;'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail_log: '
+              GET_VAR 'log: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

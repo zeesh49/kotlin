@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /classMemberFromTopLevelUnitOneStringArg.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var result: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='Fail'
+      FUN public final fun foo(newResult: kotlin.String): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'A' type=A
+            <set-?>: GET_VAR 'value-parameter newResult: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          CALL 'constructor A()' type=A operator=null
+        VAR val x: kotlin.reflect.KFunction2<A, kotlin.String, kotlin.Unit>
+          CALLABLE_REFERENCE 'foo(String): Unit' type=kotlin.reflect.KFunction2<A, kotlin.String, kotlin.Unit> operator=null
+        CALL 'invoke(A, String): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'x: KFunction2<A, String, Unit>' type=kotlin.reflect.KFunction2<A, kotlin.String, kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+          p1: GET_VAR 'a: A' type=A operator=null
+          p2: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_VAR 'a: A' type=A operator=null

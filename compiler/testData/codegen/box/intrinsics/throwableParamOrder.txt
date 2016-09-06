@@ -1,0 +1,56 @@
+MODULE <test-module>
+  FILE /throwableParamOrder.kt
+    PROPERTY public var res: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    FUN public fun getM(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=PLUSEQ
+          CALL '<set-res>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+            <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+              $this: CALL '<get-res>(): String' type=kotlin.String operator=PLUSEQ
+              other: CONST String type=kotlin.String value='M'
+        RETURN type=kotlin.Nothing from='getM(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun getT(): kotlin.Throwable
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=PLUSEQ
+          CALL '<set-res>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+            <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+              $this: CALL '<get-res>(): String' type=kotlin.String operator=PLUSEQ
+              other: CONST String type=kotlin.String value='T'
+        RETURN type=kotlin.Nothing from='getT(): Throwable'
+          CALL 'constructor Throwable(String?, Throwable?)' type=kotlin.Throwable operator=null
+            message: CONST String type=kotlin.String value='test'
+            cause: CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val z: kotlin.Throwable
+          BLOCK type=kotlin.Throwable operator=ARGUMENTS_REORDERING_FOR_CALL
+            VAR val tmp0_cause: kotlin.Throwable
+              CALL 'getT(): Throwable' type=kotlin.Throwable operator=null
+            VAR val tmp1_message: kotlin.String
+              CALL 'getM(): String' type=kotlin.String operator=null
+            CALL 'constructor Throwable(String?, Throwable?)' type=kotlin.Throwable operator=null
+              message: GET_VAR 'tmp1_message: String' type=kotlin.String operator=null
+              cause: GET_VAR 'tmp0_cause: Throwable' type=kotlin.Throwable operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-res>(): String' type=kotlin.String operator=GET_PROPERTY
+              arg1: CONST String type=kotlin.String value='TM'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Wrong argument calculation order: '
+              CALL '<get-res>(): String' type=kotlin.String operator=GET_PROPERTY
+        RETURN type=kotlin.Nothing from='box(): String'
+          BLOCK type=kotlin.String operator=EXCLEXCL
+            VAR val tmp2_notnull: kotlin.String?
+              CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                $this: GET_VAR 'z: Throwable' type=kotlin.Throwable operator=null
+            WHEN type=kotlin.String operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp2_notnull: String?' type=kotlin.String? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp2_notnull: String?' type=kotlin.String? operator=null

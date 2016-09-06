@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /implicitReceiver.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS CLASS B
+        CONSTRUCTOR public constructor B()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='B'
+        PROPERTY public final val a: kotlin.String = "FAIL"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='FAIL'
+      FUN public final fun foo(): kotlin.String
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=IF
+            if: TYPE_OP operator=INSTANCEOF typeOperand=A.B
+              THIS of 'A' type=A
+            then: RETURN type=kotlin.Nothing from='foo(): String'
+              CALL '<get-a>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=A.B
+                  THIS of 'A' type=A
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor A()' type=A operator=null

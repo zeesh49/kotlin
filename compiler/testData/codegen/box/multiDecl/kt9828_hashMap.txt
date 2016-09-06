@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /kt9828_hashMap.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val hashMap: java.util.HashMap<kotlin.String, kotlin.Int>
+          CALL 'constructor HashMap()' type=java.util.HashMap<kotlin.String, kotlin.Int> operator=null
+        CALL 'put(String, Int): Int?' type=kotlin.Int? operator=null
+          $this: GET_VAR 'hashMap: HashMap<String, Int>' type=java.util.HashMap<kotlin.String, kotlin.Int> operator=null
+          key: CONST String type=kotlin.String value='one'
+          value: CONST Int type=kotlin.Int value='1'
+        CALL 'put(String, Int): Int?' type=kotlin.Int? operator=null
+          $this: GET_VAR 'hashMap: HashMap<String, Int>' type=java.util.HashMap<kotlin.String, kotlin.Int> operator=null
+          key: CONST String type=kotlin.String value='two'
+          value: CONST Int type=kotlin.Int value='2'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.MutableIterator<kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.Int>>
+            CALL 'iterator() on MutableMap<String, Int>: MutableIterator<MutableMap.MutableEntry<String, Int>>' type=kotlin.collections.MutableIterator<kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.Int>> operator=FOR_LOOP_ITERATOR
+              $receiver: GET_VAR 'hashMap: HashMap<String, Int>' type=java.util.HashMap<kotlin.String, kotlin.Int> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: MutableIterator<MutableMap.MutableEntry<String, Int>>' type=kotlin.collections.MutableIterator<kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.Int>> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val tmp1_loop_parameter: kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.Int>
+                CALL 'next(): MutableMap.MutableEntry<String, Int>' type=kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.Int> operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: MutableIterator<MutableMap.MutableEntry<String, Int>>' type=kotlin.collections.MutableIterator<kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.Int>> operator=null
+              VAR val key: kotlin.String
+                CALL 'component1() on Map.Entry<String, Int>: String' type=kotlin.String operator=COMPONENT_N(index=1)
+                  $receiver: GET_VAR 'tmp1_loop_parameter: MutableMap.MutableEntry<String, Int>' type=kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.Int> operator=null
+              VAR val value: kotlin.Int
+                CALL 'component2() on Map.Entry<String, Int>: Int' type=kotlin.Int operator=COMPONENT_N(index=2)
+                  $receiver: GET_VAR 'tmp1_loop_parameter: MutableMap.MutableEntry<String, Int>' type=kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.Int> operator=null
+              BLOCK type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

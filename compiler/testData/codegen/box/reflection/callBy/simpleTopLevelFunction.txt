@@ -1,0 +1,14 @@
+MODULE <test-module>
+  FILE /simpleTopLevelFunction.kt
+    FUN public fun foo(result: kotlin.String = ...): kotlin.String
+      result: EXPRESSION_BODY
+        CONST String type=kotlin.String value='OK'
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(String = ...): String'
+          GET_VAR 'value-parameter result: String = ...' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'callBy(Map<KParameter, Any?>): String' type=kotlin.String operator=null
+            $this: CALLABLE_REFERENCE 'foo(String = ...): String' type=kotlin.reflect.KFunction1<kotlin.String, kotlin.String> operator=null
+            args: CALL 'mapOf(): Map<KParameter, Any?>' type=kotlin.collections.Map<kotlin.reflect.KParameter, kotlin.Any?> operator=null

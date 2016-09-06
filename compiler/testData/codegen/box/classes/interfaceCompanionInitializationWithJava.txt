@@ -1,0 +1,48 @@
+MODULE <test-module>
+  FILE /CompanionInitialization.kt
+    CLASS CLASS Static
+      CONSTRUCTOR public constructor Static()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Static'
+      PROPERTY public final val p: kotlin.Any!
+        EXPRESSION_BODY
+          CALL 'get(Any!): Any!' type=kotlin.Any! operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+              CALL 'getDeclaredField(String!): Field!' type=java.lang.reflect.Field! operator=null
+                $this: CALL '<get-java>() on KClass<IStatic>: Class<IStatic>' type=java.lang.Class<IStatic> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'IStatic' type=kotlin.reflect.KClass<IStatic>
+                p0: CONST String type=kotlin.String value='const'
+            p0: CONST Null type=kotlin.Nothing? value='null'
+    CLASS INTERFACE IStatic
+      FUN public open fun doSth(): kotlin.Unit
+        BLOCK_BODY
+      CLASS OBJECT companion object of IStatic
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Static()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of IStatic'
+        PROPERTY public const final val const: kotlin.Int = 1
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'doSth(): Unit' type=kotlin.Unit operator=null
+          $this: GET_OBJECT 'companion object of IStatic' type=IStatic.Companion
+        VAR val companion: kotlin.Any?
+          CALL 'getCompanion(): Any!' type=kotlin.Any! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'companion: Any?' type=kotlin.Any? operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'companion: Any?' type=kotlin.Any? operator=null
+              arg1: GET_OBJECT 'companion object of IStatic' type=IStatic.Companion
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

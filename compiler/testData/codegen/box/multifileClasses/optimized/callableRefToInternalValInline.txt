@@ -1,0 +1,21 @@
+MODULE <test-module>
+  FILE /box.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'okInline(): String' type=kotlin.String operator=null
+  FILE /part1.kt
+    PROPERTY internal val ok: kotlin.String
+      EXPRESSION_BODY
+        CALL 'run(() -> String): String' type=kotlin.String operator=null
+          block: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='OK'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+    FUN internal inline fun okInline(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='okInline(): String'
+          CALL 'get(): String' type=kotlin.String operator=null
+            $this: CALLABLE_REFERENCE 'ok: String' type=kotlin.reflect.KProperty0<kotlin.String> operator=null

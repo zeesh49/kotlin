@@ -1,0 +1,48 @@
+MODULE <test-module>
+  FILE /parametersToString.kt
+    FUN public fun kotlin.Int.foo(s: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun bar(): kotlin.Unit
+        BLOCK_BODY
+    FUN public fun baz(name: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(vararg String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='extension receiver of '
+                CALLABLE_REFERENCE 'foo(String) on Int: Unit' type=kotlin.reflect.KFunction2<kotlin.Int, kotlin.String, kotlin.Unit> operator=null
+              STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='parameter #1 s of '
+                CALLABLE_REFERENCE 'foo(String) on Int: Unit' type=kotlin.reflect.KFunction2<kotlin.Int, kotlin.String, kotlin.Unit> operator=null
+          actual: CALL 'map((KParameter) -> String) on Iterable<KParameter>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'foo(String) on Int: Unit' type=kotlin.reflect.KFunction2<kotlin.Int, kotlin.String, kotlin.Unit> operator=null
+            transform: CALLABLE_REFERENCE 'toString(): String' type=kotlin.reflect.KFunction1<kotlin.Any, kotlin.String> operator=null
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            element: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='instance of '
+              CALLABLE_REFERENCE 'bar(): Unit' type=kotlin.reflect.KFunction1<A, kotlin.Unit> operator=null
+          actual: CALL 'map((KParameter) -> String) on Iterable<KParameter>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'bar(): Unit' type=kotlin.reflect.KFunction1<A, kotlin.Unit> operator=null
+            transform: CALLABLE_REFERENCE 'toString(): String' type=kotlin.reflect.KFunction1<kotlin.Any, kotlin.String> operator=null
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            element: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='parameter #0 name of '
+              CALLABLE_REFERENCE 'baz(String): Unit' type=kotlin.reflect.KFunction1<kotlin.String, kotlin.Unit> operator=null
+          actual: CALL 'map((KParameter) -> String) on Iterable<KParameter>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'baz(String): Unit' type=kotlin.reflect.KFunction1<kotlin.String, kotlin.Unit> operator=null
+            transform: CALLABLE_REFERENCE 'toString(): String' type=kotlin.reflect.KFunction1<kotlin.Any, kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

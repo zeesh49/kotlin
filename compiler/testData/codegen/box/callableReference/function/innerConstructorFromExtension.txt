@@ -1,0 +1,46 @@
+MODULE <test-module>
+  FILE /innerConstructorFromExtension.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+        PROPERTY public final val o: kotlin.Int = 111
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='111'
+        PROPERTY public final val k: kotlin.Int = 222
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='222'
+    FUN public fun A.foo(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo() on A: Int'
+          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+            $this: CALL '<get-o>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: CALL 'invoke(A): A.Inner' type=A.Inner operator=null
+                $this: CALLABLE_REFERENCE 'constructor Inner()' type=kotlin.reflect.KFunction1<A, A.Inner> operator=null
+                p1: $RECEIVER of 'foo() on A: Int' type=A
+            other: CALL '<get-k>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: CALL 'invoke(A): A.Inner' type=A.Inner operator=null
+                $this: CALLABLE_REFERENCE 'constructor Inner()' type=kotlin.reflect.KFunction1<A, A.Inner> operator=null
+                p1: $RECEIVER of 'foo() on A: Int' type=A
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val result: kotlin.Int
+          CALL 'foo() on A: Int' type=kotlin.Int operator=null
+            $receiver: CALL 'constructor A()' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='333'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'result: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

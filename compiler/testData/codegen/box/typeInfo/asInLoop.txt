@@ -1,0 +1,19 @@
+MODULE <test-module>
+  FILE /asInLoop.kt
+    FUN public fun foo(args: kotlin.Array<kotlin.String>): kotlin.Unit
+      BLOCK_BODY
+        VAR val reader: java.io.BufferedReader
+          CALL 'constructor BufferedReader(Reader!)' type=java.io.BufferedReader operator=null
+            p0: CALL 'constructor InputStreamReader(InputStream!)' type=java.io.InputStreamReader operator=null
+              p0: GET_BACKING_FIELD '`in`: InputStream!' type=java.io.InputStream! operator=GET_PROPERTY
+        WHILE label=null operator=WHILE_LOOP
+          condition: CONST Boolean type=kotlin.Boolean value='true'
+          body: BLOCK type=kotlin.Unit operator=null
+            VAR val cmd: kotlin.String
+              TYPE_OP operator=CAST typeOperand=kotlin.String
+                CALL 'readLine(): String!' type=kotlin.String! operator=null
+                  $this: GET_VAR 'reader: BufferedReader' type=java.io.BufferedReader operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

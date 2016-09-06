@@ -1,0 +1,64 @@
+MODULE <test-module>
+  FILE /invokePropertyReference.kt
+    PROPERTY public var state: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    PROPERTY public var topLevel: kotlin.Int
+      PROPERTY_GETTER public fun <get-topLevel>(): kotlin.Int
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            CALL '<set-state>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+              <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: CALL '<get-state>(): String' type=kotlin.String operator=PLUSEQ
+                other: CONST String type=kotlin.String value='1'
+          RETURN type=kotlin.Nothing from='<get-topLevel>(): Int'
+            CONST Int type=kotlin.Int value='42'
+      PROPERTY_SETTER public fun <set-topLevel>(value: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+              p0: CONST String type=kotlin.String value='Nooo'
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val member: kotlin.String
+        PROPERTY_GETTER public final fun <get-member>(): kotlin.String
+          BLOCK_BODY
+            BLOCK type=kotlin.Unit operator=PLUSEQ
+              CALL '<set-state>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+                <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                  $this: CALL '<get-state>(): String' type=kotlin.String operator=PLUSEQ
+                  other: CONST String type=kotlin.String value='2'
+            RETURN type=kotlin.Nothing from='<get-member>(): String'
+              CONST String type=kotlin.String value='42'
+    PROPERTY public val A.ext: kotlin.Any
+      PROPERTY_GETTER public fun A.<get-ext>(): kotlin.Any
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            CALL '<set-state>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+              <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: CALL '<get-state>(): String' type=kotlin.String operator=PLUSEQ
+                other: CONST String type=kotlin.String value='3'
+          RETURN type=kotlin.Nothing from='<get-ext>() on A: Any'
+            $RECEIVER of 'ext: Any on A' type=A
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'invoke(): Int' type=kotlin.Int operator=null
+          $this: CALLABLE_REFERENCE 'topLevel: Int' type=kotlin.reflect.KMutableProperty0<kotlin.Int> operator=null
+        CALL 'invoke(A): String' type=kotlin.String operator=null
+          $this: CALLABLE_REFERENCE 'member: String' type=kotlin.reflect.KProperty1<A, kotlin.String> operator=null
+          p1: CALL 'constructor A()' type=A operator=null
+        CALL 'invoke(A): Any' type=kotlin.Any operator=null
+          $this: CALLABLE_REFERENCE 'ext: Any on A' type=kotlin.reflect.KProperty1<A, kotlin.Any> operator=null
+          p1: CALL 'constructor A()' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-state>(): String' type=kotlin.String operator=GET_PROPERTY
+              arg1: CONST String type=kotlin.String value='123'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              CALL '<get-state>(): String' type=kotlin.String operator=GET_PROPERTY

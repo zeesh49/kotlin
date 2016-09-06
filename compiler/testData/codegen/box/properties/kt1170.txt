@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /kt1170.kt
+    CLASS CLASS BaseClass
+      CONSTRUCTOR public constructor BaseClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='BaseClass'
+      PROPERTY public open val kind: kotlin.String = "BaseClass "
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='BaseClass '
+      FUN public final fun getKindValue(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getKindValue(): String'
+            CALL '<get-kind>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'BaseClass' type=BaseClass
+    CLASS CLASS Subclass
+      CONSTRUCTOR public constructor Subclass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor BaseClass()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Subclass'
+      PROPERTY public open override val kind: kotlin.String = "Subclass "
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='Subclass '
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val r: kotlin.String
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'getKindValue(): String' type=kotlin.String operator=null
+              $this: CALL 'constructor Subclass()' type=Subclass operator=null
+            other: CALL '<get-kind>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: CALL 'constructor Subclass()' type=Subclass operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'r: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='Subclass Subclass '
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

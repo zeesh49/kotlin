@@ -1,0 +1,35 @@
+MODULE <test-module>
+  FILE /kt1159.kt
+    CLASS OBJECT RefreshQueue
+      CONSTRUCTOR private constructor RefreshQueue()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='RefreshQueue'
+      PROPERTY private final val any: kotlin.Any
+        EXPRESSION_BODY
+          CALL 'constructor Any()' type=kotlin.Any operator=null
+      PROPERTY private final val workerThread: java.lang.Thread
+        EXPRESSION_BODY
+          CALL 'constructor Thread(Runnable!)' type=java.lang.Thread operator=null
+            p0: BLOCK type=RefreshQueue.workerThread.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                FUN public open override fun run(): kotlin.Unit
+                  BLOCK_BODY
+                    CALL 'hashCode(): Int' type=kotlin.Int operator=null
+                      $this: CALL '<get-any>(): Any' type=kotlin.Any operator=GET_PROPERTY
+                        $this: THIS of 'RefreshQueue' type=RefreshQueue
+              CALL 'constructor <no name provided>()' type=RefreshQueue.workerThread.<no name provided> operator=OBJECT_LITERAL
+      ANONYMOUS_INITIALIZER RefreshQueue
+        BLOCK_BODY
+          CALL 'start(): Unit' type=kotlin.Unit operator=null
+            $this: CALL '<get-workerThread>(): Thread' type=java.lang.Thread operator=GET_PROPERTY
+              $this: THIS of 'RefreshQueue' type=RefreshQueue
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        GET_OBJECT 'RefreshQueue' type=RefreshQueue
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

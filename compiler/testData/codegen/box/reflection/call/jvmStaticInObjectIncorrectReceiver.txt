@@ -1,0 +1,98 @@
+MODULE <test-module>
+  FILE /jvmStaticInObjectIncorrectReceiver.kt
+    CLASS OBJECT Obj
+      CONSTRUCTOR private constructor Obj()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Obj'
+      FUN @kotlin.jvm.JvmStatic public final fun foo(s: kotlin.String): kotlin.Unit
+        BLOCK_BODY
+      FUN @kotlin.jvm.JvmStatic public final fun bar(): kotlin.Unit
+        BLOCK_BODY
+      FUN @kotlin.jvm.JvmStatic public final fun sly(obj: Obj): kotlin.Unit
+        BLOCK_BODY
+      FUN public final operator fun get(name: kotlin.String): kotlin.reflect.KCallable<*>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(String): KCallable<*>'
+            CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+              $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                $this: CLASS_REFERENCE 'Obj' type=kotlin.reflect.KClass<Obj>
+              predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                      CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                          $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                        arg1: GET_VAR 'value-parameter name: String' type=kotlin.String operator=null
+                CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'call(vararg Any?): Any?' type=kotlin.Any? operator=null
+          $this: CALL 'get(String): KCallable<*>' type=kotlin.reflect.KCallable<*> operator=GET_ARRAY_ELEMENT
+            $this: GET_OBJECT 'Obj' type=Obj
+            name: CONST String type=kotlin.String value='foo'
+          args: VARARG type=Array<out Any?> varargElementType=Any?
+            GET_OBJECT 'Obj' type=Obj
+            CONST String type=kotlin.String value=''
+        CALL 'call(vararg Any?): Any?' type=kotlin.Any? operator=null
+          $this: CALL 'get(String): KCallable<*>' type=kotlin.reflect.KCallable<*> operator=GET_ARRAY_ELEMENT
+            $this: GET_OBJECT 'Obj' type=Obj
+            name: CONST String type=kotlin.String value='bar'
+          args: VARARG type=Array<out Any?> varargElementType=Any?
+            GET_OBJECT 'Obj' type=Obj
+        CALL 'call(vararg Any?): Any?' type=kotlin.Any? operator=null
+          $this: CALL 'get(String): KCallable<*>' type=kotlin.reflect.KCallable<*> operator=GET_ARRAY_ELEMENT
+            $this: GET_OBJECT 'Obj' type=Obj
+            name: CONST String type=kotlin.String value='sly'
+          args: VARARG type=Array<out Any?> varargElementType=Any?
+            GET_OBJECT 'Obj' type=Obj
+            GET_OBJECT 'Obj' type=Obj
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'call(vararg Any?): Any?' type=kotlin.Any? operator=null
+              $this: CALL 'get(String): KCallable<*>' type=kotlin.reflect.KCallable<*> operator=GET_ARRAY_ELEMENT
+                $this: GET_OBJECT 'Obj' type=Obj
+                name: CONST String type=kotlin.String value='foo'
+              args: VARARG type=Array<out Any?> varargElementType=Any?
+                CONST Null type=kotlin.Nothing? value='null'
+                CONST String type=kotlin.String value=''
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail foo'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'call(vararg Any?): Any?' type=kotlin.Any? operator=null
+              $this: CALL 'get(String): KCallable<*>' type=kotlin.reflect.KCallable<*> operator=GET_ARRAY_ELEMENT
+                $this: GET_OBJECT 'Obj' type=Obj
+                name: CONST String type=kotlin.String value='bar'
+              args: VARARG type=Array<out Any?> varargElementType=Any?
+                CONST String type=kotlin.String value=''
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail bar'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'call(vararg Any?): Any?' type=kotlin.Any? operator=null
+              $this: CALL 'get(String): KCallable<*>' type=kotlin.reflect.KCallable<*> operator=GET_ARRAY_ELEMENT
+                $this: GET_OBJECT 'Obj' type=Obj
+                name: CONST String type=kotlin.String value='sly'
+              args: VARARG type=Array<out Any?> varargElementType=Any?
+                GET_OBJECT 'Obj' type=Obj
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail sly 1'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'call(vararg Any?): Any?' type=kotlin.Any? operator=null
+              $this: CALL 'get(String): KCallable<*>' type=kotlin.reflect.KCallable<*> operator=GET_ARRAY_ELEMENT
+                $this: GET_OBJECT 'Obj' type=Obj
+                name: CONST String type=kotlin.String value='sly'
+              args: VARARG type=Array<out Any?> varargElementType=Any?
+                CONST Null type=kotlin.Nothing? value='null'
+                GET_OBJECT 'Obj' type=Obj
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail sly 2'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

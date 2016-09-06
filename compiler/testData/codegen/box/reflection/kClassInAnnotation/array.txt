@@ -1,0 +1,61 @@
+MODULE <test-module>
+  FILE /array.kt
+    CLASS ANNOTATION_CLASS Ann
+      PROPERTY public final val args: kotlin.Array<kotlin.reflect.KClass<*>>
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter args: Array<KClass<*>>' type=kotlin.Array<kotlin.reflect.KClass<*>> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS O
+      CONSTRUCTOR public constructor O()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='O'
+    CLASS CLASS K
+      CONSTRUCTOR public constructor K()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='K'
+    CLASS CLASS MyClass
+      CONSTRUCTOR public constructor MyClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyClass'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val args: kotlin.Array<kotlin.reflect.KClass<*>>
+          CALL '<get-args>(): Array<KClass<*>>' type=kotlin.Array<kotlin.reflect.KClass<*>> operator=GET_PROPERTY
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=Ann
+              CALL 'getAnnotation(Class<Ann!>!): Ann!' type=Ann! operator=null
+                $this: CALL '<get-java>() on KClass<MyClass>: Class<MyClass>' type=java.lang.Class<MyClass> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'MyClass' type=kotlin.reflect.KClass<MyClass>
+                p0: CALL '<get-java>() on KClass<Ann>: Class<Ann>' type=java.lang.Class<Ann> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'Ann' type=kotlin.reflect.KClass<Ann>
+        VAR val argName1: kotlin.String
+          BLOCK type=kotlin.String operator=ELVIS
+            VAR val tmp0_elvis_lhs: kotlin.String?
+              CALL '<get-simpleName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                $this: CALL 'get(Int): KClass<*>' type=kotlin.reflect.KClass<*> operator=GET_ARRAY_ELEMENT
+                  $this: GET_VAR 'args: Array<KClass<*>>' type=kotlin.Array<kotlin.reflect.KClass<*>> operator=null
+                  index: CONST Int type=kotlin.Int value='0'
+            WHEN type=kotlin.String operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_elvis_lhs: String?' type=kotlin.String? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CONST String type=kotlin.String value='fail 1'
+              else: GET_VAR 'tmp0_elvis_lhs: String?' type=kotlin.String? operator=null
+        VAR val argName2: kotlin.String
+          BLOCK type=kotlin.String operator=ELVIS
+            VAR val tmp1_elvis_lhs: kotlin.String?
+              CALL '<get-simpleName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                $this: CALL 'get(Int): KClass<*>' type=kotlin.reflect.KClass<*> operator=GET_ARRAY_ELEMENT
+                  $this: GET_VAR 'args: Array<KClass<*>>' type=kotlin.Array<kotlin.reflect.KClass<*>> operator=null
+                  index: CONST Int type=kotlin.Int value='1'
+            WHEN type=kotlin.String operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp1_elvis_lhs: String?' type=kotlin.String? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CONST String type=kotlin.String value='fail 2'
+              else: GET_VAR 'tmp1_elvis_lhs: String?' type=kotlin.String? operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: GET_VAR 'argName1: String' type=kotlin.String operator=null
+            other: GET_VAR 'argName2: String' type=kotlin.String operator=null

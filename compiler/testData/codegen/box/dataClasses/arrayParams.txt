@@ -1,0 +1,145 @@
+MODULE <test-module>
+  FILE /arrayParams.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(x: kotlin.Array<kotlin.Int>, y: kotlin.IntArray)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'x: Array<Int>' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter x: Array<Int>' type=kotlin.Array<kotlin.Int> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'y: IntArray' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter y: IntArray' type=kotlin.IntArray operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val x: kotlin.Array<kotlin.Int>
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter x: Array<Int>' type=kotlin.Array<kotlin.Int> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val y: kotlin.IntArray
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter y: IntArray' type=kotlin.IntArray operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final operator fun component1(): kotlin.Array<kotlin.Int>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component1(): Array<Int>'
+            CALL '<get-x>(): Array<Int>' type=kotlin.Array<kotlin.Int> operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+      FUN public final operator fun component2(): kotlin.IntArray
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component2(): IntArray'
+            CALL '<get-y>(): IntArray' type=kotlin.IntArray operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+      FUN public final fun copy(x: kotlin.Array<kotlin.Int> = ..., y: kotlin.IntArray = ...): A
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='copy(Array<Int> = ..., IntArray = ...): A'
+            CALL 'constructor A(Array<Int>, IntArray)' type=A operator=null
+              x: GET_VAR 'value-parameter x: Array<Int> = ...' type=kotlin.Array<kotlin.Int> operator=null
+              y: GET_VAR 'value-parameter y: IntArray = ...' type=kotlin.IntArray operator=null
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='A('
+              CONST String type=kotlin.String value='x='
+              CALL '<get-x>(): Array<Int>' type=kotlin.Array<kotlin.Int> operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+              CONST String type=kotlin.String value=', '
+              CONST String type=kotlin.String value='y='
+              CALL '<get-y>(): IntArray' type=kotlin.IntArray operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+              CONST String type=kotlin.String value=')'
+      FUN public open override fun hashCode(): kotlin.Int
+        BLOCK_BODY
+          VAR val tmp0_result: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          SET_VAR 'tmp0_result: Int' type=kotlin.Unit operator=EQ
+            CALL 'hashCode(): Int' type=kotlin.Int operator=null
+              $this: CALL '<get-x>(): Array<Int>' type=kotlin.Array<kotlin.Int> operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+          SET_VAR 'tmp0_result: Int' type=kotlin.Unit operator=EQ
+            CALL 'plus(Int): Int' type=kotlin.Int operator=null
+              $this: CALL 'times(Int): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'tmp0_result: Int' type=kotlin.Int operator=null
+                other: CONST Int type=kotlin.Int value='31'
+              other: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+                $this: CALL '<get-y>(): IntArray' type=kotlin.IntArray operator=GET_PROPERTY
+                  $this: THIS of 'A' type=A
+          RETURN type=kotlin.Nothing from='hashCode(): Int'
+            GET_VAR 'tmp0_result: Int' type=kotlin.Int operator=null
+      FUN public open override fun equals(other: kotlin.Any?): kotlin.Boolean
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+              arg0: THIS of 'A' type=A
+              arg1: GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='true'
+          WHEN type=kotlin.Unit operator=null
+            if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=A
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          VAR val tmp0_other_with_cast: A
+            TYPE_OP operator=CAST typeOperand=A
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-x>(): Array<Int>' type=kotlin.Array<kotlin.Int> operator=GET_PROPERTY
+                  $this: THIS of 'A' type=A
+                arg1: CALL '<get-x>(): Array<Int>' type=kotlin.Array<kotlin.Int> operator=GET_PROPERTY
+                  $this: GET_VAR 'tmp0_other_with_cast: A' type=A operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-y>(): IntArray' type=kotlin.IntArray operator=GET_PROPERTY
+                  $this: THIS of 'A' type=A
+                arg1: CALL '<get-y>(): IntArray' type=kotlin.IntArray operator=GET_PROPERTY
+                  $this: GET_VAR 'tmp0_other_with_cast: A' type=A operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun foo(x: kotlin.Array<kotlin.Int>, y: kotlin.IntArray): A
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(Array<Int>, IntArray): A'
+          CALL 'constructor A(Array<Int>, IntArray)' type=A operator=null
+            x: GET_VAR 'value-parameter x: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+            y: GET_VAR 'value-parameter y: IntArray' type=kotlin.IntArray operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: kotlin.Array<kotlin.Int>
+          CALL 'constructor Array(Int, (Int) -> Int)' type=kotlin.Array<kotlin.Int> operator=null
+            size: CONST Int type=kotlin.Int value='0'
+            init: BLOCK type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): Int'
+                    CONST Int type=kotlin.Int value='0'
+              CALLABLE_REFERENCE '<anonymous>(Int): Int' type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+        VAR val b: kotlin.IntArray
+          CALL 'constructor IntArray(Int)' type=kotlin.IntArray operator=null
+            size: CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=DESTRUCTURING_DECLARATION
+          VAR val tmp0_container: A
+            CALL 'foo(Array<Int>, IntArray): A' type=A operator=null
+              x: GET_VAR 'a: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+              y: GET_VAR 'b: IntArray' type=kotlin.IntArray operator=null
+          VAR val x: kotlin.Array<kotlin.Int>
+            CALL 'component1(): Array<Int>' type=kotlin.Array<kotlin.Int> operator=COMPONENT_N(index=1)
+              $this: GET_VAR 'tmp0_container: A' type=A operator=null
+          VAR val y: kotlin.IntArray
+            CALL 'component2(): IntArray' type=kotlin.IntArray operator=COMPONENT_N(index=2)
+              $this: GET_VAR 'tmp0_container: A' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'a: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+                arg1: GET_VAR 'x: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'b: IntArray' type=kotlin.IntArray operator=null
+                arg1: GET_VAR 'y: IntArray' type=kotlin.IntArray operator=null
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='Fail'

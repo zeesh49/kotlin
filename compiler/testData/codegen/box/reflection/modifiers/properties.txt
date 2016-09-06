@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /properties.kt
+    PROPERTY public const val const: kotlin.String = "const"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='const'
+    PROPERTY public val nonConst: kotlin.String = "nonConst"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='nonConst'
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final lateinit var lateinit: kotlin.Unit
+      PROPERTY public final var nonLateinit: kotlin.Unit
+        EXPRESSION_BODY
+          GET_OBJECT 'Unit' type=kotlin.Unit
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isConst>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'const: String' type=kotlin.reflect.KProperty0<kotlin.String> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isConst>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'nonConst: String' type=kotlin.reflect.KProperty0<kotlin.String> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isLateinit>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'lateinit: Unit' type=kotlin.reflect.KMutableProperty1<A, kotlin.Unit> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isLateinit>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'nonLateinit: Unit' type=kotlin.reflect.KMutableProperty1<A, kotlin.Unit> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

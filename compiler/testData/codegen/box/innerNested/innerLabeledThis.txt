@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /innerLabeledThis.kt
+    CLASS CLASS Outer
+      CONSTRUCTOR public constructor Outer()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+        FUN public final fun O(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='O(): String'
+              CALL '<get-O>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'Outer' type=Outer
+        PROPERTY public final val K: kotlin.String
+          EXPRESSION_BODY
+            CALL 'K(): String' type=kotlin.String operator=null
+              $this: THIS of 'Outer' type=Outer
+      PROPERTY public final val O: kotlin.String = "O"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='O'
+      FUN public final fun K(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='K(): String'
+            CONST String type=kotlin.String value='K'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'O(): String' type=kotlin.String operator=null
+              $this: CALL 'constructor Inner()' type=Outer.Inner operator=null
+                $this: CALL 'constructor Outer()' type=Outer operator=null
+            other: CALL '<get-K>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: CALL 'constructor Inner()' type=Outer.Inner operator=null
+                $this: CALL 'constructor Outer()' type=Outer operator=null

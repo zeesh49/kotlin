@@ -1,0 +1,64 @@
+MODULE <test-module>
+  FILE /kt6368.kt
+    CLASS INTERFACE R
+      FUN public abstract fun result(): kotlin.String
+    PROPERTY public val a: java.util.HashMap<kotlin.String, R>
+      delegate: PROPERTY val `a$delegate`: kotlin.Lazy<java.util.HashMap<kotlin.String, R>>
+        EXPRESSION_BODY
+          CALL 'lazy(() -> HashMap<String, R>): Lazy<HashMap<String, R>>' type=kotlin.Lazy<java.util.HashMap<kotlin.String, R>> operator=null
+            initializer: BLOCK type=() -> java.util.HashMap<kotlin.String, R> operator=LAMBDA
+              FUN local final fun <anonymous>(): java.util.HashMap<kotlin.String, R>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): HashMap<String, R>'
+                    CALL 'with(HashMap<String, R>, HashMap<String, R>.() -> HashMap<String, R>): HashMap<String, R>' type=java.util.HashMap<kotlin.String, R> operator=null
+                      receiver: CALL 'constructor HashMap()' type=java.util.HashMap<kotlin.String, R> operator=null
+                      block: BLOCK type=java.util.HashMap<kotlin.String, R>.() -> java.util.HashMap<kotlin.String, R> operator=LAMBDA
+                        FUN local final fun java.util.HashMap<kotlin.String, R>.<anonymous>(): java.util.HashMap<kotlin.String, R>
+                          BLOCK_BODY
+                            CALL 'put(String, R): R?' type=R? operator=null
+                              $this: $RECEIVER of '<anonymous>() on HashMap<String, R>: HashMap<String, R>' type=java.util.HashMap<kotlin.String, R>
+                              key: CONST String type=kotlin.String value='result'
+                              value: BLOCK type=a.<anonymous>.<anonymous>.<no name provided> operator=OBJECT_LITERAL
+                                CLASS CLASS <no name provided>
+                                  CONSTRUCTOR public constructor <no name provided>()
+                                    BLOCK_BODY
+                                      DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                                      INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                                  FUN public open override fun result(): kotlin.String
+                                    BLOCK_BODY
+                                      RETURN type=kotlin.Nothing from='result(): String'
+                                        CONST String type=kotlin.String value='OK'
+                                CALL 'constructor <no name provided>()' type=a.<anonymous>.<anonymous>.<no name provided> operator=OBJECT_LITERAL
+                            RETURN type=kotlin.Nothing from='<anonymous>() on HashMap<String, R>: HashMap<String, R>'
+                              $RECEIVER of '<anonymous>() on HashMap<String, R>: HashMap<String, R>' type=java.util.HashMap<kotlin.String, R>
+                        CALLABLE_REFERENCE '<anonymous>() on HashMap<String, R>: HashMap<String, R>' type=java.util.HashMap<kotlin.String, R>.() -> java.util.HashMap<kotlin.String, R> operator=LAMBDA
+              CALLABLE_REFERENCE '<anonymous>(): HashMap<String, R>' type=() -> java.util.HashMap<kotlin.String, R> operator=LAMBDA
+      PROPERTY_GETTER public fun <get-a>(): java.util.HashMap<kotlin.String, R>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-a>(): HashMap<String, R>'
+            CALL 'getValue(Any?, KProperty<*>) on Lazy<HashMap<String, R>>: HashMap<String, R>' type=java.util.HashMap<kotlin.String, R> operator=null
+              $receiver: GET_BACKING_FIELD '`a$delegate`: Lazy<HashMap<String, R>>' type=kotlin.Lazy<java.util.HashMap<kotlin.String, R>> operator=null
+              thisRef: CONST Null type=kotlin.Nothing? value='null'
+              property: CALLABLE_REFERENCE 'a: HashMap<String, R>' type=kotlin.reflect.KProperty0<java.util.HashMap<kotlin.String, R>> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val r: R
+          BLOCK type=R operator=EXCLEXCL
+            VAR val tmp0_notnull: R?
+              CALL 'get(String): R?' type=R? operator=GET_ARRAY_ELEMENT
+                $this: CALL '<get-a>(): HashMap<String, R>' type=java.util.HashMap<kotlin.String, R> operator=GET_PROPERTY
+                key: CONST String type=kotlin.String value='result'
+            WHEN type=R operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: R?' type=R? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: R?' type=R? operator=null
+        CALL 'toString(): String' type=kotlin.String operator=null
+          $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+            CALL 'getEnclosingMethod(): Method!' type=java.lang.reflect.Method! operator=null
+              $this: CALL '<get-javaClass>() on R: Class<R>' type=java.lang.Class<R> operator=GET_PROPERTY
+                $receiver: GET_VAR 'r: R' type=R operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'result(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'r: R' type=R operator=null

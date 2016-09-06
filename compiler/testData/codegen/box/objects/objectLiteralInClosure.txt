@@ -1,0 +1,51 @@
+MODULE <test-module>
+  FILE /objectLiteralInClosure.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C(y: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'y: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'C' type=p.C
+            value: GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      PROPERTY public final val y: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val initChild: () -> p.C.initChild.<anonymous>.<no name provided>
+        EXPRESSION_BODY
+          BLOCK type=() -> p.C.initChild.<anonymous>.<no name provided> operator=LAMBDA
+            FUN local final fun <anonymous>(): p.C.initChild.<anonymous>.<no name provided>
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): <no name provided>'
+                  BLOCK type=p.C.initChild.<anonymous>.<no name provided> operator=OBJECT_LITERAL
+                    CLASS CLASS <no name provided>
+                      CONSTRUCTOR public constructor <no name provided>()
+                        BLOCK_BODY
+                          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                          INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                      FUN public open override fun toString(): kotlin.String
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='toString(): String'
+                            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                              $this: CONST String type=kotlin.String value='child'
+                              other: CALL '<get-y>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                                $this: THIS of 'C' type=p.C
+                    CALL 'constructor <no name provided>()' type=p.C.initChild.<anonymous>.<no name provided> operator=OBJECT_LITERAL
+            CALLABLE_REFERENCE '<anonymous>(): <no name provided>' type=() -> p.C.initChild.<anonymous>.<no name provided> operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val c: () -> p.C.initChild.<anonymous>.<no name provided>
+          CALL '<get-initChild>(): () -> <no name provided>' type=() -> p.C.initChild.<anonymous>.<no name provided> operator=GET_PROPERTY
+            $this: CALL 'constructor C(Int)' type=p.C operator=null
+              y: CONST Int type=kotlin.Int value='3'
+        VAR val x: kotlin.String
+          CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL 'invoke(): <no name provided>' type=p.C.initChild.<anonymous>.<no name provided> operator=INVOKE
+              $this: GET_VAR 'c: () -> <no name provided>' type=() -> p.C.initChild.<anonymous>.<no name provided> operator=VARIABLE_AS_FUNCTION
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'x: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='child3'
+            then: CONST String type=kotlin.String value='OK'
+            else: GET_VAR 'x: String' type=kotlin.String operator=null

@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /closureWithParameterAndBoxing.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'apply(Int, (Int) -> Int): Int' type=kotlin.Int operator=null
+                arg: CONST Int type=kotlin.Int value='5'
+                f: BLOCK type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+                  FUN local final fun <anonymous>(arg: kotlin.Int): kotlin.Int
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Int): Int'
+                        CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                          $this: GET_VAR 'value-parameter arg: Int' type=kotlin.Int operator=null
+                          other: CONST Int type=kotlin.Int value='13'
+                  CALLABLE_REFERENCE '<anonymous>(Int): Int' type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+              arg1: CONST Int type=kotlin.Int value='18'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'
+    FUN public fun apply(arg: kotlin.Int, f: (kotlin.Int) -> kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='apply(Int, (Int) -> Int): Int'
+          CALL 'invoke(Int): Int' type=kotlin.Int operator=INVOKE
+            $this: GET_VAR 'value-parameter f: (Int) -> Int' type=(kotlin.Int) -> kotlin.Int operator=VARIABLE_AS_FUNCTION
+            p1: GET_VAR 'value-parameter arg: Int' type=kotlin.Int operator=null

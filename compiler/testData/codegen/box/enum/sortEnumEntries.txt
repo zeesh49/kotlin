@@ -1,0 +1,46 @@
+MODULE <test-module>
+  FILE /sortEnumEntries.kt
+    CLASS ENUM_CLASS Game
+      CONSTRUCTOR private constructor Game()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='Game'
+      ENUM_ENTRY enum entry ROCK
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Game()' ROCK
+      ENUM_ENTRY enum entry PAPER
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Game()' PAPER
+      ENUM_ENTRY enum entry SCISSORS
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Game()' SCISSORS
+      ENUM_ENTRY enum entry LIZARD
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Game()' LIZARD
+      ENUM_ENTRY enum entry SPOCK
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Game()' SPOCK
+      FUN public final fun values(): kotlin.Array<Game>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): Game
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: kotlin.Array<Game>
+          CALL 'arrayOf(vararg Game): Array<Game>' type=kotlin.Array<Game> operator=null
+            elements: VARARG type=Array<out Game> varargElementType=Game
+              GET_ENUM_VALUE 'LIZARD' type=Game
+              GET_ENUM_VALUE 'SCISSORS' type=Game
+              GET_ENUM_VALUE 'SPOCK' type=Game
+              GET_ENUM_VALUE 'ROCK' type=Game
+              GET_ENUM_VALUE 'PAPER' type=Game
+        CALL 'sort() on Array<out Game>: Unit' type=kotlin.Unit operator=null
+          $receiver: GET_VAR 'a: Array<Game>' type=kotlin.Array<Game> operator=null
+        VAR val str: kotlin.String
+          CALL 'joinToString(CharSequence = ..., CharSequence = ..., CharSequence = ..., Int = ..., CharSequence = ..., ((Game) -> CharSequence)? = ...) on Array<out Game>: String' type=kotlin.String operator=null
+            $receiver: GET_VAR 'a: Array<Game>' type=kotlin.Array<Game> operator=null
+            separator: CONST String type=kotlin.String value=' '
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'str: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='ROCK PAPER SCISSORS LIZARD SPOCK'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'str: String' type=kotlin.String operator=null

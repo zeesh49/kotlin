@@ -1,0 +1,51 @@
+MODULE <test-module>
+  FILE /kt3584.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val s: kotlin.String = "captured"
+          CONST String type=kotlin.String value='captured'
+        CLASS CLASS A
+          CONSTRUCTOR public constructor A(param: kotlin.String = ...)
+            param: EXPRESSION_BODY
+              CONST String type=kotlin.String value='OK'
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              SET_BACKING_FIELD 'param: String' type=kotlin.Unit operator=null
+                receiver: THIS of 'A' type=box.A
+                value: GET_VAR 'value-parameter param: String = ...' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+              INSTANCE_INITIALIZER_CALL classDescriptor='A'
+          PROPERTY public final val param: kotlin.String
+            EXPRESSION_BODY
+              GET_VAR 'value-parameter param: String = ...' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          PROPERTY public final val s2: kotlin.String
+            EXPRESSION_BODY
+              CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: GET_VAR 's: String' type=kotlin.String operator=null
+                other: CALL '<get-param>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: THIS of 'A' type=box.A
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-s2>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: CALL 'constructor A(String = ...)' type=box.A operator=null
+              arg1: CONST String type=kotlin.String value='capturedOK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              CALL '<get-s2>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: CALL 'constructor A(String = ...)' type=box.A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-s2>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: CALL 'constructor A(String = ...)' type=box.A operator=null
+                  param: CONST String type=kotlin.String value='Test'
+              arg1: CONST String type=kotlin.String value='capturedTest'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              CALL '<get-s2>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: CALL 'constructor A(String = ...)' type=box.A operator=null
+                  param: CONST String type=kotlin.String value='Test'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

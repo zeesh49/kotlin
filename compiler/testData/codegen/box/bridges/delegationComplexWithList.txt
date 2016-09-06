@@ -1,0 +1,106 @@
+MODULE <test-module>
+  FILE /delegationComplexWithList.kt
+    CLASS CLASS Content
+      CONSTRUCTOR public constructor Content()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Content'
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            CONST String type=kotlin.String value='OK'
+    CLASS INTERFACE ContentBox
+    CLASS OBJECT Impl
+      CONSTRUCTOR private constructor Impl()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor AbstractList()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Impl'
+      FUN public open override fun get(index: kotlin.Int): Content
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(Int): Content'
+            CALL 'constructor Content()' type=Content operator=null
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            THROW type=kotlin.Nothing
+              CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+    CLASS CLASS ContentBoxDelegate
+      CONSTRUCTOR public constructor ContentBoxDelegate<T : Content>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ContentBoxDelegate'
+      PROPERTY val `ContentBoxDelegate$ContentBox$delegate`: ContentBox<T>
+        EXPRESSION_BODY
+          TYPE_OP operator=CAST typeOperand=ContentBox<T>
+            GET_OBJECT 'Impl' type=Impl
+      FUN public open override fun contains(element: T): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='contains(T): Boolean'
+            CALL 'contains(T): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`ContentBoxDelegate$ContentBox$delegate`: ContentBox<T>' type=ContentBox<T> operator=null
+              element: GET_VAR 'value-parameter element: T' type=T operator=null
+      FUN public open override fun containsAll(elements: kotlin.collections.Collection<T>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsAll(Collection<T>): Boolean'
+            CALL 'containsAll(Collection<T>): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`ContentBoxDelegate$ContentBox$delegate`: ContentBox<T>' type=ContentBox<T> operator=null
+              elements: GET_VAR 'value-parameter elements: Collection<T>' type=kotlin.collections.Collection<T> operator=null
+      FUN public open override fun get(index: kotlin.Int): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(Int): T'
+            CALL 'get(Int): T' type=T operator=null
+              $this: GET_VAR '`ContentBoxDelegate$ContentBox$delegate`: ContentBox<T>' type=ContentBox<T> operator=null
+              index: GET_VAR 'value-parameter index: Int' type=kotlin.Int operator=null
+      FUN public open override fun indexOf(element: T): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='indexOf(T): Int'
+            CALL 'indexOf(T): Int' type=kotlin.Int operator=null
+              $this: GET_VAR '`ContentBoxDelegate$ContentBox$delegate`: ContentBox<T>' type=ContentBox<T> operator=null
+              element: GET_VAR 'value-parameter element: T' type=T operator=null
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='isEmpty(): Boolean'
+            CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`ContentBoxDelegate$ContentBox$delegate`: ContentBox<T>' type=ContentBox<T> operator=null
+      FUN public open override fun iterator(): kotlin.collections.Iterator<T>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='iterator(): Iterator<T>'
+            CALL 'iterator(): Iterator<T>' type=kotlin.collections.Iterator<T> operator=null
+              $this: GET_VAR '`ContentBoxDelegate$ContentBox$delegate`: ContentBox<T>' type=ContentBox<T> operator=null
+      FUN public open override fun lastIndexOf(element: T): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='lastIndexOf(T): Int'
+            CALL 'lastIndexOf(T): Int' type=kotlin.Int operator=null
+              $this: GET_VAR '`ContentBoxDelegate$ContentBox$delegate`: ContentBox<T>' type=ContentBox<T> operator=null
+              element: GET_VAR 'value-parameter element: T' type=T operator=null
+      FUN public open override fun listIterator(): kotlin.collections.ListIterator<T>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='listIterator(): ListIterator<T>'
+            CALL 'listIterator(): ListIterator<T>' type=kotlin.collections.ListIterator<T> operator=null
+              $this: GET_VAR '`ContentBoxDelegate$ContentBox$delegate`: ContentBox<T>' type=ContentBox<T> operator=null
+      FUN public open override fun listIterator(index: kotlin.Int): kotlin.collections.ListIterator<T>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='listIterator(Int): ListIterator<T>'
+            CALL 'listIterator(Int): ListIterator<T>' type=kotlin.collections.ListIterator<T> operator=null
+              $this: GET_VAR '`ContentBoxDelegate$ContentBox$delegate`: ContentBox<T>' type=ContentBox<T> operator=null
+              index: GET_VAR 'value-parameter index: Int' type=kotlin.Int operator=null
+      FUN public open override fun subList(fromIndex: kotlin.Int, toIndex: kotlin.Int): kotlin.collections.List<T>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='subList(Int, Int): List<T>'
+            CALL 'subList(Int, Int): List<T>' type=kotlin.collections.List<T> operator=null
+              $this: GET_VAR '`ContentBoxDelegate$ContentBox$delegate`: ContentBox<T>' type=ContentBox<T> operator=null
+              fromIndex: GET_VAR 'value-parameter fromIndex: Int' type=kotlin.Int operator=null
+              toIndex: GET_VAR 'value-parameter toIndex: Int' type=kotlin.Int operator=null
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-size>(): Int'
+              CALL '<get-size>(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR '`ContentBoxDelegate$ContentBox$delegate`: ContentBox<T>' type=ContentBox<T> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL 'get(Int): Content' type=Content operator=GET_ARRAY_ELEMENT
+              $this: CALL 'constructor ContentBoxDelegate()' type=ContentBoxDelegate<Content> operator=null
+              index: CONST Int type=kotlin.Int value='0'

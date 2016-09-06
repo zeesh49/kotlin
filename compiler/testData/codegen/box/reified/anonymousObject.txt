@@ -1,0 +1,35 @@
+MODULE <test-module>
+  FILE /anonymousObject.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public abstract fun f(): kotlin.String
+    FUN public inline fun <reified T : kotlin.Any> foo(): A
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(): A'
+          BLOCK type=foo.<no name provided><T> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              FUN public open override fun f(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='f(): String'
+                    TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+                      CALL 'getName(): String!' type=kotlin.String! operator=null
+                        $this: CALL '<get-java>() on KClass<T>: Class<T>' type=java.lang.Class<T> operator=GET_PROPERTY
+                          $receiver: CLASS_REFERENCE '<reified T : Any>' type=kotlin.reflect.KClass<T>
+            CALL 'constructor <no name provided>()' type=foo.<no name provided><T> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val y: A
+          CALL 'foo(): A' type=A operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.lang.String'
+          actual: CALL 'f(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'y: A' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

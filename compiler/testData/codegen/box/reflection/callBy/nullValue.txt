@@ -1,0 +1,20 @@
+MODULE <test-module>
+  FILE /nullValue.kt
+    FUN public fun foo(x: kotlin.String? = ...): kotlin.Unit
+      x: EXPRESSION_BODY
+        CONST String type=kotlin.String value='Fail'
+      BLOCK_BODY
+        CALL 'assertNull(Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: GET_VAR 'value-parameter x: String? = ...' type=kotlin.String? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'callBy(Map<KParameter, Any?>): Unit' type=kotlin.Unit operator=null
+          $this: CALLABLE_REFERENCE 'foo(String? = ...): Unit' type=kotlin.reflect.KFunction1<kotlin.String?, kotlin.Unit> operator=null
+          args: CALL 'mapOf(Pair<KParameter, Nothing?>): Map<KParameter, Nothing?>' type=kotlin.collections.Map<kotlin.reflect.KParameter, kotlin.Nothing?> operator=null
+            pair: CALL 'to(Nothing?) on KParameter: Pair<KParameter, Nothing?>' type=kotlin.Pair<kotlin.reflect.KParameter, kotlin.Nothing?> operator=null
+              $receiver: CALL 'single() on List<KParameter>: KParameter' type=kotlin.reflect.KParameter operator=null
+                $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                  $this: CALLABLE_REFERENCE 'foo(String? = ...): Unit' type=kotlin.reflect.KFunction1<kotlin.String?, kotlin.Unit> operator=null
+              that: CONST Null type=kotlin.Nothing? value='null'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

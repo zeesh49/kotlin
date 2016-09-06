@@ -1,0 +1,21 @@
+MODULE <test-module>
+  FILE /simpleObject.kt
+    CLASS OBJECT A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val x: kotlin.Int = 610
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='610'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_OBJECT 'A' type=A
+                arg1: CONST Int type=kotlin.Int value='610'
+            then: CONST String type=kotlin.String value='fail'
+            else: CONST String type=kotlin.String value='OK'

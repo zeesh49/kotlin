@@ -1,0 +1,32 @@
+MODULE <test-module>
+  FILE /kotlinClass.kt
+    CLASS CLASS KotlinClass
+      CONSTRUCTOR public constructor KotlinClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='KotlinClass'
+      CLASS OBJECT companion object of KotlinClass
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of KotlinClass'
+        PROPERTY public const final val FOO_INT: kotlin.Int = 10
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='10'
+        PROPERTY @kotlin.jvm.JvmField public final val FOO_STRING: kotlin.String = "OK"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val test: kotlin.String!
+          CALL 'test(): String!' type=kotlin.String! operator=null
+            $this: CALL 'constructor JavaClass()' type=JavaClass operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'test: String!' type=kotlin.String! operator=null
+              arg1: CONST String type=kotlin.String value='OK10'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail : '
+              GET_VAR 'test: String!' type=kotlin.String! operator=null

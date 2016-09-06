@@ -1,0 +1,123 @@
+MODULE <test-module>
+  FILE /supertypes.kt
+    CLASS CLASS Klass
+      CONSTRUCTOR public constructor Klass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Klass'
+    CLASS INTERFACE Interface
+    CLASS INTERFACE Interface2
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<Z>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Klass()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=DESTRUCTURING_DECLARATION
+          VAR val tmp0_container: kotlin.collections.List<java.lang.reflect.Type>
+            CALL 'map((KType) -> Type) on Iterable<KType>: List<Type>' type=kotlin.collections.List<java.lang.reflect.Type> operator=null
+              $receiver: CALL '<get-supertypes>(): List<KType>' type=kotlin.collections.List<kotlin.reflect.KType> operator=GET_PROPERTY
+                $this: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A<*>>
+              transform: BLOCK type=(kotlin.reflect.KType) -> java.lang.reflect.Type operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KType): java.lang.reflect.Type
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KType): Type'
+                      CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+                        $receiver: GET_VAR 'value-parameter it: KType' type=kotlin.reflect.KType operator=null
+                CALLABLE_REFERENCE '<anonymous>(KType): Type' type=(kotlin.reflect.KType) -> java.lang.reflect.Type operator=LAMBDA
+          VAR val i: java.lang.reflect.Type
+            CALL 'component1() on List<Type>: Type' type=java.lang.reflect.Type operator=COMPONENT_N(index=1)
+              $receiver: GET_VAR 'tmp0_container: List<Type>' type=kotlin.collections.List<java.lang.reflect.Type> operator=null
+          VAR val k: java.lang.reflect.Type
+            CALL 'component2() on List<Type>: Type' type=java.lang.reflect.Type operator=COMPONENT_N(index=2)
+              $receiver: GET_VAR 'tmp0_container: List<Type>' type=kotlin.collections.List<java.lang.reflect.Type> operator=null
+          VAR val i2: java.lang.reflect.Type
+            CALL 'component3() on List<Type>: Type' type=java.lang.reflect.Type operator=COMPONENT_N(index=3)
+              $receiver: GET_VAR 'tmp0_container: List<Type>' type=kotlin.collections.List<java.lang.reflect.Type> operator=null
+        BLOCK type=java.lang.reflect.ParameterizedType operator=ELVIS
+          VAR val tmp1_elvis_lhs: java.lang.reflect.ParameterizedType?
+            TYPE_OP operator=SAFE_CAST typeOperand=java.lang.reflect.ParameterizedType
+              GET_VAR 'i: Type' type=java.lang.reflect.Type operator=null
+          WHEN type=java.lang.reflect.ParameterizedType operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp1_elvis_lhs: ParameterizedType?' type=java.lang.reflect.ParameterizedType? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'fail(String? = ...): Nothing' type=kotlin.Nothing operator=null
+              message: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='Not a parameterized type: '
+                GET_VAR 'i: Type' type=java.lang.reflect.Type operator=null
+            else: GET_VAR 'tmp1_elvis_lhs: ParameterizedType?' type=java.lang.reflect.ParameterizedType? operator=null
+        CALL 'assertEquals(Type!, Type!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-java>() on KClass<Interface<*, *>>: Class<Interface<*, *>>' type=java.lang.Class<Interface<*, *>> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Interface' type=kotlin.reflect.KClass<Interface<*, *>>
+          actual: CALL '<get-rawType>() on ParameterizedType: Type!' type=java.lang.reflect.Type! operator=GET_PROPERTY
+            $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=java.lang.reflect.ParameterizedType
+              GET_VAR 'i: Type' type=java.lang.reflect.Type operator=null
+        VAR val args: kotlin.Array<(out) java.lang.reflect.Type!>!
+          CALL '<get-actualTypeArguments>() on ParameterizedType: Array<(out) Type!>!' type=kotlin.Array<(out) java.lang.reflect.Type!>! operator=GET_PROPERTY
+            $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=java.lang.reflect.ParameterizedType
+              GET_VAR 'i: Type' type=java.lang.reflect.Type operator=null
+        CALL 'assertEquals(Type!, Type!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-java>() on KClass<String>: Class<String>' type=java.lang.Class<kotlin.String> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+          actual: CALL 'get(Int): Type!' type=java.lang.reflect.Type! operator=GET_ARRAY_ELEMENT
+            $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<java.lang.reflect.Type!>
+              TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Type!>
+                GET_VAR 'args: Array<(out) Type!>!' type=kotlin.Array<(out) java.lang.reflect.Type!>! operator=null
+            index: CONST Int type=kotlin.Int value='0'
+          message: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='Not String: '
+            CALL 'get(Int): Type!' type=java.lang.reflect.Type! operator=GET_ARRAY_ELEMENT
+              $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<java.lang.reflect.Type!>
+                TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Type!>
+                  GET_VAR 'args: Array<(out) Type!>!' type=kotlin.Array<(out) java.lang.reflect.Type!>! operator=null
+              index: CONST Int type=kotlin.Int value='0'
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'let((Type!) -> Boolean) on Type!: Boolean' type=kotlin.Boolean operator=null
+            $receiver: CALL 'get(Int): Type!' type=java.lang.reflect.Type! operator=GET_ARRAY_ELEMENT
+              $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<java.lang.reflect.Type!>
+                TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Type!>
+                  GET_VAR 'args: Array<(out) Type!>!' type=kotlin.Array<(out) java.lang.reflect.Type!>! operator=null
+              index: CONST Int type=kotlin.Int value='1'
+            block: BLOCK type=(java.lang.reflect.Type!) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(it: java.lang.reflect.Type!): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Type!): Boolean'
+                    WHEN type=kotlin.Boolean operator=ANDAND
+                      if: WHEN type=kotlin.Boolean operator=ANDAND
+                        if: TYPE_OP operator=INSTANCEOF typeOperand=java.lang.reflect.TypeVariable<*>
+                          GET_VAR 'value-parameter it: Type!' type=java.lang.reflect.Type! operator=null
+                        then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: CALL '<get-name>() on TypeVariable<*>: String!' type=kotlin.String! operator=GET_PROPERTY
+                            $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=java.lang.reflect.TypeVariable<*>
+                              TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Type
+                                GET_VAR 'value-parameter it: Type!' type=java.lang.reflect.Type! operator=null
+                          arg1: CONST String type=kotlin.String value='Z'
+                        else: CONST Boolean type=kotlin.Boolean value='false'
+                      then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: CALL '<get-genericDeclaration>() on TypeVariable<*>: GenericDeclaration!' type=java.lang.reflect.GenericDeclaration! operator=GET_PROPERTY
+                          $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=java.lang.reflect.TypeVariable<*>
+                            TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Type
+                              GET_VAR 'value-parameter it: Type!' type=java.lang.reflect.Type! operator=null
+                        arg1: CALL '<get-java>() on KClass<A<*>>: Class<A<*>>' type=java.lang.Class<A<*>> operator=GET_PROPERTY
+                          $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A<*>>
+                      else: CONST Boolean type=kotlin.Boolean value='false'
+              CALLABLE_REFERENCE '<anonymous>(Type!): Boolean' type=(java.lang.reflect.Type!) -> kotlin.Boolean operator=LAMBDA
+          message: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='Not Z: '
+            CALL 'get(Int): Type!' type=java.lang.reflect.Type! operator=GET_ARRAY_ELEMENT
+              $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<java.lang.reflect.Type!>
+                TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Type!>
+                  GET_VAR 'args: Array<(out) Type!>!' type=kotlin.Array<(out) java.lang.reflect.Type!>! operator=null
+              index: CONST Int type=kotlin.Int value='1'
+        CALL 'assertEquals(Type, Type, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-java>() on KClass<Klass>: Class<Klass>' type=java.lang.Class<Klass> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Klass' type=kotlin.reflect.KClass<Klass>
+          actual: GET_VAR 'k: Type' type=java.lang.reflect.Type operator=null
+        CALL 'assertEquals(Type, Type, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-java>() on KClass<Interface2>: Class<Interface2>' type=java.lang.Class<Interface2> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Interface2' type=kotlin.reflect.KClass<Interface2>
+          actual: GET_VAR 'i2: Type' type=java.lang.reflect.Type operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

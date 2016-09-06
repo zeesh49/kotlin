@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /simple.kt
+    CLASS CLASS Season
+      CONSTRUCTOR private constructor Season()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Season'
+      CLASS CLASS Warm
+        CONSTRUCTOR public constructor Warm()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Season()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Warm'
+      CLASS CLASS Cold
+        CONSTRUCTOR public constructor Cold()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Season()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Cold'
+    FUN public fun foo(): Season
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(): Season'
+          CALL 'constructor Warm()' type=Season.Warm operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          BLOCK type=kotlin.String operator=WHEN
+            VAR val tmp0_subject: Season
+              CALL 'foo(): Season' type=Season operator=null
+            WHEN type=kotlin.String operator=WHEN
+              if: TYPE_OP operator=INSTANCEOF typeOperand=Season.Warm
+                GET_VAR 'tmp0_subject: Season' type=Season operator=null
+              then: CONST String type=kotlin.String value='OK'
+              if: TYPE_OP operator=INSTANCEOF typeOperand=Season.Cold
+                GET_VAR 'tmp0_subject: Season' type=Season operator=null
+              then: CONST String type=kotlin.String value='Fail: Cold, should be Warm'

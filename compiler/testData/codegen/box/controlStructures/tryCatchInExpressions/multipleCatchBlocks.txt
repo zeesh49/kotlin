@@ -1,0 +1,39 @@
+MODULE <test-module>
+  FILE /multipleCatchBlocks.kt
+    CLASS CLASS Exception1
+      CONSTRUCTOR public constructor Exception1(msg: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Exception(String!)'
+            p0: GET_VAR 'value-parameter msg: String' type=kotlin.String operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='Exception1'
+    CLASS CLASS Exception2
+      CONSTRUCTOR public constructor Exception2(msg: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Exception(String!)'
+            p0: GET_VAR 'value-parameter msg: String' type=kotlin.String operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='Exception2'
+    CLASS CLASS Exception3
+      CONSTRUCTOR public constructor Exception3(msg: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Exception(String!)'
+            p0: GET_VAR 'value-parameter msg: String' type=kotlin.String operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='Exception3'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CONST String type=kotlin.String value='O'
+            other: TRY_CATCH type=kotlin.String?
+              try: BLOCK type=kotlin.Nothing operator=null
+                THROW type=kotlin.Nothing
+                  CALL 'constructor Exception3(String)' type=Exception3 operator=null
+                    msg: CONST String type=kotlin.String value='K'
+              catch e1: BLOCK type=kotlin.String operator=null
+                CONST String type=kotlin.String value='e1'
+              catch e2: BLOCK type=kotlin.String operator=null
+                CONST String type=kotlin.String value='e2'
+              catch e3: BLOCK type=kotlin.String? operator=null
+                CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                  $this: GET_VAR 'e3: Exception3' type=Exception3 operator=null
+              catch e: BLOCK type=kotlin.String operator=null
+                CONST String type=kotlin.String value='e'

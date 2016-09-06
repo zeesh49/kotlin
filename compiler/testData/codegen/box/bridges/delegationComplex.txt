@@ -1,0 +1,43 @@
+MODULE <test-module>
+  FILE /delegationComplex.kt
+    CLASS CLASS Content
+      CONSTRUCTOR public constructor Content()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Content'
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            CONST String type=kotlin.String value='OK'
+    CLASS INTERFACE Box
+      FUN public abstract fun get(): E
+    CLASS INTERFACE ContentBox
+    CLASS OBJECT Impl
+      CONSTRUCTOR private constructor Impl()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Impl'
+      FUN public open override fun get(): Content
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(): Content'
+            CALL 'constructor Content()' type=Content operator=null
+    CLASS CLASS ContentBoxDelegate
+      CONSTRUCTOR public constructor ContentBoxDelegate<T : Content>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ContentBoxDelegate'
+      PROPERTY val `ContentBoxDelegate$ContentBox$delegate`: ContentBox<T>
+        EXPRESSION_BODY
+          TYPE_OP operator=CAST typeOperand=ContentBox<T>
+            GET_OBJECT 'Impl' type=Impl
+      FUN public open override fun get(): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(): T'
+            CALL 'get(): T' type=T operator=null
+              $this: GET_VAR '`ContentBoxDelegate$ContentBox$delegate`: ContentBox<T>' type=ContentBox<T> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL 'get(): Content' type=Content operator=null
+              $this: CALL 'constructor ContentBoxDelegate()' type=ContentBoxDelegate<Content> operator=null

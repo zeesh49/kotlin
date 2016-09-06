@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /kt4086.kt
+    CLASS INTERFACE N
+    CLASS CLASS Base
+      CONSTRUCTOR public constructor Base(n: N)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Base'
+    CLASS CLASS Derived
+      CONSTRUCTOR public constructor Derived()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Base(N)'
+            n: BLOCK type=Derived.<init>.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              CALL 'constructor <no name provided>()' type=Derived.<init>.<no name provided> operator=OBJECT_LITERAL
+          INSTANCE_INITIALIZER_CALL classDescriptor='Derived'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'constructor Derived()' type=Derived operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

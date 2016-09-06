@@ -1,0 +1,20 @@
+MODULE <test-module>
+  FILE /kt9022Throw.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var cycle: kotlin.Boolean
+          CONST Boolean type=kotlin.Boolean value='true'
+        WHILE label=null operator=WHILE_LOOP
+          condition: CONST Boolean type=kotlin.Boolean value='true'
+          body: BLOCK type=kotlin.Unit operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: WHEN type=kotlin.Boolean operator=OROR
+                if: CONST Boolean type=kotlin.Boolean value='true'
+                then: CONST Boolean type=kotlin.Nothing value='true'
+                else: THROW type=kotlin.Nothing
+                  CALL 'constructor RuntimeException()' type=java.lang.RuntimeException operator=null
+              then: BLOCK type=kotlin.Nothing operator=null
+                RETURN type=kotlin.Nothing from='box(): String'
+                  CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='fail'

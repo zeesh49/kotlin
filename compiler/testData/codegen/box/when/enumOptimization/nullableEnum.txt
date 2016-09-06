@@ -1,0 +1,39 @@
+MODULE <test-module>
+  FILE /nullableEnum.kt
+    CLASS ENUM_CLASS E
+      CONSTRUCTOR private constructor E()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='E'
+      ENUM_ENTRY enum entry A
+        init: ENUM_CONSTRUCTOR_CALL 'constructor E()' A
+      ENUM_ENTRY enum entry B
+        init: ENUM_CONSTRUCTOR_CALL 'constructor E()' B
+      FUN public final fun values(): kotlin.Array<E>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): E
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun test(e: E?): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test(E?): String'
+          BLOCK type=kotlin.String operator=WHEN
+            VAR val tmp0_subject: E?
+              GET_VAR 'value-parameter e: E?' type=E? operator=null
+            WHEN type=kotlin.String operator=WHEN
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: E?' type=E? operator=null
+                arg1: GET_ENUM_VALUE 'A' type=E
+              then: CONST String type=kotlin.String value='Fail A'
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: E?' type=E? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CONST String type=kotlin.String value='OK'
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: E?' type=E? operator=null
+                arg1: GET_ENUM_VALUE 'B' type=E
+              then: CONST String type=kotlin.String value='Fail B'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'test(E?): String' type=kotlin.String operator=null
+            e: CONST Null type=kotlin.Nothing? value='null'

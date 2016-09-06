@@ -1,0 +1,81 @@
+MODULE <test-module>
+  FILE /overloadedFun.kt
+    FUN public fun foo(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(): String'
+          CONST String type=kotlin.String value='foo1'
+    FUN public fun foo(i: kotlin.Int): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(Int): String'
+          CONST String type=kotlin.String value='foo2'
+    PROPERTY public val f1: () -> kotlin.String
+      EXPRESSION_BODY
+        CALLABLE_REFERENCE 'foo(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+    PROPERTY public val f2: (kotlin.Int) -> kotlin.String
+      EXPRESSION_BODY
+        CALLABLE_REFERENCE 'foo(Int): String' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.String> operator=null
+    FUN public fun foo1(): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun foo2(i: kotlin.Int): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun bar(f: () -> kotlin.Unit): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='bar(() -> Unit): String'
+          CONST String type=kotlin.String value='bar1'
+    FUN public fun bar(f: (kotlin.Int) -> kotlin.Unit): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='bar((Int) -> Unit): String'
+          CONST String type=kotlin.String value='bar2'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x1: kotlin.String
+          CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+            $this: CALL '<get-f1>(): () -> String' type=() -> kotlin.String operator=GET_PROPERTY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'x1: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='foo1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 1: '
+              GET_VAR 'x1: String' type=kotlin.String operator=null
+        VAR val x2: kotlin.String
+          CALL 'invoke(Int): String' type=kotlin.String operator=INVOKE
+            $this: CALL '<get-f2>(): (Int) -> String' type=(kotlin.Int) -> kotlin.String operator=GET_PROPERTY
+            p1: CONST Int type=kotlin.Int value='0'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'x2: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='foo2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 2: '
+              GET_VAR 'x2: String' type=kotlin.String operator=null
+        VAR val y1: kotlin.String
+          CALL 'bar(() -> Unit): String' type=kotlin.String operator=null
+            f: CALLABLE_REFERENCE 'foo1(): Unit' type=kotlin.reflect.KFunction0<kotlin.Unit> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'y1: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='bar1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 3: '
+              GET_VAR 'y1: String' type=kotlin.String operator=null
+        VAR val y2: kotlin.String
+          CALL 'bar((Int) -> Unit): String' type=kotlin.String operator=null
+            f: CALLABLE_REFERENCE 'foo2(Int): Unit' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Unit> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'y2: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='bar2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 4: '
+              GET_VAR 'y2: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

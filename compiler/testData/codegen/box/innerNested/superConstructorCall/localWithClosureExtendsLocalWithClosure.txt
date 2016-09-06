@@ -1,0 +1,61 @@
+MODULE <test-module>
+  FILE /localWithClosureExtendsLocalWithClosure.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val three: kotlin.Int = 3
+          CONST Int type=kotlin.Int value='3'
+        CLASS CLASS Local
+          CONSTRUCTOR public constructor Local(one: kotlin.Int)
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              SET_BACKING_FIELD 'one: Int' type=kotlin.Unit operator=null
+                receiver: THIS of 'Local' type=box.Local
+                value: GET_VAR 'value-parameter one: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+              INSTANCE_INITIALIZER_CALL classDescriptor='Local'
+          PROPERTY public final val one: kotlin.Int
+            EXPRESSION_BODY
+              GET_VAR 'value-parameter one: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          FUN public open fun value(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='value(): String'
+                STRING_CONCATENATION type=kotlin.String
+                  GET_VAR 'three: Int' type=kotlin.Int operator=null
+                  CALL '<get-one>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                    $this: THIS of 'Local' type=box.Local
+        VAR val four: kotlin.Int = 4
+          CONST Int type=kotlin.Int value='4'
+        CLASS CLASS Derived
+          CONSTRUCTOR public constructor Derived(two: kotlin.Int)
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Local(Int)'
+                one: CONST Int type=kotlin.Int value='1'
+              SET_BACKING_FIELD 'two: Int' type=kotlin.Unit operator=null
+                receiver: THIS of 'Derived' type=box.Derived
+                value: GET_VAR 'value-parameter two: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+              INSTANCE_INITIALIZER_CALL classDescriptor='Derived'
+          PROPERTY public final val two: kotlin.Int
+            EXPRESSION_BODY
+              GET_VAR 'value-parameter two: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          FUN public open override fun value(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='value(): String'
+                CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: CALL 'value(): String' superQualifier=Local type=kotlin.String operator=null
+                    $this: THIS of 'Derived' type=box.Local
+                  other: STRING_CONCATENATION type=kotlin.String
+                    GET_VAR 'four: Int' type=kotlin.Int operator=null
+                    CALL '<get-two>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                      $this: THIS of 'Derived' type=box.Derived
+        VAR val result: kotlin.String
+          CALL 'value(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Derived(Int)' type=box.Derived operator=null
+              two: CONST Int type=kotlin.Int value='2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'result: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='3142'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'result: String' type=kotlin.String operator=null

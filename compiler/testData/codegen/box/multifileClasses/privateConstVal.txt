@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /bar.kt
+    PROPERTY private const val x: kotlin.String = "K"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='K'
+    FUN public fun bar(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='bar(): String'
+          CALL '<get-x>(): String' type=kotlin.String operator=GET_PROPERTY
+  FILE /foo.kt
+    PROPERTY private const val x: kotlin.String = "O"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='O'
+    FUN public fun foo(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(): String'
+          CALL '<get-x>(): String' type=kotlin.String operator=GET_PROPERTY
+  FILE /test.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'foo(): String' type=kotlin.String operator=null
+            other: CALL 'bar(): String' type=kotlin.String operator=null

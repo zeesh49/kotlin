@@ -1,0 +1,198 @@
+MODULE <test-module>
+  FILE /K.kt
+    CLASS CLASS K
+      CONSTRUCTOR public constructor K()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor J()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='K'
+      FUN public final fun publicMemberK(): kotlin.Unit
+        BLOCK_BODY
+      FUN private final fun privateMemberK(): kotlin.Unit
+        BLOCK_BODY
+      FUN public final fun kotlin.Any.publicMemberExtensionK(): kotlin.Unit
+        BLOCK_BODY
+      FUN private final fun kotlin.Any.privateMemberExtensionK(): kotlin.Unit
+        BLOCK_BODY
+    CLASS CLASS L
+      CONSTRUCTOR public constructor L()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor K()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='L'
+    FUN public fun kotlin.collections.Collection<kotlin.reflect.KFunction<*>>.names(): kotlin.collections.Set<kotlin.String>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='names() on Collection<KFunction<*>>: Set<String>'
+          CALL 'toSet() on Iterable<String>: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            $receiver: CALL 'map((KFunction<*>) -> String) on Iterable<KFunction<*>>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              $receiver: $RECEIVER of 'names() on Collection<KFunction<*>>: Set<String>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>>
+              transform: BLOCK type=(kotlin.reflect.KFunction<*>) -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KFunction<*>): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KFunction<*>): String'
+                      CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+                CALLABLE_REFERENCE '<anonymous>(KFunction<*>): String' type=(kotlin.reflect.KFunction<*>) -> kotlin.String operator=LAMBDA
+    FUN public fun check(c: kotlin.collections.Collection<kotlin.reflect.KFunction<*>>, names: kotlin.collections.Set<kotlin.String>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assertEquals(Set<String>, Set<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'value-parameter names: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+          actual: CALL 'names() on Collection<KFunction<*>>: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            $receiver: GET_VAR 'value-parameter c: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val any: kotlin.collections.Set<kotlin.String>
+          CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='equals'
+              CONST String type=kotlin.String value='hashCode'
+              CONST String type=kotlin.String value='toString'
+        VAR val j: kotlin.reflect.KClass<J>
+          CLASS_REFERENCE 'J' type=kotlin.reflect.KClass<J>
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-staticFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'j: KClass<J>' type=kotlin.reflect.KClass<J> operator=null
+          names: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='publicStaticJ'
+              CONST String type=kotlin.String value='privateStaticJ'
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-declaredFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'j: KClass<J>' type=kotlin.reflect.KClass<J> operator=null
+          names: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='publicMemberJ'
+              CONST String type=kotlin.String value='privateMemberJ'
+              CONST String type=kotlin.String value='publicStaticJ'
+              CONST String type=kotlin.String value='privateStaticJ'
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-declaredMemberFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'j: KClass<J>' type=kotlin.reflect.KClass<J> operator=null
+          names: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='publicMemberJ'
+              CONST String type=kotlin.String value='privateMemberJ'
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-declaredMemberExtensionFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'j: KClass<J>' type=kotlin.reflect.KClass<J> operator=null
+          names: CALL 'emptySet(): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-functions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'j: KClass<J>' type=kotlin.reflect.KClass<J> operator=null
+          names: CALL 'plus(Iterable<String>) on Set<String>: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=PLUS
+            $receiver: GET_VAR 'any: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: CALL 'names() on Collection<KFunction<*>>: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+              $receiver: CALL '<get-declaredFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+                $receiver: GET_VAR 'j: KClass<J>' type=kotlin.reflect.KClass<J> operator=null
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-memberFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'j: KClass<J>' type=kotlin.reflect.KClass<J> operator=null
+          names: CALL 'plus(Iterable<String>) on Set<String>: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=PLUS
+            $receiver: GET_VAR 'any: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: CALL 'names() on Collection<KFunction<*>>: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+              $receiver: CALL '<get-declaredMemberFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+                $receiver: GET_VAR 'j: KClass<J>' type=kotlin.reflect.KClass<J> operator=null
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-memberExtensionFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'j: KClass<J>' type=kotlin.reflect.KClass<J> operator=null
+          names: CALL 'emptySet(): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+        VAR val k: kotlin.reflect.KClass<K>
+          CLASS_REFERENCE 'K' type=kotlin.reflect.KClass<K>
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-staticFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'k: KClass<K>' type=kotlin.reflect.KClass<K> operator=null
+          names: CALL 'emptySet(): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-declaredFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'k: KClass<K>' type=kotlin.reflect.KClass<K> operator=null
+          names: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='publicMemberK'
+              CONST String type=kotlin.String value='privateMemberK'
+              CONST String type=kotlin.String value='publicMemberExtensionK'
+              CONST String type=kotlin.String value='privateMemberExtensionK'
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-declaredMemberFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'k: KClass<K>' type=kotlin.reflect.KClass<K> operator=null
+          names: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='publicMemberK'
+              CONST String type=kotlin.String value='privateMemberK'
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-declaredMemberExtensionFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'k: KClass<K>' type=kotlin.reflect.KClass<K> operator=null
+          names: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='publicMemberExtensionK'
+              CONST String type=kotlin.String value='privateMemberExtensionK'
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-memberFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'k: KClass<K>' type=kotlin.reflect.KClass<K> operator=null
+          names: CALL 'plus(Iterable<String>) on Set<String>: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=PLUS
+            $receiver: CALL 'plus(Iterable<String>) on Set<String>: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=PLUS
+              $receiver: GET_VAR 'any: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+              elements: CALL 'setOf(String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+                element: CONST String type=kotlin.String value='publicMemberJ'
+            elements: CALL 'names() on Collection<KFunction<*>>: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+              $receiver: CALL '<get-declaredMemberFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+                $receiver: GET_VAR 'k: KClass<K>' type=kotlin.reflect.KClass<K> operator=null
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-memberExtensionFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'k: KClass<K>' type=kotlin.reflect.KClass<K> operator=null
+          names: CALL 'names() on Collection<KFunction<*>>: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            $receiver: CALL '<get-declaredMemberExtensionFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+              $receiver: GET_VAR 'k: KClass<K>' type=kotlin.reflect.KClass<K> operator=null
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-functions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'k: KClass<K>' type=kotlin.reflect.KClass<K> operator=null
+          names: CALL 'plus(Iterable<String>) on Set<String>: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=PLUS
+            $receiver: GET_VAR 'any: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: CALL 'names() on Collection<KFunction<*>>: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+              $receiver: CALL 'plus(Iterable<KFunction<*>>) on Collection<KFunction<*>>: List<KFunction<*>>' type=kotlin.collections.List<kotlin.reflect.KFunction<*>> operator=PLUS
+                $receiver: CALL '<get-memberFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+                  $receiver: GET_VAR 'k: KClass<K>' type=kotlin.reflect.KClass<K> operator=null
+                elements: CALL '<get-memberExtensionFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+                  $receiver: GET_VAR 'k: KClass<K>' type=kotlin.reflect.KClass<K> operator=null
+        VAR val l: kotlin.reflect.KClass<L>
+          CLASS_REFERENCE 'L' type=kotlin.reflect.KClass<L>
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-staticFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'l: KClass<L>' type=kotlin.reflect.KClass<L> operator=null
+          names: CALL 'emptySet(): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-declaredFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'l: KClass<L>' type=kotlin.reflect.KClass<L> operator=null
+          names: CALL 'emptySet(): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-declaredMemberFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'l: KClass<L>' type=kotlin.reflect.KClass<L> operator=null
+          names: CALL 'emptySet(): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-declaredMemberExtensionFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'l: KClass<L>' type=kotlin.reflect.KClass<L> operator=null
+          names: CALL 'emptySet(): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-memberFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'l: KClass<L>' type=kotlin.reflect.KClass<L> operator=null
+          names: CALL 'plus(Iterable<String>) on Set<String>: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=PLUS
+            $receiver: GET_VAR 'any: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: CALL 'setOf(vararg String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+              elements: VARARG type=Array<out String> varargElementType=String
+                CONST String type=kotlin.String value='publicMemberJ'
+                CONST String type=kotlin.String value='publicMemberK'
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-memberExtensionFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'l: KClass<L>' type=kotlin.reflect.KClass<L> operator=null
+          names: CALL 'setOf(String): Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            element: CONST String type=kotlin.String value='publicMemberExtensionK'
+        CALL 'check(Collection<KFunction<*>>, Set<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL '<get-functions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'l: KClass<L>' type=kotlin.reflect.KClass<L> operator=null
+          names: CALL 'plus(Iterable<String>) on Set<String>: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=PLUS
+            $receiver: GET_VAR 'any: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            elements: CALL 'names() on Collection<KFunction<*>>: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+              $receiver: CALL 'plus(Iterable<KFunction<*>>) on Collection<KFunction<*>>: List<KFunction<*>>' type=kotlin.collections.List<kotlin.reflect.KFunction<*>> operator=PLUS
+                $receiver: CALL '<get-memberFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+                  $receiver: GET_VAR 'l: KClass<L>' type=kotlin.reflect.KClass<L> operator=null
+                elements: CALL '<get-memberExtensionFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+                  $receiver: GET_VAR 'l: KClass<L>' type=kotlin.reflect.KClass<L> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

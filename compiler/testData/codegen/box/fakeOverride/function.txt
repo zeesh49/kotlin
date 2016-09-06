@@ -1,0 +1,86 @@
+MODULE <test-module>
+  FILE /function.kt
+    CLASS INTERFACE T
+      FUN public abstract fun foo(): kotlin.Unit
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public open override fun foo(): kotlin.Unit
+        BLOCK_BODY
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+    CLASS INTERFACE U
+    CLASS CLASS D
+      CONSTRUCTOR public constructor D()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='D'
+    CLASS CLASS E
+      CONSTRUCTOR public constructor E()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='E'
+    CLASS CLASS F
+      CONSTRUCTOR public constructor F()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='F'
+    CLASS CLASS G
+      CONSTRUCTOR public constructor G()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='G'
+    CLASS CLASS H
+      CONSTRUCTOR public constructor H()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='H'
+    CLASS CLASS I
+      CONSTRUCTOR public constructor I()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='I'
+    CLASS CLASS J
+      CONSTRUCTOR public constructor J()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='J'
+    CLASS CLASS K
+      CONSTRUCTOR public constructor K()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='K'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor B()' type=B operator=null
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor C()' type=C operator=null
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor D()' type=D operator=null
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor E()' type=E operator=null
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor F()' type=F operator=null
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor G()' type=G operator=null
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor H()' type=H operator=null
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor I()' type=I operator=null
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor J()' type=J operator=null
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor K()' type=K operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

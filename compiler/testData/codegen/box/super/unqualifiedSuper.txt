@@ -1,0 +1,157 @@
+MODULE <test-module>
+  FILE /unqualifiedSuper.kt
+    CLASS CLASS Base
+      CONSTRUCTOR public constructor Base()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Base'
+      FUN public open fun baseFun(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='baseFun(): String'
+            CONST String type=kotlin.String value='Base.baseFun()'
+      FUN public open fun unambiguous(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='unambiguous(): String'
+            CONST String type=kotlin.String value='Base.unambiguous()'
+      PROPERTY public open val baseProp: kotlin.String
+        PROPERTY_GETTER public open fun <get-baseProp>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-baseProp>(): String'
+              CONST String type=kotlin.String value='Base.baseProp'
+    CLASS INTERFACE Interface
+      FUN public open fun interfaceFun(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='interfaceFun(): String'
+            CONST String type=kotlin.String value='Interface.interfaceFun()'
+      FUN public abstract fun unambiguous(): kotlin.String
+    CLASS INTERFACE AnotherInterface
+    CLASS INTERFACE DerivedInterface
+      FUN public open override fun interfaceFun(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='interfaceFun(): String'
+            CONST String type=kotlin.String value='DerivedInterface.interfaceFun()'
+      FUN public open override fun unambiguous(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='unambiguous(): String'
+            CONST String type=kotlin.String value='DerivedInterface.unambiguous()'
+      FUN public open fun callsFunFromSuperInterface(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='callsFunFromSuperInterface(): String'
+            CALL 'interfaceFun(): String' superQualifier=Interface type=kotlin.String operator=null
+              $this: THIS of 'DerivedInterface' type=Interface
+    CLASS CLASS Derived
+      CONSTRUCTOR public constructor Derived()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Base()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Derived'
+      FUN public open override fun baseFun(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='baseFun(): String'
+            CONST String type=kotlin.String value='Derived.baseFun()'
+      FUN public open override fun unambiguous(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='unambiguous(): String'
+            CONST String type=kotlin.String value='Derived.unambiguous()'
+      FUN public open override fun interfaceFun(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='interfaceFun(): String'
+            CONST String type=kotlin.String value='Derived.interfaceFun()'
+      PROPERTY public open override val baseProp: kotlin.String
+        PROPERTY_GETTER public open override fun <get-baseProp>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-baseProp>(): String'
+              CONST String type=kotlin.String value='Derived.baseProp'
+      FUN public final fun callsBaseFun(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='callsBaseFun(): String'
+            CALL 'baseFun(): String' superQualifier=Base type=kotlin.String operator=null
+              $this: THIS of 'Derived' type=Base
+      FUN public final fun callsUnambiguousFun(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='callsUnambiguousFun(): String'
+            CALL 'unambiguous(): String' superQualifier=Base type=kotlin.String operator=null
+              $this: THIS of 'Derived' type=Base
+      FUN public final fun getsBaseProp(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getsBaseProp(): String'
+            CALL '<get-baseProp>(): String' superQualifier=Base type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'Derived' type=Base
+      FUN public final fun callsInterfaceFun(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='callsInterfaceFun(): String'
+            CALL 'interfaceFun(): String' superQualifier=Interface type=kotlin.String operator=null
+              $this: THIS of 'Derived' type=Interface
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val d: Derived
+          CALL 'constructor Derived()' type=Derived operator=null
+        VAR val test1: kotlin.String
+          CALL 'callsBaseFun(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'd: Derived' type=Derived operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test1: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='Base.baseFun()'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed: d.callsBaseFun()=='
+              GET_VAR 'test1: String' type=kotlin.String operator=null
+        VAR val test2: kotlin.String
+          CALL 'callsUnambiguousFun(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'd: Derived' type=Derived operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test2: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='Base.unambiguous()'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed: d.callsUnambiguousFun()=='
+              GET_VAR 'test2: String' type=kotlin.String operator=null
+        VAR val test3: kotlin.String
+          CALL 'getsBaseProp(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'd: Derived' type=Derived operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test3: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='Base.baseProp'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed: d.getsBaseProp()=='
+              GET_VAR 'test3: String' type=kotlin.String operator=null
+        VAR val test4: kotlin.String
+          CALL 'callsInterfaceFun(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'd: Derived' type=Derived operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test4: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='Interface.interfaceFun()'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed: d.callsInterfaceFun()=='
+              GET_VAR 'test4: String' type=kotlin.String operator=null
+        VAR val di: box.<no name provided>
+          BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+            CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL
+        VAR val test5: kotlin.String
+          CALL 'callsFunFromSuperInterface(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'di: <no name provided>' type=box.<no name provided> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test5: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='Interface.interfaceFun()'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed: di.callsFunFromSuperInterface()=='
+              GET_VAR 'test5: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

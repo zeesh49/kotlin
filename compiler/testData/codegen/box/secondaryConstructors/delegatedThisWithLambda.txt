@@ -1,0 +1,39 @@
+MODULE <test-module>
+  FILE /delegatedThisWithLambda.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(f: () -> kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'f: () -> Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter f: () -> Int' type=() -> kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val f: () -> kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter f: () -> Int' type=() -> kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A(() -> Int)'
+            f: BLOCK type=() -> kotlin.Int operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Int'
+                    CONST Int type=kotlin.Int value='23'
+              CALLABLE_REFERENCE '<anonymous>(): Int' type=() -> kotlin.Int operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val result: kotlin.Int
+          CALL 'invoke(): Int' type=kotlin.Int operator=INVOKE
+            $this: CALL '<get-f>(): () -> Int' type=() -> kotlin.Int operator=GET_PROPERTY
+              $this: CALL 'constructor A()' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='23'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: '
+              GET_VAR 'result: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

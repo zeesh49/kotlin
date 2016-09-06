@@ -1,0 +1,46 @@
+MODULE <test-module>
+  FILE /kt3523.kt
+    CLASS CLASS Base
+      CONSTRUCTOR public constructor Base()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Base'
+      FUN public final fun doSomething(): kotlin.Unit
+        BLOCK_BODY
+    CLASS CLASS X
+      CONSTRUCTOR public constructor X(action: () -> kotlin.Unit)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'action: () -> Unit' type=kotlin.Unit operator=null
+            receiver: THIS of 'X' type=X
+            value: GET_VAR 'value-parameter action: () -> Unit' type=() -> kotlin.Unit operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='X'
+      PROPERTY public final val action: () -> kotlin.Unit
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter action: () -> Unit' type=() -> kotlin.Unit operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS Foo
+      CONSTRUCTOR public constructor Foo()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Base()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      CLASS CLASS Bar
+        CONSTRUCTOR public constructor Bar()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Bar'
+        PROPERTY public final val x: X
+          EXPRESSION_BODY
+            CALL 'constructor X(() -> Unit)' type=X operator=null
+              action: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.Unit
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                      CALL 'doSomething(): Unit' type=kotlin.Unit operator=null
+                        $this: THIS of 'Foo' type=Foo
+                CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'constructor Bar()' type=Foo.Bar operator=null
+          $this: CALL 'constructor Foo()' type=Foo operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

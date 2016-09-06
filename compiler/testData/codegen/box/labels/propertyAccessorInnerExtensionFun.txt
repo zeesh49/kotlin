@@ -1,0 +1,58 @@
+MODULE <test-module>
+  FILE /propertyAccessorInnerExtensionFun.kt
+    PROPERTY public val kotlin.Int.getter: kotlin.Int
+      PROPERTY_GETTER public fun kotlin.Int.<get-getter>(): kotlin.Int
+        BLOCK_BODY
+          VAR val extFun: kotlin.Int.() -> kotlin.Int
+            BLOCK type=kotlin.Int.() -> kotlin.Int operator=LAMBDA
+              FUN local final fun kotlin.Int.<anonymous>(): kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Int: Int'
+                    $RECEIVER of 'getter: Int on Int' type=kotlin.Int
+              CALLABLE_REFERENCE '<anonymous>() on Int: Int' type=kotlin.Int.() -> kotlin.Int operator=LAMBDA
+          RETURN type=kotlin.Nothing from='<get-getter>() on Int: Int'
+            CALL 'invoke() on Int: Int' type=kotlin.Int operator=INVOKE
+              $this: GET_VAR 'extFun: Int.() -> Int' type=kotlin.Int.() -> kotlin.Int operator=VARIABLE_AS_FUNCTION
+              $receiver: $RECEIVER of 'getter: Int on Int' type=kotlin.Int
+    PROPERTY public var kotlin.Int.setter: kotlin.Int
+      PROPERTY_GETTER public fun kotlin.Int.<get-setter>(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-setter>() on Int: Int'
+            CONST Int type=kotlin.Int value='1'
+      PROPERTY_SETTER public fun kotlin.Int.<set-setter>(i: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+          VAR val extFun: kotlin.Int.() -> kotlin.Int
+            BLOCK type=kotlin.Int.() -> kotlin.Int operator=LAMBDA
+              FUN local final fun kotlin.Int.<anonymous>(): kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Int: Int'
+                    $RECEIVER of 'setter: Int on Int' type=kotlin.Int
+              CALLABLE_REFERENCE '<anonymous>() on Int: Int' type=kotlin.Int.() -> kotlin.Int operator=LAMBDA
+          CALL 'invoke() on Int: Int' type=kotlin.Int operator=INVOKE
+            $this: GET_VAR 'extFun: Int.() -> Int' type=kotlin.Int.() -> kotlin.Int operator=VARIABLE_AS_FUNCTION
+            $receiver: $RECEIVER of 'setter: Int on Int' type=kotlin.Int
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val i: kotlin.Int = 1
+          CONST Int type=kotlin.Int value='1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-getter>() on Int: Int' type=kotlin.Int operator=GET_PROPERTY
+                $receiver: GET_VAR 'i: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='getter failed'
+        CALL '<set-setter>(Int) on Int: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 'i: Int' type=kotlin.Int operator=null
+          i: CONST Int type=kotlin.Int value='1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-setter>() on Int: Int' type=kotlin.Int operator=GET_PROPERTY
+                $receiver: GET_VAR 'i: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='setter failed'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

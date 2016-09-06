@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /kt3930.kt
+    CLASS CLASS Foo
+      CONSTRUCTOR public constructor Foo()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      PROPERTY public final var isOpen: kotlin.Boolean
+        EXPRESSION_BODY
+          CONST Boolean type=kotlin.Boolean value='true'
+        PROPERTY_SETTER private final fun <set-isOpen>(<set-?>: kotlin.Boolean): kotlin.Unit
+    CLASS CLASS Bar
+      CONSTRUCTOR public constructor Bar()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Foo()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Bar'
+      CLASS CLASS Baz
+        CONSTRUCTOR public constructor Baz()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Baz'
+        FUN public final fun call(): kotlin.Unit
+          BLOCK_BODY
+            VAR val s: Bar
+              THIS of 'Bar' type=Bar
+            CALL '<get-isOpen>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+              $this: GET_VAR 's: Bar' type=Bar operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'constructor Baz()' type=Bar.Baz operator=null
+          $this: CALL 'constructor Bar()' type=Bar operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /kt1737.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(): String' type=kotlin.String operator=null
+            $this: BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                FUN public final fun foo(): kotlin.String
+                  BLOCK_BODY
+                    VAR val f: () -> kotlin.Unit
+                      BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                        FUN local final fun <anonymous>(): kotlin.Unit
+                          BLOCK_BODY
+                            RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                        CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+                    BLOCK type=box.<no name provided>.foo.<no name provided> operator=OBJECT_LITERAL
+                      CLASS CLASS <no name provided>
+                        CONSTRUCTOR public constructor <no name provided>()
+                          BLOCK_BODY
+                            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                            INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                        FUN public open override fun run(): kotlin.Unit
+                          BLOCK_BODY
+                            CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+                              $this: GET_VAR 'f: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+                      CALL 'constructor <no name provided>()' type=box.<no name provided>.foo.<no name provided> operator=OBJECT_LITERAL
+                    RETURN type=kotlin.Nothing from='foo(): String'
+                      CONST String type=kotlin.String value='OK'
+              CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL

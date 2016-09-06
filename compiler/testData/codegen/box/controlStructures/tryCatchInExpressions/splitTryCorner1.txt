@@ -1,0 +1,20 @@
+MODULE <test-module>
+  FILE /splitTryCorner1.kt
+    FUN public fun shouldReturnFalse(): kotlin.Boolean
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='shouldReturnFalse(): Boolean'
+              CONST Boolean type=kotlin.Boolean value='true'
+          finally: BLOCK type=kotlin.Unit operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CONST Boolean type=kotlin.Boolean value='true'
+              then: RETURN type=kotlin.Nothing from='shouldReturnFalse(): Boolean'
+                CONST Boolean type=kotlin.Boolean value='false'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'shouldReturnFalse(): Boolean' type=kotlin.Boolean operator=null
+            then: CONST String type=kotlin.String value='Failed'
+            else: CONST String type=kotlin.String value='OK'

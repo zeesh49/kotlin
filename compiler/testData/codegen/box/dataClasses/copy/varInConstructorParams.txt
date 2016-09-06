@@ -1,0 +1,199 @@
+MODULE <test-module>
+  FILE /varInConstructorParams.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(a: kotlin.Int, b: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'a: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter a: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'b: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter b: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var a: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter a: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final var b: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter b: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final operator fun component1(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component1(): Int'
+            CALL '<get-a>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+      FUN public final operator fun component2(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component2(): String'
+            CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+      FUN public final fun copy(a: kotlin.Int = ..., b: kotlin.String = ...): A
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='copy(Int = ..., String = ...): A'
+            CALL 'constructor A(Int, String)' type=A operator=null
+              a: GET_VAR 'value-parameter a: Int = ...' type=kotlin.Int operator=null
+              b: GET_VAR 'value-parameter b: String = ...' type=kotlin.String operator=null
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='A('
+              CONST String type=kotlin.String value='a='
+              CALL '<get-a>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+              CONST String type=kotlin.String value=', '
+              CONST String type=kotlin.String value='b='
+              CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+              CONST String type=kotlin.String value=')'
+      FUN public open override fun hashCode(): kotlin.Int
+        BLOCK_BODY
+          VAR val tmp0_result: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          SET_VAR 'tmp0_result: Int' type=kotlin.Unit operator=EQ
+            CALL 'hashCode(): Int' type=kotlin.Int operator=null
+              $this: CALL '<get-a>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+          SET_VAR 'tmp0_result: Int' type=kotlin.Unit operator=EQ
+            CALL 'plus(Int): Int' type=kotlin.Int operator=null
+              $this: CALL 'times(Int): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'tmp0_result: Int' type=kotlin.Int operator=null
+                other: CONST Int type=kotlin.Int value='31'
+              other: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+                $this: CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: THIS of 'A' type=A
+          RETURN type=kotlin.Nothing from='hashCode(): Int'
+            GET_VAR 'tmp0_result: Int' type=kotlin.Int operator=null
+      FUN public open override fun equals(other: kotlin.Any?): kotlin.Boolean
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+              arg0: THIS of 'A' type=A
+              arg1: GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='true'
+          WHEN type=kotlin.Unit operator=null
+            if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=A
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          VAR val tmp0_other_with_cast: A
+            TYPE_OP operator=CAST typeOperand=A
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-a>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'A' type=A
+                arg1: CALL '<get-a>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'tmp0_other_with_cast: A' type=A operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: THIS of 'A' type=A
+                arg1: CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: GET_VAR 'tmp0_other_with_cast: A' type=A operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.String
+          CONST String type=kotlin.String value=''
+        VAR val a: A
+          CALL 'constructor A(Int, String)' type=A operator=null
+            a: CONST Int type=kotlin.Int value='1'
+            b: CONST String type=kotlin.String value='a'
+        VAR val b: A
+          CALL 'copy(Int = ..., String = ...): A' type=A operator=null
+            $this: GET_VAR 'a: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=ANDAND
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-a>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'b: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+            then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'b: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='a'
+            else: CONST Boolean type=kotlin.Boolean value='false'
+          then: BLOCK type=kotlin.Unit operator=null
+            SET_VAR 'result: String' type=kotlin.Unit operator=PLUSEQ
+              CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: GET_VAR 'result: String' type=kotlin.String operator=PLUSEQ
+                other: CONST String type=kotlin.String value='1'
+        VAR val c: A
+          CALL 'copy(Int = ..., String = ...): A' type=A operator=null
+            $this: GET_VAR 'a: A' type=A operator=null
+            a: CONST Int type=kotlin.Int value='2'
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=ANDAND
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-a>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'c: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+            then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'c: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='a'
+            else: CONST Boolean type=kotlin.Boolean value='false'
+          then: BLOCK type=kotlin.Unit operator=null
+            SET_VAR 'result: String' type=kotlin.Unit operator=PLUSEQ
+              CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: GET_VAR 'result: String' type=kotlin.String operator=PLUSEQ
+                other: CONST String type=kotlin.String value='2'
+        VAR val d: A
+          CALL 'copy(Int = ..., String = ...): A' type=A operator=null
+            $this: GET_VAR 'a: A' type=A operator=null
+            b: CONST String type=kotlin.String value='b'
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=ANDAND
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-a>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'd: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+            then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'd: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='b'
+            else: CONST Boolean type=kotlin.Boolean value='false'
+          then: BLOCK type=kotlin.Unit operator=null
+            SET_VAR 'result: String' type=kotlin.Unit operator=PLUSEQ
+              CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: GET_VAR 'result: String' type=kotlin.String operator=PLUSEQ
+                other: CONST String type=kotlin.String value='3'
+        VAR val e: A
+          CALL 'copy(Int = ..., String = ...): A' type=A operator=null
+            $this: GET_VAR 'a: A' type=A operator=null
+            a: CONST Int type=kotlin.Int value='2'
+            b: CONST String type=kotlin.String value='b'
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=ANDAND
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-a>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'e: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+            then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'e: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='b'
+            else: CONST Boolean type=kotlin.Boolean value='false'
+          then: BLOCK type=kotlin.Unit operator=null
+            SET_VAR 'result: String' type=kotlin.Unit operator=PLUSEQ
+              CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: GET_VAR 'result: String' type=kotlin.String operator=PLUSEQ
+                other: CONST String type=kotlin.String value='4'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'result: String' type=kotlin.String operator=null
+            arg1: CONST String type=kotlin.String value='1234'
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='fail'

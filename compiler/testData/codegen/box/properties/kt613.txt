@@ -1,0 +1,96 @@
+MODULE <test-module>
+  FILE /kt613.kt
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      PROPERTY public final var i: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='5'
+      PROPERTY public final val ten: kotlin.Long = 10.toLong()
+        EXPRESSION_BODY
+          CALL 'toLong(): Long' type=kotlin.Long operator=null
+            $this: CONST Int type=kotlin.Int value='10'
+      FUN public final fun kotlin.Long.t(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='t() on Long: Int'
+            CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+              $this: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CALL 'toInt(): Int' type=kotlin.Int operator=null
+                  $this: $RECEIVER of 't() on Long: Int' type=kotlin.Long
+                other: BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                  VAR val tmp0_this: name.Test
+                    THIS of 'Test' type=name.Test
+                  BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                    VAR val tmp1: kotlin.Int
+                      CALL '<get-i>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                        $this: GET_VAR 'tmp0_this: Test' type=name.Test operator=null
+                    CALL '<set-i>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp0_this: Test' type=name.Test operator=null
+                      <set-?>: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                        $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                    GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+              other: BLOCK type=kotlin.Int operator=PREFIX_INCR
+                VAR val tmp2_this: name.Test
+                  THIS of 'Test' type=name.Test
+                BLOCK type=kotlin.Int operator=PREFIX_INCR
+                  VAR val tmp3: kotlin.Int
+                    CALL 'inc(): Int' type=kotlin.Int operator=PREFIX_INCR
+                      $this: CALL '<get-i>(): Int' type=kotlin.Int operator=PREFIX_INCR
+                        $this: GET_VAR 'tmp2_this: Test' type=name.Test operator=null
+                  CALL '<set-i>(Int): Unit' type=kotlin.Unit operator=PREFIX_INCR
+                    $this: GET_VAR 'tmp2_this: Test' type=name.Test operator=null
+                    <set-?>: GET_VAR 'tmp3: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp3: Int' type=kotlin.Int operator=null
+      FUN public final fun tt(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='tt(): Int'
+            CALL 't() on Long: Int' type=kotlin.Int operator=null
+              $this: THIS of 'Test' type=name.Test
+              $receiver: CALL '<get-ten>(): Long' type=kotlin.Long operator=GET_PROPERTY
+                $this: THIS of 'Test' type=name.Test
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var m: name.Test
+          CALL 'constructor Test()' type=name.Test operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: WHEN type=kotlin.Boolean operator=ANDAND
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                    VAR val tmp0_this: name.Test
+                      GET_VAR 'm: Test' type=name.Test operator=null
+                    BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                      VAR val tmp1: kotlin.Int
+                        CALL '<get-i>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                          $this: GET_VAR 'tmp0_this: Test' type=name.Test operator=null
+                      CALL '<set-i>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+                        $this: GET_VAR 'tmp0_this: Test' type=name.Test operator=null
+                        <set-?>: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                          $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                      GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                  arg1: CONST Int type=kotlin.Int value='5'
+                then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: BLOCK type=kotlin.Int operator=PREFIX_INCR
+                    VAR val tmp2_this: name.Test
+                      GET_VAR 'm: Test' type=name.Test operator=null
+                    BLOCK type=kotlin.Int operator=PREFIX_INCR
+                      VAR val tmp3: kotlin.Int
+                        CALL 'inc(): Int' type=kotlin.Int operator=PREFIX_INCR
+                          $this: CALL '<get-i>(): Int' type=kotlin.Int operator=PREFIX_INCR
+                            $this: GET_VAR 'tmp2_this: Test' type=name.Test operator=null
+                      CALL '<set-i>(Int): Unit' type=kotlin.Unit operator=PREFIX_INCR
+                        $this: GET_VAR 'tmp2_this: Test' type=name.Test operator=null
+                        <set-?>: GET_VAR 'tmp3: Int' type=kotlin.Int operator=null
+                      GET_VAR 'tmp3: Int' type=kotlin.Int operator=null
+                  arg1: CONST Int type=kotlin.Int value='7'
+                else: CONST Boolean type=kotlin.Boolean value='false'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL 'tt(): Int' type=kotlin.Int operator=null
+                  $this: GET_VAR 'm: Test' type=name.Test operator=null
+                arg1: CONST Int type=kotlin.Int value='26'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

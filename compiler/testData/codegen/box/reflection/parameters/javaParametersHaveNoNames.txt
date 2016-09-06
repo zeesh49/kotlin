@@ -1,0 +1,35 @@
+MODULE <test-module>
+  FILE /K.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(List<String?>, List<String?>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(vararg Nothing?): List<Nothing?>' type=kotlin.collections.List<kotlin.Nothing?> operator=null
+            elements: VARARG type=Array<out Nothing?> varargElementType=Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+              CONST Null type=kotlin.Nothing? value='null'
+              CONST Null type=kotlin.Nothing? value='null'
+          actual: CALL 'map((KParameter) -> String?) on Iterable<KParameter>: List<String?>' type=kotlin.collections.List<kotlin.String?> operator=null
+            $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'foo(String!, Int): Unit' type=kotlin.reflect.KFunction3<J, kotlin.String!, kotlin.Int, kotlin.Unit> operator=null
+            transform: BLOCK type=(kotlin.reflect.KParameter) -> kotlin.String? operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KParameter): kotlin.String?
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KParameter): String?'
+                    CALL '<get-name>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                      $this: GET_VAR 'value-parameter it: KParameter' type=kotlin.reflect.KParameter operator=null
+              CALLABLE_REFERENCE '<anonymous>(KParameter): String?' type=(kotlin.reflect.KParameter) -> kotlin.String? operator=LAMBDA
+        CALL 'assertEquals(List<String?>, List<String?>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(Nothing?): List<Nothing?>' type=kotlin.collections.List<kotlin.Nothing?> operator=null
+            element: CONST Null type=kotlin.Nothing? value='null'
+          actual: CALL 'map((KParameter) -> String?) on Iterable<KParameter>: List<String?>' type=kotlin.collections.List<kotlin.String?> operator=null
+            $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'bar(J!): Unit' type=kotlin.reflect.KFunction1<J!, kotlin.Unit> operator=null
+            transform: BLOCK type=(kotlin.reflect.KParameter) -> kotlin.String? operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KParameter): kotlin.String?
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KParameter): String?'
+                    CALL '<get-name>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                      $this: GET_VAR 'value-parameter it: KParameter' type=kotlin.reflect.KParameter operator=null
+              CALLABLE_REFERENCE '<anonymous>(KParameter): String?' type=(kotlin.reflect.KParameter) -> kotlin.String? operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

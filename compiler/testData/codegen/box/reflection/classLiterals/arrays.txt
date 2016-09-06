@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /arrays.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val any: kotlin.reflect.KClass<kotlin.Array<kotlin.Any>>
+          CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Any>>
+        VAR val string: kotlin.reflect.KClass<kotlin.Array<kotlin.String>>
+          CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.String>>
+        CALL 'assertNotEquals(KClass<*>, KClass<*>, String? = ...): Unit' type=kotlin.Unit operator=null
+          illegal: GET_VAR 'any: KClass<Array<Any>>' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Any>> operator=null
+          actual: GET_VAR 'string: KClass<Array<String>>' type=kotlin.reflect.KClass<kotlin.Array<kotlin.String>> operator=null
+        CALL 'assertNotEquals(Class<*>, Class<*>, String? = ...): Unit' type=kotlin.Unit operator=null
+          illegal: CALL '<get-java>() on KClass<Array<Any>>: Class<Array<Any>>' type=java.lang.Class<kotlin.Array<kotlin.Any>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'any: KClass<Array<Any>>' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Any>> operator=null
+          actual: CALL '<get-java>() on KClass<Array<String>>: Class<Array<String>>' type=java.lang.Class<kotlin.Array<kotlin.String>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'string: KClass<Array<String>>' type=kotlin.reflect.KClass<kotlin.Array<kotlin.String>> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

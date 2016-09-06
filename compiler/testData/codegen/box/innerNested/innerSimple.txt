@@ -1,0 +1,22 @@
+MODULE <test-module>
+  FILE /innerSimple.kt
+    CLASS CLASS Outer
+      CONSTRUCTOR public constructor Outer()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+        FUN public final fun box(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'box(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Inner()' type=Outer.Inner operator=null
+              $this: CALL 'constructor Outer()' type=Outer operator=null

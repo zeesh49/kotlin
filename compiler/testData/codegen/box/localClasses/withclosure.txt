@@ -1,0 +1,17 @@
+MODULE <test-module>
+  FILE /withclosure.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.String = "OK"
+          CONST String type=kotlin.String value='OK'
+        CLASS CLASS Aaa
+          CONSTRUCTOR public constructor Aaa()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='Aaa'
+          PROPERTY public final val y: kotlin.String = "OK"
+            EXPRESSION_BODY
+              GET_VAR 'x: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-y>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor Aaa()' type=box.Aaa operator=null

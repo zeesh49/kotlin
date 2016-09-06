@@ -1,0 +1,29 @@
+MODULE <test-module>
+  FILE /kt4777.kt
+    PROPERTY public var result: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='Fail'
+    PROPERTY public val p: java.lang.Runnable
+      EXPRESSION_BODY
+        BLOCK type=p.<no name provided> operator=OBJECT_LITERAL
+          CLASS CLASS <no name provided>
+            CONSTRUCTOR public constructor <no name provided>()
+              BLOCK_BODY
+                DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+            FUN public open override fun run(): kotlin.Unit
+              BLOCK_BODY
+                FUN local final fun <T : kotlin.Any> T.id(): T
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='id() on T: T'
+                      $RECEIVER of 'id() on T: T' type=T
+                CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+                  <set-?>: CALL 'id() on String: String' type=kotlin.String operator=null
+                    $receiver: CONST String type=kotlin.String value='OK'
+          CALL 'constructor <no name provided>()' type=p.<no name provided> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'run(): Unit' type=kotlin.Unit operator=null
+          $this: CALL '<get-p>(): Runnable' type=java.lang.Runnable operator=GET_PROPERTY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY

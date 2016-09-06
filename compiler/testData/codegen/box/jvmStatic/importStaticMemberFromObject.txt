@@ -1,0 +1,53 @@
+MODULE <test-module>
+  FILE /importStaticMemberFromObject.kt
+    CLASS OBJECT O
+      CONSTRUCTOR private constructor O()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='O'
+      FUN @kotlin.jvm.JvmStatic public final fun f(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='f(): Int'
+            CONST Int type=kotlin.Int value='3'
+      PROPERTY @kotlin.jvm.JvmStatic public final val p: kotlin.Int = 6
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='6'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      CLASS OBJECT companion object of C
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of C'
+        FUN @kotlin.jvm.JvmStatic public final fun f1(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='f1(): Int'
+              CONST Int type=kotlin.Int value='3'
+        PROPERTY @kotlin.jvm.JvmStatic public final val p1: kotlin.Int = 6
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='6'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CALL '<get-p>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                other: CALL 'f(): Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='9'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CALL '<get-p1>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                other: CALL 'f1(): Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='9'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

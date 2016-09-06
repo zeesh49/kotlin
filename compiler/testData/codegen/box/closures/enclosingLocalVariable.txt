@@ -1,0 +1,43 @@
+MODULE <test-module>
+  FILE /enclosingLocalVariable.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val cl: kotlin.Int = 39
+          CONST Int type=kotlin.Int value='39'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'sum(Int, () -> Int): Int' type=kotlin.Int operator=null
+                arg: CONST Int type=kotlin.Int value='200'
+                f: BLOCK type=() -> kotlin.Int operator=LAMBDA
+                  FUN local final fun <anonymous>(): kotlin.Int
+                    BLOCK_BODY
+                      VAR val m: () -> kotlin.Int
+                        BLOCK type=() -> kotlin.Int operator=LAMBDA
+                          FUN local final fun <anonymous>(): kotlin.Int
+                            BLOCK_BODY
+                              VAR val r: () -> kotlin.Int
+                                BLOCK type=() -> kotlin.Int operator=LAMBDA
+                                  FUN local final fun <anonymous>(): kotlin.Int
+                                    BLOCK_BODY
+                                      RETURN type=kotlin.Nothing from='<anonymous>(): Int'
+                                        GET_VAR 'cl: Int' type=kotlin.Int operator=null
+                                  CALLABLE_REFERENCE '<anonymous>(): Int' type=() -> kotlin.Int operator=LAMBDA
+                              RETURN type=kotlin.Nothing from='<anonymous>(): Int'
+                                CALL 'invoke(): Int' type=kotlin.Int operator=INVOKE
+                                  $this: GET_VAR 'r: () -> Int' type=() -> kotlin.Int operator=VARIABLE_AS_FUNCTION
+                          CALLABLE_REFERENCE '<anonymous>(): Int' type=() -> kotlin.Int operator=LAMBDA
+                      RETURN type=kotlin.Nothing from='<anonymous>(): Int'
+                        CALL 'invoke(): Int' type=kotlin.Int operator=INVOKE
+                          $this: GET_VAR 'm: () -> Int' type=() -> kotlin.Int operator=VARIABLE_AS_FUNCTION
+                  CALLABLE_REFERENCE '<anonymous>(): Int' type=() -> kotlin.Int operator=LAMBDA
+              arg1: CONST Int type=kotlin.Int value='239'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='FAIL'
+    FUN public fun sum(arg: kotlin.Int, f: () -> kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='sum(Int, () -> Int): Int'
+          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+            $this: GET_VAR 'value-parameter arg: Int' type=kotlin.Int operator=null
+            other: CALL 'invoke(): Int' type=kotlin.Int operator=INVOKE
+              $this: GET_VAR 'value-parameter f: () -> Int' type=() -> kotlin.Int operator=VARIABLE_AS_FUNCTION

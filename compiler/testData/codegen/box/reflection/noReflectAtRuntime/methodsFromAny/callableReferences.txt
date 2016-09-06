@@ -1,0 +1,55 @@
+MODULE <test-module>
+  FILE /callableReferences.kt
+    CLASS CLASS M
+      CONSTRUCTOR public constructor M()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='M'
+      FUN public final fun foo(): kotlin.Unit
+        BLOCK_BODY
+      PROPERTY public final val bar: kotlin.Int = 1
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+    FUN public fun checkEquals(x: kotlin.reflect.KCallable<*>, y: kotlin.reflect.KCallable<*>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assertEquals(KCallable<*>, KCallable<*>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'value-parameter x: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+          actual: GET_VAR 'value-parameter y: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+        CALL 'assertEquals(KCallable<*>, KCallable<*>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'value-parameter y: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+          actual: GET_VAR 'value-parameter x: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'value-parameter x: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+          actual: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'value-parameter y: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+    FUN public fun checkToString(x: kotlin.reflect.KCallable<*>, expected: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: GET_VAR 'value-parameter expected: String' type=kotlin.String operator=null
+            other: CONST String type=kotlin.String value=' (Kotlin reflection is not available)'
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'value-parameter x: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'checkEquals(KCallable<*>, KCallable<*>): Unit' type=kotlin.Unit operator=null
+          x: CALLABLE_REFERENCE 'foo(): Unit' type=kotlin.reflect.KFunction1<M, kotlin.Unit> operator=null
+          y: CALLABLE_REFERENCE 'foo(): Unit' type=kotlin.reflect.KFunction1<M, kotlin.Unit> operator=null
+        CALL 'checkEquals(KCallable<*>, KCallable<*>): Unit' type=kotlin.Unit operator=null
+          x: CALLABLE_REFERENCE 'bar: Int' type=kotlin.reflect.KProperty1<M, kotlin.Int> operator=null
+          y: CALLABLE_REFERENCE 'bar: Int' type=kotlin.reflect.KProperty1<M, kotlin.Int> operator=null
+        CALL 'checkEquals(KCallable<*>, KCallable<*>): Unit' type=kotlin.Unit operator=null
+          x: CALLABLE_REFERENCE 'constructor M()' type=kotlin.reflect.KFunction0<M> operator=null
+          y: CALLABLE_REFERENCE 'constructor M()' type=kotlin.reflect.KFunction0<M> operator=null
+        CALL 'checkToString(KCallable<*>, String): Unit' type=kotlin.Unit operator=null
+          x: CALLABLE_REFERENCE 'foo(): Unit' type=kotlin.reflect.KFunction1<M, kotlin.Unit> operator=null
+          expected: CONST String type=kotlin.String value='function foo'
+        CALL 'checkToString(KCallable<*>, String): Unit' type=kotlin.Unit operator=null
+          x: CALLABLE_REFERENCE 'bar: Int' type=kotlin.reflect.KProperty1<M, kotlin.Int> operator=null
+          expected: CONST String type=kotlin.String value='property bar'
+        CALL 'checkToString(KCallable<*>, String): Unit' type=kotlin.Unit operator=null
+          x: CALLABLE_REFERENCE 'constructor M()' type=kotlin.reflect.KFunction0<M> operator=null
+          expected: CONST String type=kotlin.String value='constructor'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

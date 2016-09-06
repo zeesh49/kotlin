@@ -1,0 +1,13 @@
+MODULE <test-module>
+  FILE /fieldSimple.kt
+    PROPERTY public val x: kotlin.String = "OK"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='OK'
+      PROPERTY_GETTER public fun <get-x>(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-x>(): String'
+            GET_VAR 'field: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-x>(): String' type=kotlin.String operator=GET_PROPERTY

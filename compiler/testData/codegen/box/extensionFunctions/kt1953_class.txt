@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /kt1953_class.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY private final val sb: java.lang.StringBuilder
+        EXPRESSION_BODY
+          CALL 'constructor StringBuilder()' type=java.lang.StringBuilder operator=null
+      FUN public final operator fun kotlin.String.unaryPlus(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'append(String!): StringBuilder!' type=java.lang.StringBuilder! operator=null
+            $this: CALL '<get-sb>(): StringBuilder' type=java.lang.StringBuilder operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+            p0: $RECEIVER of 'unaryPlus() on String: Unit' type=kotlin.String
+      FUN public final fun foo(): kotlin.String
+        BLOCK_BODY
+          CALL 'unaryPlus() on String: Unit' type=kotlin.Unit operator=UPLUS
+            $this: THIS of 'A' type=A
+            $receiver: CONST String type=kotlin.String value='OK'
+          RETURN type=kotlin.Nothing from='foo(): String'
+            BLOCK type=kotlin.String operator=EXCLEXCL
+              VAR val tmp0_notnull: kotlin.String
+                CALL 'toString(): String' type=kotlin.String operator=null
+                  $this: CALL '<get-sb>(): StringBuilder' type=java.lang.StringBuilder operator=GET_PROPERTY
+                    $this: THIS of 'A' type=A
+              WHEN type=kotlin.String operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: String' type=kotlin.String operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor A()' type=A operator=null

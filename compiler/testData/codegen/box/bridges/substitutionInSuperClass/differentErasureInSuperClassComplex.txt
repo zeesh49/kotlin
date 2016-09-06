@@ -1,0 +1,82 @@
+MODULE <test-module>
+  FILE /differentErasureInSuperClassComplex.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun foo(x: T): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(T): String'
+            CONST String type=kotlin.String value='O'
+      FUN public final fun foo(x: A<T>): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(A<T>): String'
+            CONST String type=kotlin.String value='K'
+    CLASS INTERFACE C
+      FUN public abstract fun foo(x: E): kotlin.String
+      FUN public abstract fun foo(x: A<E>): kotlin.String
+    CLASS INTERFACE D
+      FUN public abstract fun foo(x: A<A<kotlin.String>>): kotlin.String
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: A<kotlin.String>
+          CALL 'constructor A()' type=A<kotlin.String> operator=null
+        VAR val y: A<A<kotlin.String>>
+          CALL 'constructor A()' type=A<A<kotlin.String>> operator=null
+        VAR val b: B
+          CALL 'constructor B()' type=B operator=null
+        VAR val bResult: kotlin.String
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'foo(A<String>): String' type=kotlin.String operator=null
+              $this: GET_VAR 'b: B' type=B operator=null
+              x: GET_VAR 'x: A<String>' type=A<kotlin.String> operator=null
+            other: CALL 'foo(A<A<String>>): String' type=kotlin.String operator=null
+              $this: GET_VAR 'b: B' type=B operator=null
+              x: GET_VAR 'y: A<A<String>>' type=A<A<kotlin.String>> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'bResult: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              GET_VAR 'bResult: String' type=kotlin.String operator=null
+        VAR val c: C<A<kotlin.String>>
+          CALL 'constructor B()' type=B operator=null
+        VAR val cResult: kotlin.String
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'foo(A<String>): String' type=kotlin.String operator=null
+              $this: GET_VAR 'c: C<A<String>>' type=C<A<kotlin.String>> operator=null
+              x: GET_VAR 'x: A<String>' type=A<kotlin.String> operator=null
+            other: CALL 'foo(A<A<String>>): String' type=kotlin.String operator=null
+              $this: GET_VAR 'c: C<A<String>>' type=C<A<kotlin.String>> operator=null
+              x: GET_VAR 'y: A<A<String>>' type=A<A<kotlin.String>> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'cResult: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 2: '
+              GET_VAR 'cResult: String' type=kotlin.String operator=null
+        VAR val d: D
+          CALL 'constructor B()' type=B operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(A<A<String>>): String' type=kotlin.String operator=null
+                $this: GET_VAR 'd: D' type=D operator=null
+                x: GET_VAR 'y: A<A<String>>' type=A<A<kotlin.String>> operator=null
+              arg1: CONST String type=kotlin.String value='K'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

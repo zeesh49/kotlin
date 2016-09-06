@@ -1,0 +1,35 @@
+MODULE <test-module>
+  FILE /inheritedMethod.kt
+    CLASS CLASS Foo
+      CONSTRUCTOR public constructor Foo()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      FUN public final fun xyzzy(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='xyzzy(): String'
+            CONST String type=kotlin.String value='xyzzy'
+    CLASS CLASS Bar
+      CONSTRUCTOR public constructor Bar()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Foo()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Bar'
+      FUN public final fun test(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test(): String'
+            CALL 'xyzzy(): String' type=kotlin.String operator=null
+              $this: THIS of 'Bar' type=Bar
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val bar: Bar
+          CALL 'constructor Bar()' type=Bar operator=null
+        VAR val f: kotlin.String
+          CALL 'test(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'bar: Bar' type=Bar operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'f: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='xyzzy'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

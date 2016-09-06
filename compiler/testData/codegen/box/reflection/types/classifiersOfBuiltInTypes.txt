@@ -1,0 +1,113 @@
+MODULE <test-module>
+  FILE /classifiersOfBuiltInTypes.kt
+    FUN public fun primitives(p01: kotlin.Boolean, p02: kotlin.Byte, p03: kotlin.Char, p04: kotlin.Double, p05: kotlin.Float, p06: kotlin.Int, p07: kotlin.Long, p08: kotlin.Short): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun nullablePrimitives(p01: kotlin.Boolean?, p02: kotlin.Byte?, p03: kotlin.Char?, p04: kotlin.Double?, p05: kotlin.Float?, p06: kotlin.Int?, p07: kotlin.Long?, p08: kotlin.Short?): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun primitiveArrays(p01: kotlin.BooleanArray, p02: kotlin.ByteArray, p03: kotlin.CharArray, p04: kotlin.DoubleArray, p05: kotlin.FloatArray, p06: kotlin.IntArray, p07: kotlin.LongArray, p08: kotlin.ShortArray): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun others(p1: kotlin.Array<*>, p2: kotlin.Array<kotlin.String>, p3: kotlin.Array<kotlin.Array<kotlin.Int?>?>, p4: kotlin.collections.List<*>, p5: kotlin.collections.List<kotlin.String>?, p6: kotlin.collections.Map.Entry<kotlin.Int, kotlin.Double>, p7: kotlin.Unit?, p8: kotlin.String, p9: kotlin.Nothing): kotlin.Unit
+      BLOCK_BODY
+    FUN public inline fun <reified T : kotlin.Any> wrapper(): kotlin.reflect.KClass<T>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='wrapper(): KClass<T>'
+          CLASS_REFERENCE '<reified T : Any>' type=kotlin.reflect.KClass<T>
+    FUN public fun check(f: kotlin.reflect.KFunction<*>, vararg expected: kotlin.reflect.KClass<*>): kotlin.Unit
+      BLOCK_BODY
+        VAR val actual: kotlin.collections.List<kotlin.reflect.KClass<*>>
+          CALL 'map((KParameter) -> KClass<*>) on Iterable<KParameter>: List<KClass<*>>' type=kotlin.collections.List<kotlin.reflect.KClass<*>> operator=null
+            $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: GET_VAR 'value-parameter f: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+            transform: BLOCK type=(kotlin.reflect.KParameter) -> kotlin.reflect.KClass<*> operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KParameter): kotlin.reflect.KClass<*>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KParameter): KClass<*>'
+                    TYPE_OP operator=CAST typeOperand=kotlin.reflect.KClass<*>
+                      CALL '<get-classifier>(): KClassifier?' type=kotlin.reflect.KClassifier? operator=GET_PROPERTY
+                        $this: CALL '<get-type>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                          $this: GET_VAR 'value-parameter it: KParameter' type=kotlin.reflect.KParameter operator=null
+              CALLABLE_REFERENCE '<anonymous>(KParameter): KClass<*>' type=(kotlin.reflect.KParameter) -> kotlin.reflect.KClass<*> operator=LAMBDA
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<kotlin.Pair<kotlin.reflect.KClass<*>, kotlin.reflect.KClass<*>>>
+            CALL 'iterator(): Iterator<Pair<KClass<*>, KClass<*>>>' type=kotlin.collections.Iterator<kotlin.Pair<kotlin.reflect.KClass<*>, kotlin.reflect.KClass<*>>> operator=FOR_LOOP_ITERATOR
+              $this: CALL 'zip(Iterable<KClass<*>>) on Iterable<KClass<*>>: List<Pair<KClass<*>, KClass<*>>>' type=kotlin.collections.List<kotlin.Pair<kotlin.reflect.KClass<*>, kotlin.reflect.KClass<*>>> operator=null
+                $receiver: CALL 'toList() on Array<out KClass<*>>: List<KClass<*>>' type=kotlin.collections.List<kotlin.reflect.KClass<*>> operator=null
+                  $receiver: GET_VAR 'value-parameter vararg expected: KClass<*>' type=kotlin.Array<out kotlin.reflect.KClass<*>> operator=null
+                other: GET_VAR 'actual: List<KClass<*>>' type=kotlin.collections.List<kotlin.reflect.KClass<*>> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<Pair<KClass<*>, KClass<*>>>' type=kotlin.collections.Iterator<kotlin.Pair<kotlin.reflect.KClass<*>, kotlin.reflect.KClass<*>>> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val tmp1_loop_parameter: kotlin.Pair<kotlin.reflect.KClass<*>, kotlin.reflect.KClass<*>>
+                CALL 'next(): Pair<KClass<*>, KClass<*>>' type=kotlin.Pair<kotlin.reflect.KClass<*>, kotlin.reflect.KClass<*>> operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<Pair<KClass<*>, KClass<*>>>' type=kotlin.collections.Iterator<kotlin.Pair<kotlin.reflect.KClass<*>, kotlin.reflect.KClass<*>>> operator=null
+              VAR val e: kotlin.reflect.KClass<*>
+                CALL 'component1(): KClass<*>' type=kotlin.reflect.KClass<*> operator=COMPONENT_N(index=1)
+                  $this: GET_VAR 'tmp1_loop_parameter: Pair<KClass<*>, KClass<*>>' type=kotlin.Pair<kotlin.reflect.KClass<*>, kotlin.reflect.KClass<*>> operator=null
+              VAR val a: kotlin.reflect.KClass<*>
+                CALL 'component2(): KClass<*>' type=kotlin.reflect.KClass<*> operator=COMPONENT_N(index=2)
+                  $this: GET_VAR 'tmp1_loop_parameter: Pair<KClass<*>, KClass<*>>' type=kotlin.Pair<kotlin.reflect.KClass<*>, kotlin.reflect.KClass<*>> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                CALL 'assertEquals(KClass<*>, KClass<*>, String? = ...): Unit' type=kotlin.Unit operator=null
+                  expected: GET_VAR 'e: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+                  actual: GET_VAR 'a: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+                  message: STRING_CONCATENATION type=kotlin.String
+                    GET_VAR 'e: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+                    CONST String type=kotlin.String value=' ('
+                    CALL '<get-java>() on KClass<*>: Class<out Any>' type=java.lang.Class<out kotlin.Any> operator=GET_PROPERTY
+                      $receiver: GET_VAR 'e: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+                    CONST String type=kotlin.String value=') != '
+                    GET_VAR 'a: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+                    CONST String type=kotlin.String value=' ('
+                    CALL '<get-java>() on KClass<*>: Class<out Any>' type=java.lang.Class<out kotlin.Any> operator=GET_PROPERTY
+                      $receiver: GET_VAR 'a: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+                    CONST String type=kotlin.String value=')'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'check(KFunction<*>, vararg KClass<*>): Unit' type=kotlin.Unit operator=null
+          f: CALLABLE_REFERENCE 'primitives(Boolean, Byte, Char, Double, Float, Int, Long, Short): Unit' type=kotlin.reflect.KFunction8<kotlin.Boolean, kotlin.Byte, kotlin.Char, kotlin.Double, kotlin.Float, kotlin.Int, kotlin.Long, kotlin.Short, kotlin.Unit> operator=null
+          expected: VARARG type=Array<out KClass<*>> varargElementType=KClass<*>
+            CLASS_REFERENCE 'Boolean' type=kotlin.reflect.KClass<kotlin.Boolean>
+            CLASS_REFERENCE 'Byte' type=kotlin.reflect.KClass<kotlin.Byte>
+            CLASS_REFERENCE 'Char' type=kotlin.reflect.KClass<kotlin.Char>
+            CLASS_REFERENCE 'Double' type=kotlin.reflect.KClass<kotlin.Double>
+            CLASS_REFERENCE 'Float' type=kotlin.reflect.KClass<kotlin.Float>
+            CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+            CLASS_REFERENCE 'Long' type=kotlin.reflect.KClass<kotlin.Long>
+            CLASS_REFERENCE 'Short' type=kotlin.reflect.KClass<kotlin.Short>
+        CALL 'check(KFunction<*>, vararg KClass<*>): Unit' type=kotlin.Unit operator=null
+          f: CALLABLE_REFERENCE 'nullablePrimitives(Boolean?, Byte?, Char?, Double?, Float?, Int?, Long?, Short?): Unit' type=kotlin.reflect.KFunction8<kotlin.Boolean?, kotlin.Byte?, kotlin.Char?, kotlin.Double?, kotlin.Float?, kotlin.Int?, kotlin.Long?, kotlin.Short?, kotlin.Unit> operator=null
+          expected: VARARG type=Array<out KClass<*>> varargElementType=KClass<*>
+            CALL 'wrapper(): KClass<Boolean>' type=kotlin.reflect.KClass<kotlin.Boolean> operator=null
+            CALL 'wrapper(): KClass<Byte>' type=kotlin.reflect.KClass<kotlin.Byte> operator=null
+            CALL 'wrapper(): KClass<Char>' type=kotlin.reflect.KClass<kotlin.Char> operator=null
+            CALL 'wrapper(): KClass<Double>' type=kotlin.reflect.KClass<kotlin.Double> operator=null
+            CALL 'wrapper(): KClass<Float>' type=kotlin.reflect.KClass<kotlin.Float> operator=null
+            CALL 'wrapper(): KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=null
+            CALL 'wrapper(): KClass<Long>' type=kotlin.reflect.KClass<kotlin.Long> operator=null
+            CALL 'wrapper(): KClass<Short>' type=kotlin.reflect.KClass<kotlin.Short> operator=null
+        CALL 'check(KFunction<*>, vararg KClass<*>): Unit' type=kotlin.Unit operator=null
+          f: CALLABLE_REFERENCE 'primitiveArrays(BooleanArray, ByteArray, CharArray, DoubleArray, FloatArray, IntArray, LongArray, ShortArray): Unit' type=kotlin.reflect.KFunction8<kotlin.BooleanArray, kotlin.ByteArray, kotlin.CharArray, kotlin.DoubleArray, kotlin.FloatArray, kotlin.IntArray, kotlin.LongArray, kotlin.ShortArray, kotlin.Unit> operator=null
+          expected: VARARG type=Array<out KClass<*>> varargElementType=KClass<*>
+            CLASS_REFERENCE 'BooleanArray' type=kotlin.reflect.KClass<kotlin.BooleanArray>
+            CLASS_REFERENCE 'ByteArray' type=kotlin.reflect.KClass<kotlin.ByteArray>
+            CLASS_REFERENCE 'CharArray' type=kotlin.reflect.KClass<kotlin.CharArray>
+            CLASS_REFERENCE 'DoubleArray' type=kotlin.reflect.KClass<kotlin.DoubleArray>
+            CLASS_REFERENCE 'FloatArray' type=kotlin.reflect.KClass<kotlin.FloatArray>
+            CLASS_REFERENCE 'IntArray' type=kotlin.reflect.KClass<kotlin.IntArray>
+            CLASS_REFERENCE 'LongArray' type=kotlin.reflect.KClass<kotlin.LongArray>
+            CLASS_REFERENCE 'ShortArray' type=kotlin.reflect.KClass<kotlin.ShortArray>
+        CALL 'check(KFunction<*>, vararg KClass<*>): Unit' type=kotlin.Unit operator=null
+          f: CALLABLE_REFERENCE 'others(Array<*>, Array<String>, Array<Array<Int?>?>, List<*>, List<String>?, Map.Entry<Int, Double>, Unit?, String, Nothing): Unit' type=kotlin.reflect.KFunction9<kotlin.Array<*>, kotlin.Array<kotlin.String>, kotlin.Array<kotlin.Array<kotlin.Int?>?>, kotlin.collections.List<*>, kotlin.collections.List<kotlin.String>?, kotlin.collections.Map.Entry<kotlin.Int, kotlin.Double>, kotlin.Unit?, kotlin.String, kotlin.Nothing, kotlin.Unit> operator=null
+          expected: VARARG type=Array<out KClass<*>> varargElementType=KClass<*>
+            CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Any>>
+            CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.String>>
+            CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Array<kotlin.Int?>?>>
+            CLASS_REFERENCE 'List' type=kotlin.reflect.KClass<kotlin.collections.List<*>>
+            CLASS_REFERENCE 'List' type=kotlin.reflect.KClass<kotlin.collections.List<*>>
+            CLASS_REFERENCE 'Entry' type=kotlin.reflect.KClass<kotlin.collections.Map.Entry<*, *>>
+            CLASS_REFERENCE 'Unit' type=kotlin.reflect.KClass<kotlin.Unit>
+            CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+            CLASS_REFERENCE 'Nothing' type=kotlin.reflect.KClass<kotlin.Nothing>
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

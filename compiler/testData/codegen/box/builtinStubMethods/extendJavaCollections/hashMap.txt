@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /hashMap.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor HashMap()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          CALL 'constructor A()' type=A operator=null
+        VAR val b: A
+          CALL 'constructor A()' type=A operator=null
+        CALL 'put(String, Double): Double?' type=kotlin.Double? operator=null
+          $this: GET_VAR 'a: A' type=A operator=null
+          key: CONST String type=kotlin.String value=''
+          value: CONST Double type=kotlin.Double value='0.0'
+        CALL 'remove(String): Double?' type=kotlin.Double? operator=null
+          $this: GET_VAR 'a: A' type=A operator=null
+          key: CONST String type=kotlin.String value=''
+        CALL 'putAll(Map<out String, Double>): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'a: A' type=A operator=null
+          from: GET_VAR 'b: A' type=A operator=null
+        CALL 'clear(): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'a: A' type=A operator=null
+        CALL '<get-keys>(): MutableSet<String>' type=kotlin.collections.MutableSet<kotlin.String> operator=GET_PROPERTY
+          $this: GET_VAR 'a: A' type=A operator=null
+        CALL '<get-values>(): MutableCollection<Double>' type=kotlin.collections.MutableCollection<kotlin.Double> operator=GET_PROPERTY
+          $this: GET_VAR 'a: A' type=A operator=null
+        CALL '<get-entries>(): MutableSet<MutableMap.MutableEntry<String, Double>>' type=kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.Double>> operator=GET_PROPERTY
+          $this: GET_VAR 'a: A' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

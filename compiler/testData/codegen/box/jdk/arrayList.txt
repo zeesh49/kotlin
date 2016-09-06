@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /arrayList.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: java.util.ArrayList<kotlin.Int>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.Int> operator=null
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='74'
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='75'
+        VAR val i: kotlin.Int
+          CALL 'get(Int): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+        VAR val j: kotlin.Int
+          CALL 'get(Int): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+            index: CONST Int type=kotlin.Int value='1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'i: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='74'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'j: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='75'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='epic fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

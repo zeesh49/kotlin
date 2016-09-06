@@ -1,0 +1,16 @@
+MODULE <test-module>
+  FILE /closureWithSideEffect.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.String
+          CONST String type=kotlin.String value='Fail'
+        FUN local final fun changeToOK(): kotlin.Unit
+          BLOCK_BODY
+            SET_VAR 'result: String' type=kotlin.Unit operator=EQ
+              CONST String type=kotlin.String value='OK'
+        VAR val ok: kotlin.reflect.KFunction0<kotlin.Unit>
+          CALLABLE_REFERENCE 'changeToOK(): Unit' type=kotlin.reflect.KFunction0<kotlin.Unit> operator=null
+        CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'ok: KFunction0<Unit>' type=kotlin.reflect.KFunction0<kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+        RETURN type=kotlin.Nothing from='box(): String'
+          GET_VAR 'result: String' type=kotlin.String operator=null

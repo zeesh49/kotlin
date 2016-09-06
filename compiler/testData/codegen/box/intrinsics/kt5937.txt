@@ -1,0 +1,95 @@
+MODULE <test-module>
+  FILE /kt5937.kt
+    PROPERTY public var result: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='Fail'
+    PROPERTY public var l: kotlin.Long
+      EXPRESSION_BODY
+        CONST Long type=kotlin.Long value='10'
+    PROPERTY public var d: kotlin.Double
+      EXPRESSION_BODY
+        CONST Double type=kotlin.Double value='10.0'
+    PROPERTY public var i: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='10'
+    FUN public fun foo(): kotlin.Int
+      BLOCK_BODY
+        CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='foo(): Int'
+          CONST Int type=kotlin.Int value='1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val javaClass: java.lang.Class<kotlin.Int>
+          CALL '<get-javaClass>() on Int: Class<Int>' type=java.lang.Class<kotlin.Int> operator=GET_PROPERTY
+            $receiver: CALL 'foo(): Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'javaClass: Class<Int>' type=java.lang.Class<kotlin.Int> operator=null
+              arg1: CALL '<get-javaClass>() on Int: Class<Int>' type=java.lang.Class<kotlin.Int> operator=GET_PROPERTY
+                $receiver: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        VAR val lv: kotlin.Long = 3.toLong()
+          CONST Long type=kotlin.Long value='3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-javaClass>() on Long: Class<Long>' type=java.lang.Class<kotlin.Long> operator=GET_PROPERTY
+                $receiver: CONST Long type=kotlin.Long value='2'
+              arg1: CALL '<get-javaClass>() on Long: Class<Long>' type=java.lang.Class<kotlin.Long> operator=GET_PROPERTY
+                $receiver: GET_VAR 'lv: Long' type=kotlin.Long operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-javaClass>() on Long: Class<Long>' type=java.lang.Class<kotlin.Long> operator=GET_PROPERTY
+                $receiver: CONST Long type=kotlin.Long value='2'
+              arg1: CALL '<get-javaClass>() on Long: Class<Long>' type=java.lang.Class<kotlin.Long> operator=GET_PROPERTY
+                $receiver: CALL '<get-l>(): Long' type=kotlin.Long operator=GET_PROPERTY
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        VAR val dv: kotlin.Double = 3.0.toDouble()
+          CONST Double type=kotlin.Double value='3.0'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-javaClass>() on Double: Class<Double>' type=java.lang.Class<kotlin.Double> operator=GET_PROPERTY
+                $receiver: CONST Double type=kotlin.Double value='2.0'
+              arg1: CALL '<get-javaClass>() on Double: Class<Double>' type=java.lang.Class<kotlin.Double> operator=GET_PROPERTY
+                $receiver: GET_VAR 'dv: Double' type=kotlin.Double operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-javaClass>() on Double: Class<Double>' type=java.lang.Class<kotlin.Double> operator=GET_PROPERTY
+                $receiver: CONST Double type=kotlin.Double value='2.0'
+              arg1: CALL '<get-javaClass>() on Double: Class<Double>' type=java.lang.Class<kotlin.Double> operator=GET_PROPERTY
+                $receiver: CALL '<get-d>(): Double' type=kotlin.Double operator=GET_PROPERTY
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 5'
+        VAR val iv: kotlin.Int = 3
+          CONST Int type=kotlin.Int value='3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-javaClass>() on Int: Class<Int>' type=java.lang.Class<kotlin.Int> operator=GET_PROPERTY
+                $receiver: CONST Int type=kotlin.Int value='2'
+              arg1: CALL '<get-javaClass>() on Int: Class<Int>' type=java.lang.Class<kotlin.Int> operator=GET_PROPERTY
+                $receiver: GET_VAR 'iv: Int' type=kotlin.Int operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 6'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-javaClass>() on Int: Class<Int>' type=java.lang.Class<kotlin.Int> operator=GET_PROPERTY
+                $receiver: CONST Int type=kotlin.Int value='2'
+              arg1: CALL '<get-javaClass>() on Int: Class<Int>' type=java.lang.Class<kotlin.Int> operator=GET_PROPERTY
+                $receiver: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 7'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY

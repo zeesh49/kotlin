@@ -1,0 +1,27 @@
+MODULE <test-module>
+  FILE /inProjectionAsParameter.kt
+    FUN public fun test(y: kotlin.Array<in kotlin.Array<kotlin.String>>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'set(Int, Array<String>): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'value-parameter y: Array<in Array<String>>' type=kotlin.Array<in kotlin.Array<kotlin.String>> operator=null
+          index: CONST Int type=kotlin.Int value='0'
+          value: CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.Array<kotlin.Array<*>>
+          CALL 'arrayOf(vararg Array<*>): Array<Array<*>>' type=kotlin.Array<kotlin.Array<*>> operator=null
+            elements: VARARG type=Array<out Array<*>> varargElementType=Array<*>
+              CALL 'arrayOf(vararg Int): Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+                elements: VARARG type=Array<out Int> varargElementType=Int
+                  CONST Int type=kotlin.Int value='1'
+        CALL 'test(Array<in Array<String>>): Unit' type=kotlin.Unit operator=null
+          y: GET_VAR 'x: Array<Array<*>>' type=kotlin.Array<kotlin.Array<*>> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          TYPE_OP operator=CAST typeOperand=kotlin.String
+            CALL 'get(Int): Any?' type=kotlin.Any? operator=GET_ARRAY_ELEMENT
+              $this: CALL 'get(Int): Array<*>' type=kotlin.Array<*> operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'x: Array<Array<*>>' type=kotlin.Array<kotlin.Array<*>> operator=null
+                index: CONST Int type=kotlin.Int value='0'
+              index: CONST Int type=kotlin.Int value='0'

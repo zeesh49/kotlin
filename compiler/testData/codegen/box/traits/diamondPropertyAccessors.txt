@@ -1,0 +1,41 @@
+MODULE <test-module>
+  FILE /diamondPropertyAccessors.kt
+    CLASS INTERFACE A
+      PROPERTY public open var bar: kotlin.Boolean
+        PROPERTY_GETTER public open fun <get-bar>(): kotlin.Boolean
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-bar>(): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+        PROPERTY_SETTER public open fun <set-bar>(value: kotlin.Boolean): kotlin.Unit
+          BLOCK_BODY
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: CONST String type=kotlin.String value='Fail set'
+    CLASS INTERFACE B
+    CLASS INTERFACE C
+      PROPERTY public open override var bar: kotlin.Boolean
+        PROPERTY_GETTER public open override fun <get-bar>(): kotlin.Boolean
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-bar>(): Boolean'
+              CONST Boolean type=kotlin.Boolean value='true'
+        PROPERTY_SETTER public open override fun <set-bar>(value: kotlin.Boolean): kotlin.Unit
+          BLOCK_BODY
+    CLASS INTERFACE D
+    CLASS CLASS Impl
+      CONSTRUCTOR public constructor Impl()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Impl'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL '<set-bar>(Boolean): Unit' type=kotlin.Unit operator=EQ
+          $this: CALL 'constructor Impl()' type=Impl operator=null
+          value: CONST Boolean type=kotlin.Boolean value='false'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL '<get-bar>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+              $this: CALL 'constructor Impl()' type=Impl operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail get'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

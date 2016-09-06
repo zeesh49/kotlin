@@ -1,0 +1,88 @@
+MODULE <test-module>
+  FILE /test.kt
+    CLASS CLASS MyList
+      CONSTRUCTOR public constructor MyList()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyList'
+    CLASS CLASS ListImpl
+      CONSTRUCTOR public constructor ListImpl()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor J()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ListImpl'
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-size>(): Int'
+              CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CALL '<get-size>(): Int' superQualifier=J type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'ListImpl' type=J
+                other: CONST Int type=kotlin.Int value='1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val impl: ListImpl
+          CALL 'constructor ListImpl()' type=ListImpl operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'impl: ListImpl' type=ListImpl operator=null
+              arg1: CONST Int type=kotlin.Int value='56'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'contains(String): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR 'impl: ListImpl' type=ListImpl operator=null
+              element: CONST String type=kotlin.String value='abc'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        VAR val l: kotlin.collections.List<kotlin.String>
+          GET_VAR 'impl: ListImpl' type=ListImpl operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'l: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              arg1: CONST Int type=kotlin.Int value='56'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'contains(String): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR 'l: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              element: CONST String type=kotlin.String value='abc'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        VAR val anyList: kotlin.collections.List<kotlin.Any?>
+          TYPE_OP operator=CAST typeOperand=kotlin.collections.List<kotlin.Any?>
+            GET_VAR 'impl: ListImpl' type=ListImpl operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'anyList: List<Any?>' type=kotlin.collections.List<kotlin.Any?> operator=null
+              arg1: CONST Int type=kotlin.Int value='56'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 5'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'contains(Any?): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR 'anyList: List<Any?>' type=kotlin.collections.List<kotlin.Any?> operator=null
+              element: CONST String type=kotlin.String value='abc'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 6'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'contains(Any?): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'anyList: List<Any?>' type=kotlin.collections.List<kotlin.Any?> operator=null
+            element: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 7'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'contains(Any?): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'anyList: List<Any?>' type=kotlin.collections.List<kotlin.Any?> operator=null
+            element: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 8'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

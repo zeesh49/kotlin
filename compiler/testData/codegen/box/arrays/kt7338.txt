@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /kt7338.kt
+    FUN public fun foo(x: kotlin.Any): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(Any): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.Array<*>
+                GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+              then: CALL 'isArrayOf() on Array<*>: Boolean' type=kotlin.Boolean operator=null
+                $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<*>
+                  GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+              $this: TYPE_OP operator=CAST typeOperand=kotlin.Array<kotlin.String>
+                GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+              index: CONST Int type=kotlin.Int value='0'
+            else: CONST String type=kotlin.String value='fail'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(Any): String' type=kotlin.String operator=null
+            x: CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+              elements: VARARG type=Array<out String> varargElementType=String
+                CONST String type=kotlin.String value='OK'

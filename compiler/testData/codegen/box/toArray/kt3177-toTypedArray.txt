@@ -1,0 +1,40 @@
+MODULE <test-module>
+  FILE /kt3177-toTypedArray.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val list: java.util.ArrayList<kotlin.Pair<kotlin.String, kotlin.String>>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.Pair<kotlin.String, kotlin.String>> operator=null
+        CALL 'add(Pair<String, String>): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'list: ArrayList<Pair<String, String>>' type=java.util.ArrayList<kotlin.Pair<kotlin.String, kotlin.String>> operator=null
+          element: CALL 'constructor Pair(String, String)' type=kotlin.Pair<kotlin.String, kotlin.String> operator=null
+            first: CONST String type=kotlin.String value='Sample'
+            second: CONST String type=kotlin.String value='http://cyber.law.harvard.edu/rss/examples/rss2sample.xml'
+        CALL 'add(Pair<String, String>): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'list: ArrayList<Pair<String, String>>' type=java.util.ArrayList<kotlin.Pair<kotlin.String, kotlin.String>> operator=null
+          element: CALL 'constructor Pair(String, String)' type=kotlin.Pair<kotlin.String, kotlin.String> operator=null
+            first: CONST String type=kotlin.String value='Scripting'
+            second: CONST String type=kotlin.String value='http://static.scripting.com/rss.xml'
+        VAR val keys: kotlin.Array<kotlin.String>
+          CALL 'toTypedArray() on Collection<String>: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            $receiver: CALL 'map((Pair<String, String>) -> String) on Iterable<Pair<String, String>>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              $receiver: GET_VAR 'list: ArrayList<Pair<String, String>>' type=java.util.ArrayList<kotlin.Pair<kotlin.String, kotlin.String>> operator=null
+              transform: BLOCK type=(kotlin.Pair<kotlin.String, kotlin.String>) -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.Pair<kotlin.String, kotlin.String>): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(Pair<String, String>): String'
+                      CALL '<get-first>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: Pair<String, String>' type=kotlin.Pair<kotlin.String, kotlin.String> operator=null
+                CALLABLE_REFERENCE '<anonymous>(Pair<String, String>): String' type=(kotlin.Pair<kotlin.String, kotlin.String>) -> kotlin.String operator=LAMBDA
+        VAR val keysToString: kotlin.String!
+          CALL 'toString(Array<(out) Any!>!): String!' type=kotlin.String! operator=null
+            p0: GET_VAR 'keys: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'keysToString: String!' type=kotlin.String! operator=null
+              arg1: CONST String type=kotlin.String value='[Sample, Scripting]'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+              GET_VAR 'keysToString: String!' type=kotlin.String! operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,19 @@
+MODULE <test-module>
+  FILE /kt2291.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'contains(Int): Boolean' type=kotlin.Boolean operator=IN
+          $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=null
+            $this: CONST Int type=kotlin.Int value='1'
+            other: CONST Int type=kotlin.Int value='10'
+          value: CONST Int type=kotlin.Int value='1'
+        CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+          $this: CONST Int type=kotlin.Int value='1'
+          other: CONST Int type=kotlin.Int value='10'
+        CALL 'contains(Char): Boolean' type=kotlin.Boolean operator=IN
+          $this: CALL 'rangeTo(Char): CharRange' type=kotlin.ranges.CharRange operator=null
+            $this: CONST Char type=kotlin.Char value='A'
+            other: CONST Char type=kotlin.Char value='Z'
+          value: CONST Char type=kotlin.Char value='h'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

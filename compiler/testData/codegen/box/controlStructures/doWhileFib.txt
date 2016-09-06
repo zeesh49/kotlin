@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /doWhileFib.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var fx: kotlin.Int
+          CONST Int type=kotlin.Int value='1'
+        VAR var fy: kotlin.Int
+          CONST Int type=kotlin.Int value='1'
+        DO_WHILE label=null operator=DO_WHILE_LOOP
+          body: BLOCK type=kotlin.Unit operator=null
+            VAR var tmp: kotlin.Int
+              GET_VAR 'fy: Int' type=kotlin.Int operator=null
+            SET_VAR 'fy: Int' type=kotlin.Unit operator=EQ
+              CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: GET_VAR 'fx: Int' type=kotlin.Int operator=null
+                other: GET_VAR 'fy: Int' type=kotlin.Int operator=null
+            SET_VAR 'fx: Int' type=kotlin.Unit operator=EQ
+              GET_VAR 'tmp: Int' type=kotlin.Int operator=null
+          condition: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+              $this: GET_VAR 'fy: Int' type=kotlin.Int operator=null
+              other: CONST Int type=kotlin.Int value='100'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'fy: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='144'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'fx: Int' type=kotlin.Int operator=null
+              CONST String type=kotlin.String value=' '
+              GET_VAR 'fy: Int' type=kotlin.Int operator=null

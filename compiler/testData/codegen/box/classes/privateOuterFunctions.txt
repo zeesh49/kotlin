@@ -1,0 +1,63 @@
+MODULE <test-module>
+  FILE /privateOuterFunctions.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      FUN private final fun kotlin.String.ext(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='ext() on String: String'
+            CONST String type=kotlin.String value=''
+      FUN private final fun f(): kotlin.Unit
+        BLOCK_BODY
+      FUN public final fun foo(): kotlin.String
+        BLOCK_BODY
+          CALL 'invoke(): Unit' type=kotlin.Unit operator=null
+            $this: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  CALL 'ext() on String: String' type=kotlin.String operator=null
+                    $this: THIS of 'C' type=C
+                    $receiver: CONST String type=kotlin.String value=''
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                    CALL 'f(): Unit' type=kotlin.Unit operator=null
+                      $this: THIS of 'C' type=C
+              CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+          CALL 'run(): Unit' type=kotlin.Unit operator=null
+            $this: BLOCK type=C.foo.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                FUN public open override fun run(): kotlin.Unit
+                  BLOCK_BODY
+                    CALL 'ext() on String: String' type=kotlin.String operator=null
+                      $this: THIS of 'C' type=C
+                      $receiver: CONST String type=kotlin.String value=''
+                    CALL 'f(): Unit' type=kotlin.Unit operator=null
+                      $this: THIS of 'C' type=C
+              CALL 'constructor <no name provided>()' type=C.foo.<no name provided> operator=OBJECT_LITERAL
+          CALL 'innerFun(): Unit' type=kotlin.Unit operator=null
+            $this: CALL 'constructor Inner()' type=C.Inner operator=null
+              $this: THIS of 'C' type=C
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value='OK'
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+        FUN public final fun innerFun(): kotlin.Unit
+          BLOCK_BODY
+            CALL 'ext() on String: String' type=kotlin.String operator=null
+              $this: THIS of 'C' type=C
+              $receiver: CONST String type=kotlin.String value=''
+            CALL 'f(): Unit' type=kotlin.Unit operator=null
+              $this: THIS of 'C' type=C
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor C()' type=C operator=null

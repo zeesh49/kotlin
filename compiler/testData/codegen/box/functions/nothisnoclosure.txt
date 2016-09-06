@@ -1,0 +1,37 @@
+MODULE <test-module>
+  FILE /nothisnoclosure.kt
+    FUN public fun foo(x: kotlin.Int): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun loop(times: kotlin.Int): kotlin.Unit
+      BLOCK_BODY
+        VAR var left: kotlin.Int
+          GET_VAR 'value-parameter times: Int' type=kotlin.Int operator=null
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+              $this: GET_VAR 'left: Int' type=kotlin.Int operator=null
+              other: CONST Int type=kotlin.Int value='0'
+          body: BLOCK type=kotlin.Unit operator=null
+            VAR val u: (kotlin.Int) -> kotlin.Unit
+              BLOCK type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Unit
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(Int): Unit'
+                      CALL 'foo(Int): Unit' type=kotlin.Unit operator=null
+                        x: GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                CALLABLE_REFERENCE '<anonymous>(Int): Unit' type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+            CALL 'invoke(Int): Unit' type=kotlin.Unit operator=INVOKE
+              $this: GET_VAR 'u: (Int) -> Unit' type=(kotlin.Int) -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+              p1: BLOCK type=kotlin.Int operator=POSTFIX_DECR
+                VAR val tmp0: kotlin.Int
+                  GET_VAR 'left: Int' type=kotlin.Int operator=POSTFIX_DECR
+                SET_VAR 'left: Int' type=kotlin.Unit operator=POSTFIX_DECR
+                  CALL 'dec(): Int' type=kotlin.Int operator=POSTFIX_DECR
+                    $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'loop(Int): Unit' type=kotlin.Unit operator=null
+          times: CONST Int type=kotlin.Int value='5'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

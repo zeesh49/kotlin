@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /traitImplDiamond.kt
+    CLASS INTERFACE A
+      FUN public open fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value='Fail'
+    CLASS INTERFACE B
+    CLASS INTERFACE C
+      FUN public open override fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value='OK'
+    CLASS INTERFACE D
+    CLASS CLASS Impl
+      CONSTRUCTOR public constructor Impl()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Impl'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Impl()' type=Impl operator=null

@@ -1,0 +1,50 @@
+MODULE <test-module>
+  FILE /longAsIndex.kt
+    FUN public operator fun kotlin.IntArray.set(index: kotlin.Long, elem: kotlin.Int): kotlin.Unit
+      BLOCK_BODY
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+          $this: $RECEIVER of 'set(Long, Int) on IntArray: Unit' type=kotlin.IntArray
+          index: CALL 'toInt(): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'value-parameter index: Long' type=kotlin.Long operator=null
+          value: GET_VAR 'value-parameter elem: Int' type=kotlin.Int operator=null
+    FUN public operator fun kotlin.IntArray.get(index: kotlin.Long): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='get(Long) on IntArray: Int'
+          CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+            $this: $RECEIVER of 'get(Long) on IntArray: Int' type=kotlin.IntArray
+            index: CALL 'toInt(): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'value-parameter index: Long' type=kotlin.Long operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var l: kotlin.IntArray
+          CALL 'constructor IntArray(Int)' type=kotlin.IntArray operator=null
+            size: CONST Int type=kotlin.Int value='1'
+        CALL 'set(Long, Int) on IntArray: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 'l: IntArray' type=kotlin.IntArray operator=null
+          index: CALL 'toLong(): Long' type=kotlin.Long operator=null
+            $this: CONST Int type=kotlin.Int value='0'
+          elem: CONST Int type=kotlin.Int value='4'
+        BLOCK type=kotlin.Unit operator=PLUSEQ
+          VAR val tmp0_array: kotlin.IntArray
+            GET_VAR 'l: IntArray' type=kotlin.IntArray operator=null
+          VAR val tmp1_index0: kotlin.Long
+            CALL 'toLong(): Long' type=kotlin.Long operator=null
+              $this: CONST Int type=kotlin.Int value='0'
+          CALL 'set(Long, Int) on IntArray: Unit' type=kotlin.Unit operator=PLUSEQ
+            $receiver: GET_VAR 'tmp0_array: IntArray' type=kotlin.IntArray operator=null
+            index: GET_VAR 'tmp1_index0: Long' type=kotlin.Long operator=null
+            elem: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+              $this: CALL 'get(Long) on IntArray: Int' type=kotlin.Int operator=PLUSEQ
+                $receiver: GET_VAR 'tmp0_array: IntArray' type=kotlin.IntArray operator=null
+                index: GET_VAR 'tmp1_index0: Long' type=kotlin.Long operator=null
+              other: CONST Int type=kotlin.Int value='6'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'get(Long) on IntArray: Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                $receiver: GET_VAR 'l: IntArray' type=kotlin.IntArray operator=null
+                index: CALL 'toLong(): Long' type=kotlin.Long operator=null
+                  $this: CONST Int type=kotlin.Int value='0'
+              arg1: CONST Int type=kotlin.Int value='10'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='Fail'

@@ -1,0 +1,182 @@
+MODULE <test-module>
+  FILE /propertyAccessors.kt
+    PROPERTY public val p0: kotlin.Int = 1
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='1'
+    PROPERTY public val kotlin.Int.p1: kotlin.Int
+      PROPERTY_GETTER public fun kotlin.Int.<get-p1>(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-p1>() on Int: Int'
+            $RECEIVER of 'p1: Int on Int' type=kotlin.Int
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val kotlin.Int.p2: kotlin.Int
+        PROPERTY_GETTER public final fun kotlin.Int.<get-p2>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-p2>() on Int: Int'
+              $RECEIVER of 'p2: Int on Int' type=kotlin.Int
+    PROPERTY public var globalCounter: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='0'
+    PROPERTY public var mp0: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='1'
+      PROPERTY_SETTER public fun <set-mp0>(value: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            CALL '<set-globalCounter>(Int): Unit' type=kotlin.Unit operator=PLUSEQ
+              <set-?>: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                $this: CALL '<get-globalCounter>(): Int' type=kotlin.Int operator=PLUSEQ
+                other: GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=null
+    PROPERTY public var kotlin.Int.mp1: kotlin.Int
+      PROPERTY_GETTER public fun kotlin.Int.<get-mp1>(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-mp1>() on Int: Int'
+            $RECEIVER of 'mp1: Int on Int' type=kotlin.Int
+      PROPERTY_SETTER public fun kotlin.Int.<set-mp1>(value: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            CALL '<set-globalCounter>(Int): Unit' type=kotlin.Unit operator=PLUSEQ
+              <set-?>: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                $this: CALL '<get-globalCounter>(): Int' type=kotlin.Int operator=PLUSEQ
+                other: GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=null
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public final var kotlin.Int.mp2: kotlin.Int
+        PROPERTY_GETTER public final fun kotlin.Int.<get-mp2>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-mp2>() on Int: Int'
+              $RECEIVER of 'mp2: Int on Int' type=kotlin.Int
+        PROPERTY_SETTER public final fun kotlin.Int.<set-mp2>(value: kotlin.Int): kotlin.Unit
+          BLOCK_BODY
+            BLOCK type=kotlin.Unit operator=PLUSEQ
+              CALL '<set-globalCounter>(Int): Unit' type=kotlin.Unit operator=PLUSEQ
+                <set-?>: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                  $this: CALL '<get-globalCounter>(): Int' type=kotlin.Int operator=PLUSEQ
+                  other: GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+            $this: CALLABLE_REFERENCE 'p0: Int' type=kotlin.reflect.KProperty0<kotlin.Int> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+            $this: CALL '<get-getter>(): KProperty0.Getter<Int>' type=kotlin.reflect.KProperty0.Getter<kotlin.Int> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'p0: Int' type=kotlin.reflect.KProperty0<kotlin.Int> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='2'
+          actual: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+            $this: CALLABLE_REFERENCE 'p1: Int on Int' type=kotlin.reflect.KProperty1<kotlin.Int, kotlin.Int> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CONST Int type=kotlin.Int value='2'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='2'
+          actual: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+            $this: CALL '<get-getter>(): KProperty1.Getter<Int, Int>' type=kotlin.reflect.KProperty1.Getter<kotlin.Int, kotlin.Int> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'p1: Int on Int' type=kotlin.reflect.KProperty1<kotlin.Int, kotlin.Int> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CONST Int type=kotlin.Int value='2'
+        VAR val p2: kotlin.reflect.KProperty2<A, *, *>
+          CALL 'single() on Iterable<KProperty2<A, *, *>>: KProperty2<A, *, *>' type=kotlin.reflect.KProperty2<A, *, *> operator=null
+            $receiver: CALL '<get-memberExtensionProperties>() on KClass<A>: Collection<KProperty2<A, *, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty2<A, *, *>> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+        CALL 'assertEquals(Any?, Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='3'
+          actual: CALL 'call(vararg Any?): Any?' type=kotlin.Any? operator=null
+            $this: GET_VAR 'p2: KProperty2<A, *, *>' type=kotlin.reflect.KProperty2<A, *, *> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CALL 'constructor A()' type=A operator=null
+              CONST Int type=kotlin.Int value='3'
+        CALL 'assertEquals(Any?, Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='3'
+          actual: CALL 'call(vararg Any?): Any?' type=kotlin.Any? operator=null
+            $this: CALL '<get-getter>(): KProperty2.Getter<A, out Any?, Any?>' type=kotlin.reflect.KProperty2.Getter<A, out kotlin.Any?, kotlin.Any?> operator=GET_PROPERTY
+              $this: GET_VAR 'p2: KProperty2<A, *, *>' type=kotlin.reflect.KProperty2<A, *, *> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CALL 'constructor A()' type=A operator=null
+              CONST Int type=kotlin.Int value='3'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+            $this: CALLABLE_REFERENCE 'mp0: Int' type=kotlin.reflect.KMutableProperty0<kotlin.Int> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+            $this: CALL '<get-getter>(): KProperty0.Getter<Int>' type=kotlin.reflect.KProperty0.Getter<kotlin.Int> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'mp0: Int' type=kotlin.reflect.KMutableProperty0<kotlin.Int> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='2'
+          actual: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+            $this: CALLABLE_REFERENCE 'mp1: Int on Int' type=kotlin.reflect.KMutableProperty1<kotlin.Int, kotlin.Int> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CONST Int type=kotlin.Int value='2'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='2'
+          actual: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+            $this: CALL '<get-getter>(): KProperty1.Getter<Int, Int>' type=kotlin.reflect.KProperty1.Getter<kotlin.Int, kotlin.Int> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'mp1: Int on Int' type=kotlin.reflect.KMutableProperty1<kotlin.Int, kotlin.Int> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CONST Int type=kotlin.Int value='2'
+        VAR val mp2: kotlin.reflect.KMutableProperty2<B, out kotlin.Any?, out kotlin.Any?>
+          TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty2<B, out kotlin.Any?, out kotlin.Any?>
+            CALL 'single() on Iterable<KProperty2<B, *, *>>: KProperty2<B, *, *>' type=kotlin.reflect.KProperty2<B, *, *> operator=null
+              $receiver: CALL '<get-memberExtensionProperties>() on KClass<B>: Collection<KProperty2<B, *, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty2<B, *, *>> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'B' type=kotlin.reflect.KClass<B>
+        CALL 'assertEquals(Any?, Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='3'
+          actual: CALL 'call(vararg Any?): Any?' type=kotlin.Any? operator=null
+            $this: GET_VAR 'mp2: KMutableProperty2<B, out Any?, out Any?>' type=kotlin.reflect.KMutableProperty2<B, out kotlin.Any?, out kotlin.Any?> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CALL 'constructor B()' type=B operator=null
+              CONST Int type=kotlin.Int value='3'
+        CALL 'assertEquals(Any?, Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='3'
+          actual: CALL 'call(vararg Any?): Any?' type=kotlin.Any? operator=null
+            $this: CALL '<get-getter>(): KProperty2.Getter<B, out Any?, Any?>' type=kotlin.reflect.KProperty2.Getter<B, out kotlin.Any?, kotlin.Any?> operator=GET_PROPERTY
+              $this: GET_VAR 'mp2: KMutableProperty2<B, out Any?, out Any?>' type=kotlin.reflect.KMutableProperty2<B, out kotlin.Any?, out kotlin.Any?> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CALL 'constructor B()' type=B operator=null
+              CONST Int type=kotlin.Int value='3'
+        CALL 'assertEquals(Unit, Unit, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_OBJECT 'Unit' type=kotlin.Unit
+          actual: CALL 'call(vararg Any?): Unit' type=kotlin.Unit operator=null
+            $this: CALL '<get-setter>(): KMutableProperty0.Setter<Int>' type=kotlin.reflect.KMutableProperty0.Setter<kotlin.Int> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'mp0: Int' type=kotlin.reflect.KMutableProperty0<kotlin.Int> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CONST Int type=kotlin.Int value='1'
+        CALL 'assertEquals(Unit, Unit, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_OBJECT 'Unit' type=kotlin.Unit
+          actual: CALL 'call(vararg Any?): Unit' type=kotlin.Unit operator=null
+            $this: CALL '<get-setter>(): KMutableProperty1.Setter<Int, Int>' type=kotlin.reflect.KMutableProperty1.Setter<kotlin.Int, kotlin.Int> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'mp1: Int on Int' type=kotlin.reflect.KMutableProperty1<kotlin.Int, kotlin.Int> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CONST Int type=kotlin.Int value='0'
+              CONST Int type=kotlin.Int value='3'
+        CALL 'assertEquals(Unit, Unit, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_OBJECT 'Unit' type=kotlin.Unit
+          actual: CALL 'call(vararg Any?): Unit' type=kotlin.Unit operator=null
+            $this: CALL '<get-setter>(): KMutableProperty2.Setter<B, out Any?, out Any?>' type=kotlin.reflect.KMutableProperty2.Setter<B, out kotlin.Any?, out kotlin.Any?> operator=GET_PROPERTY
+              $this: GET_VAR 'mp2: KMutableProperty2<B, out Any?, out Any?>' type=kotlin.reflect.KMutableProperty2<B, out kotlin.Any?, out kotlin.Any?> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CALL 'constructor B()' type=B operator=null
+              CONST Int type=kotlin.Int value='0'
+              CONST Int type=kotlin.Int value='5'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-globalCounter>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              arg1: CONST Int type=kotlin.Int value='9'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              CALL '<get-globalCounter>(): Int' type=kotlin.Int operator=GET_PROPERTY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

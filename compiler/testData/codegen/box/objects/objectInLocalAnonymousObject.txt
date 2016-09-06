@@ -1,0 +1,30 @@
+MODULE <test-module>
+  FILE /objectInLocalAnonymousObject.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var boo: kotlin.String
+          CONST String type=kotlin.String value='OK'
+        VAR var foo: box.<no name provided>
+          BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              PROPERTY public final val bar: box.<no name provided>.bar.<no name provided>
+                EXPRESSION_BODY
+                  BLOCK type=box.<no name provided>.bar.<no name provided> operator=OBJECT_LITERAL
+                    CLASS CLASS <no name provided>
+                      CONSTRUCTOR public constructor <no name provided>()
+                        BLOCK_BODY
+                          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                          INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                      PROPERTY public final val baz: kotlin.String
+                        EXPRESSION_BODY
+                          GET_VAR 'boo: String' type=kotlin.String operator=null
+                    CALL 'constructor <no name provided>()' type=box.<no name provided>.bar.<no name provided> operator=OBJECT_LITERAL
+            CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-baz>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL '<get-bar>(): <no name provided>' type=box.<no name provided>.bar.<no name provided> operator=GET_PROPERTY
+              $this: GET_VAR 'foo: <no name provided>' type=box.<no name provided> operator=null

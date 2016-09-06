@@ -1,0 +1,30 @@
+MODULE <test-module>
+  FILE /notIs.kt
+    FUN public fun foo(x: kotlin.Any): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(Any): Boolean'
+          TYPE_OP operator=NOT_INSTANCEOF typeOperand=java.lang.Runnable
+            GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val r: box.<no name provided>
+          BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              FUN public open override fun run(): kotlin.Unit
+                BLOCK_BODY
+            CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+                $this: CALL 'foo(Any): Boolean' type=kotlin.Boolean operator=null
+                  x: GET_VAR 'r: <no name provided>' type=box.<no name provided> operator=null
+              then: CALL 'foo(Any): Boolean' type=kotlin.Boolean operator=null
+                x: CONST Int type=kotlin.Int value='42'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='Fail'

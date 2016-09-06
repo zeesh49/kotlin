@@ -1,0 +1,27 @@
+MODULE <test-module>
+  FILE /getMembersOfStandardJavaClasses.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'map((KClass<out Any>) -> List<String>) on Iterable<KClass<out Any>>: List<List<String>>' type=kotlin.collections.List<kotlin.collections.List<kotlin.String>> operator=null
+          $receiver: CALL 'listOf(vararg KClass<out Any>): List<KClass<out Any>>' type=kotlin.collections.List<kotlin.reflect.KClass<out kotlin.Any>> operator=null
+            elements: VARARG type=Array<out KClass<out Any>> varargElementType=KClass<out Any>
+              CLASS_REFERENCE 'ArrayList' type=kotlin.reflect.KClass<java.util.ArrayList<*>>
+              CLASS_REFERENCE 'LinkedList' type=kotlin.reflect.KClass<java.util.LinkedList<*>>
+              CLASS_REFERENCE 'AbstractList' type=kotlin.reflect.KClass<java.util.AbstractList<*>>
+              CLASS_REFERENCE 'HashSet' type=kotlin.reflect.KClass<java.util.HashSet<*>>
+              CLASS_REFERENCE 'TreeSet' type=kotlin.reflect.KClass<java.util.TreeSet<*>>
+              CLASS_REFERENCE 'HashMap' type=kotlin.reflect.KClass<java.util.HashMap<*, *>>
+              CLASS_REFERENCE 'TreeMap' type=kotlin.reflect.KClass<java.util.TreeMap<*, *>>
+              CLASS_REFERENCE 'AbstractMap' type=kotlin.reflect.KClass<java.util.AbstractMap<*, *>>
+              CLASS_REFERENCE 'SimpleEntry' type=kotlin.reflect.KClass<java.util.AbstractMap.SimpleEntry<*, *>>
+          transform: BLOCK type=(kotlin.reflect.KClass<out kotlin.Any>) -> kotlin.collections.List<kotlin.String> operator=LAMBDA
+            FUN local final fun <anonymous>(it: kotlin.reflect.KClass<out kotlin.Any>): kotlin.collections.List<kotlin.String>
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(KClass<out Any>): List<String>'
+                  CALL 'map((KCallable<*>) -> String) on Iterable<KCallable<*>>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+                    $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                      $this: GET_VAR 'value-parameter it: KClass<out Any>' type=kotlin.reflect.KClass<out kotlin.Any> operator=null
+                    transform: CALLABLE_REFERENCE 'toString(): String' type=kotlin.reflect.KFunction1<kotlin.Any, kotlin.String> operator=null
+            CALLABLE_REFERENCE '<anonymous>(KClass<out Any>): List<String>' type=(kotlin.reflect.KClass<out kotlin.Any>) -> kotlin.collections.List<kotlin.String> operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

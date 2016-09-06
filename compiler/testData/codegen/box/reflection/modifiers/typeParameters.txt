@@ -1,0 +1,65 @@
+MODULE <test-module>
+  FILE /typeParameters.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun <T> nonReified(): T
+        BLOCK_BODY
+          BLOCK type=kotlin.Nothing operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+            WHEN type=kotlin.Nothing operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+      FUN public final inline fun <reified U> reified(): U
+        BLOCK_BODY
+          BLOCK type=kotlin.Nothing operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+            WHEN type=kotlin.Nothing operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isReified>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALL 'single() on List<KTypeParameter>: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+              $receiver: CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+                $this: CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                  $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                    $this: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+                  predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                    FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                              $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                            arg1: CONST String type=kotlin.String value='nonReified'
+                    CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isReified>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALL 'single() on List<KTypeParameter>: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+              $receiver: CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+                $this: CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                  $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                    $this: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+                  predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                    FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                              $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                            arg1: CONST String type=kotlin.String value='reified'
+                    CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

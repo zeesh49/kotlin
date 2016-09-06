@@ -1,0 +1,223 @@
+MODULE <test-module>
+  FILE /genericMethodSignature.kt
+    CLASS CLASS Z
+      CONSTRUCTOR public constructor Z<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Z'
+    CLASS CLASS TParam
+      CONSTRUCTOR public constructor TParam()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='TParam'
+    CLASS CLASS Zout
+      CONSTRUCTOR public constructor Zout<out T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Zout'
+    CLASS CLASS Zin
+      CONSTRUCTOR public constructor Zin<in T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Zin'
+    CLASS CLASS Params
+      CONSTRUCTOR public constructor Params(methodIndex: kotlin.Int, paramClass: java.lang.Class<*>, expectedReturnType: kotlin.String, expecedParamType: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'methodIndex: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'Params' type=Params
+            value: GET_VAR 'value-parameter methodIndex: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'paramClass: Class<*>' type=kotlin.Unit operator=null
+            receiver: THIS of 'Params' type=Params
+            value: GET_VAR 'value-parameter paramClass: Class<*>' type=java.lang.Class<*> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'expectedReturnType: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Params' type=Params
+            value: GET_VAR 'value-parameter expectedReturnType: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'expecedParamType: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Params' type=Params
+            value: GET_VAR 'value-parameter expecedParamType: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Params'
+      PROPERTY public final val methodIndex: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter methodIndex: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val paramClass: java.lang.Class<*>
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter paramClass: Class<*>' type=java.lang.Class<*> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val expectedReturnType: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter expectedReturnType: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val expecedParamType: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter expecedParamType: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test<T, X, in Y>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      FUN public final fun test1(p: T): T?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test1(T): T?'
+            CONST Null type=kotlin.Nothing? value='null'
+      FUN public final fun test2(p: Z<T>): Z<T>?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test2(Z<T>): Z<T>?'
+            CONST Null type=kotlin.Nothing? value='null'
+      FUN public final fun test3(p: Z<kotlin.String>): Z<kotlin.String>?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test3(Z<String>): Z<String>?'
+            CONST Null type=kotlin.Nothing? value='null'
+      FUN public final fun test4(p: X): Zout<out kotlin.String>?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test4(X): Zout<out String>?'
+            CONST Null type=kotlin.Nothing? value='null'
+      FUN public final fun test5(p: Y): Zin<in TParam>?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test5(Y): Zin<in TParam>?'
+            CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val clz: java.lang.Class<Test<*, *, *>>
+          CALL '<get-java>() on KClass<Test<*, *, *>>: Class<Test<*, *, *>>' type=java.lang.Class<Test<*, *, *>> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Test' type=kotlin.reflect.KClass<Test<*, *, *>>
+        VAR val params: kotlin.collections.List<Params>
+          CALL 'listOf(vararg Params): List<Params>' type=kotlin.collections.List<Params> operator=null
+            elements: VARARG type=Array<out Params> varargElementType=Params
+              CALL 'constructor Params(Int, Class<*>, String, String)' type=Params operator=null
+                methodIndex: CONST Int type=kotlin.Int value='1'
+                paramClass: CALL '<get-java>() on KClass<Any>: Class<Any>' type=java.lang.Class<kotlin.Any> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+                expectedReturnType: CONST String type=kotlin.String value='T'
+                expecedParamType: CONST String type=kotlin.String value='T'
+              CALL 'constructor Params(Int, Class<*>, String, String)' type=Params operator=null
+                methodIndex: CONST Int type=kotlin.Int value='2'
+                paramClass: CALL '<get-java>() on KClass<Z<*>>: Class<Z<*>>' type=java.lang.Class<Z<*>> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'Z' type=kotlin.reflect.KClass<Z<*>>
+                expectedReturnType: CONST String type=kotlin.String value='Z<T>'
+                expecedParamType: CONST String type=kotlin.String value='Z<T>'
+              CALL 'constructor Params(Int, Class<*>, String, String)' type=Params operator=null
+                methodIndex: CONST Int type=kotlin.Int value='3'
+                paramClass: CALL '<get-java>() on KClass<Z<*>>: Class<Z<*>>' type=java.lang.Class<Z<*>> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'Z' type=kotlin.reflect.KClass<Z<*>>
+                expectedReturnType: CONST String type=kotlin.String value='Z<java.lang.String>'
+                expecedParamType: CONST String type=kotlin.String value='Z<java.lang.String>'
+              CALL 'constructor Params(Int, Class<*>, String, String)' type=Params operator=null
+                methodIndex: CONST Int type=kotlin.Int value='4'
+                paramClass: CALL '<get-java>() on KClass<Any>: Class<Any>' type=java.lang.Class<kotlin.Any> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+                expectedReturnType: CONST String type=kotlin.String value='Zout<java.lang.String>'
+                expecedParamType: CONST String type=kotlin.String value='X'
+              CALL 'constructor Params(Int, Class<*>, String, String)' type=Params operator=null
+                methodIndex: CONST Int type=kotlin.Int value='5'
+                paramClass: CALL '<get-java>() on KClass<Any>: Class<Any>' type=java.lang.Class<kotlin.Any> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+                expectedReturnType: CONST String type=kotlin.String value='Zin<TParam>'
+                expecedParamType: CONST String type=kotlin.String value='Y'
+        VAR var result: kotlin.String
+          CONST String type=kotlin.String value=''
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<Params>
+            CALL 'iterator(): Iterator<Params>' type=kotlin.collections.Iterator<Params> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'params: List<Params>' type=kotlin.collections.List<Params> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<Params>' type=kotlin.collections.Iterator<Params> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val p: Params
+                CALL 'next(): Params' type=Params operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<Params>' type=kotlin.collections.Iterator<Params> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                VAR val fail: kotlin.String
+                  CALL 'test(Class<*>, Int, Class<*>, String, String): String' type=kotlin.String operator=null
+                    clazz: GET_VAR 'clz: Class<Test<*, *, *>>' type=java.lang.Class<Test<*, *, *>> operator=null
+                    methodIndex: CALL '<get-methodIndex>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                      $this: GET_VAR 'p: Params' type=Params operator=null
+                    paramClass: CALL '<get-paramClass>(): Class<*>' type=java.lang.Class<*> operator=GET_PROPERTY
+                      $this: GET_VAR 'p: Params' type=Params operator=null
+                    expectedReturn: CALL '<get-expectedReturnType>(): String' type=kotlin.String operator=GET_PROPERTY
+                      $this: GET_VAR 'p: Params' type=Params operator=null
+                    expectedParam: CALL '<get-expecedParamType>(): String' type=kotlin.String operator=GET_PROPERTY
+                      $this: GET_VAR 'p: Params' type=Params operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                    arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                      arg0: GET_VAR 'fail: String' type=kotlin.String operator=null
+                      arg1: CONST String type=kotlin.String value='OK'
+                  then: BLOCK type=kotlin.Unit operator=null
+                    SET_VAR 'result: String' type=kotlin.Unit operator=PLUSEQ
+                      CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                        $this: GET_VAR 'result: String' type=kotlin.String operator=PLUSEQ
+                        other: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                          $this: GET_VAR 'fail: String' type=kotlin.String operator=null
+                          other: CONST String type=kotlin.String value='
+'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'isEmpty() on CharSequence: Boolean' type=kotlin.Boolean operator=null
+              $receiver: GET_VAR 'result: String' type=kotlin.String operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: GET_VAR 'result: String' type=kotlin.String operator=null
+    FUN public fun test(clazz: java.lang.Class<*>, methodIndex: kotlin.Int, paramClass: java.lang.Class<*>, expectedReturn: kotlin.String, expectedParam: kotlin.String): kotlin.String
+      BLOCK_BODY
+        VAR val method: java.lang.reflect.Method
+          BLOCK type=java.lang.reflect.Method operator=EXCLEXCL
+            VAR val tmp0_notnull: java.lang.reflect.Method!
+              CALL 'getDeclaredMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+                $this: GET_VAR 'value-parameter clazz: Class<*>' type=java.lang.Class<*> operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='test'
+                  GET_VAR 'value-parameter methodIndex: Int' type=kotlin.Int operator=null
+                p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+                  GET_VAR 'value-parameter paramClass: Class<*>' type=java.lang.Class<*> operator=null
+            WHEN type=java.lang.reflect.Method operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Method!' type=java.lang.reflect.Method! operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                GET_VAR 'tmp0_notnull: Method!' type=java.lang.reflect.Method! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Type
+                  CALL 'getGenericReturnType(): Type!' type=java.lang.reflect.Type! operator=null
+                    $this: GET_VAR 'method: Method' type=java.lang.reflect.Method operator=null
+              arg1: GET_VAR 'value-parameter expectedReturn: String' type=kotlin.String operator=null
+          then: RETURN type=kotlin.Nothing from='test(Class<*>, Int, Class<*>, String, String): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='fail'
+                GET_VAR 'value-parameter methodIndex: Int' type=kotlin.Int operator=null
+                CONST String type=kotlin.String value=': '
+              other: CALL 'getGenericReturnType(): Type!' type=java.lang.reflect.Type! operator=null
+                $this: GET_VAR 'method: Method' type=java.lang.reflect.Method operator=null
+        VAR val test1Param: java.lang.reflect.Type!
+          CALL 'get(Int): Type!' type=java.lang.reflect.Type! operator=GET_ARRAY_ELEMENT
+            $this: BLOCK type=kotlin.Array<(out) java.lang.reflect.Type!> operator=EXCLEXCL
+              VAR val tmp1_notnull: kotlin.Array<(out) java.lang.reflect.Type!>!
+                CALL 'getGenericParameterTypes(): Array<(out) Type!>!' type=kotlin.Array<(out) java.lang.reflect.Type!>! operator=null
+                  $this: GET_VAR 'method: Method' type=java.lang.reflect.Method operator=null
+              WHEN type=kotlin.Array<(out) java.lang.reflect.Type!> operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp1_notnull: Array<(out) Type!>!' type=kotlin.Array<(out) java.lang.reflect.Type!>! operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Type!>
+                  GET_VAR 'tmp1_notnull: Array<(out) Type!>!' type=kotlin.Array<(out) java.lang.reflect.Type!>! operator=null
+            index: CONST Int type=kotlin.Int value='0'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Type
+                  GET_VAR 'test1Param: Type!' type=java.lang.reflect.Type! operator=null
+              arg1: GET_VAR 'value-parameter expectedParam: String' type=kotlin.String operator=null
+          then: RETURN type=kotlin.Nothing from='test(Class<*>, Int, Class<*>, String, String): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='fail'
+                GET_VAR 'value-parameter methodIndex: Int' type=kotlin.Int operator=null
+                CONST String type=kotlin.String value='_param: '
+              other: GET_VAR 'test1Param: Type!' type=java.lang.reflect.Type! operator=null
+        RETURN type=kotlin.Nothing from='test(Class<*>, Int, Class<*>, String, String): String'
+          CONST String type=kotlin.String value='OK'

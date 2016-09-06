@@ -1,0 +1,83 @@
+MODULE <test-module>
+  FILE /WithoutPrimary.kt
+    CLASS CLASS A
+      PROPERTY public final val x: kotlin.String
+      PROPERTY public final val y: kotlin.String
+      CONSTRUCTOR public constructor A(x: kotlin.String, y: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+          SET_BACKING_FIELD 'x: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter x: String' type=kotlin.String operator=null
+          SET_BACKING_FIELD 'y: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter y: String' type=kotlin.String operator=null
+      CONSTRUCTOR public constructor A(x: kotlin.String = ..., y: kotlin.Int = ...)
+        x: EXPRESSION_BODY
+          CONST String type=kotlin.String value='def_x'
+        y: EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A(String, String)'
+            x: GET_VAR 'value-parameter x: String = ...' type=kotlin.String operator=null
+            y: CALL 'toString(): String' type=kotlin.String operator=null
+              $this: GET_VAR 'value-parameter y: Int = ...' type=kotlin.Int operator=null
+      CONSTRUCTOR public constructor A(x: kotlin.Double)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A(String, String)'
+            x: CALL 'toString(): String' type=kotlin.String operator=null
+              $this: GET_VAR 'value-parameter x: Double' type=kotlin.Double operator=null
+            y: CONST String type=kotlin.String value='def_y'
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CALL '<get-x>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+              CONST String type=kotlin.String value='#'
+              CALL '<get-y>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val test1: kotlin.String
+          CALL 'toString(): String' type=kotlin.String operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=A
+              CALL 'test1(): A!' type=A! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test1: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='123#abc'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail1: '
+              GET_VAR 'test1: String' type=kotlin.String operator=null
+        VAR val test3: kotlin.String
+          CALL 'toString(): String' type=kotlin.String operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=A
+              CALL 'test3(): A!' type=A! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test3: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='123#456'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail3: '
+              GET_VAR 'test3: String' type=kotlin.String operator=null
+        VAR val test4: kotlin.String
+          CALL 'toString(): String' type=kotlin.String operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=A
+              CALL 'test4(): A!' type=A! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test4: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='1.0#def_y'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail4: '
+              GET_VAR 'test4: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

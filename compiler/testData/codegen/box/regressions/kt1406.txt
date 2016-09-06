@@ -1,0 +1,72 @@
+MODULE <test-module>
+  FILE /kt1406.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      FUN public final fun foo(): kotlin.Unit
+        BLOCK_BODY
+          VAR val items: kotlin.collections.Collection<pack.Item>
+            BLOCK type=kotlin.collections.(Mutable)Set<pack.Item!> operator=EXCLEXCL
+              VAR val tmp0_notnull: kotlin.collections.(Mutable)Set<pack.Item!>!
+                CALL 'singleton(Item!): (Mutable)Set<Item!>!' type=kotlin.collections.(Mutable)Set<pack.Item!>! operator=null
+                  p0: CALL 'constructor Item()' type=pack.Item operator=null
+              WHEN type=kotlin.collections.(Mutable)Set<pack.Item!> operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: (Mutable)Set<Item!>!' type=kotlin.collections.(Mutable)Set<pack.Item!>! operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.collections.Set<pack.Item!>
+                  GET_VAR 'tmp0_notnull: (Mutable)Set<Item!>!' type=kotlin.collections.(Mutable)Set<pack.Item!>! operator=null
+          VAR val result: java.util.ArrayList<pack.Item>
+            CALL 'constructor ArrayList()' type=java.util.ArrayList<pack.Item> operator=null
+          VAR val pattern: java.util.regex.Pattern?
+            CALL 'compile(String!): Pattern!' type=java.util.regex.Pattern! operator=null
+              p0: CONST String type=kotlin.String value='...'
+          CALL 'filterTo(ArrayList<Item>, (Item) -> Boolean) on Iterable<Item>: ArrayList<Item>' type=java.util.ArrayList<pack.Item> operator=null
+            $receiver: GET_VAR 'items: Collection<Item>' type=kotlin.collections.Collection<pack.Item> operator=null
+            destination: GET_VAR 'result: ArrayList<Item>' type=java.util.ArrayList<pack.Item> operator=null
+            predicate: BLOCK type=(pack.Item) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(it: pack.Item): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Item): Boolean'
+                    CALL 'matches(): Boolean' type=kotlin.Boolean operator=null
+                      $this: BLOCK type=java.util.regex.Matcher operator=EXCLEXCL
+                        VAR val tmp1_notnull: java.util.regex.Matcher!
+                          CALL 'matcher(CharSequence!): Matcher!' type=java.util.regex.Matcher! operator=null
+                            $this: BLOCK type=java.util.regex.Pattern operator=EXCLEXCL
+                              VAR val tmp0_notnull: java.util.regex.Pattern?
+                                GET_VAR 'pattern: Pattern?' type=java.util.regex.Pattern? operator=null
+                              WHEN type=java.util.regex.Pattern operator=null
+                                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                                  arg0: GET_VAR 'tmp0_notnull: Pattern?' type=java.util.regex.Pattern? operator=null
+                                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                                else: GET_VAR 'tmp0_notnull: Pattern?' type=java.util.regex.Pattern? operator=null
+                            p0: CALL 'name() on Item: String' type=kotlin.String operator=null
+                              $this: THIS of 'C' type=pack.C
+                              $receiver: GET_VAR 'value-parameter it: Item' type=pack.Item operator=null
+                        WHEN type=java.util.regex.Matcher operator=null
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: GET_VAR 'tmp1_notnull: Matcher!' type=java.util.regex.Matcher! operator=null
+                            arg1: CONST Null type=kotlin.Nothing? value='null'
+                          then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                          else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.util.regex.Matcher
+                            GET_VAR 'tmp1_notnull: Matcher!' type=java.util.regex.Matcher! operator=null
+              CALLABLE_REFERENCE '<anonymous>(Item): Boolean' type=(pack.Item) -> kotlin.Boolean operator=LAMBDA
+      FUN private final fun pack.Item.name(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='name() on Item: String'
+            CONST String type=kotlin.String value=''
+    CLASS CLASS Item
+      CONSTRUCTOR public constructor Item()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Item'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor C()' type=pack.C operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

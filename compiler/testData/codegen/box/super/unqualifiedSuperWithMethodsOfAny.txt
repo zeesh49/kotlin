@@ -1,0 +1,51 @@
+MODULE <test-module>
+  FILE /unqualifiedSuperWithMethodsOfAny.kt
+    CLASS INTERFACE ISomething
+    CLASS CLASS ClassWithToString
+      CONSTRUCTOR public constructor ClassWithToString()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ClassWithToString'
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            CONST String type=kotlin.String value='C'
+    CLASS INTERFACE IWithToString
+      FUN public abstract override fun toString(): kotlin.String
+    CLASS CLASS C1
+      CONSTRUCTOR public constructor C1()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor ClassWithToString()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C1'
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            CALL 'toString(): String' superQualifier=ClassWithToString type=kotlin.String operator=null
+              $this: THIS of 'C1' type=ClassWithToString
+    CLASS CLASS C2
+      CONSTRUCTOR public constructor C2()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor ClassWithToString()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C2'
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            CALL 'toString(): String' superQualifier=ClassWithToString type=kotlin.String operator=null
+              $this: THIS of 'C2' type=ClassWithToString
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=WHEN
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                  $this: CALL 'constructor C1()' type=C1 operator=null
+                arg1: CONST String type=kotlin.String value='C'
+            then: CONST String type=kotlin.String value='Failed #1'
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                  $this: CALL 'constructor C2()' type=C2 operator=null
+                arg1: CONST String type=kotlin.String value='C'
+            then: CONST String type=kotlin.String value='Failed #2'
+            else: CONST String type=kotlin.String value='OK'

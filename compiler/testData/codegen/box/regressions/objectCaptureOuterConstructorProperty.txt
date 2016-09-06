@@ -1,0 +1,84 @@
+MODULE <test-module>
+  FILE /objectCaptureOuterConstructorProperty.kt
+    CLASS INTERFACE Stream
+      FUN public abstract fun iterator(): kotlin.collections.Iterator<T>
+    CLASS CLASS ZippingStream
+      CONSTRUCTOR public constructor ZippingStream<T1, T2>(stream1: Stream<T1>, stream2: Stream<T2>)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'stream1: Stream<T1>' type=kotlin.Unit operator=null
+            receiver: THIS of 'ZippingStream' type=ZippingStream<T1, T2>
+            value: GET_VAR 'value-parameter stream1: Stream<T1>' type=Stream<T1> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'stream2: Stream<T2>' type=kotlin.Unit operator=null
+            receiver: THIS of 'ZippingStream' type=ZippingStream<T1, T2>
+            value: GET_VAR 'value-parameter stream2: Stream<T2>' type=Stream<T2> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='ZippingStream'
+      PROPERTY public final val stream1: Stream<T1>
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter stream1: Stream<T1>' type=Stream<T1> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val stream2: Stream<T2>
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter stream2: Stream<T2>' type=Stream<T2> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public open override fun iterator(): kotlin.collections.Iterator<kotlin.Pair<T1, T2>>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='iterator(): Iterator<Pair<T1, T2>>'
+            BLOCK type=ZippingStream.iterator.<no name provided><T1, T2> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor AbstractIterator()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                PROPERTY public final val iterator1: kotlin.collections.Iterator<T1>
+                  EXPRESSION_BODY
+                    CALL 'iterator(): Iterator<T1>' type=kotlin.collections.Iterator<T1> operator=null
+                      $this: CALL '<get-stream1>(): Stream<T1>' type=Stream<T1> operator=GET_PROPERTY
+                        $this: THIS of 'ZippingStream' type=ZippingStream<T1, T2>
+                PROPERTY public final val iterator2: kotlin.collections.Iterator<T2>
+                  EXPRESSION_BODY
+                    CALL 'iterator(): Iterator<T2>' type=kotlin.collections.Iterator<T2> operator=null
+                      $this: CALL '<get-stream2>(): Stream<T2>' type=Stream<T2> operator=GET_PROPERTY
+                        $this: THIS of 'ZippingStream' type=ZippingStream<T1, T2>
+                FUN protected open override fun computeNext(): kotlin.Unit
+                  BLOCK_BODY
+                    WHEN type=kotlin.Unit operator=IF
+                      if: WHEN type=kotlin.Boolean operator=ANDAND
+                        if: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=null
+                          $this: CALL '<get-iterator1>(): Iterator<T1>' type=kotlin.collections.Iterator<T1> operator=GET_PROPERTY
+                            $this: THIS of '<no name provided>' type=ZippingStream.iterator.<no name provided><T1, T2>
+                        then: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=null
+                          $this: CALL '<get-iterator2>(): Iterator<T2>' type=kotlin.collections.Iterator<T2> operator=GET_PROPERTY
+                            $this: THIS of '<no name provided>' type=ZippingStream.iterator.<no name provided><T1, T2>
+                        else: CONST Boolean type=kotlin.Boolean value='false'
+                      then: BLOCK type=kotlin.Unit operator=null
+                        CALL 'setNext(Pair<T1, T2>): Unit' type=kotlin.Unit operator=null
+                          $this: THIS of '<no name provided>' type=ZippingStream.iterator.<no name provided><T1, T2>
+                          value: CALL 'to(T2) on T1: Pair<T1, T2>' type=kotlin.Pair<T1, T2> operator=null
+                            $receiver: CALL 'next(): T1' type=T1 operator=null
+                              $this: CALL '<get-iterator1>(): Iterator<T1>' type=kotlin.collections.Iterator<T1> operator=GET_PROPERTY
+                                $this: THIS of '<no name provided>' type=ZippingStream.iterator.<no name provided><T1, T2>
+                            that: CALL 'next(): T2' type=T2 operator=null
+                              $this: CALL '<get-iterator2>(): Iterator<T2>' type=kotlin.collections.Iterator<T2> operator=GET_PROPERTY
+                                $this: THIS of '<no name provided>' type=ZippingStream.iterator.<no name provided><T1, T2>
+                      else: BLOCK type=kotlin.Unit operator=null
+                        CALL 'done(): Unit' type=kotlin.Unit operator=null
+                          $this: THIS of '<no name provided>' type=ZippingStream.iterator.<no name provided><T1, T2>
+              CALL 'constructor <no name provided>()' type=ZippingStream.iterator.<no name provided><T1, T2> operator=OBJECT_LITERAL
+    CLASS OBJECT EmptyStream
+      CONSTRUCTOR private constructor EmptyStream()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='EmptyStream'
+      FUN public open override fun iterator(): kotlin.collections.Iterator<kotlin.Nothing>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='iterator(): Iterator<Nothing>'
+            CALL 'iterator(): Iterator<Nothing>' type=kotlin.collections.Iterator<kotlin.Nothing> operator=null
+              $this: CALL 'listOf(): List<Nothing>' type=kotlin.collections.List<kotlin.Nothing> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=null
+          $this: CALL 'iterator(): Iterator<Pair<Nothing, Nothing>>' type=kotlin.collections.Iterator<kotlin.Pair<kotlin.Nothing, kotlin.Nothing>> operator=null
+            $this: CALL 'constructor ZippingStream(Stream<Nothing>, Stream<Nothing>)' type=ZippingStream<kotlin.Nothing, kotlin.Nothing> operator=null
+              stream1: GET_OBJECT 'EmptyStream' type=EmptyStream
+              stream2: GET_OBJECT 'EmptyStream' type=EmptyStream
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

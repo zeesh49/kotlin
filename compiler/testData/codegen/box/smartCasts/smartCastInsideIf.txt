@@ -1,0 +1,42 @@
+MODULE <test-module>
+  FILE /smartCastInsideIf.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(s: kotlin.String = ...)
+        s: EXPRESSION_BODY
+          CONST String type=kotlin.String value='FAIL'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 's: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter s: String = ...' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val s: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s: String = ...' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN private fun foo(a: A?, aOther: A?): A
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(A?, A?): A'
+          WHEN type=A operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'value-parameter a: A?' type=A? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: BLOCK type=A operator=null
+              CALL 'constructor A(String = ...)' type=A operator=null
+            else: BLOCK type=A? operator=null
+              WHEN type=kotlin.Unit operator=IF
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'value-parameter aOther: A?' type=A? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: BLOCK type=kotlin.Nothing operator=null
+                  RETURN type=kotlin.Nothing from='foo(A?, A?): A'
+                    CALL 'constructor A(String = ...)' type=A operator=null
+              GET_VAR 'value-parameter aOther: A?' type=A? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'foo(A?, A?): A' type=A operator=null
+              a: CALL 'constructor A(String = ...)' type=A operator=null
+                s: CONST String type=kotlin.String value='???'
+              aOther: CALL 'constructor A(String = ...)' type=A operator=null
+                s: CONST String type=kotlin.String value='OK'

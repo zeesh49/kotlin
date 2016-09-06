@@ -1,0 +1,115 @@
+MODULE <test-module>
+  FILE /increment.kt
+    PROPERTY public var holder: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    PROPERTY public var globalA: A
+      EXPRESSION_BODY
+        CALL 'constructor A(Int)' type=A operator=null
+          p: CONST Int type=kotlin.Int value='-1'
+      PROPERTY_GETTER public fun <get-globalA>(): A
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            CALL '<set-holder>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+              <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: CALL '<get-holder>(): String' type=kotlin.String operator=PLUSEQ
+                other: CONST String type=kotlin.String value='getA'
+          RETURN type=kotlin.Nothing from='<get-globalA>(): A'
+            GET_VAR 'field: A' type=A operator=null
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(p: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'p: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter p: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val p: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter p: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final var prop: A
+        EXPRESSION_BODY
+          THIS of 'A' type=A
+      FUN public final operator fun inc(): A
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='inc(): A'
+            CALL 'constructor A(Int)' type=A operator=null
+              p: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CALL '<get-p>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'A' type=A
+                other: CONST Int type=kotlin.Int value='1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var a: A
+          CALL 'constructor A(Int)' type=A operator=null
+            p: CONST Int type=kotlin.Int value='1'
+        BLOCK type=A operator=PREFIX_INCR
+          VAR val tmp0: A
+            CALL 'inc(): A' type=A operator=PREFIX_INCR
+              $this: GET_VAR 'a: A' type=A operator=PREFIX_INCR
+          SET_VAR 'a: A' type=kotlin.Unit operator=PREFIX_INCR
+            GET_VAR 'tmp0: A' type=A operator=null
+          GET_VAR 'tmp0: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-p>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              CALL '<get-p>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              CONST String type=kotlin.String value=' '
+              CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+        CALL '<set-globalA>(A): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: CALL 'constructor A(Int)' type=A operator=null
+            p: CONST Int type=kotlin.Int value='1'
+        BLOCK type=A operator=PREFIX_INCR
+          VAR val tmp1_this: A
+            CALL '<get-globalA>(): A' type=A operator=GET_PROPERTY
+          BLOCK type=A operator=PREFIX_INCR
+            VAR val tmp2: A
+              CALL 'inc(): A' type=A operator=PREFIX_INCR
+                $this: CALL '<get-prop>(): A' type=A operator=PREFIX_INCR
+                  $this: GET_VAR 'tmp1_this: A' type=A operator=null
+            CALL '<set-prop>(A): Unit' type=kotlin.Unit operator=PREFIX_INCR
+              $this: GET_VAR 'tmp1_this: A' type=A operator=null
+              <set-?>: GET_VAR 'tmp2: A' type=A operator=null
+            GET_VAR 'tmp2: A' type=A operator=null
+        VAR val holderValue: kotlin.String
+          CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: WHEN type=kotlin.Boolean operator=OROR
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL '<get-p>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                    $this: CALL '<get-globalA>(): A' type=A operator=GET_PROPERTY
+                  arg1: CONST Int type=kotlin.Int value='1'
+              then: CONST Boolean type=kotlin.Boolean value='true'
+              else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL '<get-p>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                    $this: CALL '<get-prop>(): A' type=A operator=GET_PROPERTY
+                      $this: CALL '<get-globalA>(): A' type=A operator=GET_PROPERTY
+                  arg1: CONST Int type=kotlin.Int value='2'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'holderValue: String' type=kotlin.String operator=null
+                arg1: CONST String type=kotlin.String value='getA'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 2: '
+              CALL '<get-p>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              CONST String type=kotlin.String value=' '
+              CALL '<get-p>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL '<get-prop>(): A' type=A operator=GET_PROPERTY
+                  $this: GET_VAR 'a: A' type=A operator=null
+              CONST String type=kotlin.String value=' '
+              GET_VAR 'holderValue: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

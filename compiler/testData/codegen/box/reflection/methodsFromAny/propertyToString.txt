@@ -1,0 +1,70 @@
+MODULE <test-module>
+  FILE /propertyToString.kt
+    PROPERTY public val top: kotlin.Int = 42
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='42'
+    PROPERTY public var top2: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='-23'
+    PROPERTY public val kotlin.String.ext: kotlin.Int
+      PROPERTY_GETTER public fun kotlin.String.<get-ext>(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-ext>() on String: Int'
+            CONST Int type=kotlin.Int value='0'
+    PROPERTY public var kotlin.ranges.IntRange?.ext2: kotlin.Int
+      PROPERTY_GETTER public fun kotlin.ranges.IntRange?.<get-ext2>(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-ext2>() on IntRange?: Int'
+            CONST Int type=kotlin.Int value='0'
+      PROPERTY_SETTER public fun kotlin.ranges.IntRange?.<set-ext2>(value: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(mem: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'mem: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=test.A
+            value: GET_VAR 'value-parameter mem: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val mem: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter mem: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B(mem: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'mem: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'B' type=test.B
+            value: GET_VAR 'value-parameter mem: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public final var mem: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter mem: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun assertToString(s: kotlin.String, x: kotlin.Any): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertToString(String, Any): Unit' type=kotlin.Unit operator=null
+          s: CONST String type=kotlin.String value='val top: kotlin.Int'
+          x: CALLABLE_REFERENCE 'top: Int' type=kotlin.reflect.KProperty0<kotlin.Int> operator=null
+        CALL 'assertToString(String, Any): Unit' type=kotlin.Unit operator=null
+          s: CONST String type=kotlin.String value='var top2: kotlin.Int'
+          x: CALLABLE_REFERENCE 'top2: Int' type=kotlin.reflect.KMutableProperty0<kotlin.Int> operator=null
+        CALL 'assertToString(String, Any): Unit' type=kotlin.Unit operator=null
+          s: CONST String type=kotlin.String value='val kotlin.String.ext: kotlin.Int'
+          x: CALLABLE_REFERENCE 'ext: Int on String' type=kotlin.reflect.KProperty1<kotlin.String, kotlin.Int> operator=null
+        CALL 'assertToString(String, Any): Unit' type=kotlin.Unit operator=null
+          s: CONST String type=kotlin.String value='var kotlin.ranges.IntRange?.ext2: kotlin.Int'
+          x: CALLABLE_REFERENCE 'ext2: Int on IntRange?' type=kotlin.reflect.KMutableProperty1<kotlin.ranges.IntRange, kotlin.Int> operator=null
+        CALL 'assertToString(String, Any): Unit' type=kotlin.Unit operator=null
+          s: CONST String type=kotlin.String value='val test.A.mem: kotlin.String'
+          x: CALLABLE_REFERENCE 'mem: String' type=kotlin.reflect.KProperty1<test.A, kotlin.String> operator=null
+        CALL 'assertToString(String, Any): Unit' type=kotlin.Unit operator=null
+          s: CONST String type=kotlin.String value='var test.B.mem: kotlin.String'
+          x: CALLABLE_REFERENCE 'mem: String' type=kotlin.reflect.KMutableProperty1<test.B, kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

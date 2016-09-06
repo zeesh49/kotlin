@@ -1,0 +1,56 @@
+MODULE <test-module>
+  FILE /kt864.kt
+    FUN public fun sample(): java.io.Reader
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='sample(): Reader'
+          CALL 'constructor StringReader(String!)' type=java.io.StringReader operator=null
+            p0: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Hello'
+              CONST String type=kotlin.String value='
+'
+              CONST String type=kotlin.String value='World'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val list1: kotlin.collections.List<kotlin.String>
+          CALL 'useLines((Sequence<String>) -> List<String>) on Reader: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            $receiver: CALL 'sample(): Reader' type=java.io.Reader operator=null
+            block: BLOCK type=(kotlin.sequences.Sequence<kotlin.String>) -> kotlin.collections.List<kotlin.String> operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.sequences.Sequence<kotlin.String>): kotlin.collections.List<kotlin.String>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Sequence<String>): List<String>'
+                    CALL 'toList() on Sequence<String>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+                      $receiver: GET_VAR 'value-parameter it: Sequence<String>' type=kotlin.sequences.Sequence<kotlin.String> operator=null
+              CALLABLE_REFERENCE '<anonymous>(Sequence<String>): List<String>' type=(kotlin.sequences.Sequence<kotlin.String>) -> kotlin.collections.List<kotlin.String> operator=LAMBDA
+        VAR val list2: java.util.ArrayList<kotlin.String>
+          CALL 'useLines((Sequence<String>) -> ArrayList<String>) on Reader: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+            $receiver: CALL 'sample(): Reader' type=java.io.Reader operator=null
+            block: BLOCK type=(kotlin.sequences.Sequence<kotlin.String>) -> java.util.ArrayList<kotlin.String> operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.sequences.Sequence<kotlin.String>): java.util.ArrayList<kotlin.String>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Sequence<String>): ArrayList<String>'
+                    CALL 'toCollection(ArrayList<String>) on Sequence<String>: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+                      $receiver: GET_VAR 'value-parameter it: Sequence<String>' type=kotlin.sequences.Sequence<kotlin.String> operator=null
+                      destination: CALL 'arrayListOf(vararg String): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              CALLABLE_REFERENCE '<anonymous>(Sequence<String>): ArrayList<String>' type=(kotlin.sequences.Sequence<kotlin.String>) -> java.util.ArrayList<kotlin.String> operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'arrayListOf(vararg String): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+                elements: VARARG type=Array<out String> varargElementType=String
+                  CONST String type=kotlin.String value='Hello'
+                  CONST String type=kotlin.String value='World'
+              arg1: GET_VAR 'list1: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'arrayListOf(vararg String): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+                elements: VARARG type=Array<out String> varargElementType=String
+                  CONST String type=kotlin.String value='Hello'
+                  CONST String type=kotlin.String value='World'
+              arg1: GET_VAR 'list2: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

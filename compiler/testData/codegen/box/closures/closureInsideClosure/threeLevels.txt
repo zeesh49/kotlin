@@ -1,0 +1,27 @@
+MODULE <test-module>
+  FILE /threeLevels.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        FUN local final fun foo(x: kotlin.Int): kotlin.Unit
+          BLOCK_BODY
+            FUN local final fun bar(y: kotlin.Int): kotlin.Unit
+              BLOCK_BODY
+                FUN local final fun baz(z: kotlin.Int): kotlin.Unit
+                  BLOCK_BODY
+                    CALL 'foo(Int): Unit' type=kotlin.Unit operator=null
+                      x: CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+                        $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                        other: CONST Int type=kotlin.Int value='1'
+                CALL 'baz(Int): Unit' type=kotlin.Unit operator=null
+                  z: GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+                arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+                  $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                  other: CONST Int type=kotlin.Int value='0'
+              then: CALL 'bar(Int): Unit' type=kotlin.Unit operator=null
+                y: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+        CALL 'foo(Int): Unit' type=kotlin.Unit operator=null
+          x: CONST Int type=kotlin.Int value='1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

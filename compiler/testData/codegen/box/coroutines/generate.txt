@@ -1,0 +1,119 @@
+MODULE <test-module>
+  FILE /generate.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.String
+          CALL 'joinToString(CharSequence = ..., CharSequence = ..., CharSequence = ..., Int = ..., CharSequence = ..., ((Int) -> CharSequence)? = ...) on Sequence<Int>: String' type=kotlin.String operator=null
+            $receiver: CALL 'gen(): Sequence<Int>' type=kotlin.sequences.Sequence<kotlin.Int> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'x: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='1, 2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail1: '
+              GET_VAR 'x: String' type=kotlin.String operator=null
+        VAR val y: kotlin.String
+          CALL 'joinToString(CharSequence = ..., CharSequence = ..., CharSequence = ..., Int = ..., CharSequence = ..., ((Int) -> CharSequence)? = ...) on Sequence<Int>: String' type=kotlin.String operator=null
+            $receiver: CALL 'gen(): Sequence<Int>' type=kotlin.sequences.Sequence<kotlin.Int> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'y: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='-1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail2: '
+              GET_VAR 'y: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    PROPERTY public var was: kotlin.Boolean
+      EXPRESSION_BODY
+        CONST Boolean type=kotlin.Boolean value='false'
+    FUN public fun gen(): kotlin.sequences.Sequence<kotlin.Int>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='gen(): Sequence<Int>'
+          CALL 'generate(coroutine GeneratorController<Int>.() -> Continuation<Unit>): Sequence<Int>' type=kotlin.sequences.Sequence<kotlin.Int> operator=null
+            c: TYPE_OP operator=IMPLICIT_CAST typeOperand=GeneratorController<kotlin.Int>.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+              BLOCK type=GeneratorController<kotlin.Int>.() -> kotlin.Unit operator=LAMBDA
+                FUN local final fun GeneratorController<kotlin.Int>.<anonymous>(): kotlin.Unit
+                  BLOCK_BODY
+                    WHEN type=kotlin.Unit operator=IF
+                      if: CALL '<get-was>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+                      then: BLOCK type=kotlin.Nothing operator=null
+                        CALL 'yield(Int): Unit' type=kotlin.Unit operator=null
+                          $this: $RECEIVER of '<anonymous>() on GeneratorController<Int>: Unit' type=GeneratorController<kotlin.Int>
+                          value: CONST Int type=kotlin.Int value='-1'
+                        RETURN type=kotlin.Nothing from='<anonymous>() on GeneratorController<Int>: Unit'
+                    BLOCK type=kotlin.Unit operator=FOR_LOOP
+                      VAR val tmp0_iterator: kotlin.collections.IntIterator
+                        CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+                          $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                            $this: CONST Int type=kotlin.Int value='1'
+                            other: CONST Int type=kotlin.Int value='2'
+                      WHILE label=null operator=FOR_LOOP_INNER_WHILE
+                        condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+                          $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+                        body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+                          VAR val i: kotlin.Int
+                            CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+                          BLOCK type=kotlin.Unit operator=null
+                            CALL 'yield(Int): Unit' type=kotlin.Unit operator=null
+                              $this: $RECEIVER of '<anonymous>() on GeneratorController<Int>: Unit' type=GeneratorController<kotlin.Int>
+                              value: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                    RETURN type=kotlin.Nothing from='<anonymous>() on GeneratorController<Int>: Unit'
+                      CALL '<set-was>(Boolean): Unit' type=kotlin.Unit operator=EQ
+                        <set-?>: CONST Boolean type=kotlin.Boolean value='true'
+                CALLABLE_REFERENCE '<anonymous>() on GeneratorController<Int>: Unit' type=GeneratorController<kotlin.Int>.() -> kotlin.Unit operator=LAMBDA
+    FUN public fun <T> generate(coroutine c: GeneratorController<T>.() -> kotlin.coroutines.Continuation<kotlin.Unit>): kotlin.sequences.Sequence<T>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='generate(coroutine GeneratorController<T>.() -> Continuation<Unit>): Sequence<T>'
+          BLOCK type=generate.<no name provided><T> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              FUN public open override fun iterator(): kotlin.collections.Iterator<T>
+                BLOCK_BODY
+                  VAR val iterator: GeneratorController<T>
+                    CALL 'constructor GeneratorController()' type=GeneratorController<T> operator=null
+                  CALL 'setNextStep(Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+                    $this: GET_VAR 'iterator: GeneratorController<T>' type=GeneratorController<T> operator=null
+                    step: CALL 'invoke(GeneratorController<T>): Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=INVOKE
+                      $this: GET_VAR 'value-parameter coroutine c: GeneratorController<T>.() -> Continuation<Unit>' type=GeneratorController<T>.() -> kotlin.coroutines.Continuation<kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+                      p1: GET_VAR 'iterator: GeneratorController<T>' type=GeneratorController<T> operator=null
+                  RETURN type=kotlin.Nothing from='iterator(): Iterator<T>'
+                    GET_VAR 'iterator: GeneratorController<T>' type=GeneratorController<T> operator=null
+            CALL 'constructor <no name provided>()' type=generate.<no name provided><T> operator=OBJECT_LITERAL
+    CLASS CLASS GeneratorController
+      CONSTRUCTOR public constructor GeneratorController<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor AbstractIterator()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='GeneratorController'
+      PROPERTY private final lateinit var nextStep: kotlin.coroutines.Continuation<kotlin.Unit>
+      FUN protected open override fun computeNext(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'resume(Unit): Unit' type=kotlin.Unit operator=null
+            $this: CALL '<get-nextStep>(): Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=GET_PROPERTY
+              $this: THIS of 'GeneratorController' type=GeneratorController<T>
+            data: GET_OBJECT 'Unit' type=kotlin.Unit
+      FUN public final fun setNextStep(step: kotlin.coroutines.Continuation<kotlin.Unit>): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-nextStep>(Continuation<Unit>): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'GeneratorController' type=GeneratorController<T>
+            <set-?>: GET_VAR 'value-parameter step: Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=null
+      FUN public final suspend fun yield(value: T, c: kotlin.coroutines.Continuation<kotlin.Unit>): kotlin.Unit
+        BLOCK_BODY
+          CALL 'setNext(T): Unit' type=kotlin.Unit operator=null
+            $this: THIS of 'GeneratorController' type=GeneratorController<T>
+            value: GET_VAR 'value-parameter value: T' type=T operator=null
+          CALL 'setNextStep(Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+            $this: THIS of 'GeneratorController' type=GeneratorController<T>
+            step: GET_VAR 'value-parameter c: Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=null
+      FUN public final operator fun handleResult(result: kotlin.Unit, c: kotlin.coroutines.Continuation<kotlin.Nothing>): kotlin.Unit
+        BLOCK_BODY
+          CALL 'done(): Unit' type=kotlin.Unit operator=null
+            $this: THIS of 'GeneratorController' type=GeneratorController<T>

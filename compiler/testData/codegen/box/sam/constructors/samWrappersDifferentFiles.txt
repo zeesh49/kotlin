@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /1/wrapped.kt
+    FUN public fun getWrapped1(): java.lang.Runnable
+      BLOCK_BODY
+        VAR val f: () -> kotlin.Unit
+          BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        RETURN type=kotlin.Nothing from='getWrapped1(): Runnable'
+          CALL 'Runnable(() -> Unit): Runnable' type=java.lang.Runnable operator=null
+            function: GET_VAR 'f: () -> Unit' type=() -> kotlin.Unit operator=null
+  FILE /2/wrapped2.kt
+    FUN public fun getWrapped2(): java.lang.Runnable
+      BLOCK_BODY
+        VAR val f: () -> kotlin.Unit
+          BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        RETURN type=kotlin.Nothing from='getWrapped2(): Runnable'
+          CALL 'Runnable(() -> Unit): Runnable' type=java.lang.Runnable operator=null
+            function: GET_VAR 'f: () -> Unit' type=() -> kotlin.Unit operator=null
+  FILE /box.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val class1: java.lang.Class<java.lang.Runnable>
+          CALL '<get-javaClass>() on Runnable: Class<Runnable>' type=java.lang.Class<java.lang.Runnable> operator=GET_PROPERTY
+            $receiver: CALL 'getWrapped1(): Runnable' type=java.lang.Runnable operator=null
+        VAR val class2: java.lang.Class<java.lang.Runnable>
+          CALL '<get-javaClass>() on Runnable: Class<Runnable>' type=java.lang.Class<java.lang.Runnable> operator=GET_PROPERTY
+            $receiver: CALL 'getWrapped2(): Runnable' type=java.lang.Runnable operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'class1: Class<Runnable>' type=java.lang.Class<java.lang.Runnable> operator=null
+                arg1: GET_VAR 'class2: Class<Runnable>' type=java.lang.Class<java.lang.Runnable> operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Same class: '
+              GET_VAR 'class1: Class<Runnable>' type=java.lang.Class<java.lang.Runnable> operator=null

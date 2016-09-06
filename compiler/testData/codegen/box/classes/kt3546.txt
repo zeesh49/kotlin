@@ -1,0 +1,51 @@
+MODULE <test-module>
+  FILE /kt3546.kt
+    CLASS INTERFACE A
+      FUN public abstract fun test(): kotlin.String
+    CLASS INTERFACE B
+      FUN public abstract fun test(): kotlin.String
+    CLASS INTERFACE C
+    CLASS CLASS Z
+      CONSTRUCTOR public constructor Z(param: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'param: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Z' type=Z
+            value: GET_VAR 'value-parameter param: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Z'
+      PROPERTY public final val param: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter param: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public open override fun test(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test(): String'
+            CALL '<get-param>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'Z' type=Z
+    CLASS CLASS MyClass
+      CONSTRUCTOR public constructor MyClass(value: C)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'value: C' type=kotlin.Unit operator=null
+            receiver: THIS of 'MyClass' type=MyClass
+            value: GET_VAR 'value-parameter value: C' type=C operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyClass'
+      PROPERTY public final val value: C
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: C' type=C operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY val `MyClass$C$delegate`: C
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: C' type=C operator=null
+      FUN public open override fun test(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test(): String'
+            CALL 'test(): String' type=kotlin.String operator=null
+              $this: GET_VAR '`MyClass$C$delegate`: C' type=C operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val s: MyClass
+          CALL 'constructor MyClass(C)' type=MyClass operator=null
+            value: CALL 'constructor Z(String)' type=Z operator=null
+              param: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'test(): String' type=kotlin.String operator=null
+            $this: GET_VAR 's: MyClass' type=MyClass operator=null

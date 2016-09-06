@@ -1,0 +1,20 @@
+MODULE <test-module>
+  FILE /extensionToArray.kt
+    PROPERTY public val kotlin.Array<kotlin.String>.firstElement: kotlin.String
+      PROPERTY_GETTER public fun kotlin.Array<kotlin.String>.<get-firstElement>(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-firstElement>() on Array<String>: String'
+            CALL 'get(Int): String' type=kotlin.String operator=null
+              $this: $RECEIVER of 'firstElement: String on Array<String>' type=kotlin.Array<kotlin.String>
+              index: CONST Int type=kotlin.Int value='0'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val p: kotlin.reflect.KProperty1<kotlin.Array<kotlin.String>, kotlin.String>
+          CALLABLE_REFERENCE 'firstElement: String on Array<String>' type=kotlin.reflect.KProperty1<kotlin.Array<kotlin.String>, kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'get(Array<String>): String' type=kotlin.String operator=null
+            $this: GET_VAR 'p: KProperty1<Array<String>, String>' type=kotlin.reflect.KProperty1<kotlin.Array<kotlin.String>, kotlin.String> operator=null
+            receiver: CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+              elements: VARARG type=Array<out String> varargElementType=String
+                CONST String type=kotlin.String value='OK'
+                CONST String type=kotlin.String value='Fail'

@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /createdNestedInOuterMember.kt
+    FUN public fun foo(f: (kotlin.Int) -> kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo((Int) -> Int): Int'
+          CALL 'invoke(Int): Int' type=kotlin.Int operator=INVOKE
+            $this: GET_VAR 'value-parameter f: (Int) -> Int' type=(kotlin.Int) -> kotlin.Int operator=VARIABLE_AS_FUNCTION
+            p1: CONST Int type=kotlin.Int value='0'
+    CLASS CLASS Outer
+      CONSTRUCTOR public constructor Outer()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+      CLASS CLASS Nested
+        CONSTRUCTOR public constructor Nested()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Nested'
+        PROPERTY public final val y: kotlin.Int
+          EXPRESSION_BODY
+            CALL 'foo((Int) -> Int): Int' type=kotlin.Int operator=null
+              f: BLOCK type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+                FUN local final fun <anonymous>(a: kotlin.Int): kotlin.Int
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(Int): Int'
+                      GET_VAR 'value-parameter a: Int' type=kotlin.Int operator=null
+                CALLABLE_REFERENCE '<anonymous>(Int): Int' type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+      FUN public final fun bar(): kotlin.String
+        BLOCK_BODY
+          VAR val a: Outer.Nested
+            CALL 'constructor Nested()' type=Outer.Nested operator=null
+          RETURN type=kotlin.Nothing from='bar(): String'
+            CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'bar(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Outer()' type=Outer operator=null

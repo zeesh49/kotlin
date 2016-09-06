@@ -1,0 +1,32 @@
+MODULE <test-module>
+  FILE /coerceVoidToArray.kt
+    FUN public fun a(): kotlin.IntArray?
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='a(): IntArray?'
+          CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun b(): kotlin.Nothing
+      BLOCK_BODY
+        THROW type=kotlin.Nothing
+          CALL 'constructor Exception()' type=java.lang.Exception operator=null
+    FUN public fun foo(): kotlin.IntArray
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(): IntArray'
+          BLOCK type=kotlin.IntArray operator=ELVIS
+            VAR val tmp0_elvis_lhs: kotlin.IntArray?
+              CALL 'a(): IntArray?' type=kotlin.IntArray? operator=null
+            WHEN type=kotlin.IntArray operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_elvis_lhs: IntArray?' type=kotlin.IntArray? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'b(): Nothing' type=kotlin.Nothing operator=null
+              else: GET_VAR 'tmp0_elvis_lhs: IntArray?' type=kotlin.IntArray? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.IntArray
+          try: BLOCK type=kotlin.IntArray operator=null
+            CALL 'foo(): IntArray' type=kotlin.IntArray operator=null
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='Fail'

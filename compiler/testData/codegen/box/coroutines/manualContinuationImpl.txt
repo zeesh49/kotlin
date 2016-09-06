@@ -1,0 +1,68 @@
+MODULE <test-module>
+  FILE /manualContinuationImpl.kt
+    CLASS CLASS Controller
+      CONSTRUCTOR public constructor Controller()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Controller'
+      FUN public final suspend fun suspendHere(x: kotlin.coroutines.Continuation<kotlin.String>): kotlin.Unit
+        BLOCK_BODY
+          CALL 'resume(String): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR 'value-parameter x: Continuation<String>' type=kotlin.coroutines.Continuation<kotlin.String> operator=null
+            data: CONST String type=kotlin.String value='OK'
+    FUN public fun builder(coroutine c: Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'resume(Unit): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'invoke(Controller): Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=INVOKE
+            $this: GET_VAR 'value-parameter coroutine c: Controller.() -> Continuation<Unit>' type=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+            p1: CALL 'constructor Controller()' type=Controller operator=null
+          data: GET_OBJECT 'Unit' type=kotlin.Unit
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.String
+          CONST String type=kotlin.String value='fail'
+        VAR val lambda: Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+          BLOCK type=Controller.() -> box.<anonymous>.<no name provided> operator=LAMBDA
+            FUN local final fun Controller.<anonymous>(): box.<anonymous>.<no name provided>
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>() on Controller: <no name provided>'
+                  BLOCK type=box.<anonymous>.<no name provided> operator=OBJECT_LITERAL
+                    CLASS CLASS <no name provided>
+                      CONSTRUCTOR public constructor <no name provided>()
+                        BLOCK_BODY
+                          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                          INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                      FUN public open override fun resume(data: kotlin.Any?): kotlin.Unit
+                        BLOCK_BODY
+                          WHEN type=kotlin.Unit operator=IF
+                            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                              arg0: GET_VAR 'value-parameter data: Any?' type=kotlin.Any? operator=null
+                              arg1: GET_OBJECT 'Unit' type=kotlin.Unit
+                            then: BLOCK type=kotlin.Nothing operator=null
+                              CALL 'suspendHere(Continuation<String>): Unit' type=kotlin.Unit operator=null
+                                $this: $RECEIVER of '<anonymous>() on Controller: <no name provided>' type=Controller
+                                x: THIS of '<no name provided>' type=box.<anonymous>.<no name provided>
+                              RETURN type=kotlin.Nothing from='resume(Any?): Unit'
+                          WHEN type=kotlin.Unit operator=IF
+                            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                                arg0: GET_VAR 'value-parameter data: Any?' type=kotlin.Any? operator=null
+                                arg1: CONST String type=kotlin.String value='OK'
+                            then: BLOCK type=kotlin.Nothing operator=null
+                              THROW type=kotlin.Nothing
+                                CALL 'constructor RuntimeException(String!)' type=java.lang.RuntimeException operator=null
+                                  p0: STRING_CONCATENATION type=kotlin.String
+                                    CONST String type=kotlin.String value='fail: '
+                                    GET_VAR 'value-parameter data: Any?' type=kotlin.Any? operator=null
+                          SET_VAR 'result: String' type=kotlin.Unit operator=EQ
+                            CONST String type=kotlin.String value='OK'
+                      FUN public open override fun resumeWithException(exception: kotlin.Throwable): kotlin.Nothing
+                        BLOCK_BODY
+                          THROW type=kotlin.Nothing
+                            GET_VAR 'value-parameter exception: Throwable' type=kotlin.Throwable operator=null
+                    CALL 'constructor <no name provided>()' type=box.<anonymous>.<no name provided> operator=OBJECT_LITERAL
+            CALLABLE_REFERENCE '<anonymous>() on Controller: <no name provided>' type=Controller.() -> box.<anonymous>.<no name provided> operator=LAMBDA
+        CALL 'builder(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: GET_VAR 'lambda: Controller.() -> Continuation<Unit>' type=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          GET_VAR 'result: String' type=kotlin.String operator=null

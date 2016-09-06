@@ -1,0 +1,60 @@
+MODULE <test-module>
+  FILE /tryAndContinue.kt
+    FUN public fun idiv(a: kotlin.Int, b: kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='idiv(Int, Int): Int'
+          WHEN type=kotlin.Int operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'value-parameter b: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+            then: THROW type=kotlin.Nothing
+              CALL 'constructor Exception(String!)' type=java.lang.Exception operator=null
+                p0: CONST String type=kotlin.String value='Division by zero'
+            else: CALL 'div(Int): Int' type=kotlin.Int operator=DIV
+              $this: GET_VAR 'value-parameter a: Int' type=kotlin.Int operator=null
+              other: GET_VAR 'value-parameter b: Int' type=kotlin.Int operator=null
+    FUN public fun foo(): kotlin.Int
+      BLOCK_BODY
+        VAR var sum: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='-10'
+                other: CONST Int type=kotlin.Int value='10'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'sum: Int' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                    $this: GET_VAR 'sum: Int' type=kotlin.Int operator=PLUSEQ
+                    other: TRY_CATCH type=kotlin.Int
+                      try: BLOCK type=kotlin.Int operator=null
+                        CALL 'idiv(Int, Int): Int' type=kotlin.Int operator=null
+                          a: CONST Int type=kotlin.Int value='100'
+                          b: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                      catch e: BLOCK type=kotlin.Nothing operator=null
+                        CONTINUE label=null loop.label=null depth=0
+        RETURN type=kotlin.Nothing from='foo(): Int'
+          GET_VAR 'sum: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val test: kotlin.Int
+          CALL 'foo(): Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed, test='
+              GET_VAR 'test: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

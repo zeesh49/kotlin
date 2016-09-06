@@ -1,0 +1,35 @@
+MODULE <test-module>
+  FILE /kt3152.kt
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      PROPERTY public final val content: kotlin.Int = 1
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+      CLASS CLASS A
+        CONSTRUCTOR public constructor A()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='A'
+        PROPERTY public final val v: kotlin.Any
+          EXPRESSION_BODY
+            BLOCK type=Test.A.v.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                FUN public final fun f(): kotlin.Int
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='f(): Int'
+                      CALL '<get-content>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                        $this: THIS of 'Test' type=Test
+              CALL 'constructor <no name provided>()' type=Test.A.v.<no name provided> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'constructor A()' type=Test.A operator=null
+          $this: CALL 'constructor Test()' type=Test operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

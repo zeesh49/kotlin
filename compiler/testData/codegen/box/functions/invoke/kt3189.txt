@@ -1,0 +1,41 @@
+MODULE <test-module>
+  FILE /kt3189.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val bad: Bad
+          CALL 'constructor Bad(() -> Int)' type=Bad operator=null
+            a: BLOCK type=() -> kotlin.Int operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Int'
+                    CONST Int type=kotlin.Int value='1'
+              CALLABLE_REFERENCE '<anonymous>(): Int' type=() -> kotlin.Int operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'test(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'bad: Bad' type=Bad operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'
+    CLASS CLASS Bad
+      CONSTRUCTOR public constructor Bad(a: () -> kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'a: () -> Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'Bad' type=Bad
+            value: GET_VAR 'value-parameter a: () -> Int' type=() -> kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Bad'
+      PROPERTY public final val a: () -> kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter a: () -> Int' type=() -> kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun test(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test(): Int'
+            CALL 'invoke(): Int' type=kotlin.Int operator=INVOKE
+              $this: CALL '<get-a>(): () -> Int' type=() -> kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'Bad' type=Bad
+      FUN public final operator fun invoke(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='invoke(): Int'
+            CONST Int type=kotlin.Int value='2'

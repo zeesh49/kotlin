@@ -1,0 +1,46 @@
+MODULE <test-module>
+  FILE /kt3976.kt
+    PROPERTY public var currentAccountId: kotlin.Int?
+      delegate: PROPERTY val `currentAccountId$delegate`: SessionAccessor<kotlin.Int?>
+        EXPRESSION_BODY
+          CALL 'constructor SessionAccessor()' type=SessionAccessor<kotlin.Int?> operator=null
+      PROPERTY_GETTER public fun <get-currentAccountId>(): kotlin.Int?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-currentAccountId>(): Int?'
+            CALL 'getValue(Nothing?, KProperty<*>): Int?' type=kotlin.Int? operator=null
+              $this: GET_BACKING_FIELD '`currentAccountId$delegate`: SessionAccessor<Int?>' type=SessionAccessor<kotlin.Int?> operator=null
+              o: CONST Null type=kotlin.Nothing? value='null'
+              desc: CALLABLE_REFERENCE 'currentAccountId: Int?' type=kotlin.reflect.KMutableProperty0<kotlin.Int?> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+      PROPERTY_SETTER public fun <set-currentAccountId>(<set-?>: kotlin.Int?): kotlin.Unit
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<set-currentAccountId>(Int?): Unit'
+            CALL 'setValue(Nothing?, KProperty<*>, Int?): Unit' type=kotlin.Unit operator=null
+              $this: GET_BACKING_FIELD '`currentAccountId$delegate`: SessionAccessor<Int?>' type=SessionAccessor<kotlin.Int?> operator=null
+              o: CONST Null type=kotlin.Nothing? value='null'
+              desc: CALLABLE_REFERENCE 'currentAccountId: Int?' type=kotlin.reflect.KMutableProperty0<kotlin.Int?> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+              value: GET_VAR 'value-parameter <set-?>: Int?' type=kotlin.Int? operator=null
+    CLASS CLASS SessionAccessor
+      CONSTRUCTOR public constructor SessionAccessor<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SessionAccessor'
+      FUN public final operator fun getValue(o: kotlin.Nothing?, desc: kotlin.reflect.KProperty<*>): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getValue(Nothing?, KProperty<*>): T'
+            TYPE_OP operator=CAST typeOperand=T
+              CONST Null type=kotlin.Nothing? value='null'
+      FUN public final operator fun setValue(o: kotlin.Nothing?, desc: kotlin.reflect.KProperty<*>, value: T): kotlin.Unit
+        BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL '<set-currentAccountId>(Int?): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: CONST Int type=kotlin.Int value='1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-currentAccountId>(): Int?' type=kotlin.Int? operator=GET_PROPERTY
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

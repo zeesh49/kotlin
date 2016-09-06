@@ -1,0 +1,21 @@
+MODULE <test-module>
+  FILE /privateTopLevelPropAndVarInInner.kt
+    PROPERTY private var x: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='O'
+    FUN private fun f(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='f(): String'
+          CONST String type=kotlin.String value='K'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'invoke(): String' type=kotlin.String operator=null
+            $this: BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                      $this: CALL '<get-x>(): String' type=kotlin.String operator=GET_PROPERTY
+                      other: CALL 'f(): String' type=kotlin.String operator=null
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA

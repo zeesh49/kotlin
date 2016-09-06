@@ -1,0 +1,50 @@
+MODULE <test-module>
+  FILE /duplicatingItems.kt
+    FUN public fun foo(x: kotlin.String): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=WHEN
+          VAR val tmp0_subject: kotlin.String
+            GET_VAR 'value-parameter x: String' type=kotlin.String operator=null
+          WHEN type=kotlin.Nothing operator=WHEN
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_subject: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='abc'
+            then: RETURN type=kotlin.Nothing from='foo(String): String'
+              CONST String type=kotlin.String value='abc'
+            if: WHEN type=kotlin.Boolean operator=WHEN_COMMA
+              if: WHEN type=kotlin.Boolean operator=WHEN_COMMA
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_subject: String' type=kotlin.String operator=null
+                  arg1: CONST String type=kotlin.String value='efg'
+                then: CONST Boolean type=kotlin.Boolean value='true'
+                else: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_subject: String' type=kotlin.String operator=null
+                  arg1: CONST String type=kotlin.String value='ghi'
+              then: CONST Boolean type=kotlin.Boolean value='true'
+              else: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: String' type=kotlin.String operator=null
+                arg1: CONST String type=kotlin.String value='abc'
+            then: RETURN type=kotlin.Nothing from='foo(String): String'
+              CONST String type=kotlin.String value='efg_ghi'
+            else: RETURN type=kotlin.Nothing from='foo(String): String'
+              CONST String type=kotlin.String value='other'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='abc'
+          actual: CALL 'foo(String): String' type=kotlin.String operator=null
+            x: CONST String type=kotlin.String value='abc'
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='efg_ghi'
+          actual: CALL 'foo(String): String' type=kotlin.String operator=null
+            x: CONST String type=kotlin.String value='efg'
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='efg_ghi'
+          actual: CALL 'foo(String): String' type=kotlin.String operator=null
+            x: CONST String type=kotlin.String value='ghi'
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='other'
+          actual: CALL 'foo(String): String' type=kotlin.String operator=null
+            x: CONST String type=kotlin.String value='xyz'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

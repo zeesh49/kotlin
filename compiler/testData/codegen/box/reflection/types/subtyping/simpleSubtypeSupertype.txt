@@ -1,0 +1,228 @@
+MODULE <test-module>
+  FILE /simpleSubtypeSupertype.kt
+    FUN public fun check(subCallable: kotlin.reflect.KCallable<*>, superCallable: kotlin.reflect.KCallable<*>, shouldBeSubtype: kotlin.Boolean): kotlin.Unit
+      BLOCK_BODY
+        VAR val subtype: kotlin.reflect.KType
+          CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: GET_VAR 'value-parameter subCallable: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+        VAR val supertype: kotlin.reflect.KType
+          CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: GET_VAR 'value-parameter superCallable: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: GET_VAR 'value-parameter shouldBeSubtype: Boolean' type=kotlin.Boolean operator=null
+          then: BLOCK type=kotlin.Unit operator=null
+            CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+              actual: CALL 'isSubtypeOf(KType) on KType: Boolean' type=kotlin.Boolean operator=null
+                $receiver: GET_VAR 'subtype: KType' type=kotlin.reflect.KType operator=null
+                other: GET_VAR 'supertype: KType' type=kotlin.reflect.KType operator=null
+            CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+              actual: CALL 'isSupertypeOf(KType) on KType: Boolean' type=kotlin.Boolean operator=null
+                $receiver: GET_VAR 'supertype: KType' type=kotlin.reflect.KType operator=null
+                other: GET_VAR 'subtype: KType' type=kotlin.reflect.KType operator=null
+          else: BLOCK type=kotlin.Unit operator=null
+            CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+              actual: CALL 'isSubtypeOf(KType) on KType: Boolean' type=kotlin.Boolean operator=null
+                $receiver: GET_VAR 'subtype: KType' type=kotlin.reflect.KType operator=null
+                other: GET_VAR 'supertype: KType' type=kotlin.reflect.KType operator=null
+            CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+              actual: CALL 'isSupertypeOf(KType) on KType: Boolean' type=kotlin.Boolean operator=null
+                $receiver: GET_VAR 'supertype: KType' type=kotlin.reflect.KType operator=null
+                other: GET_VAR 'subtype: KType' type=kotlin.reflect.KType operator=null
+    CLASS CLASS O
+      CONSTRUCTOR public constructor O()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='O'
+    CLASS CLASS X
+      CONSTRUCTOR public constructor X()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor O()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='X'
+    FUN public fun any(): kotlin.Any
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun string(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun nullableString(): kotlin.String?
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun int(): kotlin.Int
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun nothing(): kotlin.Nothing
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun nullableNothing(): kotlin.Nothing?
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun function2(): (kotlin.Any, kotlin.Any) -> kotlin.Any
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun function3(): (kotlin.Any, kotlin.Any, kotlin.Any) -> kotlin.Any
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'any(): Any' type=kotlin.reflect.KFunction0<kotlin.Any> operator=null
+          superCallable: CALLABLE_REFERENCE 'any(): Any' type=kotlin.reflect.KFunction0<kotlin.Any> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'int(): Int' type=kotlin.reflect.KFunction0<kotlin.Int> operator=null
+          superCallable: CALLABLE_REFERENCE 'int(): Int' type=kotlin.reflect.KFunction0<kotlin.Int> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'nothing(): Nothing' type=kotlin.reflect.KFunction0<kotlin.Nothing> operator=null
+          superCallable: CALLABLE_REFERENCE 'nothing(): Nothing' type=kotlin.reflect.KFunction0<kotlin.Nothing> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'nullableNothing(): Nothing?' type=kotlin.reflect.KFunction0<kotlin.Nothing?> operator=null
+          superCallable: CALLABLE_REFERENCE 'nullableNothing(): Nothing?' type=kotlin.reflect.KFunction0<kotlin.Nothing?> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'string(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+          superCallable: CALLABLE_REFERENCE 'any(): Any' type=kotlin.reflect.KFunction0<kotlin.Any> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'nullableString(): String?' type=kotlin.reflect.KFunction0<kotlin.String?> operator=null
+          superCallable: CALLABLE_REFERENCE 'any(): Any' type=kotlin.reflect.KFunction0<kotlin.Any> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='false'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'int(): Int' type=kotlin.reflect.KFunction0<kotlin.Int> operator=null
+          superCallable: CALLABLE_REFERENCE 'any(): Any' type=kotlin.reflect.KFunction0<kotlin.Any> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'constructor O()' type=kotlin.reflect.KFunction0<O> operator=null
+          superCallable: CALLABLE_REFERENCE 'any(): Any' type=kotlin.reflect.KFunction0<kotlin.Any> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'constructor X()' type=kotlin.reflect.KFunction0<X> operator=null
+          superCallable: CALLABLE_REFERENCE 'any(): Any' type=kotlin.reflect.KFunction0<kotlin.Any> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'nothing(): Nothing' type=kotlin.reflect.KFunction0<kotlin.Nothing> operator=null
+          superCallable: CALLABLE_REFERENCE 'any(): Any' type=kotlin.reflect.KFunction0<kotlin.Any> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'nothing(): Nothing' type=kotlin.reflect.KFunction0<kotlin.Nothing> operator=null
+          superCallable: CALLABLE_REFERENCE 'string(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'nothing(): Nothing' type=kotlin.reflect.KFunction0<kotlin.Nothing> operator=null
+          superCallable: CALLABLE_REFERENCE 'nullableString(): String?' type=kotlin.reflect.KFunction0<kotlin.String?> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'nullableNothing(): Nothing?' type=kotlin.reflect.KFunction0<kotlin.Nothing?> operator=null
+          superCallable: CALLABLE_REFERENCE 'nullableString(): String?' type=kotlin.reflect.KFunction0<kotlin.String?> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'nullableNothing(): Nothing?' type=kotlin.reflect.KFunction0<kotlin.Nothing?> operator=null
+          superCallable: CALLABLE_REFERENCE 'string(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='false'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'string(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+          superCallable: CALLABLE_REFERENCE 'nullableString(): String?' type=kotlin.reflect.KFunction0<kotlin.String?> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'nullableString(): String?' type=kotlin.reflect.KFunction0<kotlin.String?> operator=null
+          superCallable: CALLABLE_REFERENCE 'string(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='false'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'constructor X()' type=kotlin.reflect.KFunction0<X> operator=null
+          superCallable: CALLABLE_REFERENCE 'constructor O()' type=kotlin.reflect.KFunction0<O> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'constructor O()' type=kotlin.reflect.KFunction0<O> operator=null
+          superCallable: CALLABLE_REFERENCE 'constructor X()' type=kotlin.reflect.KFunction0<X> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='false'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'int(): Int' type=kotlin.reflect.KFunction0<kotlin.Int> operator=null
+          superCallable: CALLABLE_REFERENCE 'string(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='false'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'string(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+          superCallable: CALLABLE_REFERENCE 'int(): Int' type=kotlin.reflect.KFunction0<kotlin.Int> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='false'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'any(): Any' type=kotlin.reflect.KFunction0<kotlin.Any> operator=null
+          superCallable: CALLABLE_REFERENCE 'string(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='false'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'any(): Any' type=kotlin.reflect.KFunction0<kotlin.Any> operator=null
+          superCallable: CALLABLE_REFERENCE 'nullableString(): String?' type=kotlin.reflect.KFunction0<kotlin.String?> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='false'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'function2(): (Any, Any) -> Any' type=kotlin.reflect.KFunction0<(kotlin.Any, kotlin.Any) -> kotlin.Any> operator=null
+          superCallable: CALLABLE_REFERENCE 'function3(): (Any, Any, Any) -> Any' type=kotlin.reflect.KFunction0<(kotlin.Any, kotlin.Any, kotlin.Any) -> kotlin.Any> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='false'
+        CALL 'check(KCallable<*>, KCallable<*>, Boolean): Unit' type=kotlin.Unit operator=null
+          subCallable: CALLABLE_REFERENCE 'function3(): (Any, Any, Any) -> Any' type=kotlin.reflect.KFunction0<(kotlin.Any, kotlin.Any, kotlin.Any) -> kotlin.Any> operator=null
+          superCallable: CALLABLE_REFERENCE 'function2(): (Any, Any) -> Any' type=kotlin.reflect.KFunction0<(kotlin.Any, kotlin.Any) -> kotlin.Any> operator=null
+          shouldBeSubtype: CONST Boolean type=kotlin.Boolean value='false'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

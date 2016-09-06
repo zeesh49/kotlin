@@ -1,0 +1,47 @@
+MODULE <test-module>
+  FILE /multipleEntries.kt
+    FUN public fun foo(x: kotlin.Any): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(Any): String'
+          BLOCK type=kotlin.String operator=WHEN
+            VAR val tmp0_subject: kotlin.Any
+              GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+            WHEN type=kotlin.String operator=WHEN
+              if: WHEN type=kotlin.Boolean operator=WHEN_COMMA
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_subject: Any' type=kotlin.Any operator=null
+                  arg1: CONST Int type=kotlin.Int value='0'
+                then: CONST Boolean type=kotlin.Boolean value='true'
+                else: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_subject: Any' type=kotlin.Any operator=null
+                  arg1: CONST Int type=kotlin.Int value='1'
+              then: CONST String type=kotlin.String value='bit'
+              else: CONST String type=kotlin.String value='something'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(Any): String' type=kotlin.String operator=null
+                x: CONST Int type=kotlin.Int value='0'
+              arg1: CONST String type=kotlin.String value='bit'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 0'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(Any): String' type=kotlin.String operator=null
+                x: CONST Int type=kotlin.Int value='1'
+              arg1: CONST String type=kotlin.String value='bit'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(Any): String' type=kotlin.String operator=null
+                x: CONST Int type=kotlin.Int value='2'
+              arg1: CONST String type=kotlin.String value='something'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

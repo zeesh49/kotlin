@@ -1,0 +1,29 @@
+MODULE <test-module>
+  FILE /initializationOrder.kt
+    PROPERTY public var result: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='OK'
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS OBJECT companion object of A
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of A'
+        PROPERTY public final var z: kotlin.String
+          EXPRESSION_BODY
+            CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+        FUN public final fun patchResult(): kotlin.Unit
+          BLOCK_BODY
+            CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+              <set-?>: CONST String type=kotlin.String value='fail'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'patchResult(): Unit' type=kotlin.Unit operator=null
+          $this: GET_OBJECT 'companion object of A' type=A.Companion
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-z>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of A' type=A.Companion

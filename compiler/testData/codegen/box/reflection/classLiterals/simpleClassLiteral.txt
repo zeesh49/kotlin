@@ -1,0 +1,21 @@
+MODULE <test-module>
+  FILE /simpleClassLiteral.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val klass: kotlin.reflect.KClass<A>
+          CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'klass: KClass<A>' type=kotlin.reflect.KClass<A> operator=null
+              arg1: CONST String type=kotlin.String value='class A'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'klass: KClass<A>' type=kotlin.reflect.KClass<A> operator=null

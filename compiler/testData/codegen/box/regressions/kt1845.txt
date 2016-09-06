@@ -1,0 +1,19 @@
+MODULE <test-module>
+  FILE /1.kt
+    PROPERTY public var v1: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='V1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val s: kotlin.String
+          STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='v1: '
+            CALL '<get-v1>(): String' type=kotlin.String operator=GET_PROPERTY
+            CONST String type=kotlin.String value=', v2: '
+            CALL '<get-v2>(): String' type=kotlin.String operator=GET_PROPERTY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+  FILE /2.kt
+    PROPERTY public var v2: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='V2'

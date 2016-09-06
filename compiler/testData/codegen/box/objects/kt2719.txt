@@ -1,0 +1,29 @@
+MODULE <test-module>
+  FILE /kt2719.kt
+    CLASS CLASS Clazz
+      CONSTRUCTOR public constructor Clazz()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Clazz'
+      CLASS OBJECT companion object of Clazz
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of Clazz'
+        PROPERTY public final val a: kotlin.Any
+          EXPRESSION_BODY
+            BLOCK type=Clazz.Companion.a.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                FUN public final fun run(x: kotlin.String): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='run(String): String'
+                      GET_VAR 'value-parameter x: String' type=kotlin.String operator=null
+              CALL 'constructor <no name provided>()' type=Clazz.Companion.a.<no name provided> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

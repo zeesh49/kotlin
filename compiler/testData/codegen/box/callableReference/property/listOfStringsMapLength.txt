@@ -1,0 +1,21 @@
+MODULE <test-module>
+  FILE /listOfStringsMapLength.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'map((String) -> Int) on Iterable<String>: List<Int>' type=kotlin.collections.List<kotlin.Int> operator=null
+                $receiver: CALL 'listOf(vararg String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+                  elements: VARARG type=Array<out String> varargElementType=String
+                    CONST String type=kotlin.String value='abc'
+                    CONST String type=kotlin.String value='de'
+                    CONST String type=kotlin.String value='f'
+                transform: CALLABLE_REFERENCE 'length: Int' type=kotlin.reflect.KProperty1<kotlin.String, kotlin.Int> operator=null
+              arg1: CALL 'listOf(vararg Int): List<Int>' type=kotlin.collections.List<kotlin.Int> operator=null
+                elements: VARARG type=Array<out Int> varargElementType=Int
+                  CONST Int type=kotlin.Int value='3'
+                  CONST Int type=kotlin.Int value='2'
+                  CONST Int type=kotlin.Int value='1'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='Fail'

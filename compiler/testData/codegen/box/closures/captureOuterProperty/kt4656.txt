@@ -1,0 +1,58 @@
+MODULE <test-module>
+  FILE /kt4656.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var foo: () -> kotlin.Int
+          BLOCK type=() -> kotlin.Int operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Int
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Int'
+                  CONST Int type=kotlin.Int value='1'
+            CALLABLE_REFERENCE '<anonymous>(): Int' type=() -> kotlin.Int operator=LAMBDA
+        VAR var bar: kotlin.Int
+          CONST Int type=kotlin.Int value='1'
+        VAR val t: () -> kotlin.String
+          BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CALL 'invoke(): Int' type=kotlin.Int operator=INVOKE
+                      $this: GET_VAR 'foo: () -> Int' type=() -> kotlin.Int operator=VARIABLE_AS_FUNCTION
+                    CONST String type=kotlin.String value=' '
+                    GET_VAR 'bar: Int' type=kotlin.Int operator=null
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        FUN local final fun b(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='b(): String'
+              STRING_CONCATENATION type=kotlin.String
+                CALL 'invoke(): Int' type=kotlin.Int operator=INVOKE
+                  $this: GET_VAR 'foo: () -> Int' type=() -> kotlin.Int operator=VARIABLE_AS_FUNCTION
+                CONST String type=kotlin.String value=' '
+                GET_VAR 'bar: Int' type=kotlin.Int operator=null
+        SET_VAR 'foo: () -> Int' type=kotlin.Unit operator=EQ
+          BLOCK type=() -> kotlin.Int operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Int
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Int'
+                  CONST Int type=kotlin.Int value='2'
+            CALLABLE_REFERENCE '<anonymous>(): Int' type=() -> kotlin.Int operator=LAMBDA
+        SET_VAR 'bar: Int' type=kotlin.Unit operator=EQ
+          CONST Int type=kotlin.Int value='2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+                $this: GET_VAR 't: () -> String' type=() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+              arg1: CONST String type=kotlin.String value='2 2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'b(): String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='2 2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,49 @@
+MODULE <test-module>
+  FILE /multiple.kt
+    CLASS INTERFACE AL
+      FUN public open fun get(index: kotlin.Int): kotlin.Any?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(Int): Any?'
+            CONST Null type=kotlin.Nothing? value='null'
+    CLASS INTERFACE ALE
+      FUN public open fun getOrNull(index: kotlin.Int, value: T): T
+        BLOCK_BODY
+          VAR val r: T?
+            TYPE_OP operator=SAFE_CAST typeOperand=T
+              CALL 'get(Int): Any?' type=kotlin.Any? operator=null
+                $this: THIS of 'ALE' type=ALE<T>
+                index: GET_VAR 'value-parameter index: Int' type=kotlin.Int operator=null
+          RETURN type=kotlin.Nothing from='getOrNull(Int, T): T'
+            BLOCK type=T operator=ELVIS
+              VAR val tmp0_elvis_lhs: T?
+                GET_VAR 'r: T?' type=T? operator=null
+              WHEN type=T operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_elvis_lhs: T?' type=T? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: GET_VAR 'value-parameter value: T' type=T operator=null
+                else: GET_VAR 'tmp0_elvis_lhs: T?' type=T? operator=null
+    CLASS CLASS SmartArrayList
+      CONSTRUCTOR public constructor SmartArrayList()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SmartArrayList'
+    CLASS CLASS SmartArrayList2
+      CONSTRUCTOR public constructor SmartArrayList2()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor SmartArrayList()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SmartArrayList2'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val c: SmartArrayList2
+          CALL 'constructor SmartArrayList2()' type=SmartArrayList2 operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CONST String type=kotlin.String value='239'
+              arg1: CALL 'getOrNull(Int, String): String' type=kotlin.String operator=null
+                $this: GET_VAR 'c: SmartArrayList2' type=SmartArrayList2 operator=null
+                index: CONST Int type=kotlin.Int value='0'
+                value: CONST String type=kotlin.String value='239'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

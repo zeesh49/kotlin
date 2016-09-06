@@ -1,0 +1,242 @@
+MODULE <test-module>
+  FILE /kt4118.kt
+    FUN public fun kotlin.Array<kotlin.String>.test1(): kotlin.Array<kotlin.String>
+      BLOCK_BODY
+        VAR val func: (kotlin.Int) -> kotlin.Array<kotlin.String>
+          BLOCK type=(kotlin.Int) -> kotlin.Array<kotlin.String> operator=LAMBDA
+            FUN local final fun <anonymous>(i: kotlin.Int): kotlin.Array<kotlin.String>
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(Int): Array<String>'
+                  $RECEIVER of 'test1() on Array<String>: Array<String>' type=kotlin.Array<kotlin.String>
+            CALLABLE_REFERENCE '<anonymous>(Int): Array<String>' type=(kotlin.Int) -> kotlin.Array<kotlin.String> operator=LAMBDA
+        RETURN type=kotlin.Nothing from='test1() on Array<String>: Array<String>'
+          CALL 'invoke(Int): Array<String>' type=kotlin.Array<kotlin.String> operator=INVOKE
+            $this: GET_VAR 'func: (Int) -> Array<String>' type=(kotlin.Int) -> kotlin.Array<kotlin.String> operator=VARIABLE_AS_FUNCTION
+            p1: CONST Int type=kotlin.Int value='1'
+    FUN public fun kotlin.Array<kotlin.String>.test1Nested(): kotlin.Array<kotlin.String>
+      BLOCK_BODY
+        VAR val func: (kotlin.Int) -> kotlin.Array<kotlin.String>
+          BLOCK type=(kotlin.Int) -> kotlin.Array<kotlin.String> operator=LAMBDA
+            FUN local final fun <anonymous>(i: kotlin.Int): kotlin.Array<kotlin.String>
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(Int): Array<String>'
+                  CALL 'invoke(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                    $this: BLOCK type=() -> kotlin.Array<kotlin.String> operator=LAMBDA
+                      FUN local final fun <anonymous>(): kotlin.Array<kotlin.String>
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='<anonymous>(): Array<String>'
+                            $RECEIVER of 'test1Nested() on Array<String>: Array<String>' type=kotlin.Array<kotlin.String>
+                      CALLABLE_REFERENCE '<anonymous>(): Array<String>' type=() -> kotlin.Array<kotlin.String> operator=LAMBDA
+            CALLABLE_REFERENCE '<anonymous>(Int): Array<String>' type=(kotlin.Int) -> kotlin.Array<kotlin.String> operator=LAMBDA
+        RETURN type=kotlin.Nothing from='test1Nested() on Array<String>: Array<String>'
+          CALL 'invoke(Int): Array<String>' type=kotlin.Array<kotlin.String> operator=INVOKE
+            $this: GET_VAR 'func: (Int) -> Array<String>' type=(kotlin.Int) -> kotlin.Array<kotlin.String> operator=VARIABLE_AS_FUNCTION
+            p1: CONST Int type=kotlin.Int value='1'
+    FUN public fun kotlin.Array<kotlin.String>.test2(): kotlin.Array<kotlin.String>
+      BLOCK_BODY
+        CLASS CLASS Z2
+          CONSTRUCTOR public constructor Z2()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='Z2'
+          FUN public final fun run(): kotlin.Array<kotlin.String>
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='run(): Array<String>'
+                $RECEIVER of 'test2() on Array<String>: Array<String>' type=kotlin.Array<kotlin.String>
+        RETURN type=kotlin.Nothing from='test2() on Array<String>: Array<String>'
+          CALL 'run(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            $this: CALL 'constructor Z2()' type=test2.Z2 operator=null
+    FUN public fun kotlin.Array<kotlin.String>.test2Nested(): kotlin.Array<kotlin.String>
+      BLOCK_BODY
+        CLASS CLASS Z2
+          CONSTRUCTOR public constructor Z2()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='Z2'
+          FUN public final fun run(): kotlin.Array<kotlin.String>
+            BLOCK_BODY
+              CLASS CLASS Z3
+                CONSTRUCTOR public constructor Z3()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='Z3'
+                FUN public final fun run(): kotlin.Array<kotlin.String>
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='run(): Array<String>'
+                      $RECEIVER of 'test2Nested() on Array<String>: Array<String>' type=kotlin.Array<kotlin.String>
+              RETURN type=kotlin.Nothing from='run(): Array<String>'
+                CALL 'run(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                  $this: CALL 'constructor Z3()' type=test2Nested.Z2.run.Z3 operator=null
+        RETURN type=kotlin.Nothing from='test2Nested() on Array<String>: Array<String>'
+          CALL 'run(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            $this: CALL 'constructor Z2()' type=test2Nested.Z2 operator=null
+    FUN public fun kotlin.Array<kotlin.String>.test3(): kotlin.Array<kotlin.String>
+      BLOCK_BODY
+        FUN local final fun local(): kotlin.Array<kotlin.String>
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='local(): Array<String>'
+              $RECEIVER of 'test3() on Array<String>: Array<String>' type=kotlin.Array<kotlin.String>
+        RETURN type=kotlin.Nothing from='test3() on Array<String>: Array<String>'
+          CALL 'local(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+    FUN public fun kotlin.Array<kotlin.String>.test3Nested(): kotlin.Array<kotlin.String>
+      BLOCK_BODY
+        FUN local final fun local(): kotlin.Array<kotlin.String>
+          BLOCK_BODY
+            FUN local final fun local2(): kotlin.Array<kotlin.String>
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='local2(): Array<String>'
+                  $RECEIVER of 'test3Nested() on Array<String>: Array<String>' type=kotlin.Array<kotlin.String>
+            RETURN type=kotlin.Nothing from='local(): Array<String>'
+              CALL 'local2(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='test3Nested() on Array<String>: Array<String>'
+          CALL 'local(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+    FUN public fun kotlin.Array<kotlin.String>.test4(): kotlin.Array<kotlin.String>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test4() on Array<String>: Array<String>'
+          CALL 'run(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            $this: BLOCK type=test4.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                FUN public final fun run(): kotlin.Array<kotlin.String>
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='run(): Array<String>'
+                      $RECEIVER of 'test4() on Array<String>: Array<String>' type=kotlin.Array<kotlin.String>
+              CALL 'constructor <no name provided>()' type=test4.<no name provided> operator=OBJECT_LITERAL
+    FUN public fun kotlin.Array<kotlin.String>.test4Nested(): kotlin.Array<kotlin.String>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test4Nested() on Array<String>: Array<String>'
+          CALL 'run(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            $this: BLOCK type=test4Nested.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                FUN public final fun run(): kotlin.Array<kotlin.String>
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='run(): Array<String>'
+                      CALL 'run(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                        $this: BLOCK type=test4Nested.<no name provided>.run.<no name provided> operator=OBJECT_LITERAL
+                          CLASS CLASS <no name provided>
+                            CONSTRUCTOR public constructor <no name provided>()
+                              BLOCK_BODY
+                                DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                                INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                            FUN public final fun run(): kotlin.Array<kotlin.String>
+                              BLOCK_BODY
+                                RETURN type=kotlin.Nothing from='run(): Array<String>'
+                                  $RECEIVER of 'test4Nested() on Array<String>: Array<String>' type=kotlin.Array<kotlin.String>
+                          CALL 'constructor <no name provided>()' type=test4Nested.<no name provided>.run.<no name provided> operator=OBJECT_LITERAL
+              CALL 'constructor <no name provided>()' type=test4Nested.<no name provided> operator=OBJECT_LITERAL
+    FUN public fun kotlin.Array<kotlin.DoubleArray>.test1(): kotlin.Array<kotlin.DoubleArray>
+      BLOCK_BODY
+        VAR val func: (kotlin.Int) -> kotlin.Array<kotlin.DoubleArray>
+          BLOCK type=(kotlin.Int) -> kotlin.Array<kotlin.DoubleArray> operator=LAMBDA
+            FUN local final fun <anonymous>(i: kotlin.Int): kotlin.Array<kotlin.DoubleArray>
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(Int): Array<DoubleArray>'
+                  $RECEIVER of 'test1() on Array<DoubleArray>: Array<DoubleArray>' type=kotlin.Array<kotlin.DoubleArray>
+            CALLABLE_REFERENCE '<anonymous>(Int): Array<DoubleArray>' type=(kotlin.Int) -> kotlin.Array<kotlin.DoubleArray> operator=LAMBDA
+        RETURN type=kotlin.Nothing from='test1() on Array<DoubleArray>: Array<DoubleArray>'
+          CALL 'invoke(Int): Array<DoubleArray>' type=kotlin.Array<kotlin.DoubleArray> operator=INVOKE
+            $this: GET_VAR 'func: (Int) -> Array<DoubleArray>' type=(kotlin.Int) -> kotlin.Array<kotlin.DoubleArray> operator=VARIABLE_AS_FUNCTION
+            p1: CONST Int type=kotlin.Int value='1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val array: kotlin.Array<kotlin.String>
+          CALL 'constructor Array(Int, (Int) -> String)' type=kotlin.Array<kotlin.String> operator=null
+            size: CONST Int type=kotlin.Int value='2'
+            init: BLOCK type=(kotlin.Int) -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(i: kotlin.Int): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): String'
+                    TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+                      GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+              CALLABLE_REFERENCE '<anonymous>(Int): String' type=(kotlin.Int) -> kotlin.String operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'array: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+              arg1: CALL 'test1() on Array<String>: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                $receiver: GET_VAR 'array: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'array: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+              arg1: CALL 'test2() on Array<String>: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                $receiver: GET_VAR 'array: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'array: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+              arg1: CALL 'test3() on Array<String>: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                $receiver: GET_VAR 'array: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'array: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+              arg1: CALL 'test4() on Array<String>: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                $receiver: GET_VAR 'array: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'array: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+              arg1: CALL 'test1Nested() on Array<String>: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                $receiver: GET_VAR 'array: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1Nested'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'array: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+              arg1: CALL 'test2Nested() on Array<String>: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                $receiver: GET_VAR 'array: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2Nested'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'array: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+              arg1: CALL 'test3Nested() on Array<String>: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                $receiver: GET_VAR 'array: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3Nested'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'array: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+              arg1: CALL 'test4Nested() on Array<String>: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                $receiver: GET_VAR 'array: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4Nested'
+        VAR val array2: kotlin.Array<kotlin.DoubleArray>
+          CALL 'constructor Array(Int, (Int) -> DoubleArray)' type=kotlin.Array<kotlin.DoubleArray> operator=null
+            size: CONST Int type=kotlin.Int value='2'
+            init: BLOCK type=(kotlin.Int) -> kotlin.DoubleArray operator=LAMBDA
+              FUN local final fun <anonymous>(i: kotlin.Int): kotlin.DoubleArray
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): DoubleArray'
+                    CALL 'constructor DoubleArray(Int)' type=kotlin.DoubleArray operator=null
+                      size: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+              CALLABLE_REFERENCE '<anonymous>(Int): DoubleArray' type=(kotlin.Int) -> kotlin.DoubleArray operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'array2: Array<DoubleArray>' type=kotlin.Array<kotlin.DoubleArray> operator=null
+              arg1: CALL 'test1() on Array<DoubleArray>: Array<DoubleArray>' type=kotlin.Array<kotlin.DoubleArray> operator=null
+                $receiver: GET_VAR 'array2: Array<DoubleArray>' type=kotlin.Array<kotlin.DoubleArray> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail on array of double []'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

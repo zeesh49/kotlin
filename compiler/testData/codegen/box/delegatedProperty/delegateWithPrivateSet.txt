@@ -1,0 +1,39 @@
+MODULE <test-module>
+  FILE /delegateWithPrivateSet.kt
+    CLASS CLASS My
+      CONSTRUCTOR public constructor My()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='My'
+      PROPERTY public final var delegate: kotlin.String
+        delegate: PROPERTY val `delegate$delegate`: kotlin.properties.ReadWriteProperty<kotlin.Any?, kotlin.String>
+          EXPRESSION_BODY
+            CALL 'notNull(): ReadWriteProperty<Any?, String>' type=kotlin.properties.ReadWriteProperty<kotlin.Any?, kotlin.String> operator=null
+              $this: GET_OBJECT 'Delegates' type=kotlin.properties.Delegates
+        PROPERTY_GETTER public final fun <get-delegate>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-delegate>(): String'
+              CALL 'getValue(Any?, KProperty<*>): String' type=kotlin.String operator=null
+                $this: GET_BACKING_FIELD '`delegate$delegate`: ReadWriteProperty<Any?, String>' type=kotlin.properties.ReadWriteProperty<kotlin.Any?, kotlin.String> operator=null
+                  receiver: THIS of 'My' type=My
+                thisRef: THIS of 'My' type=My
+                property: CALLABLE_REFERENCE 'delegate: String' type=kotlin.reflect.KMutableProperty1<My, kotlin.String> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+        PROPERTY_SETTER private final fun <set-delegate>(<set-?>: kotlin.String): kotlin.Unit
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<set-delegate>(String): Unit'
+              CALL 'setValue(Any?, KProperty<*>, String): Unit' type=kotlin.Unit operator=null
+                $this: GET_BACKING_FIELD '`delegate$delegate`: ReadWriteProperty<Any?, String>' type=kotlin.properties.ReadWriteProperty<kotlin.Any?, kotlin.String> operator=null
+                  receiver: THIS of 'My' type=My
+                thisRef: THIS of 'My' type=My
+                property: CALLABLE_REFERENCE 'delegate: String' type=kotlin.reflect.KMutableProperty1<My, kotlin.String> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+                value: GET_VAR 'value-parameter <set-?>: String' type=kotlin.String operator=null
+      ANONYMOUS_INITIALIZER My
+        BLOCK_BODY
+          CALL '<set-delegate>(String): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'My' type=My
+            <set-?>: CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-delegate>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor My()' type=My operator=null

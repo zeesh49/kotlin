@@ -1,0 +1,77 @@
+MODULE <test-module>
+  FILE /varInInnerClass.kt
+    CLASS CLASS Delegate
+      CONSTRUCTOR public constructor Delegate()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Delegate'
+      PROPERTY public final var inner: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+      FUN public final operator fun getValue(t: kotlin.Any?, p: kotlin.reflect.KProperty<*>): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getValue(Any?, KProperty<*>): Int'
+            CALL '<get-inner>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'Delegate' type=Delegate
+      FUN public final operator fun setValue(t: kotlin.Any?, p: kotlin.reflect.KProperty<*>, i: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-inner>(Int): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'Delegate' type=Delegate
+            <set-?>: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS CLASS B
+        CONSTRUCTOR public constructor B()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='B'
+        PROPERTY public final var prop: kotlin.Int
+          delegate: PROPERTY val `prop$delegate`: Delegate
+            EXPRESSION_BODY
+              CALL 'constructor Delegate()' type=Delegate operator=null
+          PROPERTY_GETTER public final fun <get-prop>(): kotlin.Int
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<get-prop>(): Int'
+                CALL 'getValue(Any?, KProperty<*>): Int' type=kotlin.Int operator=null
+                  $this: GET_BACKING_FIELD '`prop$delegate`: Delegate' type=Delegate operator=null
+                    receiver: THIS of 'B' type=A.B
+                  t: THIS of 'B' type=A.B
+                  p: CALLABLE_REFERENCE 'prop: Int' type=kotlin.reflect.KMutableProperty1<A.B, kotlin.Int> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+          PROPERTY_SETTER public final fun <set-prop>(<set-?>: kotlin.Int): kotlin.Unit
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<set-prop>(Int): Unit'
+                CALL 'setValue(Any?, KProperty<*>, Int): Unit' type=kotlin.Unit operator=null
+                  $this: GET_BACKING_FIELD '`prop$delegate`: Delegate' type=Delegate operator=null
+                    receiver: THIS of 'B' type=A.B
+                  t: THIS of 'B' type=A.B
+                  p: CALLABLE_REFERENCE 'prop: Int' type=kotlin.reflect.KMutableProperty1<A.B, kotlin.Int> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+                  i: GET_VAR 'value-parameter <set-?>: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val c: A.B
+          CALL 'constructor B()' type=A.B operator=null
+            $this: CALL 'constructor A()' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'c: A.B' type=A.B operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail get'
+        CALL '<set-prop>(Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'c: A.B' type=A.B operator=null
+          <set-?>: CONST Int type=kotlin.Int value='2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'c: A.B' type=A.B operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail set'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

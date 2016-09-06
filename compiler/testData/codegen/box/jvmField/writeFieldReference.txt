@@ -1,0 +1,75 @@
+MODULE <test-module>
+  FILE /writeFieldReference.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(s1: kotlin.String, s2: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 's1: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=zzz.A
+            value: GET_VAR 'value-parameter s1: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 's2: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=zzz.A
+            value: GET_VAR 'value-parameter s2: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val s1: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s1: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val s2: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s2: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY @kotlin.jvm.JvmField public final var publicField: kotlin.String
+        EXPRESSION_BODY
+          CALL '<get-s1>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: THIS of 'A' type=zzz.A
+      PROPERTY @kotlin.jvm.JvmField internal final var internalField: kotlin.String
+        EXPRESSION_BODY
+          CALL '<get-s2>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: THIS of 'A' type=zzz.A
+      FUN public final fun testAccessors(): kotlin.Unit
+        BLOCK_BODY
+          VAR val kMutableProperty: kotlin.reflect.KMutableProperty1<zzz.A, kotlin.String>
+            CALLABLE_REFERENCE 'publicField: String' type=kotlin.reflect.KMutableProperty1<zzz.A, kotlin.String> operator=null
+          CALL 'checkAccessor(KMutableProperty1<A, String>, String, String, A): Unit' type=kotlin.Unit operator=null
+            prop: GET_VAR 'kMutableProperty: KMutableProperty1<A, String>' type=kotlin.reflect.KMutableProperty1<zzz.A, kotlin.String> operator=null
+            value: CALL '<get-s1>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'A' type=zzz.A
+            newValue: CONST String type=kotlin.String value='3'
+            receiver: THIS of 'A' type=zzz.A
+          CALL 'checkAccessor(KMutableProperty1<A, String>, String, String, A): Unit' type=kotlin.Unit operator=null
+            prop: CALLABLE_REFERENCE 'internalField: String' type=kotlin.reflect.KMutableProperty1<zzz.A, kotlin.String> operator=null
+            value: CALL '<get-s2>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'A' type=zzz.A
+            newValue: CONST String type=kotlin.String value='4'
+            receiver: THIS of 'A' type=zzz.A
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'testAccessors(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor A(String, String)' type=zzz.A operator=null
+            s1: CONST String type=kotlin.String value='1'
+            s2: CONST String type=kotlin.String value='2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun <T, R> checkAccessor(prop: kotlin.reflect.KMutableProperty1<T, R>, value: R, newValue: R, receiver: T): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assertEquals(R, R, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'get(T): R' type=R operator=null
+            $this: GET_VAR 'value-parameter prop: KMutableProperty1<T, R>' type=kotlin.reflect.KMutableProperty1<T, R> operator=null
+            receiver: GET_VAR 'value-parameter receiver: T' type=T operator=null
+          actual: GET_VAR 'value-parameter value: R' type=R operator=null
+          message: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='Property '
+            GET_VAR 'value-parameter prop: KMutableProperty1<T, R>' type=kotlin.reflect.KMutableProperty1<T, R> operator=null
+            CONST String type=kotlin.String value=' has wrong value'
+        CALL 'set(T, R): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'value-parameter prop: KMutableProperty1<T, R>' type=kotlin.reflect.KMutableProperty1<T, R> operator=null
+          receiver: GET_VAR 'value-parameter receiver: T' type=T operator=null
+          value: GET_VAR 'value-parameter newValue: R' type=R operator=null
+        CALL 'assertEquals(R, R, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'get(T): R' type=R operator=null
+            $this: GET_VAR 'value-parameter prop: KMutableProperty1<T, R>' type=kotlin.reflect.KMutableProperty1<T, R> operator=null
+            receiver: GET_VAR 'value-parameter receiver: T' type=T operator=null
+          actual: GET_VAR 'value-parameter newValue: R' type=R operator=null
+          message: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='Property '
+            GET_VAR 'value-parameter prop: KMutableProperty1<T, R>' type=kotlin.reflect.KMutableProperty1<T, R> operator=null
+            CONST String type=kotlin.String value=' has wrong value'

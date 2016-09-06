@@ -1,0 +1,102 @@
+MODULE <test-module>
+  FILE /jaggedArray.kt
+    FUN public inline fun <reified T> jaggedArray(x: (kotlin.Int, kotlin.Int) -> T): kotlin.Array<kotlin.Array<T>>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='jaggedArray((Int, Int) -> T): Array<Array<T>>'
+          CALL 'constructor Array(Int, (Int) -> Array<T>)' type=kotlin.Array<kotlin.Array<T>> operator=null
+            size: CONST Int type=kotlin.Int value='1'
+            init: BLOCK type=(kotlin.Int) -> kotlin.Array<T> operator=LAMBDA
+              FUN local final fun <anonymous>(i: kotlin.Int): kotlin.Array<T>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): Array<T>'
+                    CALL 'constructor Array(Int, (Int) -> T)' type=kotlin.Array<T> operator=null
+                      size: CONST Int type=kotlin.Int value='1'
+                      init: BLOCK type=(kotlin.Int) -> T operator=LAMBDA
+                        FUN local final fun <anonymous>(j: kotlin.Int): T
+                          BLOCK_BODY
+                            RETURN type=kotlin.Nothing from='<anonymous>(Int): T'
+                              CALL 'invoke(Int, Int): T' type=T operator=INVOKE
+                                $this: GET_VAR 'value-parameter x: (Int, Int) -> T' type=(kotlin.Int, kotlin.Int) -> T operator=VARIABLE_AS_FUNCTION
+                                p1: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+                                p2: GET_VAR 'value-parameter j: Int' type=kotlin.Int operator=null
+                        CALLABLE_REFERENCE '<anonymous>(Int): T' type=(kotlin.Int) -> T operator=LAMBDA
+              CALLABLE_REFERENCE '<anonymous>(Int): Array<T>' type=(kotlin.Int) -> kotlin.Array<T> operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x1: kotlin.Array<kotlin.Array<kotlin.String>>
+          CALL 'jaggedArray((Int, Int) -> String): Array<Array<String>>' type=kotlin.Array<kotlin.Array<kotlin.String>> operator=null
+            x: BLOCK type=(kotlin.Int, kotlin.Int) -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Int, y: kotlin.Int): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int, Int): String'
+                    STRING_CONCATENATION type=kotlin.String
+                      GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                      CONST String type=kotlin.String value='-'
+                      GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=null
+              CALLABLE_REFERENCE '<anonymous>(Int, Int): String' type=(kotlin.Int, kotlin.Int) -> kotlin.String operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+                $this: CALL 'get(Int): Array<String>' type=kotlin.Array<kotlin.String> operator=GET_ARRAY_ELEMENT
+                  $this: GET_VAR 'x1: Array<Array<String>>' type=kotlin.Array<kotlin.Array<kotlin.String>> operator=null
+                  index: CONST Int type=kotlin.Int value='0'
+                index: CONST Int type=kotlin.Int value='0'
+              arg1: CONST String type=kotlin.String value='0-0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        VAR val x2: kotlin.Array<kotlin.Array<kotlin.Array<kotlin.String>>>
+          CALL 'jaggedArray((Int, Int) -> Array<String>): Array<Array<Array<String>>>' type=kotlin.Array<kotlin.Array<kotlin.Array<kotlin.String>>> operator=null
+            x: BLOCK type=(kotlin.Int, kotlin.Int) -> kotlin.Array<kotlin.String> operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Int, y: kotlin.Int): kotlin.Array<kotlin.String>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int, Int): Array<String>'
+                    CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                      elements: VARARG type=Array<out String> varargElementType=String
+                        STRING_CONCATENATION type=kotlin.String
+                          GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                          CONST String type=kotlin.String value='-'
+                          GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=null
+              CALLABLE_REFERENCE '<anonymous>(Int, Int): Array<String>' type=(kotlin.Int, kotlin.Int) -> kotlin.Array<kotlin.String> operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+                $this: CALL 'get(Int): Array<String>' type=kotlin.Array<kotlin.String> operator=GET_ARRAY_ELEMENT
+                  $this: CALL 'get(Int): Array<Array<String>>' type=kotlin.Array<kotlin.Array<kotlin.String>> operator=GET_ARRAY_ELEMENT
+                    $this: GET_VAR 'x2: Array<Array<Array<String>>>' type=kotlin.Array<kotlin.Array<kotlin.Array<kotlin.String>>> operator=null
+                    index: CONST Int type=kotlin.Int value='0'
+                  index: CONST Int type=kotlin.Int value='0'
+                index: CONST Int type=kotlin.Int value='0'
+              arg1: CONST String type=kotlin.String value='0-0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        VAR val x3: kotlin.Array<kotlin.Array<kotlin.IntArray>>
+          CALL 'jaggedArray((Int, Int) -> IntArray): Array<Array<IntArray>>' type=kotlin.Array<kotlin.Array<kotlin.IntArray>> operator=null
+            x: BLOCK type=(kotlin.Int, kotlin.Int) -> kotlin.IntArray operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Int, y: kotlin.Int): kotlin.IntArray
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int, Int): IntArray'
+                    CALL 'intArrayOf(vararg Int): IntArray' type=kotlin.IntArray operator=null
+                      elements: VARARG type=IntArray varargElementType=Int
+                        CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                          $this: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                            $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                            other: GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=null
+                          other: CONST Int type=kotlin.Int value='1'
+              CALLABLE_REFERENCE '<anonymous>(Int, Int): IntArray' type=(kotlin.Int, kotlin.Int) -> kotlin.IntArray operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                $this: CALL 'get(Int): IntArray' type=kotlin.IntArray operator=GET_ARRAY_ELEMENT
+                  $this: CALL 'get(Int): Array<IntArray>' type=kotlin.Array<kotlin.IntArray> operator=GET_ARRAY_ELEMENT
+                    $this: GET_VAR 'x3: Array<Array<IntArray>>' type=kotlin.Array<kotlin.Array<kotlin.IntArray>> operator=null
+                    index: CONST Int type=kotlin.Int value='0'
+                  index: CONST Int type=kotlin.Int value='0'
+                index: CONST Int type=kotlin.Int value='0'
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

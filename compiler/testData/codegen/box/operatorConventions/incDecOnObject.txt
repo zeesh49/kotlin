@@ -1,0 +1,176 @@
+MODULE <test-module>
+  FILE /incDecOnObject.kt
+    CLASS CLASS X
+      CONSTRUCTOR public constructor X(value: kotlin.Long)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'value: Long' type=kotlin.Unit operator=null
+            receiver: THIS of 'X' type=X
+            value: GET_VAR 'value-parameter value: Long' type=kotlin.Long operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='X'
+      PROPERTY public final var value: kotlin.Long
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: Long' type=kotlin.Long operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public operator fun X.inc(): X
+      BLOCK_BODY
+        BLOCK type=kotlin.Long operator=POSTFIX_INCR
+          VAR val tmp0_this: X
+            $RECEIVER of 'inc() on X: X' type=X
+          BLOCK type=kotlin.Long operator=POSTFIX_INCR
+            VAR val tmp1: kotlin.Long
+              CALL '<get-value>(): Long' type=kotlin.Long operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp0_this: X' type=X operator=null
+            CALL '<set-value>(Long): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp0_this: X' type=X operator=null
+              <set-?>: CALL 'inc(): Long' type=kotlin.Long operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp1: Long' type=kotlin.Long operator=null
+            GET_VAR 'tmp1: Long' type=kotlin.Long operator=null
+        RETURN type=kotlin.Nothing from='inc() on X: X'
+          $RECEIVER of 'inc() on X: X' type=X
+    FUN public operator fun X.dec(): X
+      BLOCK_BODY
+        BLOCK type=kotlin.Long operator=POSTFIX_DECR
+          VAR val tmp0_this: X
+            $RECEIVER of 'dec() on X: X' type=X
+          BLOCK type=kotlin.Long operator=POSTFIX_DECR
+            VAR val tmp1: kotlin.Long
+              CALL '<get-value>(): Long' type=kotlin.Long operator=POSTFIX_DECR
+                $this: GET_VAR 'tmp0_this: X' type=X operator=null
+            CALL '<set-value>(Long): Unit' type=kotlin.Unit operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp0_this: X' type=X operator=null
+              <set-?>: CALL 'dec(): Long' type=kotlin.Long operator=POSTFIX_DECR
+                $this: GET_VAR 'tmp1: Long' type=kotlin.Long operator=null
+            GET_VAR 'tmp1: Long' type=kotlin.Long operator=null
+        RETURN type=kotlin.Nothing from='dec() on X: X'
+          $RECEIVER of 'dec() on X: X' type=X
+    CLASS CLASS Z
+      CONSTRUCTOR public constructor Z()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Z'
+      PROPERTY public final var counter: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+      PROPERTY public final var prop: X
+        EXPRESSION_BODY
+          CALL 'constructor X(Long)' type=X operator=null
+            value: CONST Long type=kotlin.Long value='0'
+        PROPERTY_GETTER public final fun <get-prop>(): X
+          BLOCK_BODY
+            BLOCK type=kotlin.Int operator=POSTFIX_INCR
+              VAR val tmp0_this: Z
+                THIS of 'Z' type=Z
+              BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                VAR val tmp1: kotlin.Int
+                  CALL '<get-counter>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                    $this: GET_VAR 'tmp0_this: Z' type=Z operator=null
+                CALL '<set-counter>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp0_this: Z' type=Z operator=null
+                  <set-?>: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                    $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+            RETURN type=kotlin.Nothing from='<get-prop>(): X'
+              GET_VAR 'field: X' type=X operator=null
+        PROPERTY_SETTER public final fun <set-prop>(a: X): kotlin.Unit
+          BLOCK_BODY
+            BLOCK type=kotlin.Int operator=POSTFIX_INCR
+              VAR val tmp0_this: Z
+                THIS of 'Z' type=Z
+              BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                VAR val tmp1: kotlin.Int
+                  CALL '<get-counter>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                    $this: GET_VAR 'tmp0_this: Z' type=Z operator=null
+                CALL '<set-counter>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp0_this: Z' type=Z operator=null
+                  <set-?>: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                    $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+            SET_BACKING_FIELD 'prop: X' type=kotlin.Unit operator=EQ
+              value: GET_VAR 'value-parameter a: X' type=X operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var z: Z
+          CALL 'constructor Z()' type=Z operator=null
+        BLOCK type=X operator=POSTFIX_INCR
+          VAR val tmp0_this: Z
+            GET_VAR 'z: Z' type=Z operator=null
+          BLOCK type=X operator=POSTFIX_INCR
+            VAR val tmp1: X
+              CALL '<get-prop>(): X' type=X operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp0_this: Z' type=Z operator=null
+            CALL '<set-prop>(X): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp0_this: Z' type=Z operator=null
+              a: CALL 'inc() on X: X' type=X operator=POSTFIX_INCR
+                $receiver: GET_VAR 'tmp1: X' type=X operator=null
+            GET_VAR 'tmp1: X' type=X operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-counter>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'z: Z' type=Z operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail in postfix increment: '
+              CALL '<get-counter>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'z: Z' type=Z operator=null
+              CONST String type=kotlin.String value=' != 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-value>(): Long' type=kotlin.Long operator=GET_PROPERTY
+                $this: CALL '<get-prop>(): X' type=X operator=GET_PROPERTY
+                  $this: GET_VAR 'z: Z' type=Z operator=null
+              arg1: CALL 'toLong(): Long' type=kotlin.Long operator=null
+                $this: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail in postfix increment: '
+              CALL '<get-value>(): Long' type=kotlin.Long operator=GET_PROPERTY
+                $this: CALL '<get-prop>(): X' type=X operator=GET_PROPERTY
+                  $this: GET_VAR 'z: Z' type=Z operator=null
+              CONST String type=kotlin.String value=' != 1'
+        SET_VAR 'z: Z' type=kotlin.Unit operator=EQ
+          CALL 'constructor Z()' type=Z operator=null
+        BLOCK type=X operator=POSTFIX_DECR
+          VAR val tmp2_this: Z
+            GET_VAR 'z: Z' type=Z operator=null
+          BLOCK type=X operator=POSTFIX_DECR
+            VAR val tmp3: X
+              CALL '<get-prop>(): X' type=X operator=POSTFIX_DECR
+                $this: GET_VAR 'tmp2_this: Z' type=Z operator=null
+            CALL '<set-prop>(X): Unit' type=kotlin.Unit operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp2_this: Z' type=Z operator=null
+              a: CALL 'dec() on X: X' type=X operator=POSTFIX_DECR
+                $receiver: GET_VAR 'tmp3: X' type=X operator=null
+            GET_VAR 'tmp3: X' type=X operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-counter>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'z: Z' type=Z operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail in postfix decrement: '
+              CALL '<get-counter>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'z: Z' type=Z operator=null
+              CONST String type=kotlin.String value=' != 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-value>(): Long' type=kotlin.Long operator=GET_PROPERTY
+                $this: CALL '<get-prop>(): X' type=X operator=GET_PROPERTY
+                  $this: GET_VAR 'z: Z' type=Z operator=null
+              arg1: CALL 'unaryMinus(): Long' type=kotlin.Long operator=UMINUS
+                $this: CALL 'toLong(): Long' type=kotlin.Long operator=null
+                  $this: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail in postfix decrement: '
+              CALL '<get-value>(): Long' type=kotlin.Long operator=GET_PROPERTY
+                $this: CALL '<get-prop>(): X' type=X operator=GET_PROPERTY
+                  $this: GET_VAR 'z: Z' type=Z operator=null
+              CONST String type=kotlin.String value=' != -1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

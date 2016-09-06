@@ -1,0 +1,43 @@
+MODULE <test-module>
+  FILE /kt257.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<T>(t: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 't: T' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A<T>
+            value: GET_VAR 'value-parameter t: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var t: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter t: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B<R>(r: R)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'r: R' type=kotlin.Unit operator=null
+            receiver: THIS of 'B' type=B<R>
+            value: GET_VAR 'value-parameter r: R' type=R operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public final val r: R
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter r: R' type=R operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val ai: A<kotlin.Int>
+          CALL 'constructor A(Int)' type=A<kotlin.Int> operator=null
+            t: CONST Int type=kotlin.Int value='1'
+        VAR val aai: A<A<kotlin.Int>>
+          CALL 'constructor A(A<Int>)' type=A<A<kotlin.Int>> operator=null
+            t: GET_VAR 'ai: A<Int>' type=A<kotlin.Int> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-t>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL '<get-t>(): A<Int>' type=A<kotlin.Int> operator=GET_PROPERTY
+                  $this: GET_VAR 'aai: A<A<Int>>' type=A<A<kotlin.Int>> operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /kt2480.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'printSome(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Class()' type=Class operator=null
+    CLASS CLASS AbstractClass
+      CONSTRUCTOR public constructor AbstractClass<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='AbstractClass'
+      FUN public final fun printSome(): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='printSome(): T'
+            CALL '<get-some>(): T' type=T operator=GET_PROPERTY
+              $this: THIS of 'AbstractClass' type=AbstractClass<T>
+      PROPERTY public abstract val some: T
+    CLASS CLASS Class
+      CONSTRUCTOR public constructor Class()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor AbstractClass()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Class'
+      PROPERTY public open override val some: kotlin.String
+        PROPERTY_GETTER public open override fun <get-some>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-some>(): String'
+              CONST String type=kotlin.String value='OK'

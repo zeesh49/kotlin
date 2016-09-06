@@ -1,0 +1,20 @@
+MODULE <test-module>
+  FILE /kt3107.kt
+    FUN public fun foo(): kotlin.String
+      BLOCK_BODY
+        VAR val s: kotlin.String
+          TRY_CATCH type=kotlin.String
+            try: BLOCK type=kotlin.String operator=null
+              CONST String type=kotlin.String value='OK'
+            catch e: BLOCK type=kotlin.String operator=null
+              TRY_CATCH type=kotlin.String
+                try: BLOCK type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=''
+                catch ee: BLOCK type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=''
+        RETURN type=kotlin.Nothing from='foo(): String'
+          GET_VAR 's: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(): String' type=kotlin.String operator=null

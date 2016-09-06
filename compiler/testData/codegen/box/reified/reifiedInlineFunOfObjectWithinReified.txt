@@ -1,0 +1,71 @@
+MODULE <test-module>
+  FILE /reifiedInlineFunOfObjectWithinReified.kt
+    FUN public fun foo(block: () -> kotlin.String): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(() -> String): String'
+          CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+            $this: GET_VAR 'value-parameter block: () -> String' type=() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+    FUN public inline fun <reified T : kotlin.Any> className(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='className(): String'
+          TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+            CALL 'getName(): String!' type=kotlin.String! operator=null
+              $this: CALL '<get-java>() on KClass<T>: Class<T>' type=java.lang.Class<T> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE '<reified T : Any>' type=kotlin.reflect.KClass<T>
+    FUN public inline fun <reified T : kotlin.Any> lambdaShouldBeReified(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='lambdaShouldBeReified(): String'
+          CALL 'foo(() -> String): String' type=kotlin.String operator=null
+            block: BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    CALL 'className(): String' type=kotlin.String operator=null
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+    CLASS INTERFACE A
+      FUN public abstract fun f(): kotlin.String
+      FUN public abstract fun g(): kotlin.String
+    FUN public inline fun <reified T1 : kotlin.Any, reified T2 : kotlin.Any> AFactory(): A
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='AFactory(): A'
+          BLOCK type=AFactory.<no name provided><T1, T2> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              FUN public open override fun f(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='f(): String'
+                    CALL 'className(): String' type=kotlin.String operator=null
+              FUN public open override fun g(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='g(): String'
+                    CALL 'foo(() -> String): String' type=kotlin.String operator=null
+                      block: BLOCK type=() -> kotlin.String operator=LAMBDA
+                        FUN local final fun <anonymous>(): kotlin.String
+                          BLOCK_BODY
+                            RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                              CALL 'className(): String' type=kotlin.String operator=null
+                        CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+            CALL 'constructor <no name provided>()' type=AFactory.<no name provided><T1, T2> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.lang.String'
+          actual: CALL 'lambdaShouldBeReified(): String' type=kotlin.String operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.lang.Integer'
+          actual: CALL 'lambdaShouldBeReified(): String' type=kotlin.String operator=null
+        VAR val x: A
+          CALL 'AFactory(): A' type=A operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.lang.String'
+          actual: CALL 'f(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'x: A' type=A operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='java.lang.Integer'
+          actual: CALL 'g(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'x: A' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,118 @@
+MODULE <test-module>
+  FILE /rangeTo.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val b: kotlin.Byte = 42.toByte()
+          CONST Byte type=kotlin.Byte value='42'
+        VAR val c: kotlin.Char = \u007A ('z')
+          CONST Char type=kotlin.Char value='z'
+        VAR val s: kotlin.Short = 239.toShort()
+          CONST Short type=kotlin.Short value='239'
+        VAR val i: kotlin.Int = -1
+          CONST Int type=kotlin.Int value='-1'
+        VAR val j: kotlin.Long = -42.toLong()
+          CONST Long type=kotlin.Long value='-42'
+        CALL 'rangeTo(Byte): IntRange' type=kotlin.ranges.IntRange operator=null
+          $this: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+          other: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+        CALL 'rangeTo(Byte): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+          $this: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+          other: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+        CALL 'rangeTo(Short): IntRange' type=kotlin.ranges.IntRange operator=null
+          $this: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+          other: GET_VAR 's: Short' type=kotlin.Short operator=null
+        CALL 'rangeTo(Short): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+          $this: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+          other: GET_VAR 's: Short' type=kotlin.Short operator=null
+        CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=null
+          $this: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+          other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+          $this: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+          other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        CALL 'rangeTo(Long): LongRange' type=kotlin.ranges.LongRange operator=null
+          $this: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+          other: GET_VAR 'j: Long' type=kotlin.Long operator=null
+        CALL 'rangeTo(Long): LongRange' type=kotlin.ranges.LongRange operator=RANGE
+          $this: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+          other: GET_VAR 'j: Long' type=kotlin.Long operator=null
+        CALL 'rangeTo(Char): CharRange' type=kotlin.ranges.CharRange operator=null
+          $this: GET_VAR 'c: Char' type=kotlin.Char operator=null
+          other: GET_VAR 'c: Char' type=kotlin.Char operator=null
+        CALL 'rangeTo(Char): CharRange' type=kotlin.ranges.CharRange operator=RANGE
+          $this: GET_VAR 'c: Char' type=kotlin.Char operator=null
+          other: GET_VAR 'c: Char' type=kotlin.Char operator=null
+        CALL 'rangeTo(Byte): IntRange' type=kotlin.ranges.IntRange operator=null
+          $this: GET_VAR 's: Short' type=kotlin.Short operator=null
+          other: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+        CALL 'rangeTo(Byte): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+          $this: GET_VAR 's: Short' type=kotlin.Short operator=null
+          other: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+        CALL 'rangeTo(Short): IntRange' type=kotlin.ranges.IntRange operator=null
+          $this: GET_VAR 's: Short' type=kotlin.Short operator=null
+          other: GET_VAR 's: Short' type=kotlin.Short operator=null
+        CALL 'rangeTo(Short): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+          $this: GET_VAR 's: Short' type=kotlin.Short operator=null
+          other: GET_VAR 's: Short' type=kotlin.Short operator=null
+        CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=null
+          $this: GET_VAR 's: Short' type=kotlin.Short operator=null
+          other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+          $this: GET_VAR 's: Short' type=kotlin.Short operator=null
+          other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        CALL 'rangeTo(Long): LongRange' type=kotlin.ranges.LongRange operator=null
+          $this: GET_VAR 's: Short' type=kotlin.Short operator=null
+          other: GET_VAR 'j: Long' type=kotlin.Long operator=null
+        CALL 'rangeTo(Long): LongRange' type=kotlin.ranges.LongRange operator=RANGE
+          $this: GET_VAR 's: Short' type=kotlin.Short operator=null
+          other: GET_VAR 'j: Long' type=kotlin.Long operator=null
+        CALL 'rangeTo(Byte): IntRange' type=kotlin.ranges.IntRange operator=null
+          $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+          other: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+        CALL 'rangeTo(Byte): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+          $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+          other: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+        CALL 'rangeTo(Short): IntRange' type=kotlin.ranges.IntRange operator=null
+          $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+          other: GET_VAR 's: Short' type=kotlin.Short operator=null
+        CALL 'rangeTo(Short): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+          $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+          other: GET_VAR 's: Short' type=kotlin.Short operator=null
+        CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=null
+          $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+          other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+          $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+          other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        CALL 'rangeTo(Long): LongRange' type=kotlin.ranges.LongRange operator=null
+          $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+          other: GET_VAR 'j: Long' type=kotlin.Long operator=null
+        CALL 'rangeTo(Long): LongRange' type=kotlin.ranges.LongRange operator=RANGE
+          $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+          other: GET_VAR 'j: Long' type=kotlin.Long operator=null
+        CALL 'rangeTo(Byte): LongRange' type=kotlin.ranges.LongRange operator=null
+          $this: GET_VAR 'j: Long' type=kotlin.Long operator=null
+          other: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+        CALL 'rangeTo(Byte): LongRange' type=kotlin.ranges.LongRange operator=RANGE
+          $this: GET_VAR 'j: Long' type=kotlin.Long operator=null
+          other: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+        CALL 'rangeTo(Short): LongRange' type=kotlin.ranges.LongRange operator=null
+          $this: GET_VAR 'j: Long' type=kotlin.Long operator=null
+          other: GET_VAR 's: Short' type=kotlin.Short operator=null
+        CALL 'rangeTo(Short): LongRange' type=kotlin.ranges.LongRange operator=RANGE
+          $this: GET_VAR 'j: Long' type=kotlin.Long operator=null
+          other: GET_VAR 's: Short' type=kotlin.Short operator=null
+        CALL 'rangeTo(Int): LongRange' type=kotlin.ranges.LongRange operator=null
+          $this: GET_VAR 'j: Long' type=kotlin.Long operator=null
+          other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        CALL 'rangeTo(Int): LongRange' type=kotlin.ranges.LongRange operator=RANGE
+          $this: GET_VAR 'j: Long' type=kotlin.Long operator=null
+          other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        CALL 'rangeTo(Long): LongRange' type=kotlin.ranges.LongRange operator=null
+          $this: GET_VAR 'j: Long' type=kotlin.Long operator=null
+          other: GET_VAR 'j: Long' type=kotlin.Long operator=null
+        CALL 'rangeTo(Long): LongRange' type=kotlin.ranges.LongRange operator=RANGE
+          $this: GET_VAR 'j: Long' type=kotlin.Long operator=null
+          other: GET_VAR 'j: Long' type=kotlin.Long operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

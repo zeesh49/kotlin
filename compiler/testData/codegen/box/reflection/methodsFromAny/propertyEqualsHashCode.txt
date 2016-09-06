@@ -1,0 +1,86 @@
+MODULE <test-module>
+  FILE /propertyEqualsHashCode.kt
+    PROPERTY public val top: kotlin.Int = 42
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='42'
+    PROPERTY public var top2: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='-23'
+    PROPERTY public val kotlin.Int.intExt: kotlin.Int
+      PROPERTY_GETTER public fun kotlin.Int.<get-intExt>(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-intExt>() on Int: Int'
+            $RECEIVER of 'intExt: Int on Int' type=kotlin.Int
+    PROPERTY public val kotlin.Char.charExt: kotlin.Int
+      PROPERTY_GETTER public fun kotlin.Char.<get-charExt>(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-charExt>() on Char: Int'
+            CALL 'toInt(): Int' type=kotlin.Int operator=null
+              $this: $RECEIVER of 'charExt: Int on Char' type=kotlin.Char
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(mem: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'mem: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter mem: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var mem: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter mem: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B(mem: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'mem: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'B' type=B
+            value: GET_VAR 'value-parameter mem: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public final var mem: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter mem: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun checkEqual(x: kotlin.Any, y: kotlin.Any): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assertEquals(Any, Any, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+          actual: GET_VAR 'value-parameter y: Any' type=kotlin.Any operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+          actual: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'value-parameter y: Any' type=kotlin.Any operator=null
+          message: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='Elements are equal but their hash codes are not: '
+            CALL 'hashCode(): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+            CONST String type=kotlin.String value=' != '
+            CALL 'hashCode(): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'value-parameter y: Any' type=kotlin.Any operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'checkEqual(Any, Any): Unit' type=kotlin.Unit operator=null
+          x: CALLABLE_REFERENCE 'top: Int' type=kotlin.reflect.KProperty0<kotlin.Int> operator=null
+          y: CALLABLE_REFERENCE 'top: Int' type=kotlin.reflect.KProperty0<kotlin.Int> operator=null
+        CALL 'checkEqual(Any, Any): Unit' type=kotlin.Unit operator=null
+          x: CALLABLE_REFERENCE 'top2: Int' type=kotlin.reflect.KMutableProperty0<kotlin.Int> operator=null
+          y: CALLABLE_REFERENCE 'top2: Int' type=kotlin.reflect.KMutableProperty0<kotlin.Int> operator=null
+        CALL 'checkEqual(Any, Any): Unit' type=kotlin.Unit operator=null
+          x: CALLABLE_REFERENCE 'intExt: Int on Int' type=kotlin.reflect.KProperty1<kotlin.Int, kotlin.Int> operator=null
+          y: CALLABLE_REFERENCE 'intExt: Int on Int' type=kotlin.reflect.KProperty1<kotlin.Int, kotlin.Int> operator=null
+        CALL 'checkEqual(Any, Any): Unit' type=kotlin.Unit operator=null
+          x: CALLABLE_REFERENCE 'mem: String' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+          y: CALLABLE_REFERENCE 'mem: String' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALLABLE_REFERENCE 'top: Int' type=kotlin.reflect.KProperty0<kotlin.Int> operator=null
+            arg1: CALLABLE_REFERENCE 'top2: Int' type=kotlin.reflect.KMutableProperty0<kotlin.Int> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALLABLE_REFERENCE 'intExt: Int on Int' type=kotlin.reflect.KProperty1<kotlin.Int, kotlin.Int> operator=null
+            arg1: CALLABLE_REFERENCE 'charExt: Int on Char' type=kotlin.reflect.KProperty1<kotlin.Char, kotlin.Int> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALLABLE_REFERENCE 'mem: String' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+            arg1: CALLABLE_REFERENCE 'mem: String' type=kotlin.reflect.KMutableProperty1<B, kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

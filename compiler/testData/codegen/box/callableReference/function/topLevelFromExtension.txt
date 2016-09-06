@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /topLevelFromExtension.kt
+    FUN public fun foo(o: kotlin.Int, k: kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(Int, Int): Int'
+          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+            $this: GET_VAR 'value-parameter o: Int' type=kotlin.Int operator=null
+            other: GET_VAR 'value-parameter k: Int' type=kotlin.Int operator=null
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+    FUN public fun A.bar(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='bar() on A: Int'
+          CALL 'invoke(Int, Int): Int' type=kotlin.Int operator=null
+            $this: CALLABLE_REFERENCE 'foo(Int, Int): Int' type=kotlin.reflect.KFunction2<kotlin.Int, kotlin.Int, kotlin.Int> operator=null
+            p1: CONST Int type=kotlin.Int value='111'
+            p2: CONST Int type=kotlin.Int value='222'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val result: kotlin.Int
+          CALL 'bar() on A: Int' type=kotlin.Int operator=null
+            $receiver: CALL 'constructor A()' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='333'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'result: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

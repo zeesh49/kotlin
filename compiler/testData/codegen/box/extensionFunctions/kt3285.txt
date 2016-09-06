@@ -1,0 +1,73 @@
+MODULE <test-module>
+  FILE /kt3285.kt
+    PROPERTY public var sayResult: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    CLASS CLASS NoiseMaker
+      CONSTRUCTOR public constructor NoiseMaker()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='NoiseMaker'
+      FUN public final fun say(str: kotlin.String): kotlin.Unit
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            CALL '<set-sayResult>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+              <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: CALL '<get-sayResult>(): String' type=kotlin.String operator=PLUSEQ
+                other: GET_VAR 'value-parameter str: String' type=kotlin.String operator=null
+    FUN public fun noiseMaker(f: NoiseMaker.() -> kotlin.Unit): kotlin.Unit
+      BLOCK_BODY
+        VAR val noiseMaker: NoiseMaker
+          CALL 'constructor NoiseMaker()' type=NoiseMaker operator=null
+        CALL 'invoke() on NoiseMaker: Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'value-parameter f: NoiseMaker.() -> Unit' type=NoiseMaker.() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+          $receiver: GET_VAR 'noiseMaker: NoiseMaker' type=NoiseMaker operator=null
+    CLASS CLASS Pet
+      CONSTRUCTOR public constructor Pet()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Pet'
+      FUN public final fun <T> NoiseMaker.playWith(friend: T): kotlin.Unit
+        BLOCK_BODY
+          CALL 'say(String): Unit' type=kotlin.Unit operator=null
+            $this: $RECEIVER of 'playWith(T) on NoiseMaker: Unit' type=NoiseMaker
+            str: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CONST String type=kotlin.String value='Playing with '
+              other: GET_VAR 'value-parameter friend: T' type=T operator=null
+      FUN public abstract fun play(): kotlin.Unit
+    CLASS CLASS Doggy
+      CONSTRUCTOR public constructor Doggy()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Pet()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Doggy'
+      FUN public open override fun play(): kotlin.Unit
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='play(): Unit'
+            CALL 'noiseMaker(NoiseMaker.() -> Unit): Unit' type=kotlin.Unit operator=null
+              f: BLOCK type=NoiseMaker.() -> kotlin.Unit operator=LAMBDA
+                FUN local final fun NoiseMaker.<anonymous>(): kotlin.Unit
+                  BLOCK_BODY
+                    CALL 'say(String): Unit' type=kotlin.Unit operator=null
+                      $this: $RECEIVER of '<anonymous>() on NoiseMaker: Unit' type=NoiseMaker
+                      str: CONST String type=kotlin.String value='Time to play! '
+                    RETURN type=kotlin.Nothing from='<anonymous>() on NoiseMaker: Unit'
+                      CALL 'playWith(String) on NoiseMaker: Unit' type=kotlin.Unit operator=null
+                        $this: THIS of 'Doggy' type=Doggy
+                        $receiver: $RECEIVER of '<anonymous>() on NoiseMaker: Unit' type=NoiseMaker
+                        friend: CONST String type=kotlin.String value='my owner!'
+                CALLABLE_REFERENCE '<anonymous>() on NoiseMaker: Unit' type=NoiseMaker.() -> kotlin.Unit operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'play(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor Doggy()' type=Doggy operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-sayResult>(): String' type=kotlin.String operator=GET_PROPERTY
+              arg1: CONST String type=kotlin.String value='Time to play! Playing with my owner!'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: '
+              CALL '<get-sayResult>(): String' type=kotlin.String operator=GET_PROPERTY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

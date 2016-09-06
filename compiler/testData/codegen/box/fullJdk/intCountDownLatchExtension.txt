@@ -1,0 +1,39 @@
+MODULE <test-module>
+  FILE /intCountDownLatchExtension.kt
+    FUN public fun <T> kotlin.Int.latch(op: java.util.concurrent.CountDownLatch.() -> T): T
+      BLOCK_BODY
+        VAR val cdl: java.util.concurrent.CountDownLatch
+          CALL 'constructor CountDownLatch(Int)' type=java.util.concurrent.CountDownLatch operator=null
+            p0: $RECEIVER of 'latch(CountDownLatch.() -> T) on Int: T' type=kotlin.Int
+        VAR val res: T
+          CALL 'invoke() on CountDownLatch: T' type=T operator=INVOKE
+            $this: GET_VAR 'value-parameter op: CountDownLatch.() -> T' type=java.util.concurrent.CountDownLatch.() -> T operator=VARIABLE_AS_FUNCTION
+            $receiver: GET_VAR 'cdl: CountDownLatch' type=java.util.concurrent.CountDownLatch operator=null
+        CALL 'await(): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'cdl: CountDownLatch' type=java.util.concurrent.CountDownLatch operator=null
+        RETURN type=kotlin.Nothing from='latch(CountDownLatch.() -> T) on Int: T'
+          GET_VAR 'res: T' type=T operator=null
+    FUN public fun id(op: () -> kotlin.Unit): kotlin.Unit
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='id(() -> Unit): Unit'
+          CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+            $this: GET_VAR 'value-parameter op: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'latch(CountDownLatch.() -> Unit) on Int: Unit' type=kotlin.Unit operator=null
+          $receiver: CONST Int type=kotlin.Int value='1'
+          op: BLOCK type=java.util.concurrent.CountDownLatch.() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun java.util.concurrent.CountDownLatch.<anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>() on CountDownLatch: Unit'
+                  CALL 'id(() -> Unit): Unit' type=kotlin.Unit operator=null
+                    op: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                      FUN local final fun <anonymous>(): kotlin.Unit
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                            CALL 'countDown(): Unit' type=kotlin.Unit operator=null
+                              $this: $RECEIVER of '<anonymous>() on CountDownLatch: Unit' type=java.util.concurrent.CountDownLatch
+                      CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+            CALLABLE_REFERENCE '<anonymous>() on CountDownLatch: Unit' type=java.util.concurrent.CountDownLatch.() -> kotlin.Unit operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

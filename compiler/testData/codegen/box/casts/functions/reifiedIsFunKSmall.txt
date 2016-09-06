@@ -1,0 +1,86 @@
+MODULE <test-module>
+  FILE /reifiedIsFunKSmall.kt
+    FUN public fun fn0(): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun fn1(x: kotlin.Any): kotlin.Unit
+      BLOCK_BODY
+    FUN public inline fun <reified T> assertReifiedIs(x: kotlin.Any, type: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        VAR val answer: kotlin.Boolean
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            SET_VAR 'answer: Boolean' type=kotlin.Unit operator=EQ
+              TYPE_OP operator=INSTANCEOF typeOperand=T
+                GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+                  CONST String type=kotlin.String value=' is '
+                  GET_VAR 'value-parameter type: String' type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=': should not throw exceptions, got '
+                  GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: GET_VAR 'answer: Boolean' type=kotlin.Boolean operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+                    CONST String type=kotlin.String value=' is '
+                    GET_VAR 'value-parameter type: String' type=kotlin.String operator=null
+                    CONST String type=kotlin.String value=': failed'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+    FUN public inline fun <reified T> assertReifiedIsNot(x: kotlin.Any, type: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        VAR val answer: kotlin.Boolean
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            SET_VAR 'answer: Boolean' type=kotlin.Unit operator=EQ
+              TYPE_OP operator=NOT_INSTANCEOF typeOperand=T
+                GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+                  CONST String type=kotlin.String value=' !is '
+                  GET_VAR 'value-parameter type: String' type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=': should not throw exceptions, got '
+                  GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: GET_VAR 'answer: Boolean' type=kotlin.Boolean operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+                    CONST String type=kotlin.String value=' !is '
+                    GET_VAR 'value-parameter type: String' type=kotlin.String operator=null
+                    CONST String type=kotlin.String value=': failed'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f0: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALLABLE_REFERENCE 'fn0(): Unit' type=kotlin.reflect.KFunction0<kotlin.Unit> operator=null
+        VAR val f1: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALLABLE_REFERENCE 'fn1(Any): Unit' type=kotlin.reflect.KFunction1<kotlin.Any, kotlin.Unit> operator=null
+        CALL 'assertReifiedIs(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'f0: Any' type=kotlin.Any operator=null
+          type: CONST String type=kotlin.String value='Function0<*>'
+        CALL 'assertReifiedIs(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'f1: Any' type=kotlin.Any operator=null
+          type: CONST String type=kotlin.String value='Function1<*, *>'
+        CALL 'assertReifiedIsNot(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'f1: Any' type=kotlin.Any operator=null
+          type: CONST String type=kotlin.String value='Function0<*>'
+        CALL 'assertReifiedIsNot(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'f0: Any' type=kotlin.Any operator=null
+          type: CONST String type=kotlin.String value='Function1<*, *>'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

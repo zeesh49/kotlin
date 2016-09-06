@@ -1,0 +1,17 @@
+MODULE <test-module>
+  FILE /bar.kt
+    FUN public fun bar(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='bar(): String'
+          CONST String type=kotlin.String value='K'
+  FILE /foo.kt
+    FUN public fun foo(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(): String'
+          CONST String type=kotlin.String value='O'
+  FILE /test.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+            CALL 'baz(): String!' type=kotlin.String! operator=null

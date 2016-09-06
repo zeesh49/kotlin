@@ -1,0 +1,43 @@
+MODULE <test-module>
+  FILE /kt9644try.kt
+    FUN public inline fun doCall(f: () -> kotlin.Any): kotlin.Any
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='doCall(() -> Any): Any'
+          CALL 'invoke(): Any' type=kotlin.Any operator=INVOKE
+            $this: GET_VAR 'value-parameter f: () -> Any' type=() -> kotlin.Any operator=VARIABLE_AS_FUNCTION
+    FUN public fun test1(): kotlin.Unit
+      BLOCK_BODY
+        VAR val localResult: kotlin.Any
+          CALL 'doCall(() -> Any): Any' type=kotlin.Any operator=null
+            f: BLOCK type=() -> kotlin.Nothing operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Nothing
+                BLOCK_BODY
+                  TRY_CATCH type=kotlin.String
+                    try: BLOCK type=kotlin.String operator=null
+                      CONST String type=kotlin.String value='1'
+                    catch e: BLOCK type=kotlin.String operator=null
+                      CONST String type=kotlin.String value='2'
+                  RETURN type=kotlin.Nothing from='test1(): Unit'
+              CALLABLE_REFERENCE '<anonymous>(): Nothing' type=() -> kotlin.Nothing operator=LAMBDA
+    FUN public fun test2(): kotlin.String
+      BLOCK_BODY
+        VAR val localResult: kotlin.Any
+          CALL 'doCall(() -> Any): Any' type=kotlin.Any operator=null
+            f: BLOCK type=() -> kotlin.Nothing operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Nothing
+                BLOCK_BODY
+                  TRY_CATCH type=kotlin.String
+                    try: BLOCK type=kotlin.String operator=null
+                      CONST String type=kotlin.String value='1'
+                    catch e: BLOCK type=kotlin.String operator=null
+                      CONST String type=kotlin.String value='2'
+                  RETURN type=kotlin.Nothing from='test2(): String'
+                    CONST String type=kotlin.String value='OK'
+              CALLABLE_REFERENCE '<anonymous>(): Nothing' type=() -> kotlin.Nothing operator=LAMBDA
+        RETURN type=kotlin.Nothing from='test2(): String'
+          CONST String type=kotlin.String value='Hmmm...'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'test1(): Unit' type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'test2(): String' type=kotlin.String operator=null

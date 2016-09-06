@@ -1,0 +1,29 @@
+MODULE <test-module>
+  FILE /forEachByteArray.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.ByteIterator
+            CALL 'iterator(): ByteIterator' type=kotlin.collections.ByteIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'constructor ByteArray(Int)' type=kotlin.ByteArray operator=null
+                size: CONST Int type=kotlin.Int value='5'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: ByteIterator' type=kotlin.collections.ByteIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val x: kotlin.Byte
+                CALL 'next(): Byte' type=kotlin.Byte operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: ByteIterator' type=kotlin.collections.ByteIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                    arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                      arg0: GET_VAR 'x: Byte' type=kotlin.Byte operator=null
+                      arg1: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                        $this: CONST Int type=kotlin.Int value='0'
+                  then: RETURN type=kotlin.Nothing from='box(): String'
+                    STRING_CONCATENATION type=kotlin.String
+                      CONST String type=kotlin.String value='Fail '
+                      GET_VAR 'x: Byte' type=kotlin.Byte operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

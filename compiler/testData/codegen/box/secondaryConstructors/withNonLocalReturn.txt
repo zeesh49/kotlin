@@ -1,0 +1,64 @@
+MODULE <test-module>
+  FILE /withNonLocalReturn.kt
+    FUN public inline fun run(block: () -> kotlin.Unit): kotlin.Unit
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='run(() -> Unit): Unit'
+          CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+            $this: GET_VAR 'value-parameter block: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+    CLASS CLASS A
+      PROPERTY public final val prop: kotlin.Int
+      CONSTRUCTOR public constructor A(arg: kotlin.Boolean)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+          WHEN type=kotlin.Unit operator=IF
+            if: GET_VAR 'value-parameter arg: Boolean' type=kotlin.Boolean operator=null
+            then: BLOCK type=kotlin.Nothing operator=null
+              SET_BACKING_FIELD 'prop: Int' type=kotlin.Unit operator=null
+                receiver: THIS of 'A' type=A
+                value: CONST Int type=kotlin.Int value='1'
+              CALL 'run(A.() -> Nothing) on A: Nothing' type=kotlin.Nothing operator=null
+                $receiver: THIS of 'A' type=A
+                block: BLOCK type=A.() -> kotlin.Nothing operator=LAMBDA
+                  FUN local final fun A.<anonymous>(): kotlin.Nothing
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='constructor A(Boolean)'
+                  CALLABLE_REFERENCE '<anonymous>() on A: Nothing' type=A.() -> kotlin.Nothing operator=LAMBDA
+              THROW type=kotlin.Nothing
+                CALL 'constructor RuntimeException(String!)' type=java.lang.RuntimeException operator=null
+                  p0: CONST String type=kotlin.String value='fail 0'
+          SET_BACKING_FIELD 'prop: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: CONST Int type=kotlin.Int value='2'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a1: A
+          CALL 'constructor A(Boolean)' type=A operator=null
+            arg: CONST Boolean type=kotlin.Boolean value='true'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a1: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail1: '
+              CALL '<get-prop>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a1: A' type=A operator=null
+        VAR val a2: A
+          CALL 'constructor A(Boolean)' type=A operator=null
+            arg: CONST Boolean type=kotlin.Boolean value='false'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a2: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail2: '
+              CALL '<get-prop>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a2: A' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

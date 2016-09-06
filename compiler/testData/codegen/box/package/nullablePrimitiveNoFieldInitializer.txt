@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /nullablePrimitiveNoFieldInitializer.kt
+    PROPERTY public val zint: kotlin.Int? = 1
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='1'
+    PROPERTY public val zlong: kotlin.Long? = 2.toLong()
+      EXPRESSION_BODY
+        CONST Long type=kotlin.Long value='2'
+    PROPERTY public val zbyte: kotlin.Byte? = 3.toByte()
+      EXPRESSION_BODY
+        CONST Byte type=kotlin.Byte value='3'
+    PROPERTY public val zshort: kotlin.Short? = 4.toShort()
+      EXPRESSION_BODY
+        CONST Short type=kotlin.Short value='4'
+    PROPERTY public val zchar: kotlin.Char? = \u0063 ('c')
+      EXPRESSION_BODY
+        CONST Char type=kotlin.Char value='c'
+    PROPERTY public val zdouble: kotlin.Double? = 1.0.toDouble()
+      EXPRESSION_BODY
+        CONST Double type=kotlin.Double value='1.0'
+    PROPERTY public val zfloat: kotlin.Float? = 2.0.toFloat()
+      EXPRESSION_BODY
+        CALL 'toFloat(): Float' type=kotlin.Float operator=null
+          $this: CONST Double type=kotlin.Double value='2.0'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,50 @@
+MODULE <test-module>
+  FILE /memberExtOnLong.kt
+    CLASS OBJECT ExtProvider
+      CONSTRUCTOR private constructor ExtProvider()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ExtProvider'
+      FUN public final operator fun kotlin.Long.get(i: kotlin.Int): kotlin.Long
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(Int) on Long: Long'
+            $RECEIVER of 'get(Int) on Long: Long' type=kotlin.Long
+      FUN public final operator fun kotlin.Long.set(i: kotlin.Int, newValue: kotlin.Long): kotlin.Unit
+        BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'with(ExtProvider, ExtProvider.() -> Nothing): Nothing' type=kotlin.Nothing operator=null
+          receiver: GET_OBJECT 'ExtProvider' type=ExtProvider
+          block: BLOCK type=ExtProvider.() -> kotlin.Nothing operator=LAMBDA
+            FUN local final fun ExtProvider.<anonymous>(): kotlin.Nothing
+              BLOCK_BODY
+                VAR var x: kotlin.Long
+                  CONST Long type=kotlin.Long value='0'
+                VAR val y: kotlin.Long
+                  BLOCK type=kotlin.Long operator=POSTFIX_INCR
+                    VAR val tmp0_array: kotlin.Long
+                      GET_VAR 'x: Long' type=kotlin.Long operator=null
+                    VAR val tmp1_index0: kotlin.Int
+                      CONST Int type=kotlin.Int value='0'
+                    VAR val tmp2: kotlin.Long
+                      CALL 'get(Int) on Long: Long' type=kotlin.Long operator=POSTFIX_INCR
+                        $this: $RECEIVER of '<anonymous>() on ExtProvider: Nothing' type=ExtProvider
+                        $receiver: GET_VAR 'tmp0_array: Long' type=kotlin.Long operator=null
+                        i: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+                    CALL 'set(Int, Long) on Long: Unit' type=kotlin.Unit operator=POSTFIX_INCR
+                      $this: $RECEIVER of '<anonymous>() on ExtProvider: Nothing' type=ExtProvider
+                      $receiver: GET_VAR 'tmp0_array: Long' type=kotlin.Long operator=null
+                      i: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+                      newValue: CALL 'inc(): Long' type=kotlin.Long operator=POSTFIX_INCR
+                        $this: GET_VAR 'tmp2: Long' type=kotlin.Long operator=null
+                    GET_VAR 'tmp2: Long' type=kotlin.Long operator=null
+                RETURN type=kotlin.Nothing from='box(): String'
+                  WHEN type=kotlin.String operator=IF
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'y: Long' type=kotlin.Long operator=null
+                      arg1: CONST Long type=kotlin.Long value='0'
+                    then: CONST String type=kotlin.String value='OK'
+                    else: STRING_CONCATENATION type=kotlin.String
+                      CONST String type=kotlin.String value='Failed, y='
+                      GET_VAR 'y: Long' type=kotlin.Long operator=null
+            CALLABLE_REFERENCE '<anonymous>() on ExtProvider: Nothing' type=ExtProvider.() -> kotlin.Nothing operator=LAMBDA

@@ -1,0 +1,58 @@
+MODULE <test-module>
+  FILE /fakeOverridesInSubclass.kt
+    CLASS CLASS Super
+      CONSTRUCTOR public constructor Super(r: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'r: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Super' type=Super
+            value: GET_VAR 'value-parameter r: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Super'
+      PROPERTY public final val r: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter r: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS Sub
+      CONSTRUCTOR public constructor Sub(r: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Super(String)'
+            r: GET_VAR 'value-parameter r: String' type=kotlin.String operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='Sub'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val props: kotlin.collections.Collection<kotlin.reflect.KProperty1<Sub, *>>
+          CALL '<get-declaredMemberProperties>() on KClass<Sub>: Collection<KProperty1<Sub, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<Sub, *>> operator=GET_PROPERTY
+            $receiver: CALL '<get-kotlin>() on Class<Sub>: KClass<Sub>' type=kotlin.reflect.KClass<Sub> operator=GET_PROPERTY
+              $receiver: CALL '<get-java>() on KClass<Sub>: Class<Sub>' type=java.lang.Class<Sub> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'Sub' type=kotlin.reflect.KClass<Sub>
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR 'props: Collection<KProperty1<Sub, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<Sub, *>> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'props: Collection<KProperty1<Sub, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<Sub, *>> operator=null
+        VAR val allProps: kotlin.collections.Collection<kotlin.reflect.KProperty1<Sub, *>>
+          CALL '<get-memberProperties>() on KClass<Sub>: Collection<KProperty1<Sub, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<Sub, *>> operator=GET_PROPERTY
+            $receiver: CALL '<get-kotlin>() on Class<Sub>: KClass<Sub>' type=kotlin.reflect.KClass<Sub> operator=GET_PROPERTY
+              $receiver: CALL '<get-java>() on KClass<Sub>: Class<Sub>' type=java.lang.Class<Sub> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'Sub' type=kotlin.reflect.KClass<Sub>
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            element: CONST String type=kotlin.String value='r'
+          actual: CALL 'map((KProperty1<Sub, *>) -> String) on Iterable<KProperty1<Sub, *>>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            $receiver: GET_VAR 'allProps: Collection<KProperty1<Sub, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<Sub, *>> operator=null
+            transform: BLOCK type=(kotlin.reflect.KProperty1<Sub, *>) -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KProperty1<Sub, *>): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KProperty1<Sub, *>): String'
+                    CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                      $this: GET_VAR 'value-parameter it: KProperty1<Sub, *>' type=kotlin.reflect.KProperty1<Sub, *> operator=null
+              CALLABLE_REFERENCE '<anonymous>(KProperty1<Sub, *>): String' type=(kotlin.reflect.KProperty1<Sub, *>) -> kotlin.String operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          TYPE_OP operator=CAST typeOperand=kotlin.String
+            CALL 'get(Sub): Any?' type=kotlin.Any? operator=null
+              $this: CALL 'single() on Iterable<KProperty1<Sub, *>>: KProperty1<Sub, *>' type=kotlin.reflect.KProperty1<Sub, *> operator=null
+                $receiver: GET_VAR 'allProps: Collection<KProperty1<Sub, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<Sub, *>> operator=null
+              receiver: CALL 'constructor Sub(String)' type=Sub operator=null
+                r: CONST String type=kotlin.String value='OK'

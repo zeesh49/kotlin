@@ -1,0 +1,20 @@
+MODULE <test-module>
+  FILE /noElseNoMatch.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.Int = 3
+          CONST Int type=kotlin.Int value='3'
+        BLOCK type=kotlin.Unit operator=WHEN
+          VAR val tmp0_subject: kotlin.Int
+            GET_VAR 'x: Int' type=kotlin.Int operator=null
+          WHEN type=kotlin.Unit operator=WHEN
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+            then: BLOCK type=kotlin.Unit operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+            then: BLOCK type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

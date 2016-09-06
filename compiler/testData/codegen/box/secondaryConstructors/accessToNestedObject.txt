@@ -1,0 +1,54 @@
+MODULE <test-module>
+  FILE /accessToNestedObject.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(result: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'result: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter result: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val result: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter result: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CLASS OBJECT B
+        CONSTRUCTOR private constructor B()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='B'
+        FUN public final fun bar(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='bar(): Int'
+              CONST Int type=kotlin.Int value='4'
+        PROPERTY public final val prop: kotlin.Int = 5
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='5'
+      CLASS OBJECT C
+        CONSTRUCTOR private constructor C()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A(Int)'
+            result: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+              $this: CALL 'bar(): Int' type=kotlin.Int operator=null
+                $this: GET_OBJECT 'B' type=A.B
+              other: CALL '<get-prop>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_OBJECT 'B' type=A.B
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val result: kotlin.Int
+          CALL '<get-result>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: CALL 'constructor A()' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='9'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: '
+              GET_VAR 'result: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

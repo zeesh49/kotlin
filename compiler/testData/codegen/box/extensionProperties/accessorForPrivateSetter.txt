@@ -1,0 +1,45 @@
+MODULE <test-module>
+  FILE /accessorForPrivateSetter.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var result: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='Fail'
+      PROPERTY private final var kotlin.Int.foo: kotlin.String
+        PROPERTY_GETTER private final fun kotlin.Int.<get-foo>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-foo>() on Int: String'
+              CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+        PROPERTY_SETTER private final fun kotlin.Int.<set-foo>(value: kotlin.String): kotlin.Unit
+          BLOCK_BODY
+            CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+              $this: THIS of 'A' type=A
+              <set-?>: GET_VAR 'value-parameter value: String' type=kotlin.String operator=null
+      FUN public final fun run(): kotlin.String
+        BLOCK_BODY
+          CLASS CLASS O
+            CONSTRUCTOR public constructor O()
+              BLOCK_BODY
+                DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                INSTANCE_INITIALIZER_CALL classDescriptor='O'
+            FUN public final fun run(): kotlin.Unit
+              BLOCK_BODY
+                CALL '<set-foo>(String) on Int: Unit' type=kotlin.Unit operator=EQ
+                  $this: THIS of 'A' type=A
+                  $receiver: CONST Int type=kotlin.Int value='42'
+                  value: CONST String type=kotlin.String value='OK'
+          CALL 'run(): Unit' type=kotlin.Unit operator=null
+            $this: CALL 'constructor O()' type=A.run.O operator=null
+          RETURN type=kotlin.Nothing from='run(): String'
+            CALL '<get-foo>() on Int: String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+              $receiver: CONST Int type=kotlin.Int value='-42'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'run(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor A()' type=A operator=null

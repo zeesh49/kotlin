@@ -1,0 +1,94 @@
+MODULE <test-module>
+  FILE /arrayConstructorsSimple.kt
+    FUN public fun simpleIntArray(): kotlin.Array<kotlin.Int>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='simpleIntArray(): Array<Int>'
+          CALL 'constructor Array(Int, (Int) -> Int)' type=kotlin.Array<kotlin.Int> operator=null
+            size: CONST Int type=kotlin.Int value='3'
+            init: BLOCK type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): Int'
+                    GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+              CALLABLE_REFERENCE '<anonymous>(Int): Int' type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+    FUN public fun simpleDoubleArray(): kotlin.Array<kotlin.Double>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='simpleDoubleArray(): Array<Double>'
+          CALL 'constructor Array(Int, (Int) -> Double)' type=kotlin.Array<kotlin.Double> operator=null
+            size: CONST Int type=kotlin.Int value='3'
+            init: BLOCK type=(kotlin.Int) -> kotlin.Double operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Double
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): Double'
+                    CALL 'plus(Double): Double' type=kotlin.Double operator=PLUS
+                      $this: CALL 'toDouble(): Double' type=kotlin.Double operator=null
+                        $this: GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                      other: CONST Double type=kotlin.Double value='0.1'
+              CALLABLE_REFERENCE '<anonymous>(Int): Double' type=(kotlin.Int) -> kotlin.Double operator=LAMBDA
+    FUN public fun simpleStringArray(): kotlin.Array<kotlin.String>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='simpleStringArray(): Array<String>'
+          CALL 'constructor Array(Int, (Int) -> String)' type=kotlin.Array<kotlin.String> operator=null
+            size: CONST Int type=kotlin.Int value='3'
+            init: BLOCK type=(kotlin.Int) -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.Int): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): String'
+                    CALL 'toString(): String' type=kotlin.String operator=null
+                      $this: GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+              CALLABLE_REFERENCE '<anonymous>(Int): String' type=(kotlin.Int) -> kotlin.String operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val ia: kotlin.Array<kotlin.Int>
+          CALL 'simpleIntArray(): Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='0'
+          actual: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'ia: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'ia: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+            index: CONST Int type=kotlin.Int value='1'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='2'
+          actual: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'ia: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+            index: CONST Int type=kotlin.Int value='2'
+        VAR val da: kotlin.Array<kotlin.Double>
+          CALL 'simpleDoubleArray(): Array<Double>' type=kotlin.Array<kotlin.Double> operator=null
+        CALL 'assertEquals(Double, Double, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Double type=kotlin.Double value='0.1'
+          actual: CALL 'get(Int): Double' type=kotlin.Double operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'da: Array<Double>' type=kotlin.Array<kotlin.Double> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+        CALL 'assertEquals(Double, Double, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Double type=kotlin.Double value='1.1'
+          actual: CALL 'get(Int): Double' type=kotlin.Double operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'da: Array<Double>' type=kotlin.Array<kotlin.Double> operator=null
+            index: CONST Int type=kotlin.Int value='1'
+        CALL 'assertEquals(Double, Double, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Double type=kotlin.Double value='2.1'
+          actual: CALL 'get(Int): Double' type=kotlin.Double operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'da: Array<Double>' type=kotlin.Array<kotlin.Double> operator=null
+            index: CONST Int type=kotlin.Int value='2'
+        VAR val sa: kotlin.Array<kotlin.String>
+          CALL 'simpleStringArray(): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='0'
+          actual: CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'sa: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='1'
+          actual: CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'sa: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            index: CONST Int type=kotlin.Int value='1'
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='2'
+          actual: CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'sa: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            index: CONST Int type=kotlin.Int value='2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

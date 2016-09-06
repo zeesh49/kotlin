@@ -1,0 +1,23 @@
+MODULE <test-module>
+  FILE /abstractClassMember.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public abstract fun foo(): kotlin.String
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      FUN public open override fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'invoke(A): String' type=kotlin.String operator=null
+            $this: CALLABLE_REFERENCE 'foo(): String' type=kotlin.reflect.KFunction1<A, kotlin.String> operator=null
+            p1: CALL 'constructor B()' type=B operator=null

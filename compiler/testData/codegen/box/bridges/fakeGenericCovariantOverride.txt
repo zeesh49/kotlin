@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /fakeGenericCovariantOverride.kt
+    CLASS INTERFACE Trait
+      FUN public abstract fun f(): T
+    CLASS CLASS Class
+      CONSTRUCTOR public constructor Class()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Class'
+      FUN public final fun f(): kotlin.String
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+    CLASS CLASS Foo
+      CONSTRUCTOR public constructor Foo()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Class()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val t: Trait<kotlin.String>
+          CALL 'constructor Foo()' type=Foo operator=null
+        TRY_CATCH type=kotlin.String
+          try: BLOCK type=kotlin.String operator=null
+            CALL 'f(): String' type=kotlin.String operator=null
+              $this: GET_VAR 't: Trait<String>' type=Trait<kotlin.String> operator=null
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='Fail'

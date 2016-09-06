@@ -1,0 +1,16 @@
+MODULE <test-module>
+  FILE /kt2593.kt
+    FUN public fun foo(): kotlin.Unit
+      BLOCK_BODY
+        WHEN type=kotlin.Any operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CONST Int type=kotlin.Int value='1'
+            arg1: CONST Int type=kotlin.Int value='1'
+          then: BLOCK type=java.lang.Class<kotlin.Int> operator=null
+            CALL '<get-javaClass>() on Int: Class<Int>' type=java.lang.Class<kotlin.Int> operator=GET_PROPERTY
+              $receiver: CONST Int type=kotlin.Int value='1'
+          else: BLOCK type=kotlin.Unit operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

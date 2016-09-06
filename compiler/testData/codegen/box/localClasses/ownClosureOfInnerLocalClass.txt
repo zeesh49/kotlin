@@ -1,0 +1,72 @@
+MODULE <test-module>
+  FILE /ownClosureOfInnerLocalClass.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var log: kotlin.String
+          CONST String type=kotlin.String value=''
+        VAR var s: kotlin.Any?
+          CONST Null type=kotlin.Nothing? value='null'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<kotlin.String>
+            CALL 'iterator(): Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=FOR_LOOP_ITERATOR
+              $this: CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                elements: VARARG type=Array<out String> varargElementType=String
+                  CONST String type=kotlin.String value='1'
+                  CONST String type=kotlin.String value='2'
+                  CONST String type=kotlin.String value='3'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val t: kotlin.String
+                CALL 'next(): String' type=kotlin.String operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                CLASS CLASS C
+                  CONSTRUCTOR public constructor C()
+                    BLOCK_BODY
+                      DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                      INSTANCE_INITIALIZER_CALL classDescriptor='C'
+                  PROPERTY public final val y: kotlin.String
+                    EXPRESSION_BODY
+                      GET_VAR 't: String' type=kotlin.String operator=null
+                  CLASS CLASS D
+                    CONSTRUCTOR public constructor D()
+                      BLOCK_BODY
+                        DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                        INSTANCE_INITIALIZER_CALL classDescriptor='D'
+                    FUN public final fun foo(): kotlin.String
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='foo(): String'
+                          STRING_CONCATENATION type=kotlin.String
+                            CONST String type=kotlin.String value='('
+                            CALL '<get-y>(): String' type=kotlin.String operator=GET_PROPERTY
+                              $this: THIS of 'C' type=box.C
+                            CONST String type=kotlin.String value=';'
+                            GET_VAR 't: String' type=kotlin.String operator=null
+                            CONST String type=kotlin.String value=')'
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 's: Any?' type=kotlin.Any? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: BLOCK type=kotlin.Unit operator=null
+                    SET_VAR 's: Any?' type=kotlin.Unit operator=EQ
+                      CALL 'constructor C()' type=box.C operator=null
+                SET_VAR 'log: String' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 'log: String' type=kotlin.String operator=PLUSEQ
+                    other: CALL 'foo(): String' type=kotlin.String operator=null
+                      $this: CALL 'constructor D()' type=box.C.D operator=null
+                        $this: TYPE_OP operator=CAST typeOperand=box.C
+                          GET_VAR 's: Any?' type=kotlin.Any? operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'log: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='(1;1)(1;1)(1;1)'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: '
+              GET_VAR 'log: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

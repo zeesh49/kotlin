@@ -1,0 +1,215 @@
+MODULE <test-module>
+  FILE /simpleSupertypes.kt
+    CLASS CLASS Simple
+      CONSTRUCTOR public constructor Simple()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Simple'
+    CLASS CLASS OneClass
+      CONSTRUCTOR public constructor OneClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Simple()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='OneClass'
+    CLASS INTERFACE Interface
+    CLASS INTERFACE Interface2
+    CLASS CLASS ClassAndTwoInterfaces
+      CONSTRUCTOR public constructor ClassAndTwoInterfaces()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Simple()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ClassAndTwoInterfaces'
+    FUN public fun any(): kotlin.Any
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun simple(): Simple
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun interface_(): Interface
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun interface2(): Interface2
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'with(KClass<Simple>, KClass<Simple>.() -> Unit): Unit' type=kotlin.Unit operator=null
+          receiver: CLASS_REFERENCE 'Simple' type=kotlin.reflect.KClass<Simple>
+          block: BLOCK type=kotlin.reflect.KClass<Simple>.() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun kotlin.reflect.KClass<Simple>.<anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                CALL 'assertEquals(List<KType>, List<KType>, String? = ...): Unit' type=kotlin.Unit operator=null
+                  expected: CALL 'listOf(KType): List<KType>' type=kotlin.collections.List<kotlin.reflect.KType> operator=null
+                    element: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                      $this: CALLABLE_REFERENCE 'any(): Any' type=kotlin.reflect.KFunction0<kotlin.Any> operator=null
+                  actual: CALL '<get-supertypes>(): List<KType>' type=kotlin.collections.List<kotlin.reflect.KType> operator=GET_PROPERTY
+                    $this: $RECEIVER of '<anonymous>() on KClass<Simple>: Unit' type=kotlin.reflect.KClass<Simple>
+                CALL 'assertEquals(List<KClass<out Any>>, List<KClass<out Any>>, String? = ...): Unit' type=kotlin.Unit operator=null
+                  expected: CALL 'listOf(KClass<Any>): List<KClass<Any>>' type=kotlin.collections.List<kotlin.reflect.KClass<kotlin.Any>> operator=null
+                    element: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+                  actual: CALL '<get-superclasses>() on KClass<*>: List<KClass<*>>' type=kotlin.collections.List<kotlin.reflect.KClass<*>> operator=GET_PROPERTY
+                    $receiver: $RECEIVER of '<anonymous>() on KClass<Simple>: Unit' type=kotlin.reflect.KClass<Simple>
+                CALL 'assertEquals(Set<KType>, Set<KType>, String? = ...): Unit' type=kotlin.Unit operator=null
+                  expected: CALL 'setOf(KType): Set<KType>' type=kotlin.collections.Set<kotlin.reflect.KType> operator=null
+                    element: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                      $this: CALLABLE_REFERENCE 'any(): Any' type=kotlin.reflect.KFunction0<kotlin.Any> operator=null
+                  actual: CALL 'toSet() on Iterable<KType>: Set<KType>' type=kotlin.collections.Set<kotlin.reflect.KType> operator=null
+                    $receiver: CALL '<get-allSupertypes>() on KClass<*>: Collection<KType>' type=kotlin.collections.Collection<kotlin.reflect.KType> operator=GET_PROPERTY
+                      $receiver: $RECEIVER of '<anonymous>() on KClass<Simple>: Unit' type=kotlin.reflect.KClass<Simple>
+                RETURN type=kotlin.Nothing from='<anonymous>() on KClass<Simple>: Unit'
+                  CALL 'assertEquals(Set<KClass<out Any>>, Set<KClass<out Any>>, String? = ...): Unit' type=kotlin.Unit operator=null
+                    expected: CALL 'setOf(KClass<Any>): Set<KClass<Any>>' type=kotlin.collections.Set<kotlin.reflect.KClass<kotlin.Any>> operator=null
+                      element: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+                    actual: CALL 'toSet() on Iterable<KClass<*>>: Set<KClass<*>>' type=kotlin.collections.Set<kotlin.reflect.KClass<*>> operator=null
+                      $receiver: CALL '<get-allSuperclasses>() on KClass<*>: Collection<KClass<*>>' type=kotlin.collections.Collection<kotlin.reflect.KClass<*>> operator=GET_PROPERTY
+                        $receiver: $RECEIVER of '<anonymous>() on KClass<Simple>: Unit' type=kotlin.reflect.KClass<Simple>
+            CALLABLE_REFERENCE '<anonymous>() on KClass<Simple>: Unit' type=kotlin.reflect.KClass<Simple>.() -> kotlin.Unit operator=LAMBDA
+        CALL 'with(KClass<OneClass>, KClass<OneClass>.() -> Unit): Unit' type=kotlin.Unit operator=null
+          receiver: CLASS_REFERENCE 'OneClass' type=kotlin.reflect.KClass<OneClass>
+          block: BLOCK type=kotlin.reflect.KClass<OneClass>.() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun kotlin.reflect.KClass<OneClass>.<anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                CALL 'assertEquals(List<KType>, List<KType>, String? = ...): Unit' type=kotlin.Unit operator=null
+                  expected: CALL 'listOf(KType): List<KType>' type=kotlin.collections.List<kotlin.reflect.KType> operator=null
+                    element: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                      $this: CALLABLE_REFERENCE 'simple(): Simple' type=kotlin.reflect.KFunction0<Simple> operator=null
+                  actual: CALL '<get-supertypes>(): List<KType>' type=kotlin.collections.List<kotlin.reflect.KType> operator=GET_PROPERTY
+                    $this: $RECEIVER of '<anonymous>() on KClass<OneClass>: Unit' type=kotlin.reflect.KClass<OneClass>
+                CALL 'assertEquals(List<KClass<out Any>>, List<KClass<out Any>>, String? = ...): Unit' type=kotlin.Unit operator=null
+                  expected: CALL 'listOf(KClass<Simple>): List<KClass<Simple>>' type=kotlin.collections.List<kotlin.reflect.KClass<Simple>> operator=null
+                    element: CLASS_REFERENCE 'Simple' type=kotlin.reflect.KClass<Simple>
+                  actual: CALL '<get-superclasses>() on KClass<*>: List<KClass<*>>' type=kotlin.collections.List<kotlin.reflect.KClass<*>> operator=GET_PROPERTY
+                    $receiver: $RECEIVER of '<anonymous>() on KClass<OneClass>: Unit' type=kotlin.reflect.KClass<OneClass>
+                CALL 'assertEquals(Set<KType>, Set<KType>, String? = ...): Unit' type=kotlin.Unit operator=null
+                  expected: CALL 'setOf(vararg KType): Set<KType>' type=kotlin.collections.Set<kotlin.reflect.KType> operator=null
+                    elements: VARARG type=Array<out KType> varargElementType=KType
+                      CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                        $this: CALLABLE_REFERENCE 'simple(): Simple' type=kotlin.reflect.KFunction0<Simple> operator=null
+                      CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                        $this: CALLABLE_REFERENCE 'any(): Any' type=kotlin.reflect.KFunction0<kotlin.Any> operator=null
+                  actual: CALL 'toSet() on Iterable<KType>: Set<KType>' type=kotlin.collections.Set<kotlin.reflect.KType> operator=null
+                    $receiver: CALL '<get-allSupertypes>() on KClass<*>: Collection<KType>' type=kotlin.collections.Collection<kotlin.reflect.KType> operator=GET_PROPERTY
+                      $receiver: $RECEIVER of '<anonymous>() on KClass<OneClass>: Unit' type=kotlin.reflect.KClass<OneClass>
+                RETURN type=kotlin.Nothing from='<anonymous>() on KClass<OneClass>: Unit'
+                  CALL 'assertEquals(Set<KClass<*>>, Set<KClass<*>>, String? = ...): Unit' type=kotlin.Unit operator=null
+                    expected: CALL 'setOf(vararg KClass<out Any>): Set<KClass<out Any>>' type=kotlin.collections.Set<kotlin.reflect.KClass<out kotlin.Any>> operator=null
+                      elements: VARARG type=Array<out KClass<out Any>> varargElementType=KClass<out Any>
+                        CLASS_REFERENCE 'Simple' type=kotlin.reflect.KClass<Simple>
+                        CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+                    actual: CALL 'toSet() on Iterable<KClass<*>>: Set<KClass<*>>' type=kotlin.collections.Set<kotlin.reflect.KClass<*>> operator=null
+                      $receiver: CALL '<get-allSuperclasses>() on KClass<*>: Collection<KClass<*>>' type=kotlin.collections.Collection<kotlin.reflect.KClass<*>> operator=GET_PROPERTY
+                        $receiver: $RECEIVER of '<anonymous>() on KClass<OneClass>: Unit' type=kotlin.reflect.KClass<OneClass>
+            CALLABLE_REFERENCE '<anonymous>() on KClass<OneClass>: Unit' type=kotlin.reflect.KClass<OneClass>.() -> kotlin.Unit operator=LAMBDA
+        CALL 'with(KClass<Interface>, KClass<Interface>.() -> Unit): Unit' type=kotlin.Unit operator=null
+          receiver: CLASS_REFERENCE 'Interface' type=kotlin.reflect.KClass<Interface>
+          block: BLOCK type=kotlin.reflect.KClass<Interface>.() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun kotlin.reflect.KClass<Interface>.<anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                CALL 'assertEquals(List<KType>, List<KType>, String? = ...): Unit' type=kotlin.Unit operator=null
+                  expected: CALL 'listOf(KType): List<KType>' type=kotlin.collections.List<kotlin.reflect.KType> operator=null
+                    element: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                      $this: CALLABLE_REFERENCE 'any(): Any' type=kotlin.reflect.KFunction0<kotlin.Any> operator=null
+                  actual: CALL '<get-supertypes>(): List<KType>' type=kotlin.collections.List<kotlin.reflect.KType> operator=GET_PROPERTY
+                    $this: $RECEIVER of '<anonymous>() on KClass<Interface>: Unit' type=kotlin.reflect.KClass<Interface>
+                CALL 'assertEquals(List<KClass<out Any>>, List<KClass<out Any>>, String? = ...): Unit' type=kotlin.Unit operator=null
+                  expected: CALL 'listOf(KClass<Any>): List<KClass<Any>>' type=kotlin.collections.List<kotlin.reflect.KClass<kotlin.Any>> operator=null
+                    element: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+                  actual: CALL '<get-superclasses>() on KClass<*>: List<KClass<*>>' type=kotlin.collections.List<kotlin.reflect.KClass<*>> operator=GET_PROPERTY
+                    $receiver: $RECEIVER of '<anonymous>() on KClass<Interface>: Unit' type=kotlin.reflect.KClass<Interface>
+                CALL 'assertEquals(Set<KType>, Set<KType>, String? = ...): Unit' type=kotlin.Unit operator=null
+                  expected: CALL 'setOf(KType): Set<KType>' type=kotlin.collections.Set<kotlin.reflect.KType> operator=null
+                    element: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                      $this: CALLABLE_REFERENCE 'any(): Any' type=kotlin.reflect.KFunction0<kotlin.Any> operator=null
+                  actual: CALL 'toSet() on Iterable<KType>: Set<KType>' type=kotlin.collections.Set<kotlin.reflect.KType> operator=null
+                    $receiver: CALL '<get-allSupertypes>() on KClass<*>: Collection<KType>' type=kotlin.collections.Collection<kotlin.reflect.KType> operator=GET_PROPERTY
+                      $receiver: $RECEIVER of '<anonymous>() on KClass<Interface>: Unit' type=kotlin.reflect.KClass<Interface>
+                RETURN type=kotlin.Nothing from='<anonymous>() on KClass<Interface>: Unit'
+                  CALL 'assertEquals(Set<KClass<out Any>>, Set<KClass<out Any>>, String? = ...): Unit' type=kotlin.Unit operator=null
+                    expected: CALL 'setOf(KClass<Any>): Set<KClass<Any>>' type=kotlin.collections.Set<kotlin.reflect.KClass<kotlin.Any>> operator=null
+                      element: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+                    actual: CALL 'toSet() on Iterable<KClass<*>>: Set<KClass<*>>' type=kotlin.collections.Set<kotlin.reflect.KClass<*>> operator=null
+                      $receiver: CALL '<get-allSuperclasses>() on KClass<*>: Collection<KClass<*>>' type=kotlin.collections.Collection<kotlin.reflect.KClass<*>> operator=GET_PROPERTY
+                        $receiver: $RECEIVER of '<anonymous>() on KClass<Interface>: Unit' type=kotlin.reflect.KClass<Interface>
+            CALLABLE_REFERENCE '<anonymous>() on KClass<Interface>: Unit' type=kotlin.reflect.KClass<Interface>.() -> kotlin.Unit operator=LAMBDA
+        CALL 'with(KClass<ClassAndTwoInterfaces>, KClass<ClassAndTwoInterfaces>.() -> Unit): Unit' type=kotlin.Unit operator=null
+          receiver: CLASS_REFERENCE 'ClassAndTwoInterfaces' type=kotlin.reflect.KClass<ClassAndTwoInterfaces>
+          block: BLOCK type=kotlin.reflect.KClass<ClassAndTwoInterfaces>.() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun kotlin.reflect.KClass<ClassAndTwoInterfaces>.<anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                CALL 'assertEquals(List<KType>, List<KType>, String? = ...): Unit' type=kotlin.Unit operator=null
+                  expected: CALL 'listOf(vararg KType): List<KType>' type=kotlin.collections.List<kotlin.reflect.KType> operator=null
+                    elements: VARARG type=Array<out KType> varargElementType=KType
+                      CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                        $this: CALLABLE_REFERENCE 'interface_(): Interface' type=kotlin.reflect.KFunction0<Interface> operator=null
+                      CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                        $this: CALLABLE_REFERENCE 'simple(): Simple' type=kotlin.reflect.KFunction0<Simple> operator=null
+                      CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                        $this: CALLABLE_REFERENCE 'interface2(): Interface2' type=kotlin.reflect.KFunction0<Interface2> operator=null
+                  actual: CALL '<get-supertypes>(): List<KType>' type=kotlin.collections.List<kotlin.reflect.KType> operator=GET_PROPERTY
+                    $this: $RECEIVER of '<anonymous>() on KClass<ClassAndTwoInterfaces>: Unit' type=kotlin.reflect.KClass<ClassAndTwoInterfaces>
+                CALL 'assertEquals(List<KClass<*>>, List<KClass<*>>, String? = ...): Unit' type=kotlin.Unit operator=null
+                  expected: CALL 'listOf(vararg KClass<out Any>): List<KClass<out Any>>' type=kotlin.collections.List<kotlin.reflect.KClass<out kotlin.Any>> operator=null
+                    elements: VARARG type=Array<out KClass<out Any>> varargElementType=KClass<out Any>
+                      CLASS_REFERENCE 'Interface' type=kotlin.reflect.KClass<Interface>
+                      CLASS_REFERENCE 'Simple' type=kotlin.reflect.KClass<Simple>
+                      CLASS_REFERENCE 'Interface2' type=kotlin.reflect.KClass<Interface2>
+                  actual: CALL '<get-superclasses>() on KClass<*>: List<KClass<*>>' type=kotlin.collections.List<kotlin.reflect.KClass<*>> operator=GET_PROPERTY
+                    $receiver: $RECEIVER of '<anonymous>() on KClass<ClassAndTwoInterfaces>: Unit' type=kotlin.reflect.KClass<ClassAndTwoInterfaces>
+                CALL 'assertEquals(Set<KType>, Set<KType>, String? = ...): Unit' type=kotlin.Unit operator=null
+                  expected: CALL 'setOf(vararg KType): Set<KType>' type=kotlin.collections.Set<kotlin.reflect.KType> operator=null
+                    elements: VARARG type=Array<out KType> varargElementType=KType
+                      CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                        $this: CALLABLE_REFERENCE 'interface_(): Interface' type=kotlin.reflect.KFunction0<Interface> operator=null
+                      CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                        $this: CALLABLE_REFERENCE 'simple(): Simple' type=kotlin.reflect.KFunction0<Simple> operator=null
+                      CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                        $this: CALLABLE_REFERENCE 'interface2(): Interface2' type=kotlin.reflect.KFunction0<Interface2> operator=null
+                      CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                        $this: CALLABLE_REFERENCE 'any(): Any' type=kotlin.reflect.KFunction0<kotlin.Any> operator=null
+                  actual: CALL 'toSet() on Iterable<KType>: Set<KType>' type=kotlin.collections.Set<kotlin.reflect.KType> operator=null
+                    $receiver: CALL '<get-allSupertypes>() on KClass<*>: Collection<KType>' type=kotlin.collections.Collection<kotlin.reflect.KType> operator=GET_PROPERTY
+                      $receiver: $RECEIVER of '<anonymous>() on KClass<ClassAndTwoInterfaces>: Unit' type=kotlin.reflect.KClass<ClassAndTwoInterfaces>
+                RETURN type=kotlin.Nothing from='<anonymous>() on KClass<ClassAndTwoInterfaces>: Unit'
+                  CALL 'assertEquals(Set<KClass<*>>, Set<KClass<*>>, String? = ...): Unit' type=kotlin.Unit operator=null
+                    expected: CALL 'setOf(vararg KClass<out Any>): Set<KClass<out Any>>' type=kotlin.collections.Set<kotlin.reflect.KClass<out kotlin.Any>> operator=null
+                      elements: VARARG type=Array<out KClass<out Any>> varargElementType=KClass<out Any>
+                        CLASS_REFERENCE 'Interface' type=kotlin.reflect.KClass<Interface>
+                        CLASS_REFERENCE 'Simple' type=kotlin.reflect.KClass<Simple>
+                        CLASS_REFERENCE 'Interface2' type=kotlin.reflect.KClass<Interface2>
+                        CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+                    actual: CALL 'toSet() on Iterable<KClass<*>>: Set<KClass<*>>' type=kotlin.collections.Set<kotlin.reflect.KClass<*>> operator=null
+                      $receiver: CALL '<get-allSuperclasses>() on KClass<*>: Collection<KClass<*>>' type=kotlin.collections.Collection<kotlin.reflect.KClass<*>> operator=GET_PROPERTY
+                        $receiver: $RECEIVER of '<anonymous>() on KClass<ClassAndTwoInterfaces>: Unit' type=kotlin.reflect.KClass<ClassAndTwoInterfaces>
+            CALLABLE_REFERENCE '<anonymous>() on KClass<ClassAndTwoInterfaces>: Unit' type=kotlin.reflect.KClass<ClassAndTwoInterfaces>.() -> kotlin.Unit operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

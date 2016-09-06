@@ -1,0 +1,91 @@
+MODULE <test-module>
+  FILE /sync.kt
+    FUN public fun thread(block: () -> kotlin.Unit): kotlin.Unit
+      BLOCK_BODY
+        VAR val thread: thread.<no name provided>
+          BLOCK type=thread.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Thread()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              FUN public open override fun run(): kotlin.Unit
+                BLOCK_BODY
+                  CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+                    $this: GET_VAR 'value-parameter block: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+            CALL 'constructor <no name provided>()' type=thread.<no name provided> operator=OBJECT_LITERAL
+        CALL 'start(): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'thread: <no name provided>' type=thread.<no name provided> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val mtref: java.util.concurrent.atomic.AtomicInteger
+          CALL 'constructor AtomicInteger()' type=java.util.concurrent.atomic.AtomicInteger operator=null
+        VAR val cdl: java.util.concurrent.CountDownLatch
+          CALL 'constructor CountDownLatch(Int)' type=java.util.concurrent.CountDownLatch operator=null
+            p0: CONST Int type=kotlin.Int value='11'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='0'
+                other: CONST Int type=kotlin.Int value='10'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                CALL 'thread(() -> Unit): Unit' type=kotlin.Unit operator=null
+                  block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                    FUN local final fun <anonymous>(): kotlin.Unit
+                      BLOCK_BODY
+                        VAR var current: kotlin.Int
+                          CONST Int type=kotlin.Int value='0'
+                        DO_WHILE label=null operator=DO_WHILE_LOOP
+                          body: BLOCK type=kotlin.Unit operator=null
+                            SET_VAR 'current: Int' type=kotlin.Unit operator=EQ
+                              CALL 'synchronized(Any, () -> Int): Int' type=kotlin.Int operator=null
+                                lock: GET_VAR 'mtref: AtomicInteger' type=java.util.concurrent.atomic.AtomicInteger operator=null
+                                block: BLOCK type=() -> kotlin.Int operator=LAMBDA
+                                  FUN local final fun <anonymous>(): kotlin.Int
+                                    BLOCK_BODY
+                                      VAR val v: kotlin.Int
+                                        CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                                          $this: CALL 'get(): Int' type=kotlin.Int operator=null
+                                            $this: GET_VAR 'mtref: AtomicInteger' type=java.util.concurrent.atomic.AtomicInteger operator=null
+                                          other: CONST Int type=kotlin.Int value='1'
+                                      WHEN type=kotlin.Unit operator=IF
+                                        if: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+                                          arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+                                            $this: GET_VAR 'v: Int' type=kotlin.Int operator=null
+                                            other: CONST Int type=kotlin.Int value='100'
+                                        then: CALL 'set(Int): Unit' type=kotlin.Unit operator=null
+                                          $this: GET_VAR 'mtref: AtomicInteger' type=java.util.concurrent.atomic.AtomicInteger operator=null
+                                          p0: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                                            $this: GET_VAR 'v: Int' type=kotlin.Int operator=null
+                                            other: CONST Int type=kotlin.Int value='1'
+                                      RETURN type=kotlin.Nothing from='<anonymous>(): Int'
+                                        GET_VAR 'v: Int' type=kotlin.Int operator=null
+                                  CALLABLE_REFERENCE '<anonymous>(): Int' type=() -> kotlin.Int operator=LAMBDA
+                          condition: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+                            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+                              $this: GET_VAR 'current: Int' type=kotlin.Int operator=null
+                              other: CONST Int type=kotlin.Int value='100'
+                        RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                          CALL 'countDown(): Unit' type=kotlin.Unit operator=null
+                            $this: GET_VAR 'cdl: CountDownLatch' type=java.util.concurrent.CountDownLatch operator=null
+                    CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'await(): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'cdl: CountDownLatch' type=java.util.concurrent.CountDownLatch operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'get(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'mtref: AtomicInteger' type=java.util.concurrent.atomic.AtomicInteger operator=null
+              arg1: CONST Int type=kotlin.Int value='100'
+            then: CONST String type=kotlin.String value='OK'
+            else: CALL 'toString(): String' type=kotlin.String operator=null
+              $this: CALL 'get(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'mtref: AtomicInteger' type=java.util.concurrent.atomic.AtomicInteger operator=null

@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /kt3579.kt
+    CLASS CLASS Persistent
+      CONSTRUCTOR public constructor Persistent(p: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'p: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Persistent' type=Persistent
+            value: GET_VAR 'value-parameter p: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Persistent'
+      PROPERTY public final val p: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter p: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS INTERFACE Hierarchy
+    CLASS CLASS Location
+      CONSTRUCTOR public constructor Location()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Persistent(String)'
+            p: CONST String type=kotlin.String value='OK'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Location'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-p>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor Location()' type=Location operator=null

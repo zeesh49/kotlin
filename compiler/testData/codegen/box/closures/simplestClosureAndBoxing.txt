@@ -1,0 +1,22 @@
+MODULE <test-module>
+  FILE /simplestClosureAndBoxing.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'int_invoker(() -> Int): Int' type=kotlin.Int operator=null
+                gen: BLOCK type=() -> kotlin.Int operator=LAMBDA
+                  FUN local final fun <anonymous>(): kotlin.Int
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(): Int'
+                        CONST Int type=kotlin.Int value='7'
+                  CALLABLE_REFERENCE '<anonymous>(): Int' type=() -> kotlin.Int operator=LAMBDA
+              arg1: CONST Int type=kotlin.Int value='7'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'
+    FUN public fun int_invoker(gen: () -> kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='int_invoker(() -> Int): Int'
+          CALL 'invoke(): Int' type=kotlin.Int operator=INVOKE
+            $this: GET_VAR 'value-parameter gen: () -> Int' type=() -> kotlin.Int operator=VARIABLE_AS_FUNCTION

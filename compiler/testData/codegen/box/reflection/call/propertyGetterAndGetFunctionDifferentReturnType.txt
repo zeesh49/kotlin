@@ -1,0 +1,81 @@
+MODULE <test-module>
+  FILE /propertyGetterAndGetFunctionDifferentReturnType.kt
+    CLASS CLASS Foo
+      CONSTRUCTOR public constructor Foo(id: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'id: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Foo' type=Foo
+            value: GET_VAR 'value-parameter id: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      PROPERTY public final val id: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter id: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun getId(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getId(): Int'
+            CONST Int type=kotlin.Int value='-42'
+      FUN public final operator fun component1(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component1(): String'
+            CALL '<get-id>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'Foo' type=Foo
+      FUN public final fun copy(id: kotlin.String = ...): Foo
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='copy(String = ...): Foo'
+            CALL 'constructor Foo(String)' type=Foo operator=null
+              id: GET_VAR 'value-parameter id: String = ...' type=kotlin.String operator=null
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Foo('
+              CONST String type=kotlin.String value='id='
+              CALL '<get-id>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'Foo' type=Foo
+              CONST String type=kotlin.String value=')'
+      FUN public open override fun hashCode(): kotlin.Int
+        BLOCK_BODY
+          VAR val tmp0_result: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          SET_VAR 'tmp0_result: Int' type=kotlin.Unit operator=EQ
+            CALL 'hashCode(): Int' type=kotlin.Int operator=null
+              $this: CALL '<get-id>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'Foo' type=Foo
+          RETURN type=kotlin.Nothing from='hashCode(): Int'
+            GET_VAR 'tmp0_result: Int' type=kotlin.Int operator=null
+      FUN public open override fun equals(other: kotlin.Any?): kotlin.Boolean
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+              arg0: THIS of 'Foo' type=Foo
+              arg1: GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='true'
+          WHEN type=kotlin.Unit operator=null
+            if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=Foo
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          VAR val tmp0_other_with_cast: Foo
+            TYPE_OP operator=CAST typeOperand=Foo
+              GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-id>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: THIS of 'Foo' type=Foo
+                arg1: CALL '<get-id>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: GET_VAR 'tmp0_other_with_cast: Foo' type=Foo operator=null
+            then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+          RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'call(vararg Any?): String' type=kotlin.String operator=null
+            $this: CALLABLE_REFERENCE 'id: String' type=kotlin.reflect.KProperty1<Foo, kotlin.String> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CALL 'constructor Foo(String)' type=Foo operator=null
+                id: CONST String type=kotlin.String value='OK'

@@ -1,0 +1,17 @@
+MODULE <test-module>
+  FILE /equalsIntrinsic.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'invoke(A, Any?): Boolean' type=kotlin.Boolean operator=null
+              $this: CALLABLE_REFERENCE 'equals(Any?): Boolean' type=kotlin.reflect.KFunction2<A, kotlin.Any?, kotlin.Boolean> operator=null
+              p1: CALL 'constructor A()' type=A operator=null
+              p2: CALL 'constructor A()' type=A operator=null
+            then: CONST String type=kotlin.String value='Fail'
+            else: CONST String type=kotlin.String value='OK'

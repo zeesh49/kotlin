@@ -1,0 +1,108 @@
+MODULE <test-module>
+  FILE /plusAssignWithDefaultInGetter.kt
+    CLASS CLASS X
+      CONSTRUCTOR public constructor X()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='X'
+      PROPERTY public final var result: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='fail'
+      FUN public final operator fun get(name: kotlin.String, type: kotlin.String = ...): kotlin.String
+        type: EXPRESSION_BODY
+          CONST String type=kotlin.String value='none'
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(String, String = ...): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: GET_VAR 'value-parameter name: String' type=kotlin.String operator=null
+              other: GET_VAR 'value-parameter type: String = ...' type=kotlin.String operator=null
+      FUN public final operator fun set(name: kotlin.String, s: kotlin.String): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'X' type=X
+            <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: GET_VAR 'value-parameter name: String' type=kotlin.String operator=null
+              other: GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+    CLASS CLASS Y
+      CONSTRUCTOR public constructor Y()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Y'
+      PROPERTY public final var result: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='fail'
+      FUN public final operator fun get(name: kotlin.String, type: kotlin.String = ..., type2: kotlin.String = ...): kotlin.String
+        type: EXPRESSION_BODY
+          CONST String type=kotlin.String value='no'
+        type2: EXPRESSION_BODY
+          CONST String type=kotlin.String value='ne'
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(String, String = ..., String = ...): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: GET_VAR 'value-parameter name: String' type=kotlin.String operator=null
+                other: GET_VAR 'value-parameter type: String = ...' type=kotlin.String operator=null
+              other: GET_VAR 'value-parameter type2: String = ...' type=kotlin.String operator=null
+      FUN public final operator fun set(name: kotlin.String, s: kotlin.String): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'Y' type=Y
+            <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: GET_VAR 'value-parameter name: String' type=kotlin.String operator=null
+              other: GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var x: X
+          CALL 'constructor X()' type=X operator=null
+        BLOCK type=kotlin.Unit operator=PLUSEQ
+          VAR val tmp0_array: X
+            GET_VAR 'x: X' type=X operator=null
+          VAR val tmp1_index0: kotlin.String
+            CONST String type=kotlin.String value='a'
+          CALL 'set(String, String): Unit' type=kotlin.Unit operator=PLUSEQ
+            $this: GET_VAR 'tmp0_array: X' type=X operator=null
+            name: GET_VAR 'tmp1_index0: String' type=kotlin.String operator=null
+            s: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+              $this: CALL 'get(String, String = ...): String' type=kotlin.String operator=PLUSEQ
+                $this: GET_VAR 'tmp0_array: X' type=X operator=null
+                name: GET_VAR 'tmp1_index0: String' type=kotlin.String operator=null
+              other: CONST String type=kotlin.String value='OK'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'x: X' type=X operator=null
+              arg1: CONST String type=kotlin.String value='aanoneOK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: '
+              CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'x: X' type=X operator=null
+        VAR var y: Y
+          CALL 'constructor Y()' type=Y operator=null
+        BLOCK type=kotlin.Unit operator=PLUSEQ
+          VAR val tmp2_array: Y
+            GET_VAR 'y: Y' type=Y operator=null
+          VAR val tmp3_index0: kotlin.String
+            CONST String type=kotlin.String value='a'
+          CALL 'set(String, String): Unit' type=kotlin.Unit operator=PLUSEQ
+            $this: GET_VAR 'tmp2_array: Y' type=Y operator=null
+            name: GET_VAR 'tmp3_index0: String' type=kotlin.String operator=null
+            s: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+              $this: CALL 'get(String, String = ..., String = ...): String' type=kotlin.String operator=PLUSEQ
+                $this: GET_VAR 'tmp2_array: Y' type=Y operator=null
+                name: GET_VAR 'tmp3_index0: String' type=kotlin.String operator=null
+              other: CONST String type=kotlin.String value='OK'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'y: Y' type=Y operator=null
+              arg1: CONST String type=kotlin.String value='aanoneOK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: '
+              CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'y: Y' type=Y operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

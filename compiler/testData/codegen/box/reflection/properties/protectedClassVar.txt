@@ -1,0 +1,63 @@
+MODULE <test-module>
+  FILE /protectedClassVar.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(param: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY protected final var v: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter param: String' type=kotlin.String operator=null
+      FUN public final fun ref(): kotlin.reflect.KMutableProperty1<A, kotlin.String>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='ref(): KMutableProperty1<A, String>'
+            TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty1<A, kotlin.String>
+              CALL 'single() on Iterable<KProperty1<A, *>>: KProperty1<A, *>' type=kotlin.reflect.KProperty1<A, *> operator=null
+                $receiver: CALL '<get-memberProperties>() on KClass<A>: Collection<KProperty1<A, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<A, *>> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          CALL 'constructor A(String)' type=A operator=null
+            param: CONST String type=kotlin.String value=':('
+        VAR val f: kotlin.reflect.KMutableProperty1<A, kotlin.String>
+          CALL 'ref(): KMutableProperty1<A, String>' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+            $this: GET_VAR 'a: A' type=A operator=null
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'get(A): String' type=kotlin.String operator=null
+              $this: GET_VAR 'f: KMutableProperty1<A, String>' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+              receiver: GET_VAR 'a: A' type=A operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail: protected property getter is accessible by default'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'set(A, String): Unit' type=kotlin.Unit operator=null
+              $this: GET_VAR 'f: KMutableProperty1<A, String>' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+              receiver: GET_VAR 'a: A' type=A operator=null
+              value: CONST String type=kotlin.String value=':D'
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail: protected property setter is accessible by default'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        CALL '<set-isAccessible>(Boolean) on KCallable<*>: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 'f: KMutableProperty1<A, String>' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+          value: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'set(A, String): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'f: KMutableProperty1<A, String>' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+          receiver: GET_VAR 'a: A' type=A operator=null
+          value: CONST String type=kotlin.String value=':)'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'get(A): String' type=kotlin.String operator=null
+                  $this: GET_VAR 'f: KMutableProperty1<A, String>' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+                  receiver: GET_VAR 'a: A' type=A operator=null
+                arg1: CONST String type=kotlin.String value=':)'
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              CALL 'get(A): String' type=kotlin.String operator=null
+                $this: GET_VAR 'f: KMutableProperty1<A, String>' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+                receiver: GET_VAR 'a: A' type=A operator=null
+            else: CONST String type=kotlin.String value='OK'

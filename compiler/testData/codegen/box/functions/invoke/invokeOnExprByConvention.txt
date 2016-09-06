@@ -1,0 +1,97 @@
+MODULE <test-module>
+  FILE /invokeOnExprByConvention.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final operator fun invoke(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='invoke(): String'
+            CONST String type=kotlin.String value='##'
+      FUN public final operator fun invoke(i: kotlin.Int): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='invoke(Int): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='#'
+              GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+    FUN public fun foo(): A
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(): A'
+          CALL 'constructor A()' type=A operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): String' type=kotlin.String operator=null
+                $this: CALL 'constructor A()' type=A operator=null
+              arg1: CONST String type=kotlin.String value='##'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(Int): String' type=kotlin.String operator=null
+                $this: CALL 'constructor A()' type=A operator=null
+                i: CONST Int type=kotlin.Int value='1'
+              arg1: CONST String type=kotlin.String value='#1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): String' type=kotlin.String operator=null
+                $this: CALL 'foo(): A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='##'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(Int): String' type=kotlin.String operator=null
+                $this: CALL 'foo(): A' type=A operator=null
+                i: CONST Int type=kotlin.Int value='42'
+              arg1: CONST String type=kotlin.String value='#42'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail4'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(Int): String' type=kotlin.String operator=null
+                $this: CALL 'foo(): A' type=A operator=null
+                i: CONST Int type=kotlin.Int value='42'
+              arg1: CONST String type=kotlin.String value='#42'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail5'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): String' type=kotlin.String operator=null
+                $this: CALL 'invoke(): A' type=A operator=null
+                  $this: BLOCK type=() -> A operator=LAMBDA
+                    FUN local final fun <anonymous>(): A
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(): A'
+                          CALL 'constructor A()' type=A operator=null
+                    CALLABLE_REFERENCE '<anonymous>(): A' type=() -> A operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='##'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail6'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(Int): String' type=kotlin.String operator=null
+                $this: CALL 'invoke(): A' type=A operator=null
+                  $this: BLOCK type=() -> A operator=LAMBDA
+                    FUN local final fun <anonymous>(): A
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(): A'
+                          CALL 'constructor A()' type=A operator=null
+                    CALLABLE_REFERENCE '<anonymous>(): A' type=() -> A operator=LAMBDA
+                i: CONST Int type=kotlin.Int value='37'
+              arg1: CONST String type=kotlin.String value='#37'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail7'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

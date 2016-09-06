@@ -1,0 +1,49 @@
+MODULE <test-module>
+  FILE /delegateForExtPropertyInClass.kt
+    CLASS CLASS Delegate
+      CONSTRUCTOR public constructor Delegate()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Delegate'
+      FUN public final operator fun getValue(t: F.A, p: kotlin.reflect.KProperty<*>): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getValue(F.A, KProperty<*>): Int'
+            CONST Int type=kotlin.Int value='1'
+    CLASS CLASS F
+      CONSTRUCTOR public constructor F()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='F'
+      PROPERTY public final val F.A.prop: kotlin.Int
+        delegate: PROPERTY val `prop$delegate`: Delegate
+          EXPRESSION_BODY
+            CALL 'constructor Delegate()' type=Delegate operator=null
+        PROPERTY_GETTER public final fun F.A.<get-prop>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-prop>() on F.A: Int'
+              CALL 'getValue(F.A, KProperty<*>): Int' type=kotlin.Int operator=null
+                $this: GET_BACKING_FIELD '`prop$delegate`: Delegate' type=Delegate operator=null
+                  receiver: THIS of 'F' type=F
+                t: $RECEIVER of 'prop: Int on F.A' type=F.A
+                p: CALLABLE_REFERENCE 'prop: Int on F.A' type=kotlin.reflect.KProperty1<F.A, kotlin.Int> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+      CLASS CLASS A
+        CONSTRUCTOR public constructor A()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun foo(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): Int'
+            CALL '<get-prop>() on F.A: Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'F' type=F
+              $receiver: CALL 'constructor A()' type=F.A operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'foo(): Int' type=kotlin.Int operator=null
+                $this: CALL 'constructor F()' type=F operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

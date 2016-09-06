@@ -1,0 +1,196 @@
+MODULE <test-module>
+  FILE /useKPropertyLater.kt
+    PROPERTY public val properties: java.util.HashSet<kotlin.reflect.KProperty<*>>
+      EXPRESSION_BODY
+        CALL 'constructor HashSet()' type=java.util.HashSet<kotlin.reflect.KProperty<*>> operator=null
+    CLASS OBJECT Delegate
+      CONSTRUCTOR private constructor Delegate()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Delegate'
+      FUN public final operator fun getValue(t: kotlin.Any?, p: kotlin.reflect.KProperty<*>): kotlin.String
+        BLOCK_BODY
+          CALL 'add(KProperty<*>): Boolean' type=kotlin.Boolean operator=null
+            $this: CALL '<get-properties>(): HashSet<KProperty<*>>' type=java.util.HashSet<kotlin.reflect.KProperty<*>> operator=GET_PROPERTY
+            element: GET_VAR 'value-parameter p: KProperty<*>' type=kotlin.reflect.KProperty<*> operator=null
+          RETURN type=kotlin.Nothing from='getValue(Any?, KProperty<*>): String'
+            CONST String type=kotlin.String value=''
+      FUN public final operator fun setValue(t: kotlin.Any?, p: kotlin.reflect.KProperty<*>, v: kotlin.String): kotlin.Unit
+        BLOCK_BODY
+          CALL 'add(KProperty<*>): Boolean' type=kotlin.Boolean operator=null
+            $this: CALL '<get-properties>(): HashSet<KProperty<*>>' type=java.util.HashSet<kotlin.reflect.KProperty<*>> operator=GET_PROPERTY
+            element: GET_VAR 'value-parameter p: KProperty<*>' type=kotlin.reflect.KProperty<*> operator=null
+    PROPERTY public var topLevel: kotlin.String
+      delegate: PROPERTY val `topLevel$delegate`: Delegate
+        EXPRESSION_BODY
+          GET_OBJECT 'Delegate' type=Delegate
+      PROPERTY_GETTER public fun <get-topLevel>(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-topLevel>(): String'
+            CALL 'getValue(Any?, KProperty<*>): String' type=kotlin.String operator=null
+              $this: GET_BACKING_FIELD '`topLevel$delegate`: Delegate' type=Delegate operator=null
+              t: CONST Null type=kotlin.Nothing? value='null'
+              p: CALLABLE_REFERENCE 'topLevel: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+      PROPERTY_SETTER public fun <set-topLevel>(<set-?>: kotlin.String): kotlin.Unit
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<set-topLevel>(String): Unit'
+            CALL 'setValue(Any?, KProperty<*>, String): Unit' type=kotlin.Unit operator=null
+              $this: GET_BACKING_FIELD '`topLevel$delegate`: Delegate' type=Delegate operator=null
+              t: CONST Null type=kotlin.Nothing? value='null'
+              p: CALLABLE_REFERENCE 'topLevel: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+              v: GET_VAR 'value-parameter <set-?>: String' type=kotlin.String operator=null
+    CLASS OBJECT O
+      CONSTRUCTOR private constructor O()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='O'
+      PROPERTY public final var member: kotlin.String
+        delegate: PROPERTY val `member$delegate`: Delegate
+          EXPRESSION_BODY
+            GET_OBJECT 'Delegate' type=Delegate
+        PROPERTY_GETTER public final fun <get-member>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-member>(): String'
+              CALL 'getValue(Any?, KProperty<*>): String' type=kotlin.String operator=null
+                $this: GET_BACKING_FIELD '`member$delegate`: Delegate' type=Delegate operator=null
+                  receiver: THIS of 'O' type=O
+                t: THIS of 'O' type=O
+                p: CALLABLE_REFERENCE 'member: String' type=kotlin.reflect.KMutableProperty1<O, kotlin.String> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+        PROPERTY_SETTER public final fun <set-member>(<set-?>: kotlin.String): kotlin.Unit
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<set-member>(String): Unit'
+              CALL 'setValue(Any?, KProperty<*>, String): Unit' type=kotlin.Unit operator=null
+                $this: GET_BACKING_FIELD '`member$delegate`: Delegate' type=Delegate operator=null
+                  receiver: THIS of 'O' type=O
+                t: THIS of 'O' type=O
+                p: CALLABLE_REFERENCE 'member: String' type=kotlin.reflect.KMutableProperty1<O, kotlin.String> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+                v: GET_VAR 'value-parameter <set-?>: String' type=kotlin.String operator=null
+      PROPERTY public final var O.memExt: kotlin.String
+        delegate: PROPERTY val `memExt$delegate`: Delegate
+          EXPRESSION_BODY
+            GET_OBJECT 'Delegate' type=Delegate
+        PROPERTY_GETTER public final fun O.<get-memExt>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-memExt>() on O: String'
+              CALL 'getValue(Any?, KProperty<*>): String' type=kotlin.String operator=null
+                $this: GET_BACKING_FIELD '`memExt$delegate`: Delegate' type=Delegate operator=null
+                  receiver: THIS of 'O' type=O
+                t: $RECEIVER of 'memExt: String on O' type=O
+                p: CALLABLE_REFERENCE 'memExt: String on O' type=kotlin.reflect.KMutableProperty1<O, kotlin.String> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+        PROPERTY_SETTER public final fun O.<set-memExt>(<set-?>: kotlin.String): kotlin.Unit
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<set-memExt>(String) on O: Unit'
+              CALL 'setValue(Any?, KProperty<*>, String): Unit' type=kotlin.Unit operator=null
+                $this: GET_BACKING_FIELD '`memExt$delegate`: Delegate' type=Delegate operator=null
+                  receiver: THIS of 'O' type=O
+                t: $RECEIVER of 'memExt: String on O' type=O
+                p: CALLABLE_REFERENCE 'memExt: String on O' type=kotlin.reflect.KMutableProperty1<O, kotlin.String> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+                v: GET_VAR 'value-parameter <set-?>: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL '<set-topLevel>(String): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: CONST String type=kotlin.String value=''
+        CALL '<set-member>(String): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_OBJECT 'O' type=O
+          <set-?>: CONST String type=kotlin.String value=''
+        CALL 'with(O, O.() -> Unit): Unit' type=kotlin.Unit operator=null
+          receiver: GET_OBJECT 'O' type=O
+          block: BLOCK type=O.() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun O.<anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>() on O: Unit'
+                  CALL '<set-memExt>(String) on O: Unit' type=kotlin.Unit operator=EQ
+                    $this: $RECEIVER of '<anonymous>() on O: Unit' type=O
+                    $receiver: GET_OBJECT 'O' type=O
+                    <set-?>: CONST String type=kotlin.String value=''
+            CALLABLE_REFERENCE '<anonymous>() on O: Unit' type=O.() -> kotlin.Unit operator=LAMBDA
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.MutableIterator<kotlin.reflect.KProperty<*>!>
+            CALL 'iterator(): MutableIterator<KProperty<*>!>' type=kotlin.collections.MutableIterator<kotlin.reflect.KProperty<*>!> operator=FOR_LOOP_ITERATOR
+              $this: CALL 'constructor HashSet((MutableCollection<out KProperty<*>!>..Collection<KProperty<*>!>?))' type=java.util.HashSet<kotlin.reflect.KProperty<*>!> operator=null
+                p0: CALL '<get-properties>(): HashSet<KProperty<*>>' type=java.util.HashSet<kotlin.reflect.KProperty<*>> operator=GET_PROPERTY
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: MutableIterator<KProperty<*>!>' type=kotlin.collections.MutableIterator<kotlin.reflect.KProperty<*>!> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val p: kotlin.reflect.KProperty<*>!
+                CALL 'next(): KProperty<*>!' type=kotlin.reflect.KProperty<*>! operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: MutableIterator<KProperty<*>!>' type=kotlin.collections.MutableIterator<kotlin.reflect.KProperty<*>!> operator=null
+              BLOCK type=kotlin.Unit? operator=null
+                BLOCK type=kotlin.String? operator=SAFE_CALL
+                  VAR val tmp1_safe_receiver: kotlin.reflect.KProperty0<kotlin.String>?
+                    TYPE_OP operator=SAFE_CAST typeOperand=kotlin.reflect.KProperty0<kotlin.String>
+                      GET_VAR 'p: KProperty<*>!' type=kotlin.reflect.KProperty<*>! operator=null
+                  WHEN type=kotlin.String? operator=SAFE_CALL
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp1_safe_receiver: KProperty0<String>?' type=kotlin.reflect.KProperty0<kotlin.String>? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CONST Null type=kotlin.Nothing? value='null'
+                    else: CALL 'get(): String' type=kotlin.String operator=null
+                      $this: GET_VAR 'tmp1_safe_receiver: KProperty0<String>?' type=kotlin.reflect.KProperty0<kotlin.String>? operator=null
+                BLOCK type=kotlin.String? operator=SAFE_CALL
+                  VAR val tmp2_safe_receiver: kotlin.reflect.KProperty1<O, kotlin.String>?
+                    TYPE_OP operator=SAFE_CAST typeOperand=kotlin.reflect.KProperty1<O, kotlin.String>
+                      GET_VAR 'p: KProperty<*>!' type=kotlin.reflect.KProperty<*>! operator=null
+                  WHEN type=kotlin.String? operator=SAFE_CALL
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp2_safe_receiver: KProperty1<O, String>?' type=kotlin.reflect.KProperty1<O, kotlin.String>? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CONST Null type=kotlin.Nothing? value='null'
+                    else: CALL 'get(O): String' type=kotlin.String operator=null
+                      $this: GET_VAR 'tmp2_safe_receiver: KProperty1<O, String>?' type=kotlin.reflect.KProperty1<O, kotlin.String>? operator=null
+                      receiver: GET_OBJECT 'O' type=O
+                BLOCK type=kotlin.String? operator=SAFE_CALL
+                  VAR val tmp3_safe_receiver: kotlin.reflect.KProperty2<O, O, kotlin.String>?
+                    TYPE_OP operator=SAFE_CAST typeOperand=kotlin.reflect.KProperty2<O, O, kotlin.String>
+                      GET_VAR 'p: KProperty<*>!' type=kotlin.reflect.KProperty<*>! operator=null
+                  WHEN type=kotlin.String? operator=SAFE_CALL
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp3_safe_receiver: KProperty2<O, O, String>?' type=kotlin.reflect.KProperty2<O, O, kotlin.String>? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CONST Null type=kotlin.Nothing? value='null'
+                    else: CALL 'get(O, O): String' type=kotlin.String operator=null
+                      $this: GET_VAR 'tmp3_safe_receiver: KProperty2<O, O, String>?' type=kotlin.reflect.KProperty2<O, O, kotlin.String>? operator=null
+                      receiver1: GET_OBJECT 'O' type=O
+                      receiver2: GET_OBJECT 'O' type=O
+                BLOCK type=kotlin.Unit? operator=SAFE_CALL
+                  VAR val tmp4_safe_receiver: kotlin.reflect.KMutableProperty0<kotlin.String>?
+                    TYPE_OP operator=SAFE_CAST typeOperand=kotlin.reflect.KMutableProperty0<kotlin.String>
+                      GET_VAR 'p: KProperty<*>!' type=kotlin.reflect.KProperty<*>! operator=null
+                  WHEN type=kotlin.Unit? operator=SAFE_CALL
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp4_safe_receiver: KMutableProperty0<String>?' type=kotlin.reflect.KMutableProperty0<kotlin.String>? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CONST Null type=kotlin.Nothing? value='null'
+                    else: CALL 'set(String): Unit' type=kotlin.Unit operator=null
+                      $this: GET_VAR 'tmp4_safe_receiver: KMutableProperty0<String>?' type=kotlin.reflect.KMutableProperty0<kotlin.String>? operator=null
+                      value: CONST String type=kotlin.String value=''
+                BLOCK type=kotlin.Unit? operator=SAFE_CALL
+                  VAR val tmp5_safe_receiver: kotlin.reflect.KMutableProperty1<O, kotlin.String>?
+                    TYPE_OP operator=SAFE_CAST typeOperand=kotlin.reflect.KMutableProperty1<O, kotlin.String>
+                      GET_VAR 'p: KProperty<*>!' type=kotlin.reflect.KProperty<*>! operator=null
+                  WHEN type=kotlin.Unit? operator=SAFE_CALL
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp5_safe_receiver: KMutableProperty1<O, String>?' type=kotlin.reflect.KMutableProperty1<O, kotlin.String>? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CONST Null type=kotlin.Nothing? value='null'
+                    else: CALL 'set(O, String): Unit' type=kotlin.Unit operator=null
+                      $this: GET_VAR 'tmp5_safe_receiver: KMutableProperty1<O, String>?' type=kotlin.reflect.KMutableProperty1<O, kotlin.String>? operator=null
+                      receiver: GET_OBJECT 'O' type=O
+                      value: CONST String type=kotlin.String value=''
+                BLOCK type=kotlin.Unit? operator=SAFE_CALL
+                  VAR val tmp6_safe_receiver: kotlin.reflect.KMutableProperty2<O, O, kotlin.String>?
+                    TYPE_OP operator=SAFE_CAST typeOperand=kotlin.reflect.KMutableProperty2<O, O, kotlin.String>
+                      GET_VAR 'p: KProperty<*>!' type=kotlin.reflect.KProperty<*>! operator=null
+                  WHEN type=kotlin.Unit? operator=SAFE_CALL
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp6_safe_receiver: KMutableProperty2<O, O, String>?' type=kotlin.reflect.KMutableProperty2<O, O, kotlin.String>? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CONST Null type=kotlin.Nothing? value='null'
+                    else: CALL 'set(O, O, String): Unit' type=kotlin.Unit operator=null
+                      $this: GET_VAR 'tmp6_safe_receiver: KMutableProperty2<O, O, String>?' type=kotlin.reflect.KMutableProperty2<O, O, kotlin.String>? operator=null
+                      receiver1: GET_OBJECT 'O' type=O
+                      receiver2: GET_OBJECT 'O' type=O
+                      value: CONST String type=kotlin.String value=''
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

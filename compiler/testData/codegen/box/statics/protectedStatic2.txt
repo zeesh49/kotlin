@@ -1,0 +1,146 @@
+MODULE <test-module>
+  FILE /Kotlin.kt
+    CLASS CLASS Kotlin
+      CONSTRUCTOR public constructor Kotlin()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Derived()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Kotlin'
+      FUN public final fun doTest(): kotlin.String
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'invoke(): String!' type=kotlin.String! operator=null
+                  $this: BLOCK type=() -> kotlin.String! operator=LAMBDA
+                    FUN local final fun <anonymous>(): kotlin.String!
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(): String!'
+                          GET_BACKING_FIELD 'TEST: String!' type=kotlin.String! operator=GET_PROPERTY
+                    CALLABLE_REFERENCE '<anonymous>(): String!' type=() -> kotlin.String! operator=LAMBDA
+                arg1: CONST String type=kotlin.String value='DERIVED'
+            then: RETURN type=kotlin.Nothing from='doTest(): String'
+              CONST String type=kotlin.String value='fail 1'
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'invoke(): String!' type=kotlin.String! operator=null
+                  $this: BLOCK type=() -> kotlin.String! operator=LAMBDA
+                    FUN local final fun <anonymous>(): kotlin.String!
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(): String!'
+                          CALL 'test(): String!' type=kotlin.String! operator=null
+                    CALLABLE_REFERENCE '<anonymous>(): String!' type=() -> kotlin.String! operator=LAMBDA
+                arg1: CONST String type=kotlin.String value='DERIVED'
+            then: RETURN type=kotlin.Nothing from='doTest(): String'
+              CONST String type=kotlin.String value='fail 2'
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'invoke(): String!' type=kotlin.String! operator=null
+                  $this: BLOCK type=() -> kotlin.String! operator=LAMBDA
+                    FUN local final fun <anonymous>(): kotlin.String!
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(): String!'
+                          GET_BACKING_FIELD 'TEST: String!' type=kotlin.String! operator=GET_PROPERTY
+                    CALLABLE_REFERENCE '<anonymous>(): String!' type=() -> kotlin.String! operator=LAMBDA
+                arg1: CONST String type=kotlin.String value='DERIVED'
+            then: RETURN type=kotlin.Nothing from='doTest(): String'
+              CONST String type=kotlin.String value='fail 3'
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'invoke(): String!' type=kotlin.String! operator=null
+                  $this: BLOCK type=() -> kotlin.String! operator=LAMBDA
+                    FUN local final fun <anonymous>(): kotlin.String!
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(): String!'
+                          CALL 'test(): String!' type=kotlin.String! operator=null
+                    CALLABLE_REFERENCE '<anonymous>(): String!' type=() -> kotlin.String! operator=LAMBDA
+                arg1: CONST String type=kotlin.String value='DERIVED'
+            then: RETURN type=kotlin.Nothing from='doTest(): String'
+              CONST String type=kotlin.String value='fail 4'
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'invoke(): String!' type=kotlin.String! operator=null
+                  $this: BLOCK type=() -> kotlin.String! operator=LAMBDA
+                    FUN local final fun <anonymous>(): kotlin.String!
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(): String!'
+                          GET_BACKING_FIELD 'TEST: String!' type=kotlin.String! operator=GET_PROPERTY
+                    CALLABLE_REFERENCE '<anonymous>(): String!' type=() -> kotlin.String! operator=LAMBDA
+                arg1: CONST String type=kotlin.String value='BASE'
+            then: RETURN type=kotlin.Nothing from='doTest(): String'
+              CONST String type=kotlin.String value='fail 5'
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'invoke(): String!' type=kotlin.String! operator=null
+                  $this: BLOCK type=() -> kotlin.String! operator=LAMBDA
+                    FUN local final fun <anonymous>(): kotlin.String!
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(): String!'
+                          CALL 'test(): String!' type=kotlin.String! operator=null
+                    CALLABLE_REFERENCE '<anonymous>(): String!' type=() -> kotlin.String! operator=LAMBDA
+                arg1: CONST String type=kotlin.String value='BASE'
+            then: RETURN type=kotlin.Nothing from='doTest(): String'
+              CONST String type=kotlin.String value='fail 6'
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'invoke(): String!' type=kotlin.String! operator=null
+                  $this: BLOCK type=() -> kotlin.String! operator=LAMBDA
+                    FUN local final fun <anonymous>(): kotlin.String!
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(): String!'
+                          GET_BACKING_FIELD 'BASE_ONLY: String!' type=kotlin.String! operator=GET_PROPERTY
+                    CALLABLE_REFERENCE '<anonymous>(): String!' type=() -> kotlin.String! operator=LAMBDA
+                arg1: CONST String type=kotlin.String value='BASE'
+            then: RETURN type=kotlin.Nothing from='doTest(): String'
+              CONST String type=kotlin.String value='fail 7'
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'invoke(): String!' type=kotlin.String! operator=null
+                  $this: BLOCK type=() -> kotlin.String! operator=LAMBDA
+                    FUN local final fun <anonymous>(): kotlin.String!
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(): String!'
+                          CALL 'baseOnly(): String!' type=kotlin.String! operator=null
+                    CALLABLE_REFERENCE '<anonymous>(): String!' type=() -> kotlin.String! operator=LAMBDA
+                arg1: CONST String type=kotlin.String value='BASE'
+            then: RETURN type=kotlin.Nothing from='doTest(): String'
+              CONST String type=kotlin.String value='fail 8'
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'invoke(): String!' type=kotlin.String! operator=null
+                  $this: BLOCK type=() -> kotlin.String! operator=LAMBDA
+                    FUN local final fun <anonymous>(): kotlin.String!
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(): String!'
+                          GET_BACKING_FIELD 'BASE_ONLY: String!' type=kotlin.String! operator=GET_PROPERTY
+                    CALLABLE_REFERENCE '<anonymous>(): String!' type=() -> kotlin.String! operator=LAMBDA
+                arg1: CONST String type=kotlin.String value='BASE'
+            then: RETURN type=kotlin.Nothing from='doTest(): String'
+              CONST String type=kotlin.String value='fail 9'
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'invoke(): String!' type=kotlin.String! operator=null
+                  $this: BLOCK type=() -> kotlin.String! operator=LAMBDA
+                    FUN local final fun <anonymous>(): kotlin.String!
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(): String!'
+                          CALL 'baseOnly(): String!' type=kotlin.String! operator=null
+                    CALLABLE_REFERENCE '<anonymous>(): String!' type=() -> kotlin.String! operator=LAMBDA
+                arg1: CONST String type=kotlin.String value='BASE'
+            then: RETURN type=kotlin.Nothing from='doTest(): String'
+              CONST String type=kotlin.String value='fail 10'
+          RETURN type=kotlin.Nothing from='doTest(): String'
+            CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'doTest(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Kotlin()' type=anotherPackage.Kotlin operator=null

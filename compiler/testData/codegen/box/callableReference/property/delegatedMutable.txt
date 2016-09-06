@@ -1,0 +1,74 @@
+MODULE <test-module>
+  FILE /delegatedMutable.kt
+    PROPERTY public var result: kotlin.String
+      delegate: PROPERTY val `result$delegate`: Delegate
+        EXPRESSION_BODY
+          GET_OBJECT 'Delegate' type=Delegate
+      PROPERTY_GETTER public fun <get-result>(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-result>(): String'
+            CALL 'getValue(Any?, KProperty<*>): String' type=kotlin.String operator=null
+              $this: GET_BACKING_FIELD '`result$delegate`: Delegate' type=Delegate operator=null
+              instance: CONST Null type=kotlin.Nothing? value='null'
+              data: CALLABLE_REFERENCE 'result: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+      PROPERTY_SETTER public fun <set-result>(<set-?>: kotlin.String): kotlin.Unit
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<set-result>(String): Unit'
+            CALL 'setValue(Any?, KProperty<*>, String): Unit' type=kotlin.Unit operator=null
+              $this: GET_BACKING_FIELD '`result$delegate`: Delegate' type=Delegate operator=null
+              instance: CONST Null type=kotlin.Nothing? value='null'
+              data: CALLABLE_REFERENCE 'result: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+              newValue: GET_VAR 'value-parameter <set-?>: String' type=kotlin.String operator=null
+    CLASS OBJECT Delegate
+      CONSTRUCTOR private constructor Delegate()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Delegate'
+      PROPERTY public final var value: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='lol'
+      FUN public final operator fun getValue(instance: kotlin.Any?, data: kotlin.reflect.KProperty<*>): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getValue(Any?, KProperty<*>): String'
+            CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'Delegate' type=Delegate
+      FUN public final operator fun setValue(instance: kotlin.Any?, data: kotlin.reflect.KProperty<*>, newValue: kotlin.String): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-value>(String): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'Delegate' type=Delegate
+            <set-?>: GET_VAR 'value-parameter newValue: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f: kotlin.reflect.KMutableProperty0<kotlin.String>
+          CALLABLE_REFERENCE 'result: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'f: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+              arg1: CONST String type=kotlin.String value='lol'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 1: {'
+              GET_VAR 'f: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+              CONST String type=kotlin.String value='.get()}'
+        CALL '<set-value>(String): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_OBJECT 'Delegate' type=Delegate
+          <set-?>: CONST String type=kotlin.String value='rofl'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'f: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+              arg1: CONST String type=kotlin.String value='rofl'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 2: {'
+              GET_VAR 'f: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+              CONST String type=kotlin.String value='.get()}'
+        CALL 'set(String): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'f: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+          value: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'get(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'f: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null

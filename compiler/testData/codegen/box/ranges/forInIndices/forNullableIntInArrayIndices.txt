@@ -1,0 +1,45 @@
+MODULE <test-module>
+  FILE /forNullableIntInArrayIndices.kt
+    FUN public fun suppressBoxingOptimization(ni: kotlin.Int?): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var sum: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL '<get-indices>() on Array<out String>: IntRange' type=kotlin.ranges.IntRange operator=GET_PROPERTY
+                $receiver: CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                  elements: VARARG type=Array<out String> varargElementType=String
+                    CONST String type=kotlin.String value=''
+                    CONST String type=kotlin.String value=''
+                    CONST String type=kotlin.String value=''
+                    CONST String type=kotlin.String value=''
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int?
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                CALL 'suppressBoxingOptimization(Int?): Unit' type=kotlin.Unit operator=null
+                  ni: GET_VAR 'i: Int?' type=kotlin.Int? operator=null
+                SET_VAR 'sum: Int' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                    $this: GET_VAR 'sum: Int' type=kotlin.Int operator=PLUSEQ
+                    other: BLOCK type=kotlin.Int operator=ELVIS
+                      VAR val tmp2_elvis_lhs: kotlin.Int?
+                        GET_VAR 'i: Int?' type=kotlin.Int? operator=null
+                      WHEN type=kotlin.Int operator=null
+                        if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: GET_VAR 'tmp2_elvis_lhs: Int?' type=kotlin.Int? operator=null
+                          arg1: CONST Null type=kotlin.Nothing? value='null'
+                        then: CONST Int type=kotlin.Int value='0'
+                        else: GET_VAR 'tmp2_elvis_lhs: Int?' type=kotlin.Int? operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='6'
+          actual: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

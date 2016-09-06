@@ -1,0 +1,54 @@
+MODULE <test-module>
+  FILE /deepLocalHierarchy.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CLASS CLASS L1
+          CONSTRUCTOR public constructor L1()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='L1'
+          FUN public abstract fun foo(): kotlin.String
+        CLASS CLASS L2
+          CONSTRUCTOR public constructor L2(s: kotlin.String)
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor L1()'
+              SET_BACKING_FIELD 's: String' type=kotlin.Unit operator=null
+                receiver: THIS of 'L2' type=box.L2
+                value: GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+              INSTANCE_INITIALIZER_CALL classDescriptor='L2'
+          PROPERTY public final val s: kotlin.String
+            EXPRESSION_BODY
+              GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          FUN public open override fun foo(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='foo(): String'
+                CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: THIS of 'L2' type=box.L2
+        CLASS CLASS L3
+          CONSTRUCTOR public constructor L3(unused: kotlin.Double, value: kotlin.String = ...)
+            value: EXPRESSION_BODY
+              CONST String type=kotlin.String value='OK'
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor L2(String)'
+                s: GET_VAR 'value-parameter value: String = ...' type=kotlin.String operator=null
+              INSTANCE_INITIALIZER_CALL classDescriptor='L3'
+        CLASS CLASS L4
+          CONSTRUCTOR public constructor L4(i: kotlin.Int, j: kotlin.Long, z: kotlin.Boolean, l: box.L3)
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor L3(Double, String = ...)'
+                unused: CONST Double type=kotlin.Double value='3.14'
+              INSTANCE_INITIALIZER_CALL classDescriptor='L4'
+        CLASS CLASS L5
+          CONSTRUCTOR public constructor L5()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor L4(Int, Long, Boolean, L3)'
+                i: CONST Int type=kotlin.Int value='0'
+                j: CONST Long type=kotlin.Long value='0'
+                z: CONST Boolean type=kotlin.Boolean value='false'
+                l: CALL 'constructor L3(Double, String = ...)' type=box.L3 operator=null
+                  unused: CONST Double type=kotlin.Double value='2.71'
+                  value: CONST String type=kotlin.String value='Fail'
+              INSTANCE_INITIALIZER_CALL classDescriptor='L5'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor L5()' type=box.L5 operator=null

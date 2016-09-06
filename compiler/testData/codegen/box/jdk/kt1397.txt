@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /kt1397.kt
+    CLASS CLASS IntArrayList
+      CONSTRUCTOR public constructor IntArrayList()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor ArrayList()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='IntArrayList'
+      FUN public open override fun get(index: kotlin.Int): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(Int): Int'
+            CALL 'get(Int): Int' superQualifier=ArrayList type=kotlin.Int operator=null
+              $this: THIS of 'IntArrayList' type=java.util.ArrayList<kotlin.Int>
+              index: GET_VAR 'value-parameter index: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: IntArrayList
+          CALL 'constructor IntArrayList()' type=IntArrayList operator=null
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: IntArrayList' type=IntArrayList operator=null
+          element: CONST Int type=kotlin.Int value='1'
+        BLOCK type=kotlin.Int operator=POSTFIX_INCR
+          VAR val tmp0_array: IntArrayList
+            GET_VAR 'a: IntArrayList' type=IntArrayList operator=null
+          VAR val tmp1_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          VAR val tmp2: kotlin.Int
+            CALL 'get(Int): Int' type=kotlin.Int operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp0_array: IntArrayList' type=IntArrayList operator=null
+              index: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+          CALL 'set(Int, Int): Int' type=kotlin.Int operator=POSTFIX_INCR
+            $this: GET_VAR 'tmp0_array: IntArrayList' type=IntArrayList operator=null
+            index: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+            element: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp2: Int' type=kotlin.Int operator=null
+          GET_VAR 'tmp2: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'a: IntArrayList' type=IntArrayList operator=null
+                index: CONST Int type=kotlin.Int value='0'
+              arg1: CONST Int type=kotlin.Int value='2'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

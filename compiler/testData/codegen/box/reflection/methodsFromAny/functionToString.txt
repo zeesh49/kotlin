@@ -1,0 +1,46 @@
+MODULE <test-module>
+  FILE /functionToString.kt
+    FUN public fun top(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='top(): Int'
+          CONST Int type=kotlin.Int value='42'
+    FUN public fun kotlin.String.ext(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='ext() on String: Int'
+          CONST Int type=kotlin.Int value='0'
+    FUN public fun kotlin.ranges.IntRange?.ext2(): kotlin.Array<kotlin.Int?>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='ext2() on IntRange?: Array<Int?>'
+          CALL 'arrayOfNulls(Int): Array<Int?>' type=kotlin.Array<kotlin.Int?> operator=null
+            size: CONST Int type=kotlin.Int value='0'
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun mem(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='mem(): String'
+            CONST String type=kotlin.String value=''
+    FUN public fun assertToString(s: kotlin.String, x: kotlin.Any): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertToString(String, Any): Unit' type=kotlin.Unit operator=null
+          s: CONST String type=kotlin.String value='fun top(): kotlin.Int'
+          x: CALLABLE_REFERENCE 'top(): Int' type=kotlin.reflect.KFunction0<kotlin.Int> operator=null
+        CALL 'assertToString(String, Any): Unit' type=kotlin.Unit operator=null
+          s: CONST String type=kotlin.String value='fun kotlin.String.ext(): kotlin.Int'
+          x: CALLABLE_REFERENCE 'ext() on String: Int' type=kotlin.reflect.KFunction1<kotlin.String, kotlin.Int> operator=null
+        CALL 'assertToString(String, Any): Unit' type=kotlin.Unit operator=null
+          s: CONST String type=kotlin.String value='fun kotlin.ranges.IntRange?.ext2(): kotlin.Array<kotlin.Int?>'
+          x: CALLABLE_REFERENCE 'ext2() on IntRange?: Array<Int?>' type=kotlin.reflect.KFunction1<kotlin.ranges.IntRange, kotlin.Array<kotlin.Int?>> operator=null
+        CALL 'assertToString(String, Any): Unit' type=kotlin.Unit operator=null
+          s: CONST String type=kotlin.String value='fun test.A.mem(): kotlin.String'
+          x: CALLABLE_REFERENCE 'mem(): String' type=kotlin.reflect.KFunction1<test.A, kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

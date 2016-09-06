@@ -1,0 +1,82 @@
+MODULE <test-module>
+  FILE /instanceExtensionReceiverAndValueParameters.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun kotlin.String.memExt(param: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+    FUN public fun topLevel(): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun kotlin.Int.ext(vararg o: kotlin.Any): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'let((KCallable<*>) -> Unit) on KCallable<*>: Unit' type=kotlin.Unit operator=null
+          $receiver: CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+            $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+            predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                    CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                      arg1: CONST String type=kotlin.String value='memExt'
+              CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+          block: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Unit
+              BLOCK_BODY
+                CALL 'assertNotNull(KParameter?, String? = ...): KParameter' type=kotlin.reflect.KParameter operator=null
+                  actual: CALL '<get-instanceParameter>() on KCallable<*>: KParameter?' type=kotlin.reflect.KParameter? operator=GET_PROPERTY
+                    $receiver: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                CALL 'assertNotNull(KParameter?, String? = ...): KParameter' type=kotlin.reflect.KParameter operator=null
+                  actual: CALL '<get-extensionReceiverParameter>() on KCallable<*>: KParameter?' type=kotlin.reflect.KParameter? operator=GET_PROPERTY
+                    $receiver: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Unit'
+                  CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+                    expected: CONST Int type=kotlin.Int value='1'
+                    actual: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                      $this: CALL '<get-valueParameters>() on KCallable<*>: List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                        $receiver: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+            CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Unit' type=(kotlin.reflect.KCallable<*>) -> kotlin.Unit operator=LAMBDA
+        CALL 'let((KFunction0<Unit>) -> Unit) on KFunction0<Unit>: Unit' type=kotlin.Unit operator=null
+          $receiver: CALLABLE_REFERENCE 'topLevel(): Unit' type=kotlin.reflect.KFunction0<kotlin.Unit> operator=null
+          block: BLOCK type=(kotlin.reflect.KFunction0<kotlin.Unit>) -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(it: kotlin.reflect.KFunction0<kotlin.Unit>): kotlin.Unit
+              BLOCK_BODY
+                CALL 'assertNull(Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+                  actual: CALL '<get-instanceParameter>() on KCallable<*>: KParameter?' type=kotlin.reflect.KParameter? operator=GET_PROPERTY
+                    $receiver: GET_VAR 'value-parameter it: KFunction0<Unit>' type=kotlin.reflect.KFunction0<kotlin.Unit> operator=null
+                CALL 'assertNull(Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+                  actual: CALL '<get-extensionReceiverParameter>() on KCallable<*>: KParameter?' type=kotlin.reflect.KParameter? operator=GET_PROPERTY
+                    $receiver: GET_VAR 'value-parameter it: KFunction0<Unit>' type=kotlin.reflect.KFunction0<kotlin.Unit> operator=null
+                RETURN type=kotlin.Nothing from='<anonymous>(KFunction0<Unit>): Unit'
+                  CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+                    expected: CONST Int type=kotlin.Int value='0'
+                    actual: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                      $this: CALL '<get-valueParameters>() on KCallable<*>: List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                        $receiver: GET_VAR 'value-parameter it: KFunction0<Unit>' type=kotlin.reflect.KFunction0<kotlin.Unit> operator=null
+            CALLABLE_REFERENCE '<anonymous>(KFunction0<Unit>): Unit' type=(kotlin.reflect.KFunction0<kotlin.Unit>) -> kotlin.Unit operator=LAMBDA
+        CALL 'let((KFunction2<Int, Array<out Any>, Unit>) -> Unit) on KFunction2<Int, Array<out Any>, Unit>: Unit' type=kotlin.Unit operator=null
+          $receiver: CALLABLE_REFERENCE 'ext(vararg Any) on Int: Unit' type=kotlin.reflect.KFunction2<kotlin.Int, kotlin.Array<out kotlin.Any>, kotlin.Unit> operator=null
+          block: BLOCK type=(kotlin.reflect.KFunction2<kotlin.Int, kotlin.Array<out kotlin.Any>, kotlin.Unit>) -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(it: kotlin.reflect.KFunction2<kotlin.Int, kotlin.Array<out kotlin.Any>, kotlin.Unit>): kotlin.Unit
+              BLOCK_BODY
+                CALL 'assertNull(Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+                  actual: CALL '<get-instanceParameter>() on KCallable<*>: KParameter?' type=kotlin.reflect.KParameter? operator=GET_PROPERTY
+                    $receiver: GET_VAR 'value-parameter it: KFunction2<Int, Array<out Any>, Unit>' type=kotlin.reflect.KFunction2<kotlin.Int, kotlin.Array<out kotlin.Any>, kotlin.Unit> operator=null
+                CALL 'assertNotNull(KParameter?, String? = ...): KParameter' type=kotlin.reflect.KParameter operator=null
+                  actual: CALL '<get-extensionReceiverParameter>() on KCallable<*>: KParameter?' type=kotlin.reflect.KParameter? operator=GET_PROPERTY
+                    $receiver: GET_VAR 'value-parameter it: KFunction2<Int, Array<out Any>, Unit>' type=kotlin.reflect.KFunction2<kotlin.Int, kotlin.Array<out kotlin.Any>, kotlin.Unit> operator=null
+                RETURN type=kotlin.Nothing from='<anonymous>(KFunction2<Int, Array<out Any>, Unit>): Unit'
+                  CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+                    expected: CONST Int type=kotlin.Int value='1'
+                    actual: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                      $this: CALL '<get-valueParameters>() on KCallable<*>: List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                        $receiver: GET_VAR 'value-parameter it: KFunction2<Int, Array<out Any>, Unit>' type=kotlin.reflect.KFunction2<kotlin.Int, kotlin.Array<out kotlin.Any>, kotlin.Unit> operator=null
+            CALLABLE_REFERENCE '<anonymous>(KFunction2<Int, Array<out Any>, Unit>): Unit' type=(kotlin.reflect.KFunction2<kotlin.Int, kotlin.Array<out kotlin.Any>, kotlin.Unit>) -> kotlin.Unit operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

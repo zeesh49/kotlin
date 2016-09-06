@@ -1,0 +1,64 @@
+MODULE <test-module>
+  FILE /kt1441.kt
+    CLASS CLASS Foo
+      CONSTRUCTOR public constructor Foo()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      PROPERTY public final var rnd: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='10'
+      FUN public open override fun equals(that: kotlin.Any?): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+            WHEN type=kotlin.Boolean operator=ANDAND
+              if: TYPE_OP operator=INSTANCEOF typeOperand=Foo
+                GET_VAR 'value-parameter that: Any?' type=kotlin.Any? operator=null
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL '<get-rnd>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=Foo
+                    GET_VAR 'value-parameter that: Any?' type=kotlin.Any? operator=null
+                arg1: CALL '<get-rnd>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'Foo' type=Foo
+              else: CONST Boolean type=kotlin.Boolean value='false'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: Foo
+          CALL 'constructor Foo()' type=Foo operator=null
+        VAR val b: Foo
+          CALL 'constructor Foo()' type=Foo operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: GET_VAR 'a: Foo' type=Foo operator=null
+              arg1: GET_VAR 'a: Foo' type=Foo operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: GET_VAR 'b: Foo' type=Foo operator=null
+              arg1: GET_VAR 'b: Foo' type=Foo operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+            arg0: GET_VAR 'b: Foo' type=Foo operator=null
+            arg1: GET_VAR 'a: Foo' type=Foo operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+            arg0: GET_VAR 'a: Foo' type=Foo operator=null
+            arg1: GET_VAR 'b: Foo' type=Foo operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'a: Foo' type=Foo operator=null
+              arg1: GET_VAR 'b: Foo' type=Foo operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail5'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

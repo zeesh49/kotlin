@@ -1,0 +1,84 @@
+MODULE <test-module>
+  FILE /accessToPrivateProperty.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY private final var foo: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+        PROPERTY_GETTER private final fun <get-foo>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-foo>(): Int'
+              CONST Int type=kotlin.Int value='1'
+      FUN public final fun foo(): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-foo>(Int): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'A' type=A
+            <set-?>: CONST Int type=kotlin.Int value='5'
+          CALL '<get-foo>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: THIS of 'A' type=A
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY private final val foo: kotlin.Int = 1
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+        PROPERTY_GETTER private final fun <get-foo>(): kotlin.Int
+      FUN public final fun foo(): kotlin.Unit
+        BLOCK_BODY
+          CALL '<get-foo>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: THIS of 'B' type=B
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      PROPERTY private final var foo: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+        PROPERTY_GETTER private final fun <get-foo>(): kotlin.Int
+        PROPERTY_SETTER private final fun <set-foo>(<set-?>: kotlin.Int): kotlin.Unit
+      FUN public final fun foo(): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-foo>(Int): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'C' type=C
+            <set-?>: CONST Int type=kotlin.Int value='2'
+          CALL '<get-foo>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: THIS of 'C' type=C
+    CLASS CLASS D
+      CONSTRUCTOR public constructor D()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='D'
+      PROPERTY private final var foo: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+        PROPERTY_SETTER private final fun <set-foo>(i: kotlin.Int): kotlin.Unit
+          BLOCK_BODY
+            SET_BACKING_FIELD 'foo: Int' type=kotlin.Unit operator=EQ
+              value: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+                other: CONST Int type=kotlin.Int value='1'
+      FUN public final fun foo(): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-foo>(Int): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'D' type=D
+            i: CONST Int type=kotlin.Int value='5'
+          CALL '<get-foo>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: THIS of 'D' type=D
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor A()' type=A operator=null
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor B()' type=B operator=null
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor C()' type=C operator=null
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor D()' type=D operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

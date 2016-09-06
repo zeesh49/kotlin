@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /basicmethodSuperTrait.kt
+    CLASS INTERFACE Tr
+      FUN public open fun extra(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='extra(): String'
+            CONST String type=kotlin.String value='_'
+    CLASS CLASS N
+      CONSTRUCTOR public constructor N()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='N'
+      FUN public open override fun extra(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='extra(): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CALL 'extra(): String' superQualifier=Tr type=kotlin.String operator=null
+                $this: THIS of 'N' type=Tr
+              other: CALL 'extra(): String' superQualifier=Tr type=kotlin.String operator=null
+                $this: THIS of 'N' type=Tr
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val n: N
+          CALL 'constructor N()' type=N operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'extra(): String' type=kotlin.String operator=null
+              $this: GET_VAR 'n: N' type=N operator=null
+            arg1: CONST String type=kotlin.String value='__'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='fail'

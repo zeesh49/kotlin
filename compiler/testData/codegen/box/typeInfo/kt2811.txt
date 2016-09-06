@@ -1,0 +1,57 @@
+MODULE <test-module>
+  FILE /kt2811.kt
+    CLASS CLASS Test1
+      CONSTRUCTOR public constructor Test1()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test1'
+      FUN public final fun test1(): kotlin.String
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=IF
+            if: TYPE_OP operator=INSTANCEOF typeOperand=Test2
+              THIS of 'Test1' type=Test1
+            then: BLOCK type=kotlin.Nothing operator=null
+              RETURN type=kotlin.Nothing from='test1(): String'
+                CALL 'foo(): String' type=kotlin.String operator=null
+                  $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=Test2
+                    THIS of 'Test1' type=Test1
+          RETURN type=kotlin.Nothing from='test1(): String'
+            CONST String type=kotlin.String value='fail'
+    CLASS CLASS Test2
+      CONSTRUCTOR public constructor Test2()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Test1()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test2'
+      FUN public final fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value='OK'
+    FUN public fun Test1.test2(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Nothing operator=IF
+          if: TYPE_OP operator=INSTANCEOF typeOperand=Test2
+            $RECEIVER of 'test2() on Test1: String' type=Test1
+          then: RETURN type=kotlin.Nothing from='test2() on Test1: String'
+            CALL 'foo(): String' type=kotlin.String operator=null
+              $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=Test2
+                $RECEIVER of 'test2() on Test1: String' type=Test1
+          else: RETURN type=kotlin.Nothing from='test2() on Test1: String'
+            CONST String type=kotlin.String value='fail'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=ANDAND
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CONST String type=kotlin.String value='OK'
+              arg1: CALL 'test1(): String' type=kotlin.String operator=null
+                $this: CALL 'constructor Test2()' type=Test2 operator=null
+            then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CONST String type=kotlin.String value='OK'
+              arg1: CALL 'test2() on Test1: String' type=kotlin.String operator=null
+                $receiver: CALL 'constructor Test2()' type=Test2 operator=null
+            else: CONST Boolean type=kotlin.Boolean value='false'
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='fail'

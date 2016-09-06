@@ -1,0 +1,35 @@
+MODULE <test-module>
+  FILE /kt11943.kt
+    PROPERTY public val <T : kotlin.reflect.KClass<*>> T.myjava1: java.lang.Class<*>
+      PROPERTY_GETTER public fun T.<get-myjava1>(): java.lang.Class<*>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-myjava1>() on T: Class<*>'
+            CALL '<get-java>() on KClass<*>: Class<out Any>' type=java.lang.Class<out kotlin.Any> operator=GET_PROPERTY
+              $receiver: $RECEIVER of 'myjava1: Class<*> on T' type=T
+    PROPERTY public val <E : kotlin.Any, T : kotlin.reflect.KClass<E>> T.myjava2: java.lang.Class<E>
+      PROPERTY_GETTER public fun T.<get-myjava2>(): java.lang.Class<E>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-myjava2>() on T: Class<E>'
+            CALL '<get-java>() on KClass<E>: Class<E>' type=java.lang.Class<E> operator=GET_PROPERTY
+              $receiver: $RECEIVER of 'myjava2: Class<E> on T' type=T
+    CLASS CLASS O
+      CONSTRUCTOR public constructor O()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='O'
+    CLASS CLASS K
+      CONSTRUCTOR public constructor K()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='K'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+              CALL 'getSimpleName(): String!' type=kotlin.String! operator=null
+                $this: CALL '<get-myjava1>() on KClass<O>: Class<*>' type=java.lang.Class<*> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'O' type=kotlin.reflect.KClass<O>
+            other: CALL 'getSimpleName(): String!' type=kotlin.String! operator=null
+              $this: CALL '<get-myjava2>() on KClass<K>: Class<K>' type=java.lang.Class<K> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'K' type=kotlin.reflect.KClass<K>

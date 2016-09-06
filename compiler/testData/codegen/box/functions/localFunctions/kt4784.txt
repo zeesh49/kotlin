@@ -1,0 +1,50 @@
+MODULE <test-module>
+  FILE /kt4784.kt
+    CLASS CLASS T
+      CONSTRUCTOR public constructor T(value: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'value: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'T' type=T
+            value: GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='T'
+      PROPERTY public final var value: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun plusAssign(): T
+      BLOCK_BODY
+        FUN local final operator fun T.plusAssign(s: kotlin.Int): kotlin.Unit
+          BLOCK_BODY
+            BLOCK type=kotlin.Unit operator=PLUSEQ
+              VAR val tmp0_this: T
+                $RECEIVER of 'plusAssign(Int) on T: Unit' type=T
+              CALL '<set-value>(Int): Unit' type=kotlin.Unit operator=PLUSEQ
+                $this: GET_VAR 'tmp0_this: T' type=T operator=null
+                <set-?>: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                  $this: CALL '<get-value>(): Int' type=kotlin.Int operator=PLUSEQ
+                    $this: GET_VAR 'tmp0_this: T' type=T operator=null
+                  other: GET_VAR 'value-parameter s: Int' type=kotlin.Int operator=null
+        VAR var t: T
+          CALL 'constructor T(Int)' type=T operator=null
+            value: CONST Int type=kotlin.Int value='1'
+        CALL 'plusAssign(Int) on T: Unit' type=kotlin.Unit operator=PLUSEQ
+          $receiver: GET_VAR 't: T' type=T operator=PLUSEQ
+          s: CONST Int type=kotlin.Int value='1'
+        RETURN type=kotlin.Nothing from='plusAssign(): T'
+          GET_VAR 't: T' type=T operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val result: kotlin.Int
+          CALL '<get-value>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: CALL 'plusAssign(): T' type=T operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              GET_VAR 'result: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

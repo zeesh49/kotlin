@@ -1,0 +1,45 @@
+MODULE <test-module>
+  FILE /forInCharSequenceIndices.kt
+    FUN public fun test(s: kotlin.CharSequence): kotlin.Int
+      BLOCK_BODY
+        VAR var result: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL '<get-indices>() on CharSequence: IntRange' type=kotlin.ranges.IntRange operator=GET_PROPERTY
+                $receiver: GET_VAR 'value-parameter s: CharSequence' type=kotlin.CharSequence operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'result: Int' type=kotlin.Unit operator=EQ
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                      $this: GET_VAR 'result: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='10'
+                    other: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                      $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='1'
+        RETURN type=kotlin.Nothing from='test(CharSequence): Int'
+          GET_VAR 'result: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val test: kotlin.Int
+          CALL 'test(CharSequence): Int' type=kotlin.Int operator=null
+            s: CONST String type=kotlin.String value='abcd'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='1234'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'test: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

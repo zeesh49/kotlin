@@ -1,0 +1,131 @@
+MODULE <test-module>
+  FILE /casts.kt
+    FUN public inline fun <R, T> foo(x: R?, block: (R?) -> T): T
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(R?, (R?) -> T): T'
+          CALL 'invoke(R?): T' type=T operator=INVOKE
+            $this: GET_VAR 'value-parameter block: (R?) -> T' type=(R?) -> T operator=VARIABLE_AS_FUNCTION
+            p1: GET_VAR 'value-parameter x: R?' type=R? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(Long, Long, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Long type=kotlin.Long value='1'
+          actual: CALL 'foo(Int?, (Int?) -> Long): Long' type=kotlin.Long operator=null
+            x: CONST Int type=kotlin.Int value='1'
+            block: BLOCK type=(kotlin.Int?) -> kotlin.Long operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Int?): kotlin.Long
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int?): Long'
+                    CALL 'toLong(): Long' type=kotlin.Long operator=null
+                      $this: BLOCK type=kotlin.Int operator=EXCLEXCL
+                        VAR val tmp0_notnull: kotlin.Int?
+                          GET_VAR 'value-parameter x: Int?' type=kotlin.Int? operator=null
+                        WHEN type=kotlin.Int operator=null
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+                            arg1: CONST Null type=kotlin.Nothing? value='null'
+                          then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                          else: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+              CALLABLE_REFERENCE '<anonymous>(Int?): Long' type=(kotlin.Int?) -> kotlin.Long operator=LAMBDA
+        CALL 'assertEquals(Short, Short, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'toShort(): Short' type=kotlin.Short operator=null
+            $this: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'foo(Int?, (Int?) -> Short): Short' type=kotlin.Short operator=null
+            x: CONST Int type=kotlin.Int value='1'
+            block: BLOCK type=(kotlin.Int?) -> kotlin.Short operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Int?): kotlin.Short
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int?): Short'
+                    CALL 'toShort(): Short' type=kotlin.Short operator=null
+                      $this: BLOCK type=kotlin.Int operator=EXCLEXCL
+                        VAR val tmp0_notnull: kotlin.Int?
+                          GET_VAR 'value-parameter x: Int?' type=kotlin.Int? operator=null
+                        WHEN type=kotlin.Int operator=null
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+                            arg1: CONST Null type=kotlin.Nothing? value='null'
+                          then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                          else: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+              CALLABLE_REFERENCE '<anonymous>(Int?): Short' type=(kotlin.Int?) -> kotlin.Short operator=LAMBDA
+        CALL 'assertEquals(Byte, Byte, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+            $this: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'foo(Long?, (Long?) -> Byte): Byte' type=kotlin.Byte operator=null
+            x: CONST Long type=kotlin.Long value='1'
+            block: BLOCK type=(kotlin.Long?) -> kotlin.Byte operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Long?): kotlin.Byte
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Long?): Byte'
+                    CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                      $this: BLOCK type=kotlin.Long operator=EXCLEXCL
+                        VAR val tmp0_notnull: kotlin.Long?
+                          GET_VAR 'value-parameter x: Long?' type=kotlin.Long? operator=null
+                        WHEN type=kotlin.Long operator=null
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: GET_VAR 'tmp0_notnull: Long?' type=kotlin.Long? operator=null
+                            arg1: CONST Null type=kotlin.Nothing? value='null'
+                          then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                          else: GET_VAR 'tmp0_notnull: Long?' type=kotlin.Long? operator=null
+              CALLABLE_REFERENCE '<anonymous>(Long?): Byte' type=(kotlin.Long?) -> kotlin.Byte operator=LAMBDA
+        CALL 'assertEquals(Short, Short, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'toShort(): Short' type=kotlin.Short operator=null
+            $this: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'foo(Long?, (Long?) -> Short): Short' type=kotlin.Short operator=null
+            x: CONST Long type=kotlin.Long value='1'
+            block: BLOCK type=(kotlin.Long?) -> kotlin.Short operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Long?): kotlin.Short
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Long?): Short'
+                    CALL 'toShort(): Short' type=kotlin.Short operator=null
+                      $this: BLOCK type=kotlin.Long operator=EXCLEXCL
+                        VAR val tmp0_notnull: kotlin.Long?
+                          GET_VAR 'value-parameter x: Long?' type=kotlin.Long? operator=null
+                        WHEN type=kotlin.Long operator=null
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: GET_VAR 'tmp0_notnull: Long?' type=kotlin.Long? operator=null
+                            arg1: CONST Null type=kotlin.Nothing? value='null'
+                          then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                          else: GET_VAR 'tmp0_notnull: Long?' type=kotlin.Long? operator=null
+              CALLABLE_REFERENCE '<anonymous>(Long?): Short' type=(kotlin.Long?) -> kotlin.Short operator=LAMBDA
+        CALL 'assertEquals(Double, Double, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'toDouble(): Double' type=kotlin.Double operator=null
+            $this: CONST Char type=kotlin.Char value='a'
+          actual: CALL 'foo(Char?, (Char?) -> Double): Double' type=kotlin.Double operator=null
+            x: CONST Char type=kotlin.Char value='a'
+            block: BLOCK type=(kotlin.Char?) -> kotlin.Double operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Char?): kotlin.Double
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Char?): Double'
+                    CALL 'toDouble(): Double' type=kotlin.Double operator=null
+                      $this: BLOCK type=kotlin.Char operator=EXCLEXCL
+                        VAR val tmp0_notnull: kotlin.Char?
+                          GET_VAR 'value-parameter x: Char?' type=kotlin.Char? operator=null
+                        WHEN type=kotlin.Char operator=null
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: GET_VAR 'tmp0_notnull: Char?' type=kotlin.Char? operator=null
+                            arg1: CONST Null type=kotlin.Nothing? value='null'
+                          then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                          else: GET_VAR 'tmp0_notnull: Char?' type=kotlin.Char? operator=null
+              CALLABLE_REFERENCE '<anonymous>(Char?): Double' type=(kotlin.Char?) -> kotlin.Double operator=LAMBDA
+        CALL 'assertEquals(Byte, Byte, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+            $this: CONST Double type=kotlin.Double value='1.0'
+          actual: CALL 'foo(Double?, (Double?) -> Byte): Byte' type=kotlin.Byte operator=null
+            x: CONST Double type=kotlin.Double value='1.0'
+            block: BLOCK type=(kotlin.Double?) -> kotlin.Byte operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Double?): kotlin.Byte
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Double?): Byte'
+                    CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                      $this: BLOCK type=kotlin.Double operator=EXCLEXCL
+                        VAR val tmp0_notnull: kotlin.Double?
+                          GET_VAR 'value-parameter x: Double?' type=kotlin.Double? operator=null
+                        WHEN type=kotlin.Double operator=null
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: GET_VAR 'tmp0_notnull: Double?' type=kotlin.Double? operator=null
+                            arg1: CONST Null type=kotlin.Nothing? value='null'
+                          then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                          else: GET_VAR 'tmp0_notnull: Double?' type=kotlin.Double? operator=null
+              CALLABLE_REFERENCE '<anonymous>(Double?): Byte' type=(kotlin.Double?) -> kotlin.Byte operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

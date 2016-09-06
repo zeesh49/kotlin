@@ -1,0 +1,63 @@
+MODULE <test-module>
+  FILE /expectException.kt
+    FUN public inline fun fails(block: () -> kotlin.Unit): kotlin.Throwable?
+      BLOCK_BODY
+        VAR var thrown: kotlin.Throwable?
+          CONST Null type=kotlin.Nothing? value='null'
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+              $this: GET_VAR 'value-parameter block: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+          catch e: BLOCK type=kotlin.Unit operator=null
+            SET_VAR 'thrown: Throwable?' type=kotlin.Unit operator=EQ
+              GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'thrown: Throwable?' type=kotlin.Throwable? operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: THROW type=kotlin.Nothing
+            CALL 'constructor Exception(String!)' type=java.lang.Exception operator=null
+              p0: CONST String type=kotlin.String value='Expected an exception to be thrown'
+        RETURN type=kotlin.Nothing from='fails(() -> Unit): Throwable?'
+          GET_VAR 'thrown: Throwable?' type=kotlin.Throwable? operator=null
+    FUN public inline fun throwIt(msg: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        THROW type=kotlin.Nothing
+          CALL 'constructor Exception(String!)' type=java.lang.Exception operator=null
+            p0: GET_VAR 'value-parameter msg: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'fails(() -> Unit): Throwable?' type=kotlin.Throwable? operator=null
+          block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  CALL 'throwIt(String): Unit' type=kotlin.Unit operator=null
+                    msg: CONST String type=kotlin.String value='oops!'
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        VAR var x: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        TRY_CATCH type=kotlin.Any?
+          try: BLOCK type=kotlin.Throwable? operator=null
+            CALL 'fails(() -> Unit): Throwable?' type=kotlin.Throwable? operator=null
+              block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.Unit
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                      SET_VAR 'x: Int' type=kotlin.Unit operator=EQ
+                        CONST Int type=kotlin.Int value='1'
+                CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+          catch e: BLOCK type=kotlin.Unit operator=null
+            SET_VAR 'x: Int' type=kotlin.Unit operator=EQ
+              CONST Int type=kotlin.Int value='2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'x: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed: x=='
+              GET_VAR 'x: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

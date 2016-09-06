@@ -1,0 +1,41 @@
+MODULE <test-module>
+  FILE /nonTrivialUpperBound.kt
+    CLASS CLASS MyIterator
+      CONSTRUCTOR public constructor MyIterator<E : kotlin.Number>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyIterator'
+      FUN public open override fun next(): kotlin.Nothing
+        BLOCK_BODY
+          BLOCK type=kotlin.Nothing operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+            WHEN type=kotlin.Nothing operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+      FUN public open override fun hasNext(): kotlin.Nothing
+        BLOCK_BODY
+          BLOCK type=kotlin.Nothing operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+            WHEN type=kotlin.Nothing operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'remove(): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=CAST typeOperand=java.util.Iterator<kotlin.Number>
+                CALL 'constructor MyIterator()' type=MyIterator<kotlin.Int> operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail'
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'

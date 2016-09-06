@@ -1,0 +1,35 @@
+MODULE <test-module>
+  FILE /emptyEnumValuesValueOf.kt
+    CLASS ENUM_CLASS Empty
+      CONSTRUCTOR private constructor Empty()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='Empty'
+      FUN public final fun values(): kotlin.Array<Empty>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): Empty
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL 'values(): Array<Empty>' type=kotlin.Array<Empty> operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              CALL 'values(): Array<Empty>' type=kotlin.Array<Empty> operator=null
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            VAR val found: Empty
+              CALL 'valueOf(String): Empty' type=Empty operator=null
+                value: CONST String type=kotlin.String value='nonExistentEntry'
+            RETURN type=kotlin.Nothing from='box(): String'
+              STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='Fail: '
+                GET_VAR 'found: Empty' type=Empty operator=null
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'

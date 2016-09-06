@@ -1,0 +1,27 @@
+MODULE <test-module>
+  FILE /localClassInTopLevelFunction.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CLASS CLASS C
+          CONSTRUCTOR public constructor C()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='C'
+        VAR val name: kotlin.String!
+          CALL 'getSimpleName(): String!' type=kotlin.String! operator=null
+            $this: CALL '<get-java>() on KClass<C>: Class<C>' type=java.lang.Class<box.C> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'C' type=kotlin.reflect.KClass<box.C>
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'name: String!' type=kotlin.String! operator=null
+              arg1: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='box'
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='C'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'name: String!' type=kotlin.String! operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,37 @@
+MODULE <test-module>
+  FILE /negateObjectComp2.kt
+    PROPERTY public val p: kotlin.Int? = 1
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='1'
+    PROPERTY public val z: kotlin.Int? = 2
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='2'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+              arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+                $this: BLOCK type=kotlin.Int operator=EXCLEXCL
+                  VAR val tmp0_notnull: kotlin.Int?
+                    CALL '<get-p>(): Int?' type=kotlin.Int? operator=GET_PROPERTY
+                  WHEN type=kotlin.Int operator=null
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                    else: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+                other: BLOCK type=kotlin.Int operator=EXCLEXCL
+                  VAR val tmp1_notnull: kotlin.Int?
+                    CALL '<get-z>(): Int?' type=kotlin.Int? operator=GET_PROPERTY
+                  WHEN type=kotlin.Int operator=null
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp1_notnull: Int?' type=kotlin.Int? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                    else: GET_VAR 'tmp1_notnull: Int?' type=kotlin.Int? operator=null
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,48 @@
+MODULE <test-module>
+  FILE /integralWhenWithNoInlinedConstants.kt
+    FUN public fun foo1(x: kotlin.Int): kotlin.Boolean
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=WHEN
+          VAR val tmp0_subject: kotlin.Int
+            GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+          WHEN type=kotlin.Nothing operator=WHEN
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+              arg1: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CONST Int type=kotlin.Int value='2'
+                other: CONST Int type=kotlin.Int value='2'
+            then: RETURN type=kotlin.Nothing from='foo1(Int): Boolean'
+              CONST Boolean type=kotlin.Boolean value='true'
+            else: RETURN type=kotlin.Nothing from='foo1(Int): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+    FUN public fun foo2(x: kotlin.Int): kotlin.Boolean
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=WHEN
+          VAR val tmp0_subject: kotlin.Int
+            GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+          WHEN type=kotlin.Nothing operator=WHEN
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+              arg1: GET_BACKING_FIELD 'MAX_VALUE: Int' type=kotlin.Int operator=GET_PROPERTY
+            then: RETURN type=kotlin.Nothing from='foo2(Int): Boolean'
+              CONST Boolean type=kotlin.Boolean value='true'
+            else: RETURN type=kotlin.Nothing from='foo2(Int): Boolean'
+              CONST Boolean type=kotlin.Boolean value='false'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'foo1(Int): Boolean' type=kotlin.Boolean operator=null
+            x: CONST Int type=kotlin.Int value='4'
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'foo1(Int): Boolean' type=kotlin.Boolean operator=null
+              x: CONST Int type=kotlin.Int value='1'
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'foo2(Int): Boolean' type=kotlin.Boolean operator=null
+            x: GET_BACKING_FIELD 'MAX_VALUE: Int' type=kotlin.Int operator=GET_PROPERTY
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'foo2(Int): Boolean' type=kotlin.Boolean operator=null
+              x: CONST Int type=kotlin.Int value='1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

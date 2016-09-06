@@ -1,0 +1,51 @@
+MODULE <test-module>
+  FILE /overrideAnyWithPrimitive.kt
+    CLASS INTERFACE I
+      FUN public abstract fun foo(): kotlin.Any
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public open override fun foo(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): Int'
+            CONST Int type=kotlin.Int value='0'
+      FUN public final fun bar(x: kotlin.Long): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='bar(Long): Int'
+            CALL 'toInt(): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'value-parameter x: Long' type=kotlin.Long operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(Type, Type, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-java>() on KClass<Integer>: Class<Integer>' type=java.lang.Class<java.lang.Integer> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Integer' type=kotlin.reflect.KClass<java.lang.Integer>
+          actual: CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+            $receiver: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'foo(): Int' type=kotlin.reflect.KFunction1<A, kotlin.Int> operator=null
+        CALL 'assertNotEquals(Type!, Type!, String? = ...): Unit' type=kotlin.Unit operator=null
+          illegal: GET_BACKING_FIELD 'TYPE: Class<Int!>!' type=java.lang.Class<kotlin.Int!>! operator=GET_PROPERTY
+          actual: CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+            $receiver: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'foo(): Int' type=kotlin.reflect.KFunction1<A, kotlin.Int> operator=null
+        CALL 'assertNotEquals(Type, Type, String? = ...): Unit' type=kotlin.Unit operator=null
+          illegal: CALL '<get-java>() on KClass<Integer>: Class<Integer>' type=java.lang.Class<java.lang.Integer> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Integer' type=kotlin.reflect.KClass<java.lang.Integer>
+          actual: CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+            $receiver: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'bar(Long): Int' type=kotlin.reflect.KFunction2<A, kotlin.Long, kotlin.Int> operator=null
+        CALL 'assertEquals(Type!, Type!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_BACKING_FIELD 'TYPE: Class<Int!>!' type=java.lang.Class<kotlin.Int!>! operator=GET_PROPERTY
+          actual: CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+            $receiver: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'bar(Long): Int' type=kotlin.reflect.KFunction2<A, kotlin.Long, kotlin.Int> operator=null
+        CALL 'assertEquals(Type!, Type!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_BACKING_FIELD 'TYPE: Class<Long!>!' type=java.lang.Class<kotlin.Long!>! operator=GET_PROPERTY
+          actual: CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+            $receiver: CALL '<get-type>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALL 'last() on List<KParameter>: KParameter' type=kotlin.reflect.KParameter operator=null
+                $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                  $this: CALLABLE_REFERENCE 'bar(Long): Int' type=kotlin.reflect.KFunction2<A, kotlin.Long, kotlin.Int> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

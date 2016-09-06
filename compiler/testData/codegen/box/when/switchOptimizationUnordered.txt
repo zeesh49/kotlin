@@ -1,0 +1,42 @@
+MODULE <test-module>
+  FILE /switchOptimizationUnordered.kt
+    FUN public fun foo(x: kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(Int): Int'
+          BLOCK type=kotlin.Int operator=WHEN
+            VAR val tmp0_subject: kotlin.Int
+              GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+            WHEN type=kotlin.Int operator=WHEN
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+                arg1: CONST Int type=kotlin.Int value='2'
+              then: CONST Int type=kotlin.Int value='6'
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+                arg1: CONST Int type=kotlin.Int value='1'
+              then: CONST Int type=kotlin.Int value='5'
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+                arg1: CONST Int type=kotlin.Int value='3'
+              then: CONST Int type=kotlin.Int value='7'
+              else: CONST Int type=kotlin.Int value='8'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.String
+          CALL 'joinToString(CharSequence = ..., CharSequence = ..., CharSequence = ..., Int = ..., CharSequence = ..., ((Int) -> CharSequence)? = ...) on Iterable<Int>: String' type=kotlin.String operator=null
+            $receiver: CALL 'map((Int) -> Int) on Iterable<Int>: List<Int>' type=kotlin.collections.List<kotlin.Int> operator=null
+              $receiver: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='0'
+                other: CONST Int type=kotlin.Int value='3'
+              transform: CALLABLE_REFERENCE 'foo(Int): Int' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Int> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='8, 5, 6, 7'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CONST String type=kotlin.String value='unordered:'
+              other: GET_VAR 'result: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

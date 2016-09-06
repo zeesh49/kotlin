@@ -1,0 +1,64 @@
+MODULE <test-module>
+  FILE /createNestedClass.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS CLASS B1
+        CONSTRUCTOR public constructor B1()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='B1'
+      CLASS CLASS B2
+        CONSTRUCTOR public constructor B2(x: kotlin.Int)
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            SET_BACKING_FIELD 'x: Int' type=kotlin.Unit operator=null
+              receiver: THIS of 'B2' type=A.B2
+              value: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            INSTANCE_INITIALIZER_CALL classDescriptor='B2'
+        PROPERTY public final val x: kotlin.Int
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CLASS CLASS B3
+        CONSTRUCTOR public constructor B3(x: kotlin.Long, y: kotlin.Int)
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            SET_BACKING_FIELD 'x: Long' type=kotlin.Unit operator=null
+              receiver: THIS of 'B3' type=A.B3
+              value: GET_VAR 'value-parameter x: Long' type=kotlin.Long operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            SET_BACKING_FIELD 'y: Int' type=kotlin.Unit operator=null
+              receiver: THIS of 'B3' type=A.B3
+              value: GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            INSTANCE_INITIALIZER_CALL classDescriptor='B3'
+        PROPERTY public final val x: kotlin.Long
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter x: Long' type=kotlin.Long operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+        PROPERTY public final val y: kotlin.Int
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CLASS CLASS B4
+        CONSTRUCTOR public constructor B4(str: kotlin.String)
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            SET_BACKING_FIELD 'str: String' type=kotlin.Unit operator=null
+              receiver: THIS of 'B4' type=A.B4
+              value: GET_VAR 'value-parameter str: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            INSTANCE_INITIALIZER_CALL classDescriptor='B4'
+        PROPERTY public final val str: kotlin.String
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter str: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'constructor B1()' type=A.B1 operator=null
+        VAR val b2: A.B2
+          CALL 'constructor B2(Int)' type=A.B2 operator=null
+            x: CALL '<get-y>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: CALL 'constructor B3(Long, Int)' type=A.B3 operator=null
+                x: CONST Long type=kotlin.Long value='42'
+                y: CONST Int type=kotlin.Int value='42'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-str>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor B4(String)' type=A.B4 operator=null
+              str: CONST String type=kotlin.String value='OK'

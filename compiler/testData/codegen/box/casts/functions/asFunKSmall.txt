@@ -1,0 +1,111 @@
+MODULE <test-module>
+  FILE /asFunKSmall.kt
+    FUN public fun fn0(): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun fn1(x: kotlin.Any): kotlin.Unit
+      BLOCK_BODY
+    FUN public inline fun asFailsWithCCE(operation: kotlin.String, block: () -> kotlin.Unit): kotlin.Unit
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+              $this: GET_VAR 'value-parameter block: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='asFailsWithCCE(String, () -> Unit): Unit'
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=': should throw ClassCastException, got '
+                  GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+        THROW type=kotlin.Nothing
+          CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+            p0: STRING_CONCATENATION type=kotlin.String
+              GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+              CONST String type=kotlin.String value=': should throw ClassCastException, no exception thrown'
+    FUN public inline fun asSucceeds(operation: kotlin.String, block: () -> kotlin.Unit): kotlin.Unit
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+              $this: GET_VAR 'value-parameter block: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=': should not throw exceptions, got '
+                  GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+    CLASS CLASS MyFun
+      CONSTRUCTOR public constructor MyFun()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyFun'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f0: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALLABLE_REFERENCE 'fn0(): Unit' type=kotlin.reflect.KFunction0<kotlin.Unit> operator=null
+        VAR val f1: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALLABLE_REFERENCE 'fn1(Any): Unit' type=kotlin.reflect.KFunction1<kotlin.Any, kotlin.Unit> operator=null
+        VAR val myFun: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALL 'constructor MyFun()' type=MyFun operator=null
+        CALL 'asSucceeds(String, () -> Unit): Unit' type=kotlin.Unit operator=null
+          operation: CONST String type=kotlin.String value='f0 as Function0<*>'
+          block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  TYPE_OP operator=CAST typeOperand=kotlin.Function0<*>
+                    GET_VAR 'f0: Any' type=kotlin.Any operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'asFailsWithCCE(String, () -> Unit): Unit' type=kotlin.Unit operator=null
+          operation: CONST String type=kotlin.String value='f0 as Function1<*, *>'
+          block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  TYPE_OP operator=CAST typeOperand=kotlin.Function1<*, *>
+                    GET_VAR 'f0: Any' type=kotlin.Any operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'asFailsWithCCE(String, () -> Unit): Unit' type=kotlin.Unit operator=null
+          operation: CONST String type=kotlin.String value='f1 as Function0<*>'
+          block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  TYPE_OP operator=CAST typeOperand=kotlin.Function0<*>
+                    GET_VAR 'f1: Any' type=kotlin.Any operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'asSucceeds(String, () -> Unit): Unit' type=kotlin.Unit operator=null
+          operation: CONST String type=kotlin.String value='f1 as Function1<*, *>'
+          block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  TYPE_OP operator=CAST typeOperand=kotlin.Function1<*, *>
+                    GET_VAR 'f1: Any' type=kotlin.Any operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'asFailsWithCCE(String, () -> Unit): Unit' type=kotlin.Unit operator=null
+          operation: CONST String type=kotlin.String value='myFun as Function0<*>'
+          block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  TYPE_OP operator=CAST typeOperand=kotlin.Function0<*>
+                    GET_VAR 'myFun: Any' type=kotlin.Any operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'asFailsWithCCE(String, () -> Unit): Unit' type=kotlin.Unit operator=null
+          operation: CONST String type=kotlin.String value='myFun as Function1<*, *>'
+          block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  TYPE_OP operator=CAST typeOperand=kotlin.Function1<*, *>
+                    GET_VAR 'myFun: Any' type=kotlin.Any operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,99 @@
+MODULE <test-module>
+  FILE /kt10044.kt
+    CLASS CLASS JClass
+      CONSTRUCTOR public constructor JClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='JClass'
+      FUN public final fun test(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test(): String'
+            CONST String type=kotlin.String value='OK'
+    CLASS CLASS Example
+      CONSTRUCTOR public constructor Example()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor JClass()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Example'
+      PROPERTY private final var obj: JClass?
+        EXPRESSION_BODY
+          CONST Null type=kotlin.Nothing? value='null'
+      PROPERTY public final var result: kotlin.String?
+        EXPRESSION_BODY
+          CONST Null type=kotlin.Nothing? value='null'
+      ANONYMOUS_INITIALIZER Example
+        BLOCK_BODY
+          CALL 'invoke(): Unit' type=kotlin.Unit operator=null
+            $this: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                    CALL '<set-result>(String?): Unit' type=kotlin.Unit operator=EQ
+                      $this: THIS of 'Example' type=Example
+                      <set-?>: BLOCK type=kotlin.String? operator=SAFE_CALL
+                        VAR val tmp0_safe_receiver: JClass?
+                          CALL '<get-obj>(): JClass?' type=JClass? operator=GET_PROPERTY
+                            $this: THIS of 'Example' type=Example
+                        WHEN type=kotlin.String? operator=SAFE_CALL
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: GET_VAR 'tmp0_safe_receiver: JClass?' type=JClass? operator=null
+                            arg1: CONST Null type=kotlin.Nothing? value='null'
+                          then: CONST Null type=kotlin.Nothing? value='null'
+                          else: CALL 'test(): String' type=kotlin.String operator=null
+                            $this: GET_VAR 'tmp0_safe_receiver: JClass?' type=JClass? operator=null
+              CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+    CLASS CLASS Example2
+      CONSTRUCTOR public constructor Example2()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor JClass()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Example2'
+      PROPERTY private final var obj: JClass?
+        EXPRESSION_BODY
+          THIS of 'Example2' type=Example2
+      PROPERTY public final var result: kotlin.String?
+        EXPRESSION_BODY
+          CONST Null type=kotlin.Nothing? value='null'
+      ANONYMOUS_INITIALIZER Example2
+        BLOCK_BODY
+          CALL 'invoke(): Unit' type=kotlin.Unit operator=null
+            $this: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                    CALL '<set-result>(String?): Unit' type=kotlin.Unit operator=EQ
+                      $this: THIS of 'Example2' type=Example2
+                      <set-?>: BLOCK type=kotlin.String? operator=SAFE_CALL
+                        VAR val tmp0_safe_receiver: JClass?
+                          CALL '<get-obj>(): JClass?' type=JClass? operator=GET_PROPERTY
+                            $this: THIS of 'Example2' type=Example2
+                        WHEN type=kotlin.String? operator=SAFE_CALL
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: GET_VAR 'tmp0_safe_receiver: JClass?' type=JClass? operator=null
+                            arg1: CONST Null type=kotlin.Nothing? value='null'
+                          then: CONST Null type=kotlin.Nothing? value='null'
+                          else: CALL 'test(): String' type=kotlin.String operator=null
+                            $this: GET_VAR 'tmp0_safe_receiver: JClass?' type=JClass? operator=null
+              CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val result: kotlin.String?
+          CALL '<get-result>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CALL 'constructor Example()' type=Example operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: String?' type=kotlin.String? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='fail 1: '
+            GET_VAR 'result: String?' type=kotlin.String? operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          BLOCK type=kotlin.String operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.String?
+              CALL '<get-result>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                $this: CALL 'constructor Example2()' type=Example2 operator=null
+            WHEN type=kotlin.String operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: String?' type=kotlin.String? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: String?' type=kotlin.String? operator=null

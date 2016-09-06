@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /kClassInstanceIsInitializedFirst.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS OBJECT companion object of A
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of A'
+        PROPERTY public final val ref: kotlin.reflect.KProperty1<A, kotlin.String>
+          EXPRESSION_BODY
+            CALLABLE_REFERENCE 'foo: String' type=kotlin.reflect.KProperty1<A, kotlin.String> operator=null
+      PROPERTY public final val foo: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'get(A): String' type=kotlin.String operator=null
+            $this: CALL '<get-ref>(): KProperty1<A, String>' type=kotlin.reflect.KProperty1<A, kotlin.String> operator=GET_PROPERTY
+              $this: GET_OBJECT 'companion object of A' type=A.Companion
+            receiver: CALL 'constructor A()' type=A operator=null

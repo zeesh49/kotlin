@@ -1,0 +1,50 @@
+MODULE <test-module>
+  FILE /jaggedArrayOfNulls.kt
+    FUN public inline fun <reified T> jaggedArrayOfNulls(): kotlin.Array<kotlin.Array<T>?>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='jaggedArrayOfNulls(): Array<Array<T>?>'
+          CALL 'arrayOfNulls(Int): Array<Array<T>?>' type=kotlin.Array<kotlin.Array<T>?> operator=null
+            size: CONST Int type=kotlin.Int value='1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x1: kotlin.String!
+          CALL '<get-simpleName>() on Class<Array<Array<String>?>>: String!' type=kotlin.String! operator=GET_PROPERTY
+            $receiver: CALL '<get-javaClass>() on Array<Array<String>?>: Class<Array<Array<String>?>>' type=java.lang.Class<kotlin.Array<kotlin.Array<kotlin.String>?>> operator=GET_PROPERTY
+              $receiver: CALL 'jaggedArrayOfNulls(): Array<Array<String>?>' type=kotlin.Array<kotlin.Array<kotlin.String>?> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'x1: String!' type=kotlin.String! operator=null
+              arg1: CONST String type=kotlin.String value='String[][]'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail1: '
+              GET_VAR 'x1: String!' type=kotlin.String! operator=null
+        VAR val x2: kotlin.String!
+          CALL '<get-simpleName>() on Class<Array<Array<Array<String>>?>>: String!' type=kotlin.String! operator=GET_PROPERTY
+            $receiver: CALL '<get-javaClass>() on Array<Array<Array<String>>?>: Class<Array<Array<Array<String>>?>>' type=java.lang.Class<kotlin.Array<kotlin.Array<kotlin.Array<kotlin.String>>?>> operator=GET_PROPERTY
+              $receiver: CALL 'jaggedArrayOfNulls(): Array<Array<Array<String>>?>' type=kotlin.Array<kotlin.Array<kotlin.Array<kotlin.String>>?> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'x2: String!' type=kotlin.String! operator=null
+              arg1: CONST String type=kotlin.String value='String[][][]'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail2: '
+              GET_VAR 'x2: String!' type=kotlin.String! operator=null
+        VAR val x3: kotlin.String!
+          CALL '<get-simpleName>() on Class<Array<Array<IntArray>?>>: String!' type=kotlin.String! operator=GET_PROPERTY
+            $receiver: CALL '<get-javaClass>() on Array<Array<IntArray>?>: Class<Array<Array<IntArray>?>>' type=java.lang.Class<kotlin.Array<kotlin.Array<kotlin.IntArray>?>> operator=GET_PROPERTY
+              $receiver: CALL 'jaggedArrayOfNulls(): Array<Array<IntArray>?>' type=kotlin.Array<kotlin.Array<kotlin.IntArray>?> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'x3: String!' type=kotlin.String! operator=null
+              arg1: CONST String type=kotlin.String value='int[][][]'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail3: '
+              GET_VAR 'x3: String!' type=kotlin.String! operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

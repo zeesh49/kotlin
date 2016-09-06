@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /kt5363.kt
+    CLASS CLASS Outer
+      CONSTRUCTOR public constructor Outer()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+      CLASS CLASS Nested
+        CONSTRUCTOR public constructor Nested()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Nested'
+        FUN public final fun foo(s: kotlin.String): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo(String): String'
+              CALL 'extension() on String: String' type=kotlin.String operator=null
+                $this: THIS of 'companion object of Outer' type=Outer.Companion
+                $receiver: GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+      CLASS OBJECT companion object of Outer
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of Outer'
+        FUN private final fun kotlin.String.extension(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='extension() on String: String'
+              $RECEIVER of 'extension() on String: String' type=kotlin.String
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(String): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Nested()' type=Outer.Nested operator=null
+            s: CONST String type=kotlin.String value='OK'

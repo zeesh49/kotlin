@@ -1,0 +1,138 @@
+MODULE <test-module>
+  FILE /functionLiteralGenericSignature.kt
+    FUN public fun assertGenericSuper(expected: kotlin.String, function: kotlin.Any?): kotlin.Unit
+      BLOCK_BODY
+        VAR val clazz: java.lang.Class<*>
+          BLOCK type=java.lang.Class<*> operator=EXCLEXCL
+            VAR val tmp0_notnull: java.lang.Class<*>!
+              CALL 'getClass(): Class<*>!' type=java.lang.Class<*>! operator=null
+                $this: TYPE_OP operator=CAST typeOperand=java.lang.Object
+                  GET_VAR 'value-parameter function: Any?' type=kotlin.Any? operator=null
+            WHEN type=java.lang.Class<*> operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Class<*>!' type=java.lang.Class<*>! operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+                GET_VAR 'tmp0_notnull: Class<*>!' type=java.lang.Class<*>! operator=null
+        VAR val genericSuper: java.lang.reflect.Type
+          BLOCK type=java.lang.reflect.Type operator=EXCLEXCL
+            VAR val tmp1_notnull: java.lang.reflect.Type!
+              CALL 'get(Int): Type!' type=java.lang.reflect.Type! operator=GET_ARRAY_ELEMENT
+                $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<java.lang.reflect.Type!>
+                  TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Type!>
+                    CALL 'getGenericInterfaces(): Array<(out) Type!>!' type=kotlin.Array<(out) java.lang.reflect.Type!>! operator=null
+                      $this: GET_VAR 'clazz: Class<*>' type=java.lang.Class<*> operator=null
+                index: CONST Int type=kotlin.Int value='0'
+            WHEN type=java.lang.reflect.Type operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp1_notnull: Type!' type=java.lang.reflect.Type! operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Type
+                GET_VAR 'tmp1_notnull: Type!' type=java.lang.reflect.Type! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'genericSuper: Type' type=java.lang.reflect.Type operator=null
+              arg1: GET_VAR 'value-parameter expected: String' type=kotlin.String operator=null
+          then: THROW type=kotlin.Nothing
+            CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+              p0: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='Fail, expected: '
+                GET_VAR 'value-parameter expected: String' type=kotlin.String operator=null
+                CONST String type=kotlin.String value=', actual: '
+                GET_VAR 'genericSuper: Type' type=java.lang.reflect.Type operator=null
+    PROPERTY public val unitFun: () -> kotlin.Unit
+      EXPRESSION_BODY
+        BLOCK type=() -> kotlin.Unit operator=LAMBDA
+          FUN local final fun <anonymous>(): kotlin.Unit
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+          CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+    PROPERTY public val intFun: () -> kotlin.Int
+      EXPRESSION_BODY
+        BLOCK type=() -> kotlin.Int operator=LAMBDA
+          FUN local final fun <anonymous>(): kotlin.Int
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<anonymous>(): Int'
+                CONST Int type=kotlin.Int value='42'
+          CALLABLE_REFERENCE '<anonymous>(): Int' type=() -> kotlin.Int operator=LAMBDA
+    PROPERTY public val stringParamFun: (kotlin.String) -> kotlin.Unit
+      EXPRESSION_BODY
+        BLOCK type=(kotlin.String) -> kotlin.Unit operator=LAMBDA
+          FUN local final fun <anonymous>(x: kotlin.String): kotlin.Unit
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<anonymous>(String): Unit'
+          CALLABLE_REFERENCE '<anonymous>(String): Unit' type=(kotlin.String) -> kotlin.Unit operator=LAMBDA
+    PROPERTY public val listFun: (kotlin.collections.List<kotlin.String>) -> kotlin.collections.List<kotlin.String>
+      EXPRESSION_BODY
+        BLOCK type=(kotlin.collections.List<kotlin.String>) -> kotlin.collections.List<kotlin.String> operator=LAMBDA
+          FUN local final fun <anonymous>(l: kotlin.collections.List<kotlin.String>): kotlin.collections.List<kotlin.String>
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<anonymous>(List<String>): List<String>'
+                GET_VAR 'value-parameter l: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+          CALLABLE_REFERENCE '<anonymous>(List<String>): List<String>' type=(kotlin.collections.List<kotlin.String>) -> kotlin.collections.List<kotlin.String> operator=LAMBDA
+    PROPERTY public val mutableListFun: (kotlin.collections.MutableList<kotlin.Double>) -> kotlin.collections.MutableList<kotlin.Int>
+      EXPRESSION_BODY
+        BLOCK type=(kotlin.collections.MutableList<kotlin.Double>) -> kotlin.collections.MutableList<kotlin.Int> operator=ANONYMOUS_FUNCTION
+          FUN local final fun <no name provided>(l: kotlin.collections.MutableList<kotlin.Double>): kotlin.collections.MutableList<kotlin.Int>
+            BLOCK_BODY
+              BLOCK type=kotlin.Nothing operator=EXCLEXCL
+                VAR val tmp0_notnull: kotlin.Nothing?
+                  CONST Null type=kotlin.Nothing? value='null'
+                WHEN type=kotlin.Nothing operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+          CALLABLE_REFERENCE '<no name provided>(MutableList<Double>): MutableList<Int>' type=(kotlin.collections.MutableList<kotlin.Double>) -> kotlin.collections.MutableList<kotlin.Int> operator=ANONYMOUS_FUNCTION
+    PROPERTY public val funWithIn: (kotlin.Comparable<kotlin.String>) -> kotlin.Unit
+      EXPRESSION_BODY
+        BLOCK type=(kotlin.Comparable<kotlin.String>) -> kotlin.Unit operator=ANONYMOUS_FUNCTION
+          FUN local final fun <no name provided>(x: kotlin.Comparable<kotlin.String>): kotlin.Unit
+            BLOCK_BODY
+          CALLABLE_REFERENCE '<no name provided>(Comparable<String>): Unit' type=(kotlin.Comparable<kotlin.String>) -> kotlin.Unit operator=ANONYMOUS_FUNCTION
+    PROPERTY public val extensionFun: kotlin.Any.() -> kotlin.Unit
+      EXPRESSION_BODY
+        BLOCK type=kotlin.Any.() -> kotlin.Unit operator=ANONYMOUS_FUNCTION
+          FUN local final fun kotlin.Any.<no name provided>(): kotlin.Unit
+            BLOCK_BODY
+          CALLABLE_REFERENCE '<no name provided>() on Any: Unit' type=kotlin.Any.() -> kotlin.Unit operator=ANONYMOUS_FUNCTION
+    PROPERTY public val extensionWithArgFun: kotlin.Long.(kotlin.Any) -> java.util.Date
+      EXPRESSION_BODY
+        BLOCK type=kotlin.Long.(kotlin.Any) -> java.util.Date operator=ANONYMOUS_FUNCTION
+          FUN local final fun kotlin.Long.<no name provided>(x: kotlin.Any): java.util.Date
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<no name provided>(Any) on Long: Date'
+                CALL 'constructor Date()' type=java.util.Date operator=null
+          CALLABLE_REFERENCE '<no name provided>(Any) on Long: Date' type=kotlin.Long.(kotlin.Any) -> java.util.Date operator=ANONYMOUS_FUNCTION
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertGenericSuper(String, Any?): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.jvm.functions.Function0<kotlin.Unit>'
+          function: CALL '<get-unitFun>(): () -> Unit' type=() -> kotlin.Unit operator=GET_PROPERTY
+        CALL 'assertGenericSuper(String, Any?): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.jvm.functions.Function0<java.lang.Integer>'
+          function: CALL '<get-intFun>(): () -> Int' type=() -> kotlin.Int operator=GET_PROPERTY
+        CALL 'assertGenericSuper(String, Any?): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.jvm.functions.Function1<java.lang.String, kotlin.Unit>'
+          function: CALL '<get-stringParamFun>(): (String) -> Unit' type=(kotlin.String) -> kotlin.Unit operator=GET_PROPERTY
+        CALL 'assertGenericSuper(String, Any?): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.jvm.functions.Function1<java.util.List<? extends java.lang.String>, java.util.List<? extends java.lang.String>>'
+          function: CALL '<get-listFun>(): (List<String>) -> List<String>' type=(kotlin.collections.List<kotlin.String>) -> kotlin.collections.List<kotlin.String> operator=GET_PROPERTY
+        CALL 'assertGenericSuper(String, Any?): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.jvm.functions.Function1<java.util.List<java.lang.Double>, java.util.List<java.lang.Integer>>'
+          function: CALL '<get-mutableListFun>(): (MutableList<Double>) -> MutableList<Int>' type=(kotlin.collections.MutableList<kotlin.Double>) -> kotlin.collections.MutableList<kotlin.Int> operator=GET_PROPERTY
+        CALL 'assertGenericSuper(String, Any?): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.jvm.functions.Function1<java.lang.Comparable<? super java.lang.String>, kotlin.Unit>'
+          function: CALL '<get-funWithIn>(): (Comparable<String>) -> Unit' type=(kotlin.Comparable<kotlin.String>) -> kotlin.Unit operator=GET_PROPERTY
+        CALL 'assertGenericSuper(String, Any?): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.jvm.functions.Function1<java.lang.Object, kotlin.Unit>'
+          function: CALL '<get-extensionFun>(): Any.() -> Unit' type=kotlin.Any.() -> kotlin.Unit operator=GET_PROPERTY
+        CALL 'assertGenericSuper(String, Any?): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.jvm.functions.Function2<java.lang.Long, java.lang.Object, java.util.Date>'
+          function: CALL '<get-extensionWithArgFun>(): Long.(Any) -> Date' type=kotlin.Long.(kotlin.Any) -> java.util.Date operator=GET_PROPERTY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

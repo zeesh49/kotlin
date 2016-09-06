@@ -1,0 +1,29 @@
+MODULE <test-module>
+  FILE /twoAnnotatedExtensionPropertiesWithoutBackingFields.kt
+    CLASS ANNOTATION_CLASS Anno
+    PROPERTY @Anno public val kotlin.Int.foo: kotlin.Int
+      PROPERTY_GETTER public fun kotlin.Int.<get-foo>(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-foo>() on Int: Int'
+            $RECEIVER of 'foo: Int on Int' type=kotlin.Int
+    PROPERTY @Anno public val kotlin.String.foo: kotlin.Int
+      PROPERTY_GETTER public fun kotlin.String.<get-foo>(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-foo>() on String: Int'
+            CONST Int type=kotlin.Int value='42'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL '<get-foo>() on Int: Int' type=kotlin.Int operator=GET_PROPERTY
+                  $receiver: CONST Int type=kotlin.Int value='42'
+                arg1: CONST Int type=kotlin.Int value='42'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL '<get-foo>() on String: Int' type=kotlin.Int operator=GET_PROPERTY
+                  $receiver: CONST String type=kotlin.String value='OK'
+                arg1: CONST Int type=kotlin.Int value='42'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='Fail'

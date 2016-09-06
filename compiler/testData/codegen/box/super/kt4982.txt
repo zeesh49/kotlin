@@ -1,0 +1,37 @@
+MODULE <test-module>
+  FILE /kt4982.kt
+    CLASS CLASS WaitFor
+      CONSTRUCTOR public constructor WaitFor()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='WaitFor'
+      ANONYMOUS_INITIALIZER WaitFor
+        BLOCK_BODY
+          CALL 'condition(): Boolean' type=kotlin.Boolean operator=null
+            $this: THIS of 'WaitFor' type=WaitFor
+      FUN public abstract fun condition(): kotlin.Boolean
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val local: kotlin.String = ""
+          CONST String type=kotlin.String value=''
+        VAR var result: kotlin.String
+          CONST String type=kotlin.String value='fail'
+        VAR val s: box.<no name provided>
+          BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor WaitFor()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              FUN public open override fun condition(): kotlin.Boolean
+                BLOCK_BODY
+                  SET_VAR 'result: String' type=kotlin.Unit operator=EQ
+                    CONST String type=kotlin.String value='OK'
+                  RETURN type=kotlin.Nothing from='condition(): Boolean'
+                    CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                        $this: GET_VAR 'result: String' type=kotlin.String operator=null
+                      arg1: CONST Int type=kotlin.Int value='2'
+            CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL
+        RETURN type=kotlin.Nothing from='box(): String'
+          GET_VAR 'result: String' type=kotlin.String operator=null

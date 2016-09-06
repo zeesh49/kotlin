@@ -1,0 +1,27 @@
+MODULE <test-module>
+  FILE /classMemberFromTopLevelUnitNoArgs.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var result: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='Fail'
+      FUN public final fun foo(): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'A' type=A
+            <set-?>: CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          CALL 'constructor A()' type=A operator=null
+        VAR val x: kotlin.reflect.KFunction1<A, kotlin.Unit>
+          CALLABLE_REFERENCE 'foo(): Unit' type=kotlin.reflect.KFunction1<A, kotlin.Unit> operator=null
+        CALL 'invoke(A): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'x: KFunction1<A, Unit>' type=kotlin.reflect.KFunction1<A, kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+          p1: GET_VAR 'a: A' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_VAR 'a: A' type=A operator=null

@@ -1,0 +1,57 @@
+MODULE <test-module>
+  FILE /explicitObject.kt
+    CLASS OBJECT AX
+      CONSTRUCTOR private constructor AX()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='AX'
+      PROPERTY @kotlin.jvm.JvmStatic public final val c: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+      FUN @kotlin.jvm.JvmStatic public final fun aStatic(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='aStatic(): String'
+            CALL 'b(): String' type=kotlin.String operator=null
+              $this: GET_OBJECT 'AX' type=AX
+      FUN public final fun aNonStatic(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='aNonStatic(): String'
+            CALL 'b(): String' type=kotlin.String operator=null
+              $this: GET_OBJECT 'AX' type=AX
+      FUN @kotlin.jvm.JvmStatic public final fun b(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='b(): String'
+            CONST String type=kotlin.String value='OK'
+      FUN public final fun getProperty(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getProperty(): String'
+            CALL '<get-c>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: GET_OBJECT 'AX' type=AX
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'aStatic(): String' type=kotlin.String operator=null
+                $this: GET_OBJECT 'AX' type=AX
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'aNonStatic(): String' type=kotlin.String operator=null
+                $this: GET_OBJECT 'AX' type=AX
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'getProperty(): String' type=kotlin.String operator=null
+                $this: GET_OBJECT 'AX' type=AX
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

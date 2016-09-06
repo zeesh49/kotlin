@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /kt3492TraitFun.kt
+    CLASS INTERFACE ATrait
+      FUN public open fun foo2(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo2(): String'
+            CONST String type=kotlin.String value='OK'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor B()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      CLASS CLASS D
+        CONSTRUCTOR public constructor D()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='D'
+        PROPERTY public final val foo: kotlin.String
+          EXPRESSION_BODY
+            CALL 'foo2(): String' superQualifier=B type=kotlin.String operator=null
+              $this: THIS of 'C' type=B
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val obj: C.D
+          CALL 'constructor D()' type=C.D operator=null
+            $this: CALL 'constructor C()' type=C operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-foo>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_VAR 'obj: C.D' type=C.D operator=null

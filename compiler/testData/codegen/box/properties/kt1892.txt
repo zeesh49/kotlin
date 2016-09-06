@@ -1,0 +1,37 @@
+MODULE <test-module>
+  FILE /kt1892.kt
+    PROPERTY public val kotlin.Int.ext: () -> kotlin.Int
+      PROPERTY_GETTER public fun kotlin.Int.<get-ext>(): () -> kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-ext>() on Int: () -> Int'
+            BLOCK type=() -> kotlin.Int operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Int'
+                    CONST Int type=kotlin.Int value='5'
+              CALLABLE_REFERENCE '<anonymous>(): Int' type=() -> kotlin.Int operator=LAMBDA
+    PROPERTY public val kotlin.Long.ext: kotlin.Long
+      PROPERTY_GETTER public fun kotlin.Long.<get-ext>(): kotlin.Long
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-ext>() on Long: Long'
+            CALL 'toLong(): Long' type=kotlin.Long operator=null
+              $this: CALL 'invoke(): Int' type=kotlin.Int operator=INVOKE
+                $this: CALL '<get-ext>() on Int: () -> Int' type=() -> kotlin.Int operator=GET_PROPERTY
+                  $receiver: CONST Int type=kotlin.Int value='4'
+    PROPERTY public val y: kotlin.Long
+      PROPERTY_GETTER public fun <get-y>(): kotlin.Long
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-y>(): Long'
+            CALL '<get-ext>() on Long: Long' type=kotlin.Long operator=GET_PROPERTY
+              $receiver: CONST Long type=kotlin.Long value='10'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-y>(): Long' type=kotlin.Long operator=GET_PROPERTY
+              arg1: CONST Long type=kotlin.Long value='5'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: '
+              CALL '<get-y>(): Long' type=kotlin.Long operator=GET_PROPERTY

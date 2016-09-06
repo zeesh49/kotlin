@@ -1,0 +1,37 @@
+MODULE <test-module>
+  FILE /kt9711.kt
+    CLASS ENUM_CLASS X
+      CONSTRUCTOR private constructor X()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='X'
+      ENUM_ENTRY enum entry B
+        init: ENUM_CONSTRUCTOR_CALL 'constructor B()' B
+        class: CLASS ENUM_ENTRY B
+          CONSTRUCTOR private constructor B()
+            BLOCK_BODY
+              ENUM_CONSTRUCTOR_CALL 'constructor X()' super
+              INSTANCE_INITIALIZER_CALL classDescriptor='B'
+          PROPERTY public final val value2: kotlin.String = "OK"
+            EXPRESSION_BODY
+              CONST String type=kotlin.String value='OK'
+          PROPERTY public open override val value: () -> kotlin.String
+            EXPRESSION_BODY
+              BLOCK type=() -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                      CALL '<get-value2>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: THIS of 'B' type=X.B
+                CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+      PROPERTY public abstract val value: () -> kotlin.String
+      FUN public final fun values(): kotlin.Array<X>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): X
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+            $this: CALL '<get-value>(): () -> String' type=() -> kotlin.String operator=GET_PROPERTY
+              $this: GET_ENUM_VALUE 'B' type=X

@@ -1,0 +1,48 @@
+MODULE <test-module>
+  FILE /selfcreate.kt
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(b: B)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'b: B' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter b: B' type=B operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val b: B
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter b: B' type=B operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun a(): A
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='a(): A'
+            BLOCK type=A.a.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor A(B)'
+                      b: CALL '<get-b>(): B' type=B operator=GET_PROPERTY
+                        $this: THIS of 'A' type=A
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              CALL 'constructor <no name provided>()' type=A.a.<no name provided> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val b: B
+          CALL 'constructor B()' type=B operator=null
+        VAR val a: A
+          CALL 'a(): A' type=A operator=null
+            $this: CALL 'constructor A(B)' type=A operator=null
+              b: GET_VAR 'b: B' type=B operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+            arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+              arg0: CALL '<get-b>(): B' type=B operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: GET_VAR 'b: B' type=B operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='failed'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

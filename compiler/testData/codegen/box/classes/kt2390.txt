@@ -1,0 +1,49 @@
+MODULE <test-module>
+  FILE /kt2390.kt
+    CLASS CLASS JsonObject
+      CONSTRUCTOR public constructor JsonObject()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='JsonObject'
+    CLASS CLASS JsonArray
+      CONSTRUCTOR public constructor JsonArray()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='JsonArray'
+    CLASS INTERFACE Formatter
+      FUN public abstract fun format(source: IN?): OUT
+    CLASS INTERFACE MultiFormatter
+      FUN public abstract fun format(source: kotlin.collections.Collection<IN>): OUT
+    CLASS CLASS Project
+      CONSTRUCTOR public constructor Project()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Project'
+    CLASS INTERFACE JsonFormatter
+      FUN public open override fun format(source: kotlin.collections.Collection<IN>): JsonArray
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='format(Collection<IN>): JsonArray'
+            CALL 'constructor JsonArray()' type=JsonArray operator=null
+    CLASS CLASS ProjectJsonFormatter
+      CONSTRUCTOR public constructor ProjectJsonFormatter()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ProjectJsonFormatter'
+      FUN public open override fun format(source: Project?): JsonObject
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='format(Project?): JsonObject'
+            CALL 'constructor JsonObject()' type=JsonObject operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val formatter: ProjectJsonFormatter
+          CALL 'constructor ProjectJsonFormatter()' type=ProjectJsonFormatter operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'format(Project?): JsonObject' type=JsonObject operator=null
+                  $this: GET_VAR 'formatter: ProjectJsonFormatter' type=ProjectJsonFormatter operator=null
+                  source: CALL 'constructor Project()' type=Project operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

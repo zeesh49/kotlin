@@ -1,0 +1,91 @@
+MODULE <test-module>
+  FILE /kt503.kt
+    FUN public fun iarr(vararg a: kotlin.Int): kotlin.IntArray
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='iarr(vararg Int): IntArray'
+          GET_VAR 'value-parameter vararg a: Int' type=kotlin.IntArray operator=null
+    FUN public fun <T> array(vararg a: T): kotlin.Array<out T>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='array(vararg T): Array<out T>'
+          GET_VAR 'value-parameter vararg a: T' type=kotlin.Array<out T> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val tests: kotlin.Array<out kotlin.IntArray>
+          CALL 'array(vararg IntArray): Array<out IntArray>' type=kotlin.Array<out kotlin.IntArray> operator=null
+            a: VARARG type=Array<out IntArray> varargElementType=IntArray
+              CALL 'iarr(vararg Int): IntArray' type=kotlin.IntArray operator=null
+                a: VARARG type=IntArray varargElementType=Int
+                  CONST Int type=kotlin.Int value='6'
+                  CONST Int type=kotlin.Int value='5'
+                  CONST Int type=kotlin.Int value='4'
+                  CONST Int type=kotlin.Int value='3'
+                  CONST Int type=kotlin.Int value='2'
+                  CONST Int type=kotlin.Int value='1'
+              CALL 'iarr(vararg Int): IntArray' type=kotlin.IntArray operator=null
+                a: VARARG type=IntArray varargElementType=Int
+                  CONST Int type=kotlin.Int value='1'
+                  CONST Int type=kotlin.Int value='2'
+              CALL 'iarr(vararg Int): IntArray' type=kotlin.IntArray operator=null
+                a: VARARG type=IntArray varargElementType=Int
+                  CONST Int type=kotlin.Int value='1'
+                  CONST Int type=kotlin.Int value='2'
+                  CONST Int type=kotlin.Int value='3'
+              CALL 'iarr(vararg Int): IntArray' type=kotlin.IntArray operator=null
+                a: VARARG type=IntArray varargElementType=Int
+                  CONST Int type=kotlin.Int value='1'
+                  CONST Int type=kotlin.Int value='2'
+                  CONST Int type=kotlin.Int value='3'
+                  CONST Int type=kotlin.Int value='4'
+              CALL 'iarr(vararg Int): IntArray' type=kotlin.IntArray operator=null
+                a: VARARG type=IntArray varargElementType=Int
+                  CONST Int type=kotlin.Int value='1'
+        VAR var n: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            VAR var i: kotlin.Int
+              CONST Int type=kotlin.Int value='0'
+            WHILE label=null operator=WHILE_LOOP
+              condition: CONST Boolean type=kotlin.Boolean value='true'
+              body: BLOCK type=kotlin.Unit operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'thirdElementIsThree(IntArray): Boolean' type=kotlin.Boolean operator=null
+                    a: CALL 'get(Int): IntArray' type=kotlin.IntArray operator=GET_ARRAY_ELEMENT
+                      $this: GET_VAR 'tests: Array<out IntArray>' type=kotlin.Array<out kotlin.IntArray> operator=null
+                      index: BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                        VAR val tmp0: kotlin.Int
+                          GET_VAR 'i: Int' type=kotlin.Int operator=POSTFIX_INCR
+                        SET_VAR 'i: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                          CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                            $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                        GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                  then: BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                    VAR val tmp1: kotlin.Int
+                      GET_VAR 'n: Int' type=kotlin.Int operator=POSTFIX_INCR
+                    SET_VAR 'n: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                      CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                        $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                    GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+          catch e: BLOCK type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'n: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'
+    FUN public fun thirdElementIsThree(a: kotlin.IntArray): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='thirdElementIsThree(IntArray): Boolean'
+          WHEN type=kotlin.Boolean operator=ANDAND
+            if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+              arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GTEQ
+                $this: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'value-parameter a: IntArray' type=kotlin.IntArray operator=null
+                other: CONST Int type=kotlin.Int value='3'
+            then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'value-parameter a: IntArray' type=kotlin.IntArray operator=null
+                index: CONST Int type=kotlin.Int value='2'
+              arg1: CONST Int type=kotlin.Int value='3'
+            else: CONST Boolean type=kotlin.Boolean value='false'

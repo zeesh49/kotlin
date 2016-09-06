@@ -1,0 +1,22 @@
+MODULE <test-module>
+  FILE /accessToPrivateSetter.kt
+    CLASS CLASS D
+      CONSTRUCTOR public constructor D()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='D'
+      PROPERTY public final var foo: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+        PROPERTY_SETTER private final fun <set-foo>(<set-?>: kotlin.Int): kotlin.Unit
+      FUN public final fun foo(): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-foo>(Int): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'D' type=D
+            <set-?>: CONST Int type=kotlin.Int value='2'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor D()' type=D operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

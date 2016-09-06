@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /K.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(vararg String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='Inner'
+              CONST String type=kotlin.String value='Nested'
+              CONST String type=kotlin.String value='PrivateNested'
+          actual: CALL 'sorted() on Iterable<String>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            $receiver: CALL 'map((KClass<*>) -> String) on Iterable<KClass<*>>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              $receiver: CALL '<get-nestedClasses>(): Collection<KClass<*>>' type=kotlin.collections.Collection<kotlin.reflect.KClass<*>> operator=GET_PROPERTY
+                $this: CLASS_REFERENCE 'J' type=kotlin.reflect.KClass<J>
+              transform: BLOCK type=(kotlin.reflect.KClass<*>) -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KClass<*>): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KClass<*>): String'
+                      BLOCK type=kotlin.String operator=EXCLEXCL
+                        VAR val tmp0_notnull: kotlin.String?
+                          CALL '<get-simpleName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                            $this: GET_VAR 'value-parameter it: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+                        WHEN type=kotlin.String operator=null
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: GET_VAR 'tmp0_notnull: String?' type=kotlin.String? operator=null
+                            arg1: CONST Null type=kotlin.Nothing? value='null'
+                          then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                          else: GET_VAR 'tmp0_notnull: String?' type=kotlin.String? operator=null
+                CALLABLE_REFERENCE '<anonymous>(KClass<*>): String' type=(kotlin.reflect.KClass<*>) -> kotlin.String operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

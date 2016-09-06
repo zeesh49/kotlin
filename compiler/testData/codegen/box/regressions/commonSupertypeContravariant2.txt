@@ -1,0 +1,35 @@
+MODULE <test-module>
+  FILE /commonSupertypeContravariant2.kt
+    CLASS INTERFACE In
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    FUN public fun <T> select(x: T, y: T): T
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='select(T, T): T'
+          BLOCK type=T operator=ELVIS
+            VAR val tmp0_elvis_lhs: T
+              GET_VAR 'value-parameter x: T' type=T operator=null
+            WHEN type=T operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_elvis_lhs: T' type=T operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: GET_VAR 'value-parameter y: T' type=T operator=null
+              else: GET_VAR 'tmp0_elvis_lhs: T' type=T operator=null
+    FUN public fun foobar(a: A, b: B): In<*>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foobar(A, B): In<*>'
+          CALL 'select(In<*>, In<*>): In<*>' type=In<*> operator=null
+            x: GET_VAR 'value-parameter a: A' type=A operator=null
+            y: GET_VAR 'value-parameter b: B' type=B operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

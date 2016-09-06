@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /kt3863.kt
+    CLASS CLASS NotImplemented
+      CONSTRUCTOR public constructor NotImplemented<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='NotImplemented'
+      FUN public final operator fun getValue(thisRef: kotlin.Any?, prop: kotlin.reflect.KProperty<*>): T
+        BLOCK_BODY
+          CALL 'notImplemented(): Nothing' type=kotlin.Nothing operator=null
+      FUN public final operator fun setValue(thisRef: kotlin.Any?, prop: kotlin.reflect.KProperty<*>, value: T): kotlin.Nothing
+        BLOCK_BODY
+          CALL 'notImplemented(): Nothing' type=kotlin.Nothing operator=null
+    FUN public fun notImplemented(): kotlin.Nothing
+      BLOCK_BODY
+        CALL 'notImplemented(): Nothing' type=kotlin.Nothing operator=null
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      PROPERTY public final val x: kotlin.Int
+        delegate: PROPERTY val `x$delegate`: NotImplemented<kotlin.Int>
+          EXPRESSION_BODY
+            CALL 'constructor NotImplemented()' type=NotImplemented<kotlin.Int> operator=null
+        PROPERTY_GETTER public final fun <get-x>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-x>(): Int'
+              CALL 'getValue(Any?, KProperty<*>): Int' type=kotlin.Int operator=null
+                $this: GET_BACKING_FIELD '`x$delegate`: NotImplemented<Int>' type=NotImplemented<kotlin.Int> operator=null
+                  receiver: THIS of 'Test' type=Test
+                thisRef: THIS of 'Test' type=Test
+                prop: CALLABLE_REFERENCE 'x: Int' type=kotlin.reflect.KProperty1<Test, kotlin.Int> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'constructor Test()' type=Test operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,73 @@
+MODULE <test-module>
+  FILE /finallyAndFinally.kt
+    CLASS CLASS MyString
+      CONSTRUCTOR public constructor MyString()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyString'
+      PROPERTY public final var s: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value=''
+      FUN public final operator fun plus(x: kotlin.String): MyString
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            VAR val tmp0_this: MyString
+              THIS of 'MyString' type=MyString
+            CALL '<set-s>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+              $this: GET_VAR 'tmp0_this: MyString' type=MyString operator=null
+              <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: CALL '<get-s>(): String' type=kotlin.String operator=PLUSEQ
+                  $this: GET_VAR 'tmp0_this: MyString' type=MyString operator=null
+                other: GET_VAR 'value-parameter x: String' type=kotlin.String operator=null
+          RETURN type=kotlin.Nothing from='plus(String): MyString'
+            THIS of 'MyString' type=MyString
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'MyString' type=MyString
+    FUN public fun test1(): MyString
+      BLOCK_BODY
+        VAR var r: MyString
+          CALL 'constructor MyString()' type=MyString operator=null
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'plus(String): MyString' type=MyString operator=PLUS
+              $this: GET_VAR 'r: MyString' type=MyString operator=null
+              x: CONST String type=kotlin.String value='Try1'
+            TRY_CATCH type=kotlin.Unit
+              try: BLOCK type=kotlin.Unit operator=null
+                CALL 'plus(String): MyString' type=MyString operator=PLUS
+                  $this: GET_VAR 'r: MyString' type=MyString operator=null
+                  x: CONST String type=kotlin.String value='Try2'
+                WHEN type=kotlin.Unit operator=IF
+                  if: CONST Boolean type=kotlin.Boolean value='true'
+                  then: RETURN type=kotlin.Nothing from='test1(): MyString'
+                    GET_VAR 'r: MyString' type=MyString operator=null
+              finally: BLOCK type=kotlin.Unit operator=null
+                CALL 'plus(String): MyString' type=MyString operator=PLUS
+                  $this: GET_VAR 'r: MyString' type=MyString operator=null
+                  x: CONST String type=kotlin.String value='Finally2'
+                WHEN type=kotlin.Unit operator=IF
+                  if: CONST Boolean type=kotlin.Boolean value='true'
+                  then: BLOCK type=kotlin.Nothing operator=null
+                    RETURN type=kotlin.Nothing from='test1(): MyString'
+                      GET_VAR 'r: MyString' type=MyString operator=null
+            RETURN type=kotlin.Nothing from='test1(): MyString'
+              GET_VAR 'r: MyString' type=MyString operator=null
+          finally: BLOCK type=MyString operator=null
+            CALL 'plus(String): MyString' type=MyString operator=PLUS
+              $this: GET_VAR 'r: MyString' type=MyString operator=null
+              x: CONST String type=kotlin.String value='Finally1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: CALL 'test1(): MyString' type=MyString operator=null
+              arg1: CONST String type=kotlin.String value='Try1Try2Finally2Finally1'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: '
+              CALL 'test1(): MyString' type=MyString operator=null

@@ -1,0 +1,30 @@
+MODULE <test-module>
+  FILE /test.kt
+    CLASS CLASS X
+      CONSTRUCTOR public constructor X()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='X'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: X
+          CALL 'constructor X()' type=X operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'x: X' type=X operator=null
+              arg1: CONST Int type=kotlin.Int value='56'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Char' type=kotlin.Char operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'x: X' type=X operator=null
+                index: CONST Int type=kotlin.Int value='0'
+              arg1: CONST Char type=kotlin.Char value='A'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

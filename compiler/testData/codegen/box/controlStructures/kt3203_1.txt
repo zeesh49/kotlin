@@ -1,0 +1,32 @@
+MODULE <test-module>
+  FILE /kt3203_1.kt
+    FUN public fun testIf(): kotlin.Unit
+      BLOCK_BODY
+        VAR val condition: kotlin.Boolean = true
+          CONST Boolean type=kotlin.Boolean value='true'
+        VAR val result: kotlin.Boolean
+          WHEN type=kotlin.Boolean operator=IF
+            if: GET_VAR 'condition: Boolean' type=kotlin.Boolean operator=null
+            then: BLOCK type=kotlin.Boolean operator=null
+              VAR val hello: kotlin.String? = "hello"
+                CONST String type=kotlin.String value='hello'
+              WHEN type=kotlin.Boolean operator=IF
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'hello: String?' type=kotlin.String? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: BLOCK type=kotlin.Boolean operator=null
+                  CONST Boolean type=kotlin.Boolean value='false'
+                else: BLOCK type=kotlin.Boolean operator=null
+                  CONST Boolean type=kotlin.Boolean value='true'
+            else: CONST Boolean type=kotlin.Boolean value='true'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: GET_VAR 'result: Boolean' type=kotlin.Boolean operator=null
+          then: THROW type=kotlin.Nothing
+            CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+              p0: CONST String type=kotlin.String value='result is false'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'testIf(): Unit' type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

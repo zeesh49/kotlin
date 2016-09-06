@@ -1,0 +1,19 @@
+MODULE <test-module>
+  FILE /simpleNative.kt
+    CLASS CLASS WithNative
+      CONSTRUCTOR public constructor WithNative()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='WithNative'
+      FUN public final external fun foo(): kotlin.Unit
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'foo(): Unit' type=kotlin.Unit operator=null
+              $this: CALL 'constructor WithNative()' type=foo.WithNative operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Link error expected'
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'

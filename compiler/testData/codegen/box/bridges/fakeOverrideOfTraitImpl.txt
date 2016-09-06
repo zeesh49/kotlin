@@ -1,0 +1,58 @@
+MODULE <test-module>
+  FILE /fakeOverrideOfTraitImpl.kt
+    PROPERTY public var result: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    CLASS INTERFACE D1
+      FUN public open fun foo(): D1
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            CALL '<set-result>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+              <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: CALL '<get-result>(): String' type=kotlin.String operator=PLUSEQ
+                other: CONST String type=kotlin.String value='D1'
+          RETURN type=kotlin.Nothing from='foo(): D1'
+            THIS of 'D1' type=D1
+    CLASS INTERFACE F2
+    CLASS INTERFACE D3
+      FUN public open override fun foo(): D3
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            CALL '<set-result>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+              <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: CALL '<get-result>(): String' type=kotlin.String operator=PLUSEQ
+                other: CONST String type=kotlin.String value='D3'
+          RETURN type=kotlin.Nothing from='foo(): D3'
+            THIS of 'D3' type=D3
+    CLASS CLASS D4
+      CONSTRUCTOR public constructor D4()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='D4'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: D4
+          CALL 'constructor D4()' type=D4 operator=null
+        CALL 'foo(): D3' type=D3 operator=null
+          $this: GET_VAR 'x: D4' type=D4 operator=null
+        VAR val d3: D3
+          GET_VAR 'x: D4' type=D4 operator=null
+        VAR val f2: F2
+          GET_VAR 'x: D4' type=D4 operator=null
+        VAR val d1: D1
+          GET_VAR 'x: D4' type=D4 operator=null
+        CALL 'foo(): D3' type=D3 operator=null
+          $this: GET_VAR 'd3: D3' type=D3 operator=null
+        CALL 'foo(): D1' type=D1 operator=null
+          $this: GET_VAR 'f2: F2' type=F2 operator=null
+        CALL 'foo(): D1' type=D1 operator=null
+          $this: GET_VAR 'd1: D1' type=D1 operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+              arg1: CONST String type=kotlin.String value='D3D3D3D3'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY

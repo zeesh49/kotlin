@@ -1,0 +1,60 @@
+MODULE <test-module>
+  FILE /noPrivateNoAccessorsInMultiFileFacade2.kt
+    PROPERTY public var prop: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='fail'
+      PROPERTY_SETTER private fun <set-prop>(<set-?>: kotlin.String): kotlin.Unit
+    FUN private fun test(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test(): String'
+          CONST String type=kotlin.String value='K'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val clazz: java.lang.Class<*>!
+          CALL 'forName(String!): Class<*>!' type=java.lang.Class<*>! operator=null
+            p0: CONST String type=kotlin.String value='test.TestKt'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='2'
+          actual: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<java.lang.reflect.Method!>
+              TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Method!>
+                CALL '<get-declaredMethods>() on Class<*>: Array<(out) Method!>!' type=kotlin.Array<(out) java.lang.reflect.Method!>! operator=GET_PROPERTY
+                  $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+                    GET_VAR 'clazz: Class<*>!' type=java.lang.Class<*>! operator=null
+          message: CONST String type=kotlin.String value='Facade should have only box method'
+        VAR val methods: kotlin.collections.List<kotlin.String!>
+          CALL 'map((Method!) -> String!) on Array<out Method!>: List<String!>' type=kotlin.collections.List<kotlin.String!> operator=null
+            $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Method!>
+              CALL '<get-declaredMethods>() on Class<*>: Array<(out) Method!>!' type=kotlin.Array<(out) java.lang.reflect.Method!>! operator=GET_PROPERTY
+                $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+                  GET_VAR 'clazz: Class<*>!' type=java.lang.Class<*>! operator=null
+            transform: BLOCK type=(java.lang.reflect.Method!) -> kotlin.String! operator=LAMBDA
+              FUN local final fun <anonymous>(it: java.lang.reflect.Method!): kotlin.String!
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Method!): String!'
+                    CALL '<get-name>() on Method: String!' type=kotlin.String! operator=GET_PROPERTY
+                      $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                        GET_VAR 'value-parameter it: Method!' type=java.lang.reflect.Method! operator=null
+              CALLABLE_REFERENCE '<anonymous>(Method!): String!' type=(java.lang.reflect.Method!) -> kotlin.String! operator=LAMBDA
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'contains(String!): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'methods: List<String!>' type=kotlin.collections.List<kotlin.String!> operator=null
+            element: CONST String type=kotlin.String value='box'
+          message: CONST String type=kotlin.String value='Facade should have box method'
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'contains(String!): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'methods: List<String!>' type=kotlin.collections.List<kotlin.String!> operator=null
+            element: CONST String type=kotlin.String value='getProp'
+          message: CONST String type=kotlin.String value='Facade should have box method'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'invoke(): String' type=kotlin.String operator=null
+            $this: BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  CALL '<set-prop>(String): Unit' type=kotlin.Unit operator=EQ
+                    <set-?>: CONST String type=kotlin.String value='O'
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                      $this: CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                      other: CALL 'test(): String' type=kotlin.String operator=null
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA

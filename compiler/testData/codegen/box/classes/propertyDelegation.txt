@@ -1,0 +1,99 @@
+MODULE <test-module>
+  FILE /propertyDelegation.kt
+    CLASS CLASS Base
+      CONSTRUCTOR public constructor Base()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Base'
+      PROPERTY public final val plain: kotlin.Int = 239
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='239'
+      PROPERTY public final val read: kotlin.Int
+        PROPERTY_GETTER public final fun <get-read>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-read>(): Int'
+              CONST Int type=kotlin.Int value='239'
+      PROPERTY public final var readwrite: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+        PROPERTY_GETTER public final fun <get-readwrite>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-readwrite>(): Int'
+              CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: GET_VAR 'field: Int' type=kotlin.Int operator=null
+                other: CONST Int type=kotlin.Int value='1'
+        PROPERTY_SETTER public final fun <set-readwrite>(n: kotlin.Int): kotlin.Unit
+          BLOCK_BODY
+            SET_BACKING_FIELD 'readwrite: Int' type=kotlin.Unit operator=EQ
+              value: GET_VAR 'value-parameter n: Int' type=kotlin.Int operator=null
+    CLASS INTERFACE Abstract
+    CLASS CLASS Derived1
+      CONSTRUCTOR public constructor Derived1()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Base()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Derived1'
+    CLASS CLASS Derived2
+      CONSTRUCTOR public constructor Derived2()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Base()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Derived2'
+    FUN public fun code(s: Base): kotlin.Int
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-plain>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'value-parameter s: Base' type=Base operator=null
+              arg1: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='code(Base): Int'
+            CONST Int type=kotlin.Int value='1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-read>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'value-parameter s: Base' type=Base operator=null
+              arg1: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='code(Base): Int'
+            CONST Int type=kotlin.Int value='2'
+        CALL '<set-readwrite>(Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'value-parameter s: Base' type=Base operator=null
+          n: CONST Int type=kotlin.Int value='238'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-readwrite>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'value-parameter s: Base' type=Base operator=null
+              arg1: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='code(Base): Int'
+            CONST Int type=kotlin.Int value='3'
+        RETURN type=kotlin.Nothing from='code(Base): Int'
+          CONST Int type=kotlin.Int value='0'
+    FUN public fun test(s: Base): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test(Base): Boolean'
+          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'code(Base): Int' type=kotlin.Int operator=null
+              s: GET_VAR 'value-parameter s: Base' type=Base operator=null
+            arg1: CONST Int type=kotlin.Int value='0'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'test(Base): Boolean' type=kotlin.Boolean operator=null
+              s: CALL 'constructor Base()' type=Base operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail #1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'test(Base): Boolean' type=kotlin.Boolean operator=null
+              s: CALL 'constructor Derived1()' type=Derived1 operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail #2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'test(Base): Boolean' type=kotlin.Boolean operator=null
+              s: CALL 'constructor Derived2()' type=Derived2 operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail #3'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

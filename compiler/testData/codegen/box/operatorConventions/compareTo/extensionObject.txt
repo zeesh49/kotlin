@@ -1,0 +1,86 @@
+MODULE <test-module>
+  FILE /extensionObject.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(x: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'x: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val x: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public operator fun A.compareTo(other: A): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='compareTo(A) on A: Int'
+          CALL 'compareTo(Int): Int' type=kotlin.Int operator=null
+            $this: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: $RECEIVER of 'compareTo(A) on A: Int' type=A
+            other: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: GET_VAR 'value-parameter other: A' type=A operator=null
+    FUN public fun checkLess(x: A, y: A): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='checkLess(A, A): String'
+          WHEN type=kotlin.String operator=WHEN
+            if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+              arg0: CALL 'compareTo(A) on A: Int' type=kotlin.Int operator=GTEQ
+                $receiver: GET_VAR 'value-parameter x: A' type=A operator=null
+                other: GET_VAR 'value-parameter y: A' type=A operator=null
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'value-parameter x: A' type=A operator=null
+              CONST String type=kotlin.String value=' >= '
+              GET_VAR 'value-parameter y: A' type=A operator=null
+            if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+              $this: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+                arg0: CALL 'compareTo(A) on A: Int' type=kotlin.Int operator=LT
+                  $receiver: GET_VAR 'value-parameter x: A' type=A operator=null
+                  other: GET_VAR 'value-parameter y: A' type=A operator=null
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail !('
+              GET_VAR 'value-parameter x: A' type=A operator=null
+              CONST String type=kotlin.String value=' < '
+              GET_VAR 'value-parameter y: A' type=A operator=null
+              CONST String type=kotlin.String value=')'
+            if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+              $this: CALL 'LTEQ0(Int): Boolean' type=kotlin.Boolean operator=LTEQ
+                arg0: CALL 'compareTo(A) on A: Int' type=kotlin.Int operator=LTEQ
+                  $receiver: GET_VAR 'value-parameter x: A' type=A operator=null
+                  other: GET_VAR 'value-parameter y: A' type=A operator=null
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail !('
+              GET_VAR 'value-parameter x: A' type=A operator=null
+              CONST String type=kotlin.String value=' <= '
+              GET_VAR 'value-parameter y: A' type=A operator=null
+              CONST String type=kotlin.String value=')'
+            if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+              arg0: CALL 'compareTo(A) on A: Int' type=kotlin.Int operator=GT
+                $receiver: GET_VAR 'value-parameter x: A' type=A operator=null
+                other: GET_VAR 'value-parameter y: A' type=A operator=null
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'value-parameter x: A' type=A operator=null
+              CONST String type=kotlin.String value=' > '
+              GET_VAR 'value-parameter y: A' type=A operator=null
+            if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+              arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GTEQ
+                $this: CALL 'compareTo(A) on A: Int' type=kotlin.Int operator=null
+                  $receiver: GET_VAR 'value-parameter x: A' type=A operator=null
+                  other: GET_VAR 'value-parameter y: A' type=A operator=null
+                other: CONST Int type=kotlin.Int value='0'
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'value-parameter x: A' type=A operator=null
+              CONST String type=kotlin.String value='.compareTo('
+              GET_VAR 'value-parameter y: A' type=A operator=null
+              CONST String type=kotlin.String value=') >= 0'
+            else: CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'checkLess(A, A): String' type=kotlin.String operator=null
+            x: CALL 'constructor A(Int)' type=A operator=null
+              x: CONST Int type=kotlin.Int value='0'
+            y: CALL 'constructor A(Int)' type=A operator=null
+              x: CONST Int type=kotlin.Int value='1'

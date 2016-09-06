@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /classObjectNotOfEnum.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS OBJECT companion object of A
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of A'
+        FUN public final fun values(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='values(): String'
+              CONST String type=kotlin.String value='O'
+        FUN public final fun valueOf(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='valueOf(): String'
+              CONST String type=kotlin.String value='K'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'values(): String' type=kotlin.String operator=null
+              $this: GET_OBJECT 'companion object of A' type=A.Companion
+            other: CALL 'valueOf(): String' type=kotlin.String operator=null
+              $this: GET_OBJECT 'companion object of A' type=A.Companion

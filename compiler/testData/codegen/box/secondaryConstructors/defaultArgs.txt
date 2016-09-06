@@ -1,0 +1,156 @@
+MODULE <test-module>
+  FILE /defaultArgs.kt
+    PROPERTY public val global: kotlin.String = "OK"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='OK'
+    CLASS CLASS A
+      PROPERTY public final val prop: kotlin.String
+      CONSTRUCTOR public constructor A(arg1: kotlin.String = ...)
+        arg1: EXPRESSION_BODY
+          CALL '<get-global>(): String' type=kotlin.String operator=GET_PROPERTY
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+          SET_BACKING_FIELD 'prop: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter arg1: String = ...' type=kotlin.String operator=null
+      CONSTRUCTOR public constructor A(arg1: kotlin.String = ..., arg2: kotlin.Long)
+        arg1: EXPRESSION_BODY
+          CALL '<get-global>(): String' type=kotlin.String operator=GET_PROPERTY
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+          SET_BACKING_FIELD 'prop: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: STRING_CONCATENATION type=kotlin.String
+              GET_VAR 'value-parameter arg1: String = ...' type=kotlin.String operator=null
+              CONST String type=kotlin.String value='#'
+              GET_VAR 'value-parameter arg2: Long' type=kotlin.Long operator=null
+      CONSTRUCTOR public constructor A(arg1: kotlin.String = ..., argDouble: kotlin.Double, arg3: kotlin.Long = ...)
+        arg1: EXPRESSION_BODY
+          CALL '<get-global>(): String' type=kotlin.String operator=GET_PROPERTY
+        arg3: EXPRESSION_BODY
+          CONST Long type=kotlin.Long value='1'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+          SET_BACKING_FIELD 'prop: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: STRING_CONCATENATION type=kotlin.String
+              GET_VAR 'value-parameter arg1: String = ...' type=kotlin.String operator=null
+              CONST String type=kotlin.String value='#'
+              GET_VAR 'value-parameter argDouble: Double' type=kotlin.Double operator=null
+              CONST String type=kotlin.String value='#'
+              GET_VAR 'value-parameter arg3: Long = ...' type=kotlin.Long operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a1: A
+          CALL 'constructor A(String = ...)' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a1: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail1: '
+              CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a1: A' type=A operator=null
+        VAR val a2: A
+          CALL 'constructor A(String = ...)' type=A operator=null
+            arg1: CONST String type=kotlin.String value='A'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a2: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='A'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail2: '
+              CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a2: A' type=A operator=null
+        VAR val a3: A
+          CALL 'constructor A(String = ..., Long)' type=A operator=null
+            arg2: CONST Long type=kotlin.Long value='123'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a3: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='OK#123'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail3: '
+              CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a3: A' type=A operator=null
+        VAR val a4: A
+          CALL 'constructor A(String = ..., Long)' type=A operator=null
+            arg1: CONST String type=kotlin.String value='A'
+            arg2: CONST Long type=kotlin.Long value='123'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a4: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='A#123'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail4: '
+              CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a4: A' type=A operator=null
+        VAR val a5: A
+          CALL 'constructor A(String = ..., Double, Long = ...)' type=A operator=null
+            argDouble: CONST Double type=kotlin.Double value='23.1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a5: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='OK#23.1#1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail5: '
+              CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a5: A' type=A operator=null
+        VAR val a6: A
+          CALL 'constructor A(String = ..., Double, Long = ...)' type=A operator=null
+            arg1: CONST String type=kotlin.String value='A'
+            argDouble: CONST Double type=kotlin.Double value='23.1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a6: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='A#23.1#1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail6: '
+              CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a6: A' type=A operator=null
+        VAR val a7: A
+          BLOCK type=A operator=ARGUMENTS_REORDERING_FOR_CALL
+            VAR val tmp0_arg1: kotlin.String
+              CONST String type=kotlin.String value='A'
+            VAR val tmp1_arg3: kotlin.Long
+              CONST Long type=kotlin.Long value='2'
+            VAR val tmp2_argDouble: kotlin.Double
+              CONST Double type=kotlin.Double value='23.1'
+            CALL 'constructor A(String = ..., Double, Long = ...)' type=A operator=null
+              arg1: GET_VAR 'tmp0_arg1: String' type=kotlin.String operator=null
+              argDouble: GET_VAR 'tmp2_argDouble: Double' type=kotlin.Double operator=null
+              arg3: GET_VAR 'tmp1_arg3: Long' type=kotlin.Long operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a7: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='A#23.1#2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail7: '
+              CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a7: A' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

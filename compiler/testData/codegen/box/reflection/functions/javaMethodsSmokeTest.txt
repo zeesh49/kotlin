@@ -1,0 +1,22 @@
+MODULE <test-module>
+  FILE /K.kt
+    FUN public fun test(f: kotlin.reflect.KFunction<*>): kotlin.Unit
+      BLOCK_BODY
+        CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+          $this: GET_VAR 'value-parameter f: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'test(KFunction<*>): Unit' type=kotlin.Unit operator=null
+          f: CALLABLE_REFERENCE 'simple(): Unit' type=kotlin.reflect.KFunction1<J, kotlin.Unit> operator=null
+        CALL 'test(KFunction<*>): Unit' type=kotlin.Unit operator=null
+          f: CALLABLE_REFERENCE 'objectTypes(Any!, String!, Array<(out) Any!>!, Array<(out) String!>!): Unit' type=kotlin.reflect.KFunction5<J, kotlin.Any!, kotlin.String!, kotlin.Array<(out) kotlin.Any!>!, kotlin.Array<(out) kotlin.String!>!, kotlin.Unit> operator=null
+        CALL 'test(KFunction<*>): Unit' type=kotlin.Unit operator=null
+          f: CALLABLE_REFERENCE 'primitives(Boolean, Char, Byte, Short, Int, Float, Long, Double): Unit' type=kotlin.reflect.KFunction9<J, kotlin.Boolean, kotlin.Char, kotlin.Byte, kotlin.Short, kotlin.Int, kotlin.Float, kotlin.Long, kotlin.Double, kotlin.Unit> operator=null
+        CALL 'test(KFunction<*>): Unit' type=kotlin.Unit operator=null
+          f: CALLABLE_REFERENCE 'primitiveArrays(BooleanArray!, CharArray!, ByteArray!, ShortArray!, IntArray!, FloatArray!, LongArray!, DoubleArray!): Unit' type=kotlin.reflect.KFunction9<J, kotlin.BooleanArray!, kotlin.CharArray!, kotlin.ByteArray!, kotlin.ShortArray!, kotlin.IntArray!, kotlin.FloatArray!, kotlin.LongArray!, kotlin.DoubleArray!, kotlin.Unit> operator=null
+        CALL 'test(KFunction<*>): Unit' type=kotlin.Unit operator=null
+          f: CALLABLE_REFERENCE 'multiDimensionalArrays(Array<(out) Array<(out) IntArray!>!>!, Array<(out) Array<(out) Array<(out) Array<(out) Cloneable!>!>!>!>!): Unit' type=kotlin.reflect.KFunction3<J, kotlin.Array<(out) kotlin.Array<(out) kotlin.IntArray!>!>!, kotlin.Array<(out) kotlin.Array<(out) kotlin.Array<(out) kotlin.Array<(out) kotlin.Cloneable!>!>!>!>!, kotlin.Unit> operator=null
+        CALL 'test(KFunction<*>): Unit' type=kotlin.Unit operator=null
+          f: CALLABLE_REFERENCE 'wildcards((MutableList<out Number!>..List<Number!>?), MutableList<in Cloneable!>!): Unit' type=kotlin.reflect.KFunction3<J, (kotlin.collections.MutableList<out kotlin.Number!>..kotlin.collections.List<kotlin.Number!>?), kotlin.collections.MutableList<in kotlin.Cloneable!>!, kotlin.Unit> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

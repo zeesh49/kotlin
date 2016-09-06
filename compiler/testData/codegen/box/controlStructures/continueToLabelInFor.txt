@@ -1,0 +1,559 @@
+MODULE <test-module>
+  FILE /continueToLabelInFor.kt
+    FUN public fun for_int_range(): kotlin.Int
+      BLOCK_BODY
+        VAR var c: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='1'
+                other: CONST Int type=kotlin.Int value='10'
+          WHILE label=loop operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Int operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+                    arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GTEQ
+                      $this: GET_VAR 'c: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='5'
+                  then: CONTINUE label=loop loop.label=loop depth=0
+                BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                  VAR val tmp1: kotlin.Int
+                    GET_VAR 'c: Int' type=kotlin.Int operator=POSTFIX_INCR
+                  SET_VAR 'c: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                    CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='for_int_range(): Int'
+          GET_VAR 'c: Int' type=kotlin.Int operator=null
+    FUN public fun for_byte_range(): kotlin.Int
+      BLOCK_BODY
+        VAR var c: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        VAR val from: kotlin.Byte = 1.toByte()
+          CONST Byte type=kotlin.Byte value='1'
+        VAR val to: kotlin.Byte = 10.toByte()
+          CONST Byte type=kotlin.Byte value='10'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Byte): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: GET_VAR 'from: Byte' type=kotlin.Byte operator=null
+                other: GET_VAR 'to: Byte' type=kotlin.Byte operator=null
+          WHILE label=loop operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Int operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+                    arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GTEQ
+                      $this: GET_VAR 'c: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='5'
+                  then: CONTINUE label=loop loop.label=loop depth=0
+                BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                  VAR val tmp1: kotlin.Int
+                    GET_VAR 'c: Int' type=kotlin.Int operator=POSTFIX_INCR
+                  SET_VAR 'c: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                    CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='for_byte_range(): Int'
+          GET_VAR 'c: Int' type=kotlin.Int operator=null
+    FUN public fun for_long_range(): kotlin.Int
+      BLOCK_BODY
+        VAR var c: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        VAR val from: kotlin.Long = 1.toLong()
+          CONST Long type=kotlin.Long value='1'
+        VAR val to: kotlin.Long = 10.toLong()
+          CONST Long type=kotlin.Long value='10'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.LongIterator
+            CALL 'iterator(): LongIterator' type=kotlin.collections.LongIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Long): LongRange' type=kotlin.ranges.LongRange operator=RANGE
+                $this: GET_VAR 'from: Long' type=kotlin.Long operator=null
+                other: GET_VAR 'to: Long' type=kotlin.Long operator=null
+          WHILE label=loop operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: LongIterator' type=kotlin.collections.LongIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Long
+                CALL 'next(): Long' type=kotlin.Long operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: LongIterator' type=kotlin.collections.LongIterator operator=null
+              BLOCK type=kotlin.Int operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+                    arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GTEQ
+                      $this: GET_VAR 'c: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='5'
+                  then: CONTINUE label=loop loop.label=loop depth=0
+                BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                  VAR val tmp1: kotlin.Int
+                    GET_VAR 'c: Int' type=kotlin.Int operator=POSTFIX_INCR
+                  SET_VAR 'c: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                    CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='for_long_range(): Int'
+          GET_VAR 'c: Int' type=kotlin.Int operator=null
+    FUN public fun for_int_list(): kotlin.Int
+      BLOCK_BODY
+        VAR val a: java.util.ArrayList<kotlin.Int>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.Int> operator=null
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='0'
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='0'
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='0'
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='0'
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='0'
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='0'
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='0'
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='0'
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='0'
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='0'
+        VAR var c: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.MutableIterator<kotlin.Int>
+            CALL 'iterator(): MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          WHILE label=loop operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: MutableIterator<Int>' type=kotlin.collections.MutableIterator<kotlin.Int> operator=null
+              BLOCK type=kotlin.Int operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+                    arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GTEQ
+                      $this: GET_VAR 'c: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='5'
+                  then: CONTINUE label=loop loop.label=loop depth=0
+                BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                  VAR val tmp1: kotlin.Int
+                    GET_VAR 'c: Int' type=kotlin.Int operator=POSTFIX_INCR
+                  SET_VAR 'c: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                    CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='for_int_list(): Int'
+          GET_VAR 'c: Int' type=kotlin.Int operator=null
+    FUN public fun for_byte_list(): kotlin.Int
+      BLOCK_BODY
+        VAR val a: java.util.ArrayList<kotlin.Byte>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.Byte> operator=null
+        CALL 'add(Byte): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Byte>' type=java.util.ArrayList<kotlin.Byte> operator=null
+          element: CONST Byte type=kotlin.Byte value='0'
+        CALL 'add(Byte): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Byte>' type=java.util.ArrayList<kotlin.Byte> operator=null
+          element: CONST Byte type=kotlin.Byte value='0'
+        CALL 'add(Byte): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Byte>' type=java.util.ArrayList<kotlin.Byte> operator=null
+          element: CONST Byte type=kotlin.Byte value='0'
+        CALL 'add(Byte): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Byte>' type=java.util.ArrayList<kotlin.Byte> operator=null
+          element: CONST Byte type=kotlin.Byte value='0'
+        CALL 'add(Byte): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Byte>' type=java.util.ArrayList<kotlin.Byte> operator=null
+          element: CONST Byte type=kotlin.Byte value='0'
+        CALL 'add(Byte): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Byte>' type=java.util.ArrayList<kotlin.Byte> operator=null
+          element: CONST Byte type=kotlin.Byte value='0'
+        CALL 'add(Byte): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Byte>' type=java.util.ArrayList<kotlin.Byte> operator=null
+          element: CONST Byte type=kotlin.Byte value='0'
+        CALL 'add(Byte): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Byte>' type=java.util.ArrayList<kotlin.Byte> operator=null
+          element: CONST Byte type=kotlin.Byte value='0'
+        CALL 'add(Byte): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Byte>' type=java.util.ArrayList<kotlin.Byte> operator=null
+          element: CONST Byte type=kotlin.Byte value='0'
+        CALL 'add(Byte): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Byte>' type=java.util.ArrayList<kotlin.Byte> operator=null
+          element: CONST Byte type=kotlin.Byte value='0'
+        VAR var c: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.MutableIterator<kotlin.Byte>
+            CALL 'iterator(): MutableIterator<Byte>' type=kotlin.collections.MutableIterator<kotlin.Byte> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'a: ArrayList<Byte>' type=java.util.ArrayList<kotlin.Byte> operator=null
+          WHILE label=loop operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: MutableIterator<Byte>' type=kotlin.collections.MutableIterator<kotlin.Byte> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Byte
+                CALL 'next(): Byte' type=kotlin.Byte operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: MutableIterator<Byte>' type=kotlin.collections.MutableIterator<kotlin.Byte> operator=null
+              BLOCK type=kotlin.Int operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+                    arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GTEQ
+                      $this: GET_VAR 'c: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='5'
+                  then: CONTINUE label=loop loop.label=loop depth=0
+                BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                  VAR val tmp1: kotlin.Int
+                    GET_VAR 'c: Int' type=kotlin.Int operator=POSTFIX_INCR
+                  SET_VAR 'c: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                    CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='for_byte_list(): Int'
+          GET_VAR 'c: Int' type=kotlin.Int operator=null
+    FUN public fun for_long_list(): kotlin.Int
+      BLOCK_BODY
+        VAR val a: java.util.ArrayList<kotlin.Long>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.Long> operator=null
+        CALL 'add(Long): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Long>' type=java.util.ArrayList<kotlin.Long> operator=null
+          element: CONST Long type=kotlin.Long value='0'
+        CALL 'add(Long): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Long>' type=java.util.ArrayList<kotlin.Long> operator=null
+          element: CONST Long type=kotlin.Long value='0'
+        CALL 'add(Long): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Long>' type=java.util.ArrayList<kotlin.Long> operator=null
+          element: CONST Long type=kotlin.Long value='0'
+        CALL 'add(Long): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Long>' type=java.util.ArrayList<kotlin.Long> operator=null
+          element: CONST Long type=kotlin.Long value='0'
+        CALL 'add(Long): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Long>' type=java.util.ArrayList<kotlin.Long> operator=null
+          element: CONST Long type=kotlin.Long value='0'
+        CALL 'add(Long): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Long>' type=java.util.ArrayList<kotlin.Long> operator=null
+          element: CONST Long type=kotlin.Long value='0'
+        CALL 'add(Long): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Long>' type=java.util.ArrayList<kotlin.Long> operator=null
+          element: CONST Long type=kotlin.Long value='0'
+        CALL 'add(Long): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Long>' type=java.util.ArrayList<kotlin.Long> operator=null
+          element: CONST Long type=kotlin.Long value='0'
+        CALL 'add(Long): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Long>' type=java.util.ArrayList<kotlin.Long> operator=null
+          element: CONST Long type=kotlin.Long value='0'
+        CALL 'add(Long): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Long>' type=java.util.ArrayList<kotlin.Long> operator=null
+          element: CONST Long type=kotlin.Long value='0'
+        VAR var c: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.MutableIterator<kotlin.Long>
+            CALL 'iterator(): MutableIterator<Long>' type=kotlin.collections.MutableIterator<kotlin.Long> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'a: ArrayList<Long>' type=java.util.ArrayList<kotlin.Long> operator=null
+          WHILE label=loop operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: MutableIterator<Long>' type=kotlin.collections.MutableIterator<kotlin.Long> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Long
+                CALL 'next(): Long' type=kotlin.Long operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: MutableIterator<Long>' type=kotlin.collections.MutableIterator<kotlin.Long> operator=null
+              BLOCK type=kotlin.Int operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+                    arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GTEQ
+                      $this: GET_VAR 'c: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='5'
+                  then: CONTINUE label=loop loop.label=loop depth=0
+                BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                  VAR val tmp1: kotlin.Int
+                    GET_VAR 'c: Int' type=kotlin.Int operator=POSTFIX_INCR
+                  SET_VAR 'c: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                    CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='for_long_list(): Int'
+          GET_VAR 'c: Int' type=kotlin.Int operator=null
+    FUN public fun for_double_list(): kotlin.Int
+      BLOCK_BODY
+        VAR val a: java.util.ArrayList<kotlin.Double>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.Double> operator=null
+        CALL 'add(Double): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Double>' type=java.util.ArrayList<kotlin.Double> operator=null
+          element: CONST Double type=kotlin.Double value='0.0'
+        CALL 'add(Double): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Double>' type=java.util.ArrayList<kotlin.Double> operator=null
+          element: CONST Double type=kotlin.Double value='0.0'
+        CALL 'add(Double): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Double>' type=java.util.ArrayList<kotlin.Double> operator=null
+          element: CONST Double type=kotlin.Double value='0.0'
+        CALL 'add(Double): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Double>' type=java.util.ArrayList<kotlin.Double> operator=null
+          element: CONST Double type=kotlin.Double value='0.0'
+        CALL 'add(Double): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Double>' type=java.util.ArrayList<kotlin.Double> operator=null
+          element: CONST Double type=kotlin.Double value='0.0'
+        CALL 'add(Double): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Double>' type=java.util.ArrayList<kotlin.Double> operator=null
+          element: CONST Double type=kotlin.Double value='0.0'
+        CALL 'add(Double): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Double>' type=java.util.ArrayList<kotlin.Double> operator=null
+          element: CONST Double type=kotlin.Double value='0.0'
+        CALL 'add(Double): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Double>' type=java.util.ArrayList<kotlin.Double> operator=null
+          element: CONST Double type=kotlin.Double value='0.0'
+        CALL 'add(Double): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Double>' type=java.util.ArrayList<kotlin.Double> operator=null
+          element: CONST Double type=kotlin.Double value='0.0'
+        CALL 'add(Double): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Double>' type=java.util.ArrayList<kotlin.Double> operator=null
+          element: CONST Double type=kotlin.Double value='0.0'
+        VAR var c: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.MutableIterator<kotlin.Double>
+            CALL 'iterator(): MutableIterator<Double>' type=kotlin.collections.MutableIterator<kotlin.Double> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'a: ArrayList<Double>' type=java.util.ArrayList<kotlin.Double> operator=null
+          WHILE label=loop operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: MutableIterator<Double>' type=kotlin.collections.MutableIterator<kotlin.Double> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Double
+                CALL 'next(): Double' type=kotlin.Double operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: MutableIterator<Double>' type=kotlin.collections.MutableIterator<kotlin.Double> operator=null
+              BLOCK type=kotlin.Int operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+                    arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GTEQ
+                      $this: GET_VAR 'c: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='5'
+                  then: CONTINUE label=loop loop.label=loop depth=0
+                BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                  VAR val tmp1: kotlin.Int
+                    GET_VAR 'c: Int' type=kotlin.Int operator=POSTFIX_INCR
+                  SET_VAR 'c: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                    CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='for_double_list(): Int'
+          GET_VAR 'c: Int' type=kotlin.Int operator=null
+    FUN public fun for_object_list(): kotlin.Int
+      BLOCK_BODY
+        VAR val a: java.util.ArrayList<kotlin.Any>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.Any> operator=null
+        CALL 'add(Any): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Any>' type=java.util.ArrayList<kotlin.Any> operator=null
+          element: CONST Double type=kotlin.Double value='0.0'
+        CALL 'add(Any): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Any>' type=java.util.ArrayList<kotlin.Any> operator=null
+          element: CONST Double type=kotlin.Double value='0.0'
+        CALL 'add(Any): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Any>' type=java.util.ArrayList<kotlin.Any> operator=null
+          element: CONST Double type=kotlin.Double value='0.0'
+        CALL 'add(Any): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Any>' type=java.util.ArrayList<kotlin.Any> operator=null
+          element: CONST Double type=kotlin.Double value='0.0'
+        CALL 'add(Any): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Any>' type=java.util.ArrayList<kotlin.Any> operator=null
+          element: CONST Double type=kotlin.Double value='0.0'
+        CALL 'add(Any): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Any>' type=java.util.ArrayList<kotlin.Any> operator=null
+          element: CONST Double type=kotlin.Double value='0.0'
+        CALL 'add(Any): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Any>' type=java.util.ArrayList<kotlin.Any> operator=null
+          element: CONST Double type=kotlin.Double value='0.0'
+        CALL 'add(Any): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Any>' type=java.util.ArrayList<kotlin.Any> operator=null
+          element: CONST Double type=kotlin.Double value='0.0'
+        CALL 'add(Any): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Any>' type=java.util.ArrayList<kotlin.Any> operator=null
+          element: CONST Double type=kotlin.Double value='0.0'
+        CALL 'add(Any): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Any>' type=java.util.ArrayList<kotlin.Any> operator=null
+          element: CONST Double type=kotlin.Double value='0.0'
+        VAR var c: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.MutableIterator<kotlin.Any>
+            CALL 'iterator(): MutableIterator<Any>' type=kotlin.collections.MutableIterator<kotlin.Any> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'a: ArrayList<Any>' type=java.util.ArrayList<kotlin.Any> operator=null
+          WHILE label=loop operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: MutableIterator<Any>' type=kotlin.collections.MutableIterator<kotlin.Any> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Any
+                CALL 'next(): Any' type=kotlin.Any operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: MutableIterator<Any>' type=kotlin.collections.MutableIterator<kotlin.Any> operator=null
+              BLOCK type=kotlin.Int operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+                    arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GTEQ
+                      $this: GET_VAR 'c: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='5'
+                  then: CONTINUE label=loop loop.label=loop depth=0
+                BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                  VAR val tmp1: kotlin.Int
+                    GET_VAR 'c: Int' type=kotlin.Int operator=POSTFIX_INCR
+                  SET_VAR 'c: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                    CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='for_object_list(): Int'
+          GET_VAR 'c: Int' type=kotlin.Int operator=null
+    FUN public fun for_str_array(): kotlin.Int
+      BLOCK_BODY
+        VAR val a: kotlin.Array<kotlin.String?>
+          CALL 'arrayOfNulls(Int): Array<String?>' type=kotlin.Array<kotlin.String?> operator=null
+            size: CONST Int type=kotlin.Int value='10'
+        VAR var c: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<kotlin.String?>
+            CALL 'iterator(): Iterator<String?>' type=kotlin.collections.Iterator<kotlin.String?> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'a: Array<String?>' type=kotlin.Array<kotlin.String?> operator=null
+          WHILE label=loop operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<String?>' type=kotlin.collections.Iterator<kotlin.String?> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.String?
+                CALL 'next(): String?' type=kotlin.String? operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<String?>' type=kotlin.collections.Iterator<kotlin.String?> operator=null
+              BLOCK type=kotlin.Int operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+                    arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GTEQ
+                      $this: GET_VAR 'c: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='5'
+                  then: CONTINUE label=loop loop.label=loop depth=0
+                BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                  VAR val tmp1: kotlin.Int
+                    GET_VAR 'c: Int' type=kotlin.Int operator=POSTFIX_INCR
+                  SET_VAR 'c: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                    CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='for_str_array(): Int'
+          GET_VAR 'c: Int' type=kotlin.Int operator=null
+    FUN public fun for_intarray(): kotlin.Int
+      BLOCK_BODY
+        VAR val a: kotlin.IntArray
+          CALL 'constructor IntArray(Int)' type=kotlin.IntArray operator=null
+            size: CONST Int type=kotlin.Int value='10'
+        VAR var c: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'a: IntArray' type=kotlin.IntArray operator=null
+          WHILE label=loop operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Int operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+                    arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GTEQ
+                      $this: GET_VAR 'c: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='5'
+                  then: CONTINUE label=loop loop.label=loop depth=0
+                BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                  VAR val tmp1: kotlin.Int
+                    GET_VAR 'c: Int' type=kotlin.Int operator=POSTFIX_INCR
+                  SET_VAR 'c: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                    CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='for_intarray(): Int'
+          GET_VAR 'c: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'for_int_range(): Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='5'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'for_byte_range(): Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='5'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'for_long_range(): Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='5'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'for_intarray(): Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='5'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'for_str_array(): Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='5'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 5'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'for_int_list(): Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='5'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 6'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'for_byte_list(): Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='5'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 7'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'for_long_list(): Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='5'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 8'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'for_double_list(): Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='5'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 9'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

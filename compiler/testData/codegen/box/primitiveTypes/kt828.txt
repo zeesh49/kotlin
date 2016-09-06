@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /kt828.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var res: kotlin.Boolean
+          CONST Boolean type=kotlin.Boolean value='true'
+        SET_VAR 'res: Boolean' type=kotlin.Unit operator=EQ
+          CALL 'and(Boolean): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'res: Boolean' type=kotlin.Boolean operator=null
+            other: CONST Boolean type=kotlin.Boolean value='false'
+        SET_VAR 'res: Boolean' type=kotlin.Unit operator=EQ
+          CALL 'or(Boolean): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'res: Boolean' type=kotlin.Boolean operator=null
+            other: CONST Boolean type=kotlin.Boolean value='false'
+        SET_VAR 'res: Boolean' type=kotlin.Unit operator=EQ
+          CALL 'xor(Boolean): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'res: Boolean' type=kotlin.Boolean operator=null
+            other: CONST Boolean type=kotlin.Boolean value='false'
+        SET_VAR 'res: Boolean' type=kotlin.Unit operator=EQ
+          CALL 'and(Boolean): Boolean' type=kotlin.Boolean operator=null
+            $this: CONST Boolean type=kotlin.Boolean value='true'
+            other: CONST Boolean type=kotlin.Boolean value='false'
+        SET_VAR 'res: Boolean' type=kotlin.Unit operator=EQ
+          CALL 'or(Boolean): Boolean' type=kotlin.Boolean operator=null
+            $this: CONST Boolean type=kotlin.Boolean value='true'
+            other: CONST Boolean type=kotlin.Boolean value='false'
+        SET_VAR 'res: Boolean' type=kotlin.Unit operator=EQ
+          CALL 'xor(Boolean): Boolean' type=kotlin.Boolean operator=null
+            $this: CONST Boolean type=kotlin.Boolean value='true'
+            other: CONST Boolean type=kotlin.Boolean value='false'
+        SET_VAR 'res: Boolean' type=kotlin.Unit operator=EQ
+          CONST Boolean type=kotlin.Boolean value='false'
+        SET_VAR 'res: Boolean' type=kotlin.Unit operator=EQ
+          WHEN type=kotlin.Boolean operator=ANDAND
+            if: CONST Boolean type=kotlin.Boolean value='true'
+            then: CONST Boolean type=kotlin.Boolean value='false'
+            else: CONST Boolean type=kotlin.Boolean value='false'
+        SET_VAR 'res: Boolean' type=kotlin.Unit operator=EQ
+          WHEN type=kotlin.Boolean operator=OROR
+            if: CONST Boolean type=kotlin.Boolean value='true'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CONST Boolean type=kotlin.Boolean value='false'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

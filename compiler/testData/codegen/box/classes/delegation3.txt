@@ -1,0 +1,99 @@
+MODULE <test-module>
+  FILE /delegation3.kt
+    CLASS INTERFACE One
+      FUN public abstract fun foo(): kotlin.Int
+      FUN public open fun faz(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='faz(): Int'
+            CONST Int type=kotlin.Int value='10'
+    CLASS INTERFACE Two
+      FUN public abstract fun foo(): kotlin.Int
+      FUN public open fun quux(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='quux(): Int'
+            CONST Int type=kotlin.Int value='100'
+    CLASS CLASS OneImpl
+      CONSTRUCTOR public constructor OneImpl()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='OneImpl'
+      FUN public open override fun foo(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): Int'
+            CONST Int type=kotlin.Int value='1'
+    CLASS CLASS TwoImpl
+      CONSTRUCTOR public constructor TwoImpl()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='TwoImpl'
+      FUN public open override fun foo(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): Int'
+            CONST Int type=kotlin.Int value='2'
+    CLASS CLASS Test2
+      CONSTRUCTOR public constructor Test2(a: One, b: Two)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test2'
+      PROPERTY val `Test2$Two$delegate`: Two
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter b: Two' type=Two operator=null
+      FUN public open override fun quux(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='quux(): Int'
+            CALL 'quux(): Int' type=kotlin.Int operator=null
+              $this: GET_VAR '`Test2$Two$delegate`: Two' type=Two operator=null
+      PROPERTY val `Test2$One$delegate`: One
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter a: One' type=One operator=null
+      FUN public open override fun faz(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='faz(): Int'
+            CALL 'faz(): Int' type=kotlin.Int operator=null
+              $this: GET_VAR '`Test2$One$delegate`: One' type=One operator=null
+      FUN public open override fun foo(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): Int'
+            CONST Int type=kotlin.Int value='0'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var t2: Test2
+          CALL 'constructor Test2(One, Two)' type=Test2 operator=null
+            a: CALL 'constructor OneImpl()' type=OneImpl operator=null
+            b: CALL 'constructor TwoImpl()' type=TwoImpl operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 't2: Test2' type=Test2 operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail #1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'faz(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 't2: Test2' type=Test2 operator=null
+              arg1: CONST Int type=kotlin.Int value='10'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail #2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'quux(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 't2: Test2' type=Test2 operator=null
+              arg1: CONST Int type=kotlin.Int value='100'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail #3'
+        WHEN type=kotlin.Unit operator=IF
+          if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=One
+            GET_VAR 't2: Test2' type=Test2 operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail #4'
+        WHEN type=kotlin.Unit operator=IF
+          if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=Two
+            GET_VAR 't2: Test2' type=Test2 operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail #5'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

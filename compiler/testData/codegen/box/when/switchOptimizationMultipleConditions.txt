@@ -1,0 +1,70 @@
+MODULE <test-module>
+  FILE /switchOptimizationMultipleConditions.kt
+    FUN public fun foo(x: kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(Int): Int'
+          BLOCK type=kotlin.Int operator=WHEN
+            VAR val tmp0_subject: kotlin.Int
+              GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+            WHEN type=kotlin.Int operator=WHEN
+              if: WHEN type=kotlin.Boolean operator=WHEN_COMMA
+                if: WHEN type=kotlin.Boolean operator=WHEN_COMMA
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+                    arg1: CONST Int type=kotlin.Int value='1'
+                  then: CONST Boolean type=kotlin.Boolean value='true'
+                  else: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+                    arg1: CONST Int type=kotlin.Int value='2'
+                then: CONST Boolean type=kotlin.Boolean value='true'
+                else: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+                  arg1: CONST Int type=kotlin.Int value='3'
+              then: CONST Int type=kotlin.Int value='1'
+              if: WHEN type=kotlin.Boolean operator=WHEN_COMMA
+                if: WHEN type=kotlin.Boolean operator=WHEN_COMMA
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+                    arg1: CONST Int type=kotlin.Int value='4'
+                  then: CONST Boolean type=kotlin.Boolean value='true'
+                  else: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+                    arg1: CONST Int type=kotlin.Int value='5'
+                then: CONST Boolean type=kotlin.Boolean value='true'
+                else: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+                  arg1: CONST Int type=kotlin.Int value='6'
+              then: CONST Int type=kotlin.Int value='2'
+              if: WHEN type=kotlin.Boolean operator=WHEN_COMMA
+                if: WHEN type=kotlin.Boolean operator=WHEN_COMMA
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+                    arg1: CONST Int type=kotlin.Int value='7'
+                  then: CONST Boolean type=kotlin.Boolean value='true'
+                  else: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+                    arg1: CONST Int type=kotlin.Int value='8'
+                then: CONST Boolean type=kotlin.Boolean value='true'
+                else: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+                  arg1: CONST Int type=kotlin.Int value='9'
+              then: CONST Int type=kotlin.Int value='3'
+              else: CONST Int type=kotlin.Int value='4'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.String
+          CALL 'joinToString(CharSequence = ..., CharSequence = ..., CharSequence = ..., Int = ..., CharSequence = ..., ((Int) -> CharSequence)? = ...) on Iterable<Int>: String' type=kotlin.String operator=null
+            $receiver: CALL 'map((Int) -> Int) on Iterable<Int>: List<Int>' type=kotlin.collections.List<kotlin.Int> operator=null
+              $receiver: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='0'
+                other: CONST Int type=kotlin.Int value='10'
+              transform: CALLABLE_REFERENCE 'foo(Int): Int' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Int> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='4, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            GET_VAR 'result: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

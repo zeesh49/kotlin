@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /abstractMethodInEnum.kt
+    CLASS ENUM_CLASS A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      ENUM_ENTRY enum entry ENTRY
+        init: ENUM_CONSTRUCTOR_CALL 'constructor ENTRY()' ENTRY
+        class: CLASS ENUM_ENTRY ENTRY
+          CONSTRUCTOR private constructor ENTRY()
+            BLOCK_BODY
+              ENUM_CONSTRUCTOR_CALL 'constructor A()' super
+              INSTANCE_INITIALIZER_CALL classDescriptor='ENTRY'
+          FUN public open override fun t(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='t(): String'
+                CONST String type=kotlin.String value='OK'
+      FUN public abstract fun t(): kotlin.String
+      FUN public final fun values(): kotlin.Array<A>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): A
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun f(a: A): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='f(A): String'
+          CALL 't(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'value-parameter a: A' type=A operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'f(A): String' type=kotlin.String operator=null
+            a: GET_ENUM_VALUE 'ENTRY' type=A

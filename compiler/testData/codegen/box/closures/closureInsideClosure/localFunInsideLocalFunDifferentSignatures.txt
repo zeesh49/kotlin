@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /localFunInsideLocalFunDifferentSignatures.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        FUN local final fun rec(n: kotlin.Int): kotlin.Unit
+          BLOCK_BODY
+            FUN local final fun x(m: kotlin.Int, k: kotlin.Int): kotlin.Unit
+              BLOCK_BODY
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+                    arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+                      $this: GET_VAR 'value-parameter n: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='0'
+                  then: CALL 'rec(Int): Unit' type=kotlin.Unit operator=null
+                    n: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                      $this: CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+                        $this: GET_VAR 'value-parameter n: Int' type=kotlin.Int operator=null
+                        other: CONST Int type=kotlin.Int value='1'
+                      other: GET_VAR 'value-parameter k: Int' type=kotlin.Int operator=null
+            CALL 'x(Int, Int): Unit' type=kotlin.Unit operator=null
+              m: CONST Int type=kotlin.Int value='0'
+              k: CONST Int type=kotlin.Int value='0'
+        CALL 'rec(Int): Unit' type=kotlin.Unit operator=null
+          n: CONST Int type=kotlin.Int value='5'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

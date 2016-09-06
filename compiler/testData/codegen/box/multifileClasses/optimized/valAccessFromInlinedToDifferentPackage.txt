@@ -1,0 +1,32 @@
+MODULE <test-module>
+  FILE /box.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'ok(() -> Unit): String' type=kotlin.String operator=null
+            block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+              CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+  FILE /part1.kt
+    PROPERTY public val O: kotlin.String
+      EXPRESSION_BODY
+        CALL 'run(() -> String): String' type=kotlin.String operator=null
+          block: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='O'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+    PROPERTY public const val K: kotlin.String = "K"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='K'
+    FUN public inline fun ok(block: () -> kotlin.Unit): kotlin.String
+      BLOCK_BODY
+        CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'value-parameter block: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+        RETURN type=kotlin.Nothing from='ok(() -> Unit): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL '<get-O>(): String' type=kotlin.String operator=GET_PROPERTY
+            other: CALL '<get-K>(): String' type=kotlin.String operator=GET_PROPERTY

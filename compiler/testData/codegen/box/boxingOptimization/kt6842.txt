@@ -1,0 +1,23 @@
+MODULE <test-module>
+  FILE /kt6842.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.collections.List<kotlin.Long>
+          CALL 'map((Long) -> Long) on Iterable<Long>: List<Long>' type=kotlin.collections.List<kotlin.Long> operator=null
+            $receiver: CALL 'rangeTo(Int): LongRange' type=kotlin.ranges.LongRange operator=RANGE
+              $this: CONST Long type=kotlin.Long value='10'
+              other: CONST Int type=kotlin.Int value='50'
+            transform: BLOCK type=(kotlin.Long) -> kotlin.Long operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.Long): kotlin.Long
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Long): Long'
+                    CALL 'times(Long): Long' type=kotlin.Long operator=MUL
+                      $this: GET_VAR 'value-parameter it: Long' type=kotlin.Long operator=null
+                      other: CONST Long type=kotlin.Long value='40'
+              CALLABLE_REFERENCE '<anonymous>(Long): Long' type=(kotlin.Long) -> kotlin.Long operator=LAMBDA
+        CALL 'assertEquals(Long, Long, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Long type=kotlin.Long value='400'
+          actual: CALL 'first() on List<Long>: Long' type=kotlin.Long operator=null
+            $receiver: GET_VAR 'x: List<Long>' type=kotlin.collections.List<kotlin.Long> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,54 @@
+MODULE <test-module>
+  FILE /inlineTryFinally.kt
+    FUN public inline fun <T> tryAndThen(f1: () -> kotlin.Unit, f2: () -> kotlin.Unit, f3: () -> T): T
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+              $this: GET_VAR 'value-parameter f1: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+          catch e: BLOCK type=kotlin.Unit operator=null
+            CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+              $this: GET_VAR 'value-parameter f2: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+          finally: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='tryAndThen(() -> Unit, () -> Unit, () -> T): T'
+              CALL 'invoke(): T' type=T operator=INVOKE
+                $this: GET_VAR 'value-parameter f3: () -> T' type=() -> T operator=VARIABLE_AS_FUNCTION
+    FUN public fun testIt(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='testIt(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CONST String type=kotlin.String value='abc'
+              other: CALL 'tryAndThen(() -> Unit, () -> Unit, () -> String): String' type=kotlin.String operator=null
+                f1: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun <anonymous>(): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+                f2: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                  FUN local final fun <anonymous>(): kotlin.Unit
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+                f3: BLOCK type=() -> kotlin.String operator=LAMBDA
+                  FUN local final fun <anonymous>(): kotlin.String
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                        CONST String type=kotlin.String value='def'
+                  CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+            other: CONST String type=kotlin.String value='ghi'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val test: kotlin.String
+          CALL 'testIt(): String' type=kotlin.String operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='abcdefghi'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed, test=='
+              GET_VAR 'test: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

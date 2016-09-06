@@ -1,0 +1,29 @@
+MODULE <test-module>
+  FILE /forEachFloatArray.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.FloatIterator
+            CALL 'iterator(): FloatIterator' type=kotlin.collections.FloatIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'constructor FloatArray(Int)' type=kotlin.FloatArray operator=null
+                size: CONST Int type=kotlin.Int value='5'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: FloatIterator' type=kotlin.collections.FloatIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val x: kotlin.Float
+                CALL 'next(): Float' type=kotlin.Float operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: FloatIterator' type=kotlin.collections.FloatIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                    arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                      arg0: GET_VAR 'x: Float' type=kotlin.Float operator=null
+                      arg1: CALL 'toFloat(): Float' type=kotlin.Float operator=null
+                        $this: CONST Int type=kotlin.Int value='0'
+                  then: RETURN type=kotlin.Nothing from='box(): String'
+                    STRING_CONCATENATION type=kotlin.String
+                      CONST String type=kotlin.String value='Fail '
+                      GET_VAR 'x: Float' type=kotlin.Float operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

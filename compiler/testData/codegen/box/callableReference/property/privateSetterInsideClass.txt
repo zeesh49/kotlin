@@ -1,0 +1,35 @@
+MODULE <test-module>
+  FILE /privateSetterInsideClass.kt
+    CLASS CLASS Bar
+      CONSTRUCTOR public constructor Bar(name: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Bar'
+      PROPERTY public final var foo: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter name: String' type=kotlin.String operator=null
+        PROPERTY_SETTER private final fun <set-foo>(<set-?>: kotlin.String): kotlin.Unit
+      FUN public final fun test(): kotlin.Unit
+        BLOCK_BODY
+          VAR val p: kotlin.reflect.KMutableProperty1<Bar, kotlin.String>
+            CALLABLE_REFERENCE 'foo: String' type=kotlin.reflect.KMutableProperty1<Bar, kotlin.String> operator=null
+          WHEN type=kotlin.Unit operator=IF
+            if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=kotlin.reflect.KMutableProperty<*>
+              GET_VAR 'p: KMutableProperty1<Bar, String>' type=kotlin.reflect.KMutableProperty1<Bar, kotlin.String> operator=null
+            then: THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: CONST String type=kotlin.String value='Fail: p is not a KMutableProperty'
+          CALL 'set(Bar, String): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR 'p: KMutableProperty1<Bar, String>' type=kotlin.reflect.KMutableProperty1<Bar, kotlin.String> operator=null
+            receiver: THIS of 'Bar' type=Bar
+            value: CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val bar: Bar
+          CALL 'constructor Bar(String)' type=Bar operator=null
+            name: CONST String type=kotlin.String value='Fail'
+        CALL 'test(): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'bar: Bar' type=Bar operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-foo>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_VAR 'bar: Bar' type=Bar operator=null

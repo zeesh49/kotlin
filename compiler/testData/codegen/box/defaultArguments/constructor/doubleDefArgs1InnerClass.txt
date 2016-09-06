@@ -1,0 +1,87 @@
+MODULE <test-module>
+  FILE /doubleDefArgs1InnerClass.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS CLASS B
+        CONSTRUCTOR public constructor B(a: kotlin.Double = ..., b: kotlin.Int = ..., c: kotlin.String = ...)
+          a: EXPRESSION_BODY
+            CONST Double type=kotlin.Double value='1.0'
+          b: EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='55'
+          c: EXPRESSION_BODY
+            CONST String type=kotlin.String value='c'
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            SET_BACKING_FIELD 'a: Double' type=kotlin.Unit operator=null
+              receiver: THIS of 'B' type=A.B
+              value: GET_VAR 'value-parameter a: Double = ...' type=kotlin.Double operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            SET_BACKING_FIELD 'b: Int' type=kotlin.Unit operator=null
+              receiver: THIS of 'B' type=A.B
+              value: GET_VAR 'value-parameter b: Int = ...' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            SET_BACKING_FIELD 'c: String' type=kotlin.Unit operator=null
+              receiver: THIS of 'B' type=A.B
+              value: GET_VAR 'value-parameter c: String = ...' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            INSTANCE_INITIALIZER_CALL classDescriptor='B'
+        PROPERTY public final val a: kotlin.Double
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter a: Double = ...' type=kotlin.Double operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+        PROPERTY public final val b: kotlin.Int
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter b: Int = ...' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+        PROPERTY public final val c: kotlin.String
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter c: String = ...' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val bDefault: A.B
+          CALL 'constructor B(Double = ..., Int = ..., String = ...)' type=A.B operator=null
+            $this: CALL 'constructor A()' type=A operator=null
+        VAR val b: A.B
+          CALL 'constructor B(Double = ..., Int = ..., String = ...)' type=A.B operator=null
+            $this: CALL 'constructor A()' type=A operator=null
+            a: CONST Double type=kotlin.Double value='2.0'
+            b: CONST Int type=kotlin.Int value='66'
+            c: CONST String type=kotlin.String value='cc'
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=ANDAND
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL '<get-a>(): Double' type=kotlin.Double operator=GET_PROPERTY
+                  $this: GET_VAR 'bDefault: A.B' type=A.B operator=null
+                arg1: CONST Double type=kotlin.Double value='1.0'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL '<get-b>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'bDefault: A.B' type=A.B operator=null
+                arg1: CONST Int type=kotlin.Int value='55'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-c>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'bDefault: A.B' type=A.B operator=null
+              arg1: CONST String type=kotlin.String value='c'
+            else: CONST Boolean type=kotlin.Boolean value='false'
+          then: BLOCK type=kotlin.Unit operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: WHEN type=kotlin.Boolean operator=ANDAND
+                if: WHEN type=kotlin.Boolean operator=ANDAND
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: CALL '<get-a>(): Double' type=kotlin.Double operator=GET_PROPERTY
+                      $this: GET_VAR 'b: A.B' type=A.B operator=null
+                    arg1: CONST Double type=kotlin.Double value='2.0'
+                  then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: CALL '<get-b>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                      $this: GET_VAR 'b: A.B' type=A.B operator=null
+                    arg1: CONST Int type=kotlin.Int value='66'
+                  else: CONST Boolean type=kotlin.Boolean value='false'
+                then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: CALL '<get-c>(): String' type=kotlin.String operator=GET_PROPERTY
+                    $this: GET_VAR 'b: A.B' type=A.B operator=null
+                  arg1: CONST String type=kotlin.String value='cc'
+                else: CONST Boolean type=kotlin.Boolean value='false'
+              then: BLOCK type=kotlin.Nothing operator=null
+                RETURN type=kotlin.Nothing from='box(): String'
+                  CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='fail'

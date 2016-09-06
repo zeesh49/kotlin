@@ -1,0 +1,211 @@
+MODULE <test-module>
+  FILE /tostring.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                  $this: CONST Int type=kotlin.Int value='239'
+              arg1: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                $receiver: TYPE_OP operator=CAST typeOperand=kotlin.Byte?
+                  CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                    $this: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='byte failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: CALL 'toShort(): Short' type=kotlin.Short operator=null
+                  $this: CONST Int type=kotlin.Int value='239'
+              arg1: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                $receiver: TYPE_OP operator=CAST typeOperand=kotlin.Short?
+                  CALL 'toShort(): Short' type=kotlin.Short operator=null
+                    $this: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='short failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: CALL 'toInt(): Int' type=kotlin.Int operator=null
+                  $this: CONST Int type=kotlin.Int value='239'
+              arg1: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                $receiver: TYPE_OP operator=CAST typeOperand=kotlin.Int?
+                  CALL 'toInt(): Int' type=kotlin.Int operator=null
+                    $this: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='int failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: CALL 'toFloat(): Float' type=kotlin.Float operator=null
+                  $this: CONST Int type=kotlin.Int value='239'
+              arg1: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                $receiver: TYPE_OP operator=CAST typeOperand=kotlin.Float?
+                  CALL 'toFloat(): Float' type=kotlin.Float operator=null
+                    $this: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='float failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: CALL 'toLong(): Long' type=kotlin.Long operator=null
+                  $this: CONST Int type=kotlin.Int value='239'
+              arg1: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                $receiver: TYPE_OP operator=CAST typeOperand=kotlin.Long?
+                  CALL 'toLong(): Long' type=kotlin.Long operator=null
+                    $this: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='long failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: CALL 'toDouble(): Double' type=kotlin.Double operator=null
+                  $this: CONST Int type=kotlin.Int value='239'
+              arg1: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                $receiver: TYPE_OP operator=CAST typeOperand=kotlin.Double?
+                  CALL 'toDouble(): Double' type=kotlin.Double operator=null
+                    $this: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='double failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: CONST Boolean type=kotlin.Boolean value='true'
+              arg1: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                $receiver: TYPE_OP operator=CAST typeOperand=kotlin.Boolean?
+                  CONST Boolean type=kotlin.Boolean value='true'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='boolean failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: CALL 'toChar(): Char' type=kotlin.Char operator=null
+                  $this: CONST Char type=kotlin.Char value='a'
+              arg1: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                $receiver: TYPE_OP operator=CAST typeOperand=kotlin.Char?
+                  CALL 'toChar(): Char' type=kotlin.Char operator=null
+                    $this: CONST Char type=kotlin.Char value='a'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='char failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                $this: CONST Int type=kotlin.Int value='239'
+              arg1: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                $receiver: TYPE_OP operator=CAST typeOperand=kotlin.Byte?
+                  CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                    $this: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='byte template failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toShort(): Short' type=kotlin.Short operator=null
+                $this: CONST Int type=kotlin.Int value='239'
+              arg1: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                $receiver: TYPE_OP operator=CAST typeOperand=kotlin.Short?
+                  CALL 'toShort(): Short' type=kotlin.Short operator=null
+                    $this: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='short  template failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toInt(): Int' type=kotlin.Int operator=null
+                $this: CONST Int type=kotlin.Int value='239'
+              arg1: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                $receiver: TYPE_OP operator=CAST typeOperand=kotlin.Int?
+                  CALL 'toInt(): Int' type=kotlin.Int operator=null
+                    $this: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='int  template failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toFloat(): Float' type=kotlin.Float operator=null
+                $this: CONST Int type=kotlin.Int value='239'
+              arg1: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                $receiver: TYPE_OP operator=CAST typeOperand=kotlin.Float?
+                  CALL 'toFloat(): Float' type=kotlin.Float operator=null
+                    $this: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='float  template failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toLong(): Long' type=kotlin.Long operator=null
+                $this: CONST Int type=kotlin.Int value='239'
+              arg1: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                $receiver: TYPE_OP operator=CAST typeOperand=kotlin.Long?
+                  CALL 'toLong(): Long' type=kotlin.Long operator=null
+                    $this: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='long  template failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toDouble(): Double' type=kotlin.Double operator=null
+                $this: CONST Int type=kotlin.Int value='239'
+              arg1: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                $receiver: TYPE_OP operator=CAST typeOperand=kotlin.Double?
+                  CALL 'toDouble(): Double' type=kotlin.Double operator=null
+                    $this: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='double  template failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CONST Boolean type=kotlin.Boolean value='true'
+              arg1: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                $receiver: TYPE_OP operator=CAST typeOperand=kotlin.Boolean?
+                  CONST Boolean type=kotlin.Boolean value='true'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='boolean  template failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toChar(): Char' type=kotlin.Char operator=null
+                $this: CONST Char type=kotlin.Char value='a'
+              arg1: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                $receiver: TYPE_OP operator=CAST typeOperand=kotlin.Char?
+                  CALL 'toChar(): Char' type=kotlin.Char operator=null
+                    $this: CONST Char type=kotlin.Char value='a'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='char  template failed'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='0'
+                other: CONST Int type=kotlin.Int value='255'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val b: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                    arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                      arg0: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                        $this: GET_VAR 'b: Int' type=kotlin.Int operator=null
+                      arg1: CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                        $receiver: TYPE_OP operator=CAST typeOperand=kotlin.Byte?
+                          CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                            $this: GET_VAR 'b: Int' type=kotlin.Int operator=null
+                  then: RETURN type=kotlin.Nothing from='box(): String'
+                    CONST String type=kotlin.String value='byte conversion failed'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,27 @@
+MODULE <test-module>
+  FILE /implicitExtensionReceiver.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value='OK'
+    FUN public fun A?.bar(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='bar() on A?: String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: $RECEIVER of 'bar() on A?: String' type=A?
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'foo(): String' type=kotlin.String operator=null
+              $this: $RECEIVER of 'bar() on A?: String' type=A?
+            else: CONST String type=kotlin.String value='FAIL'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'bar() on A?: String' type=kotlin.String operator=null
+            $receiver: CALL 'constructor A()' type=A operator=null

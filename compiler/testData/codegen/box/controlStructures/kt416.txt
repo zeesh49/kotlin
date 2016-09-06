@@ -1,0 +1,23 @@
+MODULE <test-module>
+  FILE /kt416.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var a: kotlin.Int
+          CONST Int type=kotlin.Int value='10'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: BLOCK type=kotlin.Int? operator=SAFE_CALL
+                VAR val tmp0_safe_receiver: kotlin.Int
+                  GET_VAR 'a: Int' type=kotlin.Int operator=null
+                WHEN type=kotlin.Int? operator=SAFE_CALL
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_safe_receiver: Int' type=kotlin.Int operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CONST Null type=kotlin.Nothing? value='null'
+                  else: CALL 'plus(Int): Int' type=kotlin.Int operator=null
+                    $this: GET_VAR 'tmp0_safe_receiver: Int' type=kotlin.Int operator=null
+                    other: CONST Int type=kotlin.Int value='10'
+              arg1: CONST Int type=kotlin.Int value='20'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

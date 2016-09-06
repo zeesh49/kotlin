@@ -1,0 +1,39 @@
+MODULE <test-module>
+  FILE /basicmethodSuperClass.kt
+    CLASS CLASS N
+      CONSTRUCTOR public constructor N()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor ArrayList()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='N'
+      FUN public open override fun add(el: kotlin.Any): kotlin.Boolean
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+              $this: CALL 'add(Any): Boolean' superQualifier=ArrayList type=kotlin.Boolean operator=null
+                $this: THIS of 'N' type=java.util.ArrayList<kotlin.Any>
+                element: GET_VAR 'value-parameter el: Any' type=kotlin.Any operator=null
+            then: BLOCK type=kotlin.Nothing operator=null
+              THROW type=kotlin.Nothing
+                CALL 'constructor Exception()' type=java.lang.Exception operator=null
+          RETURN type=kotlin.Nothing from='add(Any): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val n: N
+          CALL 'constructor N()' type=N operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'add(Any): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'n: N' type=N operator=null
+            el: CONST String type=kotlin.String value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'get(Int): Any' type=kotlin.Any operator=null
+              $this: GET_VAR 'n: N' type=N operator=null
+              index: CONST Int type=kotlin.Int value='0'
+            arg1: CONST String type=kotlin.String value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='fail'

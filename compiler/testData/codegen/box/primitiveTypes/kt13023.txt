@@ -1,0 +1,67 @@
+MODULE <test-module>
+  FILE /kt13023.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val b: kotlin.Char = \u0062 ('b')
+          CONST Char type=kotlin.Char value='b'
+        VAR val c: kotlin.Char = \u0063 ('c')
+          CONST Char type=kotlin.Char value='c'
+        CALL 'assertEquals(Char, Char, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Char type=kotlin.Char value='c'
+          actual: CALL 'plus(Int): Char' type=kotlin.Char operator=PLUS
+            $this: GET_VAR 'b: Char' type=kotlin.Char operator=null
+            other: CONST Int type=kotlin.Int value='1'
+        CALL 'assertEquals(Char, Char, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Char type=kotlin.Char value='a'
+          actual: CALL 'minus(Int): Char' type=kotlin.Char operator=MINUS
+            $this: GET_VAR 'b: Char' type=kotlin.Char operator=null
+            other: CONST Int type=kotlin.Int value='1'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'minus(Char): Int' type=kotlin.Int operator=MINUS
+            $this: GET_VAR 'c: Char' type=kotlin.Char operator=null
+            other: GET_VAR 'b: Char' type=kotlin.Char operator=null
+        VAR val list: kotlin.collections.List<kotlin.Char>
+          CALL 'listOf(vararg Char): List<Char>' type=kotlin.collections.List<kotlin.Char> operator=null
+            elements: VARARG type=Array<out Char> varargElementType=Char
+              CONST Char type=kotlin.Char value='b'
+              CONST Char type=kotlin.Char value='a'
+        CALL 'assertEquals(Char, Char, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Char type=kotlin.Char value='c'
+          actual: CALL 'plus(Int): Char' type=kotlin.Char operator=PLUS
+            $this: CALL 'get(Int): Char' type=kotlin.Char operator=GET_ARRAY_ELEMENT
+              $this: GET_VAR 'list: List<Char>' type=kotlin.collections.List<kotlin.Char> operator=null
+              index: CONST Int type=kotlin.Int value='0'
+            other: CONST Int type=kotlin.Int value='1'
+        CALL 'assertEquals(Char, Char, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Char type=kotlin.Char value='a'
+          actual: CALL 'minus(Int): Char' type=kotlin.Char operator=MINUS
+            $this: CALL 'get(Int): Char' type=kotlin.Char operator=GET_ARRAY_ELEMENT
+              $this: GET_VAR 'list: List<Char>' type=kotlin.collections.List<kotlin.Char> operator=null
+              index: CONST Int type=kotlin.Int value='0'
+            other: CONST Int type=kotlin.Int value='1'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'minus(Char): Int' type=kotlin.Int operator=MINUS
+            $this: CALL 'get(Int): Char' type=kotlin.Char operator=GET_ARRAY_ELEMENT
+              $this: GET_VAR 'list: List<Char>' type=kotlin.collections.List<kotlin.Char> operator=null
+              index: CONST Int type=kotlin.Int value='0'
+            other: CALL 'get(Int): Char' type=kotlin.Char operator=GET_ARRAY_ELEMENT
+              $this: GET_VAR 'list: List<Char>' type=kotlin.collections.List<kotlin.Char> operator=null
+              index: CONST Int type=kotlin.Int value='1'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'minus(Char): Int' type=kotlin.Int operator=MINUS
+            $this: CALL 'get(Int): Char' type=kotlin.Char operator=GET_ARRAY_ELEMENT
+              $this: GET_VAR 'list: List<Char>' type=kotlin.collections.List<kotlin.Char> operator=null
+              index: CONST Int type=kotlin.Int value='0'
+            other: CONST Char type=kotlin.Char value='a'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'minus(Char): Int' type=kotlin.Int operator=MINUS
+            $this: CONST Char type=kotlin.Char value='b'
+            other: CALL 'get(Int): Char' type=kotlin.Char operator=GET_ARRAY_ELEMENT
+              $this: GET_VAR 'list: List<Char>' type=kotlin.collections.List<kotlin.Char> operator=null
+              index: CONST Int type=kotlin.Int value='1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

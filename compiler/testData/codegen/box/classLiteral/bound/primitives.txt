@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /primitives.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(KClass<Boolean>, KClass<Boolean>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_CLASS type=kotlin.reflect.KClass<kotlin.Boolean>
+            CONST Boolean type=kotlin.Boolean value='true'
+          actual: CLASS_REFERENCE 'Boolean' type=kotlin.reflect.KClass<kotlin.Boolean>
+        CALL 'assertEquals(KClass<Byte>, KClass<Byte>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_CLASS type=kotlin.reflect.KClass<kotlin.Byte>
+            CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+              $this: CONST Int type=kotlin.Int value='42'
+          actual: CLASS_REFERENCE 'Byte' type=kotlin.reflect.KClass<kotlin.Byte>
+        CALL 'assertEquals(KClass<Char>, KClass<Char>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_CLASS type=kotlin.reflect.KClass<kotlin.Char>
+            CONST Char type=kotlin.Char value='z'
+          actual: CLASS_REFERENCE 'Char' type=kotlin.reflect.KClass<kotlin.Char>
+        CALL 'assertEquals(KClass<Double>, KClass<Double>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_CLASS type=kotlin.reflect.KClass<kotlin.Double>
+            CONST Double type=kotlin.Double value='3.14'
+          actual: CLASS_REFERENCE 'Double' type=kotlin.reflect.KClass<kotlin.Double>
+        CALL 'assertEquals(KClass<Float>, KClass<Float>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_CLASS type=kotlin.reflect.KClass<kotlin.Float>
+            CONST Float type=kotlin.Float value='2.72'
+          actual: CLASS_REFERENCE 'Float' type=kotlin.reflect.KClass<kotlin.Float>
+        CALL 'assertEquals(KClass<Long>, KClass<Long>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_CLASS type=kotlin.reflect.KClass<kotlin.Long>
+            CONST Long type=kotlin.Long value='42'
+          actual: CLASS_REFERENCE 'Long' type=kotlin.reflect.KClass<kotlin.Long>
+        CALL 'assertEquals(KClass<Short>, KClass<Short>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_CLASS type=kotlin.reflect.KClass<kotlin.Short>
+            CALL 'toShort(): Short' type=kotlin.Short operator=null
+              $this: CONST Int type=kotlin.Int value='42'
+          actual: CLASS_REFERENCE 'Short' type=kotlin.reflect.KClass<kotlin.Short>
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

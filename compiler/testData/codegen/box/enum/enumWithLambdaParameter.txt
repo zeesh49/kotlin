@@ -1,0 +1,90 @@
+MODULE <test-module>
+  FILE /enumWithLambdaParameter.kt
+    CLASS ENUM_CLASS Sign
+      CONSTRUCTOR private constructor Sign(str: kotlin.String, func: (kotlin.Int, kotlin.Int) -> kotlin.Int)
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          SET_BACKING_FIELD 'str: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Sign' type=Sign
+            value: GET_VAR 'value-parameter str: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'func: (Int, Int) -> Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'Sign' type=Sign
+            value: GET_VAR 'value-parameter func: (Int, Int) -> Int' type=(kotlin.Int, kotlin.Int) -> kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Sign'
+      PROPERTY public final val str: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter str: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val func: (kotlin.Int, kotlin.Int) -> kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter func: (Int, Int) -> Int' type=(kotlin.Int, kotlin.Int) -> kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      ENUM_ENTRY enum entry plus
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Sign(String, (Int, Int) -> Int)' plus
+          str: CONST String type=kotlin.String value='+'
+          func: BLOCK type=(kotlin.Int, kotlin.Int) -> kotlin.Int operator=LAMBDA
+            FUN local final fun <anonymous>(x: kotlin.Int, y: kotlin.Int): kotlin.Int
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(Int, Int): Int'
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                    other: GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=null
+            CALLABLE_REFERENCE '<anonymous>(Int, Int): Int' type=(kotlin.Int, kotlin.Int) -> kotlin.Int operator=LAMBDA
+      ENUM_ENTRY enum entry mult
+        init: ENUM_CONSTRUCTOR_CALL 'constructor mult()' mult
+        class: CLASS ENUM_ENTRY mult
+          CONSTRUCTOR private constructor mult()
+            BLOCK_BODY
+              ENUM_CONSTRUCTOR_CALL 'constructor Sign(String, (Int, Int) -> Int)' super
+                str: CONST String type=kotlin.String value='*'
+                func: BLOCK type=(kotlin.Int, kotlin.Int) -> kotlin.Int operator=LAMBDA
+                  FUN local final fun <anonymous>(x: kotlin.Int, y: kotlin.Int): kotlin.Int
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Int, Int): Int'
+                        CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                          $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                          other: GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=null
+                  CALLABLE_REFERENCE '<anonymous>(Int, Int): Int' type=(kotlin.Int, kotlin.Int) -> kotlin.Int operator=LAMBDA
+              INSTANCE_INITIALIZER_CALL classDescriptor='mult'
+          FUN public open override fun toString(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='toString(): String'
+                TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+                  CALL 'invoke(Int, Int): Int' type=kotlin.Int operator=INVOKE
+                    $this: CALL '<get-func>(): (Int, Int) -> Int' type=(kotlin.Int, kotlin.Int) -> kotlin.Int operator=GET_PROPERTY
+                      $this: THIS of 'mult' type=Sign.mult
+                    p1: CONST Int type=kotlin.Int value='4'
+                    p2: CONST Int type=kotlin.Int value='5'
+      FUN public final fun values(): kotlin.Array<Sign>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): Sign
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val sum: kotlin.Int
+          CALL 'invoke(Int, Int): Int' type=kotlin.Int operator=INVOKE
+            $this: CALL '<get-func>(): (Int, Int) -> Int' type=(kotlin.Int, kotlin.Int) -> kotlin.Int operator=GET_PROPERTY
+              $this: GET_ENUM_VALUE 'plus' type=Sign
+            p1: CONST Int type=kotlin.Int value='2'
+            p2: CONST Int type=kotlin.Int value='3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'sum: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='5'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 1: '
+              GET_VAR 'sum: Int' type=kotlin.Int operator=null
+        VAR val product: kotlin.String
+          CALL 'toString(): String' type=kotlin.String operator=null
+            $this: GET_ENUM_VALUE 'mult' type=Sign
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'product: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='20'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail 2: '
+              GET_VAR 'product: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

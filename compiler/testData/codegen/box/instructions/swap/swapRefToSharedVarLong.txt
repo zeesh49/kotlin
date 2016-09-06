@@ -1,0 +1,16 @@
+MODULE <test-module>
+  FILE /swapRefToSharedVarLong.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var a: kotlin.Long
+        SET_VAR 'a: Long' type=kotlin.Unit operator=EQ
+          CALL 'toLong(): Long' type=kotlin.Long operator=null
+            $this: CONST Int type=kotlin.Int value='12'
+        FUN local final fun f(): kotlin.Unit
+          BLOCK_BODY
+            CALL 'foo(Long): Unit' type=kotlin.Unit operator=null
+              l: GET_VAR 'a: Long' type=kotlin.Long operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun foo(l: kotlin.Long): kotlin.Unit
+      BLOCK_BODY

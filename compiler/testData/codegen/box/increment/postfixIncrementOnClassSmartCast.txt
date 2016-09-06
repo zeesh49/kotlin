@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /postfixIncrementOnClassSmartCast.kt
+    CLASS CLASS Base
+      CONSTRUCTOR public constructor Base()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Base'
+    CLASS CLASS Derived
+      CONSTRUCTOR public constructor Derived()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Base()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Derived'
+    FUN public operator fun Derived.inc(): Derived
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='inc() on Derived: Derived'
+          CALL 'constructor Derived()' type=Derived operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var i: Base
+        SET_VAR 'i: Base' type=kotlin.Unit operator=EQ
+          CALL 'constructor Derived()' type=Derived operator=null
+        VAR val j: Base
+          BLOCK type=Base operator=POSTFIX_INCR
+            VAR val tmp0: Base
+              GET_VAR 'i: Base' type=Base operator=POSTFIX_INCR
+            SET_VAR 'i: Base' type=kotlin.Unit operator=POSTFIX_INCR
+              CALL 'inc() on Derived: Derived' type=Derived operator=POSTFIX_INCR
+                $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=Derived
+                  GET_VAR 'tmp0: Base' type=Base operator=null
+            GET_VAR 'tmp0: Base' type=Base operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: TYPE_OP operator=INSTANCEOF typeOperand=Derived
+                GET_VAR 'j: Base' type=Base operator=null
+              then: TYPE_OP operator=INSTANCEOF typeOperand=Derived
+                GET_VAR 'i: Base' type=Base operator=null
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail j = '
+              GET_VAR 'j: Base' type=Base operator=null
+              CONST String type=kotlin.String value=' i = '
+              GET_VAR 'i: Base' type=Base operator=null

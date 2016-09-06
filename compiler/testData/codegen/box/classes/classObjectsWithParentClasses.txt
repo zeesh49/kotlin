@@ -1,0 +1,59 @@
+MODULE <test-module>
+  FILE /classObjectsWithParentClasses.kt
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      CLASS OBJECT companion object of Test
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of Test'
+        FUN public final fun testStatic(ic: Test.InnerClass): Test.NotInnerClass
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='testStatic(Test.InnerClass): Test.NotInnerClass'
+              CALL 'constructor NotInnerClass(Int)' type=Test.NotInnerClass operator=null
+                value: CALL '<get-value>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'value-parameter ic: Test.InnerClass' type=Test.InnerClass operator=null
+      FUN public final fun test(): Test.InnerClass
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test(): Test.InnerClass'
+            CALL 'constructor InnerClass(Int)' type=Test.InnerClass operator=null
+              $this: THIS of 'Test' type=Test
+              value: CONST Int type=kotlin.Int value='150'
+      CLASS CLASS InnerClass
+        CONSTRUCTOR public constructor InnerClass(value: kotlin.Int)
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            SET_BACKING_FIELD 'value: Int' type=kotlin.Unit operator=null
+              receiver: THIS of 'InnerClass' type=Test.InnerClass
+              value: GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            INSTANCE_INITIALIZER_CALL classDescriptor='InnerClass'
+        PROPERTY public final val value: kotlin.Int
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CLASS CLASS NotInnerClass
+        CONSTRUCTOR public constructor NotInnerClass(value: kotlin.Int)
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            SET_BACKING_FIELD 'value: Int' type=kotlin.Unit operator=null
+              receiver: THIS of 'NotInnerClass' type=Test.NotInnerClass
+              value: GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            INSTANCE_INITIALIZER_CALL classDescriptor='NotInnerClass'
+        PROPERTY public final val value: kotlin.Int
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-value>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL 'testStatic(Test.InnerClass): Test.NotInnerClass' type=Test.NotInnerClass operator=null
+                  $this: GET_OBJECT 'companion object of Test' type=Test.Companion
+                  ic: CALL 'test(): Test.InnerClass' type=Test.InnerClass operator=null
+                    $this: CALL 'constructor Test()' type=Test operator=null
+              arg1: CONST Int type=kotlin.Int value='150'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='FAIL'

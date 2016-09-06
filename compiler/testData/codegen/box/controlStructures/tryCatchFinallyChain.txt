@@ -1,0 +1,22 @@
+MODULE <test-module>
+  FILE /tryCatchFinallyChain.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+          finally: BLOCK type=kotlin.Nothing operator=null
+            TRY_CATCH type=kotlin.Unit
+              try: BLOCK type=kotlin.Unit operator=null
+                TRY_CATCH type=kotlin.Unit
+                  try: BLOCK type=kotlin.Unit operator=null
+                  finally: BLOCK type=kotlin.Unit operator=null
+                    TRY_CATCH type=kotlin.Unit
+                      try: BLOCK type=kotlin.Unit operator=null
+                      finally: BLOCK type=kotlin.Unit operator=null
+              catch e: BLOCK type=kotlin.Unit operator=null
+                TRY_CATCH type=kotlin.Unit
+                  try: BLOCK type=kotlin.Unit operator=null
+                  catch f: BLOCK type=kotlin.Unit operator=null
+                  finally: BLOCK type=kotlin.Unit operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'

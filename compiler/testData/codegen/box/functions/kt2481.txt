@@ -1,0 +1,32 @@
+MODULE <test-module>
+  FILE /kt2481.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'method(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor B()' type=B operator=null
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public open fun method(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='method(): String'
+            CONST String type=kotlin.String value='OK'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      FUN public open override fun method(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='method(): String'
+            CALL 'invoke(): String' type=kotlin.String operator=null
+              $this: BLOCK type=() -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                      CALL 'method(): String' superQualifier=A type=kotlin.String operator=null
+                        $this: THIS of 'B' type=A
+                CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA

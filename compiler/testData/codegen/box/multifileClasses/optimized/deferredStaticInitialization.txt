@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /box.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-OK>(): String' type=kotlin.String operator=GET_PROPERTY
+  FILE /irrelevantPart.kt
+    PROPERTY public val X1: kotlin.Nothing
+      EXPRESSION_BODY
+        THROW type=kotlin.Nothing
+          CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+            p0: CONST String type=kotlin.String value='X1 should not be initialized'
+  FILE /part1.kt
+    PROPERTY public val O: kotlin.String
+      EXPRESSION_BODY
+        CALL 'run(() -> String): String' type=kotlin.String operator=null
+          block: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='O'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+  FILE /part2.kt
+    PROPERTY public const val K: kotlin.String = "K"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='K'
+  FILE /part3.kt
+    PROPERTY public val OK: kotlin.String
+      EXPRESSION_BODY
+        CALL 'run(() -> String): String' type=kotlin.String operator=null
+          block: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                    $this: CALL '<get-O>(): String' type=kotlin.String operator=GET_PROPERTY
+                    other: CALL '<get-K>(): String' type=kotlin.String operator=GET_PROPERTY
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+  FILE /reallyIrrelevantPart.kt
+    PROPERTY public val X2: kotlin.Nothing
+      EXPRESSION_BODY
+        THROW type=kotlin.Nothing
+          CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+            p0: CONST String type=kotlin.String value='X2 should not be initialized'

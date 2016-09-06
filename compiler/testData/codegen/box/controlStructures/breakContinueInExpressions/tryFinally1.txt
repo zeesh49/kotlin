@@ -1,0 +1,22 @@
+MODULE <test-module>
+  FILE /tryFinally1.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var x: kotlin.String
+          CONST String type=kotlin.String value='OK'
+        WHILE label=null operator=WHILE_LOOP
+          condition: CONST Boolean type=kotlin.Boolean value='true'
+          body: BLOCK type=kotlin.Unit operator=null
+            TRY_CATCH type=kotlin.Unit
+              try: BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'x: String' type=kotlin.Unit operator=EQ
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                    $this: GET_VAR 'x: String' type=kotlin.String operator=null
+                    other: CONTINUE label=null loop.label=null depth=0
+              finally: BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'x: String' type=kotlin.Unit operator=EQ
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                    $this: GET_VAR 'x: String' type=kotlin.String operator=null
+                    other: BREAK label=null loop.label=null depth=0
+        RETURN type=kotlin.Nothing from='box(): String'
+          GET_VAR 'x: String' type=kotlin.String operator=null

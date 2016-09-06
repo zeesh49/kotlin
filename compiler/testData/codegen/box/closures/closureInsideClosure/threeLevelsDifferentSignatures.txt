@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /threeLevelsDifferentSignatures.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        FUN local final fun foo(x: kotlin.Int, s: kotlin.String): kotlin.String
+          BLOCK_BODY
+            FUN local final fun bar(y: kotlin.Int): kotlin.Unit
+              BLOCK_BODY
+                FUN local final fun baz(z: kotlin.Int, k: kotlin.Int): kotlin.Unit
+                  BLOCK_BODY
+                    CALL 'foo(Int, String): String' type=kotlin.String operator=null
+                      x: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                        $this: CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+                          $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                          other: CONST Int type=kotlin.Int value='1'
+                        other: GET_VAR 'value-parameter k: Int' type=kotlin.Int operator=null
+                      s: CONST String type=kotlin.String value='Fail'
+                CALL 'baz(Int, Int): Unit' type=kotlin.Unit operator=null
+                  z: GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=null
+                  k: CONST Int type=kotlin.Int value='0'
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+                arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+                  $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                  other: CONST Int type=kotlin.Int value='0'
+              then: CALL 'bar(Int): Unit' type=kotlin.Unit operator=null
+                y: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+            RETURN type=kotlin.Nothing from='foo(Int, String): String'
+              GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(Int, String): String' type=kotlin.String operator=null
+            x: CONST Int type=kotlin.Int value='1'
+            s: CONST String type=kotlin.String value='OK'

@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /1/part.kt
+    FUN public fun foo(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(): String'
+          CONST String type=kotlin.String value='O'
+  FILE /2/part.kt
+    FUN public fun bar(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='bar(): String'
+          CONST String type=kotlin.String value='K'
+  FILE /box.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'foo(): String' type=kotlin.String operator=null
+            other: CALL 'bar(): String' type=kotlin.String operator=null

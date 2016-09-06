@@ -1,0 +1,43 @@
+MODULE <test-module>
+  FILE /traitImplInheritsTraitImpl.kt
+    CLASS INTERFACE A
+      FUN public open fun foo(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): Any'
+            CONST String type=kotlin.String value='A'
+    CLASS INTERFACE B
+      FUN public open override fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value='B'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val c: C
+          CALL 'constructor C()' type=C operator=null
+        VAR val b: B
+          GET_VAR 'c: C' type=C operator=null
+        VAR val a: A
+          GET_VAR 'c: C' type=C operator=null
+        VAR var r: kotlin.String
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CALL 'foo(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'c: C' type=C operator=null
+              other: CALL 'foo(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'b: B' type=B operator=null
+            other: CALL 'foo(): Any' type=kotlin.Any operator=null
+              $this: GET_VAR 'a: A' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'r: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='BBB'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'r: String' type=kotlin.String operator=null

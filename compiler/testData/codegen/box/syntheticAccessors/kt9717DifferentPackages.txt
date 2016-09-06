@@ -1,0 +1,29 @@
+MODULE <test-module>
+  FILE /a.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'ok(): String' type=kotlin.String operator=null
+          $this: CALL 'constructor BB()' type=b.BB operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-OK>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor BB()' type=b.BB operator=null
+  FILE /b.kt
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public final var OK: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+        PROPERTY_SETTER protected final fun <set-OK>(<set-?>: kotlin.String): kotlin.Unit
+    CLASS CLASS BB
+      CONSTRUCTOR public constructor BB()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor B()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='BB'
+      FUN public final fun ok(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='ok(): String'
+            CALL '<get-OK>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'BB' type=b.BB

@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /kt2711.kt
+    CLASS CLASS IntRange
+      CONSTRUCTOR public constructor IntRange()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='IntRange'
+      FUN public final operator fun contains(a: kotlin.Int): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='contains(Int): Boolean'
+            CALL 'contains(Int): Boolean' type=kotlin.Boolean operator=null
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='1'
+                other: CONST Int type=kotlin.Int value='2'
+              value: GET_VAR 'value-parameter a: Int' type=kotlin.Int operator=null
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      FUN public final operator fun rangeTo(i: kotlin.Int): IntRange
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='rangeTo(Int): IntRange'
+            CALL 'constructor IntRange()' type=IntRange operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'contains(Int): Boolean' type=kotlin.Boolean operator=IN
+            $this: CALL 'rangeTo(Int): IntRange' type=IntRange operator=RANGE
+              $this: CALL 'constructor C()' type=C operator=null
+              i: CONST Int type=kotlin.Int value='2'
+            a: CONST Int type=kotlin.Int value='2'
+          then: BLOCK type=kotlin.Boolean operator=null
+            CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CONST Int type=kotlin.Int value='2'
+              arg1: CONST Int type=kotlin.Int value='2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

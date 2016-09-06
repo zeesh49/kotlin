@@ -1,0 +1,158 @@
+MODULE <test-module>
+  FILE /usedInMethodCall.kt
+    CLASS CLASS Controller
+      CONSTRUCTOR public constructor Controller()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Controller'
+      FUN public final suspend fun suspendHere(x: kotlin.coroutines.Continuation<kotlin.Unit>): kotlin.Unit
+        BLOCK_BODY
+          CALL 'resume(Unit): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR 'value-parameter x: Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=null
+            data: GET_OBJECT 'Unit' type=kotlin.Unit
+    FUN public fun builder(coroutine c: Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'resume(Unit): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'invoke(Controller): Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=INVOKE
+            $this: GET_VAR 'value-parameter coroutine c: Controller.() -> Continuation<Unit>' type=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+            p1: CALL 'constructor Controller()' type=Controller operator=null
+          data: GET_OBJECT 'Unit' type=kotlin.Unit
+    PROPERTY private var booleanResult: kotlin.Boolean
+      EXPRESSION_BODY
+        CONST Boolean type=kotlin.Boolean value='false'
+    FUN public fun setBooleanRes(x: kotlin.Boolean): kotlin.Unit
+      BLOCK_BODY
+        CALL '<set-booleanResult>(Boolean): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: GET_VAR 'value-parameter x: Boolean' type=kotlin.Boolean operator=null
+    PROPERTY private var charResult: kotlin.Char
+      EXPRESSION_BODY
+        CONST Char type=kotlin.Char value='0'
+    FUN public fun setCharRes(x: kotlin.Char): kotlin.Unit
+      BLOCK_BODY
+        CALL '<set-charResult>(Char): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: GET_VAR 'value-parameter x: Char' type=kotlin.Char operator=null
+    PROPERTY private var byteResult: kotlin.Byte
+      EXPRESSION_BODY
+        CONST Byte type=kotlin.Byte value='0'
+    FUN public fun setByteRes(x: kotlin.Byte): kotlin.Unit
+      BLOCK_BODY
+        CALL '<set-byteResult>(Byte): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: GET_VAR 'value-parameter x: Byte' type=kotlin.Byte operator=null
+    PROPERTY private var shortResult: kotlin.Short
+      EXPRESSION_BODY
+        CONST Short type=kotlin.Short value='0'
+    FUN public fun setShortRes(x: kotlin.Short): kotlin.Unit
+      BLOCK_BODY
+        CALL '<set-shortResult>(Short): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: GET_VAR 'value-parameter x: Short' type=kotlin.Short operator=null
+    PROPERTY private var intResult: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='0'
+    FUN public fun setIntRes(x: kotlin.Int): kotlin.Unit
+      BLOCK_BODY
+        CALL '<set-intResult>(Int): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'builder(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+            BLOCK type=Controller.() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun Controller.<anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  VAR val x: kotlin.Boolean = true
+                    CONST Boolean type=kotlin.Boolean value='true'
+                  CALL 'suspendHere(): Unit' type=kotlin.Unit operator=null
+                    $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Controller: Unit'
+                    CALL 'setBooleanRes(Boolean): Unit' type=kotlin.Unit operator=null
+                      x: GET_VAR 'x: Boolean' type=kotlin.Boolean operator=null
+              CALLABLE_REFERENCE '<anonymous>() on Controller: Unit' type=Controller.() -> kotlin.Unit operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL '<get-booleanResult>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        CALL 'builder(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+            BLOCK type=Controller.() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun Controller.<anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  VAR val x: kotlin.Char = \u0031 ('1')
+                    CONST Char type=kotlin.Char value='1'
+                  CALL 'suspendHere(): Unit' type=kotlin.Unit operator=null
+                    $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Controller: Unit'
+                    CALL 'setCharRes(Char): Unit' type=kotlin.Unit operator=null
+                      x: GET_VAR 'x: Char' type=kotlin.Char operator=null
+              CALLABLE_REFERENCE '<anonymous>() on Controller: Unit' type=Controller.() -> kotlin.Unit operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-charResult>(): Char' type=kotlin.Char operator=GET_PROPERTY
+              arg1: CONST Char type=kotlin.Char value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        CALL 'builder(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+            BLOCK type=Controller.() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun Controller.<anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  VAR val x: kotlin.Byte = 1.toByte()
+                    CONST Byte type=kotlin.Byte value='1'
+                  CALL 'suspendHere(): Unit' type=kotlin.Unit operator=null
+                    $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Controller: Unit'
+                    CALL 'setByteRes(Byte): Unit' type=kotlin.Unit operator=null
+                      x: GET_VAR 'x: Byte' type=kotlin.Byte operator=null
+              CALLABLE_REFERENCE '<anonymous>() on Controller: Unit' type=Controller.() -> kotlin.Unit operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-byteResult>(): Byte' type=kotlin.Byte operator=GET_PROPERTY
+              arg1: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                $this: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        CALL 'builder(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+            BLOCK type=Controller.() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun Controller.<anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  VAR val x: kotlin.Short = 1.toShort()
+                    CONST Short type=kotlin.Short value='1'
+                  CALL 'suspendHere(): Unit' type=kotlin.Unit operator=null
+                    $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Controller: Unit'
+                    CALL 'setShortRes(Short): Unit' type=kotlin.Unit operator=null
+                      x: GET_VAR 'x: Short' type=kotlin.Short operator=null
+              CALLABLE_REFERENCE '<anonymous>() on Controller: Unit' type=Controller.() -> kotlin.Unit operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-shortResult>(): Short' type=kotlin.Short operator=GET_PROPERTY
+              arg1: CALL 'toShort(): Short' type=kotlin.Short operator=null
+                $this: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        CALL 'builder(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+            BLOCK type=Controller.() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun Controller.<anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  VAR val x: kotlin.Int = 1
+                    CONST Int type=kotlin.Int value='1'
+                  CALL 'suspendHere(): Unit' type=kotlin.Unit operator=null
+                    $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Controller: Unit'
+                    CALL 'setIntRes(Int): Unit' type=kotlin.Unit operator=null
+                      x: GET_VAR 'x: Int' type=kotlin.Int operator=null
+              CALLABLE_REFERENCE '<anonymous>() on Controller: Unit' type=Controller.() -> kotlin.Unit operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-intResult>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 5'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

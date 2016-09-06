@@ -1,0 +1,92 @@
+MODULE <test-module>
+  FILE /maxValueInt.kt
+    CLASS ANNOTATION_CLASS Ann
+      PROPERTY public final val p1: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter p1: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val p2: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter p2: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val p4: kotlin.Long
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter p4: Long' type=kotlin.Long operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val p5: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter p5: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS MyClass
+      CONSTRUCTOR public constructor MyClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyClass'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val annotation: Ann
+          BLOCK type=Ann operator=EXCLEXCL
+            VAR val tmp0_notnull: Ann!
+              CALL 'getAnnotation(Class<Ann!>!): Ann!' type=Ann! operator=null
+                $this: CALL '<get-java>() on KClass<MyClass>: Class<MyClass>' type=java.lang.Class<MyClass> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'MyClass' type=kotlin.reflect.KClass<MyClass>
+                p0: CALL '<get-java>() on KClass<Ann>: Class<Ann>' type=java.lang.Class<Ann> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'Ann' type=kotlin.reflect.KClass<Ann>
+            WHEN type=Ann operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Ann!' type=Ann! operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=Ann
+                GET_VAR 'tmp0_notnull: Ann!' type=Ann! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-p1>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'annotation: Ann' type=Ann operator=null
+              arg1: CONST Int type=kotlin.Int value='-2147483648'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1, expected = '
+              CONST Int type=kotlin.Int value='-2147483648'
+              CONST String type=kotlin.String value=', actual = '
+              CALL '<get-p1>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'annotation: Ann' type=Ann operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-p2>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'annotation: Ann' type=Ann operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 2, expected = '
+              CONST Int type=kotlin.Int value='2'
+              CONST String type=kotlin.String value=', actual = '
+              CALL '<get-p2>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'annotation: Ann' type=Ann operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-p4>(): Long' type=kotlin.Long operator=GET_PROPERTY
+                $this: GET_VAR 'annotation: Ann' type=Ann operator=null
+              arg1: CALL 'toLong(): Long' type=kotlin.Long operator=null
+                $this: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 4, expected = '
+              CONST Int type=kotlin.Int value='2'
+              CONST String type=kotlin.String value=', actual = '
+              CALL '<get-p4>(): Long' type=kotlin.Long operator=GET_PROPERTY
+                $this: GET_VAR 'annotation: Ann' type=Ann operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-p5>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'annotation: Ann' type=Ann operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 5, expected = '
+              CONST Int type=kotlin.Int value='2'
+              CONST String type=kotlin.String value=', actual = '
+              CALL '<get-p5>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'annotation: Ann' type=Ann operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

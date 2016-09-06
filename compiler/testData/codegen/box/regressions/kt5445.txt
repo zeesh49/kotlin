@@ -1,0 +1,39 @@
+MODULE <test-module>
+  FILE /1.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'test(Any): String' type=kotlin.String operator=null
+            $this: CALL 'constructor B()' type=test2.B operator=null
+            other: CALL 'constructor B()' type=test2.B operator=null
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      FUN public final fun test(other: kotlin.Any): kotlin.String
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: TYPE_OP operator=INSTANCEOF typeOperand=test2.B
+                GET_VAR 'value-parameter other: Any' type=kotlin.Any operator=null
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL '<get-s>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=test.A
+                    GET_VAR 'value-parameter other: Any' type=kotlin.Any operator=null
+                arg1: CONST Int type=kotlin.Int value='2'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: BLOCK type=kotlin.Nothing operator=null
+              RETURN type=kotlin.Nothing from='test(Any): String'
+                CONST String type=kotlin.String value='OK'
+          RETURN type=kotlin.Nothing from='test(Any): String'
+            CONST String type=kotlin.String value='fail'
+  FILE /2.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY @kotlin.jvm.JvmField protected final val s: kotlin.Int = 2
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='2'

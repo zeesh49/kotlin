@@ -1,0 +1,27 @@
+MODULE <test-module>
+  FILE /classSimpleName.kt
+    CLASS CLASS Klass
+      CONSTRUCTOR public constructor Klass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Klass'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Klass'
+          actual: CALL '<get-simpleName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'Klass' type=kotlin.reflect.KClass<Klass>
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Date'
+          actual: CALL '<get-simpleName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'Date' type=kotlin.reflect.KClass<java.util.Date>
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='ObjectRef'
+          actual: CALL '<get-simpleName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'ObjectRef' type=kotlin.reflect.KClass<kotlin.jvm.internal.Ref.ObjectRef<*>>
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Void'
+          actual: CALL '<get-simpleName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'Void' type=kotlin.reflect.KClass<java.lang.Void>
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

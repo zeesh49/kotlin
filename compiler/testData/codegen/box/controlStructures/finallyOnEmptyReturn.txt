@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /finallyOnEmptyReturn.kt
+    PROPERTY public var result: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='Fail'
+    FUN public fun foo(): kotlin.Unit
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='foo(): Unit'
+          finally: BLOCK type=kotlin.Unit operator=null
+            CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+              <set-?>: CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY

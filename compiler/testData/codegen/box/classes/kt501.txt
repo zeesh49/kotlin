@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /kt501.kt
+    CLASS CLASS Reluctant
+      CONSTRUCTOR public constructor Reluctant()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Reluctant'
+      ANONYMOUS_INITIALIZER Reluctant
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor Exception(String!)' type=java.lang.Exception operator=null
+              p0: CONST String type=kotlin.String value='I'm not coming out'
+    FUN public fun test1(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            VAR val b: Reluctant
+              CALL 'constructor Reluctant()' type=Reluctant operator=null
+            RETURN type=kotlin.Nothing from='test1(): String'
+              CONST String type=kotlin.String value='Surprise!'
+          catch ex: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='test1(): String'
+              CONST String type=kotlin.String value='I told you so'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test1(): String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='I told you so'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test1 failed'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

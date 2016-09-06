@@ -1,0 +1,52 @@
+MODULE <test-module>
+  FILE /FortyTwoExtractor.kt
+    CLASS CLASS FortyTwo
+      CONSTRUCTOR public constructor FortyTwo()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Number()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='FortyTwo'
+      FUN public open override fun toByte(): kotlin.Byte
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toByte(): Byte'
+            CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+              $this: CONST Int type=kotlin.Int value='42'
+      FUN public open override fun toShort(): kotlin.Short
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toShort(): Short'
+            CALL 'toShort(): Short' type=kotlin.Short operator=null
+              $this: CONST Int type=kotlin.Int value='42'
+      FUN public open override fun toInt(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toInt(): Int'
+            CONST Int type=kotlin.Int value='42'
+      FUN public open override fun toLong(): kotlin.Long
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toLong(): Long'
+            CONST Long type=kotlin.Long value='42'
+      FUN public open override fun toFloat(): kotlin.Float
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toFloat(): Float'
+            CONST Float type=kotlin.Float value='42.0'
+      FUN public open override fun toDouble(): kotlin.Double
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toDouble(): Double'
+            CONST Double type=kotlin.Double value='42.0'
+      FUN public open override fun toChar(): kotlin.Char
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toChar(): Char'
+            CALL 'toChar(): Char' type=kotlin.Char operator=null
+              $this: CONST Int type=kotlin.Int value='42'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val extractor: FortyTwoExtractor
+          CALL 'constructor FortyTwoExtractor()' type=FortyTwoExtractor operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'intValue(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'extractor: FortyTwoExtractor' type=FortyTwoExtractor operator=null
+              arg1: CONST Int type=kotlin.Int value='42'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='FAIL'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

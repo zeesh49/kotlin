@@ -1,0 +1,84 @@
+MODULE <test-module>
+  FILE /companionObject.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      CLASS OBJECT companion object of C
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of C'
+        FUN public final fun foo(a: kotlin.String, b: kotlin.String = ...): kotlin.String
+          b: EXPRESSION_BODY
+            CONST String type=kotlin.String value='b'
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo(String, String = ...): String'
+              CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: GET_VAR 'value-parameter a: String' type=kotlin.String operator=null
+                other: GET_VAR 'value-parameter b: String = ...' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f: kotlin.reflect.KCallable<*>
+          CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+            $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'companion object of C' type=kotlin.reflect.KClass<C.Companion>
+            predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                    CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                      arg1: CONST String type=kotlin.String value='foo'
+              CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'callBy(Map<KParameter, Any?>): Any?' type=kotlin.Any? operator=null
+              $this: GET_VAR 'f: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+              args: CALL 'mapOf(Pair<KParameter, String>): Map<KParameter, String>' type=kotlin.collections.Map<kotlin.reflect.KParameter, kotlin.String> operator=null
+                pair: CALL 'to(String) on KParameter: Pair<KParameter, String>' type=kotlin.Pair<kotlin.reflect.KParameter, kotlin.String> operator=null
+                  $receiver: CALL 'single((KParameter) -> Boolean) on Iterable<KParameter>: KParameter' type=kotlin.reflect.KParameter operator=null
+                    $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                      $this: GET_VAR 'f: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                    predicate: BLOCK type=(kotlin.reflect.KParameter) -> kotlin.Boolean operator=LAMBDA
+                      FUN local final fun <anonymous>(it: kotlin.reflect.KParameter): kotlin.Boolean
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='<anonymous>(KParameter): Boolean'
+                            CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                              arg0: CALL '<get-name>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                                $this: GET_VAR 'value-parameter it: KParameter' type=kotlin.reflect.KParameter operator=null
+                              arg1: CONST String type=kotlin.String value='a'
+                      CALLABLE_REFERENCE '<anonymous>(KParameter): Boolean' type=(kotlin.reflect.KParameter) -> kotlin.Boolean operator=LAMBDA
+                  that: CONST String type=kotlin.String value='a'
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail: IllegalArgumentException should have been thrown'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        CALL 'assertEquals(Any?, Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='ab'
+          actual: CALL 'callBy(Map<KParameter, Any?>): Any?' type=kotlin.Any? operator=null
+            $this: GET_VAR 'f: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+            args: CALL 'mapOf(vararg Pair<KParameter, Any>): Map<KParameter, Any>' type=kotlin.collections.Map<kotlin.reflect.KParameter, kotlin.Any> operator=null
+              pairs: VARARG type=Array<out Pair<KParameter, Any>> varargElementType=Pair<KParameter, Any>
+                CALL 'to(C.Companion) on KParameter: Pair<KParameter, C.Companion>' type=kotlin.Pair<kotlin.reflect.KParameter, C.Companion> operator=null
+                  $receiver: CALL 'first() on List<KParameter>: KParameter' type=kotlin.reflect.KParameter operator=null
+                    $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                      $this: GET_VAR 'f: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                  that: GET_OBJECT 'companion object of C' type=C.Companion
+                CALL 'to(String) on KParameter: Pair<KParameter, String>' type=kotlin.Pair<kotlin.reflect.KParameter, kotlin.String> operator=null
+                  $receiver: CALL 'single((KParameter) -> Boolean) on Iterable<KParameter>: KParameter' type=kotlin.reflect.KParameter operator=null
+                    $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                      $this: GET_VAR 'f: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                    predicate: BLOCK type=(kotlin.reflect.KParameter) -> kotlin.Boolean operator=LAMBDA
+                      FUN local final fun <anonymous>(it: kotlin.reflect.KParameter): kotlin.Boolean
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='<anonymous>(KParameter): Boolean'
+                            CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                              arg0: CALL '<get-name>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                                $this: GET_VAR 'value-parameter it: KParameter' type=kotlin.reflect.KParameter operator=null
+                              arg1: CONST String type=kotlin.String value='a'
+                      CALLABLE_REFERENCE '<anonymous>(KParameter): Boolean' type=(kotlin.reflect.KParameter) -> kotlin.Boolean operator=LAMBDA
+                  that: CONST String type=kotlin.String value='a'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

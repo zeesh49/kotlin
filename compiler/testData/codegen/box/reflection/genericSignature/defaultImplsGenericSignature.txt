@@ -1,0 +1,63 @@
+MODULE <test-module>
+  FILE /K.kt
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B<T>(value: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'value: T' type=kotlin.Unit operator=null
+            receiver: THIS of 'B' type=B<T>
+            value: GET_VAR 'value-parameter value: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public final val value: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS INTERFACE A
+      FUN public open fun <T, L> test1(p: T, z: L): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test1(T, L): T'
+            GET_VAR 'value-parameter p: T' type=T operator=null
+      FUN public open fun <L> test2(p: L): A<T, Y>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test2(L): A<T, Y>'
+            THIS of 'A' type=A<T, Y>
+    CLASS CLASS X
+      CONSTRUCTOR public constructor X<T, Y : B<T>>(p1: T, p2: Y)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'p1: T' type=kotlin.Unit operator=null
+            receiver: THIS of 'X' type=X<T, Y>
+            value: GET_VAR 'value-parameter p1: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'p2: Y' type=kotlin.Unit operator=null
+            receiver: THIS of 'X' type=X<T, Y>
+            value: GET_VAR 'value-parameter p2: Y' type=Y operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='X'
+      PROPERTY public final val p1: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter p1: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val p2: Y
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter p2: Y' type=Y operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val test1: kotlin.Int
+          CALL 'test1(): Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test1: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              GET_VAR 'test1: Int' type=kotlin.Int operator=null
+              CONST String type=kotlin.String value=' != 1'
+        VAR val test2: X<kotlin.String, B<kotlin.String>>
+          TYPE_OP operator=CAST typeOperand=X<kotlin.String, B<kotlin.String>>
+            CALL 'test2(): A<String!, B<String!>!>!' type=A<kotlin.String!, B<kotlin.String!>!>! operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL '<get-p1>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: GET_VAR 'test2: X<String, B<String>>' type=X<kotlin.String, B<kotlin.String>> operator=null
+            other: CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: CALL '<get-p2>(): B<String>' type=B<kotlin.String> operator=GET_PROPERTY
+                $this: GET_VAR 'test2: X<String, B<String>>' type=X<kotlin.String, B<kotlin.String>> operator=null

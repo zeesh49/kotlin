@@ -1,0 +1,70 @@
+MODULE <test-module>
+  FILE /objectLiteral.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C(x: kotlin.Int, y: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'y: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'C' type=C
+            value: GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      PROPERTY public final val y: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun initChild(x0: kotlin.Int): kotlin.Any
+        BLOCK_BODY
+          VAR var x: kotlin.Int
+            GET_VAR 'value-parameter x0: Int' type=kotlin.Int operator=null
+          RETURN type=kotlin.Nothing from='initChild(Int): Any'
+            BLOCK type=C.initChild.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                FUN public open override fun toString(): kotlin.String
+                  BLOCK_BODY
+                    SET_VAR 'x: Int' type=kotlin.Unit operator=EQ
+                      CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                        $this: GET_VAR 'x: Int' type=kotlin.Int operator=null
+                        other: CALL '<get-y>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                          $this: THIS of 'C' type=C
+                    RETURN type=kotlin.Nothing from='toString(): String'
+                      CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                        $this: CONST String type=kotlin.String value='child'
+                        other: GET_VAR 'x: Int' type=kotlin.Int operator=null
+              CALL 'constructor <no name provided>()' type=C.initChild.<no name provided> operator=OBJECT_LITERAL
+      PROPERTY public final val child: kotlin.Any
+        EXPRESSION_BODY
+          CALL 'initChild(Int): Any' type=kotlin.Any operator=null
+            $this: THIS of 'C' type=C
+            x0: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val c: C
+          CALL 'constructor C(Int, Int)' type=C operator=null
+            x: CONST Int type=kotlin.Int value='10'
+            y: CONST Int type=kotlin.Int value='3'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: WHEN type=kotlin.Boolean operator=ANDAND
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                    $this: CALL '<get-child>(): Any' type=kotlin.Any operator=GET_PROPERTY
+                      $this: GET_VAR 'c: C' type=C operator=null
+                  arg1: CONST String type=kotlin.String value='child13'
+                then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                    $this: CALL '<get-child>(): Any' type=kotlin.Any operator=GET_PROPERTY
+                      $this: GET_VAR 'c: C' type=C operator=null
+                  arg1: CONST String type=kotlin.String value='child16'
+                else: CONST Boolean type=kotlin.Boolean value='false'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                  $this: CALL '<get-child>(): Any' type=kotlin.Any operator=GET_PROPERTY
+                    $this: GET_VAR 'c: C' type=C operator=null
+                arg1: CONST String type=kotlin.String value='child19'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /kt789.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: java.util.ArrayList<kotlin.Int>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.Int> operator=null
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='1'
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: WHEN type=kotlin.Boolean operator=ANDAND
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                    $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+                  arg1: CONST Int type=kotlin.Int value='2'
+                then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: CALL 'get(Int): Int' type=kotlin.Int operator=null
+                    $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+                    index: CONST Int type=kotlin.Int value='1'
+                  arg1: CONST Int type=kotlin.Int value='2'
+                else: CONST Boolean type=kotlin.Boolean value='false'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL 'get(Int): Int' type=kotlin.Int operator=null
+                  $this: GET_VAR 'a: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+                  index: CONST Int type=kotlin.Int value='0'
+                arg1: CONST Int type=kotlin.Int value='1'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

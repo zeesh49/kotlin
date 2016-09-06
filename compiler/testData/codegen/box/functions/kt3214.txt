@@ -1,0 +1,85 @@
+MODULE <test-module>
+  FILE /kt3214.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun get(vararg x: kotlin.Int): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(vararg Int): Int'
+            CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: GET_VAR 'value-parameter vararg x: Int' type=kotlin.IntArray operator=null
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      FUN public final fun get(vararg x: kotlin.Unit): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(vararg Unit): Int'
+            CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: GET_VAR 'value-parameter vararg x: Unit' type=kotlin.Array<out kotlin.Unit> operator=null
+    FUN public fun test1(a: A): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test1(A): Int'
+          CALL 'get(vararg Int): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'value-parameter a: A' type=A operator=null
+            x: VARARG type=IntArray varargElementType=Int
+              CONST Int type=kotlin.Int value='1'
+    FUN public fun test2(a: A): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test2(A): Int'
+          CALL 'get(vararg Int): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'value-parameter a: A' type=A operator=null
+            x: VARARG type=IntArray varargElementType=Int
+              CONST Int type=kotlin.Int value='1'
+              CONST Int type=kotlin.Int value='2'
+    FUN public fun test3(b: B): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test3(B): Int'
+          CALL 'get(vararg Unit): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'value-parameter b: B' type=B operator=null
+            x: VARARG type=Array<out Unit> varargElementType=Unit
+              GET_OBJECT 'Unit' type=kotlin.Unit
+              GET_OBJECT 'Unit' type=kotlin.Unit
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.Int
+          CALL 'test1(A): Int' type=kotlin.Int operator=null
+            a: CALL 'constructor A()' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail1: '
+              GET_VAR 'result: Int' type=kotlin.Int operator=null
+        SET_VAR 'result: Int' type=kotlin.Unit operator=EQ
+          CALL 'test2(A): Int' type=kotlin.Int operator=null
+            a: CALL 'constructor A()' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail2: '
+              GET_VAR 'result: Int' type=kotlin.Int operator=null
+        SET_VAR 'result: Int' type=kotlin.Unit operator=EQ
+          CALL 'test3(B): Int' type=kotlin.Int operator=null
+            b: CALL 'constructor B()' type=B operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail3: '
+              GET_VAR 'result: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,49 @@
+MODULE <test-module>
+  FILE /simpleReturnType.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<T : kotlin.Number>(t: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 't: T' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A<T>
+            value: GET_VAR 'value-parameter t: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val t: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter t: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public open fun foo(): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): T'
+            CALL '<get-t>(): T' type=T operator=GET_PROPERTY
+              $this: THIS of 'A' type=A<T>
+    CLASS CLASS Z
+      CONSTRUCTOR public constructor Z()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A(Int)'
+            t: CONST Int type=kotlin.Int value='17'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Z'
+      FUN public open override fun foo(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): Int'
+            CONST Int type=kotlin.Int value='239'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val z: Z
+          CALL 'constructor Z()' type=Z operator=null
+        VAR val a: A<kotlin.Int>
+          GET_VAR 'z: Z' type=Z operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=WHEN
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'foo(): Int' type=kotlin.Int operator=null
+                  $this: GET_VAR 'z: Z' type=Z operator=null
+                arg1: CONST Int type=kotlin.Int value='239'
+            then: CONST String type=kotlin.String value='Fail #1'
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'foo(): Int' type=kotlin.Int operator=null
+                  $this: GET_VAR 'a: A<Int>' type=A<kotlin.Int> operator=null
+                arg1: CONST Int type=kotlin.Int value='239'
+            then: CONST String type=kotlin.String value='Fail #2'
+            else: CONST String type=kotlin.String value='OK'

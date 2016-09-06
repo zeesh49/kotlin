@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /covariantOverrideGeneric.kt
+    CLASS CLASS Foo
+      CONSTRUCTOR public constructor Foo()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      FUN public open fun foo(x: kotlin.CharSequence = ...): kotlin.CharSequence
+        x: EXPRESSION_BODY
+          CONST String type=kotlin.String value='O'
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(CharSequence = ...): CharSequence'
+            GET_VAR 'value-parameter x: CharSequence = ...' type=kotlin.CharSequence operator=null
+    CLASS CLASS Bar
+      CONSTRUCTOR public constructor Bar<T : kotlin.String>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Foo()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Bar'
+      FUN public open override fun foo(x: kotlin.CharSequence = ...): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(CharSequence = ...): T'
+            TYPE_OP operator=CAST typeOperand=T
+              CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: CALL 'toString(): String' type=kotlin.String operator=null
+                  $this: GET_VAR 'value-parameter x: CharSequence = ...' type=kotlin.CharSequence operator=null
+                other: CONST String type=kotlin.String value='K'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(CharSequence = ...): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Bar()' type=Bar<kotlin.String> operator=null

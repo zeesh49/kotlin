@@ -1,0 +1,48 @@
+MODULE <test-module>
+  FILE /simpleCreateType.kt
+    CLASS CLASS Foo
+      CONSTRUCTOR public constructor Foo()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+    CLASS CLASS Bar
+      CONSTRUCTOR public constructor Bar<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Bar'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Foo'
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL 'createType(List<KTypeProjection> = ..., Boolean = ..., List<Annotation> = ...) on KClassifier: KType' type=kotlin.reflect.KType operator=null
+              $receiver: CLASS_REFERENCE 'Foo' type=kotlin.reflect.KClass<Foo>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Foo?'
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL 'createType(List<KTypeProjection> = ..., Boolean = ..., List<Annotation> = ...) on KClassifier: KType' type=kotlin.reflect.KType operator=null
+              $receiver: CLASS_REFERENCE 'Foo' type=kotlin.reflect.KClass<Foo>
+              nullable: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Bar<kotlin.String>'
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL 'createType(List<KTypeProjection> = ..., Boolean = ..., List<Annotation> = ...) on KClassifier: KType' type=kotlin.reflect.KType operator=null
+              $receiver: CLASS_REFERENCE 'Bar' type=kotlin.reflect.KClass<Bar<*>>
+              arguments: CALL 'listOf(KTypeProjection): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+                element: CALL 'invariant(KType): KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+                  $this: GET_OBJECT 'companion object of KTypeProjection' type=kotlin.reflect.KTypeProjection.Companion
+                  type: CALL 'createType(List<KTypeProjection> = ..., Boolean = ..., List<Annotation> = ...) on KClassifier: KType' type=kotlin.reflect.KType operator=null
+                    $receiver: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Bar<kotlin.Int>?'
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL 'createType(List<KTypeProjection> = ..., Boolean = ..., List<Annotation> = ...) on KClassifier: KType' type=kotlin.reflect.KType operator=null
+              $receiver: CLASS_REFERENCE 'Bar' type=kotlin.reflect.KClass<Bar<*>>
+              arguments: CALL 'listOf(KTypeProjection): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+                element: CALL 'invariant(KType): KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+                  $this: GET_OBJECT 'companion object of KTypeProjection' type=kotlin.reflect.KTypeProjection.Companion
+                  type: CALL 'createType(List<KTypeProjection> = ..., Boolean = ..., List<Annotation> = ...) on KClassifier: KType' type=kotlin.reflect.KType operator=null
+                    $receiver: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+              nullable: CONST Boolean type=kotlin.Boolean value='true'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

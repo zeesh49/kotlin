@@ -1,0 +1,69 @@
+MODULE <test-module>
+  FILE /innerAnonymousObject.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<R>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public abstract fun f(): kotlin.String
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            CALL 'f(): String' type=kotlin.String operator=null
+              $this: THIS of 'A' type=A<R>
+    CLASS CLASS G
+      CONSTRUCTOR public constructor G()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='G'
+      FUN public abstract fun bar(): kotlin.Any
+    FUN public inline fun <reified T> foo(): G
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(): G'
+          BLOCK type=foo.<no name provided><T> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor G()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              FUN public open override fun bar(): kotlin.Any
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='bar(): Any'
+                    BLOCK type=foo.<no name provided>.bar.<no name provided><T> operator=OBJECT_LITERAL
+                      CLASS CLASS <no name provided>
+                        CONSTRUCTOR public constructor <no name provided>()
+                          BLOCK_BODY
+                            DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+                            INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                        FUN public open override fun f(): kotlin.String
+                          BLOCK_BODY
+                            RETURN type=kotlin.Nothing from='f(): String'
+                              CONST String type=kotlin.String value='OK'
+                      CALL 'constructor <no name provided>()' type=foo.<no name provided>.bar.<no name provided><T> operator=OBJECT_LITERAL
+            CALL 'constructor <no name provided>()' type=foo.<no name provided><T> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val y: kotlin.Any
+          CALL 'bar(): Any' type=kotlin.Any operator=null
+            $this: CALL 'foo(): G' type=G operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='OK'
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'y: Any' type=kotlin.Any operator=null
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='A<java.lang.String>'
+          actual: BLOCK type=kotlin.String? operator=SAFE_CALL
+            VAR val tmp0_safe_receiver: java.lang.reflect.Type!
+              CALL 'getGenericSuperclass(): Type!' type=java.lang.reflect.Type! operator=null
+                $this: CALL '<get-javaClass>() on Any: Class<Any>' type=java.lang.Class<kotlin.Any> operator=GET_PROPERTY
+                  $receiver: GET_VAR 'y: Any' type=kotlin.Any operator=null
+            WHEN type=kotlin.String? operator=SAFE_CALL
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_safe_receiver: Type!' type=java.lang.reflect.Type! operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CONST Null type=kotlin.Nothing? value='null'
+              else: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Type
+                  GET_VAR 'tmp0_safe_receiver: Type!' type=java.lang.reflect.Type! operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

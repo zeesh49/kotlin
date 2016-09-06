@@ -1,0 +1,57 @@
+MODULE <test-module>
+  FILE /loadFromByteArray.kt
+    CLASS CLASS Controller
+      CONSTRUCTOR public constructor Controller()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Controller'
+      FUN public final suspend fun suspendHere(x: kotlin.coroutines.Continuation<kotlin.Unit>): kotlin.Unit
+        BLOCK_BODY
+          CALL 'resume(Unit): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR 'value-parameter x: Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=null
+            data: GET_OBJECT 'Unit' type=kotlin.Unit
+    FUN public fun builder(coroutine c: Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'resume(Unit): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'invoke(Controller): Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=INVOKE
+            $this: GET_VAR 'value-parameter coroutine c: Controller.() -> Continuation<Unit>' type=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+            p1: CALL 'constructor Controller()' type=Controller operator=null
+          data: GET_OBJECT 'Unit' type=kotlin.Unit
+    PROPERTY private var byteResult: kotlin.Byte
+      EXPRESSION_BODY
+        CONST Byte type=kotlin.Byte value='0'
+    FUN public fun setByteRes(x: kotlin.Byte): kotlin.Unit
+      BLOCK_BODY
+        CALL '<set-byteResult>(Byte): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: GET_VAR 'value-parameter x: Byte' type=kotlin.Byte operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'builder(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+            BLOCK type=Controller.() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun Controller.<anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  VAR val a: kotlin.ByteArray
+                    CALL 'byteArrayOf(vararg Byte): ByteArray' type=kotlin.ByteArray operator=null
+                      elements: VARARG type=ByteArray varargElementType=Byte
+                        CONST Byte type=kotlin.Byte value='1'
+                  VAR val x: kotlin.Byte
+                    CALL 'get(Int): Byte' type=kotlin.Byte operator=GET_ARRAY_ELEMENT
+                      $this: GET_VAR 'a: ByteArray' type=kotlin.ByteArray operator=null
+                      index: CONST Int type=kotlin.Int value='0'
+                  CALL 'suspendHere(): Unit' type=kotlin.Unit operator=null
+                    $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Controller: Unit'
+                    CALL 'setByteRes(Byte): Unit' type=kotlin.Unit operator=null
+                      x: GET_VAR 'x: Byte' type=kotlin.Byte operator=null
+              CALLABLE_REFERENCE '<anonymous>() on Controller: Unit' type=Controller.() -> kotlin.Unit operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-byteResult>(): Byte' type=kotlin.Byte operator=GET_PROPERTY
+              arg1: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                $this: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

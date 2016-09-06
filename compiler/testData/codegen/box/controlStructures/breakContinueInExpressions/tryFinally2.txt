@@ -1,0 +1,35 @@
+MODULE <test-module>
+  FILE /tryFinally2.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var r: kotlin.String
+          CONST String type=kotlin.String value=''
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='1'
+                other: CONST Int type=kotlin.Int value='1'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Nothing operator=null
+                TRY_CATCH type=kotlin.Nothing
+                  try: BLOCK type=kotlin.Nothing operator=null
+                    SET_VAR 'r: String' type=kotlin.Unit operator=PLUSEQ
+                      CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                        $this: GET_VAR 'r: String' type=kotlin.String operator=PLUSEQ
+                        other: CONST String type=kotlin.String value='O'
+                    BREAK label=null loop.label=null depth=0
+                  finally: BLOCK type=kotlin.Nothing operator=null
+                    SET_VAR 'r: String' type=kotlin.Unit operator=PLUSEQ
+                      CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                        $this: GET_VAR 'r: String' type=kotlin.String operator=PLUSEQ
+                        other: CONST String type=kotlin.String value='K'
+                    CONTINUE label=null loop.label=null depth=0
+        RETURN type=kotlin.Nothing from='box(): String'
+          GET_VAR 'r: String' type=kotlin.String operator=null

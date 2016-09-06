@@ -1,0 +1,76 @@
+MODULE <test-module>
+  FILE /K.kt
+    CLASS CLASS K
+      CONSTRUCTOR public constructor K()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor J()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='K'
+      FUN public open fun publicKFun(): kotlin.Unit
+        BLOCK_BODY
+      FUN private final fun privateKFun(): kotlin.Unit
+        BLOCK_BODY
+      PROPERTY public final var publicKProp: kotlin.Unit
+        EXPRESSION_BODY
+          GET_OBJECT 'Unit' type=kotlin.Unit
+      PROPERTY private final val privateKProp: kotlin.Unit
+        EXPRESSION_BODY
+          GET_OBJECT 'Unit' type=kotlin.Unit
+    CLASS CLASS L
+      CONSTRUCTOR public constructor L()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor K()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='L'
+      FUN public final fun publicLFun(): kotlin.Unit
+        BLOCK_BODY
+      FUN private final fun privateLFun(): kotlin.Unit
+        BLOCK_BODY
+      PROPERTY public final val publicLProp: kotlin.Unit
+        EXPRESSION_BODY
+          GET_OBJECT 'Unit' type=kotlin.Unit
+      PROPERTY private final var privateLProp: kotlin.Unit
+        EXPRESSION_BODY
+          GET_OBJECT 'Unit' type=kotlin.Unit
+    FUN public inline fun <reified T> test(vararg names: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assertEquals(Set<String>, Set<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'toSet() on Array<out String>: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            $receiver: GET_VAR 'value-parameter vararg names: String' type=kotlin.Array<out kotlin.String> operator=null
+          actual: CALL 'toSet() on Iterable<String>: Set<String>' type=kotlin.collections.Set<kotlin.String> operator=null
+            $receiver: CALL 'map((KCallable<*>) -> String) on Iterable<KCallable<*>>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              $receiver: CALL '<get-declaredMembers>() on KClass<*>: Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE '<reified T>' type=kotlin.reflect.KClass<T>
+              transform: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): String'
+                      CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                CALLABLE_REFERENCE '<anonymous>(KCallable<*>): String' type=(kotlin.reflect.KCallable<*>) -> kotlin.String operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'test(vararg String): Unit' type=kotlin.Unit operator=null
+          names: VARARG type=Array<out String> varargElementType=String
+            CONST String type=kotlin.String value='publicStaticI'
+            CONST String type=kotlin.String value='publicMemberI'
+            CONST String type=kotlin.String value='privateStaticI'
+            CONST String type=kotlin.String value='privateMemberI'
+        CALL 'test(vararg String): Unit' type=kotlin.Unit operator=null
+          names: VARARG type=Array<out String> varargElementType=String
+            CONST String type=kotlin.String value='publicStaticJ'
+            CONST String type=kotlin.String value='publicMemberJ'
+            CONST String type=kotlin.String value='privateStaticJ'
+            CONST String type=kotlin.String value='privateMemberJ'
+        CALL 'test(vararg String): Unit' type=kotlin.Unit operator=null
+          names: VARARG type=Array<out String> varargElementType=String
+            CONST String type=kotlin.String value='publicKFun'
+            CONST String type=kotlin.String value='privateKFun'
+            CONST String type=kotlin.String value='publicKProp'
+            CONST String type=kotlin.String value='privateKProp'
+        CALL 'test(vararg String): Unit' type=kotlin.Unit operator=null
+          names: VARARG type=Array<out String> varargElementType=String
+            CONST String type=kotlin.String value='publicLFun'
+            CONST String type=kotlin.String value='privateLFun'
+            CONST String type=kotlin.String value='publicLProp'
+            CONST String type=kotlin.String value='privateLProp'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

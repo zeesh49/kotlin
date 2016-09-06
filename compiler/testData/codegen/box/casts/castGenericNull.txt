@@ -1,0 +1,17 @@
+MODULE <test-module>
+  FILE /castGenericNull.kt
+    FUN public fun <T> castToString(t: T): kotlin.Unit
+      BLOCK_BODY
+        TYPE_OP operator=CAST typeOperand=kotlin.String
+          GET_VAR 'value-parameter t: T' type=T operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            CALL 'castToString(Any?): Unit' type=kotlin.Unit operator=null
+              t: CONST Null type=kotlin.Nothing? value='null'
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='Fail'

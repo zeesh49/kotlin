@@ -1,0 +1,47 @@
+MODULE <test-module>
+  FILE /objectSuperConstructorCall.kt
+    CLASS CLASS S
+      CONSTRUCTOR public constructor S<T>(klass: java.lang.Class<T>)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'klass: Class<T>' type=kotlin.Unit operator=null
+            receiver: THIS of 'S' type=S<T>
+            value: GET_VAR 'value-parameter klass: Class<T>' type=java.lang.Class<T> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='S'
+      PROPERTY public final val klass: java.lang.Class<T>
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter klass: Class<T>' type=java.lang.Class<T> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val result: kotlin.String!
+        EXPRESSION_BODY
+          CALL '<get-simpleName>() on Class<T>: String!' type=kotlin.String! operator=GET_PROPERTY
+            $receiver: CALL '<get-klass>(): Class<T>' type=java.lang.Class<T> operator=GET_PROPERTY
+              $this: THIS of 'S' type=S<T>
+    CLASS OBJECT OK
+      CONSTRUCTOR private constructor OK()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor S(Class<OK>)'
+            klass: CALL '<get-java>() on KClass<OK>: Class<OK>' type=java.lang.Class<OK> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'OK' type=kotlin.reflect.KClass<OK>
+          INSTANCE_INITIALIZER_CALL classDescriptor='OK'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      CLASS OBJECT companion object of C
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor S(Class<C.Companion>)'
+              klass: CALL '<get-java>() on KClass<C.Companion>: Class<C.Companion>' type=java.lang.Class<C.Companion> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'companion object of C' type=kotlin.reflect.KClass<C.Companion>
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of C'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(String!, String!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Companion'
+          actual: CALL '<get-result>(): String!' type=kotlin.String! operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of C' type=C.Companion
+        RETURN type=kotlin.Nothing from='box(): String'
+          TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+            CALL '<get-result>(): String!' type=kotlin.String! operator=GET_PROPERTY
+              $this: GET_OBJECT 'OK' type=OK

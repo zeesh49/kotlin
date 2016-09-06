@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /kt4860.kt
+    CLASS CLASS A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS OBJECT companion object of A
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of A'
+      CLASS CLASS B
+        CONSTRUCTOR public constructor B()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A.Companion
+          GET_OBJECT 'companion object of A' type=A.Companion
+        VAR val b: A.B
+          CALL 'constructor B()' type=A.B operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

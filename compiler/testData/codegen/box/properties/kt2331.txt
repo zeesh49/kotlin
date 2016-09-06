@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /kt2331.kt
+    CLASS CLASS P
+      CONSTRUCTOR public constructor P()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='P'
+      PROPERTY public final var x: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+        PROPERTY_SETTER private final fun <set-x>(<set-?>: kotlin.Int): kotlin.Unit
+      FUN public final fun foo(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'invoke(): Unit' type=kotlin.Unit operator=null
+            $this: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                    CALL '<set-x>(Int): Unit' type=kotlin.Unit operator=EQ
+                      $this: THIS of 'P' type=P
+                      <set-?>: CONST Int type=kotlin.Int value='4'
+              CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val p: P
+          CALL 'constructor P()' type=P operator=null
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'p: P' type=P operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'p: P' type=P operator=null
+              arg1: CONST Int type=kotlin.Int value='4'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

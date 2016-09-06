@@ -1,0 +1,156 @@
+MODULE <test-module>
+  FILE /typeParametersEqualsHashCode.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    CLASS CLASS Fun
+      CONSTRUCTOR public constructor Fun()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Fun'
+      FUN public final fun <T> foo(): T
+        BLOCK_BODY
+          BLOCK type=kotlin.Nothing operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+            WHEN type=kotlin.Nothing operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    CLASS CLASS Fourple
+      CONSTRUCTOR public constructor Fourple<A, B, in C, out D>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Fourple'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(List<KTypeParameter>, List<KTypeParameter>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A<*>>
+          actual: CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A<*>>
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: CALL 'single() on List<KTypeParameter>: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+              $receiver: CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+                $this: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A<*>>
+          actual: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: CALL 'single() on List<KTypeParameter>: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+              $receiver: CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+                $this: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A<*>>
+        FUN local final fun getFoo(): kotlin.reflect.KCallable<*>
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='getFoo(): KCallable<*>'
+              CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                  $this: CLASS_REFERENCE 'Fun' type=kotlin.reflect.KClass<Fun>
+                predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                        CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                            $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                          arg1: CONST String type=kotlin.String value='foo'
+                  CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+        CALL 'assertEquals(List<KTypeParameter>, List<KTypeParameter>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+            $this: CALL 'getFoo(): KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+          actual: CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+            $this: CALL 'getFoo(): KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: CALL 'single() on List<KTypeParameter>: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+              $receiver: CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+                $this: CALL 'getFoo(): KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+          actual: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: CALL 'single() on List<KTypeParameter>: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+              $receiver: CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+                $this: CALL 'getFoo(): KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+        CALL 'assertNotEquals(KTypeParameter, KTypeParameter, String? = ...): Unit' type=kotlin.Unit operator=null
+          illegal: CALL 'single() on List<KTypeParameter>: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+            $receiver: CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A<*>>
+          actual: CALL 'single() on List<KTypeParameter>: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+            $receiver: CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'B' type=kotlin.reflect.KClass<B<*>>
+        VAR val fi: kotlin.collections.List<kotlin.reflect.KTypeParameter>
+          CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'Fourple' type=kotlin.reflect.KClass<Fourple<*, *, *, *>>
+        VAR val fj: kotlin.collections.List<kotlin.reflect.KTypeParameter>
+          CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'Fourple' type=kotlin.reflect.KClass<Fourple<*, *, *, *>>
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='0'
+                other: CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+                  $this: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                    $this: GET_VAR 'fi: List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=null
+                  other: CONST Int type=kotlin.Int value='1'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                BLOCK type=kotlin.Unit operator=FOR_LOOP
+                  VAR val tmp1_iterator: kotlin.collections.IntIterator
+                    CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+                      $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                        $this: CONST Int type=kotlin.Int value='0'
+                        other: CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+                          $this: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                            $this: GET_VAR 'fj: List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=null
+                          other: CONST Int type=kotlin.Int value='1'
+                  WHILE label=null operator=FOR_LOOP_INNER_WHILE
+                    condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+                      $this: GET_VAR 'tmp1_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+                    body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+                      VAR val j: kotlin.Int
+                        CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                          $this: GET_VAR 'tmp1_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+                      BLOCK type=kotlin.Unit operator=null
+                        WHEN type=kotlin.Unit operator=IF
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                            arg1: GET_VAR 'j: Int' type=kotlin.Int operator=null
+                          then: BLOCK type=kotlin.Unit operator=null
+                            CALL 'assertEquals(KTypeParameter, KTypeParameter, String? = ...): Unit' type=kotlin.Unit operator=null
+                              expected: CALL 'get(Int): KTypeParameter' type=kotlin.reflect.KTypeParameter operator=GET_ARRAY_ELEMENT
+                                $this: GET_VAR 'fi: List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=null
+                                index: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                              actual: CALL 'get(Int): KTypeParameter' type=kotlin.reflect.KTypeParameter operator=GET_ARRAY_ELEMENT
+                                $this: GET_VAR 'fj: List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=null
+                                index: GET_VAR 'j: Int' type=kotlin.Int operator=null
+                            CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+                              expected: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+                                $this: CALL 'get(Int): KTypeParameter' type=kotlin.reflect.KTypeParameter operator=GET_ARRAY_ELEMENT
+                                  $this: GET_VAR 'fi: List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=null
+                                  index: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                              actual: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+                                $this: CALL 'get(Int): KTypeParameter' type=kotlin.reflect.KTypeParameter operator=GET_ARRAY_ELEMENT
+                                  $this: GET_VAR 'fj: List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=null
+                                  index: GET_VAR 'j: Int' type=kotlin.Int operator=null
+                          else: BLOCK type=kotlin.Unit operator=null
+                            CALL 'assertNotEquals(KTypeParameter, KTypeParameter, String? = ...): Unit' type=kotlin.Unit operator=null
+                              illegal: CALL 'get(Int): KTypeParameter' type=kotlin.reflect.KTypeParameter operator=GET_ARRAY_ELEMENT
+                                $this: GET_VAR 'fi: List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=null
+                                index: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                              actual: CALL 'get(Int): KTypeParameter' type=kotlin.reflect.KTypeParameter operator=GET_ARRAY_ELEMENT
+                                $this: GET_VAR 'fj: List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=null
+                                index: GET_VAR 'j: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

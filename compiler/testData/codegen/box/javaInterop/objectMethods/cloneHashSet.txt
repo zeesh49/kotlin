@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /cloneHashSet.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: java.util.HashSet<kotlin.String>
+          CALL 'constructor HashSet()' type=java.util.HashSet<kotlin.String> operator=null
+        CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+          element: CONST String type=kotlin.String value='live'
+        CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+          element: CONST String type=kotlin.String value='long'
+        CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+          element: CONST String type=kotlin.String value='prosper'
+        VAR val b: kotlin.Any
+          CALL 'clone(): Any' type=kotlin.Any operator=null
+            $this: GET_VAR 'a: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'a: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+              arg1: GET_VAR 'b: Any' type=kotlin.Any operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail equals'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+            arg0: GET_VAR 'a: HashSet<String>' type=java.util.HashSet<kotlin.String> operator=null
+            arg1: GET_VAR 'b: Any' type=kotlin.Any operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail identity'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

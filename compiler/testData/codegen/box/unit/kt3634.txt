@@ -1,0 +1,14 @@
+MODULE <test-module>
+  FILE /kt3634.kt
+    PROPERTY public val c: kotlin.Unit
+      EXPRESSION_BODY
+        GET_OBJECT 'Unit' type=kotlin.Unit
+    PROPERTY public val d: kotlin.Unit
+      EXPRESSION_BODY
+        CALL '<get-c>(): Unit' type=kotlin.Unit operator=GET_PROPERTY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL '<get-c>(): Unit' type=kotlin.Unit operator=GET_PROPERTY
+        CALL '<get-d>(): Unit' type=kotlin.Unit operator=GET_PROPERTY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

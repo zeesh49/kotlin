@@ -1,0 +1,59 @@
+MODULE <test-module>
+  FILE /typeParameterMultipleBounds.kt
+    CLASS INTERFACE I1
+    CLASS INTERFACE I2
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+    CLASS INTERFACE K
+      FUN public abstract fun <T : C> c1(t: T): kotlin.Unit where T : I1, T : I2
+      FUN public abstract fun <T : I1> c2(t: T): kotlin.Unit where T : C, T : I2
+      FUN public abstract fun <T : I2> c3(t: T): kotlin.Unit where T : C, T : I1
+      FUN public abstract fun <T : I2> c4(t: T): kotlin.Unit where T : I1, T : C
+      FUN public abstract fun <T : I1> i1(t: T): kotlin.Unit where T : I2
+      FUN public abstract fun <T : I2> i2(t: T): kotlin.Unit where T : I1
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val k: java.lang.Class<K>
+          CALL '<get-java>() on KClass<K>: Class<K>' type=java.lang.Class<K> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'K' type=kotlin.reflect.KClass<K>
+        CALL 'getDeclaredMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+          $this: GET_VAR 'k: Class<K>' type=java.lang.Class<K> operator=null
+          p0: CONST String type=kotlin.String value='c1'
+          p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+            CALL '<get-java>() on KClass<C>: Class<C>' type=java.lang.Class<C> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'C' type=kotlin.reflect.KClass<C>
+        CALL 'getDeclaredMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+          $this: GET_VAR 'k: Class<K>' type=java.lang.Class<K> operator=null
+          p0: CONST String type=kotlin.String value='c2'
+          p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+            CALL '<get-java>() on KClass<C>: Class<C>' type=java.lang.Class<C> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'C' type=kotlin.reflect.KClass<C>
+        CALL 'getDeclaredMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+          $this: GET_VAR 'k: Class<K>' type=java.lang.Class<K> operator=null
+          p0: CONST String type=kotlin.String value='c3'
+          p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+            CALL '<get-java>() on KClass<C>: Class<C>' type=java.lang.Class<C> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'C' type=kotlin.reflect.KClass<C>
+        CALL 'getDeclaredMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+          $this: GET_VAR 'k: Class<K>' type=java.lang.Class<K> operator=null
+          p0: CONST String type=kotlin.String value='c4'
+          p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+            CALL '<get-java>() on KClass<C>: Class<C>' type=java.lang.Class<C> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'C' type=kotlin.reflect.KClass<C>
+        CALL 'getDeclaredMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+          $this: GET_VAR 'k: Class<K>' type=java.lang.Class<K> operator=null
+          p0: CONST String type=kotlin.String value='i1'
+          p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+            CALL '<get-java>() on KClass<I1>: Class<I1>' type=java.lang.Class<I1> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'I1' type=kotlin.reflect.KClass<I1>
+        CALL 'getDeclaredMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+          $this: GET_VAR 'k: Class<K>' type=java.lang.Class<K> operator=null
+          p0: CONST String type=kotlin.String value='i2'
+          p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+            CALL '<get-java>() on KClass<I2>: Class<I2>' type=java.lang.Class<I2> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'I2' type=kotlin.reflect.KClass<I2>
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

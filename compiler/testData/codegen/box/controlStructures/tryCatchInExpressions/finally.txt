@@ -1,0 +1,12 @@
+MODULE <test-module>
+  FILE /finally.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CONST String type=kotlin.String value='O'
+            other: TRY_CATCH type=kotlin.String
+              try: BLOCK type=kotlin.String operator=null
+                CONST String type=kotlin.String value='K'
+              finally: BLOCK type=kotlin.String operator=null
+                CONST String type=kotlin.String value='hmmm'

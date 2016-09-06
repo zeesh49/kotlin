@@ -1,0 +1,191 @@
+MODULE <test-module>
+  FILE /lambdaMigration.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var res: kotlin.String
+          CONST String type=kotlin.String value=''
+        VAR var call: kotlin.String
+          CALL 'test(String, String, () -> String): String' type=kotlin.String operator=null
+            a: CALL 'invoke(): String' type=kotlin.String operator=null
+              $this: BLOCK type=() -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.String
+                  BLOCK_BODY
+                    SET_VAR 'res: String' type=kotlin.Unit operator=PLUSEQ
+                      CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                        $this: GET_VAR 'res: String' type=kotlin.String operator=PLUSEQ
+                        other: CONST String type=kotlin.String value='K'
+                    RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                      CONST String type=kotlin.String value='K'
+                CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+            b: CALL 'invoke(): String' type=kotlin.String operator=null
+              $this: BLOCK type=() -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.String
+                  BLOCK_BODY
+                    SET_VAR 'res: String' type=kotlin.Unit operator=PLUSEQ
+                      CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                        $this: GET_VAR 'res: String' type=kotlin.String operator=PLUSEQ
+                        other: CONST String type=kotlin.String value='O'
+                    RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                      CONST String type=kotlin.String value='O'
+                CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+            c: BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  SET_VAR 'res: String' type=kotlin.Unit operator=PLUSEQ
+                    CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                      $this: GET_VAR 'res: String' type=kotlin.String operator=PLUSEQ
+                      other: CONST String type=kotlin.String value='L'
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    CONST String type=kotlin.String value='L'
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'res: String' type=kotlin.String operator=null
+                arg1: CONST String type=kotlin.String value='KOL'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'call: String' type=kotlin.String operator=null
+                arg1: CONST String type=kotlin.String value='KOL'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              GET_VAR 'res: String' type=kotlin.String operator=null
+              CONST String type=kotlin.String value=' != KOL or '
+              GET_VAR 'call: String' type=kotlin.String operator=null
+              CONST String type=kotlin.String value=' != KOL'
+        SET_VAR 'res: String' type=kotlin.Unit operator=EQ
+          CONST String type=kotlin.String value=''
+        SET_VAR 'call: String' type=kotlin.Unit operator=EQ
+          BLOCK type=kotlin.String operator=ARGUMENTS_REORDERING_FOR_CALL
+            VAR val tmp0_a: kotlin.String
+              CALL 'invoke(): String' type=kotlin.String operator=null
+                $this: BLOCK type=() -> kotlin.String operator=LAMBDA
+                  FUN local final fun <anonymous>(): kotlin.String
+                    BLOCK_BODY
+                      SET_VAR 'res: String' type=kotlin.Unit operator=PLUSEQ
+                        CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                          $this: GET_VAR 'res: String' type=kotlin.String operator=PLUSEQ
+                          other: CONST String type=kotlin.String value='K'
+                      RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                        CONST String type=kotlin.String value='K'
+                  CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+            VAR val tmp1_c: () -> kotlin.String
+              BLOCK type=() -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.String
+                  BLOCK_BODY
+                    SET_VAR 'res: String' type=kotlin.Unit operator=PLUSEQ
+                      CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                        $this: GET_VAR 'res: String' type=kotlin.String operator=PLUSEQ
+                        other: CONST String type=kotlin.String value='L'
+                    RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                      CONST String type=kotlin.String value='L'
+                CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+            VAR val tmp2_b: kotlin.String
+              CALL 'invoke(): String' type=kotlin.String operator=null
+                $this: BLOCK type=() -> kotlin.String operator=LAMBDA
+                  FUN local final fun <anonymous>(): kotlin.String
+                    BLOCK_BODY
+                      SET_VAR 'res: String' type=kotlin.Unit operator=PLUSEQ
+                        CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                          $this: GET_VAR 'res: String' type=kotlin.String operator=PLUSEQ
+                          other: CONST String type=kotlin.String value='O'
+                      RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                        CONST String type=kotlin.String value='O'
+                  CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+            CALL 'test(String, String, () -> String): String' type=kotlin.String operator=null
+              a: GET_VAR 'tmp0_a: String' type=kotlin.String operator=null
+              b: GET_VAR 'tmp2_b: String' type=kotlin.String operator=null
+              c: GET_VAR 'tmp1_c: () -> String' type=() -> kotlin.String operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'res: String' type=kotlin.String operator=null
+                arg1: CONST String type=kotlin.String value='KOL'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'call: String' type=kotlin.String operator=null
+                arg1: CONST String type=kotlin.String value='KOL'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 2: '
+              GET_VAR 'res: String' type=kotlin.String operator=null
+              CONST String type=kotlin.String value=' != KOL or '
+              GET_VAR 'call: String' type=kotlin.String operator=null
+              CONST String type=kotlin.String value=' != KOL'
+        SET_VAR 'res: String' type=kotlin.Unit operator=EQ
+          CONST String type=kotlin.String value=''
+        SET_VAR 'call: String' type=kotlin.Unit operator=EQ
+          BLOCK type=kotlin.String operator=ARGUMENTS_REORDERING_FOR_CALL
+            VAR val tmp3_c: () -> kotlin.String
+              BLOCK type=() -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.String
+                  BLOCK_BODY
+                    SET_VAR 'res: String' type=kotlin.Unit operator=PLUSEQ
+                      CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                        $this: GET_VAR 'res: String' type=kotlin.String operator=PLUSEQ
+                        other: CONST String type=kotlin.String value='L'
+                    RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                      CONST String type=kotlin.String value='L'
+                CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+            VAR val tmp4_a: kotlin.String
+              CALL 'invoke(): String' type=kotlin.String operator=null
+                $this: BLOCK type=() -> kotlin.String operator=LAMBDA
+                  FUN local final fun <anonymous>(): kotlin.String
+                    BLOCK_BODY
+                      SET_VAR 'res: String' type=kotlin.Unit operator=PLUSEQ
+                        CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                          $this: GET_VAR 'res: String' type=kotlin.String operator=PLUSEQ
+                          other: CONST String type=kotlin.String value='K'
+                      RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                        CONST String type=kotlin.String value='K'
+                  CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+            VAR val tmp5_b: kotlin.String
+              CALL 'invoke(): String' type=kotlin.String operator=null
+                $this: BLOCK type=() -> kotlin.String operator=LAMBDA
+                  FUN local final fun <anonymous>(): kotlin.String
+                    BLOCK_BODY
+                      SET_VAR 'res: String' type=kotlin.Unit operator=PLUSEQ
+                        CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                          $this: GET_VAR 'res: String' type=kotlin.String operator=PLUSEQ
+                          other: CONST String type=kotlin.String value='O'
+                      RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                        CONST String type=kotlin.String value='O'
+                  CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+            CALL 'test(String, String, () -> String): String' type=kotlin.String operator=null
+              a: GET_VAR 'tmp4_a: String' type=kotlin.String operator=null
+              b: GET_VAR 'tmp5_b: String' type=kotlin.String operator=null
+              c: GET_VAR 'tmp3_c: () -> String' type=() -> kotlin.String operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'res: String' type=kotlin.String operator=null
+                arg1: CONST String type=kotlin.String value='KOL'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'call: String' type=kotlin.String operator=null
+                arg1: CONST String type=kotlin.String value='KOL'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 3: '
+              GET_VAR 'res: String' type=kotlin.String operator=null
+              CONST String type=kotlin.String value=' != KOL or '
+              GET_VAR 'call: String' type=kotlin.String operator=null
+              CONST String type=kotlin.String value=' != KOL'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun test(a: kotlin.String, b: kotlin.String, c: () -> kotlin.String): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test(String, String, () -> String): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: GET_VAR 'value-parameter a: String' type=kotlin.String operator=null
+              other: GET_VAR 'value-parameter b: String' type=kotlin.String operator=null
+            other: CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+              $this: GET_VAR 'value-parameter c: () -> String' type=() -> kotlin.String operator=VARIABLE_AS_FUNCTION

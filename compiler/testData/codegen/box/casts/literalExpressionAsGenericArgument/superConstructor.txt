@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /superConstructor.kt
+    CLASS CLASS Base
+      CONSTRUCTOR public constructor Base<T>(value: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'value: T' type=kotlin.Unit operator=null
+            receiver: THIS of 'Base' type=Base<T>
+            value: GET_VAR 'value-parameter value: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Base'
+      PROPERTY public final val value: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS Box
+      CONSTRUCTOR public constructor Box()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Base(Long)'
+            value: CONST Long type=kotlin.Long value='-1'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Box'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val expected: kotlin.Long? = -1.toLong()
+          CONST Long type=kotlin.Long value='-1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-value>(): Long' type=kotlin.Long operator=GET_PROPERTY
+                $this: CALL 'constructor Box()' type=Box operator=null
+              arg1: GET_VAR 'expected: Long?' type=kotlin.Long? operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

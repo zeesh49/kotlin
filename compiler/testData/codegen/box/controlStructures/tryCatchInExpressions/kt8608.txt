@@ -1,0 +1,51 @@
+MODULE <test-module>
+  FILE /kt8608.kt
+    CLASS INTERFACE Callable
+      FUN public abstract fun call(b: kotlin.Boolean): kotlin.Unit
+    FUN public inline fun run(f: () -> kotlin.Unit): kotlin.Unit
+      BLOCK_BODY
+        CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'value-parameter f: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun foo(): kotlin.String
+        BLOCK_BODY
+          CALL 'run(A.() -> Unit) on A: Unit' type=kotlin.Unit operator=null
+            $receiver: THIS of 'A' type=A
+            block: BLOCK type=A.() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun A.<anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  VAR val x: A.foo.<anonymous>.<no name provided>
+                    BLOCK type=A.foo.<anonymous>.<no name provided> operator=OBJECT_LITERAL
+                      CLASS CLASS <no name provided>
+                        CONSTRUCTOR public constructor <no name provided>()
+                          BLOCK_BODY
+                            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                            INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                        FUN public open override fun call(b: kotlin.Boolean): kotlin.Unit
+                          BLOCK_BODY
+                            WHEN type=kotlin.Unit operator=IF
+                              if: GET_VAR 'value-parameter b: Boolean' type=kotlin.Boolean operator=null
+                              then: BLOCK type=kotlin.Unit operator=null
+                                CALL 'x(): Unit' type=kotlin.Unit operator=null
+                                  $this: $RECEIVER of '<anonymous>() on A: Unit' type=A
+                              else: BLOCK type=kotlin.Unit operator=null
+                                TRY_CATCH type=kotlin.Unit
+                                  try: BLOCK type=kotlin.Unit operator=null
+                                    CALL 'x(): Unit' type=kotlin.Unit operator=null
+                                      $this: $RECEIVER of '<anonymous>() on A: Unit' type=A
+                                  catch t: BLOCK type=kotlin.Unit operator=null
+                      CALL 'constructor <no name provided>()' type=A.foo.<anonymous>.<no name provided> operator=OBJECT_LITERAL
+              CALLABLE_REFERENCE '<anonymous>() on A: Unit' type=A.() -> kotlin.Unit operator=LAMBDA
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value='OK'
+      FUN private final fun x(): kotlin.Unit
+        BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor A()' type=A operator=null

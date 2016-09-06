@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /inheritedInnerClass.kt
+    CLASS CLASS Outer
+      CONSTRUCTOR public constructor Outer()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+      CLASS CLASS InnerBase
+        CONSTRUCTOR public constructor InnerBase()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='InnerBase'
+      CLASS CLASS InnerDerived
+        CONSTRUCTOR public constructor InnerDerived()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor InnerBase()'
+              $this: THIS of 'Outer' type=Outer
+            INSTANCE_INITIALIZER_CALL classDescriptor='InnerDerived'
+      PROPERTY public final val foo: Outer.InnerBase?
+        EXPRESSION_BODY
+          CALL 'constructor InnerDerived()' type=Outer.InnerDerived operator=null
+            $this: THIS of 'Outer' type=Outer
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val o: Outer
+          CALL 'constructor Outer()' type=Outer operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+              arg0: CALL '<get-foo>(): Outer.InnerBase?' type=Outer.InnerBase? operator=GET_PROPERTY
+                $this: GET_VAR 'o: Outer' type=Outer operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST String type=kotlin.String value='fail'
+            else: CONST String type=kotlin.String value='OK'

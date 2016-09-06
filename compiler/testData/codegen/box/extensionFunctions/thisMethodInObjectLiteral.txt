@@ -1,0 +1,40 @@
+MODULE <test-module>
+  FILE /thisMethodInObjectLiteral.kt
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      FUN private final fun <T : kotlin.Any> T.self(): Test.self.<no name provided><T>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='self() on T: <no name provided><T>'
+            BLOCK type=Test.self.<no name provided><T> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                FUN public final fun calc(): T
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='calc(): T'
+                      $RECEIVER of 'self() on T: <no name provided><T>' type=T
+              CALL 'constructor <no name provided>()' type=Test.self.<no name provided><T> operator=OBJECT_LITERAL
+      FUN public final fun box(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='box(): Int'
+            CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+              $this: CALL 'calc(): Int' type=kotlin.Int operator=null
+                $this: CALL 'self() on Int: <no name provided><Int>' type=Test.self.<no name provided><kotlin.Int> operator=null
+                  $this: THIS of 'Test' type=Test
+                  $receiver: CONST Int type=kotlin.Int value='1'
+              other: CONST Int type=kotlin.Int value='1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'box(): Int' type=kotlin.Int operator=null
+                $this: CALL 'constructor Test()' type=Test operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

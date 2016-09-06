@@ -1,0 +1,29 @@
+MODULE <test-module>
+  FILE /captureOuter.kt
+    CLASS CLASS Outer
+      CONSTRUCTOR public constructor Outer()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+      PROPERTY public final val result: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+        FUN public final fun foo(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo(): String'
+              CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'Outer' type=Outer
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f: kotlin.reflect.KFunction1<Outer.Inner, kotlin.String>
+          CALLABLE_REFERENCE 'foo(): String' type=kotlin.reflect.KFunction1<Outer.Inner, kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'invoke(Outer.Inner): String' type=kotlin.String operator=INVOKE
+            $this: GET_VAR 'f: KFunction1<Outer.Inner, String>' type=kotlin.reflect.KFunction1<Outer.Inner, kotlin.String> operator=VARIABLE_AS_FUNCTION
+            p1: CALL 'constructor Inner()' type=Outer.Inner operator=null
+              $this: CALL 'constructor Outer()' type=Outer operator=null

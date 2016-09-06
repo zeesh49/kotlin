@@ -1,0 +1,128 @@
+MODULE <test-module>
+  FILE /usedInVarStore.kt
+    CLASS CLASS Controller
+      CONSTRUCTOR public constructor Controller()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Controller'
+      FUN public final suspend fun suspendHere(x: kotlin.coroutines.Continuation<kotlin.Unit>): kotlin.Unit
+        BLOCK_BODY
+          CALL 'resume(Unit): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR 'value-parameter x: Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=null
+            data: GET_OBJECT 'Unit' type=kotlin.Unit
+    FUN public fun builder(coroutine c: Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'resume(Unit): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'invoke(Controller): Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=INVOKE
+            $this: GET_VAR 'value-parameter coroutine c: Controller.() -> Continuation<Unit>' type=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+            p1: CALL 'constructor Controller()' type=Controller operator=null
+          data: GET_OBJECT 'Unit' type=kotlin.Unit
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'builder(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+            BLOCK type=Controller.() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun Controller.<anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  VAR val x: kotlin.Boolean = true
+                    CONST Boolean type=kotlin.Boolean value='true'
+                  CALL 'suspendHere(): Unit' type=kotlin.Unit operator=null
+                    $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                  VAR val y: kotlin.Boolean = true
+                    GET_VAR 'x: Boolean' type=kotlin.Boolean operator=null
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Controller: Unit'
+                    WHEN type=kotlin.Unit operator=IF
+                      if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+                        $this: GET_VAR 'y: Boolean' type=kotlin.Boolean operator=null
+                      then: THROW type=kotlin.Nothing
+                        CALL 'constructor IllegalStateException(String!)' type=java.lang.IllegalStateException operator=null
+                          p0: CONST String type=kotlin.String value='fail 1'
+              CALLABLE_REFERENCE '<anonymous>() on Controller: Unit' type=Controller.() -> kotlin.Unit operator=LAMBDA
+        CALL 'builder(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+            BLOCK type=Controller.() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun Controller.<anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  VAR val x: kotlin.Char = \u0031 ('1')
+                    CONST Char type=kotlin.Char value='1'
+                  CALL 'suspendHere(): Unit' type=kotlin.Unit operator=null
+                    $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                  VAR val y: kotlin.Char = \u0031 ('1')
+                    GET_VAR 'x: Char' type=kotlin.Char operator=null
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Controller: Unit'
+                    WHEN type=kotlin.Unit operator=IF
+                      if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                          arg0: GET_VAR 'y: Char' type=kotlin.Char operator=null
+                          arg1: CONST Char type=kotlin.Char value='1'
+                      then: THROW type=kotlin.Nothing
+                        CALL 'constructor IllegalStateException(String!)' type=java.lang.IllegalStateException operator=null
+                          p0: CONST String type=kotlin.String value='fail 2'
+              CALLABLE_REFERENCE '<anonymous>() on Controller: Unit' type=Controller.() -> kotlin.Unit operator=LAMBDA
+        CALL 'builder(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+            BLOCK type=Controller.() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun Controller.<anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  VAR val x: kotlin.Byte = 1.toByte()
+                    CONST Byte type=kotlin.Byte value='1'
+                  CALL 'suspendHere(): Unit' type=kotlin.Unit operator=null
+                    $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                  VAR val y: kotlin.Byte = 1.toByte()
+                    GET_VAR 'x: Byte' type=kotlin.Byte operator=null
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Controller: Unit'
+                    WHEN type=kotlin.Unit operator=IF
+                      if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                          arg0: GET_VAR 'y: Byte' type=kotlin.Byte operator=null
+                          arg1: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                            $this: CONST Int type=kotlin.Int value='1'
+                      then: THROW type=kotlin.Nothing
+                        CALL 'constructor IllegalStateException(String!)' type=java.lang.IllegalStateException operator=null
+                          p0: CONST String type=kotlin.String value='fail 3'
+              CALLABLE_REFERENCE '<anonymous>() on Controller: Unit' type=Controller.() -> kotlin.Unit operator=LAMBDA
+        CALL 'builder(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+            BLOCK type=Controller.() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun Controller.<anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  VAR val x: kotlin.Short = 1.toShort()
+                    CONST Short type=kotlin.Short value='1'
+                  CALL 'suspendHere(): Unit' type=kotlin.Unit operator=null
+                    $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                  VAR val y: kotlin.Short = 1.toShort()
+                    GET_VAR 'x: Short' type=kotlin.Short operator=null
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Controller: Unit'
+                    WHEN type=kotlin.Unit operator=IF
+                      if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                          arg0: GET_VAR 'y: Short' type=kotlin.Short operator=null
+                          arg1: CALL 'toShort(): Short' type=kotlin.Short operator=null
+                            $this: CONST Int type=kotlin.Int value='1'
+                      then: THROW type=kotlin.Nothing
+                        CALL 'constructor IllegalStateException(String!)' type=java.lang.IllegalStateException operator=null
+                          p0: CONST String type=kotlin.String value='fail 4'
+              CALLABLE_REFERENCE '<anonymous>() on Controller: Unit' type=Controller.() -> kotlin.Unit operator=LAMBDA
+        CALL 'builder(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+            BLOCK type=Controller.() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun Controller.<anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  VAR val x: kotlin.Int = 1
+                    CONST Int type=kotlin.Int value='1'
+                  CALL 'suspendHere(): Unit' type=kotlin.Unit operator=null
+                    $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                  VAR val y: kotlin.Int = 1
+                    GET_VAR 'x: Int' type=kotlin.Int operator=null
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Controller: Unit'
+                    WHEN type=kotlin.Unit operator=IF
+                      if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                          arg0: GET_VAR 'y: Int' type=kotlin.Int operator=null
+                          arg1: CONST Int type=kotlin.Int value='1'
+                      then: THROW type=kotlin.Nothing
+                        CALL 'constructor IllegalStateException(String!)' type=java.lang.IllegalStateException operator=null
+                          p0: CONST String type=kotlin.String value='fail 5'
+              CALLABLE_REFERENCE '<anonymous>() on Controller: Unit' type=Controller.() -> kotlin.Unit operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

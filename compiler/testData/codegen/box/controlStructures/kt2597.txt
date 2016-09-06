@@ -1,0 +1,27 @@
+MODULE <test-module>
+  FILE /kt2597.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var i: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        CALL 'invoke(): Any' type=kotlin.Any operator=null
+          $this: BLOCK type=() -> kotlin.Any operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Any
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Any'
+                  WHEN type=kotlin.Any operator=IF
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: CONST Int type=kotlin.Int value='1'
+                      arg1: CONST Int type=kotlin.Int value='1'
+                    then: BLOCK type=kotlin.Int operator=null
+                      BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                        VAR val tmp0: kotlin.Int
+                          GET_VAR 'i: Int' type=kotlin.Int operator=POSTFIX_INCR
+                        SET_VAR 'i: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                          CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                            $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                        GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                    else: BLOCK type=kotlin.Unit operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Any' type=() -> kotlin.Any operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

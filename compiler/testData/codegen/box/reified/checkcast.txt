@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /checkcast.kt
+    FUN public inline fun <reified T> checkcast(x: kotlin.Any?): T
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='checkcast(Any?): T'
+          TYPE_OP operator=CAST typeOperand=T
+            GET_VAR 'value-parameter x: Any?' type=kotlin.Any? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.String
+          CALL 'checkcast(Any?): String' type=kotlin.String operator=null
+            x: CONST String type=kotlin.String value='abc'
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='abc'
+          actual: GET_VAR 'x: String' type=kotlin.String operator=null
+        VAR val y: kotlin.Int
+          CALL 'checkcast(Any?): Int' type=kotlin.Int operator=null
+            x: CONST Int type=kotlin.Int value='1'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: GET_VAR 'y: Int' type=kotlin.Int operator=null
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            VAR val z: kotlin.Int
+              CALL 'checkcast(Any?): Int' type=kotlin.Int operator=null
+                x: CONST String type=kotlin.String value='abc'
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='Fail'

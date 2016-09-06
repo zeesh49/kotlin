@@ -1,0 +1,82 @@
+MODULE <test-module>
+  FILE /classToString.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS CLASS Nested
+        CONSTRUCTOR public constructor Nested()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Nested'
+      CLASS OBJECT companion object of A
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of A'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='class A'
+          actual: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+            CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='class A'
+            CONST String type=kotlin.String value='$'
+            CONST String type=kotlin.String value='Nested'
+          actual: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+            CLASS_REFERENCE 'Nested' type=kotlin.reflect.KClass<A.Nested>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='class A'
+            CONST String type=kotlin.String value='$'
+            CONST String type=kotlin.String value='Companion'
+          actual: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+            CLASS_REFERENCE 'companion object of A' type=kotlin.reflect.KClass<A.Companion>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='class kotlin.Any'
+          actual: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+            CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='class kotlin.Int'
+          actual: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+            CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='class kotlin.Int'
+            CONST String type=kotlin.String value='$'
+            CONST String type=kotlin.String value='Companion'
+          actual: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+            CLASS_REFERENCE 'companion object of Int' type=kotlin.reflect.KClass<kotlin.Int.Companion>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='class kotlin.IntArray'
+          actual: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+            CLASS_REFERENCE 'IntArray' type=kotlin.reflect.KClass<kotlin.IntArray>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='class kotlin.String'
+          actual: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+            CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='class kotlin.String'
+          actual: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+            CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<java.lang.String>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='class kotlin.Array'
+          actual: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+            CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Any>>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='class kotlin.Array'
+          actual: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+            CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Int>>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='class kotlin.Array'
+          actual: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+            CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Array<kotlin.String>>>
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='class java.lang.Runnable'
+          actual: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+            CLASS_REFERENCE 'Runnable' type=kotlin.reflect.KClass<java.lang.Runnable>
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

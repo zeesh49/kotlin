@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /traitWithPrivateExtension.kt
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public final val p: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+    CLASS CLASS BB
+      CONSTRUCTOR public constructor BB()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor B()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='BB'
+    CLASS INTERFACE Z
+      FUN public open fun T.getString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getString() on T: String'
+            CALL '<get-p>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: $RECEIVER of 'getString() on T: String' type=T
+      FUN public open fun test(s: T): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test(T): String'
+            CALL 'extension() on T: String' type=kotlin.String operator=null
+              $this: THIS of 'Z' type=Z<T>
+              $receiver: GET_VAR 'value-parameter s: T' type=T operator=null
+      FUN private final fun T.extension(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='extension() on T: String'
+            CALL 'getString() on T: String' type=kotlin.String operator=null
+              $this: THIS of 'Z' type=Z<T>
+              $receiver: $RECEIVER of 'extension() on T: String' type=T
+    CLASS OBJECT Z2
+      CONSTRUCTOR private constructor Z2()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Z2'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'test(BB): String' type=kotlin.String operator=null
+            $this: GET_OBJECT 'Z2' type=Z2
+            s: CALL 'constructor BB()' type=BB operator=null

@@ -1,0 +1,80 @@
+MODULE <test-module>
+  FILE /convention.kt
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B(s: kotlin.Int = ...)
+        s: EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 's: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'B' type=B
+            value: GET_VAR 'value-parameter s: Int = ...' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public final var s: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s: Int = ...' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS OBJECT A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun test1(v: B): kotlin.Unit
+        BLOCK_BODY
+          CALL 'plusAssign(B) on B: Unit' type=kotlin.Unit operator=PLUSEQ
+            $this: THIS of 'A' type=A
+            $receiver: GET_VAR 'value-parameter v: B' type=B operator=PLUSEQ
+            b: CALL 'constructor B(Int = ...)' type=B operator=null
+              s: CONST Int type=kotlin.Int value='1000'
+      FUN @kotlin.jvm.JvmStatic public final operator fun B.plusAssign(b: B): kotlin.Unit
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            VAR val tmp0_this: B
+              $RECEIVER of 'plusAssign(B) on B: Unit' type=B
+            CALL '<set-s>(Int): Unit' type=kotlin.Unit operator=PLUSEQ
+              $this: GET_VAR 'tmp0_this: B' type=B operator=null
+              <set-?>: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                $this: CALL '<get-s>(): Int' type=kotlin.Int operator=PLUSEQ
+                  $this: GET_VAR 'tmp0_this: B' type=B operator=null
+                other: CALL '<get-s>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'value-parameter b: B' type=B operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val b1: B
+          CALL 'constructor B(Int = ...)' type=B operator=null
+            s: CONST Int type=kotlin.Int value='11'
+        CALL 'with(A, A.() -> Unit): Unit' type=kotlin.Unit operator=null
+          receiver: GET_OBJECT 'A' type=A
+          block: BLOCK type=A.() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun A.<anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>() on A: Unit'
+                  CALL 'plusAssign(B) on B: Unit' type=kotlin.Unit operator=PLUSEQ
+                    $this: $RECEIVER of '<anonymous>() on A: Unit' type=A
+                    $receiver: GET_VAR 'b1: B' type=B operator=PLUSEQ
+                    b: CALL 'constructor B(Int = ...)' type=B operator=null
+                      s: CONST Int type=kotlin.Int value='1000'
+            CALLABLE_REFERENCE '<anonymous>() on A: Unit' type=A.() -> kotlin.Unit operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-s>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'b1: B' type=B operator=null
+              arg1: CONST Int type=kotlin.Int value='1011'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        VAR val b: B
+          CALL 'constructor B(Int = ...)' type=B operator=null
+            s: CONST Int type=kotlin.Int value='11'
+        CALL 'test1(B): Unit' type=kotlin.Unit operator=null
+          $this: GET_OBJECT 'A' type=A
+          v: GET_VAR 'b: B' type=B operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-s>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'b: B' type=B operator=null
+              arg1: CONST Int type=kotlin.Int value='1011'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

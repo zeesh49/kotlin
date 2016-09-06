@@ -1,0 +1,135 @@
+MODULE <test-module>
+  FILE /test.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public open override val length: kotlin.Int = 123
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='123'
+      FUN public open override fun get(index: kotlin.Int): kotlin.Char
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(Int): Char'
+            CONST Char type=kotlin.Char value='z'
+      FUN public open override fun subSequence(start: kotlin.Int, end: kotlin.Int): kotlin.CharSequence
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val b: J.B
+          CALL 'constructor B()' type=J.B operator=null
+        VAR val a: A
+          CALL 'constructor A()' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Char' type=kotlin.Char operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'b: J.B' type=J.B operator=null
+                index: CONST Int type=kotlin.Int value='0'
+              arg1: CONST Char type=kotlin.Char value='z'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 6'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Char' type=kotlin.Char operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'a: A' type=A operator=null
+                index: CONST Int type=kotlin.Int value='0'
+              arg1: CONST Char type=kotlin.Char value='z'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 7'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Char' type=kotlin.Char operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'b: J.B' type=J.B operator=null
+                index: CONST Int type=kotlin.Int value='1'
+              arg1: CONST Char type=kotlin.Char value='a'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 8'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Char' type=kotlin.Char operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'a: A' type=A operator=null
+                index: CONST Int type=kotlin.Int value='0'
+              arg1: CONST Char type=kotlin.Char value='z'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 9'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Char' type=kotlin.Char operator=null
+                $this: GET_VAR 'b: J.B' type=J.B operator=null
+                index: CONST Int type=kotlin.Int value='0'
+              arg1: CONST Char type=kotlin.Char value='z'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 10'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Char' type=kotlin.Char operator=null
+                $this: GET_VAR 'a: A' type=A operator=null
+                index: CONST Int type=kotlin.Int value='0'
+              arg1: CONST Char type=kotlin.Char value='z'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 11'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Char' type=kotlin.Char operator=null
+                $this: GET_VAR 'b: J.B' type=J.B operator=null
+                index: CONST Int type=kotlin.Int value='1'
+              arg1: CONST Char type=kotlin.Char value='a'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 12'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Char' type=kotlin.Char operator=null
+                $this: GET_VAR 'a: A' type=A operator=null
+                index: CONST Int type=kotlin.Int value='1'
+              arg1: CONST Char type=kotlin.Char value='z'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 13'
+        VAR var cs: kotlin.CharSequence
+          GET_VAR 'a: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='123'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 14'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'cs: CharSequence' type=kotlin.CharSequence operator=null
+              arg1: CONST Int type=kotlin.Int value='123'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 15'
+        SET_VAR 'cs: CharSequence' type=kotlin.Unit operator=EQ
+          GET_VAR 'b: J.B' type=J.B operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'b: J.B' type=J.B operator=null
+              arg1: CONST Int type=kotlin.Int value='456'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 16'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'b: J.B' type=J.B operator=null
+              arg1: CONST Int type=kotlin.Int value='456'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 17'
+        RETURN type=kotlin.Nothing from='box(): String'
+          TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+            CALL 'foo(): String!' type=kotlin.String! operator=null

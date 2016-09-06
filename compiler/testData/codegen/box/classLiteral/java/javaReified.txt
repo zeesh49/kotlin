@@ -1,0 +1,55 @@
+MODULE <test-module>
+  FILE /javaReified.kt
+    FUN public inline fun <reified T : kotlin.Any> check(expected: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        VAR val clazz: java.lang.Class<T>
+          BLOCK type=java.lang.Class<T> operator=EXCLEXCL
+            VAR val tmp0_notnull: java.lang.Class<T>
+              CALL '<get-java>() on KClass<T>: Class<T>' type=java.lang.Class<T> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE '<reified T : Any>' type=kotlin.reflect.KClass<T>
+            WHEN type=java.lang.Class<T> operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Class<T>' type=java.lang.Class<T> operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Class<T>' type=java.lang.Class<T> operator=null
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL '<get-canonicalName>() on Class<T>: String!' type=kotlin.String! operator=GET_PROPERTY
+              $receiver: GET_VAR 'clazz: Class<T>' type=java.lang.Class<T> operator=null
+            arg1: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='java.lang.'
+              GET_VAR 'value-parameter expected: String' type=kotlin.String operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='clazz name: '
+                    CALL '<get-canonicalName>() on Class<T>: String!' type=kotlin.String! operator=GET_PROPERTY
+                      $receiver: GET_VAR 'clazz: Class<T>' type=java.lang.Class<T> operator=null
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'check(String): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Boolean'
+        CALL 'check(String): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Character'
+        CALL 'check(String): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Byte'
+        CALL 'check(String): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Short'
+        CALL 'check(String): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Integer'
+        CALL 'check(String): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Float'
+        CALL 'check(String): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Long'
+        CALL 'check(String): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Double'
+        CALL 'check(String): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='String'
+        CALL 'check(String): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Void'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

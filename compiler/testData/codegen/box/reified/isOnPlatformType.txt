@@ -1,0 +1,52 @@
+MODULE <test-module>
+  FILE /kotlin.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val nullStr: kotlin.String!
+          CALL 'nullString(): String!' type=kotlin.String! operator=null
+        VAR val nonnullStr: kotlin.String!
+          CALL 'nonnullString(): String!' type=kotlin.String! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo() on String!: Boolean' type=kotlin.Boolean operator=null
+                $receiver: GET_VAR 'nullStr: String!' type=kotlin.String! operator=null
+              arg1: CONST Boolean type=kotlin.Boolean value='true'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo() on String!: Boolean' type=kotlin.Boolean operator=null
+                $receiver: GET_VAR 'nonnullStr: String!' type=kotlin.String! operator=null
+              arg1: CONST Boolean type=kotlin.Boolean value='true'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'fooN() on String!: Boolean' type=kotlin.Boolean operator=null
+                $receiver: GET_VAR 'nullStr: String!' type=kotlin.String! operator=null
+              arg1: CONST Boolean type=kotlin.Boolean value='true'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'fooN() on String!: Boolean' type=kotlin.Boolean operator=null
+                $receiver: GET_VAR 'nonnullStr: String!' type=kotlin.String! operator=null
+              arg1: CONST Boolean type=kotlin.Boolean value='true'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public inline fun <reified T> T.foo(): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo() on T: Boolean'
+          TYPE_OP operator=INSTANCEOF typeOperand=T
+            $RECEIVER of 'foo() on T: Boolean' type=T
+    FUN public inline fun <reified T> T.fooN(): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='fooN() on T: Boolean'
+          TYPE_OP operator=INSTANCEOF typeOperand=T?
+            $RECEIVER of 'fooN() on T: Boolean' type=T

@@ -1,0 +1,50 @@
+MODULE <test-module>
+  FILE /privateClassVal.kt
+    CLASS CLASS Result
+      CONSTRUCTOR public constructor Result()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Result'
+      PROPERTY private final val value: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+      FUN public final fun ref(): kotlin.reflect.KProperty1<Result, kotlin.String>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='ref(): KProperty1<Result, String>'
+            TYPE_OP operator=CAST typeOperand=kotlin.reflect.KProperty1<Result, kotlin.String>
+              CALL 'single() on Iterable<KProperty1<Result, *>>: KProperty1<Result, *>' type=kotlin.reflect.KProperty1<Result, *> operator=null
+                $receiver: CALL '<get-memberProperties>() on KClass<Result>: Collection<KProperty1<Result, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<Result, *>> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'Result' type=kotlin.reflect.KClass<Result>
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val p: kotlin.reflect.KProperty1<Result, kotlin.String>
+          CALL 'ref(): KProperty1<Result, String>' type=kotlin.reflect.KProperty1<Result, kotlin.String> operator=null
+            $this: CALL 'constructor Result()' type=Result operator=null
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'get(Result): String' type=kotlin.String operator=null
+              $this: GET_VAR 'p: KProperty1<Result, String>' type=kotlin.reflect.KProperty1<Result, kotlin.String> operator=null
+              receiver: CALL 'constructor Result()' type=Result operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail: private property is accessible by default'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        CALL '<set-isAccessible>(Boolean) on KCallable<*>: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 'p: KProperty1<Result, String>' type=kotlin.reflect.KProperty1<Result, kotlin.String> operator=null
+          value: CONST Boolean type=kotlin.Boolean value='true'
+        VAR val r: kotlin.String
+          CALL 'get(Result): String' type=kotlin.String operator=null
+            $this: GET_VAR 'p: KProperty1<Result, String>' type=kotlin.reflect.KProperty1<Result, kotlin.String> operator=null
+            receiver: CALL 'constructor Result()' type=Result operator=null
+        CALL '<set-isAccessible>(Boolean) on KCallable<*>: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 'p: KProperty1<Result, String>' type=kotlin.reflect.KProperty1<Result, kotlin.String> operator=null
+          value: CONST Boolean type=kotlin.Boolean value='false'
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'get(Result): String' type=kotlin.String operator=null
+              $this: GET_VAR 'p: KProperty1<Result, String>' type=kotlin.reflect.KProperty1<Result, kotlin.String> operator=null
+              receiver: CALL 'constructor Result()' type=Result operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail: setAccessible(false) had no effect'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          GET_VAR 'r: String' type=kotlin.String operator=null

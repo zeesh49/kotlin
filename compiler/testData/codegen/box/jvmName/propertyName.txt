@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /propertyName.kt
+    PROPERTY public var v: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='1'
+      PROPERTY_GETTER @kotlin.jvm.JvmName public fun <get-v>(): kotlin.Int
+      PROPERTY_SETTER @kotlin.jvm.JvmName public fun <set-v>(<set-?>: kotlin.Int): kotlin.Unit
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=PLUSEQ
+          CALL '<set-v>(Int): Unit' type=kotlin.Unit operator=PLUSEQ
+            <set-?>: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+              $this: CALL '<get-v>(): Int' type=kotlin.Int operator=PLUSEQ
+              other: CONST Int type=kotlin.Int value='1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-v>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              CALL '<get-v>(): Int' type=kotlin.Int operator=GET_PROPERTY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

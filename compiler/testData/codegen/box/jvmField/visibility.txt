@@ -1,0 +1,244 @@
+MODULE <test-module>
+  FILE /visibility.kt
+    PROPERTY @kotlin.jvm.JvmField public val publicField: kotlin.String = "OK"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='OK'
+    PROPERTY @kotlin.jvm.JvmField internal val internalField: kotlin.String = "OK"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='OK'
+    FUN public fun testVisibilities(): kotlin.Unit
+      BLOCK_BODY
+        CALL 'checkVisibility(Field, Int): Unit' type=kotlin.Unit operator=null
+          field: BLOCK type=java.lang.reflect.Field operator=EXCLEXCL
+            VAR val tmp0_notnull: java.lang.reflect.Field?
+              CALL '<get-javaField>() on KProperty<*>: Field?' type=java.lang.reflect.Field? operator=GET_PROPERTY
+                $receiver: CALLABLE_REFERENCE 'publicField: String' type=kotlin.reflect.KProperty0<kotlin.String> operator=null
+            WHEN type=java.lang.reflect.Field operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Field?' type=java.lang.reflect.Field? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Field?' type=java.lang.reflect.Field? operator=null
+          visibility: GET_BACKING_FIELD 'PUBLIC: Int' type=kotlin.Int operator=GET_PROPERTY
+        CALL 'checkVisibility(Field, Int): Unit' type=kotlin.Unit operator=null
+          field: BLOCK type=java.lang.reflect.Field operator=EXCLEXCL
+            VAR val tmp1_notnull: java.lang.reflect.Field?
+              CALL '<get-javaField>() on KProperty<*>: Field?' type=java.lang.reflect.Field? operator=GET_PROPERTY
+                $receiver: CALLABLE_REFERENCE 'internalField: String' type=kotlin.reflect.KProperty0<kotlin.String> operator=null
+            WHEN type=java.lang.reflect.Field operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp1_notnull: Field?' type=java.lang.reflect.Field? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp1_notnull: Field?' type=java.lang.reflect.Field? operator=null
+          visibility: GET_BACKING_FIELD 'PUBLIC: Int' type=kotlin.Int operator=GET_PROPERTY
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY @kotlin.jvm.JvmField public final val publicField: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+      PROPERTY @kotlin.jvm.JvmField internal final val internalField: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+      PROPERTY @kotlin.jvm.JvmField protected final val protectedfield: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+      FUN public final fun testVisibilities(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'checkVisibility(Field, Int): Unit' type=kotlin.Unit operator=null
+            field: BLOCK type=java.lang.reflect.Field operator=EXCLEXCL
+              VAR val tmp0_notnull: java.lang.reflect.Field?
+                CALL '<get-javaField>() on KProperty<*>: Field?' type=java.lang.reflect.Field? operator=GET_PROPERTY
+                  $receiver: CALLABLE_REFERENCE 'publicField: String' type=kotlin.reflect.KProperty1<A, kotlin.String> operator=null
+              WHEN type=java.lang.reflect.Field operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: Field?' type=java.lang.reflect.Field? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: Field?' type=java.lang.reflect.Field? operator=null
+            visibility: GET_BACKING_FIELD 'PUBLIC: Int' type=kotlin.Int operator=GET_PROPERTY
+          CALL 'checkVisibility(Field, Int): Unit' type=kotlin.Unit operator=null
+            field: BLOCK type=java.lang.reflect.Field operator=EXCLEXCL
+              VAR val tmp1_notnull: java.lang.reflect.Field?
+                CALL '<get-javaField>() on KProperty<*>: Field?' type=java.lang.reflect.Field? operator=GET_PROPERTY
+                  $receiver: CALLABLE_REFERENCE 'internalField: String' type=kotlin.reflect.KProperty1<A, kotlin.String> operator=null
+              WHEN type=java.lang.reflect.Field operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp1_notnull: Field?' type=java.lang.reflect.Field? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp1_notnull: Field?' type=java.lang.reflect.Field? operator=null
+            visibility: GET_BACKING_FIELD 'PUBLIC: Int' type=kotlin.Int operator=GET_PROPERTY
+          CALL 'checkVisibility(Field, Int): Unit' type=kotlin.Unit operator=null
+            field: BLOCK type=java.lang.reflect.Field operator=EXCLEXCL
+              VAR val tmp2_notnull: java.lang.reflect.Field?
+                CALL '<get-javaField>() on KProperty<*>: Field?' type=java.lang.reflect.Field? operator=GET_PROPERTY
+                  $receiver: CALLABLE_REFERENCE 'protectedfield: String' type=kotlin.reflect.KProperty1<A, kotlin.String> operator=null
+              WHEN type=java.lang.reflect.Field operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp2_notnull: Field?' type=java.lang.reflect.Field? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp2_notnull: Field?' type=java.lang.reflect.Field? operator=null
+            visibility: GET_BACKING_FIELD 'PROTECTED: Int' type=kotlin.Int operator=GET_PROPERTY
+    CLASS CLASS AWithCompanion
+      CONSTRUCTOR public constructor AWithCompanion()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='AWithCompanion'
+      CLASS OBJECT companion object of AWithCompanion
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of AWithCompanion'
+        PROPERTY @kotlin.jvm.JvmField public final val publicField: kotlin.String = "OK"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='OK'
+        PROPERTY @kotlin.jvm.JvmField internal final val internalField: kotlin.String = "OK"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='OK'
+        PROPERTY @kotlin.jvm.JvmField protected final val protectedfield: kotlin.String = "OK"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='OK'
+        FUN public final operator fun get(name: kotlin.String): kotlin.reflect.KProperty<*>
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='get(String): KProperty<*>'
+              TYPE_OP operator=CAST typeOperand=kotlin.reflect.KProperty<*>
+                CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                  $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                    $this: CLASS_REFERENCE 'companion object of AWithCompanion' type=kotlin.reflect.KClass<AWithCompanion.Companion>
+                  predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                    FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                              $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                            arg1: GET_VAR 'value-parameter name: String' type=kotlin.String operator=null
+                    CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+        FUN public final fun testVisibilities(): kotlin.Unit
+          BLOCK_BODY
+            CALL 'checkVisibility(Field, Int): Unit' type=kotlin.Unit operator=null
+              field: BLOCK type=java.lang.reflect.Field operator=EXCLEXCL
+                VAR val tmp0_notnull: java.lang.reflect.Field?
+                  CALL '<get-javaField>() on KProperty<*>: Field?' type=java.lang.reflect.Field? operator=GET_PROPERTY
+                    $receiver: CALL 'get(String): KProperty<*>' type=kotlin.reflect.KProperty<*> operator=GET_ARRAY_ELEMENT
+                      $this: THIS of 'companion object of AWithCompanion' type=AWithCompanion.Companion
+                      name: CONST String type=kotlin.String value='publicField'
+                WHEN type=java.lang.reflect.Field operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_notnull: Field?' type=java.lang.reflect.Field? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: GET_VAR 'tmp0_notnull: Field?' type=java.lang.reflect.Field? operator=null
+              visibility: GET_BACKING_FIELD 'PUBLIC: Int' type=kotlin.Int operator=GET_PROPERTY
+            CALL 'checkVisibility(Field, Int): Unit' type=kotlin.Unit operator=null
+              field: BLOCK type=java.lang.reflect.Field operator=EXCLEXCL
+                VAR val tmp1_notnull: java.lang.reflect.Field?
+                  CALL '<get-javaField>() on KProperty<*>: Field?' type=java.lang.reflect.Field? operator=GET_PROPERTY
+                    $receiver: CALL 'get(String): KProperty<*>' type=kotlin.reflect.KProperty<*> operator=GET_ARRAY_ELEMENT
+                      $this: THIS of 'companion object of AWithCompanion' type=AWithCompanion.Companion
+                      name: CONST String type=kotlin.String value='internalField'
+                WHEN type=java.lang.reflect.Field operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp1_notnull: Field?' type=java.lang.reflect.Field? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: GET_VAR 'tmp1_notnull: Field?' type=java.lang.reflect.Field? operator=null
+              visibility: GET_BACKING_FIELD 'PUBLIC: Int' type=kotlin.Int operator=GET_PROPERTY
+            CALL 'checkVisibility(Field, Int): Unit' type=kotlin.Unit operator=null
+              field: BLOCK type=java.lang.reflect.Field operator=EXCLEXCL
+                VAR val tmp2_notnull: java.lang.reflect.Field?
+                  CALL '<get-javaField>() on KProperty<*>: Field?' type=java.lang.reflect.Field? operator=GET_PROPERTY
+                    $receiver: CALL 'get(String): KProperty<*>' type=kotlin.reflect.KProperty<*> operator=GET_ARRAY_ELEMENT
+                      $this: THIS of 'companion object of AWithCompanion' type=AWithCompanion.Companion
+                      name: CONST String type=kotlin.String value='protectedfield'
+                WHEN type=java.lang.reflect.Field operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp2_notnull: Field?' type=java.lang.reflect.Field? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: GET_VAR 'tmp2_notnull: Field?' type=java.lang.reflect.Field? operator=null
+              visibility: GET_BACKING_FIELD 'PROTECTED: Int' type=kotlin.Int operator=GET_PROPERTY
+    CLASS OBJECT Object
+      CONSTRUCTOR private constructor Object()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Object'
+      PROPERTY @kotlin.jvm.JvmField public final val publicField: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+      PROPERTY @kotlin.jvm.JvmField internal final val internalField: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+      FUN public final operator fun get(name: kotlin.String): kotlin.reflect.KProperty<*>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(String): KProperty<*>'
+            TYPE_OP operator=CAST typeOperand=kotlin.reflect.KProperty<*>
+              CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                  $this: CLASS_REFERENCE 'Object' type=kotlin.reflect.KClass<Object>
+                predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                        CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                            $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                          arg1: GET_VAR 'value-parameter name: String' type=kotlin.String operator=null
+                  CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+      FUN public final fun testVisibilities(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'checkVisibility(Field, Int): Unit' type=kotlin.Unit operator=null
+            field: BLOCK type=java.lang.reflect.Field operator=EXCLEXCL
+              VAR val tmp0_notnull: java.lang.reflect.Field?
+                CALL '<get-javaField>() on KProperty<*>: Field?' type=java.lang.reflect.Field? operator=GET_PROPERTY
+                  $receiver: CALL 'get(String): KProperty<*>' type=kotlin.reflect.KProperty<*> operator=GET_ARRAY_ELEMENT
+                    $this: THIS of 'Object' type=Object
+                    name: CONST String type=kotlin.String value='publicField'
+              WHEN type=java.lang.reflect.Field operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: Field?' type=java.lang.reflect.Field? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: Field?' type=java.lang.reflect.Field? operator=null
+            visibility: GET_BACKING_FIELD 'PUBLIC: Int' type=kotlin.Int operator=GET_PROPERTY
+          CALL 'checkVisibility(Field, Int): Unit' type=kotlin.Unit operator=null
+            field: BLOCK type=java.lang.reflect.Field operator=EXCLEXCL
+              VAR val tmp1_notnull: java.lang.reflect.Field?
+                CALL '<get-javaField>() on KProperty<*>: Field?' type=java.lang.reflect.Field? operator=GET_PROPERTY
+                  $receiver: CALL 'get(String): KProperty<*>' type=kotlin.reflect.KProperty<*> operator=GET_ARRAY_ELEMENT
+                    $this: THIS of 'Object' type=Object
+                    name: CONST String type=kotlin.String value='internalField'
+              WHEN type=java.lang.reflect.Field operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp1_notnull: Field?' type=java.lang.reflect.Field? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp1_notnull: Field?' type=java.lang.reflect.Field? operator=null
+            visibility: GET_BACKING_FIELD 'PUBLIC: Int' type=kotlin.Int operator=GET_PROPERTY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'testVisibilities(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor A()' type=A operator=null
+        CALL 'testVisibilities(): Unit' type=kotlin.Unit operator=null
+          $this: GET_OBJECT 'companion object of AWithCompanion' type=AWithCompanion.Companion
+        CALL 'testVisibilities(): Unit' type=kotlin.Unit operator=null
+          $this: GET_OBJECT 'Object' type=Object
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun checkVisibility(field: java.lang.reflect.Field, visibility: kotlin.Int): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assertNotEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          illegal: CALL 'and(Int): Int' type=kotlin.Int operator=null
+            $this: CALL '<get-modifiers>() on Field: Int' type=kotlin.Int operator=GET_PROPERTY
+              $receiver: GET_VAR 'value-parameter field: Field' type=java.lang.reflect.Field operator=null
+            other: GET_VAR 'value-parameter visibility: Int' type=kotlin.Int operator=null
+          actual: CONST Int type=kotlin.Int value='0'
+          message: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='Field '
+            GET_VAR 'value-parameter field: Field' type=java.lang.reflect.Field operator=null
+            CONST String type=kotlin.String value=' has wrong visibility'

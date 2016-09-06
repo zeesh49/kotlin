@@ -1,0 +1,54 @@
+MODULE <test-module>
+  FILE /fakeOverrideWithSynthesizedImplementation.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(value: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'value: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter value: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val value: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun component1(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component1(): String'
+            CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+    CLASS INTERFACE B
+      FUN public abstract fun component1(): kotlin.Any
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C(value: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A(String)'
+            value: GET_VAR 'value-parameter value: String' type=kotlin.String operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val c: C
+          CALL 'constructor C(String)' type=C operator=null
+            value: CONST String type=kotlin.String value='OK'
+        VAR val b: B
+          GET_VAR 'c: C' type=C operator=null
+        VAR val a: A
+          GET_VAR 'c: C' type=C operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'component1(): Any' type=kotlin.Any operator=null
+                $this: GET_VAR 'b: B' type=B operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'component1(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'a: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'component1(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'c: C' type=C operator=null

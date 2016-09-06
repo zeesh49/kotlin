@@ -1,0 +1,45 @@
+MODULE <test-module>
+  FILE /typeDisjunction.kt
+    FUN public fun foo(s: kotlin.Any): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.String
+          BLOCK type=kotlin.String operator=WHEN
+            VAR val tmp0_subject: kotlin.Any
+              GET_VAR 'value-parameter s: Any' type=kotlin.Any operator=null
+            WHEN type=kotlin.String operator=WHEN
+              if: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.String
+                GET_VAR 'tmp0_subject: Any' type=kotlin.Any operator=null
+              then: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+                GET_VAR 'value-parameter s: Any' type=kotlin.Any operator=null
+              if: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.Int
+                GET_VAR 'tmp0_subject: Any' type=kotlin.Any operator=null
+              then: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+                GET_VAR 'value-parameter s: Any' type=kotlin.Any operator=null
+              else: RETURN type=kotlin.Nothing from='foo(Any): String'
+                CONST String type=kotlin.String value=''
+        VAR val y: kotlin.String
+          GET_VAR 'x: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='foo(Any): String'
+          GET_VAR 'y: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: WHEN type=kotlin.Boolean operator=ANDAND
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: CALL 'foo(Any): String' type=kotlin.String operator=null
+                    s: CONST String type=kotlin.String value='OK'
+                  arg1: CONST String type=kotlin.String value='OK'
+                then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: CALL 'foo(Any): String' type=kotlin.String operator=null
+                    s: CONST Int type=kotlin.Int value='42'
+                  arg1: CONST String type=kotlin.String value='42'
+                else: CONST Boolean type=kotlin.Boolean value='false'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL 'foo(Any): String' type=kotlin.String operator=null
+                  s: CONST Boolean type=kotlin.Boolean value='true'
+                arg1: CONST String type=kotlin.String value=''
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='Fail'

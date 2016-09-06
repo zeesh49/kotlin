@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /simpleNames.kt
+    FUN public fun foo(): kotlin.Unit
+      BLOCK_BODY
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun bar(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='bar(): String'
+            CONST String type=kotlin.String value=''
+    FUN public fun kotlin.Int.baz(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='baz() on Int: Int'
+          $RECEIVER of 'baz() on Int: Int' type=kotlin.Int
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='foo'
+          actual: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'foo(): Unit' type=kotlin.reflect.KFunction0<kotlin.Unit> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='bar'
+          actual: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'bar(): String' type=kotlin.reflect.KFunction1<A, kotlin.String> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='baz'
+          actual: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'baz() on Int: Int' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Int> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

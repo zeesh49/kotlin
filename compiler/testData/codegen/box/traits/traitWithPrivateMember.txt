@@ -1,0 +1,35 @@
+MODULE <test-module>
+  FILE /traitWithPrivateMember.kt
+    CLASS INTERFACE Z
+      FUN public open fun testFun(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='testFun(): String'
+            CALL 'privateFun(): String' type=kotlin.String operator=null
+              $this: THIS of 'Z' type=Z
+      FUN public open fun testProperty(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='testProperty(): String'
+            CALL '<get-privateProp>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'Z' type=Z
+      FUN private final fun privateFun(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='privateFun(): String'
+            CONST String type=kotlin.String value='O'
+      PROPERTY private final val privateProp: kotlin.String
+        PROPERTY_GETTER private final fun <get-privateProp>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-privateProp>(): String'
+              CONST String type=kotlin.String value='K'
+    CLASS OBJECT Z2
+      CONSTRUCTOR private constructor Z2()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Z2'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'testFun(): String' type=kotlin.String operator=null
+              $this: GET_OBJECT 'Z2' type=Z2
+            other: CALL 'testProperty(): String' type=kotlin.String operator=null
+              $this: GET_OBJECT 'Z2' type=Z2

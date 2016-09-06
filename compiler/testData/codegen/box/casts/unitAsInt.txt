@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /unitAsInt.kt
+    FUN public fun foo(): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Int?
+          try: BLOCK type=kotlin.Int? operator=null
+            TYPE_OP operator=CAST typeOperand=kotlin.Int?
+              CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='Fail: ClassCastException should have been thrown, but was instead '
+                CALL 'getName(): String!' type=kotlin.String! operator=null
+                  $this: CALL '<get-javaClass>() on Throwable: Class<Throwable>' type=java.lang.Class<kotlin.Throwable> operator=GET_PROPERTY
+                    $receiver: GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+                CONST String type=kotlin.String value=': '
+                CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                  $this: GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='Fail: no exception was thrown'

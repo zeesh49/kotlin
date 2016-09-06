@@ -1,0 +1,19 @@
+MODULE <test-module>
+  FILE /indirectlyInheritPropertyGetter.kt
+    CLASS INTERFACE A
+      PROPERTY public open val str: kotlin.String
+        PROPERTY_GETTER public open fun <get-str>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-str>(): String'
+              CONST String type=kotlin.String value='OK'
+    CLASS INTERFACE B
+    CLASS CLASS Impl
+      CONSTRUCTOR public constructor Impl()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Impl'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-str>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor Impl()' type=Impl operator=null

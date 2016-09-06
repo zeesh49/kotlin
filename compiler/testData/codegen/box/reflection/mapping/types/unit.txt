@@ -1,0 +1,68 @@
+MODULE <test-module>
+  FILE /unit.kt
+    FUN public fun foo(unitParam: kotlin.Unit, nullableUnitParam: kotlin.Unit?): kotlin.Unit
+      BLOCK_BODY
+    PROPERTY public var bar: kotlin.Unit
+      EXPRESSION_BODY
+        GET_OBJECT 'Unit' type=kotlin.Unit
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assert(Boolean): Unit' type=kotlin.Unit operator=null
+          value: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-java>() on KClass<Unit>: Class<Unit>' type=java.lang.Class<kotlin.Unit> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'Unit' type=kotlin.reflect.KClass<kotlin.Unit>
+              arg1: GET_BACKING_FIELD 'TYPE: Class<Void!>!' type=java.lang.Class<java.lang.Void!>! operator=GET_PROPERTY
+        CALL 'assertEquals(Type, Type, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-java>() on KClass<Unit>: Class<Unit>' type=java.lang.Class<kotlin.Unit> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Unit' type=kotlin.reflect.KClass<kotlin.Unit>
+          actual: CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+            $receiver: CALL '<get-type>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+                $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                  $this: CALLABLE_REFERENCE 'foo(Unit, Unit?): Unit' type=kotlin.reflect.KFunction2<kotlin.Unit, kotlin.Unit?, kotlin.Unit> operator=null
+                index: CONST Int type=kotlin.Int value='0'
+        CALL 'assertEquals(Type, Type, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-java>() on KClass<Unit>: Class<Unit>' type=java.lang.Class<kotlin.Unit> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Unit' type=kotlin.reflect.KClass<kotlin.Unit>
+          actual: CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+            $receiver: CALL '<get-type>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+                $this: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                  $this: CALLABLE_REFERENCE 'foo(Unit, Unit?): Unit' type=kotlin.reflect.KFunction2<kotlin.Unit, kotlin.Unit?, kotlin.Unit> operator=null
+                index: CONST Int type=kotlin.Int value='1'
+        CALL 'assertEquals(Type!, Type!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_BACKING_FIELD 'TYPE: Class<Void!>!' type=java.lang.Class<java.lang.Void!>! operator=GET_PROPERTY
+          actual: CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+            $receiver: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'foo(Unit, Unit?): Unit' type=kotlin.reflect.KFunction2<kotlin.Unit, kotlin.Unit?, kotlin.Unit> operator=null
+        CALL 'assertEquals(Type, Type, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-java>() on KClass<Unit>: Class<Unit>' type=java.lang.Class<kotlin.Unit> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Unit' type=kotlin.reflect.KClass<kotlin.Unit>
+          actual: CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+            $receiver: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'bar: Unit' type=kotlin.reflect.KMutableProperty0<kotlin.Unit> operator=null
+        CALL 'assertEquals(Type, Type, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-java>() on KClass<Unit>: Class<Unit>' type=java.lang.Class<kotlin.Unit> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Unit' type=kotlin.reflect.KClass<kotlin.Unit>
+          actual: CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+            $receiver: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALL '<get-getter>(): KProperty0.Getter<Unit>' type=kotlin.reflect.KProperty0.Getter<kotlin.Unit> operator=GET_PROPERTY
+                $this: CALLABLE_REFERENCE 'bar: Unit' type=kotlin.reflect.KMutableProperty0<kotlin.Unit> operator=null
+        CALL 'assertEquals(Type, Type, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-java>() on KClass<Unit>: Class<Unit>' type=java.lang.Class<kotlin.Unit> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Unit' type=kotlin.reflect.KClass<kotlin.Unit>
+          actual: CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+            $receiver: CALL '<get-type>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALL 'single() on List<KParameter>: KParameter' type=kotlin.reflect.KParameter operator=null
+                $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                  $this: CALL '<get-setter>(): KMutableProperty0.Setter<Unit>' type=kotlin.reflect.KMutableProperty0.Setter<kotlin.Unit> operator=GET_PROPERTY
+                    $this: CALLABLE_REFERENCE 'bar: Unit' type=kotlin.reflect.KMutableProperty0<kotlin.Unit> operator=null
+        CALL 'assertEquals(Type!, Type!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_BACKING_FIELD 'TYPE: Class<Void!>!' type=java.lang.Class<java.lang.Void!>! operator=GET_PROPERTY
+          actual: CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+            $receiver: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALL '<get-setter>(): KMutableProperty0.Setter<Unit>' type=kotlin.reflect.KMutableProperty0.Setter<kotlin.Unit> operator=GET_PROPERTY
+                $this: CALLABLE_REFERENCE 'bar: Unit' type=kotlin.reflect.KMutableProperty0<kotlin.Unit> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

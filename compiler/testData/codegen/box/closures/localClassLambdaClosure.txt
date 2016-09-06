@@ -1,0 +1,27 @@
+MODULE <test-module>
+  FILE /localClassLambdaClosure.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val o: kotlin.String = "O"
+          CONST String type=kotlin.String value='O'
+        VAR val ok_L: () -> kotlin.String
+          BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                    $this: GET_VAR 'o: String' type=kotlin.String operator=null
+                    other: CONST String type=kotlin.String value='K'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CLASS CLASS OK
+          CONSTRUCTOR public constructor OK()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='OK'
+          PROPERTY public final val ok: kotlin.String
+            EXPRESSION_BODY
+              CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+                $this: GET_VAR 'ok_L: () -> String' type=() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-ok>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor OK()' type=box.OK operator=null

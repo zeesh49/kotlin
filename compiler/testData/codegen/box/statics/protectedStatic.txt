@@ -1,0 +1,81 @@
+MODULE <test-module>
+  FILE /First.kt
+    CLASS CLASS Second
+      CONSTRUCTOR public constructor Second()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor First()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Second'
+      PROPERTY public final val some: () -> kotlin.String!
+        EXPRESSION_BODY
+          BLOCK type=() -> kotlin.String! operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String!
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String!'
+                  GET_BACKING_FIELD 'TEST: String!' type=kotlin.String! operator=GET_PROPERTY
+            CALLABLE_REFERENCE '<anonymous>(): String!' type=() -> kotlin.String! operator=LAMBDA
+      FUN public final fun foo(): () -> kotlin.String!
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): () -> String!'
+            BLOCK type=() -> kotlin.String! operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String!
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String!'
+                    CALL 'test(): String!' type=kotlin.String! operator=null
+              CALLABLE_REFERENCE '<anonymous>(): String!' type=() -> kotlin.String! operator=LAMBDA
+      PROPERTY public final val some2: () -> kotlin.String!
+        EXPRESSION_BODY
+          BLOCK type=() -> kotlin.String! operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String!
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String!'
+                  GET_BACKING_FIELD 'TEST: String!' type=kotlin.String! operator=GET_PROPERTY
+            CALLABLE_REFERENCE '<anonymous>(): String!' type=() -> kotlin.String! operator=LAMBDA
+      FUN public final fun foo2(): () -> kotlin.String!
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo2(): () -> String!'
+            BLOCK type=() -> kotlin.String! operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String!
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String!'
+                    CALL 'test(): String!' type=kotlin.String! operator=null
+              CALLABLE_REFERENCE '<anonymous>(): String!' type=() -> kotlin.String! operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): String!' type=kotlin.String! operator=null
+                $this: CALL '<get-some>(): () -> String!' type=() -> kotlin.String! operator=GET_PROPERTY
+                  $this: CALL 'constructor Second()' type=anotherPackage.Second operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): String!' type=kotlin.String! operator=null
+                $this: CALL 'foo(): () -> String!' type=() -> kotlin.String! operator=null
+                  $this: CALL 'constructor Second()' type=anotherPackage.Second operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): String!' type=kotlin.String! operator=null
+                $this: CALL '<get-some2>(): () -> String!' type=() -> kotlin.String! operator=GET_PROPERTY
+                  $this: CALL 'constructor Second()' type=anotherPackage.Second operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): String!' type=kotlin.String! operator=null
+                $this: CALL 'foo2(): () -> String!' type=() -> kotlin.String! operator=null
+                  $this: CALL 'constructor Second()' type=anotherPackage.Second operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

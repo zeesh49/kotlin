@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /box.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-ok>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor OK()' type=a.OK operator=null
+  FILE /part1.kt
+    PROPERTY private val reallyOk: kotlin.String
+      EXPRESSION_BODY
+        CALL 'run(() -> String): String' type=kotlin.String operator=null
+          block: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='OK'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+    CLASS CLASS OK
+      CONSTRUCTOR public constructor OK()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='OK'
+      PROPERTY public final val ok: kotlin.String
+        EXPRESSION_BODY
+          CALL '<get-reallyOk>(): String' type=kotlin.String operator=GET_PROPERTY

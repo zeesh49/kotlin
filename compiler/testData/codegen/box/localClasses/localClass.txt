@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /localClass.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun a(): kotlin.String
+        BLOCK_BODY
+          CLASS CLASS B
+            CONSTRUCTOR public constructor B()
+              BLOCK_BODY
+                DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                INSTANCE_INITIALIZER_CALL classDescriptor='B'
+            FUN public final fun s(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='s(): String'
+                  CONST String type=kotlin.String value='OK'
+          RETURN type=kotlin.Nothing from='a(): String'
+            CALL 's(): String' type=kotlin.String operator=null
+              $this: CALL 'constructor B()' type=A.a.B operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'a(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor A()' type=A operator=null

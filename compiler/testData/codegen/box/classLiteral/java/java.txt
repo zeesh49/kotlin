@@ -1,0 +1,143 @@
+MODULE <test-module>
+  FILE /java.kt
+    FUN public fun checkPrimitive(clazz: java.lang.Class<*>, expected: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL '<get-canonicalName>() on Class<*>: String!' type=kotlin.String! operator=GET_PROPERTY
+              $receiver: BLOCK type=java.lang.Class<*> operator=EXCLEXCL
+                VAR val tmp0_notnull: java.lang.Class<*>
+                  GET_VAR 'value-parameter clazz: Class<*>' type=java.lang.Class<*> operator=null
+                WHEN type=java.lang.Class<*> operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_notnull: Class<*>' type=java.lang.Class<*> operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: GET_VAR 'tmp0_notnull: Class<*>' type=java.lang.Class<*> operator=null
+            arg1: GET_VAR 'value-parameter expected: String' type=kotlin.String operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='clazz name: '
+                    CALL '<get-canonicalName>() on Class<*>: String!' type=kotlin.String! operator=GET_PROPERTY
+                      $receiver: GET_VAR 'value-parameter clazz: Class<*>' type=java.lang.Class<*> operator=null
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+    FUN public fun checkPrimitive(kClass: kotlin.reflect.KClass<*>, expected: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        CALL 'checkPrimitive(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          clazz: CALL '<get-java>() on KClass<*>: Class<out Any>' type=java.lang.Class<out kotlin.Any> operator=GET_PROPERTY
+            $receiver: GET_VAR 'value-parameter kClass: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+          expected: GET_VAR 'value-parameter expected: String' type=kotlin.String operator=null
+    FUN public fun checkObject(clazz: java.lang.Class<*>, expected: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL '<get-canonicalName>() on Class<*>: String!' type=kotlin.String! operator=GET_PROPERTY
+              $receiver: GET_VAR 'value-parameter clazz: Class<*>' type=java.lang.Class<*> operator=null
+            arg1: GET_VAR 'value-parameter expected: String' type=kotlin.String operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='clazz should be object, but found: '
+                    CALL '<get-canonicalName>() on Class<*>: String!' type=kotlin.String! operator=GET_PROPERTY
+                      $receiver: BLOCK type=java.lang.Class<*> operator=EXCLEXCL
+                        VAR val tmp0_notnull: java.lang.Class<*>
+                          GET_VAR 'value-parameter clazz: Class<*>' type=java.lang.Class<*> operator=null
+                        WHEN type=java.lang.Class<*> operator=null
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: GET_VAR 'tmp0_notnull: Class<*>' type=java.lang.Class<*> operator=null
+                            arg1: CONST Null type=kotlin.Nothing? value='null'
+                          then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                          else: GET_VAR 'tmp0_notnull: Class<*>' type=java.lang.Class<*> operator=null
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+    FUN public fun checkObject(kClass: kotlin.reflect.KClass<*>, expected: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        CALL 'checkObject(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          clazz: CALL '<get-java>() on KClass<*>: Class<out Any>' type=java.lang.Class<out kotlin.Any> operator=GET_PROPERTY
+            $receiver: GET_VAR 'value-parameter kClass: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+          expected: GET_VAR 'value-parameter expected: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'checkPrimitive(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          clazz: CALL '<get-java>() on KClass<Boolean>: Class<Boolean>' type=java.lang.Class<kotlin.Boolean> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Boolean' type=kotlin.reflect.KClass<kotlin.Boolean>
+          expected: CONST String type=kotlin.String value='boolean'
+        CALL 'checkPrimitive(KClass<*>, String): Unit' type=kotlin.Unit operator=null
+          kClass: CLASS_REFERENCE 'Boolean' type=kotlin.reflect.KClass<kotlin.Boolean>
+          expected: CONST String type=kotlin.String value='boolean'
+        CALL 'checkPrimitive(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          clazz: CALL '<get-java>() on KClass<Char>: Class<Char>' type=java.lang.Class<kotlin.Char> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Char' type=kotlin.reflect.KClass<kotlin.Char>
+          expected: CONST String type=kotlin.String value='char'
+        CALL 'checkPrimitive(KClass<*>, String): Unit' type=kotlin.Unit operator=null
+          kClass: CLASS_REFERENCE 'Char' type=kotlin.reflect.KClass<kotlin.Char>
+          expected: CONST String type=kotlin.String value='char'
+        CALL 'checkPrimitive(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          clazz: CALL '<get-java>() on KClass<Byte>: Class<Byte>' type=java.lang.Class<kotlin.Byte> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Byte' type=kotlin.reflect.KClass<kotlin.Byte>
+          expected: CONST String type=kotlin.String value='byte'
+        CALL 'checkPrimitive(KClass<*>, String): Unit' type=kotlin.Unit operator=null
+          kClass: CLASS_REFERENCE 'Byte' type=kotlin.reflect.KClass<kotlin.Byte>
+          expected: CONST String type=kotlin.String value='byte'
+        CALL 'checkPrimitive(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          clazz: CALL '<get-java>() on KClass<Short>: Class<Short>' type=java.lang.Class<kotlin.Short> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Short' type=kotlin.reflect.KClass<kotlin.Short>
+          expected: CONST String type=kotlin.String value='short'
+        CALL 'checkPrimitive(KClass<*>, String): Unit' type=kotlin.Unit operator=null
+          kClass: CLASS_REFERENCE 'Short' type=kotlin.reflect.KClass<kotlin.Short>
+          expected: CONST String type=kotlin.String value='short'
+        CALL 'checkPrimitive(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          clazz: CALL '<get-java>() on KClass<Int>: Class<Int>' type=java.lang.Class<kotlin.Int> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+          expected: CONST String type=kotlin.String value='int'
+        CALL 'checkPrimitive(KClass<*>, String): Unit' type=kotlin.Unit operator=null
+          kClass: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+          expected: CONST String type=kotlin.String value='int'
+        CALL 'checkPrimitive(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          clazz: CALL '<get-java>() on KClass<Float>: Class<Float>' type=java.lang.Class<kotlin.Float> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Float' type=kotlin.reflect.KClass<kotlin.Float>
+          expected: CONST String type=kotlin.String value='float'
+        CALL 'checkPrimitive(KClass<*>, String): Unit' type=kotlin.Unit operator=null
+          kClass: CLASS_REFERENCE 'Float' type=kotlin.reflect.KClass<kotlin.Float>
+          expected: CONST String type=kotlin.String value='float'
+        CALL 'checkPrimitive(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          clazz: CALL '<get-java>() on KClass<Long>: Class<Long>' type=java.lang.Class<kotlin.Long> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Long' type=kotlin.reflect.KClass<kotlin.Long>
+          expected: CONST String type=kotlin.String value='long'
+        CALL 'checkPrimitive(KClass<*>, String): Unit' type=kotlin.Unit operator=null
+          kClass: CLASS_REFERENCE 'Long' type=kotlin.reflect.KClass<kotlin.Long>
+          expected: CONST String type=kotlin.String value='long'
+        CALL 'checkPrimitive(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          clazz: CALL '<get-java>() on KClass<Double>: Class<Double>' type=java.lang.Class<kotlin.Double> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Double' type=kotlin.reflect.KClass<kotlin.Double>
+          expected: CONST String type=kotlin.String value='double'
+        CALL 'checkPrimitive(KClass<*>, String): Unit' type=kotlin.Unit operator=null
+          kClass: CLASS_REFERENCE 'Double' type=kotlin.reflect.KClass<kotlin.Double>
+          expected: CONST String type=kotlin.String value='double'
+        CALL 'checkObject(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          clazz: CALL '<get-java>() on KClass<String>: Class<String>' type=java.lang.Class<kotlin.String> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+          expected: CONST String type=kotlin.String value='java.lang.String'
+        CALL 'checkObject(KClass<*>, String): Unit' type=kotlin.Unit operator=null
+          kClass: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+          expected: CONST String type=kotlin.String value='java.lang.String'
+        CALL 'checkObject(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          clazz: CALL '<get-java>() on KClass<Nothing>: Class<Nothing>' type=java.lang.Class<kotlin.Nothing> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Nothing' type=kotlin.reflect.KClass<kotlin.Nothing>
+          expected: CONST String type=kotlin.String value='java.lang.Void'
+        CALL 'checkObject(KClass<*>, String): Unit' type=kotlin.Unit operator=null
+          kClass: CLASS_REFERENCE 'Nothing' type=kotlin.reflect.KClass<kotlin.Nothing>
+          expected: CONST String type=kotlin.String value='java.lang.Void'
+        CALL 'checkObject(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          clazz: CALL '<get-java>() on KClass<Void>: Class<Void>' type=java.lang.Class<java.lang.Void> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Void' type=kotlin.reflect.KClass<java.lang.Void>
+          expected: CONST String type=kotlin.String value='java.lang.Void'
+        CALL 'checkObject(KClass<*>, String): Unit' type=kotlin.Unit operator=null
+          kClass: CLASS_REFERENCE 'Void' type=kotlin.reflect.KClass<java.lang.Void>
+          expected: CONST String type=kotlin.String value='java.lang.Void'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

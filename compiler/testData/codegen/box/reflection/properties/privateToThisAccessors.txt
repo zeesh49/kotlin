@@ -1,0 +1,41 @@
+MODULE <test-module>
+  FILE /privateToThisAccessors.kt
+    CLASS CLASS K
+      CONSTRUCTOR public constructor K<in T : kotlin.String>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='K'
+      PROPERTY private/*private to this*/ final var t: T
+        PROPERTY_GETTER private/*private to this*/ final fun <get-t>(): T
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-t>(): T'
+              TYPE_OP operator=CAST typeOperand=T
+                CONST String type=kotlin.String value='OK'
+        PROPERTY_SETTER private/*private to this*/ final fun <set-t>(value: T): kotlin.Unit
+          BLOCK_BODY
+      FUN public final fun run(): kotlin.String
+        BLOCK_BODY
+          VAR val p: kotlin.reflect.KMutableProperty1<K<kotlin.String>, kotlin.String>
+            TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty1<K<kotlin.String>, kotlin.String>
+              CALL 'single() on Iterable<KProperty1<K<*>, *>>: KProperty1<K<*>, *>' type=kotlin.reflect.KProperty1<K<*>, *> operator=null
+                $receiver: CALL '<get-memberProperties>() on KClass<K<*>>: Collection<KProperty1<K<*>, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<K<*>, *>> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'K' type=kotlin.reflect.KClass<K<*>>
+          CALL '<set-isAccessible>(Boolean) on KCallable<*>: Unit' type=kotlin.Unit operator=EQ
+            $receiver: GET_VAR 'p: KMutableProperty1<K<String>, String>' type=kotlin.reflect.KMutableProperty1<K<kotlin.String>, kotlin.String> operator=null
+            value: CONST Boolean type=kotlin.Boolean value='true'
+          CALL 'set(K<String>, String): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR 'p: KMutableProperty1<K<String>, String>' type=kotlin.reflect.KMutableProperty1<K<kotlin.String>, kotlin.String> operator=null
+            receiver: TYPE_OP operator=CAST typeOperand=K<kotlin.String>
+              THIS of 'K' type=K<T>
+            value: CONST String type=kotlin.String value=''
+          RETURN type=kotlin.Nothing from='run(): String'
+            TYPE_OP operator=CAST typeOperand=kotlin.String
+              CALL 'get(K<String>): String' type=kotlin.String operator=null
+                $this: GET_VAR 'p: KMutableProperty1<K<String>, String>' type=kotlin.reflect.KMutableProperty1<K<kotlin.String>, kotlin.String> operator=null
+                receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=K<kotlin.String>
+                  THIS of 'K' type=K<T>
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'run(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor K()' type=K<kotlin.String> operator=null

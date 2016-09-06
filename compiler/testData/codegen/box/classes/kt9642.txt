@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /kt9642.kt
+    CLASS CLASS Outer
+      CONSTRUCTOR public constructor Outer()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+      CLASS CLASS Nested
+        CONSTRUCTOR public constructor Nested()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Nested'
+        FUN public final fun fn(): kotlin.String
+          BLOCK_BODY
+            CALL '<set-s>(String): Unit' type=kotlin.Unit operator=EQ
+              $this: THIS of 'companion object of Outer' type=Outer.Companion
+              <set-?>: CONST String type=kotlin.String value='OK'
+            RETURN type=kotlin.Nothing from='fn(): String'
+              CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'companion object of Outer' type=Outer.Companion
+      CLASS OBJECT companion object of Outer
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of Outer'
+        PROPERTY public final var s: kotlin.String
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='fail'
+          PROPERTY_SETTER private final fun <set-s>(<set-?>: kotlin.String): kotlin.Unit
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'fn(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Nested()' type=Outer.Nested operator=null

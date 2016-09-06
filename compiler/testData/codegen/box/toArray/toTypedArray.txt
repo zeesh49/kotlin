@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /toTypedArray.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val array: kotlin.Array<kotlin.Int!>
+          CALL 'toTypedArray() on Collection<Int!>: Array<Int!>' type=kotlin.Array<kotlin.Int!> operator=null
+            $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.collections.List<kotlin.Int!>
+              CALL 'asList(vararg Int!): (Mutable)List<Int!>!' type=kotlin.collections.(Mutable)List<kotlin.Int!>! operator=null
+                p0: VARARG type=(kotlin.Array<(kotlin.Int..kotlin.Int?)>..kotlin.Array<out (kotlin.Int..kotlin.Int?)>?) varargElementType=(kotlin.Int..kotlin.Int?)
+                  CONST Int type=kotlin.Int value='2'
+                  CONST Int type=kotlin.Int value='3'
+                  CONST Int type=kotlin.Int value='9'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'isArrayOf() on Array<*>: Boolean' type=kotlin.Boolean operator=null
+              $receiver: GET_VAR 'array: Array<Int!>' type=kotlin.Array<kotlin.Int!> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CALL 'toString(): String' type=kotlin.String operator=null
+              $this: CALL '<get-javaClass>() on Array<Int!>: Class<Array<Int!>>' type=java.lang.Class<kotlin.Array<kotlin.Int!>> operator=GET_PROPERTY
+                $receiver: GET_VAR 'array: Array<Int!>' type=kotlin.Array<kotlin.Int!> operator=null
+        VAR val str: kotlin.String!
+          CALL 'toString(Array<(out) Any!>!): String!' type=kotlin.String! operator=null
+            p0: GET_VAR 'array: Array<Int!>' type=kotlin.Array<kotlin.Int!> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'str: String!' type=kotlin.String! operator=null
+              arg1: CONST String type=kotlin.String value='[2, 3, 9]'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+              GET_VAR 'str: String!' type=kotlin.String! operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

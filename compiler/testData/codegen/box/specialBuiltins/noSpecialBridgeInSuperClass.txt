@@ -1,0 +1,115 @@
+MODULE <test-module>
+  FILE /noSpecialBridgeInSuperClass.kt
+    PROPERTY public var result: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    CLASS CLASS AbstractFoo
+      CONSTRUCTOR public constructor AbstractFoo<K, V>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='AbstractFoo'
+      FUN public open override fun get(key: K): V?
+        BLOCK_BODY
+          CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+            <set-?>: CONST String type=kotlin.String value='AbstractFoo'
+          RETURN type=kotlin.Nothing from='get(K): V?'
+            CONST Null type=kotlin.Nothing? value='null'
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            THROW type=kotlin.Nothing
+              CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun containsKey(key: K): kotlin.Boolean
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun containsValue(value: V): kotlin.Boolean
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      PROPERTY public open override val keys: kotlin.collections.Set<K>
+        PROPERTY_GETTER public open override fun <get-keys>(): kotlin.collections.Set<K>
+          BLOCK_BODY
+            THROW type=kotlin.Nothing
+              CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      PROPERTY public open override val values: kotlin.collections.Collection<V>
+        PROPERTY_GETTER public open override fun <get-values>(): kotlin.collections.Collection<V>
+          BLOCK_BODY
+            THROW type=kotlin.Nothing
+              CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      PROPERTY public open override val entries: kotlin.collections.Set<kotlin.collections.Map.Entry<K, V>>
+        PROPERTY_GETTER public open override fun <get-entries>(): kotlin.collections.Set<kotlin.collections.Map.Entry<K, V>>
+          BLOCK_BODY
+            THROW type=kotlin.Nothing
+              CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+    CLASS CLASS StringFoo
+      CONSTRUCTOR public constructor StringFoo<E>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor AbstractFoo()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='StringFoo'
+      FUN public open override fun get(key: kotlin.String): E?
+        BLOCK_BODY
+          CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+            <set-?>: CONST String type=kotlin.String value='StringFoo'
+          RETURN type=kotlin.Nothing from='get(String): E?'
+            CONST Null type=kotlin.Nothing? value='null'
+    CLASS CLASS IntFoo
+      CONSTRUCTOR public constructor IntFoo<E>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor AbstractFoo()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='IntFoo'
+      FUN public open override fun get(key: kotlin.Int): E?
+        BLOCK_BODY
+          CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+            <set-?>: CONST String type=kotlin.String value='IntFoo'
+          RETURN type=kotlin.Nothing from='get(Int): E?'
+            CONST Null type=kotlin.Nothing? value='null'
+    CLASS CLASS AnyFoo
+      CONSTRUCTOR public constructor AnyFoo<E>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor AbstractFoo()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='AnyFoo'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'get(String): String?' type=kotlin.String? operator=null
+          $this: CALL 'constructor StringFoo()' type=StringFoo<kotlin.String> operator=null
+          key: CONST String type=kotlin.String value=''
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+              arg1: CONST String type=kotlin.String value='StringFoo'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+        CALL 'get(Int): String?' type=kotlin.String? operator=null
+          $this: CALL 'constructor IntFoo()' type=IntFoo<kotlin.String> operator=null
+          key: CONST Int type=kotlin.Int value='1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+              arg1: CONST String type=kotlin.String value='IntFoo'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 2: '
+              CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+        CALL 'get(Any?): String?' type=kotlin.String? operator=null
+          $this: CALL 'constructor AnyFoo()' type=AnyFoo<kotlin.String> operator=null
+          key: CONST Null type=kotlin.Nothing? value='null'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+              arg1: CONST String type=kotlin.String value='AbstractFoo'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 3: '
+              CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

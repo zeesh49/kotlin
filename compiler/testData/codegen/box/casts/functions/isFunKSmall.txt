@@ -1,0 +1,213 @@
+MODULE <test-module>
+  FILE /isFunKSmall.kt
+    FUN public fun fn0(): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun fn1(x: kotlin.Any): kotlin.Unit
+      BLOCK_BODY
+    PROPERTY public val lambda0: () -> kotlin.Unit
+      EXPRESSION_BODY
+        TYPE_OP operator=CAST typeOperand=() -> kotlin.Unit
+          BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+    PROPERTY public val lambda1: (kotlin.Any) -> kotlin.Unit
+      EXPRESSION_BODY
+        TYPE_OP operator=CAST typeOperand=(kotlin.Any) -> kotlin.Unit
+          BLOCK type=(kotlin.Any) -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(x: kotlin.Any): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(Any): Unit'
+            CALLABLE_REFERENCE '<anonymous>(Any): Unit' type=(kotlin.Any) -> kotlin.Unit operator=LAMBDA
+    FUN public fun kotlin.Any.extFun(): kotlin.Unit
+      BLOCK_BODY
+    PROPERTY public var kotlin.Any.extProp: kotlin.String
+      PROPERTY_GETTER public fun kotlin.Any.<get-extProp>(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-extProp>() on Any: String'
+            CONST String type=kotlin.String value='extProp'
+      PROPERTY_SETTER public fun kotlin.Any.<set-extProp>(x: kotlin.String): kotlin.Unit
+        BLOCK_BODY
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun foo(): kotlin.Unit
+        BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f0: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALLABLE_REFERENCE 'fn0(): Unit' type=kotlin.reflect.KFunction0<kotlin.Unit> operator=null
+        VAR val f1: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALLABLE_REFERENCE 'fn1(Any): Unit' type=kotlin.reflect.KFunction1<kotlin.Any, kotlin.Unit> operator=null
+        VAR val ef: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALLABLE_REFERENCE 'extFun() on Any: Unit' type=kotlin.reflect.KFunction1<kotlin.Any, kotlin.Unit> operator=null
+        VAR val epg: kotlin.reflect.KProperty1.Getter<kotlin.Any, kotlin.String>
+          CALL '<get-getter>(): KProperty1.Getter<Any, String>' type=kotlin.reflect.KProperty1.Getter<kotlin.Any, kotlin.String> operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'extProp: String on Any' type=kotlin.reflect.KMutableProperty1<kotlin.Any, kotlin.String> operator=null
+        VAR val eps: kotlin.reflect.KMutableProperty1.Setter<kotlin.Any, kotlin.String>
+          CALL '<get-setter>(): KMutableProperty1.Setter<Any, String>' type=kotlin.reflect.KMutableProperty1.Setter<kotlin.Any, kotlin.String> operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'extProp: String on Any' type=kotlin.reflect.KMutableProperty1<kotlin.Any, kotlin.String> operator=null
+        VAR val afoo: kotlin.reflect.KFunction1<A, kotlin.Unit>
+          CALLABLE_REFERENCE 'foo(): Unit' type=kotlin.reflect.KFunction1<A, kotlin.Unit> operator=null
+        FUN local final fun local0(): kotlin.Unit
+          BLOCK_BODY
+        FUN local final fun local1(x: kotlin.Any): kotlin.Unit
+          BLOCK_BODY
+        VAR val localFun0: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALLABLE_REFERENCE 'local0(): Unit' type=kotlin.reflect.KFunction0<kotlin.Unit> operator=null
+        VAR val localFun1: kotlin.Any
+          TYPE_OP operator=CAST typeOperand=kotlin.Any
+            CALLABLE_REFERENCE 'local1(Any): Unit' type=kotlin.reflect.KFunction1<kotlin.Any, kotlin.Unit> operator=null
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.Function0<*>
+            GET_VAR 'f0: Any' type=kotlin.Any operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Failed: f0 is Function0<*>'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.Function1<*, *>
+            GET_VAR 'f1: Any' type=kotlin.Any operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Failed: f1 is Function1<*, *>'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=NOT_INSTANCEOF typeOperand=kotlin.Function1<*, *>
+            GET_VAR 'f0: Any' type=kotlin.Any operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Failed: f0 !is Function1<*, *>'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=NOT_INSTANCEOF typeOperand=kotlin.Function0<*>
+            GET_VAR 'f1: Any' type=kotlin.Any operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Failed: f1 !is Function0<*>'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.Function0<*>
+            CALL '<get-lambda0>(): () -> Unit' type=() -> kotlin.Unit operator=GET_PROPERTY
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Failed: lambda0 is Function0<*>'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.Function1<*, *>
+            CALL '<get-lambda1>(): (Any) -> Unit' type=(kotlin.Any) -> kotlin.Unit operator=GET_PROPERTY
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Failed: lambda1 is Function1<*, *>'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=NOT_INSTANCEOF typeOperand=kotlin.Function1<*, *>
+            CALL '<get-lambda0>(): () -> Unit' type=() -> kotlin.Unit operator=GET_PROPERTY
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Failed: lambda0 !is Function1<*, *>'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=NOT_INSTANCEOF typeOperand=kotlin.Function0<*>
+            CALL '<get-lambda1>(): (Any) -> Unit' type=(kotlin.Any) -> kotlin.Unit operator=GET_PROPERTY
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Failed: lambda1 !is Function0<*>'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.Function0<*>
+            GET_VAR 'localFun0: Any' type=kotlin.Any operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Failed: localFun0 is Function0<*>'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.Function1<*, *>
+            GET_VAR 'localFun1: Any' type=kotlin.Any operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Failed: localFun1 is Function1<*, *>'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=NOT_INSTANCEOF typeOperand=kotlin.Function1<*, *>
+            GET_VAR 'localFun0: Any' type=kotlin.Any operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Failed: localFun0 !is Function1<*, *>'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=NOT_INSTANCEOF typeOperand=kotlin.Function0<*>
+            GET_VAR 'localFun1: Any' type=kotlin.Any operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Failed: localFun1 !is Function0<*>'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.Function1<*, *>
+            GET_VAR 'ef: Any' type=kotlin.Any operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Failed: ef is Function1<*, *>'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.Function1<*, *>
+            GET_VAR 'epg: KProperty1.Getter<Any, String>' type=kotlin.reflect.KProperty1.Getter<kotlin.Any, kotlin.String> operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Failed: epg is Function1<*, *>'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.Function2<*, *, *>
+            GET_VAR 'eps: KMutableProperty1.Setter<Any, String>' type=kotlin.reflect.KMutableProperty1.Setter<kotlin.Any, kotlin.String> operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Failed: eps is Function2<*, *, *>'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.Function1<*, *>
+            GET_VAR 'afoo: KFunction1<A, Unit>' type=kotlin.reflect.KFunction1<A, kotlin.Unit> operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='afoo is Function1<*, *>'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

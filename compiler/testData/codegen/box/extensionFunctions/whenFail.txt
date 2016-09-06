@@ -1,0 +1,53 @@
+MODULE <test-module>
+  FILE /whenFail.kt
+    FUN public fun java.lang.StringBuilder.takeFirst(): kotlin.Char
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: $RECEIVER of 'takeFirst() on StringBuilder: Char' type=java.lang.StringBuilder
+            arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='takeFirst() on StringBuilder: Char'
+            CALL 'toChar(): Char' type=kotlin.Char operator=null
+              $this: CONST Int type=kotlin.Int value='0'
+        VAR val c: kotlin.Char
+          CALL 'get(Int): Char' type=kotlin.Char operator=null
+            $this: $RECEIVER of 'takeFirst() on StringBuilder: Char' type=java.lang.StringBuilder
+            p0: CONST Int type=kotlin.Int value='0'
+        CALL 'deleteCharAt(Int): StringBuilder!' type=java.lang.StringBuilder! operator=null
+          $this: $RECEIVER of 'takeFirst() on StringBuilder: Char' type=java.lang.StringBuilder
+          p0: CONST Int type=kotlin.Int value='0'
+        RETURN type=kotlin.Nothing from='takeFirst() on StringBuilder: Char'
+          GET_VAR 'c: Char' type=kotlin.Char operator=null
+    FUN public fun foo(expr: java.lang.StringBuilder): kotlin.Int
+      BLOCK_BODY
+        VAR val c: kotlin.Char
+          CALL 'takeFirst() on StringBuilder: Char' type=kotlin.Char operator=null
+            $receiver: GET_VAR 'value-parameter expr: StringBuilder' type=java.lang.StringBuilder operator=null
+        BLOCK type=kotlin.Nothing operator=WHEN
+          VAR val tmp0_subject: kotlin.Char
+            GET_VAR 'c: Char' type=kotlin.Char operator=null
+          WHEN type=kotlin.Nothing operator=WHEN
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_subject: Char' type=kotlin.Char operator=null
+              arg1: CALL 'toChar(): Char' type=kotlin.Char operator=null
+                $this: CONST Int type=kotlin.Int value='0'
+            then: THROW type=kotlin.Nothing
+              CALL 'constructor Exception(String!)' type=java.lang.Exception operator=null
+                p0: CONST String type=kotlin.String value='zero'
+            else: THROW type=kotlin.Nothing
+              CALL 'constructor Exception(String!)' type=java.lang.Exception operator=null
+                p0: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: CONST String type=kotlin.String value='nonzero'
+                  other: GET_VAR 'c: Char' type=kotlin.Char operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'foo(StringBuilder): Int' type=kotlin.Int operator=null
+              expr: CALL 'constructor StringBuilder()' type=java.lang.StringBuilder operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail'
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'

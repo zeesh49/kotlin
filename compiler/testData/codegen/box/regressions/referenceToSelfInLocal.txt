@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /referenceToSelfInLocal.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var accessedFromConstructor: java.lang.Class<*>?
+          CONST Null type=kotlin.Nothing? value='null'
+        CLASS CLASS MyClass
+          CONSTRUCTOR public constructor MyClass()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='MyClass'
+          ANONYMOUS_INITIALIZER MyClass
+            BLOCK_BODY
+              SET_VAR 'accessedFromConstructor: Class<*>?' type=kotlin.Unit operator=EQ
+                CALL '<get-java>() on KClass<MyClass>: Class<MyClass>' type=java.lang.Class<box.MyClass> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'MyClass' type=kotlin.reflect.KClass<box.MyClass>
+        CALL 'constructor MyClass()' type=box.MyClass operator=null
+        WHEN type=kotlin.Nothing operator=IF
+          if: CALL 'endsWith(String, Boolean = ...) on String: Boolean' type=kotlin.Boolean operator=null
+            $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+              CALL 'getName(): String!' type=kotlin.String! operator=null
+                $this: BLOCK type=java.lang.Class<*> operator=EXCLEXCL
+                  VAR val tmp0_notnull: java.lang.Class<*>?
+                    GET_VAR 'accessedFromConstructor: Class<*>?' type=java.lang.Class<*>? operator=null
+                  WHEN type=java.lang.Class<*> operator=null
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp0_notnull: Class<*>?' type=java.lang.Class<*>? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                    else: GET_VAR 'tmp0_notnull: Class<*>?' type=java.lang.Class<*>? operator=null
+            suffix: CONST String type=kotlin.String value='MyClass'
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'
+          else: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CALL 'toString() on Any?: String' type=kotlin.String operator=null
+                $receiver: GET_VAR 'accessedFromConstructor: Class<*>?' type=java.lang.Class<*>? operator=null

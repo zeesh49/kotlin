@@ -1,0 +1,64 @@
+MODULE <test-module>
+  FILE /classNaryGetSet.kt
+    CLASS OBJECT A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var x: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+      FUN public final operator fun get(i1: kotlin.Int, i2: kotlin.Int, i3: kotlin.Int): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(Int, Int, Int): Int'
+            CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+      FUN public final operator fun set(i1: kotlin.Int, i2: kotlin.Int, i3: kotlin.Int, value: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-x>(Int): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'A' type=A
+            <set-?>: GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL '<set-x>(Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_OBJECT 'A' type=A
+          <set-?>: CONST Int type=kotlin.Int value='0'
+        VAR val xx: kotlin.Int
+          BLOCK type=kotlin.Int operator=POSTFIX_INCR
+            VAR val tmp0_array: A
+              GET_OBJECT 'A' type=A
+            VAR val tmp1_index0: kotlin.Int
+              CONST Int type=kotlin.Int value='1'
+            VAR val tmp2_index1: kotlin.Int
+              CONST Int type=kotlin.Int value='2'
+            VAR val tmp3_index2: kotlin.Int
+              CONST Int type=kotlin.Int value='3'
+            VAR val tmp4: kotlin.Int
+              CALL 'get(Int, Int, Int): Int' type=kotlin.Int operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp0_array: A' type=A operator=null
+                i1: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+                i2: GET_VAR 'tmp2_index1: Int' type=kotlin.Int operator=null
+                i3: GET_VAR 'tmp3_index2: Int' type=kotlin.Int operator=null
+            CALL 'set(Int, Int, Int, Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp0_array: A' type=A operator=null
+              i1: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+              i2: GET_VAR 'tmp2_index1: Int' type=kotlin.Int operator=null
+              i3: GET_VAR 'tmp3_index2: Int' type=kotlin.Int operator=null
+              value: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp4: Int' type=kotlin.Int operator=null
+            GET_VAR 'tmp4: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=OROR
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: GET_VAR 'xx: Int' type=kotlin.Int operator=null
+                  arg1: CONST Int type=kotlin.Int value='0'
+              then: CONST Boolean type=kotlin.Boolean value='true'
+              else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                    $this: GET_OBJECT 'A' type=A
+                  arg1: CONST Int type=kotlin.Int value='1'
+            then: CONST String type=kotlin.String value='Failed'
+            else: CONST String type=kotlin.String value='OK'

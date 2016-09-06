@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /Kotlin.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor JavaClass()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun test(): kotlin.String!
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test(): String!'
+            CALL 'runZ(JavaClass.Z!): String!' type=kotlin.String! operator=null
+              $this: THIS of 'A' type=zzz.A
+              z: CALL 'Z((String!, String!) -> String!): JavaClass.Z' type=JavaClass.Z operator=null
+                function: BLOCK type=(kotlin.String!, kotlin.String!) -> kotlin.String operator=LAMBDA
+                  FUN local final fun <anonymous>(a: kotlin.String!, b: kotlin.String!): kotlin.String
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(String!, String!): String'
+                        CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                          $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+                            GET_VAR 'value-parameter a: String!' type=kotlin.String! operator=null
+                          other: GET_VAR 'value-parameter b: String!' type=kotlin.String! operator=null
+                  CALLABLE_REFERENCE '<anonymous>(String!, String!): String' type=(kotlin.String!, kotlin.String!) -> kotlin.String operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+            CALL 'test(): String!' type=kotlin.String! operator=null
+              $this: CALL 'constructor A()' type=zzz.A operator=null

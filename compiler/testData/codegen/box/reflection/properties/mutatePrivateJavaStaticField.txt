@@ -1,0 +1,29 @@
+MODULE <test-module>
+  FILE /K.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: J
+          CALL 'constructor J()' type=J operator=null
+        VAR val p: kotlin.reflect.KMutableProperty0<kotlin.String>
+          TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty0<kotlin.String>
+            CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+              $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                $this: CLASS_REFERENCE 'J' type=kotlin.reflect.KClass<J>
+              predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                      CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                          $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                        arg1: CONST String type=kotlin.String value='result'
+                CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+        CALL '<set-isAccessible>(Boolean) on KCallable<*>: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 'p: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+          value: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'set(String): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'p: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+          value: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'get(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'p: KMutableProperty0<String>' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null

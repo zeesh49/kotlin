@@ -1,0 +1,85 @@
+MODULE <test-module>
+  FILE /kt1980.kt
+    FUN public inline fun kotlin.Int.times(body: () -> kotlin.Unit): kotlin.Unit
+      BLOCK_BODY
+        VAR var count: kotlin.Int
+          $RECEIVER of 'times(() -> Unit) on Int: Unit' type=kotlin.Int
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+              $this: GET_VAR 'count: Int' type=kotlin.Int operator=null
+              other: CONST Int type=kotlin.Int value='0'
+          body: BLOCK type=kotlin.Int operator=null
+            CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+              $this: GET_VAR 'value-parameter body: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+            BLOCK type=kotlin.Int operator=POSTFIX_DECR
+              VAR val tmp0: kotlin.Int
+                GET_VAR 'count: Int' type=kotlin.Int operator=POSTFIX_DECR
+              SET_VAR 'count: Int' type=kotlin.Unit operator=POSTFIX_DECR
+                CALL 'dec(): Int' type=kotlin.Int operator=POSTFIX_DECR
+                  $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+    FUN public fun calc(): kotlin.Int
+      BLOCK_BODY
+        VAR val a: java.util.ArrayList<() -> kotlin.Int>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<() -> kotlin.Int> operator=null
+        CALL 'times(() -> Unit) on Int: Unit' type=kotlin.Unit operator=null
+          $receiver: CONST Int type=kotlin.Int value='2'
+          body: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                VAR var j: kotlin.Int
+                  CONST Int type=kotlin.Int value='1'
+                CALL 'add(() -> Int): Boolean' type=kotlin.Boolean operator=null
+                  $this: GET_VAR 'a: ArrayList<() -> Int>' type=java.util.ArrayList<() -> kotlin.Int> operator=null
+                  element: BLOCK type=() -> kotlin.Int operator=LAMBDA
+                    FUN local final fun <anonymous>(): kotlin.Int
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(): Int'
+                          GET_VAR 'j: Int' type=kotlin.Int operator=null
+                    CALLABLE_REFERENCE '<anonymous>(): Int' type=() -> kotlin.Int operator=LAMBDA
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  BLOCK type=kotlin.Int operator=PREFIX_INCR
+                    VAR val tmp0: kotlin.Int
+                      CALL 'inc(): Int' type=kotlin.Int operator=PREFIX_INCR
+                        $this: GET_VAR 'j: Int' type=kotlin.Int operator=PREFIX_INCR
+                    SET_VAR 'j: Int' type=kotlin.Unit operator=PREFIX_INCR
+                      GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                    GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        VAR var sum: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.MutableIterator<() -> kotlin.Int>
+            CALL 'iterator(): MutableIterator<() -> Int>' type=kotlin.collections.MutableIterator<() -> kotlin.Int> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'a: ArrayList<() -> Int>' type=java.util.ArrayList<() -> kotlin.Int> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: MutableIterator<() -> Int>' type=kotlin.collections.MutableIterator<() -> kotlin.Int> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val f: () -> kotlin.Int
+                CALL 'next(): () -> Int' type=() -> kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: MutableIterator<() -> Int>' type=kotlin.collections.MutableIterator<() -> kotlin.Int> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                VAR val g: () -> kotlin.Int
+                  TYPE_OP operator=CAST typeOperand=() -> kotlin.Int
+                    GET_VAR 'f: () -> Int' type=() -> kotlin.Int operator=null
+                SET_VAR 'sum: Int' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                    $this: GET_VAR 'sum: Int' type=kotlin.Int operator=PLUSEQ
+                    other: CALL 'invoke(): Int' type=kotlin.Int operator=INVOKE
+                      $this: GET_VAR 'g: () -> Int' type=() -> kotlin.Int operator=VARIABLE_AS_FUNCTION
+        RETURN type=kotlin.Nothing from='calc(): Int'
+          GET_VAR 'sum: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.Int
+          CALL 'calc(): Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'x: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='4'
+            then: CONST String type=kotlin.String value='OK'
+            else: CALL 'toString(): String' type=kotlin.String operator=null
+              $this: GET_VAR 'x: Int' type=kotlin.Int operator=null

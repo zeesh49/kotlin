@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /FakePlatformName.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val test1: kotlin.String!
+          CALL 'foo(): String!' type=kotlin.String! operator=null
+            $this: CALL 'constructor FakePlatformName()' type=FakePlatformName operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test1: String!' type=kotlin.String! operator=null
+              arg1: CONST String type=kotlin.String value='foo'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed: FakePlatformName().foo()=='
+              GET_VAR 'test1: String!' type=kotlin.String! operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

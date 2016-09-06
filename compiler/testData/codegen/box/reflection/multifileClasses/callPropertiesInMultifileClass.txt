@@ -1,0 +1,71 @@
+MODULE <test-module>
+  FILE /Test1.kt
+    PROPERTY public var x: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='x'
+          actual: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'x: Int' type=kotlin.reflect.KMutableProperty0<kotlin.Int> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='y'
+          actual: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'y: Int' type=kotlin.reflect.KProperty0<kotlin.Int> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='MAGIC_NUMBER'
+          actual: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'MAGIC_NUMBER: Int' type=kotlin.reflect.KProperty0<kotlin.Int> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+            $this: CALLABLE_REFERENCE 'x: Int' type=kotlin.reflect.KMutableProperty0<kotlin.Int> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+            $this: CALL '<get-getter>(): KProperty0.Getter<Int>' type=kotlin.reflect.KProperty0.Getter<kotlin.Int> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'x: Int' type=kotlin.reflect.KMutableProperty0<kotlin.Int> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='239'
+          actual: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+            $this: CALLABLE_REFERENCE 'y: Int' type=kotlin.reflect.KProperty0<kotlin.Int> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='239'
+          actual: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+            $this: CALL '<get-getter>(): KProperty0.Getter<Int>' type=kotlin.reflect.KProperty0.Getter<kotlin.Int> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'y: Int' type=kotlin.reflect.KProperty0<kotlin.Int> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='42'
+          actual: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+            $this: CALLABLE_REFERENCE 'MAGIC_NUMBER: Int' type=kotlin.reflect.KProperty0<kotlin.Int> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='42'
+          actual: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+            $this: CALL '<get-getter>(): KProperty0.Getter<Int>' type=kotlin.reflect.KProperty0.Getter<kotlin.Int> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'MAGIC_NUMBER: Int' type=kotlin.reflect.KProperty0<kotlin.Int> operator=null
+        CALL 'assertEquals(Unit, Unit, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_OBJECT 'Unit' type=kotlin.Unit
+          actual: CALL 'call(vararg Any?): Unit' type=kotlin.Unit operator=null
+            $this: CALL '<get-setter>(): KMutableProperty0.Setter<Int>' type=kotlin.reflect.KMutableProperty0.Setter<kotlin.Int> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'x: Int' type=kotlin.reflect.KMutableProperty0<kotlin.Int> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CONST Int type=kotlin.Int value='2'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='2'
+          actual: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+            $this: CALLABLE_REFERENCE 'x: Int' type=kotlin.reflect.KMutableProperty0<kotlin.Int> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='2'
+          actual: CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+            $this: CALL '<get-getter>(): KProperty0.Getter<Int>' type=kotlin.reflect.KProperty0.Getter<kotlin.Int> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'x: Int' type=kotlin.reflect.KMutableProperty0<kotlin.Int> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+  FILE /Test2.kt
+    PROPERTY public val y: kotlin.Int = 239
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='239'
+    PROPERTY public const val MAGIC_NUMBER: kotlin.Int = 42
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='42'

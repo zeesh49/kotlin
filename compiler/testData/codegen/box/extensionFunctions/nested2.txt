@@ -1,0 +1,37 @@
+MODULE <test-module>
+  FILE /nested2.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val y: kotlin.Int = 12
+          CONST Int type=kotlin.Int value='12'
+        VAR val op: (kotlin.Int) -> kotlin.String
+          BLOCK type=(kotlin.Int) -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(x: kotlin.Int): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(Int): String'
+                  CALL 'toString(): String' type=kotlin.String operator=null
+                    $this: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                      $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                      other: GET_VAR 'y: Int' type=kotlin.Int operator=null
+            CALLABLE_REFERENCE '<anonymous>(Int): String' type=(kotlin.Int) -> kotlin.String operator=LAMBDA
+        VAR val op2: kotlin.Int.(kotlin.Int) -> kotlin.String
+          BLOCK type=kotlin.Int.(kotlin.Int) -> kotlin.String operator=LAMBDA
+            FUN local final fun kotlin.Int.<anonymous>(it: kotlin.Int): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(Int) on Int: String'
+                  CALL 'invoke(Int): String' type=kotlin.String operator=INVOKE
+                    $this: GET_VAR 'op: (Int) -> String' type=(kotlin.Int) -> kotlin.String operator=VARIABLE_AS_FUNCTION
+                    p1: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                      $this: $RECEIVER of '<anonymous>(Int) on Int: String' type=kotlin.Int
+                      other: GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+            CALLABLE_REFERENCE '<anonymous>(Int) on Int: String' type=kotlin.Int.(kotlin.Int) -> kotlin.String operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CONST String type=kotlin.String value='27'
+              arg1: CALL 'invoke(Int) on Int: String' type=kotlin.String operator=INVOKE
+                $this: GET_VAR 'op2: Int.(Int) -> String' type=kotlin.Int.(kotlin.Int) -> kotlin.String operator=VARIABLE_AS_FUNCTION
+                $receiver: CONST Int type=kotlin.Int value='5'
+                p2: CONST Int type=kotlin.Int value='10'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

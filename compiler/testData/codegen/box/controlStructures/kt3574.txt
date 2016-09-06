@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /kt3574.kt
+    FUN public fun nil(): kotlin.Nothing?
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='nil(): Nothing?'
+          CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun list(): kotlin.collections.(Mutable)List<kotlin.String!>!
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='list(): (Mutable)List<String!>!'
+          CALL 'asList(vararg String!): (Mutable)List<String!>!' type=kotlin.collections.(Mutable)List<kotlin.String!>! operator=null
+            p0: VARARG type=(kotlin.Array<(kotlin.String..kotlin.String?)>..kotlin.Array<out (kotlin.String..kotlin.String?)>?) varargElementType=(kotlin.String..kotlin.String?)
+              CONST String type=kotlin.String value='1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp1_iterator: kotlin.collections.MutableIterator<kotlin.String!>
+            CALL 'iterator(): MutableIterator<String!>' type=kotlin.collections.MutableIterator<kotlin.String!> operator=FOR_LOOP_ITERATOR
+              $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.collections.MutableCollection<kotlin.String!>
+                TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.collections.List<kotlin.String!>
+                  BLOCK type=kotlin.collections.(Mutable)List<kotlin.String!>! operator=ELVIS
+                    VAR val tmp0_elvis_lhs: kotlin.Nothing?
+                      CALL 'nil(): Nothing?' type=kotlin.Nothing? operator=null
+                    WHEN type=kotlin.collections.(Mutable)List<kotlin.String!>! operator=null
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'tmp0_elvis_lhs: Nothing?' type=kotlin.Nothing? operator=null
+                        arg1: CONST Null type=kotlin.Nothing? value='null'
+                      then: CALL 'list(): (Mutable)List<String!>!' type=kotlin.collections.(Mutable)List<kotlin.String!>! operator=null
+                      else: GET_VAR 'tmp0_elvis_lhs: Nothing?' type=kotlin.Nothing? operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp1_iterator: MutableIterator<String!>' type=kotlin.collections.MutableIterator<kotlin.String!> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val x: kotlin.String!
+                CALL 'next(): String!' type=kotlin.String! operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp1_iterator: MutableIterator<String!>' type=kotlin.collections.MutableIterator<kotlin.String!> operator=null
+              BLOCK type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

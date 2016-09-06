@@ -1,0 +1,103 @@
+MODULE <test-module>
+  FILE /enumWithTwoDoubleDefArgs.kt
+    CLASS ENUM_CLASS Foo
+      CONSTRUCTOR private constructor Foo(a: kotlin.Double = ..., b: kotlin.Double = ...)
+        a: EXPRESSION_BODY
+          CONST Double type=kotlin.Double value='1.0'
+        b: EXPRESSION_BODY
+          CONST Double type=kotlin.Double value='1.0'
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          SET_BACKING_FIELD 'a: Double' type=kotlin.Unit operator=null
+            receiver: THIS of 'Foo' type=Foo
+            value: GET_VAR 'value-parameter a: Double = ...' type=kotlin.Double operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'b: Double' type=kotlin.Unit operator=null
+            receiver: THIS of 'Foo' type=Foo
+            value: GET_VAR 'value-parameter b: Double = ...' type=kotlin.Double operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      PROPERTY public final val a: kotlin.Double
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter a: Double = ...' type=kotlin.Double operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val b: kotlin.Double
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter b: Double = ...' type=kotlin.Double operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      ENUM_ENTRY enum entry A
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Foo(Double = ..., Double = ...)' A
+      ENUM_ENTRY enum entry B
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Foo(Double = ..., Double = ...)' B
+          a: CONST Double type=kotlin.Double value='2.0'
+          b: CONST Double type=kotlin.Double value='2.0'
+      ENUM_ENTRY enum entry C
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Foo(Double = ..., Double = ...)' C
+          b: CONST Double type=kotlin.Double value='2.0'
+      ENUM_ENTRY enum entry D
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Foo(Double = ..., Double = ...)' D
+          a: CONST Double type=kotlin.Double value='2.0'
+      FUN public final fun values(): kotlin.Array<Foo>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): Foo
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-a>(): Double' type=kotlin.Double operator=GET_PROPERTY
+                  $this: GET_ENUM_VALUE 'A' type=Foo
+                arg1: CONST Double type=kotlin.Double value='1.0'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-b>(): Double' type=kotlin.Double operator=GET_PROPERTY
+                  $this: GET_ENUM_VALUE 'A' type=Foo
+                arg1: CONST Double type=kotlin.Double value='1.0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-a>(): Double' type=kotlin.Double operator=GET_PROPERTY
+                  $this: GET_ENUM_VALUE 'B' type=Foo
+                arg1: CONST Double type=kotlin.Double value='2.0'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-b>(): Double' type=kotlin.Double operator=GET_PROPERTY
+                  $this: GET_ENUM_VALUE 'B' type=Foo
+                arg1: CONST Double type=kotlin.Double value='2.0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-a>(): Double' type=kotlin.Double operator=GET_PROPERTY
+                  $this: GET_ENUM_VALUE 'C' type=Foo
+                arg1: CONST Double type=kotlin.Double value='1.0'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-b>(): Double' type=kotlin.Double operator=GET_PROPERTY
+                  $this: GET_ENUM_VALUE 'C' type=Foo
+                arg1: CONST Double type=kotlin.Double value='2.0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-a>(): Double' type=kotlin.Double operator=GET_PROPERTY
+                  $this: GET_ENUM_VALUE 'D' type=Foo
+                arg1: CONST Double type=kotlin.Double value='2.0'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-b>(): Double' type=kotlin.Double operator=GET_PROPERTY
+                  $this: GET_ENUM_VALUE 'D' type=Foo
+                arg1: CONST Double type=kotlin.Double value='1.0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

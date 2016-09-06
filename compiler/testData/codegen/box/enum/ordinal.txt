@@ -1,0 +1,47 @@
+MODULE <test-module>
+  FILE /ordinal.kt
+    CLASS ENUM_CLASS State
+      CONSTRUCTOR private constructor State()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='State'
+      ENUM_ENTRY enum entry _0
+        init: ENUM_CONSTRUCTOR_CALL 'constructor State()' _0
+      ENUM_ENTRY enum entry _1
+        init: ENUM_CONSTRUCTOR_CALL 'constructor State()' _1
+      ENUM_ENTRY enum entry _2
+        init: ENUM_CONSTRUCTOR_CALL 'constructor State()' _2
+      ENUM_ENTRY enum entry _3
+        init: ENUM_CONSTRUCTOR_CALL 'constructor State()' _3
+      FUN public final fun values(): kotlin.Array<State>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): State
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: WHEN type=kotlin.Boolean operator=ANDAND
+                if: WHEN type=kotlin.Boolean operator=ANDAND
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: CALL '<get-ordinal>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                      $this: GET_ENUM_VALUE '_0' type=State
+                    arg1: CONST Int type=kotlin.Int value='0'
+                  then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: CALL '<get-ordinal>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                      $this: GET_ENUM_VALUE '_1' type=State
+                    arg1: CONST Int type=kotlin.Int value='1'
+                  else: CONST Boolean type=kotlin.Boolean value='false'
+                then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: CALL '<get-ordinal>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                    $this: GET_ENUM_VALUE '_2' type=State
+                  arg1: CONST Int type=kotlin.Int value='2'
+                else: CONST Boolean type=kotlin.Boolean value='false'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL '<get-ordinal>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_ENUM_VALUE '_3' type=State
+                arg1: CONST Int type=kotlin.Int value='3'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

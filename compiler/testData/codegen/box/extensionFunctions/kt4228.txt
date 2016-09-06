@@ -1,0 +1,29 @@
+MODULE <test-module>
+  FILE /kt4228.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS OBJECT companion object of A
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of A'
+    PROPERTY public val foo: kotlin.Any.() -> kotlin.Unit
+      EXPRESSION_BODY
+        BLOCK type=kotlin.Any.() -> kotlin.Unit operator=LAMBDA
+          FUN local final fun kotlin.Any.<anonymous>(): kotlin.Unit
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<anonymous>() on Any: Unit'
+          CALLABLE_REFERENCE '<anonymous>() on Any: Unit' type=kotlin.Any.() -> kotlin.Unit operator=LAMBDA
+    FUN public fun test(): kotlin.Unit
+      BLOCK_BODY
+        CALL 'invoke() on Any: Unit' type=kotlin.Unit operator=null
+          $this: CALL '<get-foo>(): Any.() -> Unit' type=kotlin.Any.() -> kotlin.Unit operator=GET_PROPERTY
+          $receiver: GET_OBJECT 'companion object of A' type=A.Companion
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'test(): Unit' type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

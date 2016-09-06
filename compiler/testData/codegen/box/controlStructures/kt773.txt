@@ -1,0 +1,50 @@
+MODULE <test-module>
+  FILE /kt773.kt
+    FUN public fun print(o: kotlin.Any?): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun test(i: kotlin.Int): kotlin.Unit
+      BLOCK_BODY
+        VAR var monthString: kotlin.String?
+          CONST String type=kotlin.String value='<empty>'
+        BLOCK type=kotlin.Unit operator=WHEN
+          VAR val tmp0_subject: kotlin.Int
+            GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+          WHEN type=kotlin.Unit operator=WHEN
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+            then: BLOCK type=kotlin.Unit operator=null
+              CALL 'print(Any?): Unit' type=kotlin.Unit operator=null
+                o: CONST Int type=kotlin.Int value='1'
+              CALL 'print(Any?): Unit' type=kotlin.Unit operator=null
+                o: CONST Int type=kotlin.Int value='2'
+              CALL 'print(Any?): Unit' type=kotlin.Unit operator=null
+                o: CONST Int type=kotlin.Int value='3'
+              CALL 'print(Any?): Unit' type=kotlin.Unit operator=null
+                o: CONST Int type=kotlin.Int value='4'
+              CALL 'print(Any?): Unit' type=kotlin.Unit operator=null
+                o: CONST Int type=kotlin.Int value='5'
+            else: BLOCK type=kotlin.Unit operator=null
+              SET_VAR 'monthString: String?' type=kotlin.Unit operator=EQ
+                CONST String type=kotlin.String value='Invalid month'
+        CALL 'print(Any?): Unit' type=kotlin.Unit operator=null
+          o: GET_VAR 'monthString: String?' type=kotlin.String? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='1'
+                other: CONST Int type=kotlin.Int value='12'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              CALL 'test(Int): Unit' type=kotlin.Unit operator=null
+                i: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

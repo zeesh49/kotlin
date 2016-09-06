@@ -1,0 +1,40 @@
+MODULE <test-module>
+  FILE /initializerBlockDImpl.kt
+    CLASS CLASS World
+      CONSTRUCTOR public constructor World()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='World'
+      PROPERTY public final val items: java.util.ArrayList<World.Item>
+        EXPRESSION_BODY
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<World.Item> operator=null
+      CLASS CLASS Item
+        CONSTRUCTOR public constructor Item()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Item'
+        ANONYMOUS_INITIALIZER Item
+          BLOCK_BODY
+            CALL 'add(World.Item): Boolean' type=kotlin.Boolean operator=null
+              $this: CALL '<get-items>(): ArrayList<World.Item>' type=java.util.ArrayList<World.Item> operator=GET_PROPERTY
+                $this: THIS of 'World' type=World
+              element: THIS of 'Item' type=World.Item
+      PROPERTY public final val foo: World.Item
+        EXPRESSION_BODY
+          CALL 'constructor Item()' type=World.Item operator=null
+            $this: THIS of 'World' type=World
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val w: World
+          CALL 'constructor World()' type=World operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL '<get-items>(): ArrayList<World.Item>' type=java.util.ArrayList<World.Item> operator=GET_PROPERTY
+                  $this: GET_VAR 'w: World' type=World operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

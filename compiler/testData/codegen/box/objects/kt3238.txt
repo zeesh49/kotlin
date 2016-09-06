@@ -1,0 +1,58 @@
+MODULE <test-module>
+  FILE /kt3238.kt
+    CLASS OBJECT Obj
+      CONSTRUCTOR private constructor Obj()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Obj'
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+        FUN public final fun ok(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='ok(): String'
+              CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val klass: java.lang.Class<*>
+          BLOCK type=java.lang.Class<*> operator=EXCLEXCL
+            VAR val tmp0_notnull: java.lang.Class<*>!
+              CALL 'forName(String!): Class<*>!' type=java.lang.Class<*>! operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='Obj'
+                  CONST String type=kotlin.String value='$'
+                  CONST String type=kotlin.String value='Inner'
+            WHEN type=java.lang.Class<*> operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Class<*>!' type=java.lang.Class<*>! operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+                GET_VAR 'tmp0_notnull: Class<*>!' type=java.lang.Class<*>! operator=null
+        VAR val cons: java.lang.reflect.Constructor<*>!
+          CALL 'get(Int): Constructor<*>!' type=java.lang.reflect.Constructor<*>! operator=GET_ARRAY_ELEMENT
+            $this: BLOCK type=kotlin.Array<(out) java.lang.reflect.Constructor<*>!> operator=EXCLEXCL
+              VAR val tmp1_notnull: kotlin.Array<(out) java.lang.reflect.Constructor<*>!>!
+                CALL 'getConstructors(): Array<(out) Constructor<*>!>!' type=kotlin.Array<(out) java.lang.reflect.Constructor<*>!>! operator=null
+                  $this: GET_VAR 'klass: Class<*>' type=java.lang.Class<*> operator=null
+              WHEN type=kotlin.Array<(out) java.lang.reflect.Constructor<*>!> operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp1_notnull: Array<(out) Constructor<*>!>!' type=kotlin.Array<(out) java.lang.reflect.Constructor<*>!>! operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Constructor<*>!>
+                  GET_VAR 'tmp1_notnull: Array<(out) Constructor<*>!>!' type=kotlin.Array<(out) java.lang.reflect.Constructor<*>!>! operator=null
+            index: CONST Int type=kotlin.Int value='0'
+        VAR val inner: kotlin.Any!
+          CALL 'newInstance(vararg Any!): Any!' type=kotlin.Any! operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Constructor<*>
+              GET_VAR 'cons: Constructor<*>!' type=java.lang.reflect.Constructor<*>! operator=null
+            p0: VARARG type=(kotlin.Array<(kotlin.Any..kotlin.Any?)>..kotlin.Array<out (kotlin.Any..kotlin.Any?)>?) varargElementType=(kotlin.Any..kotlin.Any?)
+              SPREAD_ELEMENT
+                TYPE_OP operator=CAST typeOperand=kotlin.Array<kotlin.String>
+                  CALL 'arrayOfNulls(Int): Array<String?>' type=kotlin.Array<kotlin.String?> operator=null
+                    size: CONST Int type=kotlin.Int value='0'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

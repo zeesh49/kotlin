@@ -1,0 +1,68 @@
+MODULE <test-module>
+  FILE /kt940.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val w: box.<no name provided>
+          BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              FUN public open override fun compare(o1: kotlin.String?, o2: kotlin.String?): kotlin.Int
+                BLOCK_BODY
+                  VAR val l1: kotlin.Int
+                    BLOCK type=kotlin.Int operator=ELVIS
+                      VAR val tmp1_elvis_lhs: kotlin.Int?
+                        BLOCK type=kotlin.Int? operator=SAFE_CALL
+                          VAR val tmp0_safe_receiver: kotlin.String?
+                            GET_VAR 'value-parameter o1: String?' type=kotlin.String? operator=null
+                          WHEN type=kotlin.Int? operator=SAFE_CALL
+                            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                              arg0: GET_VAR 'tmp0_safe_receiver: String?' type=kotlin.String? operator=null
+                              arg1: CONST Null type=kotlin.Nothing? value='null'
+                            then: CONST Null type=kotlin.Nothing? value='null'
+                            else: CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                              $this: GET_VAR 'tmp0_safe_receiver: String?' type=kotlin.String? operator=null
+                      WHEN type=kotlin.Int operator=null
+                        if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: GET_VAR 'tmp1_elvis_lhs: Int?' type=kotlin.Int? operator=null
+                          arg1: CONST Null type=kotlin.Nothing? value='null'
+                        then: CONST Int type=kotlin.Int value='0'
+                        else: GET_VAR 'tmp1_elvis_lhs: Int?' type=kotlin.Int? operator=null
+                  VAR val l2: kotlin.Int
+                    BLOCK type=kotlin.Int operator=ELVIS
+                      VAR val tmp3_elvis_lhs: kotlin.Int?
+                        BLOCK type=kotlin.Int? operator=SAFE_CALL
+                          VAR val tmp2_safe_receiver: kotlin.String?
+                            GET_VAR 'value-parameter o2: String?' type=kotlin.String? operator=null
+                          WHEN type=kotlin.Int? operator=SAFE_CALL
+                            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                              arg0: GET_VAR 'tmp2_safe_receiver: String?' type=kotlin.String? operator=null
+                              arg1: CONST Null type=kotlin.Nothing? value='null'
+                            then: CONST Null type=kotlin.Nothing? value='null'
+                            else: CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                              $this: GET_VAR 'tmp2_safe_receiver: String?' type=kotlin.String? operator=null
+                      WHEN type=kotlin.Int operator=null
+                        if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: GET_VAR 'tmp3_elvis_lhs: Int?' type=kotlin.Int? operator=null
+                          arg1: CONST Null type=kotlin.Nothing? value='null'
+                        then: CONST Int type=kotlin.Int value='0'
+                        else: GET_VAR 'tmp3_elvis_lhs: Int?' type=kotlin.Int? operator=null
+                  RETURN type=kotlin.Nothing from='compare(String?, String?): Int'
+                    CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+                      $this: GET_VAR 'l1: Int' type=kotlin.Int operator=null
+                      other: GET_VAR 'l2: Int' type=kotlin.Int operator=null
+              FUN public open override fun equals(obj: kotlin.Any?): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+                    CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+                      arg0: GET_VAR 'value-parameter obj: Any?' type=kotlin.Any? operator=null
+                      arg1: THIS of '<no name provided>' type=box.<no name provided>
+            CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL
+        CALL 'compare(String?, String?): Int' type=kotlin.Int operator=null
+          $this: GET_VAR 'w: <no name provided>' type=box.<no name provided> operator=null
+          o1: CONST String type=kotlin.String value='aaa'
+          o2: CONST String type=kotlin.String value='bbb'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

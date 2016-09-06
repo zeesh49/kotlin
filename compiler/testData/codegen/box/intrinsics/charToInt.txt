@@ -1,0 +1,23 @@
+MODULE <test-module>
+  FILE /charToInt.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.Any = \u0041 ('A')
+          CONST Char type=kotlin.Char value='A'
+        VAR var y: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        WHEN type=kotlin.Unit operator=IF
+          if: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.Char
+            GET_VAR 'x: Any' type=kotlin.Any operator=null
+          then: BLOCK type=kotlin.Unit operator=null
+            SET_VAR 'y: Int' type=kotlin.Unit operator=EQ
+              CALL 'toInt(): Int' type=kotlin.Int operator=null
+                $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Char
+                  GET_VAR 'x: Any' type=kotlin.Any operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'y: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='65'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

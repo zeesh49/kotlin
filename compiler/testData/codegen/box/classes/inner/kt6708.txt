@@ -1,0 +1,29 @@
+MODULE <test-module>
+  FILE /kt6708.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS CLASS InnerA
+        CONSTRUCTOR public constructor InnerA()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='InnerA'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      CLASS CLASS InnerB
+        CONSTRUCTOR public constructor InnerB()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor InnerA()'
+              $this: THIS of 'B' type=B
+            INSTANCE_INITIALIZER_CALL classDescriptor='InnerB'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'constructor InnerB()' type=B.InnerB operator=null
+          $this: CALL 'constructor B()' type=B operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

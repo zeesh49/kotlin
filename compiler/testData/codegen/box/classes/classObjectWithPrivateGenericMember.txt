@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /classObjectWithPrivateGenericMember.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      CLASS OBJECT companion object of C
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of C'
+        FUN private final fun <T> create(): C
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='create(): C'
+              CALL 'constructor C()' type=C operator=null
+      CLASS CLASS ZZZ
+        CONSTRUCTOR public constructor ZZZ()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='ZZZ'
+        PROPERTY public final val c: C
+          EXPRESSION_BODY
+            CALL 'create(): C' type=C operator=null
+              $this: GET_OBJECT 'companion object of C' type=C.Companion
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL '<get-c>(): C' type=C operator=GET_PROPERTY
+          $this: CALL 'constructor ZZZ()' type=C.ZZZ operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

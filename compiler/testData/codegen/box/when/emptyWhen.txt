@@ -1,0 +1,23 @@
+MODULE <test-module>
+  FILE /emptyWhen.kt
+    CLASS ENUM_CLASS A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      ENUM_ENTRY enum entry X1
+        init: ENUM_CONSTRUCTOR_CALL 'constructor A()' X1
+      ENUM_ENTRY enum entry X2
+        init: ENUM_CONSTRUCTOR_CALL 'constructor A()' X2
+      FUN public final fun values(): kotlin.Array<A>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): A
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=WHEN
+        BLOCK type=kotlin.Unit operator=WHEN
+          VAR val tmp0_subject: A
+            GET_ENUM_VALUE 'X1' type=A
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

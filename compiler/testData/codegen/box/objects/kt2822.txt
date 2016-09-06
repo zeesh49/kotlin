@@ -1,0 +1,27 @@
+MODULE <test-module>
+  FILE /kt2822.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'bar(): String' type=kotlin.String operator=null
+            $this: BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                FUN public final fun bar(): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='bar(): String'
+                      CALL 'foo(): String' superQualifier=A type=kotlin.String operator=null
+                        $this: THIS of '<no name provided>' type=A
+              CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL

@@ -1,0 +1,42 @@
+MODULE <test-module>
+  FILE /kt3087.kt
+    FUN public fun putNumberCompareAsUnit(): kotlin.Unit
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=WHEN
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CONST Int type=kotlin.Int value='1'
+            arg1: CONST Int type=kotlin.Int value='1'
+          then: BLOCK type=kotlin.Unit operator=null
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CONST Int type=kotlin.Int value='1'
+            arg1: CONST Int type=kotlin.Int value='1'
+          then: BLOCK type=kotlin.Unit operator=null
+    FUN public fun putNumberCompareAsVoid(): kotlin.Unit
+      BLOCK_BODY
+        WHEN type=kotlin.Any operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CONST Int type=kotlin.Int value='1'
+            arg1: CONST Int type=kotlin.Int value='1'
+          then: BLOCK type=kotlin.Boolean operator=null
+            CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CONST Int type=kotlin.Int value='1'
+              arg1: CONST Int type=kotlin.Int value='1'
+          else: BLOCK type=kotlin.Unit operator=null
+    FUN public fun putInvertAsUnit(b: kotlin.Boolean): kotlin.Unit
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=WHEN
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CONST Int type=kotlin.Int value='1'
+            arg1: CONST Int type=kotlin.Int value='1'
+          then: BLOCK type=kotlin.Unit operator=null
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: GET_VAR 'value-parameter b: Boolean' type=kotlin.Boolean operator=null
+          then: BLOCK type=kotlin.Unit operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'putNumberCompareAsUnit(): Unit' type=kotlin.Unit operator=null
+        CALL 'putNumberCompareAsVoid(): Unit' type=kotlin.Unit operator=null
+        CALL 'putInvertAsUnit(Boolean): Unit' type=kotlin.Unit operator=null
+          b: CONST Boolean type=kotlin.Boolean value='true'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

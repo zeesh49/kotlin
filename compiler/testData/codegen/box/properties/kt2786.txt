@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /kt2786.kt
+    CLASS INTERFACE FooTrait
+      PROPERTY public abstract val propertyTest: kotlin.String
+    CLASS CLASS FooDelegate
+      CONSTRUCTOR public constructor FooDelegate()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='FooDelegate'
+      PROPERTY public open override val propertyTest: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+    CLASS CLASS DelegateTest
+      CONSTRUCTOR public constructor DelegateTest()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='DelegateTest'
+      PROPERTY val `DelegateTest$FooTrait$delegate`: FooDelegate
+        EXPRESSION_BODY
+          CALL 'constructor FooDelegate()' type=FooDelegate operator=null
+      PROPERTY public open override val propertyTest: kotlin.String
+        PROPERTY_GETTER public open override fun <get-propertyTest>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-propertyTest>(): String'
+              CALL '<get-propertyTest>(): String' type=kotlin.String operator=null
+                $this: GET_VAR '`DelegateTest$FooTrait$delegate`: FooDelegate' type=FooDelegate operator=null
+      FUN public final fun test(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test(): String'
+            CALL '<get-propertyTest>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'DelegateTest' type=DelegateTest
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'test(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor DelegateTest()' type=DelegateTest operator=null

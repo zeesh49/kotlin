@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /privateMethod.kt
+    CLASS OBJECT A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN @kotlin.jvm.JvmStatic private final fun a(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='a(): String'
+            CONST String type=kotlin.String value='OK'
+      CLASS OBJECT Z
+        CONSTRUCTOR private constructor Z()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Z'
+        PROPERTY public final val p: kotlin.String
+          EXPRESSION_BODY
+            CALL 'a(): String' type=kotlin.String operator=null
+              $this: THIS of 'A' type=A
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-p>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_OBJECT 'Z' type=A.Z

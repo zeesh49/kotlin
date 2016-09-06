@@ -1,0 +1,48 @@
+MODULE <test-module>
+  FILE /privateExtensionFromInitializer_kt4543.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(result: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'result: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter result: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val result: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter result: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun a(body: A.() -> kotlin.String): kotlin.String
+      BLOCK_BODY
+        VAR val r: A
+          CALL 'constructor A(String)' type=A operator=null
+            result: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='a(A.() -> String): String'
+          CALL 'invoke() on A: String' type=kotlin.String operator=INVOKE
+            $this: GET_VAR 'value-parameter body: A.() -> String' type=A.() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+            $receiver: GET_VAR 'r: A' type=A operator=null
+    CLASS OBJECT C
+      CONSTRUCTOR private constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      FUN private final fun A.f(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='f() on A: String'
+            CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: $RECEIVER of 'f() on A: String' type=A
+      PROPERTY public final val g: kotlin.String
+        EXPRESSION_BODY
+          CALL 'a(A.() -> String): String' type=kotlin.String operator=null
+            body: BLOCK type=A.() -> kotlin.String operator=LAMBDA
+              FUN local final fun A.<anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>() on A: String'
+                    CALL 'f() on A: String' type=kotlin.String operator=null
+                      $this: THIS of 'C' type=C
+                      $receiver: $RECEIVER of '<anonymous>() on A: String' type=A
+              CALLABLE_REFERENCE '<anonymous>() on A: String' type=A.() -> kotlin.String operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-g>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_OBJECT 'C' type=C

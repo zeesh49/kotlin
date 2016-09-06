@@ -1,0 +1,184 @@
+MODULE <test-module>
+  FILE /K.kt
+    CLASS CLASS K
+      CONSTRUCTOR public constructor K()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='K'
+      PROPERTY public final var prop: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value=':('
+      PROPERTY public final val kotlin.Int.ext: kotlin.Int
+        PROPERTY_GETTER public final fun kotlin.Int.<get-ext>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-ext>() on Int: Int'
+              $RECEIVER of 'ext: Int on Int' type=kotlin.Int
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val j: J
+          CALL 'constructor J()' type=J operator=null
+        VAR val prop: kotlin.reflect.KMutableProperty1<J, kotlin.String>
+          CALLABLE_REFERENCE 'prop: String' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=kotlin.reflect.KMutableProperty1<*, *>
+            GET_VAR 'prop: KMutableProperty1<J, String>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail instanceof'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'prop: KMutableProperty1<J, String>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+              arg1: CONST String type=kotlin.String value='prop'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail name: '
+              CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'prop: KMutableProperty1<J, String>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(J): String' type=kotlin.String operator=null
+                $this: GET_VAR 'prop: KMutableProperty1<J, String>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+                receiver: GET_VAR 'j: J' type=J operator=null
+              arg1: CONST String type=kotlin.String value=':('
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail get before: '
+              CALL 'get(J): String' type=kotlin.String operator=null
+                $this: GET_VAR 'prop: KMutableProperty1<J, String>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+                receiver: GET_VAR 'j: J' type=J operator=null
+        CALL 'set(J, String): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'prop: KMutableProperty1<J, String>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+          receiver: GET_VAR 'j: J' type=J operator=null
+          value: CONST String type=kotlin.String value=':)'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(J): String' type=kotlin.String operator=null
+                $this: GET_VAR 'prop: KMutableProperty1<J, String>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+                receiver: GET_VAR 'j: J' type=J operator=null
+              arg1: CONST String type=kotlin.String value=':)'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail get after: '
+              CALL 'get(J): String' type=kotlin.String operator=null
+                $this: GET_VAR 'prop: KMutableProperty1<J, String>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+                receiver: GET_VAR 'j: J' type=J operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'prop: KMutableProperty1<J, String>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+            arg1: CALLABLE_REFERENCE 'prop: String' type=kotlin.reflect.KMutableProperty1<K, kotlin.String> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail J::prop == K::prop (these are different properties)'
+        VAR val klass: kotlin.reflect.KClass<J>
+          CALL '<get-kotlin>() on Class<J>: KClass<J>' type=kotlin.reflect.KClass<J> operator=GET_PROPERTY
+            $receiver: CALL '<get-java>() on KClass<J>: Class<J>' type=java.lang.Class<J> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'J' type=kotlin.reflect.KClass<J>
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'isNotEmpty() on Collection<KProperty1<J, *>>: Boolean' type=kotlin.Boolean operator=null
+            $receiver: CALL '<get-declaredMemberProperties>() on KClass<J>: Collection<KProperty1<J, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<J, *>> operator=GET_PROPERTY
+              $receiver: GET_VAR 'klass: KClass<J>' type=kotlin.reflect.KClass<J> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail: declaredMemberProperties should be empty'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'isNotEmpty() on Collection<KProperty2<J, *, *>>: Boolean' type=kotlin.Boolean operator=null
+            $receiver: CALL '<get-declaredMemberExtensionProperties>() on KClass<J>: Collection<KProperty2<J, *, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty2<J, *, *>> operator=GET_PROPERTY
+              $receiver: GET_VAR 'klass: KClass<J>' type=kotlin.reflect.KClass<J> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail: declaredMemberExtensionProperties should be empty'
+        VAR val prop2: kotlin.Any
+          BLOCK type=kotlin.Any operator=ELVIS
+            VAR val tmp0_elvis_lhs: kotlin.reflect.KProperty1<J, *>?
+              CALL 'firstOrNull((KProperty1<J, *>) -> Boolean) on Iterable<KProperty1<J, *>>: KProperty1<J, *>?' type=kotlin.reflect.KProperty1<J, *>? operator=null
+                $receiver: CALL '<get-memberProperties>() on KClass<J>: Collection<KProperty1<J, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<J, *>> operator=GET_PROPERTY
+                  $receiver: GET_VAR 'klass: KClass<J>' type=kotlin.reflect.KClass<J> operator=null
+                predicate: BLOCK type=(kotlin.reflect.KProperty1<J, *>) -> kotlin.Boolean operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.reflect.KProperty1<J, *>): kotlin.Boolean
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(KProperty1<J, *>): Boolean'
+                        CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                            $this: GET_VAR 'value-parameter it: KProperty1<J, *>' type=kotlin.reflect.KProperty1<J, *> operator=null
+                          arg1: CONST String type=kotlin.String value='prop'
+                  CALLABLE_REFERENCE '<anonymous>(KProperty1<J, *>): Boolean' type=(kotlin.reflect.KProperty1<J, *>) -> kotlin.Boolean operator=LAMBDA
+            WHEN type=kotlin.Any operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_elvis_lhs: KProperty1<J, *>?' type=kotlin.reflect.KProperty1<J, *>? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CONST String type=kotlin.String value='Fail: no 'prop' property in memberProperties'
+              else: GET_VAR 'tmp0_elvis_lhs: KProperty1<J, *>?' type=kotlin.reflect.KProperty1<J, *>? operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'prop: KMutableProperty1<J, String>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+              arg1: GET_VAR 'prop2: Any' type=kotlin.Any operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: property references from :: and from properties differ: '
+              GET_VAR 'prop: KMutableProperty1<J, String>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+              CONST String type=kotlin.String value=' != '
+              GET_VAR 'prop2: Any' type=kotlin.Any operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=kotlin.reflect.KMutableProperty1<*, *>
+            GET_VAR 'prop2: Any' type=kotlin.Any operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail instanceof 2'
+        CALL 'set(J, String): Unit' type=kotlin.Unit operator=null
+          $this: TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty1<J, kotlin.String>
+            GET_VAR 'prop2: Any' type=kotlin.Any operator=null
+          receiver: GET_VAR 'j: J' type=J operator=null
+          value: CONST String type=kotlin.String value='::)'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(J): String' type=kotlin.String operator=null
+                $this: GET_VAR 'prop: KMutableProperty1<J, String>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+                receiver: GET_VAR 'j: J' type=J operator=null
+              arg1: CONST String type=kotlin.String value='::)'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail get after 2: '
+              CALL 'get(J): String' type=kotlin.String operator=null
+                $this: GET_VAR 'prop: KMutableProperty1<J, String>' type=kotlin.reflect.KMutableProperty1<J, kotlin.String> operator=null
+                receiver: GET_VAR 'j: J' type=J operator=null
+        VAR val ext: kotlin.Any
+          BLOCK type=kotlin.Any operator=ELVIS
+            VAR val tmp1_elvis_lhs: kotlin.reflect.KProperty2<J, *, *>?
+              CALL 'firstOrNull((KProperty2<J, *, *>) -> Boolean) on Iterable<KProperty2<J, *, *>>: KProperty2<J, *, *>?' type=kotlin.reflect.KProperty2<J, *, *>? operator=null
+                $receiver: CALL '<get-memberExtensionProperties>() on KClass<J>: Collection<KProperty2<J, *, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty2<J, *, *>> operator=GET_PROPERTY
+                  $receiver: GET_VAR 'klass: KClass<J>' type=kotlin.reflect.KClass<J> operator=null
+                predicate: BLOCK type=(kotlin.reflect.KProperty2<J, *, *>) -> kotlin.Boolean operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.reflect.KProperty2<J, *, *>): kotlin.Boolean
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(KProperty2<J, *, *>): Boolean'
+                        CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                            $this: GET_VAR 'value-parameter it: KProperty2<J, *, *>' type=kotlin.reflect.KProperty2<J, *, *> operator=null
+                          arg1: CONST String type=kotlin.String value='ext'
+                  CALLABLE_REFERENCE '<anonymous>(KProperty2<J, *, *>): Boolean' type=(kotlin.reflect.KProperty2<J, *, *>) -> kotlin.Boolean operator=LAMBDA
+            WHEN type=kotlin.Any operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp1_elvis_lhs: KProperty2<J, *, *>?' type=kotlin.reflect.KProperty2<J, *, *>? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CONST String type=kotlin.String value='Fail: no 'ext' property in memberExtensionProperties'
+              else: GET_VAR 'tmp1_elvis_lhs: KProperty2<J, *, *>?' type=kotlin.reflect.KProperty2<J, *, *>? operator=null
+        TYPE_OP operator=CAST typeOperand=kotlin.reflect.KProperty2<J, kotlin.Int, kotlin.Int>
+          GET_VAR 'ext: Any' type=kotlin.Any operator=null
+        VAR val fortyTwo: kotlin.Int
+          CALL 'get(J, Int): Int' type=kotlin.Int operator=null
+            $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.reflect.KProperty2<J, kotlin.Int, kotlin.Int>
+              GET_VAR 'ext: Any' type=kotlin.Any operator=null
+            receiver1: GET_VAR 'j: J' type=J operator=null
+            receiver2: CONST Int type=kotlin.Int value='42'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'fortyTwo: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='42'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail ext get: '
+              GET_VAR 'fortyTwo: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

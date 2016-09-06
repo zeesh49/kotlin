@@ -1,0 +1,241 @@
+MODULE <test-module>
+  FILE /superCallPrimary.kt
+    PROPERTY public var sideEffects: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    CLASS CLASS B
+      CONSTRUCTOR protected constructor B(arg: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'arg: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'B' type=B
+            value: GET_VAR 'value-parameter arg: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public final val arg: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter arg: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val parentProp: kotlin.String
+      ANONYMOUS_INITIALIZER B
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            CALL '<set-sideEffects>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+              <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: CALL '<get-sideEffects>(): String' type=kotlin.String operator=PLUSEQ
+                other: CONST String type=kotlin.String value='zero#'
+          SET_BACKING_FIELD 'parentProp: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'B' type=B
+            value: CALL 'toString(): String' type=kotlin.String operator=null
+              $this: CALL '<get-arg>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'B' type=B
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(x: kotlin.Boolean)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor B(Int)'
+            arg: WHEN type=kotlin.Int operator=IF
+              if: GET_VAR 'value-parameter x: Boolean' type=kotlin.Boolean operator=null
+              then: CONST Int type=kotlin.Int value='1'
+              else: CONST Int type=kotlin.Int value='2'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var prop: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value=''
+      ANONYMOUS_INITIALIZER A
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            CALL '<set-sideEffects>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+              <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: CALL '<get-sideEffects>(): String' type=kotlin.String operator=PLUSEQ
+                other: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                    $this: THIS of 'A' type=A
+                  other: CONST String type=kotlin.String value='first'
+      CONSTRUCTOR public constructor A(x: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A(Boolean)'
+            x: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'value-parameter x: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='abc'
+          CALL '<set-prop>(String): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'A' type=A
+            <set-?>: GET_VAR 'value-parameter x: String' type=kotlin.String operator=null
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            CALL '<set-sideEffects>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+              <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: CALL '<get-sideEffects>(): String' type=kotlin.String operator=PLUSEQ
+                other: CONST String type=kotlin.String value='#third'
+      ANONYMOUS_INITIALIZER A
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            CALL '<set-sideEffects>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+              <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: CALL '<get-sideEffects>(): String' type=kotlin.String operator=PLUSEQ
+                other: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                    $this: THIS of 'A' type=A
+                  other: CONST String type=kotlin.String value='#second'
+      CONSTRUCTOR public constructor A(x: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A(Boolean)'
+            x: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+              arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+                $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                other: CONST Int type=kotlin.Int value='0'
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            VAR val tmp0_this: A
+              THIS of 'A' type=A
+            CALL '<set-prop>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+              $this: GET_VAR 'tmp0_this: A' type=A operator=null
+              <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: CALL '<get-prop>(): String' type=kotlin.String operator=PLUSEQ
+                  $this: GET_VAR 'tmp0_this: A' type=A operator=null
+                other: STRING_CONCATENATION type=kotlin.String
+                  GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                  CONST String type=kotlin.String value='#int'
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            CALL '<set-sideEffects>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+              <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: CALL '<get-sideEffects>(): String' type=kotlin.String operator=PLUSEQ
+                other: CONST String type=kotlin.String value='#fourth'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a1: A
+          CALL 'constructor A(String)' type=A operator=null
+            x: CONST String type=kotlin.String value='abc'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a1: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='abc'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail0: '
+              CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a1: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-parentProp>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a1: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail1: '
+              CALL '<get-parentProp>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a1: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-arg>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a1: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail1': '
+              CALL '<get-arg>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a1: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-sideEffects>(): String' type=kotlin.String operator=GET_PROPERTY
+              arg1: CONST String type=kotlin.String value='zero#first#second#third'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail2: '
+              CALL '<get-sideEffects>(): String' type=kotlin.String operator=GET_PROPERTY
+        CALL '<set-sideEffects>(String): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: CONST String type=kotlin.String value=''
+        VAR val a2: A
+          CALL 'constructor A(Int)' type=A operator=null
+            x: CONST Int type=kotlin.Int value='123'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a2: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='123#int'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail3: '
+              CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a2: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-parentProp>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a2: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail4: '
+              CALL '<get-parentProp>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a2: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-arg>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a2: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail5': '
+              CALL '<get-arg>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a2: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-sideEffects>(): String' type=kotlin.String operator=GET_PROPERTY
+              arg1: CONST String type=kotlin.String value='zero#first#second#fourth'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail6: '
+              CALL '<get-sideEffects>(): String' type=kotlin.String operator=GET_PROPERTY
+        CALL '<set-sideEffects>(String): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: CONST String type=kotlin.String value=''
+        VAR val a3: A
+          CALL 'constructor A(Boolean)' type=A operator=null
+            x: CONST Boolean type=kotlin.Boolean value='false'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a3: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value=''
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail7: '
+              CALL '<get-prop>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a3: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-parentProp>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a3: A' type=A operator=null
+              arg1: CONST String type=kotlin.String value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail8: '
+              CALL '<get-parentProp>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'a3: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-arg>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a3: A' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail9': '
+              CALL '<get-arg>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'a3: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-sideEffects>(): String' type=kotlin.String operator=GET_PROPERTY
+              arg1: CONST String type=kotlin.String value='zero#first#second'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail10: '
+              CALL '<get-sideEffects>(): String' type=kotlin.String operator=GET_PROPERTY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

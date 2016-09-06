@@ -1,0 +1,23 @@
+MODULE <test-module>
+  FILE /K.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(Type, Type, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-java>() on KClass<Any>: Class<Any>' type=java.lang.Class<kotlin.Any> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+          actual: CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+            $receiver: BLOCK type=kotlin.reflect.KType operator=EXCLEXCL
+              VAR val tmp0_notnull: kotlin.reflect.KType?
+                CALL '<get-type>(): KType?' type=kotlin.reflect.KType? operator=GET_PROPERTY
+                  $this: CALL 'single() on List<KTypeProjection>: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+                    $receiver: CALL '<get-arguments>(): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=GET_PROPERTY
+                      $this: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                        $this: CALLABLE_REFERENCE 'foo(): (Mutable)List<(raw) Any?>!' type=kotlin.reflect.KFunction1<J, kotlin.collections.(Mutable)List<(raw) kotlin.Any?>!> operator=null
+              WHEN type=kotlin.reflect.KType operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: KType?' type=kotlin.reflect.KType? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: KType?' type=kotlin.reflect.KType? operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

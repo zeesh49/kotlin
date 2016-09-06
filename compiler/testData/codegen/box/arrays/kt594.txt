@@ -1,0 +1,87 @@
+MODULE <test-module>
+  FILE /kt594.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var array: kotlin.IntArray?
+          CALL 'constructor IntArray(Int)' type=kotlin.IntArray operator=null
+            size: CONST Int type=kotlin.Int value='10'
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp0_safe_receiver: kotlin.IntArray?
+            GET_VAR 'array: IntArray?' type=kotlin.IntArray? operator=null
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_safe_receiver: IntArray?' type=kotlin.IntArray? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=null
+              $this: GET_VAR 'tmp0_safe_receiver: IntArray?' type=kotlin.IntArray? operator=null
+              index: CONST Int type=kotlin.Int value='0'
+              value: CONST Int type=kotlin.Int value='3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: BLOCK type=kotlin.Int? operator=SAFE_CALL
+                VAR val tmp1_safe_receiver: kotlin.IntArray?
+                  GET_VAR 'array: IntArray?' type=kotlin.IntArray? operator=null
+                WHEN type=kotlin.Int? operator=SAFE_CALL
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp1_safe_receiver: IntArray?' type=kotlin.IntArray? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CONST Null type=kotlin.Nothing? value='null'
+                  else: CALL 'get(Int): Int' type=kotlin.Int operator=null
+                    $this: GET_VAR 'tmp1_safe_receiver: IntArray?' type=kotlin.IntArray? operator=null
+                    index: CONST Int type=kotlin.Int value='0'
+              arg1: CONST Int type=kotlin.Int value='3'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        VAR var a: kotlin.Array<kotlin.Array<kotlin.String?>?>
+          CALL 'arrayOfNulls(Int): Array<Array<String?>?>' type=kotlin.Array<kotlin.Array<kotlin.String?>?> operator=null
+            size: CONST Int type=kotlin.Int value='5'
+        VAR var b: kotlin.Array<kotlin.String?>
+          CALL 'arrayOfNulls(Int): Array<String?>' type=kotlin.Array<kotlin.String?> operator=null
+            size: CONST Int type=kotlin.Int value='1'
+        CALL 'set(Int, String?): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'b: Array<String?>' type=kotlin.Array<kotlin.String?> operator=null
+          index: CONST Int type=kotlin.Int value='0'
+          value: CONST String type=kotlin.String value='239'
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp2_safe_receiver: kotlin.Array<kotlin.Array<kotlin.String?>?>
+            GET_VAR 'a: Array<Array<String?>?>' type=kotlin.Array<kotlin.Array<kotlin.String?>?> operator=null
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp2_safe_receiver: Array<Array<String?>?>' type=kotlin.Array<kotlin.Array<kotlin.String?>?> operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'set(Int, Array<String?>?): Unit' type=kotlin.Unit operator=null
+              $this: GET_VAR 'tmp2_safe_receiver: Array<Array<String?>?>' type=kotlin.Array<kotlin.Array<kotlin.String?>?> operator=null
+              index: CONST Int type=kotlin.Int value='0'
+              value: GET_VAR 'b: Array<String?>' type=kotlin.Array<kotlin.String?> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: BLOCK type=kotlin.String? operator=SAFE_CALL
+                VAR val tmp4_safe_receiver: kotlin.Array<kotlin.String?>?
+                  BLOCK type=kotlin.Array<kotlin.String?>? operator=SAFE_CALL
+                    VAR val tmp3_safe_receiver: kotlin.Array<kotlin.Array<kotlin.String?>?>
+                      GET_VAR 'a: Array<Array<String?>?>' type=kotlin.Array<kotlin.Array<kotlin.String?>?> operator=null
+                    WHEN type=kotlin.Array<kotlin.String?>? operator=SAFE_CALL
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'tmp3_safe_receiver: Array<Array<String?>?>' type=kotlin.Array<kotlin.Array<kotlin.String?>?> operator=null
+                        arg1: CONST Null type=kotlin.Nothing? value='null'
+                      then: CONST Null type=kotlin.Nothing? value='null'
+                      else: CALL 'get(Int): Array<String?>?' type=kotlin.Array<kotlin.String?>? operator=null
+                        $this: GET_VAR 'tmp3_safe_receiver: Array<Array<String?>?>' type=kotlin.Array<kotlin.Array<kotlin.String?>?> operator=null
+                        index: CONST Int type=kotlin.Int value='0'
+                WHEN type=kotlin.String? operator=SAFE_CALL
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp4_safe_receiver: Array<String?>?' type=kotlin.Array<kotlin.String?>? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CONST Null type=kotlin.Nothing? value='null'
+                  else: CALL 'get(Int): String?' type=kotlin.String? operator=null
+                    $this: GET_VAR 'tmp4_safe_receiver: Array<String?>?' type=kotlin.Array<kotlin.String?>? operator=null
+                    index: CONST Int type=kotlin.Int value='0'
+              arg1: CONST String type=kotlin.String value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

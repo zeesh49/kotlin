@@ -1,0 +1,114 @@
+MODULE <test-module>
+  FILE /propertyAccessors.kt
+    PROPERTY public var foo: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='foo'
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var bar: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='bar'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val fooGetter: java.lang.reflect.Method
+          BLOCK type=java.lang.reflect.Method operator=ELVIS
+            VAR val tmp0_elvis_lhs: java.lang.reflect.Method?
+              CALL '<get-javaMethod>() on KFunction<*>: Method?' type=java.lang.reflect.Method? operator=GET_PROPERTY
+                $receiver: CALL '<get-getter>(): KProperty0.Getter<String>' type=kotlin.reflect.KProperty0.Getter<kotlin.String> operator=GET_PROPERTY
+                  $this: CALLABLE_REFERENCE 'foo: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+            WHEN type=java.lang.reflect.Method operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_elvis_lhs: Method?' type=java.lang.reflect.Method? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                CONST String type=kotlin.String value='Fail fooGetter'
+              else: GET_VAR 'tmp0_elvis_lhs: Method?' type=java.lang.reflect.Method? operator=null
+        CALL 'assertEquals(Any!, Any!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='foo'
+          actual: CALL 'invoke(Any!, vararg Any!): Any!' type=kotlin.Any! operator=null
+            $this: GET_VAR 'fooGetter: Method' type=java.lang.reflect.Method operator=null
+            p0: CONST Null type=kotlin.Nothing? value='null'
+        VAR val fooSetter: java.lang.reflect.Method
+          BLOCK type=java.lang.reflect.Method operator=ELVIS
+            VAR val tmp1_elvis_lhs: java.lang.reflect.Method?
+              CALL '<get-javaMethod>() on KFunction<*>: Method?' type=java.lang.reflect.Method? operator=GET_PROPERTY
+                $receiver: CALL '<get-setter>(): KMutableProperty0.Setter<String>' type=kotlin.reflect.KMutableProperty0.Setter<kotlin.String> operator=GET_PROPERTY
+                  $this: CALLABLE_REFERENCE 'foo: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+            WHEN type=java.lang.reflect.Method operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp1_elvis_lhs: Method?' type=java.lang.reflect.Method? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                CONST String type=kotlin.String value='Fail fooSetter'
+              else: GET_VAR 'tmp1_elvis_lhs: Method?' type=java.lang.reflect.Method? operator=null
+        CALL 'invoke(Any!, vararg Any!): Any!' type=kotlin.Any! operator=null
+          $this: GET_VAR 'fooSetter: Method' type=java.lang.reflect.Method operator=null
+          p0: CONST Null type=kotlin.Nothing? value='null'
+          p1: VARARG type=(kotlin.Array<(kotlin.Any..kotlin.Any?)>..kotlin.Array<out (kotlin.Any..kotlin.Any?)>?) varargElementType=(kotlin.Any..kotlin.Any?)
+            CONST String type=kotlin.String value='foof'
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='foof'
+          actual: CALL '<get-foo>(): String' type=kotlin.String operator=GET_PROPERTY
+        CALL 'assertNull(Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-javaConstructor>() on KFunction<String>: Constructor<String>?' type=java.lang.reflect.Constructor<kotlin.String>? operator=GET_PROPERTY
+            $receiver: CALL '<get-getter>(): KProperty0.Getter<String>' type=kotlin.reflect.KProperty0.Getter<kotlin.String> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'foo: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+        CALL 'assertNull(Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-javaConstructor>() on KFunction<Unit>: Constructor<Unit>?' type=java.lang.reflect.Constructor<kotlin.Unit>? operator=GET_PROPERTY
+            $receiver: CALL '<get-setter>(): KMutableProperty0.Setter<String>' type=kotlin.reflect.KMutableProperty0.Setter<kotlin.String> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'foo: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+        VAR val a: A
+          CALL 'constructor A()' type=A operator=null
+        VAR val barGetter: java.lang.reflect.Method
+          BLOCK type=java.lang.reflect.Method operator=ELVIS
+            VAR val tmp2_elvis_lhs: java.lang.reflect.Method?
+              CALL '<get-javaMethod>() on KFunction<*>: Method?' type=java.lang.reflect.Method? operator=GET_PROPERTY
+                $receiver: CALL '<get-getter>(): KProperty1.Getter<A, String>' type=kotlin.reflect.KProperty1.Getter<A, kotlin.String> operator=GET_PROPERTY
+                  $this: CALLABLE_REFERENCE 'bar: String' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+            WHEN type=java.lang.reflect.Method operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp2_elvis_lhs: Method?' type=java.lang.reflect.Method? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                CONST String type=kotlin.String value='Fail barGetter'
+              else: GET_VAR 'tmp2_elvis_lhs: Method?' type=java.lang.reflect.Method? operator=null
+        CALL 'assertEquals(Any!, Any!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='bar'
+          actual: CALL 'invoke(Any!, vararg Any!): Any!' type=kotlin.Any! operator=null
+            $this: GET_VAR 'barGetter: Method' type=java.lang.reflect.Method operator=null
+            p0: GET_VAR 'a: A' type=A operator=null
+        VAR val barSetter: java.lang.reflect.Method
+          BLOCK type=java.lang.reflect.Method operator=ELVIS
+            VAR val tmp3_elvis_lhs: java.lang.reflect.Method?
+              CALL '<get-javaMethod>() on KFunction<*>: Method?' type=java.lang.reflect.Method? operator=GET_PROPERTY
+                $receiver: CALL '<get-setter>(): KMutableProperty1.Setter<A, String>' type=kotlin.reflect.KMutableProperty1.Setter<A, kotlin.String> operator=GET_PROPERTY
+                  $this: CALLABLE_REFERENCE 'bar: String' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+            WHEN type=java.lang.reflect.Method operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp3_elvis_lhs: Method?' type=java.lang.reflect.Method? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                CONST String type=kotlin.String value='Fail barSetter'
+              else: GET_VAR 'tmp3_elvis_lhs: Method?' type=java.lang.reflect.Method? operator=null
+        CALL 'invoke(Any!, vararg Any!): Any!' type=kotlin.Any! operator=null
+          $this: GET_VAR 'barSetter: Method' type=java.lang.reflect.Method operator=null
+          p0: GET_VAR 'a: A' type=A operator=null
+          p1: VARARG type=(kotlin.Array<(kotlin.Any..kotlin.Any?)>..kotlin.Array<out (kotlin.Any..kotlin.Any?)>?) varargElementType=(kotlin.Any..kotlin.Any?)
+            CONST String type=kotlin.String value='barb'
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='barb'
+          actual: CALL '<get-bar>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_VAR 'a: A' type=A operator=null
+        CALL 'assertNull(Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-javaConstructor>() on KFunction<String>: Constructor<String>?' type=java.lang.reflect.Constructor<kotlin.String>? operator=GET_PROPERTY
+            $receiver: CALL '<get-getter>(): KProperty1.Getter<A, String>' type=kotlin.reflect.KProperty1.Getter<A, kotlin.String> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'bar: String' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+        CALL 'assertNull(Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-javaConstructor>() on KFunction<Unit>: Constructor<Unit>?' type=java.lang.reflect.Constructor<kotlin.Unit>? operator=GET_PROPERTY
+            $receiver: CALL '<get-setter>(): KMutableProperty1.Setter<A, String>' type=kotlin.reflect.KMutableProperty1.Setter<A, kotlin.String> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'bar: String' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

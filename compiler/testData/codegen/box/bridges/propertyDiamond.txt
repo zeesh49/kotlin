@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /propertyDiamond.kt
+    CLASS INTERFACE A
+      PROPERTY public abstract val o: O
+      PROPERTY public abstract val k: K
+    CLASS INTERFACE B
+    CLASS INTERFACE C
+    CLASS CLASS D
+      CONSTRUCTOR public constructor D()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='D'
+      PROPERTY public open override val o: kotlin.String = "O"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='O'
+      PROPERTY public open override val k: kotlin.String = "K"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='K'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A<kotlin.String, kotlin.String>
+          CALL 'constructor D()' type=D operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL '<get-o>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: GET_VAR 'a: A<String, String>' type=A<kotlin.String, kotlin.String> operator=null
+            other: CALL '<get-k>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: GET_VAR 'a: A<String, String>' type=A<kotlin.String, kotlin.String> operator=null

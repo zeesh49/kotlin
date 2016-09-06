@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /anonymousInitializerIObject.kt
+    CLASS OBJECT Foo
+      CONSTRUCTOR private constructor Foo()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      PROPERTY public final val bar: kotlin.String
+      ANONYMOUS_INITIALIZER Foo
+        BLOCK_BODY
+          SET_BACKING_FIELD 'bar: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Foo' type=Foo
+            value: CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-bar>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_OBJECT 'Foo' type=Foo

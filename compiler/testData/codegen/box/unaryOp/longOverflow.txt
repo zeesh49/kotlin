@@ -1,0 +1,19 @@
+MODULE <test-module>
+  FILE /longOverflow.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: kotlin.Long = -2147483648.toLong()
+          TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Long
+            CALL 'unaryMinus(): Int' type=kotlin.Int operator=UMINUS
+              $this: CALL 'shl(Int): Int' type=kotlin.Int operator=null
+                $this: CONST Int type=kotlin.Int value='1'
+                bitCount: CONST Int type=kotlin.Int value='31'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'a: Long' type=kotlin.Long operator=null
+              arg1: CONST Long type=kotlin.Long value='-2147483648'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail: in this case we should add to ints and than cast the result to long - overflow expected'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

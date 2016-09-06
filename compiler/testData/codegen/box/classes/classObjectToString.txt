@@ -1,0 +1,29 @@
+MODULE <test-module>
+  FILE /classObjectToString.kt
+    CLASS CLASS SomeClass
+      CONSTRUCTOR public constructor SomeClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SomeClass'
+      CLASS OBJECT companion object of SomeClass
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of SomeClass'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'matches(String!): Boolean' type=kotlin.Boolean operator=null
+              $this: TYPE_OP operator=CAST typeOperand=java.lang.String
+                CALL 'toString(): String' type=kotlin.String operator=null
+                  $this: GET_OBJECT 'companion object of SomeClass' type=SomeClass.Companion
+              p0: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='SomeClass'
+                CONST String type=kotlin.String value='\'
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='Companion@[0-9a-fA-F]+'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_OBJECT 'companion object of SomeClass' type=SomeClass.Companion

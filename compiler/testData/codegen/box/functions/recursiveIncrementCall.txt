@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /recursiveIncrementCall.kt
+    FUN public operator fun kotlin.String.inc(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: $RECEIVER of 'inc() on String: String' type=kotlin.String
+            arg1: CONST String type=kotlin.String value=''
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='inc() on String: String'
+              CONST String type=kotlin.String value='done'
+        VAR var s: kotlin.String
+          CONST String type=kotlin.String value=''
+        RETURN type=kotlin.Nothing from='inc() on String: String'
+          BLOCK type=kotlin.String operator=PREFIX_INCR
+            VAR val tmp0: kotlin.String
+              CALL 'inc() on String: String' type=kotlin.String operator=PREFIX_INCR
+                $receiver: GET_VAR 's: String' type=kotlin.String operator=PREFIX_INCR
+            SET_VAR 's: String' type=kotlin.Unit operator=PREFIX_INCR
+              GET_VAR 'tmp0: String' type=kotlin.String operator=null
+            GET_VAR 'tmp0: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var s: kotlin.String
+          CONST String type=kotlin.String value='11test'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: BLOCK type=kotlin.String operator=PREFIX_INCR
+                VAR val tmp0: kotlin.String
+                  CALL 'inc() on String: String' type=kotlin.String operator=PREFIX_INCR
+                    $receiver: GET_VAR 's: String' type=kotlin.String operator=PREFIX_INCR
+                SET_VAR 's: String' type=kotlin.Unit operator=PREFIX_INCR
+                  GET_VAR 'tmp0: String' type=kotlin.String operator=null
+                GET_VAR 'tmp0: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='done'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='FAIL'

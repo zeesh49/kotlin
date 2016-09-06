@@ -1,0 +1,144 @@
+MODULE <test-module>
+  FILE /1.kt
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      FUN public final fun box(): kotlin.String
+        BLOCK_BODY
+          VAR val overriddenMethod: () -> kotlin.String
+            BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    CALL 'method(): String' type=kotlin.String operator=null
+                      $this: THIS of 'B' type=B
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+          CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+            expected: CONST String type=kotlin.String value='C.method'
+            actual: CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+              $this: GET_VAR 'overriddenMethod: () -> String' type=() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+          VAR val superMethod: () -> kotlin.String
+            BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    CALL 'method(): String' superQualifier=A type=kotlin.String operator=null
+                      $this: THIS of 'B' type=test.A
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+          CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+            expected: CONST String type=kotlin.String value='A.method'
+            actual: CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+              $this: GET_VAR 'superMethod: () -> String' type=() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+          VAR val overriddenPropertyGetter: () -> kotlin.String
+            BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    CALL '<get-property>(): String' type=kotlin.String operator=GET_PROPERTY
+                      $this: THIS of 'B' type=B
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+          CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+            expected: CONST String type=kotlin.String value='C.property'
+            actual: CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+              $this: GET_VAR 'overriddenPropertyGetter: () -> String' type=() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+          VAR val superPropertyGetter: () -> kotlin.String
+            BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    CALL '<get-property>(): String' superQualifier=A type=kotlin.String operator=GET_PROPERTY
+                      $this: THIS of 'B' type=test.A
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+          CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+            expected: CONST String type=kotlin.String value='A.property'
+            actual: CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+              $this: GET_VAR 'superPropertyGetter: () -> String' type=() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+          VAR val overriddenPropertySetter: () -> kotlin.Unit
+            BLOCK type=() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                    CALL '<set-property>(String): Unit' type=kotlin.Unit operator=EQ
+                      $this: THIS of 'B' type=B
+                      value: CONST String type=kotlin.String value=''
+              CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+          CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+            $this: GET_VAR 'overriddenPropertySetter: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+          VAR val superPropertySetter: () -> kotlin.Unit
+            BLOCK type=() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                    CALL '<set-property>(String): Unit' superQualifier=A type=kotlin.Unit operator=EQ
+                      $this: THIS of 'B' type=test.A
+                      value: CONST String type=kotlin.String value=''
+              CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+          CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+            $this: GET_VAR 'superPropertySetter: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+          CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+            expected: CONST String type=kotlin.String value='C.property;A.property;'
+            actual: CALL '<get-state>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'B' type=B
+          RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='OK'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor B()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      FUN protected open override fun method(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='method(): String'
+            CONST String type=kotlin.String value='C.method'
+      PROPERTY protected open override var property: kotlin.String
+        PROPERTY_GETTER protected open override fun <get-property>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-property>(): String'
+              CONST String type=kotlin.String value='C.property'
+        PROPERTY_SETTER protected open override fun <set-property>(value: kotlin.String): kotlin.Unit
+          BLOCK_BODY
+            BLOCK type=kotlin.Unit operator=PLUSEQ
+              VAR val tmp0_this: C
+                THIS of 'C' type=C
+              CALL '<set-state>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+                $this: GET_VAR 'tmp0_this: C' type=C operator=null
+                <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                  $this: CALL '<get-state>(): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 'tmp0_this: C' type=C operator=null
+                  other: CONST String type=kotlin.String value='C.property;'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'box(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor C()' type=C operator=null
+  FILE /2.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var state: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value=''
+      FUN protected open fun method(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='method(): String'
+            CONST String type=kotlin.String value='A.method'
+      PROPERTY protected open var property: kotlin.String
+        PROPERTY_GETTER protected open fun <get-property>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-property>(): String'
+              CONST String type=kotlin.String value='A.property'
+        PROPERTY_SETTER protected open fun <set-property>(value: kotlin.String): kotlin.Unit
+          BLOCK_BODY
+            BLOCK type=kotlin.Unit operator=PLUSEQ
+              VAR val tmp0_this: test.A
+                THIS of 'A' type=test.A
+              CALL '<set-state>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+                $this: GET_VAR 'tmp0_this: A' type=test.A operator=null
+                <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                  $this: CALL '<get-state>(): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 'tmp0_this: A' type=test.A operator=null
+                  other: CONST String type=kotlin.String value='A.property;'

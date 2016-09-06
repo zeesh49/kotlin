@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /simple.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.CharSequence
+          CONST String type=kotlin.String value=''
+        VAR val klass: kotlin.reflect.KClass<kotlin.CharSequence>
+          GET_CLASS type=kotlin.reflect.KClass<kotlin.CharSequence>
+            GET_VAR 'x: CharSequence' type=kotlin.CharSequence operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'klass: KClass<CharSequence>' type=kotlin.reflect.KClass<kotlin.CharSequence> operator=null
+              arg1: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'klass: KClass<CharSequence>' type=kotlin.reflect.KClass<kotlin.CharSequence> operator=null

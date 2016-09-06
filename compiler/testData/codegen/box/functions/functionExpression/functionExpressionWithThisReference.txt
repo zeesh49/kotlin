@@ -1,0 +1,196 @@
+MODULE <test-module>
+  FILE /functionExpressionWithThisReference.kt
+    FUN public fun kotlin.Int.thisRef1(): () -> kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='thisRef1() on Int: () -> Int'
+          BLOCK type=() -> kotlin.Int operator=ANONYMOUS_FUNCTION
+            FUN local final fun <no name provided>(): kotlin.Int
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<no name provided>(): Int'
+                  $RECEIVER of 'thisRef1() on Int: () -> Int' type=kotlin.Int
+            CALLABLE_REFERENCE '<no name provided>(): Int' type=() -> kotlin.Int operator=ANONYMOUS_FUNCTION
+    FUN public fun kotlin.Int.thisRef2(): () -> kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='thisRef2() on Int: () -> Int'
+          BLOCK type=() -> kotlin.Int operator=ANONYMOUS_FUNCTION
+            FUN local final fun <no name provided>(): kotlin.Int
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<no name provided>(): Int'
+                  $RECEIVER of 'thisRef2() on Int: () -> Int' type=kotlin.Int
+            CALLABLE_REFERENCE '<no name provided>(): Int' type=() -> kotlin.Int operator=ANONYMOUS_FUNCTION
+    FUN public fun <T> T.genericThisRef1(): () -> T
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='genericThisRef1() on T: () -> T'
+          BLOCK type=() -> T operator=ANONYMOUS_FUNCTION
+            FUN local final fun <no name provided>(): T
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<no name provided>(): T'
+                  $RECEIVER of 'genericThisRef1() on T: () -> T' type=T
+            CALLABLE_REFERENCE '<no name provided>(): T' type=() -> T operator=ANONYMOUS_FUNCTION
+    FUN public fun <T> T.genericThisRef2(): () -> T
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='genericThisRef2() on T: () -> T'
+          BLOCK type=() -> T operator=ANONYMOUS_FUNCTION
+            FUN local final fun <no name provided>(): T
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<no name provided>(): T'
+                  $RECEIVER of 'genericThisRef2() on T: () -> T' type=T
+            CALLABLE_REFERENCE '<no name provided>(): T' type=() -> T operator=ANONYMOUS_FUNCTION
+    PROPERTY public val kotlin.Int.valThisRef1: () -> kotlin.Int
+      PROPERTY_GETTER public fun kotlin.Int.<get-valThisRef1>(): () -> kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-valThisRef1>() on Int: () -> Int'
+            BLOCK type=() -> kotlin.Int operator=ANONYMOUS_FUNCTION
+              FUN local final fun <no name provided>(): kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<no name provided>(): Int'
+                    $RECEIVER of 'valThisRef1: () -> Int on Int' type=kotlin.Int
+              CALLABLE_REFERENCE '<no name provided>(): Int' type=() -> kotlin.Int operator=ANONYMOUS_FUNCTION
+    PROPERTY public val kotlin.Int.valThisRef2: () -> kotlin.Int
+      PROPERTY_GETTER public fun kotlin.Int.<get-valThisRef2>(): () -> kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-valThisRef2>() on Int: () -> Int'
+            BLOCK type=() -> kotlin.Int operator=ANONYMOUS_FUNCTION
+              FUN local final fun <no name provided>(): kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<no name provided>(): Int'
+                    $RECEIVER of 'valThisRef2: () -> Int on Int' type=kotlin.Int
+              CALLABLE_REFERENCE '<no name provided>(): Int' type=() -> kotlin.Int operator=ANONYMOUS_FUNCTION
+    PROPERTY public val <T> T.valGenericThisRef1: () -> T
+      PROPERTY_GETTER public fun T.<get-valGenericThisRef1>(): () -> T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-valGenericThisRef1>() on T: () -> T'
+            BLOCK type=() -> T operator=ANONYMOUS_FUNCTION
+              FUN local final fun <no name provided>(): T
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<no name provided>(): T'
+                    $RECEIVER of 'valGenericThisRef1: () -> T on T' type=T
+              CALLABLE_REFERENCE '<no name provided>(): T' type=() -> T operator=ANONYMOUS_FUNCTION
+    PROPERTY public val <T> T.valGenericThisRef2: () -> T
+      PROPERTY_GETTER public fun T.<get-valGenericThisRef2>(): () -> T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-valGenericThisRef2>() on T: () -> T'
+            BLOCK type=() -> T operator=ANONYMOUS_FUNCTION
+              FUN local final fun <no name provided>(): T
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<no name provided>(): T'
+                    $RECEIVER of 'valGenericThisRef2: () -> T on T' type=T
+              CALLABLE_REFERENCE '<no name provided>(): T' type=() -> T operator=ANONYMOUS_FUNCTION
+    PROPERTY public val <T> T.withLabel1: () -> T
+      PROPERTY_GETTER public fun T.<get-withLabel1>(): () -> T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-withLabel1>() on T: () -> T'
+            BLOCK type=() -> T operator=ANONYMOUS_FUNCTION
+              FUN local final fun <no name provided>(): T
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<no name provided>(): T'
+                    $RECEIVER of 'withLabel1: () -> T on T' type=T
+              CALLABLE_REFERENCE '<no name provided>(): T' type=() -> T operator=ANONYMOUS_FUNCTION
+    PROPERTY public val <T> T.withLabel2: () -> T
+      PROPERTY_GETTER public fun T.<get-withLabel2>(): () -> T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-withLabel2>() on T: () -> T'
+            BLOCK type=() -> T operator=ANONYMOUS_FUNCTION
+              FUN local final fun <no name provided>(): T
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<no name provided>(): T'
+                    $RECEIVER of 'withLabel2: () -> T on T' type=T
+              CALLABLE_REFERENCE '<no name provided>(): T' type=() -> T operator=ANONYMOUS_FUNCTION
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): Int' type=kotlin.Int operator=null
+                $this: CALL 'thisRef1() on Int: () -> Int' type=() -> kotlin.Int operator=null
+                  $receiver: CONST Int type=kotlin.Int value='1'
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Test 1 failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): Int' type=kotlin.Int operator=null
+                $this: CALL 'thisRef2() on Int: () -> Int' type=() -> kotlin.Int operator=null
+                  $receiver: CONST Int type=kotlin.Int value='2'
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Test 2 failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): Int' type=kotlin.Int operator=null
+                $this: CALL 'genericThisRef1() on Int: () -> Int' type=() -> kotlin.Int operator=null
+                  $receiver: CONST Int type=kotlin.Int value='3'
+              arg1: CONST Int type=kotlin.Int value='3'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Test 3 failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): Int' type=kotlin.Int operator=null
+                $this: CALL 'genericThisRef2() on Int: () -> Int' type=() -> kotlin.Int operator=null
+                  $receiver: CONST Int type=kotlin.Int value='4'
+              arg1: CONST Int type=kotlin.Int value='4'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Test 4 failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): Int' type=kotlin.Int operator=INVOKE
+                $this: CALL '<get-valThisRef1>() on Int: () -> Int' type=() -> kotlin.Int operator=GET_PROPERTY
+                  $receiver: CONST Int type=kotlin.Int value='5'
+              arg1: CONST Int type=kotlin.Int value='5'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Test 5 failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): Int' type=kotlin.Int operator=INVOKE
+                $this: CALL '<get-valThisRef2>() on Int: () -> Int' type=() -> kotlin.Int operator=GET_PROPERTY
+                  $receiver: CONST Int type=kotlin.Int value='6'
+              arg1: CONST Int type=kotlin.Int value='6'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Test 6 failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): T' type=T operator=INVOKE
+                $this: CALL '<get-valGenericThisRef1>() on T: () -> T' type=() -> T operator=GET_PROPERTY
+                  $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+                    CONST Int type=kotlin.Int value='7'
+              arg1: CONST Int type=kotlin.Int value='7'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Test 7 failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): T' type=T operator=INVOKE
+                $this: CALL '<get-valGenericThisRef2>() on T: () -> T' type=() -> T operator=GET_PROPERTY
+                  $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+                    CONST Int type=kotlin.Int value='8'
+              arg1: CONST Int type=kotlin.Int value='8'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Test 8 failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): T' type=T operator=INVOKE
+                $this: CALL '<get-withLabel1>() on T: () -> T' type=() -> T operator=GET_PROPERTY
+                  $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+                    CONST String type=kotlin.String value='bar'
+              arg1: CONST String type=kotlin.String value='bar'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Test 9 failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(): T' type=T operator=INVOKE
+                $this: CALL '<get-withLabel2>() on T: () -> T' type=() -> T operator=GET_PROPERTY
+                  $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+                    CONST String type=kotlin.String value='bar'
+              arg1: CONST String type=kotlin.String value='bar'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Test 10 failed'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

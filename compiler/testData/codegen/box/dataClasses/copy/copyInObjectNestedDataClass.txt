@@ -1,0 +1,59 @@
+MODULE <test-module>
+  FILE /copyInObjectNestedDataClass.kt
+    CLASS CLASS Bar
+      CONSTRUCTOR public constructor Bar(name: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'name: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Bar' type=Bar
+            value: GET_VAR 'value-parameter name: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Bar'
+      PROPERTY public final val name: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter name: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS Foo
+      CONSTRUCTOR public constructor Foo()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      FUN public abstract fun foo(): kotlin.String
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(): String' type=kotlin.String operator=null
+            $this: BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Foo()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                CLASS CLASS NestedFoo
+                  CONSTRUCTOR public constructor NestedFoo(bar: Bar)
+                    BLOCK_BODY
+                      DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                      SET_BACKING_FIELD 'bar: Bar' type=kotlin.Unit operator=null
+                        receiver: THIS of 'NestedFoo' type=box.<no name provided>.NestedFoo
+                        value: GET_VAR 'value-parameter bar: Bar' type=Bar operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+                      INSTANCE_INITIALIZER_CALL classDescriptor='NestedFoo'
+                  PROPERTY public final val bar: Bar
+                    EXPRESSION_BODY
+                      GET_VAR 'value-parameter bar: Bar' type=Bar operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+                  FUN public final fun copy(bar: Bar): box.<no name provided>.NestedFoo
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='copy(Bar): <no name provided>.NestedFoo'
+                        CALL 'constructor NestedFoo(Bar)' type=box.<no name provided>.NestedFoo operator=null
+                          $this: THIS of '<no name provided>' type=box.<no name provided>
+                          bar: GET_VAR 'value-parameter bar: Bar' type=Bar operator=null
+                FUN public open override fun foo(): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='foo(): String'
+                      CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: CALL '<get-bar>(): Bar' type=Bar operator=GET_PROPERTY
+                          $this: CALL 'copy(Bar): <no name provided>.NestedFoo' type=box.<no name provided>.NestedFoo operator=null
+                            $this: CALL 'constructor NestedFoo(Bar)' type=box.<no name provided>.NestedFoo operator=null
+                              $this: THIS of '<no name provided>' type=box.<no name provided>
+                              bar: CALL 'constructor Bar(String)' type=Bar operator=null
+                                name: CONST String type=kotlin.String value='Fail'
+                            bar: CALL 'constructor Bar(String)' type=Bar operator=null
+                              name: CONST String type=kotlin.String value='OK'
+              CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL

@@ -1,0 +1,103 @@
+MODULE <test-module>
+  FILE /kt1291.kt
+    PROPERTY public var result: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='0'
+    FUN public fun <T> kotlin.collections.Iterator<T>.foreach(action: (T) -> kotlin.Unit): kotlin.Unit
+      BLOCK_BODY
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=null
+            $this: $RECEIVER of 'foreach((T) -> Unit) on Iterator<T>: Unit' type=kotlin.collections.Iterator<T>
+          body: BLOCK type=kotlin.Unit operator=null
+            CALL 'invoke(T): Unit' type=kotlin.Unit operator=null
+              $this: GET_VAR 'value-parameter action: (T) -> Unit' type=(T) -> kotlin.Unit operator=null
+              p1: CALL 'next(): T' type=T operator=null
+                $this: $RECEIVER of 'foreach((T) -> Unit) on Iterator<T>: Unit' type=kotlin.collections.Iterator<T>
+    FUN public fun <In, Out> kotlin.collections.Iterator<In>.select(f: (In) -> Out): kotlin.collections.Iterator<Out>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='select((In) -> Out) on Iterator<In>: Iterator<Out>'
+          CALL 'constructor Selector(Iterator<In>, (In) -> Out)' type=Selector<In, Out> operator=null
+            source: $RECEIVER of 'select((In) -> Out) on Iterator<In>: Iterator<Out>' type=kotlin.collections.Iterator<In>
+            f: GET_VAR 'value-parameter f: (In) -> Out' type=(In) -> Out operator=null
+    CLASS CLASS Selector
+      CONSTRUCTOR public constructor Selector<In, Out>(source: kotlin.collections.Iterator<In>, f: (In) -> Out)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'source: Iterator<In>' type=kotlin.Unit operator=null
+            receiver: THIS of 'Selector' type=Selector<In, Out>
+            value: GET_VAR 'value-parameter source: Iterator<In>' type=kotlin.collections.Iterator<In> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'f: (In) -> Out' type=kotlin.Unit operator=null
+            receiver: THIS of 'Selector' type=Selector<In, Out>
+            value: GET_VAR 'value-parameter f: (In) -> Out' type=(In) -> Out operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Selector'
+      PROPERTY public final val source: kotlin.collections.Iterator<In>
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter source: Iterator<In>' type=kotlin.collections.Iterator<In> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val f: (In) -> Out
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter f: (In) -> Out' type=(In) -> Out operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public open override fun hasNext(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='hasNext(): Boolean'
+            CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=null
+              $this: CALL '<get-source>(): Iterator<In>' type=kotlin.collections.Iterator<In> operator=GET_PROPERTY
+                $this: THIS of 'Selector' type=Selector<In, Out>
+      FUN public open override fun next(): Out
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='next(): Out'
+            CALL 'invoke(In): Out' type=Out operator=null
+              $this: CALL '<get-f>(): (In) -> Out' type=(In) -> Out operator=GET_PROPERTY
+                $this: THIS of 'Selector' type=Selector<In, Out>
+              p1: CALL 'next(): In' type=In operator=null
+                $this: CALL '<get-source>(): Iterator<In>' type=kotlin.collections.Iterator<In> operator=GET_PROPERTY
+                  $this: THIS of 'Selector' type=Selector<In, Out>
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'foreach((Int) -> Unit) on Iterator<Int>: Unit' type=kotlin.Unit operator=null
+          $receiver: CALL 'select((Int) -> Int) on Iterator<Int>: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+            $receiver: CALL 'iterator(): Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+              $this: CALL 'constructor Array(Int, (Int) -> Int)' type=kotlin.Array<kotlin.Int> operator=null
+                size: CONST Int type=kotlin.Int value='4'
+                init: BLOCK type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Int
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(Int): Int'
+                        CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                          $this: GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                          other: CONST Int type=kotlin.Int value='1'
+                  CALLABLE_REFERENCE '<anonymous>(Int): Int' type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+            f: BLOCK type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+              FUN local final fun <anonymous>(i: kotlin.Int): kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): Int'
+                    CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                      $this: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='10'
+              CALLABLE_REFERENCE '<anonymous>(Int): Int' type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+          action: BLOCK type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(k: kotlin.Int): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(Int): Unit'
+                  BLOCK type=kotlin.Unit operator=PLUSEQ
+                    CALL '<set-result>(Int): Unit' type=kotlin.Unit operator=PLUSEQ
+                      <set-?>: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                        $this: CALL '<get-result>(): Int' type=kotlin.Int operator=PLUSEQ
+                        other: GET_VAR 'value-parameter k: Int' type=kotlin.Int operator=null
+            CALLABLE_REFERENCE '<anonymous>(Int): Unit' type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-result>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              arg1: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                  $this: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: CONST Int type=kotlin.Int value='10'
+                    other: CONST Int type=kotlin.Int value='20'
+                  other: CONST Int type=kotlin.Int value='30'
+                other: CONST Int type=kotlin.Int value='40'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              CALL '<get-result>(): Int' type=kotlin.Int operator=GET_PROPERTY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

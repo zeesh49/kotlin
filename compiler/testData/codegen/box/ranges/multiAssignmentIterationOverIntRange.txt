@@ -1,0 +1,84 @@
+MODULE <test-module>
+  FILE /multiAssignmentIterationOverIntRange.kt
+    FUN public operator fun kotlin.Int.component1(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='component1() on Int: String'
+          CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+            $this: CALL 'arrayListOf(vararg String): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              elements: VARARG type=Array<out String> varargElementType=String
+                CONST String type=kotlin.String value='zero'
+                CONST String type=kotlin.String value='one'
+                CONST String type=kotlin.String value='two'
+                CONST String type=kotlin.String value='three'
+            index: $RECEIVER of 'component1() on Int: String' type=kotlin.Int
+    FUN public operator fun kotlin.Int.component2(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='component2() on Int: Int'
+          CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+            $this: CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+              elements: VARARG type=Array<out Int> varargElementType=Int
+                CONST Int type=kotlin.Int value='0'
+                CONST Int type=kotlin.Int value='1'
+                CONST Int type=kotlin.Int value='4'
+                CONST Int type=kotlin.Int value='9'
+            index: $RECEIVER of 'component2() on Int: Int' type=kotlin.Int
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val strings: java.util.ArrayList<kotlin.String>
+          CALL 'arrayListOf(vararg String): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+        VAR val squares: java.util.ArrayList<kotlin.Int>
+          CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='1'
+                other: CONST Int type=kotlin.Int value='3'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val tmp1_loop_parameter: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              VAR val str: kotlin.String
+                CALL 'component1() on Int: String' type=kotlin.String operator=COMPONENT_N(index=1)
+                  $receiver: GET_VAR 'tmp1_loop_parameter: Int' type=kotlin.Int operator=null
+              VAR val sq: kotlin.Int
+                CALL 'component2() on Int: Int' type=kotlin.Int operator=COMPONENT_N(index=2)
+                  $receiver: GET_VAR 'tmp1_loop_parameter: Int' type=kotlin.Int operator=null
+              BLOCK type=kotlin.Boolean operator=null
+                CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+                  $this: GET_VAR 'strings: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+                  element: GET_VAR 'str: String' type=kotlin.String operator=null
+                CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+                  $this: GET_VAR 'squares: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+                  element: GET_VAR 'sq: Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'strings: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              arg1: CALL 'arrayListOf(vararg String): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+                elements: VARARG type=Array<out String> varargElementType=String
+                  CONST String type=kotlin.String value='one'
+                  CONST String type=kotlin.String value='two'
+                  CONST String type=kotlin.String value='three'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='FAIL: '
+              GET_VAR 'strings: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'squares: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+              arg1: CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+                elements: VARARG type=Array<out Int> varargElementType=Int
+                  CONST Int type=kotlin.Int value='1'
+                  CONST Int type=kotlin.Int value='4'
+                  CONST Int type=kotlin.Int value='9'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='FAIL: '
+              GET_VAR 'squares: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

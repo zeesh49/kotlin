@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /kt2350.kt
+    CLASS ENUM_CLASS A
+      CONSTRUCTOR private constructor A(b: kotlin.String)
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          SET_BACKING_FIELD 'b: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter b: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val b: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter b: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      ENUM_ENTRY enum entry E1
+        init: ENUM_CONSTRUCTOR_CALL 'constructor E1()' E1
+        class: CLASS ENUM_ENTRY E1
+          CONSTRUCTOR private constructor E1()
+            BLOCK_BODY
+              ENUM_CONSTRUCTOR_CALL 'constructor A(String)' super
+                b: CONST String type=kotlin.String value='OK'
+              INSTANCE_INITIALIZER_CALL classDescriptor='E1'
+          FUN public open override fun t(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='t(): String'
+                CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: THIS of 'E1' type=A.E1
+      FUN public abstract fun t(): kotlin.String
+      FUN public final fun values(): kotlin.Array<A>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): A
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 't(): String' type=kotlin.String operator=null
+            $this: GET_ENUM_VALUE 'E1' type=A

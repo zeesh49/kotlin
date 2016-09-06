@@ -1,0 +1,19 @@
+MODULE <test-module>
+  FILE /kt3421.kt
+    CLASS OBJECT Globals
+      CONSTRUCTOR private constructor Globals()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Globals'
+      FUN public final operator fun get(key: kotlin.String, remove: kotlin.Boolean = ...): kotlin.String
+        remove: EXPRESSION_BODY
+          CONST Boolean type=kotlin.Boolean value='true'
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(String, Boolean = ...): String'
+            CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'get(String, Boolean = ...): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+            $this: GET_OBJECT 'Globals' type=Globals
+            key: CONST String type=kotlin.String value='test'

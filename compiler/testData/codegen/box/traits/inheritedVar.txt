@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /inheritedVar.kt
+    CLASS INTERFACE A
+      PROPERTY public open var a: kotlin.Int
+        PROPERTY_GETTER public open fun <get-a>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-a>(): Int'
+              CONST Int type=kotlin.Int value='239'
+        PROPERTY_SETTER public open fun <set-a>(value: kotlin.Int): kotlin.Unit
+          BLOCK_BODY
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-a>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL 'constructor B()' type=B operator=null
+              arg1: CONST Int type=kotlin.Int value='239'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

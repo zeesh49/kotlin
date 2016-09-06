@@ -1,0 +1,119 @@
+MODULE <test-module>
+  FILE /delegationToVal.kt
+    CLASS INTERFACE IActing
+      FUN public abstract fun act(): kotlin.String
+    CLASS CLASS CActing
+      CONSTRUCTOR public constructor CActing(value: kotlin.String = ...)
+        value: EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'value: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'CActing' type=CActing
+            value: GET_VAR 'value-parameter value: String = ...' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='CActing'
+      PROPERTY public final val value: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: String = ...' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public open override fun act(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='act(): String'
+            CALL '<get-value>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'CActing' type=CActing
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test(acting: CActing = ...)
+        acting: EXPRESSION_BODY
+          CALL 'constructor CActing(String = ...)' type=CActing operator=null
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'acting: CActing' type=kotlin.Unit operator=null
+            receiver: THIS of 'Test' type=Test
+            value: GET_VAR 'value-parameter acting: CActing = ...' type=CActing operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      PROPERTY public final val acting: CActing
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter acting: CActing = ...' type=CActing operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY val `Test$IActing$delegate`: CActing
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter acting: CActing = ...' type=CActing operator=null
+      FUN public open override fun act(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='act(): String'
+            CALL 'act(): String' type=kotlin.String operator=null
+              $this: GET_VAR '`Test$IActing$delegate`: CActing' type=CActing operator=null
+    CLASS CLASS Test2
+      CONSTRUCTOR public constructor Test2(acting: CActing = ...)
+        acting: EXPRESSION_BODY
+          CALL 'constructor CActing(String = ...)' type=CActing operator=null
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'acting: CActing' type=kotlin.Unit operator=null
+            receiver: THIS of 'Test2' type=Test2
+            value: GET_VAR 'value-parameter acting: CActing = ...' type=CActing operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test2'
+      PROPERTY public open val acting: CActing
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter acting: CActing = ...' type=CActing operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY val `Test2$IActing$delegate`: CActing
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter acting: CActing = ...' type=CActing operator=null
+      FUN public open override fun act(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='act(): String'
+            CALL 'act(): String' type=kotlin.String operator=null
+              $this: GET_VAR '`Test2$IActing$delegate`: CActing' type=CActing operator=null
+    CLASS CLASS Test3
+      CONSTRUCTOR public constructor Test3()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Test2(CActing = ...)'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test3'
+      PROPERTY public open override val acting: CActing
+        EXPRESSION_BODY
+          CALL 'constructor CActing(String = ...)' type=CActing operator=null
+            value: CONST String type=kotlin.String value='OKOK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'getDeclaredField(String!): Field!' type=java.lang.reflect.Field! operator=null
+              $this: CALL '<get-java>() on KClass<Test>: Class<Test>' type=java.lang.Class<Test> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'Test' type=kotlin.reflect.KClass<Test>
+              p0: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='delegate_0'
+            RETURN type=kotlin.Nothing from='box(): String'
+              STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='delegate_0 field generated for class Test but should not'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'getDeclaredField(String!): Field!' type=java.lang.reflect.Field! operator=null
+              $this: CALL '<get-java>() on KClass<Test2>: Class<Test2>' type=java.lang.Class<Test2> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'Test2' type=kotlin.reflect.KClass<Test2>
+              p0: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='delegate_0'
+            RETURN type=kotlin.Nothing from='box(): String'
+              STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='$'
+                CONST String type=kotlin.String value='delegate_0 field generated for class Test but should not'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'act(): String' type=kotlin.String operator=null
+                $this: CALL '<get-acting>(): CActing' type=CActing operator=GET_PROPERTY
+                  $this: CALL 'constructor Test3()' type=Test3 operator=null
+              arg1: CONST String type=kotlin.String value='OKOK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail Test3'
+        VAR val test: Test
+          CALL 'constructor Test(CActing = ...)' type=Test operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'act(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'test: Test' type=Test operator=null

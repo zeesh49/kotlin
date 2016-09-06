@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /captureClassFields.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY @kotlin.jvm.JvmField public final val publicField: kotlin.String = "1"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='1'
+      PROPERTY @kotlin.jvm.JvmField internal final val internalField: kotlin.String = "2"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='2'
+      PROPERTY @kotlin.jvm.JvmField protected final val protectedField: kotlin.String = "34"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='34'
+      FUN public final fun test(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test(): String'
+            CALL 'invoke(): String' type=kotlin.String operator=null
+              $this: BLOCK type=() -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                      CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                        $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                          $this: CALL '<get-publicField>(): String' type=kotlin.String operator=GET_PROPERTY
+                            $this: THIS of 'A' type=A
+                          other: CALL '<get-internalField>(): String' type=kotlin.String operator=GET_PROPERTY
+                            $this: THIS of 'A' type=A
+                        other: CALL '<get-protectedField>(): String' type=kotlin.String operator=GET_PROPERTY
+                          $this: THIS of 'A' type=A
+                CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'test(): String' type=kotlin.String operator=null
+                $this: CALL 'constructor A()' type=A operator=null
+              arg1: CONST String type=kotlin.String value='1234'
+            then: RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

@@ -1,0 +1,29 @@
+MODULE <test-module>
+  FILE /K.kt
+    FUN public fun foo(x: kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(Int): Int'
+          GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(KParameter?, KParameter?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'single() on List<KParameter>: KParameter' type=kotlin.reflect.KParameter operator=null
+            $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'foo(Int): Int' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Int> operator=null
+          actual: CALL 'findParameterByName(String) on KCallable<*>: KParameter?' type=kotlin.reflect.KParameter? operator=null
+            $receiver: CALLABLE_REFERENCE 'foo(Int): Int' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Int> operator=null
+            name: CONST String type=kotlin.String value='x'
+        CALL 'assertNull(Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'findParameterByName(String) on KCallable<*>: KParameter?' type=kotlin.reflect.KParameter? operator=null
+            $receiver: CALLABLE_REFERENCE 'foo(Int): Int' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Int> operator=null
+            name: CONST String type=kotlin.String value='y'
+        CALL 'assertNull(Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'findParameterByName(String) on KCallable<*>: KParameter?' type=kotlin.reflect.KParameter? operator=null
+            $receiver: CALLABLE_REFERENCE 'bar(Int): Unit' type=kotlin.reflect.KFunction2<J, kotlin.Int, kotlin.Unit> operator=null
+            name: CONST String type=kotlin.String value='x'
+        CALL 'assertNull(Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'findParameterByName(String) on KCallable<*>: KParameter?' type=kotlin.reflect.KParameter? operator=null
+            $receiver: CALLABLE_REFERENCE 'bar(Int): Unit' type=kotlin.reflect.KFunction2<J, kotlin.Int, kotlin.Unit> operator=null
+            name: CONST String type=kotlin.String value='y'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

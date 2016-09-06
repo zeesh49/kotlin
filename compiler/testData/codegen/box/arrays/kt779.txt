@@ -1,0 +1,19 @@
+MODULE <test-module>
+  FILE /kt779.kt
+    PROPERTY public val <T> kotlin.Array<T>.length: kotlin.Int
+      PROPERTY_GETTER public fun kotlin.Array<T>.<get-length>(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-length>() on Array<T>: Int'
+            CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: $RECEIVER of 'length: Int on Array<T>' type=kotlin.Array<T>
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-length>() on Array<Int?>: Int' type=kotlin.Int operator=GET_PROPERTY
+                $receiver: CALL 'arrayOfNulls(Int): Array<Int?>' type=kotlin.Array<kotlin.Int?> operator=null
+                  size: CONST Int type=kotlin.Int value='10'
+              arg1: CONST Int type=kotlin.Int value='10'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

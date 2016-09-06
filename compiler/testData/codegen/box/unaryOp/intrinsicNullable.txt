@@ -1,0 +1,110 @@
+MODULE <test-module>
+  FILE /intrinsicNullable.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a1: kotlin.Byte? = -1.toByte()
+          CONST Byte type=kotlin.Byte value='-1'
+        VAR val a2: kotlin.Short? = -1.toShort()
+          CONST Short type=kotlin.Short value='-1'
+        VAR val a3: kotlin.Int? = -1
+          CONST Int type=kotlin.Int value='-1'
+        VAR val a4: kotlin.Long? = -1.toLong()
+          CONST Long type=kotlin.Long value='-1'
+        VAR val a5: kotlin.Double? = -1.0.toDouble()
+          CONST Double type=kotlin.Double value='-1.0'
+        VAR val a6: kotlin.Float? = -1.0.toFloat()
+          CONST Float type=kotlin.Float value='-1.0'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: BLOCK type=kotlin.Byte operator=EXCLEXCL
+                VAR val tmp0_notnull: kotlin.Byte?
+                  GET_VAR 'a1: Byte?' type=kotlin.Byte? operator=null
+                WHEN type=kotlin.Byte operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_notnull: Byte?' type=kotlin.Byte? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: GET_VAR 'tmp0_notnull: Byte?' type=kotlin.Byte? operator=null
+              arg1: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                $this: CONST Int type=kotlin.Int value='-1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: BLOCK type=kotlin.Short operator=EXCLEXCL
+                VAR val tmp1_notnull: kotlin.Short?
+                  GET_VAR 'a2: Short?' type=kotlin.Short? operator=null
+                WHEN type=kotlin.Short operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp1_notnull: Short?' type=kotlin.Short? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: GET_VAR 'tmp1_notnull: Short?' type=kotlin.Short? operator=null
+              arg1: CALL 'toShort(): Short' type=kotlin.Short operator=null
+                $this: CONST Int type=kotlin.Int value='-1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: BLOCK type=kotlin.Int operator=EXCLEXCL
+                VAR val tmp2_notnull: kotlin.Int?
+                  GET_VAR 'a3: Int?' type=kotlin.Int? operator=null
+                WHEN type=kotlin.Int operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp2_notnull: Int?' type=kotlin.Int? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: GET_VAR 'tmp2_notnull: Int?' type=kotlin.Int? operator=null
+              arg1: CONST Int type=kotlin.Int value='-1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: BLOCK type=kotlin.Long operator=EXCLEXCL
+                VAR val tmp3_notnull: kotlin.Long?
+                  GET_VAR 'a4: Long?' type=kotlin.Long? operator=null
+                WHEN type=kotlin.Long operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp3_notnull: Long?' type=kotlin.Long? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: GET_VAR 'tmp3_notnull: Long?' type=kotlin.Long? operator=null
+              arg1: CONST Long type=kotlin.Long value='-1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: BLOCK type=kotlin.Double operator=EXCLEXCL
+                VAR val tmp4_notnull: kotlin.Double?
+                  GET_VAR 'a5: Double?' type=kotlin.Double? operator=null
+                WHEN type=kotlin.Double operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp4_notnull: Double?' type=kotlin.Double? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: GET_VAR 'tmp4_notnull: Double?' type=kotlin.Double? operator=null
+              arg1: CONST Double type=kotlin.Double value='-1.0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 5'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: BLOCK type=kotlin.Float operator=EXCLEXCL
+                VAR val tmp5_notnull: kotlin.Float?
+                  GET_VAR 'a6: Float?' type=kotlin.Float? operator=null
+                WHEN type=kotlin.Float operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp5_notnull: Float?' type=kotlin.Float? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: GET_VAR 'tmp5_notnull: Float?' type=kotlin.Float? operator=null
+              arg1: CONST Float type=kotlin.Float value='-1.0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 6'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

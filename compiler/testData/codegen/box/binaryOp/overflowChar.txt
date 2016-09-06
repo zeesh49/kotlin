@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /overflowChar.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val c1: kotlin.Char = \u0000 ('?')
+          CALL 'toChar(): Char' type=kotlin.Char operator=null
+            $this: CONST Int type=kotlin.Int value='0'
+        VAR val c2: kotlin.Char = \uFFFF ('?')
+          CALL 'minus(Int): Char' type=kotlin.Char operator=MINUS
+            $this: GET_VAR 'c1: Char' type=kotlin.Char operator=null
+            other: CONST Int type=kotlin.Int value='1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Char): Int' type=kotlin.Int operator=LT
+              $this: GET_VAR 'c2: Char' type=kotlin.Char operator=null
+              other: GET_VAR 'c1: Char' type=kotlin.Char operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail: 0.toChar() - 1 should overflow to positive.'
+        VAR val c3: kotlin.Char = \u0000 ('?')
+          CALL 'plus(Int): Char' type=kotlin.Char operator=PLUS
+            $this: GET_VAR 'c2: Char' type=kotlin.Char operator=null
+            other: CONST Int type=kotlin.Int value='1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+            arg0: CALL 'compareTo(Char): Int' type=kotlin.Int operator=GT
+              $this: GET_VAR 'c3: Char' type=kotlin.Char operator=null
+              other: GET_VAR 'c2: Char' type=kotlin.Char operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail: FFFF.toChar() + 1 should overflow to zero.'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

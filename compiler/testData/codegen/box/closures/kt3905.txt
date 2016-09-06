@@ -1,0 +1,17 @@
+MODULE <test-module>
+  FILE /kt3905.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        FUN local final fun <T> foo(t: () -> T): T
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo(() -> T): T'
+              CALL 'invoke(): T' type=T operator=INVOKE
+                $this: GET_VAR 'value-parameter t: () -> T' type=() -> T operator=VARIABLE_AS_FUNCTION
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(() -> String): String' type=kotlin.String operator=null
+            t: BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    CONST String type=kotlin.String value='OK'
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA

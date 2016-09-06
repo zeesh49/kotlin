@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /kt504.kt
+    CLASS CLASS Identifier
+      CONSTRUCTOR public constructor Identifier()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Identifier'
+      PROPERTY private final var myNullable: kotlin.Boolean
+        EXPRESSION_BODY
+          CONST Boolean type=kotlin.Boolean value='true'
+      CLASS OBJECT companion object of Identifier
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of Identifier'
+        FUN public open fun init(isNullable: kotlin.Boolean): mult_constructors_3_bug.Identifier
+          BLOCK_BODY
+            VAR val id: mult_constructors_3_bug.Identifier
+              CALL 'constructor Identifier()' type=mult_constructors_3_bug.Identifier operator=null
+            CALL '<set-myNullable>(Boolean): Unit' type=kotlin.Unit operator=EQ
+              $this: GET_VAR 'id: Identifier' type=mult_constructors_3_bug.Identifier operator=null
+              <set-?>: GET_VAR 'value-parameter isNullable: Boolean' type=kotlin.Boolean operator=null
+            RETURN type=kotlin.Nothing from='init(Boolean): Identifier'
+              GET_VAR 'id: Identifier' type=mult_constructors_3_bug.Identifier operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'init(Boolean): Identifier' type=mult_constructors_3_bug.Identifier operator=null
+          $this: GET_OBJECT 'companion object of Identifier' type=mult_constructors_3_bug.Identifier.Companion
+          isNullable: CONST Boolean type=kotlin.Boolean value='true'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,50 @@
+MODULE <test-module>
+  FILE /kt10715.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var a: Base
+          CALL 'constructor Base()' type=Base operator=null
+        VAR val count: kotlin.Int
+          CALL '<get-count>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: GET_VAR 'a: Base' type=Base operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'count: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              GET_VAR 'count: Int' type=kotlin.Int operator=null
+        VAR val count2: kotlin.Int
+          CALL '<get-count>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: GET_VAR 'a: Base' type=Base operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'count2: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 2: '
+              GET_VAR 'count2: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    CLASS CLASS Base
+      CONSTRUCTOR public constructor Base()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Base'
+      PROPERTY public final var count: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+        PROPERTY_GETTER public final fun <get-count>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-count>(): Int'
+              BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                VAR val tmp0: kotlin.Int
+                  GET_BACKING_FIELD 'count: Int' type=kotlin.Int operator=POSTFIX_INCR
+                SET_BACKING_FIELD 'count: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                  value: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                    $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                GET_VAR 'tmp0: Int' type=kotlin.Int operator=null

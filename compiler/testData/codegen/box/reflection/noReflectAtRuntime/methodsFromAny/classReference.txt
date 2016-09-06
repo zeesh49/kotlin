@@ -1,0 +1,47 @@
+MODULE <test-module>
+  FILE /classReference.kt
+    CLASS CLASS M
+      CONSTRUCTOR public constructor M()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='M'
+    FUN public fun check(x: kotlin.reflect.KClass<*>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assertEquals(KClass<out Any>, KClass<out Any>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'value-parameter x: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+          actual: CALL '<get-kotlin>() on Class<out Any>: KClass<out Any>' type=kotlin.reflect.KClass<out kotlin.Any> operator=GET_PROPERTY
+            $receiver: CALL '<get-java>() on KClass<*>: Class<out Any>' type=java.lang.Class<out kotlin.Any> operator=GET_PROPERTY
+              $receiver: GET_VAR 'value-parameter x: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'value-parameter x: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+          actual: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: CALL '<get-kotlin>() on Class<out Any>: KClass<out Any>' type=kotlin.reflect.KClass<out kotlin.Any> operator=GET_PROPERTY
+              $receiver: CALL '<get-java>() on KClass<*>: Class<out Any>' type=java.lang.Class<out kotlin.Any> operator=GET_PROPERTY
+                $receiver: GET_VAR 'value-parameter x: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'toString(): String' type=kotlin.String operator=null
+              $this: CALL '<get-java>() on KClass<*>: Class<out Any>' type=java.lang.Class<out kotlin.Any> operator=GET_PROPERTY
+                $receiver: GET_VAR 'value-parameter x: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+            other: CONST String type=kotlin.String value=' (Kotlin reflection is not available)'
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'value-parameter x: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'check(KClass<*>): Unit' type=kotlin.Unit operator=null
+          x: CLASS_REFERENCE 'M' type=kotlin.reflect.KClass<M>
+        CALL 'check(KClass<*>): Unit' type=kotlin.Unit operator=null
+          x: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+        CALL 'check(KClass<*>): Unit' type=kotlin.Unit operator=null
+          x: CLASS_REFERENCE 'Error' type=kotlin.reflect.KClass<kotlin.Error /* = java.lang.Error */>
+        CALL 'check(KClass<*>): Unit' type=kotlin.Unit operator=null
+          x: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+        CALL 'check(KClass<*>): Unit' type=kotlin.Unit operator=null
+          x: CLASS_REFERENCE 'Integer' type=kotlin.reflect.KClass<java.lang.Integer>
+        CALL 'check(KClass<*>): Unit' type=kotlin.Unit operator=null
+          x: CLASS_REFERENCE 'MutableList' type=kotlin.reflect.KClass<kotlin.collections.MutableList<*>>
+        CALL 'check(KClass<*>): Unit' type=kotlin.Unit operator=null
+          x: CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.String>>
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

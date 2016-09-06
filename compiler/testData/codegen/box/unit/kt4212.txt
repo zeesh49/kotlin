@@ -1,0 +1,49 @@
+MODULE <test-module>
+  FILE /kt4212.kt
+    FUN public fun foo(): kotlin.Any?
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(): Any?'
+          CALL 'bar(): Unit' type=kotlin.Unit operator=null
+    FUN public fun bar(): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun baz(): kotlin.Any?
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='baz(): Any?'
+          CALL 'bar(): Unit' type=kotlin.Unit operator=null
+    FUN public fun quux(): kotlin.Unit?
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='quux(): Unit?'
+          CALL 'bar(): Unit' type=kotlin.Unit operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'foo(): Any?' type=kotlin.Any? operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(): Any?' type=kotlin.Any? operator=null
+              arg1: GET_OBJECT 'Unit' type=kotlin.Unit
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(): Any?' type=kotlin.Any? operator=null
+              arg1: CALL 'bar(): Unit' type=kotlin.Unit operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'bar(): Unit' type=kotlin.Unit operator=null
+              arg1: CALL 'baz(): Any?' type=kotlin.Any? operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'baz(): Any?' type=kotlin.Any? operator=null
+              arg1: CALL 'quux(): Unit?' type=kotlin.Unit? operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 4'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

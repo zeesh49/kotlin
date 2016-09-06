@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /nestedInPackage.kt
+    CLASS CLASS Outer
+      CONSTRUCTOR public constructor Outer()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+      CLASS CLASS Nested
+        CONSTRUCTOR public constructor Nested()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Nested'
+        PROPERTY public final val O: kotlin.String = "O"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='O'
+        PROPERTY public final val K: kotlin.String = "K"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='K'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL '<get-O>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: CALL 'constructor Nested()' type=Package.Outer.Nested operator=null
+            other: CALL '<get-K>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: CALL 'constructor Nested()' type=Package.Outer.Nested operator=null

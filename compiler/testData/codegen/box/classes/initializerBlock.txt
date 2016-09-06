@@ -1,0 +1,27 @@
+MODULE <test-module>
+  FILE /initializerBlock.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      PROPERTY public final var f: kotlin.Int
+      ANONYMOUS_INITIALIZER C
+        BLOCK_BODY
+          CALL '<set-f>(Int): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'C' type=C
+            <set-?>: CONST Int type=kotlin.Int value='610'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val c: C
+          CALL 'constructor C()' type=C operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-f>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'c: C' type=C operator=null
+              arg1: CONST Int type=kotlin.Int value='610'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

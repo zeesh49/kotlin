@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /K.kt
+    FUN public fun nonNullString(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='nonNullString(): String'
+          CONST String type=kotlin.String value=''
+    FUN public fun nullableString(): kotlin.String?
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='nullableString(): String?'
+          CONST String type=kotlin.String value=''
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertNotEquals(KType, KType, String? = ...): Unit' type=kotlin.Unit operator=null
+          illegal: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'foo(): String!' type=kotlin.reflect.KFunction0<kotlin.String!> operator=null
+          actual: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'nonNullString(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+        CALL 'assertNotEquals(KType, KType, String? = ...): Unit' type=kotlin.Unit operator=null
+          illegal: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'foo(): String!' type=kotlin.reflect.KFunction0<kotlin.String!> operator=null
+          actual: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'nullableString(): String?' type=kotlin.reflect.KFunction0<kotlin.String?> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

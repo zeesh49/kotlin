@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /kt2271.kt
+    FUN public fun foo(i: kotlin.Int, j: kotlin.Int = ...): kotlin.Int
+      j: EXPRESSION_BODY
+        GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(Int, Int = ...): Int'
+          GET_VAR 'value-parameter j: Int = ...' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'foo(Int, Int = ...): Int' type=kotlin.Int operator=null
+                i: CONST Int type=kotlin.Int value='1'
+              arg1: CONST Int type=kotlin.Int value='1'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

@@ -1,0 +1,92 @@
+MODULE <test-module>
+  FILE /modifierFlags.kt
+    CLASS ENUM_CLASS En
+      CONSTRUCTOR private constructor En()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='En'
+      ENUM_ENTRY enum entry Y
+        init: ENUM_CONSTRUCTOR_CALL 'constructor En()' Y
+      FUN public final fun values(): kotlin.Array<En>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): En
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val klass: java.lang.Class<En>
+          CALL '<get-java>() on KClass<En>: Class<En>' type=java.lang.Class<En> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'En' type=kotlin.reflect.KClass<En>
+        VAR val superclass: kotlin.String!
+          CALL '<get-name>() on Class<in En!>: String!' type=kotlin.String! operator=GET_PROPERTY
+            $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<in En!>
+              CALL '<get-superclass>() on Class<En>: Class<in En!>!' type=java.lang.Class<in En!>! operator=GET_PROPERTY
+                $receiver: GET_VAR 'klass: Class<En>' type=java.lang.Class<En> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'superclass: String!' type=kotlin.String! operator=null
+              arg1: CONST String type=kotlin.String value='java.lang.Enum'
+          then: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='Fail superclass: '
+            GET_VAR 'superclass: String!' type=kotlin.String! operator=null
+        VAR val enumModifiers: kotlin.Int
+          CALL '<get-modifiers>() on Class<En>: Int' type=kotlin.Int operator=GET_PROPERTY
+            $receiver: GET_VAR 'klass: Class<En>' type=java.lang.Class<En> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'and(Int): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'enumModifiers: Int' type=kotlin.Int operator=null
+              other: CONST Int type=kotlin.Int value='16384'
+            arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail ACC_ENUM on class'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'and(Int): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'enumModifiers: Int' type=kotlin.Int operator=null
+              other: GET_BACKING_FIELD 'FINAL: Int' type=kotlin.Int operator=GET_PROPERTY
+            arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail FINAL on class'
+        VAR val entry: java.lang.reflect.Field!
+          CALL 'getField(String!): Field!' type=java.lang.reflect.Field! operator=null
+            $this: GET_VAR 'klass: Class<En>' type=java.lang.Class<En> operator=null
+            p0: CONST String type=kotlin.String value='Y'
+        VAR val entryModifiers: kotlin.Int
+          CALL '<get-modifiers>() on Field: Int' type=kotlin.Int operator=GET_PROPERTY
+            $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+              GET_VAR 'entry: Field!' type=java.lang.reflect.Field! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'and(Int): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'entryModifiers: Int' type=kotlin.Int operator=null
+              other: CONST Int type=kotlin.Int value='16384'
+            arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail ACC_ENUM on entry'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'and(Int): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'entryModifiers: Int' type=kotlin.Int operator=null
+              other: GET_BACKING_FIELD 'FINAL: Int' type=kotlin.Int operator=GET_PROPERTY
+            arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail FINAL on entry'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'and(Int): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'entryModifiers: Int' type=kotlin.Int operator=null
+              other: GET_BACKING_FIELD 'STATIC: Int' type=kotlin.Int operator=GET_PROPERTY
+            arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail FINAL on entry'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'and(Int): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'entryModifiers: Int' type=kotlin.Int operator=null
+              other: GET_BACKING_FIELD 'PUBLIC: Int' type=kotlin.Int operator=GET_PROPERTY
+            arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail FINAL on entry'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

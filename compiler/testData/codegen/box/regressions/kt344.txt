@@ -1,0 +1,582 @@
+MODULE <test-module>
+  FILE /kt344.kt
+    FUN public fun s0(): kotlin.Boolean
+      BLOCK_BODY
+        VAR val y: kotlin.String = "222"
+          CONST String type=kotlin.String value='222'
+        VAR val foo: () -> kotlin.String
+          BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                VAR val bar: () -> kotlin.String
+                  BLOCK type=() -> kotlin.String operator=LAMBDA
+                    FUN local final fun <anonymous>(): kotlin.String
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                          GET_VAR 'y: String' type=kotlin.String operator=null
+                    CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+                    $this: GET_VAR 'bar: () -> String' type=() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        RETURN type=kotlin.Nothing from='s0(): Boolean'
+          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+              $this: GET_VAR 'foo: () -> String' type=() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+            arg1: CONST String type=kotlin.String value='222'
+    FUN public fun s1(): kotlin.Boolean
+      BLOCK_BODY
+        VAR var x: kotlin.String
+          CONST String type=kotlin.String value='222'
+        VAR val foo: () -> kotlin.Unit
+          BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                VAR val bar: () -> kotlin.Unit
+                  BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                    FUN local final fun <anonymous>(): kotlin.Unit
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                          SET_VAR 'x: String' type=kotlin.Unit operator=EQ
+                            CONST String type=kotlin.String value='aaa'
+                    CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+                    $this: GET_VAR 'bar: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'foo: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+        RETURN type=kotlin.Nothing from='s1(): Boolean'
+          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'x: String' type=kotlin.String operator=null
+            arg1: CONST String type=kotlin.String value='aaa'
+    FUN public fun t1(): kotlin.Boolean
+      BLOCK_BODY
+        VAR var x: kotlin.String
+          CONST String type=kotlin.String value='111'
+        VAR val y: kotlin.String
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: GET_VAR 'x: String' type=kotlin.String operator=null
+            other: CONST String type=kotlin.String value='22'
+        VAR val foo: () -> kotlin.Unit
+          BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                SET_VAR 'x: String' type=kotlin.Unit operator=EQ
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                    $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                      $this: GET_VAR 'x: String' type=kotlin.String operator=null
+                      other: CONST String type=kotlin.String value='45'
+                    other: GET_VAR 'y: String' type=kotlin.String operator=null
+                SET_VAR 'x: String' type=kotlin.Unit operator=EQ
+                  CALL 'substring(Int) on String: String' type=kotlin.String operator=null
+                    $receiver: GET_VAR 'x: String' type=kotlin.String operator=null
+                    startIndex: CONST Int type=kotlin.Int value='3'
+                SET_VAR 'x: String' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 'x: String' type=kotlin.String operator=PLUSEQ
+                    other: CONST String type=kotlin.String value='aaa'
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  GET_OBJECT 'Unit' type=kotlin.Unit
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'foo: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+        SET_VAR 'x: String' type=kotlin.Unit operator=PLUSEQ
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+            $this: GET_VAR 'x: String' type=kotlin.String operator=PLUSEQ
+            other: CONST String type=kotlin.String value='bbb'
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp0_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(String!): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: GET_VAR 'x: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='t1(): Boolean'
+          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'x: String' type=kotlin.String operator=null
+            arg1: CONST String type=kotlin.String value='4511122aaabbb'
+    FUN public fun t2(): kotlin.Boolean
+      BLOCK_BODY
+        VAR var x: kotlin.Int
+          CONST Int type=kotlin.Int value='111'
+        VAR val y: kotlin.Int
+          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+            $this: GET_VAR 'x: Int' type=kotlin.Int operator=null
+            other: CONST Int type=kotlin.Int value='22'
+        VAR val foo: () -> kotlin.Unit
+          BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                SET_VAR 'x: Int' type=kotlin.Unit operator=EQ
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                      $this: GET_VAR 'x: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='5'
+                    other: GET_VAR 'y: Int' type=kotlin.Int operator=null
+                SET_VAR 'x: Int' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                    $this: GET_VAR 'x: Int' type=kotlin.Int operator=PLUSEQ
+                    other: CONST Int type=kotlin.Int value='5'
+                BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                  VAR val tmp0: kotlin.Int
+                    GET_VAR 'x: Int' type=kotlin.Int operator=POSTFIX_INCR
+                  SET_VAR 'x: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                    CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  GET_OBJECT 'Unit' type=kotlin.Unit
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'foo: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+        SET_VAR 'x: Int' type=kotlin.Unit operator=MINUSEQ
+          CALL 'minus(Int): Int' type=kotlin.Int operator=MINUSEQ
+            $this: GET_VAR 'x: Int' type=kotlin.Int operator=MINUSEQ
+            other: CONST Int type=kotlin.Int value='55'
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp0_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(Int): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: GET_VAR 'x: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='t2(): Boolean'
+          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'x: Int' type=kotlin.Int operator=null
+            arg1: CONST Int type=kotlin.Int value='200'
+    FUN public fun t3(): kotlin.Boolean
+      BLOCK_BODY
+        VAR var x: kotlin.Boolean
+          CONST Boolean type=kotlin.Boolean value='true'
+        VAR val foo: () -> kotlin.Unit
+          BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                SET_VAR 'x: Boolean' type=kotlin.Unit operator=EQ
+                  CONST Boolean type=kotlin.Boolean value='false'
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  GET_OBJECT 'Unit' type=kotlin.Unit
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'foo: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+        RETURN type=kotlin.Nothing from='t3(): Boolean'
+          CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: GET_VAR 'x: Boolean' type=kotlin.Boolean operator=null
+    FUN public fun t4(): kotlin.Boolean
+      BLOCK_BODY
+        VAR var x: kotlin.Float
+          CALL 'toFloat(): Float' type=kotlin.Float operator=null
+            $this: CONST Int type=kotlin.Int value='100'
+        VAR val y: kotlin.Float
+          CALL 'plus(Int): Float' type=kotlin.Float operator=PLUS
+            $this: GET_VAR 'x: Float' type=kotlin.Float operator=null
+            other: CONST Int type=kotlin.Int value='22'
+        VAR val foo: () -> kotlin.Unit
+          BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                SET_VAR 'x: Float' type=kotlin.Unit operator=EQ
+                  CALL 'plus(Float): Float' type=kotlin.Float operator=PLUS
+                    $this: CALL 'plus(Float): Float' type=kotlin.Float operator=PLUS
+                      $this: GET_VAR 'x: Float' type=kotlin.Float operator=null
+                      other: CALL 'toFloat(): Float' type=kotlin.Float operator=null
+                        $this: CONST Int type=kotlin.Int value='200'
+                    other: GET_VAR 'y: Float' type=kotlin.Float operator=null
+                SET_VAR 'x: Float' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Int): Float' type=kotlin.Float operator=PLUSEQ
+                    $this: GET_VAR 'x: Float' type=kotlin.Float operator=PLUSEQ
+                    other: CONST Int type=kotlin.Int value='18'
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  GET_OBJECT 'Unit' type=kotlin.Unit
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'foo: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp0_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(Float): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: GET_VAR 'x: Float' type=kotlin.Float operator=null
+        RETURN type=kotlin.Nothing from='t4(): Boolean'
+          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'x: Float' type=kotlin.Float operator=null
+            arg1: CALL 'toFloat(): Float' type=kotlin.Float operator=null
+              $this: CONST Int type=kotlin.Int value='440'
+    FUN public fun t5(): kotlin.Boolean
+      BLOCK_BODY
+        VAR var x: kotlin.Double
+          CALL 'toDouble(): Double' type=kotlin.Double operator=null
+            $this: CONST Int type=kotlin.Int value='100'
+        VAR val y: kotlin.Double
+          CALL 'plus(Int): Double' type=kotlin.Double operator=PLUS
+            $this: GET_VAR 'x: Double' type=kotlin.Double operator=null
+            other: CONST Int type=kotlin.Int value='22'
+        VAR val foo: () -> kotlin.Unit
+          BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                SET_VAR 'x: Double' type=kotlin.Unit operator=EQ
+                  CALL 'plus(Double): Double' type=kotlin.Double operator=PLUS
+                    $this: CALL 'plus(Double): Double' type=kotlin.Double operator=PLUS
+                      $this: GET_VAR 'x: Double' type=kotlin.Double operator=null
+                      other: CALL 'toDouble(): Double' type=kotlin.Double operator=null
+                        $this: CONST Int type=kotlin.Int value='200'
+                    other: GET_VAR 'y: Double' type=kotlin.Double operator=null
+                SET_VAR 'x: Double' type=kotlin.Unit operator=MINUSEQ
+                  CALL 'minus(Int): Double' type=kotlin.Double operator=MINUSEQ
+                    $this: GET_VAR 'x: Double' type=kotlin.Double operator=MINUSEQ
+                    other: CONST Int type=kotlin.Int value='22'
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  GET_OBJECT 'Unit' type=kotlin.Unit
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'foo: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp0_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(Double): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: GET_VAR 'x: Double' type=kotlin.Double operator=null
+        RETURN type=kotlin.Nothing from='t5(): Boolean'
+          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'x: Double' type=kotlin.Double operator=null
+            arg1: CALL 'toDouble(): Double' type=kotlin.Double operator=null
+              $this: CONST Int type=kotlin.Int value='400'
+    FUN public fun t6(): kotlin.Boolean
+      BLOCK_BODY
+        VAR var x: kotlin.Byte
+          CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+            $this: CONST Int type=kotlin.Int value='20'
+        VAR val y: kotlin.Int
+          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+            $this: GET_VAR 'x: Byte' type=kotlin.Byte operator=null
+            other: CONST Int type=kotlin.Int value='22'
+        VAR val foo: () -> kotlin.Unit
+          BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                SET_VAR 'x: Byte' type=kotlin.Unit operator=EQ
+                  CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                    $this: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                      $this: CALL 'plus(Byte): Int' type=kotlin.Int operator=PLUS
+                        $this: GET_VAR 'x: Byte' type=kotlin.Byte operator=null
+                        other: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                          $this: CONST Int type=kotlin.Int value='20'
+                      other: GET_VAR 'y: Int' type=kotlin.Int operator=null
+                SET_VAR 'x: Byte' type=kotlin.Unit operator=EQ
+                  CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                    $this: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                      $this: GET_VAR 'x: Byte' type=kotlin.Byte operator=null
+                      other: CONST Int type=kotlin.Int value='2'
+                BLOCK type=kotlin.Byte operator=POSTFIX_DECR
+                  VAR val tmp0: kotlin.Byte
+                    GET_VAR 'x: Byte' type=kotlin.Byte operator=POSTFIX_DECR
+                  SET_VAR 'x: Byte' type=kotlin.Unit operator=POSTFIX_DECR
+                    CALL 'dec(): Byte' type=kotlin.Byte operator=POSTFIX_DECR
+                      $this: GET_VAR 'tmp0: Byte' type=kotlin.Byte operator=null
+                  GET_VAR 'tmp0: Byte' type=kotlin.Byte operator=null
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  GET_OBJECT 'Unit' type=kotlin.Unit
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'foo: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp0_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(Any!): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: GET_VAR 'x: Byte' type=kotlin.Byte operator=null
+        RETURN type=kotlin.Nothing from='t6(): Boolean'
+          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'x: Byte' type=kotlin.Byte operator=null
+            arg1: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+              $this: CONST Int type=kotlin.Int value='83'
+    FUN public fun t7(): kotlin.Boolean
+      BLOCK_BODY
+        VAR var x: kotlin.Char
+          CONST Char type=kotlin.Char value='a'
+        VAR val foo: () -> kotlin.Unit
+          BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                SET_VAR 'x: Char' type=kotlin.Unit operator=EQ
+                  CONST Char type=kotlin.Char value='b'
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  GET_OBJECT 'Unit' type=kotlin.Unit
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'foo: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp0_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(Char): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: GET_VAR 'x: Char' type=kotlin.Char operator=null
+        RETURN type=kotlin.Nothing from='t7(): Boolean'
+          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'x: Char' type=kotlin.Char operator=null
+            arg1: CONST Char type=kotlin.Char value='b'
+    FUN public fun t8(): kotlin.Boolean
+      BLOCK_BODY
+        VAR var x: kotlin.Short
+          CALL 'toShort(): Short' type=kotlin.Short operator=null
+            $this: CONST Int type=kotlin.Int value='20'
+        VAR val foo: () -> kotlin.Unit
+          BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                VAR val bar: () -> kotlin.Unit
+                  BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                    FUN local final fun <anonymous>(): kotlin.Unit
+                      BLOCK_BODY
+                        SET_VAR 'x: Short' type=kotlin.Unit operator=EQ
+                          CALL 'toShort(): Short' type=kotlin.Short operator=null
+                            $this: CONST Int type=kotlin.Int value='30'
+                        RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                          GET_OBJECT 'Unit' type=kotlin.Unit
+                    CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+                CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+                  $this: GET_VAR 'bar: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  GET_OBJECT 'Unit' type=kotlin.Unit
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'foo: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+        RETURN type=kotlin.Nothing from='t8(): Boolean'
+          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'x: Short' type=kotlin.Short operator=null
+            arg1: CALL 'toShort(): Short' type=kotlin.Short operator=null
+              $this: CONST Int type=kotlin.Int value='30'
+    FUN public fun t9(x0: kotlin.Int): kotlin.Boolean
+      BLOCK_BODY
+        VAR var x: kotlin.Int
+          GET_VAR 'value-parameter x0: Int' type=kotlin.Int operator=null
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+              $this: GET_VAR 'x: Int' type=kotlin.Int operator=null
+              other: CONST Int type=kotlin.Int value='100'
+          body: BLOCK type=kotlin.Int operator=null
+            BLOCK type=kotlin.Int operator=POSTFIX_INCR
+              VAR val tmp0: kotlin.Int
+                GET_VAR 'x: Int' type=kotlin.Int operator=POSTFIX_INCR
+              SET_VAR 'x: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='t9(Int): Boolean'
+          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'x: Int' type=kotlin.Int operator=null
+            arg1: CONST Int type=kotlin.Int value='100'
+    FUN public fun t10(): kotlin.Boolean
+      BLOCK_BODY
+        VAR var y: kotlin.Int
+          CONST Int type=kotlin.Int value='1'
+        VAR val foo: () -> kotlin.Unit
+          BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                VAR val bar: () -> kotlin.Unit
+                  BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                    FUN local final fun <anonymous>(): kotlin.Unit
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                          SET_VAR 'y: Int' type=kotlin.Unit operator=EQ
+                            CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                              $this: GET_VAR 'y: Int' type=kotlin.Int operator=null
+                              other: CONST Int type=kotlin.Int value='1'
+                    CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+                    $this: GET_VAR 'bar: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'foo: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+        RETURN type=kotlin.Nothing from='t10(): Boolean'
+          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'y: Int' type=kotlin.Int operator=null
+            arg1: CONST Int type=kotlin.Int value='2'
+    FUN public fun t11(x0: kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        VAR var x: kotlin.Int
+          GET_VAR 'value-parameter x0: Int' type=kotlin.Int operator=null
+        VAR val foo: () -> kotlin.Unit
+          BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                SET_VAR 'x: Int' type=kotlin.Unit operator=EQ
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: GET_VAR 'x: Int' type=kotlin.Int operator=null
+                    other: CONST Int type=kotlin.Int value='1'
+                VAR val bar: () -> kotlin.Unit
+                  BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                    FUN local final fun <anonymous>(): kotlin.Unit
+                      BLOCK_BODY
+                        SET_VAR 'x: Int' type=kotlin.Unit operator=EQ
+                          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                            $this: GET_VAR 'x: Int' type=kotlin.Int operator=null
+                            other: CONST Int type=kotlin.Int value='1'
+                        RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                          SET_VAR 'x: Int' type=kotlin.Unit operator=PLUSEQ
+                            CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                              $this: GET_VAR 'x: Int' type=kotlin.Int operator=PLUSEQ
+                              other: CONST Int type=kotlin.Int value='3'
+                    CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+                    $this: GET_VAR 'bar: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+              $this: GET_VAR 'x: Int' type=kotlin.Int operator=null
+              other: CONST Int type=kotlin.Int value='100'
+          body: BLOCK type=kotlin.Unit operator=null
+            CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+              $this: GET_VAR 'foo: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+        RETURN type=kotlin.Nothing from='t11(Int): Int'
+          GET_VAR 'x: Int' type=kotlin.Int operator=null
+    FUN public fun t12(x: kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        VAR var y: kotlin.Int
+          GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+        VAR val runnable: t12.<no name provided>
+          BLOCK type=t12.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              FUN public open override fun run(): kotlin.Unit
+                BLOCK_BODY
+                  SET_VAR 'y: Int' type=kotlin.Unit operator=EQ
+                    CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                      $this: GET_VAR 'y: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='1'
+            CALL 'constructor <no name provided>()' type=t12.<no name provided> operator=OBJECT_LITERAL
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+              $this: GET_VAR 'y: Int' type=kotlin.Int operator=null
+              other: CONST Int type=kotlin.Int value='100'
+          body: BLOCK type=kotlin.Unit operator=null
+            CALL 'run(): Unit' type=kotlin.Unit operator=null
+              $this: GET_VAR 'runnable: <no name provided>' type=t12.<no name provided> operator=null
+        RETURN type=kotlin.Nothing from='t12(Int): Int'
+          GET_VAR 'y: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 's0(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='s0 fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 's1(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='s1 fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 't1(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='t1 fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 't2(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='t2 fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 't3(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='t3 fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 't4(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='t4 fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 't5(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='t5 fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 't6(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='t6 fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 't7(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='t7 fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 't8(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='t8 fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 't9(Int): Boolean' type=kotlin.Boolean operator=null
+              x0: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='t9 fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 't10(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='t10 fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 't11(Int): Int' type=kotlin.Int operator=null
+                x0: CONST Int type=kotlin.Int value='1'
+              arg1: CONST Int type=kotlin.Int value='101'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='t11 fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 't12(Int): Int' type=kotlin.Int operator=null
+                x: CONST Int type=kotlin.Int value='0'
+              arg1: CONST Int type=kotlin.Int value='100'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='t12 fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /innerWithExistingClassObject.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS OBJECT companion object of A
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of A'
+      CLASS ENUM_CLASS E
+        CONSTRUCTOR private constructor E()
+          BLOCK_BODY
+            ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+            INSTANCE_INITIALIZER_CALL classDescriptor='E'
+        ENUM_ENTRY enum entry OK
+          init: ENUM_CONSTRUCTOR_CALL 'constructor E()' OK
+        FUN public final fun values(): kotlin.Array<A.E>
+          SYNTHETIC_BODY kind=ENUM_VALUES
+        FUN public final fun valueOf(value: kotlin.String): A.E
+          SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'toString(): String' type=kotlin.String operator=null
+            $this: GET_ENUM_VALUE 'OK' type=A.E

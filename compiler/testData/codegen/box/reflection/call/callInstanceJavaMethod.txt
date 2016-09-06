@@ -1,0 +1,50 @@
+MODULE <test-module>
+  FILE /K.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f: kotlin.reflect.KFunction4<J, kotlin.IntArray!, kotlin.Array<(out) kotlin.Any!>!, kotlin.Int!, kotlin.String!>
+          CALLABLE_REFERENCE 'foo(IntArray!, Array<(out) Any!>!, Int!): String!' type=kotlin.reflect.KFunction4<J, kotlin.IntArray!, kotlin.Array<(out) kotlin.Any!>!, kotlin.Int!, kotlin.String!> operator=null
+        CALL 'assertEquals(List<Type>, List<Type>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(vararg Class<out Any>): List<Class<out Any>>' type=kotlin.collections.List<java.lang.Class<out kotlin.Any>> operator=null
+            elements: VARARG type=Array<out Class<out Any>> varargElementType=Class<out Any>
+              CALL '<get-java>() on KClass<J>: Class<J>' type=java.lang.Class<J> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'J' type=kotlin.reflect.KClass<J>
+              CALL '<get-java>() on KClass<IntArray>: Class<IntArray>' type=java.lang.Class<kotlin.IntArray> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'IntArray' type=kotlin.reflect.KClass<kotlin.IntArray>
+              CALL '<get-java>() on KClass<Array<Any>>: Class<Array<Any>>' type=java.lang.Class<kotlin.Array<kotlin.Any>> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Any>>
+              CALL '<get-java>() on KClass<Integer>: Class<Integer>' type=java.lang.Class<java.lang.Integer> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'Integer' type=kotlin.reflect.KClass<java.lang.Integer>
+          actual: CALL 'map((KParameter) -> Type) on Iterable<KParameter>: List<Type>' type=kotlin.collections.List<java.lang.reflect.Type> operator=null
+            $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: GET_VAR 'f: KFunction4<J, IntArray!, Array<(out) Any!>!, Int!, String!>' type=kotlin.reflect.KFunction4<J, kotlin.IntArray!, kotlin.Array<(out) kotlin.Any!>!, kotlin.Int!, kotlin.String!> operator=null
+            transform: BLOCK type=(kotlin.reflect.KParameter) -> java.lang.reflect.Type operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KParameter): java.lang.reflect.Type
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KParameter): Type'
+                    CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+                      $receiver: CALL '<get-type>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KParameter' type=kotlin.reflect.KParameter operator=null
+              CALLABLE_REFERENCE '<anonymous>(KParameter): Type' type=(kotlin.reflect.KParameter) -> java.lang.reflect.Type operator=LAMBDA
+        CALL 'assertEquals(Type, Type, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-java>() on KClass<String>: Class<String>' type=java.lang.Class<kotlin.String> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+          actual: CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+            $receiver: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: GET_VAR 'f: KFunction4<J, IntArray!, Array<(out) Any!>!, Int!, String!>' type=kotlin.reflect.KFunction4<J, kotlin.IntArray!, kotlin.Array<(out) kotlin.Any!>!, kotlin.Int!, kotlin.String!> operator=null
+        CALL 'assertEquals(String!, String!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='01A2'
+          actual: CALL 'call(vararg Any?): String!' type=kotlin.String! operator=null
+            $this: GET_VAR 'f: KFunction4<J, IntArray!, Array<(out) Any!>!, Int!, String!>' type=kotlin.reflect.KFunction4<J, kotlin.IntArray!, kotlin.Array<(out) kotlin.Any!>!, kotlin.Int!, kotlin.String!> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CALL 'constructor J(Int)' type=J operator=null
+                param: CONST Int type=kotlin.Int value='0'
+              CALL 'intArrayOf(vararg Int): IntArray' type=kotlin.IntArray operator=null
+                elements: VARARG type=IntArray varargElementType=Int
+                  CONST Int type=kotlin.Int value='1'
+              CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+                elements: VARARG type=Array<out String> varargElementType=String
+                  CONST String type=kotlin.String value='A'
+              CONST Int type=kotlin.Int value='2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

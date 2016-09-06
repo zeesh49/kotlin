@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /differentErasureInSuperClass.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun foo(x: T): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(T): String'
+            CONST String type=kotlin.String value='O'
+      FUN public final fun foo(x: A<T>): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(A<T>): String'
+            CONST String type=kotlin.String value='K'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: A<kotlin.String>
+          CALL 'constructor A()' type=A<kotlin.String> operator=null
+        VAR val y: A<A<kotlin.String>>
+          CALL 'constructor A()' type=A<A<kotlin.String>> operator=null
+        VAR val b: B
+          CALL 'constructor B()' type=B operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'foo(A<String>): String' type=kotlin.String operator=null
+              $this: GET_VAR 'b: B' type=B operator=null
+              x: GET_VAR 'x: A<String>' type=A<kotlin.String> operator=null
+            other: CALL 'foo(A<A<String>>): String' type=kotlin.String operator=null
+              $this: GET_VAR 'b: B' type=B operator=null
+              x: GET_VAR 'y: A<A<String>>' type=A<A<kotlin.String>> operator=null

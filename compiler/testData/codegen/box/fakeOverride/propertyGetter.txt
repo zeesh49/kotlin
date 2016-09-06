@@ -1,0 +1,87 @@
+MODULE <test-module>
+  FILE /propertyGetter.kt
+    CLASS INTERFACE T
+      PROPERTY public abstract val foo: kotlin.String
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public open override val foo: kotlin.String = ""
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value=''
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+    CLASS INTERFACE U
+    CLASS CLASS D
+      CONSTRUCTOR public constructor D()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='D'
+    CLASS CLASS E
+      CONSTRUCTOR public constructor E()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='E'
+    CLASS CLASS F
+      CONSTRUCTOR public constructor F()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='F'
+    CLASS CLASS G
+      CONSTRUCTOR public constructor G()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='G'
+    CLASS CLASS H
+      CONSTRUCTOR public constructor H()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='H'
+    CLASS CLASS I
+      CONSTRUCTOR public constructor I()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='I'
+    CLASS CLASS J
+      CONSTRUCTOR public constructor J()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='J'
+    CLASS CLASS K
+      CONSTRUCTOR public constructor K()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='K'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL '<get-foo>(): String' type=kotlin.String operator=GET_PROPERTY
+          $this: CALL 'constructor B()' type=B operator=null
+        CALL '<get-foo>(): String' type=kotlin.String operator=GET_PROPERTY
+          $this: CALL 'constructor C()' type=C operator=null
+        CALL '<get-foo>(): String' type=kotlin.String operator=GET_PROPERTY
+          $this: CALL 'constructor D()' type=D operator=null
+        CALL '<get-foo>(): String' type=kotlin.String operator=GET_PROPERTY
+          $this: CALL 'constructor E()' type=E operator=null
+        CALL '<get-foo>(): String' type=kotlin.String operator=GET_PROPERTY
+          $this: CALL 'constructor F()' type=F operator=null
+        CALL '<get-foo>(): String' type=kotlin.String operator=GET_PROPERTY
+          $this: CALL 'constructor G()' type=G operator=null
+        CALL '<get-foo>(): String' type=kotlin.String operator=GET_PROPERTY
+          $this: CALL 'constructor H()' type=H operator=null
+        CALL '<get-foo>(): String' type=kotlin.String operator=GET_PROPERTY
+          $this: CALL 'constructor I()' type=I operator=null
+        CALL '<get-foo>(): String' type=kotlin.String operator=GET_PROPERTY
+          $this: CALL 'constructor J()' type=J operator=null
+        CALL '<get-foo>(): String' type=kotlin.String operator=GET_PROPERTY
+          $this: CALL 'constructor K()' type=K operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

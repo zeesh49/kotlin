@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /implicitExhaustiveAndReturn.kt
+    FUN public fun test(i: kotlin.Int): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=WHEN
+          VAR val tmp0_subject: kotlin.Int
+            GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+          WHEN type=kotlin.Nothing operator=WHEN
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+            then: RETURN type=kotlin.Nothing from='test(Int): String'
+              CONST String type=kotlin.String value='0'
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+            then: RETURN type=kotlin.Nothing from='test(Int): String'
+              CONST String type=kotlin.String value='1'
+        RETURN type=kotlin.Nothing from='test(Int): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'test(Int): String' type=kotlin.String operator=null
+            i: CONST Int type=kotlin.Int value='42'

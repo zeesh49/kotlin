@@ -1,0 +1,46 @@
+MODULE <test-module>
+  FILE /defaultAndNonDefaultIntertwined.kt
+    FUN public fun foo(a: kotlin.String, b: kotlin.String = ..., c: kotlin.String, d: kotlin.String = ..., e: kotlin.String): kotlin.String
+      b: EXPRESSION_BODY
+        CONST String type=kotlin.String value='b'
+      d: EXPRESSION_BODY
+        CONST String type=kotlin.String value='d'
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(String, String = ..., String, String = ..., String): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: GET_VAR 'value-parameter a: String' type=kotlin.String operator=null
+                  other: GET_VAR 'value-parameter b: String = ...' type=kotlin.String operator=null
+                other: GET_VAR 'value-parameter c: String' type=kotlin.String operator=null
+              other: GET_VAR 'value-parameter d: String = ...' type=kotlin.String operator=null
+            other: GET_VAR 'value-parameter e: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val p: kotlin.collections.List<kotlin.reflect.KParameter>
+          CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'foo(String, String = ..., String, String = ..., String): String' type=kotlin.reflect.KFunction5<kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='abcde'
+          actual: CALL 'callBy(Map<KParameter, Any?>): String' type=kotlin.String operator=null
+            $this: CALLABLE_REFERENCE 'foo(String, String = ..., String, String = ..., String): String' type=kotlin.reflect.KFunction5<kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String> operator=null
+            args: CALL 'mapOf(vararg Pair<KParameter, String>): Map<KParameter, String>' type=kotlin.collections.Map<kotlin.reflect.KParameter, kotlin.String> operator=null
+              pairs: VARARG type=Array<out Pair<KParameter, String>> varargElementType=Pair<KParameter, String>
+                CALL 'to(String) on KParameter: Pair<KParameter, String>' type=kotlin.Pair<kotlin.reflect.KParameter, kotlin.String> operator=null
+                  $receiver: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+                    $this: GET_VAR 'p: List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=null
+                    index: CONST Int type=kotlin.Int value='0'
+                  that: CONST String type=kotlin.String value='a'
+                CALL 'to(String) on KParameter: Pair<KParameter, String>' type=kotlin.Pair<kotlin.reflect.KParameter, kotlin.String> operator=null
+                  $receiver: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+                    $this: GET_VAR 'p: List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=null
+                    index: CONST Int type=kotlin.Int value='2'
+                  that: CONST String type=kotlin.String value='c'
+                CALL 'to(String) on KParameter: Pair<KParameter, String>' type=kotlin.Pair<kotlin.reflect.KParameter, kotlin.String> operator=null
+                  $receiver: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+                    $this: GET_VAR 'p: List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=null
+                    index: CONST Int type=kotlin.Int value='4'
+                  that: CONST String type=kotlin.String value='e'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

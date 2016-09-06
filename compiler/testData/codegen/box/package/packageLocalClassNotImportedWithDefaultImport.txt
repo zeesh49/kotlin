@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /box.kt
+    CLASS CLASS X
+      CONSTRUCTOR public constructor X()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor SomeClass()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='X'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'constructor X()' type=a.X operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+  FILE /file1.kt
+    CLASS CLASS SomeClass
+      CONSTRUCTOR public constructor SomeClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SomeClass'
+  FILE /file2.kt
+    CLASS CLASS SomeClass
+      CONSTRUCTOR public constructor SomeClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SomeClass'

@@ -1,0 +1,53 @@
+MODULE <test-module>
+  FILE /continueInForCondition.kt
+    FUN public fun foo(): kotlin.collections.List<kotlin.String>?
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(): List<String>?'
+          CALL 'asList(vararg String!): (Mutable)List<String!>!' type=kotlin.collections.(Mutable)List<kotlin.String!>! operator=null
+            p0: VARARG type=(kotlin.Array<(kotlin.String..kotlin.String?)>..kotlin.Array<out (kotlin.String..kotlin.String?)>?) varargElementType=(kotlin.String..kotlin.String?)
+              CONST String type=kotlin.String value='abcde'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CONST Int type=kotlin.Int value='1'
+                other: CONST Int type=kotlin.Int value='3'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                BLOCK type=kotlin.Unit operator=FOR_LOOP
+                  VAR val tmp2_iterator: kotlin.collections.Iterator<kotlin.String>
+                    CALL 'iterator(): Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=FOR_LOOP_ITERATOR
+                      $this: BLOCK type=kotlin.collections.List<kotlin.String> operator=ELVIS
+                        VAR val tmp1_elvis_lhs: kotlin.collections.List<kotlin.String>?
+                          CALL 'foo(): List<String>?' type=kotlin.collections.List<kotlin.String>? operator=null
+                        WHEN type=kotlin.collections.List<kotlin.String> operator=null
+                          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: GET_VAR 'tmp1_elvis_lhs: List<String>?' type=kotlin.collections.List<kotlin.String>? operator=null
+                            arg1: CONST Null type=kotlin.Nothing? value='null'
+                          then: CONTINUE label=null loop.label=null depth=0
+                          else: GET_VAR 'tmp1_elvis_lhs: List<String>?' type=kotlin.collections.List<kotlin.String>? operator=null
+                  WHILE label=null operator=FOR_LOOP_INNER_WHILE
+                    condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+                      $this: GET_VAR 'tmp2_iterator: Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+                    body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+                      VAR val value: kotlin.String
+                        CALL 'next(): String' type=kotlin.String operator=FOR_LOOP_NEXT
+                          $this: GET_VAR 'tmp2_iterator: Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+                      BLOCK type=kotlin.Unit operator=null
+                        WHEN type=kotlin.Unit operator=IF
+                          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                              arg0: GET_VAR 'value: String' type=kotlin.String operator=null
+                              arg1: CONST String type=kotlin.String value='abcde'
+                          then: RETURN type=kotlin.Nothing from='box(): String'
+                            CONST String type=kotlin.String value='Fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /box.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-OK>(): String' type=kotlin.String operator=GET_PROPERTY
+  FILE /irrelevant.kt
+    PROPERTY public val X: kotlin.Nothing
+      EXPRESSION_BODY
+        THROW type=kotlin.Nothing
+          CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+            p0: CONST String type=kotlin.String value='X should not be initialized'
+  FILE /part1.kt
+    PROPERTY public val O: kotlin.String = "O"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='O'
+  FILE /part2.kt
+    PROPERTY public val K: kotlin.String = "K"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='K'
+  FILE /part3.kt
+    PROPERTY public val OK: kotlin.String = "OK"
+      EXPRESSION_BODY
+        CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+          $this: CALL '<get-O>(): String' type=kotlin.String operator=GET_PROPERTY
+          other: CALL '<get-K>(): String' type=kotlin.String operator=GET_PROPERTY

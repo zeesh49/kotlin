@@ -1,0 +1,100 @@
+MODULE <test-module>
+  FILE /memberProperty.kt
+    CLASS CLASS K
+      CONSTRUCTOR public constructor K(value: kotlin.Long)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'value: Long' type=kotlin.Unit operator=null
+            receiver: THIS of 'K' type=K
+            value: GET_VAR 'value-parameter value: Long' type=kotlin.Long operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='K'
+      PROPERTY public final var value: kotlin.Long
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: Long' type=kotlin.Long operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val p: kotlin.reflect.KMutableProperty1<K, kotlin.Long>
+          CALLABLE_REFERENCE 'value: Long' type=kotlin.reflect.KMutableProperty1<K, kotlin.Long> operator=null
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-javaField>() on KProperty<*>: Field?' type=java.lang.reflect.Field? operator=GET_PROPERTY
+                $receiver: GET_VAR 'p: KMutableProperty1<K, Long>' type=kotlin.reflect.KMutableProperty1<K, kotlin.Long> operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Fail p field'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        VAR val getter: java.lang.reflect.Method
+          BLOCK type=java.lang.reflect.Method operator=EXCLEXCL
+            VAR val tmp0_notnull: java.lang.reflect.Method?
+              CALL '<get-javaGetter>() on KProperty<*>: Method?' type=java.lang.reflect.Method? operator=GET_PROPERTY
+                $receiver: GET_VAR 'p: KMutableProperty1<K, Long>' type=kotlin.reflect.KMutableProperty1<K, kotlin.Long> operator=null
+            WHEN type=java.lang.reflect.Method operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Method?' type=java.lang.reflect.Method? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Method?' type=java.lang.reflect.Method? operator=null
+        VAR val setter: java.lang.reflect.Method
+          BLOCK type=java.lang.reflect.Method operator=EXCLEXCL
+            VAR val tmp1_notnull: java.lang.reflect.Method?
+              CALL '<get-javaSetter>() on KMutableProperty<*>: Method?' type=java.lang.reflect.Method? operator=GET_PROPERTY
+                $receiver: GET_VAR 'p: KMutableProperty1<K, Long>' type=kotlin.reflect.KMutableProperty1<K, kotlin.Long> operator=null
+            WHEN type=java.lang.reflect.Method operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp1_notnull: Method?' type=java.lang.reflect.Method? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp1_notnull: Method?' type=java.lang.reflect.Method? operator=null
+        CALL 'assertEquals(Method!, Method!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'getter: Method' type=java.lang.reflect.Method operator=null
+          actual: CALL 'getMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+            $this: CALL '<get-java>() on KClass<K>: Class<K>' type=java.lang.Class<K> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'K' type=kotlin.reflect.KClass<K>
+            p0: CONST String type=kotlin.String value='getValue'
+        CALL 'assertEquals(Method!, Method!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'setter: Method' type=java.lang.reflect.Method operator=null
+          actual: CALL 'getMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+            $this: CALL '<get-java>() on KClass<K>: Class<K>' type=java.lang.Class<K> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'K' type=kotlin.reflect.KClass<K>
+            p0: CONST String type=kotlin.String value='setValue'
+            p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+              CALL '<get-java>() on KClass<Long>: Class<Long>' type=java.lang.Class<kotlin.Long> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'Long' type=kotlin.reflect.KClass<kotlin.Long>
+        VAR val k: K
+          CALL 'constructor K(Long)' type=K operator=null
+            value: CONST Long type=kotlin.Long value='42'
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'invoke(Any!, vararg Any!): Any!' type=kotlin.Any! operator=null
+              $this: GET_VAR 'getter: Method' type=java.lang.reflect.Method operator=null
+              p0: GET_VAR 'k: K' type=K operator=null
+            arg1: CONST Long type=kotlin.Long value='42'
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Fail k getter'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'invoke(Any!, vararg Any!): Any!' type=kotlin.Any! operator=null
+          $this: GET_VAR 'setter: Method' type=java.lang.reflect.Method operator=null
+          p0: GET_VAR 'k: K' type=K operator=null
+          p1: VARARG type=(kotlin.Array<(kotlin.Any..kotlin.Any?)>..kotlin.Array<out (kotlin.Any..kotlin.Any?)>?) varargElementType=(kotlin.Any..kotlin.Any?)
+            CONST Long type=kotlin.Long value='-239'
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'invoke(Any!, vararg Any!): Any!' type=kotlin.Any! operator=null
+              $this: GET_VAR 'getter: Method' type=java.lang.reflect.Method operator=null
+              p0: GET_VAR 'k: K' type=K operator=null
+            arg1: CONST Long type=kotlin.Long value='-239'
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Fail k setter'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

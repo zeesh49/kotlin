@@ -1,0 +1,13 @@
+MODULE <test-module>
+  FILE /UnitValue.kt
+    FUN public fun foo(): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'foo(): Unit' type=kotlin.Unit operator=null
+              arg1: GET_OBJECT 'Unit' type=kotlin.Unit
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='Fail'

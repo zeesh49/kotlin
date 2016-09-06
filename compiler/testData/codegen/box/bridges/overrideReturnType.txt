@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /overrideReturnType.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      FUN public open fun f(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='f(): Any'
+            CONST String type=kotlin.String value='C f'
+    CLASS CLASS D
+      CONSTRUCTOR public constructor D()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor C()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='D'
+      FUN public open override fun f(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='f(): String'
+            CONST String type=kotlin.String value='D f'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val d: C
+          CALL 'constructor D()' type=D operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'f(): Any' type=kotlin.Any operator=null
+                $this: GET_VAR 'd: C' type=C operator=null
+              arg1: CONST String type=kotlin.String value='D f'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail f'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

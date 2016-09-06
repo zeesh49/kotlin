@@ -1,0 +1,194 @@
+MODULE <test-module>
+  FILE /defaultParameterValues.kt
+    CLASS ANNOTATION_CLASS Ann
+      PROPERTY public final val i: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter i: Int = ...' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val s: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s: String = ...' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val a: Ann2
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter a: Ann2 = ...' type=Ann2 operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val e: MyEnum
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter e: MyEnum = ...' type=MyEnum operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val c: kotlin.reflect.KClass<*>
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter c: KClass<*> = ...' type=kotlin.reflect.KClass<*> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val ia: kotlin.IntArray
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter ia: IntArray = ...' type=kotlin.IntArray operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val sa: kotlin.Array<kotlin.String>
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter sa: Array<String> = ...' type=kotlin.Array<kotlin.String> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val ann: Ann!
+          CALL 'getAnnotation(Class<Ann!>!): Ann!' type=Ann! operator=null
+            $this: CALL '<get-java>() on KClass<MyClass>: Class<MyClass>' type=java.lang.Class<MyClass> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'MyClass' type=kotlin.reflect.KClass<MyClass>
+            p0: CALL '<get-java>() on KClass<Ann>: Class<Ann>' type=java.lang.Class<Ann> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'Ann' type=kotlin.reflect.KClass<Ann>
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'ann: Ann!' type=Ann! operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail: cannot find Ann on MyClass}'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=Ann
+                  GET_VAR 'ann: Ann!' type=Ann! operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: annotation parameter i should be 1, but was '
+              CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=Ann
+                  GET_VAR 'ann: Ann!' type=Ann! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=Ann
+                  GET_VAR 'ann: Ann!' type=Ann! operator=null
+              arg1: CONST String type=kotlin.String value='a'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: annotation parameter s should be '
+              CONST String type=kotlin.String value='"'
+              CONST String type=kotlin.String value='a'
+              CONST String type=kotlin.String value='"'
+              CONST String type=kotlin.String value=', but was '
+              CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=Ann
+                  GET_VAR 'ann: Ann!' type=Ann! operator=null
+        VAR val annSimpleName: kotlin.String!
+          CALL 'getSimpleName(): String!' type=kotlin.String! operator=null
+            $this: CALL '<get-java>() on KClass<out Ann2>: Class<out Ann2>' type=java.lang.Class<out Ann2> operator=GET_PROPERTY
+              $receiver: CALL '<get-annotationClass>() on Ann2: KClass<out Ann2>' type=kotlin.reflect.KClass<out Ann2> operator=GET_PROPERTY
+                $receiver: CALL '<get-a>(): Ann2' type=Ann2 operator=GET_PROPERTY
+                  $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=Ann
+                    GET_VAR 'ann: Ann!' type=Ann! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'annSimpleName: String!' type=kotlin.String! operator=null
+              arg1: CONST String type=kotlin.String value='Ann2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: annotation parameter a should be of class Ann2, but was '
+              GET_VAR 'annSimpleName: String!' type=kotlin.String! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-e>(): MyEnum' type=MyEnum operator=GET_PROPERTY
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=Ann
+                  GET_VAR 'ann: Ann!' type=Ann! operator=null
+              arg1: GET_ENUM_VALUE 'A' type=MyEnum
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: annotation parameter e should be MyEnum.A, but was '
+              CALL '<get-e>(): MyEnum' type=MyEnum operator=GET_PROPERTY
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=Ann
+                  GET_VAR 'ann: Ann!' type=Ann! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-java>() on KClass<*>: Class<out Any>' type=java.lang.Class<out kotlin.Any> operator=GET_PROPERTY
+                $receiver: CALL '<get-c>(): KClass<*>' type=kotlin.reflect.KClass<*> operator=GET_PROPERTY
+                  $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=Ann
+                    GET_VAR 'ann: Ann!' type=Ann! operator=null
+              arg1: CALL '<get-java>() on KClass<A>: Class<A>' type=java.lang.Class<A> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: annotation parameter c should be of class A, but was '
+              CALL '<get-c>(): KClass<*>' type=kotlin.reflect.KClass<*> operator=GET_PROPERTY
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=Ann
+                  GET_VAR 'ann: Ann!' type=Ann! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                  $this: CALL '<get-ia>(): IntArray' type=kotlin.IntArray operator=GET_PROPERTY
+                    $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=Ann
+                      GET_VAR 'ann: Ann!' type=Ann! operator=null
+                  index: CONST Int type=kotlin.Int value='0'
+                arg1: CONST Int type=kotlin.Int value='1'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                  $this: CALL '<get-ia>(): IntArray' type=kotlin.IntArray operator=GET_PROPERTY
+                    $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=Ann
+                      GET_VAR 'ann: Ann!' type=Ann! operator=null
+                  index: CONST Int type=kotlin.Int value='1'
+                arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: annotation parameter ia should be [1, 2], but was '
+              CALL '<get-ia>(): IntArray' type=kotlin.IntArray operator=GET_PROPERTY
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=Ann
+                  GET_VAR 'ann: Ann!' type=Ann! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+                  $this: CALL '<get-sa>(): Array<String>' type=kotlin.Array<kotlin.String> operator=GET_PROPERTY
+                    $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=Ann
+                      GET_VAR 'ann: Ann!' type=Ann! operator=null
+                  index: CONST Int type=kotlin.Int value='0'
+                arg1: CONST String type=kotlin.String value='a'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+                  $this: CALL '<get-sa>(): Array<String>' type=kotlin.Array<kotlin.String> operator=GET_PROPERTY
+                    $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=Ann
+                      GET_VAR 'ann: Ann!' type=Ann! operator=null
+                  index: CONST Int type=kotlin.Int value='1'
+                arg1: CONST String type=kotlin.String value='b'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: annotation parameter ia should be ['
+              CONST String type=kotlin.String value='"'
+              CONST String type=kotlin.String value='a'
+              CONST String type=kotlin.String value='"'
+              CONST String type=kotlin.String value=', '
+              CONST String type=kotlin.String value='"'
+              CONST String type=kotlin.String value='b'
+              CONST String type=kotlin.String value='"'
+              CONST String type=kotlin.String value='], but was '
+              CALL '<get-sa>(): Array<String>' type=kotlin.Array<kotlin.String> operator=GET_PROPERTY
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=Ann
+                  GET_VAR 'ann: Ann!' type=Ann! operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    CLASS ANNOTATION_CLASS Ann2
+    CLASS ENUM_CLASS MyEnum
+      CONSTRUCTOR private constructor MyEnum()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyEnum'
+      ENUM_ENTRY enum entry A
+        init: ENUM_CONSTRUCTOR_CALL 'constructor MyEnum()' A
+      FUN public final fun values(): kotlin.Array<MyEnum>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): MyEnum
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+    CLASS CLASS MyClass
+      CONSTRUCTOR public constructor MyClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyClass'

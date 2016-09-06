@@ -1,0 +1,22 @@
+MODULE <test-module>
+  FILE /extensionWithClosure.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.String
+          CONST String type=kotlin.String value='Fail'
+        FUN local final fun A.ext(): kotlin.Unit
+          BLOCK_BODY
+            SET_VAR 'result: String' type=kotlin.Unit operator=EQ
+              CONST String type=kotlin.String value='OK'
+        VAR val f: kotlin.reflect.KFunction1<A, kotlin.Unit>
+          CALLABLE_REFERENCE 'ext() on A: Unit' type=kotlin.reflect.KFunction1<A, kotlin.Unit> operator=null
+        CALL 'invoke(A): Unit' type=kotlin.Unit operator=INVOKE
+          $this: GET_VAR 'f: KFunction1<A, Unit>' type=kotlin.reflect.KFunction1<A, kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+          p1: CALL 'constructor A()' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          GET_VAR 'result: String' type=kotlin.String operator=null

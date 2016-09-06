@@ -1,0 +1,59 @@
+MODULE <test-module>
+  FILE /forInNonOptimizedIndices.kt
+    FUN public fun sumIndices(coll: kotlin.collections.Collection<*>?): kotlin.Int
+      BLOCK_BODY
+        VAR var sum: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp2_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: BLOCK type=kotlin.ranges.IntRange operator=ELVIS
+                VAR val tmp1_elvis_lhs: kotlin.ranges.IntRange?
+                  BLOCK type=kotlin.ranges.IntRange? operator=SAFE_CALL
+                    VAR val tmp0_safe_receiver: kotlin.collections.Collection<*>?
+                      GET_VAR 'value-parameter coll: Collection<*>?' type=kotlin.collections.Collection<*>? operator=null
+                    WHEN type=kotlin.ranges.IntRange? operator=SAFE_CALL
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'tmp0_safe_receiver: Collection<*>?' type=kotlin.collections.Collection<*>? operator=null
+                        arg1: CONST Null type=kotlin.Nothing? value='null'
+                      then: CONST Null type=kotlin.Nothing? value='null'
+                      else: CALL '<get-indices>() on Collection<*>: IntRange' type=kotlin.ranges.IntRange operator=GET_PROPERTY
+                        $this: GET_VAR 'tmp0_safe_receiver: Collection<*>?' type=kotlin.collections.Collection<*>? operator=null
+                WHEN type=kotlin.ranges.IntRange operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp1_elvis_lhs: IntRange?' type=kotlin.ranges.IntRange? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: RETURN type=kotlin.Nothing from='sumIndices(Collection<*>?): Int'
+                    CONST Int type=kotlin.Int value='0'
+                  else: GET_VAR 'tmp1_elvis_lhs: IntRange?' type=kotlin.ranges.IntRange? operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp2_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp2_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'sum: Int' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                    $this: GET_VAR 'sum: Int' type=kotlin.Int operator=PLUSEQ
+                    other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='sumIndices(Collection<*>?): Int'
+          GET_VAR 'sum: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='6'
+          actual: CALL 'sumIndices(Collection<*>?): Int' type=kotlin.Int operator=null
+            coll: CALL 'listOf(vararg Int): List<Int>' type=kotlin.collections.List<kotlin.Int> operator=null
+              elements: VARARG type=Array<out Int> varargElementType=Int
+                CONST Int type=kotlin.Int value='0'
+                CONST Int type=kotlin.Int value='0'
+                CONST Int type=kotlin.Int value='0'
+                CONST Int type=kotlin.Int value='0'
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='0'
+          actual: CALL 'sumIndices(Collection<*>?): Int' type=kotlin.Int operator=null
+            coll: CONST Null type=kotlin.Nothing? value='null'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

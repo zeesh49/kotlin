@@ -1,0 +1,61 @@
+MODULE <test-module>
+  FILE /tryAndBreak.kt
+    FUN public fun idiv(a: kotlin.Int, b: kotlin.Int): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='idiv(Int, Int): Int'
+          WHEN type=kotlin.Int operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'value-parameter b: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+            then: THROW type=kotlin.Nothing
+              CALL 'constructor Exception(String!)' type=java.lang.Exception operator=null
+                p0: CONST String type=kotlin.String value='Division by zero'
+            else: CALL 'div(Int): Int' type=kotlin.Int operator=DIV
+              $this: GET_VAR 'value-parameter a: Int' type=kotlin.Int operator=null
+              other: GET_VAR 'value-parameter b: Int' type=kotlin.Int operator=null
+    FUN public fun foo(): kotlin.Int
+      BLOCK_BODY
+        VAR var sum: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        VAR var i: kotlin.Int
+          CONST Int type=kotlin.Int value='2'
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+              $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+              other: CONST Int type=kotlin.Int value='-10'
+          body: BLOCK type=kotlin.Int operator=null
+            SET_VAR 'sum: Int' type=kotlin.Unit operator=PLUSEQ
+              CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                $this: GET_VAR 'sum: Int' type=kotlin.Int operator=PLUSEQ
+                other: TRY_CATCH type=kotlin.Int
+                  try: BLOCK type=kotlin.Int operator=null
+                    CALL 'idiv(Int, Int): Int' type=kotlin.Int operator=null
+                      a: CONST Int type=kotlin.Int value='100'
+                      b: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                  catch e: BLOCK type=kotlin.Nothing operator=null
+                    BREAK label=null loop.label=null depth=0
+            BLOCK type=kotlin.Int operator=POSTFIX_DECR
+              VAR val tmp0: kotlin.Int
+                GET_VAR 'i: Int' type=kotlin.Int operator=POSTFIX_DECR
+              SET_VAR 'i: Int' type=kotlin.Unit operator=POSTFIX_DECR
+                CALL 'dec(): Int' type=kotlin.Int operator=POSTFIX_DECR
+                  $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='foo(): Int'
+          GET_VAR 'sum: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val test: kotlin.Int
+          CALL 'foo(): Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='150'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed, test='
+              GET_VAR 'test: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

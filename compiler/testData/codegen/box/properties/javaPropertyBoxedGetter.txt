@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /kotlin.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val javaClass: JavaClass
+          CALL 'constructor JavaClass()' type=JavaClass operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-isValue>() on JavaClass: Boolean!' type=kotlin.Boolean! operator=GET_PROPERTY
+                $receiver: GET_VAR 'javaClass: JavaClass' type=JavaClass operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        CALL '<set-isValue>(Boolean!) on JavaClass: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 'javaClass: JavaClass' type=JavaClass operator=null
+          <set-?>: CONST Boolean type=kotlin.Boolean value='false'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-isValue>() on JavaClass: Boolean!' type=kotlin.Boolean! operator=GET_PROPERTY
+                $receiver: GET_VAR 'javaClass: JavaClass' type=JavaClass operator=null
+              arg1: CONST Boolean type=kotlin.Boolean value='false'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        CALL '<set-isValue>(Boolean!) on JavaClass: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 'javaClass: JavaClass' type=JavaClass operator=null
+          <set-?>: CONST Boolean type=kotlin.Boolean value='true'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-isValue>() on JavaClass: Boolean!' type=kotlin.Boolean! operator=GET_PROPERTY
+                $receiver: GET_VAR 'javaClass: JavaClass' type=JavaClass operator=null
+              arg1: CONST Boolean type=kotlin.Boolean value='true'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

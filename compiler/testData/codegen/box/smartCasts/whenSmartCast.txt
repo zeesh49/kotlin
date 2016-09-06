@@ -1,0 +1,43 @@
+MODULE <test-module>
+  FILE /whenSmartCast.kt
+    FUN public fun baz(s: kotlin.String?): kotlin.Int
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'value-parameter s: String?' type=kotlin.String? operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='baz(String?): Int'
+            CONST Int type=kotlin.Int value='0'
+        RETURN type=kotlin.Nothing from='baz(String?): Int'
+          CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: BLOCK type=kotlin.String operator=WHEN
+              VAR val tmp0_subject: kotlin.String?
+                GET_VAR 'value-parameter s: String?' type=kotlin.String? operator=null
+              WHEN type=kotlin.String operator=WHEN
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_subject: String?' type=kotlin.String? operator=null
+                  arg1: CONST String type=kotlin.String value='abc'
+                then: GET_VAR 'value-parameter s: String?' type=kotlin.String? operator=null
+                else: CONST String type=kotlin.String value='xyz'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: WHEN type=kotlin.Boolean operator=ANDAND
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: CALL 'baz(String?): Int' type=kotlin.Int operator=null
+                    s: CONST String type=kotlin.String value='abc'
+                  arg1: CONST Int type=kotlin.Int value='3'
+                then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: CALL 'baz(String?): Int' type=kotlin.Int operator=null
+                    s: CONST String type=kotlin.String value=''
+                  arg1: CONST Int type=kotlin.Int value='3'
+                else: CONST Boolean type=kotlin.Boolean value='false'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL 'baz(String?): Int' type=kotlin.Int operator=null
+                  s: CONST Null type=kotlin.Nothing? value='null'
+                arg1: CONST Int type=kotlin.Int value='0'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='FAIL'

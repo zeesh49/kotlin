@@ -1,0 +1,22 @@
+MODULE <test-module>
+  FILE /propertySetter.kt
+    CLASS INTERFACE A
+      PROPERTY public abstract var v: T
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public open override var v: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='Fail'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A<kotlin.String>
+          CALL 'constructor B()' type=B operator=null
+        CALL '<set-v>(String): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a: A<String>' type=A<kotlin.String> operator=null
+          <set-?>: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-v>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_VAR 'a: A<String>' type=A<kotlin.String> operator=null

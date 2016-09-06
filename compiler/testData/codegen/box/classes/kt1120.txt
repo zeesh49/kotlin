@@ -1,0 +1,42 @@
+MODULE <test-module>
+  FILE /kt1120.kt
+    CLASS OBJECT RefreshQueue
+      CONSTRUCTOR private constructor RefreshQueue()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='RefreshQueue'
+      PROPERTY public final val any: kotlin.Any
+        EXPRESSION_BODY
+          CALL 'constructor Any()' type=kotlin.Any operator=null
+      PROPERTY public final val workerThread: java.lang.Thread
+        EXPRESSION_BODY
+          CALL 'constructor Thread(Runnable!)' type=java.lang.Thread operator=null
+            p0: BLOCK type=RefreshQueue.workerThread.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                FUN public open override fun run(): kotlin.Unit
+                  BLOCK_BODY
+                    VAR val a: kotlin.Any
+                      CALL '<get-any>(): Any' type=kotlin.Any operator=GET_PROPERTY
+                        $this: THIS of 'RefreshQueue' type=RefreshQueue
+                    VAR val b: kotlin.Any
+                      CALL '<get-any>(): Any' type=kotlin.Any operator=GET_PROPERTY
+                        $this: GET_OBJECT 'RefreshQueue' type=RefreshQueue
+                    WHEN type=kotlin.Unit operator=IF
+                      if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                        arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                          arg0: GET_VAR 'a: Any' type=kotlin.Any operator=null
+                          arg1: GET_VAR 'b: Any' type=kotlin.Any operator=null
+                      then: THROW type=kotlin.Nothing
+                        CALL 'constructor AssertionError()' type=java.lang.AssertionError operator=null
+              CALL 'constructor <no name provided>()' type=RefreshQueue.workerThread.<no name provided> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'run(): Unit' type=kotlin.Unit operator=null
+          $this: CALL '<get-workerThread>(): Thread' type=java.lang.Thread operator=GET_PROPERTY
+            $this: GET_OBJECT 'RefreshQueue' type=RefreshQueue
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

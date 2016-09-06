@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /simpleConstructorAnnotation.kt
+    CLASS ANNOTATION_CLASS Primary
+    CLASS ANNOTATION_CLASS Secondary
+    CLASS CLASS C
+      CONSTRUCTOR @Primary public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      CONSTRUCTOR @Secondary public constructor C(s: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor C()'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val ans: kotlin.collections.List<kotlin.String!>
+          CALL 'sorted() on Iterable<String!>: List<String!>' type=kotlin.collections.List<kotlin.String!> operator=null
+            $receiver: CALL 'map((KFunction<C>) -> String!) on Iterable<KFunction<C>>: List<String!>' type=kotlin.collections.List<kotlin.String!> operator=null
+              $receiver: CALL '<get-constructors>(): Collection<KFunction<C>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<C>> operator=GET_PROPERTY
+                $this: CLASS_REFERENCE 'C' type=kotlin.reflect.KClass<C>
+              transform: BLOCK type=(kotlin.reflect.KFunction<C>) -> kotlin.String! operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KFunction<C>): kotlin.String!
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KFunction<C>): String!'
+                      CALL '<get-simpleName>() on Class<out Annotation>: String!' type=kotlin.String! operator=GET_PROPERTY
+                        $receiver: CALL '<get-java>() on KClass<out Annotation>: Class<out Annotation>' type=java.lang.Class<out kotlin.Annotation> operator=GET_PROPERTY
+                          $receiver: CALL '<get-annotationClass>() on Annotation: KClass<out Annotation>' type=kotlin.reflect.KClass<out kotlin.Annotation> operator=GET_PROPERTY
+                            $receiver: CALL 'single() on List<Annotation>: Annotation' type=kotlin.Annotation operator=null
+                              $receiver: CALL '<get-annotations>(): List<Annotation>' type=kotlin.collections.List<kotlin.Annotation> operator=GET_PROPERTY
+                                $this: GET_VAR 'value-parameter it: KFunction<C>' type=kotlin.reflect.KFunction<C> operator=null
+                CALLABLE_REFERENCE '<anonymous>(KFunction<C>): String!' type=(kotlin.reflect.KFunction<C>) -> kotlin.String! operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'ans: List<String!>' type=kotlin.collections.List<kotlin.String!> operator=null
+              arg1: CALL 'listOf(vararg String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+                elements: VARARG type=Array<out String> varargElementType=String
+                  CONST String type=kotlin.String value='Primary'
+                  CONST String type=kotlin.String value='Secondary'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'ans: List<String!>' type=kotlin.collections.List<kotlin.String!> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

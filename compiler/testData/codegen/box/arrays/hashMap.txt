@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /hashMap.kt
+    FUN public operator fun java.util.HashMap<kotlin.String, kotlin.Int?>.set(index: kotlin.String, elem: kotlin.Int?): kotlin.Unit
+      BLOCK_BODY
+        CALL 'put(String, Int?): Int?' type=kotlin.Int? operator=null
+          $this: $RECEIVER of 'set(String, Int?) on HashMap<String, Int?>: Unit' type=java.util.HashMap<kotlin.String, kotlin.Int?>
+          key: GET_VAR 'value-parameter index: String' type=kotlin.String operator=null
+          value: GET_VAR 'value-parameter elem: Int?' type=kotlin.Int? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val s: java.util.HashMap<kotlin.String, kotlin.Int?>
+          CALL 'constructor HashMap()' type=java.util.HashMap<kotlin.String, kotlin.Int?> operator=null
+        CALL 'set(String, Int?) on HashMap<String, Int?>: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 's: HashMap<String, Int?>' type=java.util.HashMap<kotlin.String, kotlin.Int?> operator=null
+          index: CONST String type=kotlin.String value='239'
+          elem: CONST Int type=kotlin.Int value='239'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'get(String): Int?' type=kotlin.Int? operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 's: HashMap<String, Int?>' type=java.util.HashMap<kotlin.String, kotlin.Int?> operator=null
+                key: CONST String type=kotlin.String value='239'
+              arg1: CONST Int type=kotlin.Int value='239'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='Fail'

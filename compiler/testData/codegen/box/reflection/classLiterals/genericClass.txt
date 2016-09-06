@@ -1,0 +1,17 @@
+MODULE <test-module>
+  FILE /genericClass.kt
+    CLASS CLASS Generic
+      CONSTRUCTOR public constructor Generic<K, V>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Generic'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val g: kotlin.reflect.KClass<Generic<*, *>>
+          CLASS_REFERENCE 'Generic' type=kotlin.reflect.KClass<Generic<*, *>>
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='Generic'
+          actual: CALL '<get-simpleName>(): String?' type=kotlin.String? operator=GET_PROPERTY
+            $this: GET_VAR 'g: KClass<Generic<*, *>>' type=kotlin.reflect.KClass<Generic<*, *>> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

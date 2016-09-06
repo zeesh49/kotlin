@@ -1,0 +1,20 @@
+MODULE <test-module>
+  FILE /kt882.kt
+    PROPERTY public val _0: kotlin.Double = 0.0.toDouble()
+      EXPRESSION_BODY
+        CONST Double type=kotlin.Double value='0.0'
+    PROPERTY public val _0dbl: kotlin.Double = 0.0.toDouble()
+      EXPRESSION_BODY
+        CALL 'toDouble(): Double' type=kotlin.Double operator=null
+          $this: CONST Int type=kotlin.Int value='0'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-_0>(): Double' type=kotlin.Double operator=GET_PROPERTY
+              arg1: CALL '<get-_0dbl>(): Double' type=kotlin.Double operator=GET_PROPERTY
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

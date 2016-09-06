@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /kt3273.kt
+    FUN public fun printlnMock(a: kotlin.Any): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun testCoalesce(): kotlin.Unit
+      BLOCK_BODY
+        VAR val value: kotlin.String
+          WHEN type=kotlin.String operator=WHEN
+            if: CONST Boolean type=kotlin.Boolean value='true'
+            then: BLOCK type=kotlin.String operator=null
+              WHEN type=kotlin.String operator=IF
+                if: CONST Boolean type=kotlin.Boolean value='true'
+                then: BLOCK type=kotlin.String operator=null
+                  CONST String type=kotlin.String value='foo'
+                else: BLOCK type=kotlin.String operator=null
+                  CONST String type=kotlin.String value='bar'
+            else: CONST String type=kotlin.String value='Hello world'
+        CALL 'printlnMock(Any): Unit' type=kotlin.Unit operator=null
+          a: CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: GET_VAR 'value: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'testCoalesce(): Unit' type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

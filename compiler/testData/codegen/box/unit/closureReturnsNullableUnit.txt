@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /closureReturnsNullableUnit.kt
+    FUN public fun isNull(x: kotlin.Unit?): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='isNull(Unit?): Boolean'
+          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'value-parameter x: Unit?' type=kotlin.Unit? operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val closure: () -> kotlin.Unit?
+          BLOCK type=() -> kotlin.Nothing? operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Nothing?
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Nothing?'
+                  CONST Null type=kotlin.Nothing? value='null'
+            CALLABLE_REFERENCE '<anonymous>(): Nothing?' type=() -> kotlin.Nothing? operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'isNull(Unit?): Boolean' type=kotlin.Boolean operator=null
+              x: CALL 'invoke(): Unit?' type=kotlin.Unit? operator=INVOKE
+                $this: GET_VAR 'closure: () -> Unit?' type=() -> kotlin.Unit? operator=VARIABLE_AS_FUNCTION
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

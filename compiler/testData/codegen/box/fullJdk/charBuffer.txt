@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /charBuffer.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val cb: java.nio.CharBuffer!
+          CALL 'wrap(CharSequence!): CharBuffer!' type=java.nio.CharBuffer! operator=null
+            p0: CONST String type=kotlin.String value='OK'
+        CALL 'position(Int): Buffer!' type=java.nio.Buffer! operator=null
+          $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.nio.CharBuffer
+            GET_VAR 'cb: CharBuffer!' type=java.nio.CharBuffer! operator=null
+          p0: CONST Int type=kotlin.Int value='1'
+        VAR val o: kotlin.Char
+          CALL 'get(Int): Char' type=kotlin.Char operator=GET_ARRAY_ELEMENT
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.nio.CharBuffer
+              GET_VAR 'cb: CharBuffer!' type=java.nio.CharBuffer! operator=null
+            index: CONST Int type=kotlin.Int value='0'
+        VAR val k: kotlin.Char
+          CALL 'get(Int): Char' type=kotlin.Char operator=null
+            $this: TYPE_OP operator=CAST typeOperand=kotlin.CharSequence
+              GET_VAR 'cb: CharBuffer!' type=java.nio.CharBuffer! operator=null
+            index: CONST Int type=kotlin.Int value='0'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'toString(): String' type=kotlin.String operator=null
+              $this: GET_VAR 'o: Char' type=kotlin.Char operator=null
+            other: GET_VAR 'k: Char' type=kotlin.Char operator=null

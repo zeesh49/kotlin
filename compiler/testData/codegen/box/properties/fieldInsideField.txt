@@ -1,0 +1,40 @@
+MODULE <test-module>
+  FILE /fieldInsideField.kt
+    CLASS CLASS Your
+      CONSTRUCTOR public constructor Your()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Your'
+      PROPERTY public abstract val your: kotlin.String
+      FUN public final fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CALL '<get-your>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'Your' type=Your
+    PROPERTY public val my: kotlin.String = "O"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='O'
+      PROPERTY_GETTER public fun <get-my>(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-my>(): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: GET_VAR 'field: String' type=kotlin.String operator=null
+              other: CALL 'foo(): String' type=kotlin.String operator=null
+                $this: BLOCK type=<get-my>.<no name provided> operator=OBJECT_LITERAL
+                  CLASS CLASS <no name provided>
+                    CONSTRUCTOR public constructor <no name provided>()
+                      BLOCK_BODY
+                        DELEGATING_CONSTRUCTOR_CALL 'constructor Your()'
+                        INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                    PROPERTY public open override val your: kotlin.String = "K"
+                      EXPRESSION_BODY
+                        CONST String type=kotlin.String value='K'
+                      PROPERTY_GETTER public open override fun <get-your>(): kotlin.String
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='<get-your>(): String'
+                            GET_VAR 'field: String' type=kotlin.String operator=null
+                  CALL 'constructor <no name provided>()' type=<get-my>.<no name provided> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-my>(): String' type=kotlin.String operator=GET_PROPERTY

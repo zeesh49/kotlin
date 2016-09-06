@@ -1,0 +1,65 @@
+MODULE <test-module>
+  FILE /boolean.kt
+    FUN public fun checkLess(x: kotlin.Boolean, y: kotlin.Boolean): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='checkLess(Boolean, Boolean): String'
+          WHEN type=kotlin.String operator=WHEN
+            if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+              arg0: CALL 'compareTo(Boolean): Int' type=kotlin.Int operator=GTEQ
+                $this: GET_VAR 'value-parameter x: Boolean' type=kotlin.Boolean operator=null
+                other: GET_VAR 'value-parameter y: Boolean' type=kotlin.Boolean operator=null
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'value-parameter x: Boolean' type=kotlin.Boolean operator=null
+              CONST String type=kotlin.String value=' >= '
+              GET_VAR 'value-parameter y: Boolean' type=kotlin.Boolean operator=null
+            if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+              $this: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+                arg0: CALL 'compareTo(Boolean): Int' type=kotlin.Int operator=LT
+                  $this: GET_VAR 'value-parameter x: Boolean' type=kotlin.Boolean operator=null
+                  other: GET_VAR 'value-parameter y: Boolean' type=kotlin.Boolean operator=null
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail !('
+              GET_VAR 'value-parameter x: Boolean' type=kotlin.Boolean operator=null
+              CONST String type=kotlin.String value=' < '
+              GET_VAR 'value-parameter y: Boolean' type=kotlin.Boolean operator=null
+              CONST String type=kotlin.String value=')'
+            if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+              $this: CALL 'LTEQ0(Int): Boolean' type=kotlin.Boolean operator=LTEQ
+                arg0: CALL 'compareTo(Boolean): Int' type=kotlin.Int operator=LTEQ
+                  $this: GET_VAR 'value-parameter x: Boolean' type=kotlin.Boolean operator=null
+                  other: GET_VAR 'value-parameter y: Boolean' type=kotlin.Boolean operator=null
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail !('
+              GET_VAR 'value-parameter x: Boolean' type=kotlin.Boolean operator=null
+              CONST String type=kotlin.String value=' <= '
+              GET_VAR 'value-parameter y: Boolean' type=kotlin.Boolean operator=null
+              CONST String type=kotlin.String value=')'
+            if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+              arg0: CALL 'compareTo(Boolean): Int' type=kotlin.Int operator=GT
+                $this: GET_VAR 'value-parameter x: Boolean' type=kotlin.Boolean operator=null
+                other: GET_VAR 'value-parameter y: Boolean' type=kotlin.Boolean operator=null
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'value-parameter x: Boolean' type=kotlin.Boolean operator=null
+              CONST String type=kotlin.String value=' > '
+              GET_VAR 'value-parameter y: Boolean' type=kotlin.Boolean operator=null
+            if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+              arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GTEQ
+                $this: CALL 'compareTo(Boolean): Int' type=kotlin.Int operator=null
+                  $this: GET_VAR 'value-parameter x: Boolean' type=kotlin.Boolean operator=null
+                  other: GET_VAR 'value-parameter y: Boolean' type=kotlin.Boolean operator=null
+                other: CONST Int type=kotlin.Int value='0'
+            then: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'value-parameter x: Boolean' type=kotlin.Boolean operator=null
+              CONST String type=kotlin.String value='.compareTo('
+              GET_VAR 'value-parameter y: Boolean' type=kotlin.Boolean operator=null
+              CONST String type=kotlin.String value=') >= 0'
+            else: CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'checkLess(Boolean, Boolean): String' type=kotlin.String operator=null
+            x: CONST Boolean type=kotlin.Boolean value='false'
+            y: CONST Boolean type=kotlin.Boolean value='true'

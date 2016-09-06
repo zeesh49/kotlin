@@ -1,0 +1,91 @@
+MODULE <test-module>
+  FILE /constructors.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(d: kotlin.Double, s: kotlin.String, parent: A?)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS CLASS Nested
+        CONSTRUCTOR public constructor Nested(a: A)
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Nested'
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner(nested: A.Nested)
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(List<Type!>, List<Type!>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(vararg Class<out Any!>!): List<Class<out Any!>!>' type=kotlin.collections.List<java.lang.Class<out kotlin.Any!>!> operator=null
+            elements: VARARG type=Array<out (java.lang.Class<out (kotlin.Any..kotlin.Any?)>..java.lang.Class<out (kotlin.Any..kotlin.Any?)>?)> varargElementType=(java.lang.Class<out (kotlin.Any..kotlin.Any?)>..java.lang.Class<out (kotlin.Any..kotlin.Any?)>?)
+              GET_BACKING_FIELD 'TYPE: Class<Double!>!' type=java.lang.Class<kotlin.Double!>! operator=GET_PROPERTY
+              CALL '<get-java>() on KClass<String>: Class<String>' type=java.lang.Class<kotlin.String> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+              CALL '<get-java>() on KClass<A>: Class<A>' type=java.lang.Class<A> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+          actual: CALL 'map((KParameter) -> Type) on Iterable<KParameter>: List<Type>' type=kotlin.collections.List<java.lang.reflect.Type> operator=null
+            $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'constructor A(Double, String, A?)' type=kotlin.reflect.KFunction3<kotlin.Double, kotlin.String, A?, A> operator=null
+            transform: BLOCK type=(kotlin.reflect.KParameter) -> java.lang.reflect.Type operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KParameter): java.lang.reflect.Type
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KParameter): Type'
+                    CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+                      $receiver: CALL '<get-type>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KParameter' type=kotlin.reflect.KParameter operator=null
+              CALLABLE_REFERENCE '<anonymous>(KParameter): Type' type=(kotlin.reflect.KParameter) -> java.lang.reflect.Type operator=LAMBDA
+        CALL 'assertEquals(List<Type>, List<Type>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(Class<A>): List<Class<A>>' type=kotlin.collections.List<java.lang.Class<A>> operator=null
+            element: CALL '<get-java>() on KClass<A>: Class<A>' type=java.lang.Class<A> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+          actual: CALL 'map((KParameter) -> Type) on Iterable<KParameter>: List<Type>' type=kotlin.collections.List<java.lang.reflect.Type> operator=null
+            $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'constructor Nested(A)' type=kotlin.reflect.KFunction1<A, A.Nested> operator=null
+            transform: BLOCK type=(kotlin.reflect.KParameter) -> java.lang.reflect.Type operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KParameter): java.lang.reflect.Type
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KParameter): Type'
+                    CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+                      $receiver: CALL '<get-type>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KParameter' type=kotlin.reflect.KParameter operator=null
+              CALLABLE_REFERENCE '<anonymous>(KParameter): Type' type=(kotlin.reflect.KParameter) -> java.lang.reflect.Type operator=LAMBDA
+        CALL 'assertEquals(List<Type>, List<Type>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(vararg Class<out Any>): List<Class<out Any>>' type=kotlin.collections.List<java.lang.Class<out kotlin.Any>> operator=null
+            elements: VARARG type=Array<out Class<out Any>> varargElementType=Class<out Any>
+              CALL '<get-java>() on KClass<A>: Class<A>' type=java.lang.Class<A> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+              CALL '<get-java>() on KClass<A.Nested>: Class<A.Nested>' type=java.lang.Class<A.Nested> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'Nested' type=kotlin.reflect.KClass<A.Nested>
+          actual: CALL 'map((KParameter) -> Type) on Iterable<KParameter>: List<Type>' type=kotlin.collections.List<java.lang.reflect.Type> operator=null
+            $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'constructor Inner(A.Nested)' type=kotlin.reflect.KFunction2<A, A.Nested, A.Inner> operator=null
+            transform: BLOCK type=(kotlin.reflect.KParameter) -> java.lang.reflect.Type operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KParameter): java.lang.reflect.Type
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KParameter): Type'
+                    CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+                      $receiver: CALL '<get-type>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KParameter' type=kotlin.reflect.KParameter operator=null
+              CALLABLE_REFERENCE '<anonymous>(KParameter): Type' type=(kotlin.reflect.KParameter) -> java.lang.reflect.Type operator=LAMBDA
+        CALL 'assertEquals(Type, Type, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-java>() on KClass<A>: Class<A>' type=java.lang.Class<A> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+          actual: CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+            $receiver: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'constructor A(Double, String, A?)' type=kotlin.reflect.KFunction3<kotlin.Double, kotlin.String, A?, A> operator=null
+        CALL 'assertEquals(Type, Type, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-java>() on KClass<A.Nested>: Class<A.Nested>' type=java.lang.Class<A.Nested> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Nested' type=kotlin.reflect.KClass<A.Nested>
+          actual: CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+            $receiver: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'constructor Nested(A)' type=kotlin.reflect.KFunction1<A, A.Nested> operator=null
+        CALL 'assertEquals(Type, Type, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL '<get-java>() on KClass<A.Inner>: Class<A.Inner>' type=java.lang.Class<A.Inner> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'Inner' type=kotlin.reflect.KClass<A.Inner>
+          actual: CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+            $receiver: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'constructor Inner(A.Nested)' type=kotlin.reflect.KFunction2<A, A.Nested, A.Inner> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

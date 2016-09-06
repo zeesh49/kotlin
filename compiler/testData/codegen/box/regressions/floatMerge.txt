@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /floatMerge.kt
+    FUN public fun foo(): kotlin.Float
+      BLOCK_BODY
+        VAR var f: kotlin.Float
+          CONST Float type=kotlin.Float value='2.0'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+            arg0: CALL 'compareTo(Float): Int' type=kotlin.Int operator=GT
+              $this: GET_VAR 'f: Float' type=kotlin.Float operator=null
+              other: CONST Float type=kotlin.Float value='0.0'
+          then: BLOCK type=kotlin.Float operator=null
+            BLOCK type=kotlin.Float operator=POSTFIX_INCR
+              VAR val tmp0: kotlin.Float
+                GET_VAR 'f: Float' type=kotlin.Float operator=POSTFIX_INCR
+              SET_VAR 'f: Float' type=kotlin.Unit operator=POSTFIX_INCR
+                CALL 'inc(): Float' type=kotlin.Float operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp0: Float' type=kotlin.Float operator=null
+              GET_VAR 'tmp0: Float' type=kotlin.Float operator=null
+        BLOCK type=kotlin.Float operator=POSTFIX_INCR
+          VAR val tmp1: kotlin.Float
+            GET_VAR 'f: Float' type=kotlin.Float operator=POSTFIX_INCR
+          SET_VAR 'f: Float' type=kotlin.Unit operator=POSTFIX_INCR
+            CALL 'inc(): Float' type=kotlin.Float operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp1: Float' type=kotlin.Float operator=null
+          GET_VAR 'tmp1: Float' type=kotlin.Float operator=null
+        RETURN type=kotlin.Nothing from='foo(): Float'
+          GET_VAR 'f: Float' type=kotlin.Float operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+              arg0: CALL 'compareTo(Float): Int' type=kotlin.Int operator=GT
+                $this: CALL 'foo(): Float' type=kotlin.Float operator=null
+                other: CONST Float type=kotlin.Float value='3.5'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='Fail'

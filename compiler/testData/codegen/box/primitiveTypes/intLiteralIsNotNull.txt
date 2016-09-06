@@ -1,0 +1,19 @@
+MODULE <test-module>
+  FILE /intLiteralIsNotNull.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: BLOCK type=kotlin.Int operator=EXCLEXCL
+                VAR val tmp0_notnull: kotlin.Int
+                  CONST Int type=kotlin.Int value='10'
+                WHEN type=kotlin.Int operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_notnull: Int' type=kotlin.Int operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: GET_VAR 'tmp0_notnull: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='10'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

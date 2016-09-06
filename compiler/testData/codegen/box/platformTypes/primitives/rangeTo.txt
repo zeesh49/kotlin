@@ -1,0 +1,43 @@
+MODULE <test-module>
+  FILE /rangeTo.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val l: java.util.ArrayList<kotlin.Int>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.Int> operator=null
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'l: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='2'
+        VAR val sb: java.lang.StringBuilder
+          CALL 'constructor StringBuilder()' type=java.lang.StringBuilder operator=null
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                $this: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                  $this: GET_VAR 'l: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+                  index: CONST Int type=kotlin.Int value='0'
+                other: CONST Int type=kotlin.Int value='3'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=java.lang.StringBuilder! operator=null
+                CALL 'append(Int): StringBuilder!' type=java.lang.StringBuilder! operator=null
+                  $this: GET_VAR 'sb: StringBuilder' type=java.lang.StringBuilder operator=null
+                  p0: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'sb: StringBuilder' type=java.lang.StringBuilder operator=null
+              arg1: CONST String type=kotlin.String value='23'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'sb: StringBuilder' type=java.lang.StringBuilder operator=null
+              CONST String type=kotlin.String value='}'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

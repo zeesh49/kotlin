@@ -1,0 +1,43 @@
+MODULE <test-module>
+  FILE /enumNameOrdinal.kt
+    CLASS ENUM_CLASS E
+      CONSTRUCTOR private constructor E()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='E'
+      ENUM_ENTRY enum entry I
+        init: ENUM_CONSTRUCTOR_CALL 'constructor E()' I
+      FUN public final fun values(): kotlin.Array<E>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): E
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val i: kotlin.String
+          CALL 'get(E): String' type=kotlin.String operator=null
+            $this: CALLABLE_REFERENCE 'name: String' type=kotlin.reflect.KProperty1<E, kotlin.String> operator=null
+            receiver: GET_ENUM_VALUE 'I' type=E
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'i: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='I'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'i: String' type=kotlin.String operator=null
+        VAR val n: kotlin.Int
+          CALL 'get(E): Int' type=kotlin.Int operator=null
+            $this: CALLABLE_REFERENCE 'ordinal: Int' type=kotlin.reflect.KProperty1<E, kotlin.Int> operator=null
+            receiver: GET_ENUM_VALUE 'I' type=E
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'n: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'n: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

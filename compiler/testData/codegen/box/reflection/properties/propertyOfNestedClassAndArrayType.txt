@@ -1,0 +1,103 @@
+MODULE <test-module>
+  FILE /propertyOfNestedClassAndArrayType.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS CLASS B
+        CONSTRUCTOR public constructor B(result: kotlin.String)
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            SET_BACKING_FIELD 'result: String' type=kotlin.Unit operator=null
+              receiver: THIS of 'B' type=A.B
+              value: GET_VAR 'value-parameter result: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            INSTANCE_INITIALIZER_CALL classDescriptor='B'
+        PROPERTY public final val result: kotlin.String
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter result: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final var p: A.B?
+        EXPRESSION_BODY
+          CONST Null type=kotlin.Nothing? value='null'
+      PROPERTY public final var q: kotlin.Array<kotlin.Array<A.B>>?
+        EXPRESSION_BODY
+          CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          CALL 'constructor A()' type=A operator=null
+        VAR val aq: kotlin.reflect.KMutableProperty1<A, kotlin.Array<kotlin.Array<A.B>>>
+          TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty1<A, kotlin.Array<kotlin.Array<A.B>>>
+            CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+              $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                $this: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+              predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                      CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                          $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                        arg1: CONST String type=kotlin.String value='q'
+                CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+        CALL 'set(A, Array<Array<A.B>>): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'aq: KMutableProperty1<A, Array<Array<A.B>>>' type=kotlin.reflect.KMutableProperty1<A, kotlin.Array<kotlin.Array<A.B>>> operator=null
+          receiver: GET_VAR 'a: A' type=A operator=null
+          value: CALL 'arrayOf(vararg Array<A.B>): Array<Array<A.B>>' type=kotlin.Array<kotlin.Array<A.B>> operator=null
+            elements: VARARG type=Array<out Array<B>> varargElementType=Array<B>
+              CALL 'arrayOf(vararg A.B): Array<A.B>' type=kotlin.Array<A.B> operator=null
+                elements: VARARG type=Array<out B> varargElementType=B
+                  CALL 'constructor B(String)' type=A.B operator=null
+                    result: CONST String type=kotlin.String value='array'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: CALL 'get(Int): A.B' type=A.B operator=GET_ARRAY_ELEMENT
+                  $this: CALL 'get(Int): Array<A.B>' type=kotlin.Array<A.B> operator=GET_ARRAY_ELEMENT
+                    $this: BLOCK type=kotlin.Array<kotlin.Array<A.B>> operator=EXCLEXCL
+                      VAR val tmp0_notnull: kotlin.Array<kotlin.Array<A.B>>?
+                        CALL '<get-q>(): Array<Array<A.B>>?' type=kotlin.Array<kotlin.Array<A.B>>? operator=GET_PROPERTY
+                          $this: GET_VAR 'a: A' type=A operator=null
+                      WHEN type=kotlin.Array<kotlin.Array<A.B>> operator=null
+                        if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: GET_VAR 'tmp0_notnull: Array<Array<A.B>>?' type=kotlin.Array<kotlin.Array<A.B>>? operator=null
+                          arg1: CONST Null type=kotlin.Nothing? value='null'
+                        then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                        else: GET_VAR 'tmp0_notnull: Array<Array<A.B>>?' type=kotlin.Array<kotlin.Array<A.B>>? operator=null
+                    index: CONST Int type=kotlin.Int value='0'
+                  index: CONST Int type=kotlin.Int value='0'
+              arg1: CONST String type=kotlin.String value='array'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail array'
+        VAR val ap: kotlin.reflect.KMutableProperty1<A, A.B>
+          TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty1<A, A.B>
+            CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+              $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                $this: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+              predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                      CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                          $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                        arg1: CONST String type=kotlin.String value='p'
+                CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+        CALL 'set(A, A.B): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'ap: KMutableProperty1<A, A.B>' type=kotlin.reflect.KMutableProperty1<A, A.B> operator=null
+          receiver: GET_VAR 'a: A' type=A operator=null
+          value: CALL 'constructor B(String)' type=A.B operator=null
+            result: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: BLOCK type=A.B operator=EXCLEXCL
+              VAR val tmp1_notnull: A.B?
+                CALL '<get-p>(): A.B?' type=A.B? operator=GET_PROPERTY
+                  $this: GET_VAR 'a: A' type=A operator=null
+              WHEN type=A.B operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp1_notnull: A.B?' type=A.B? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp1_notnull: A.B?' type=A.B? operator=null

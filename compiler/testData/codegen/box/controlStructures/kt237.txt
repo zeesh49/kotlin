@@ -1,0 +1,172 @@
+MODULE <test-module>
+  FILE /kt237.kt
+    FUN public fun main(args: kotlin.Array<kotlin.String>?): kotlin.Unit
+      BLOCK_BODY
+        VAR val y: kotlin.Unit
+          GET_OBJECT 'Unit' type=kotlin.Unit
+        CALL 'constructor A()' type=A<kotlin.Unit> operator=null
+        CALL 'constructor C(Unit)' type=C<kotlin.Unit> operator=null
+          value: GET_OBJECT 'Unit' type=kotlin.Unit
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp0_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(Any!): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: CALL 'fff(Unit): Unit' type=kotlin.Unit operator=null
+                x: GET_OBJECT 'Unit' type=kotlin.Unit
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp1_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp1_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(Any!): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp1_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: CALL 'id(Unit): Unit' type=kotlin.Unit operator=null
+                value: GET_VAR 'y: Unit' type=kotlin.Unit operator=null
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp2_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp2_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(Boolean): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp2_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL 'fff(Unit): Unit' type=kotlin.Unit operator=null
+                  x: CALL 'id(Unit): Unit' type=kotlin.Unit operator=null
+                    value: GET_VAR 'y: Unit' type=kotlin.Unit operator=null
+                arg1: CALL 'id(Unit): Unit' type=kotlin.Unit operator=null
+                  value: CALL 'foreach(Array<Int>, (Int) -> Unit): Unit' type=kotlin.Unit operator=null
+                    array: TYPE_OP operator=CAST typeOperand=kotlin.Array<kotlin.Int>
+                      CALL 'arrayOfNulls(Int): Array<Int?>' type=kotlin.Array<kotlin.Int?> operator=null
+                        size: CONST Int type=kotlin.Int value='0'
+                    action: BLOCK type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+                      FUN local final fun <anonymous>(e: kotlin.Int): kotlin.Unit
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='<anonymous>(Int): Unit'
+                      CALLABLE_REFERENCE '<anonymous>(Int): Unit' type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C<T>(value: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'value: T' type=kotlin.Unit operator=null
+            receiver: THIS of 'C' type=C<T>
+            value: GET_VAR 'value-parameter value: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      PROPERTY public final val value: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun foo(): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): T'
+            CALL '<get-value>(): T' type=T operator=GET_PROPERTY
+              $this: THIS of 'C' type=C<T>
+    FUN public fun <T> fff(x: T): T
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='fff(T): T'
+          GET_VAR 'value-parameter x: T' type=T operator=null
+    FUN public fun <T> id(value: T): T
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='id(T): T'
+          GET_VAR 'value-parameter value: T' type=T operator=null
+    FUN public fun foreach(array: kotlin.Array<kotlin.Int>, action: (kotlin.Int) -> kotlin.Unit): kotlin.Unit
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<kotlin.Int>
+            CALL 'iterator(): Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'value-parameter array: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val el: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                CALL 'invoke(Int): Unit' type=kotlin.Unit operator=INVOKE
+                  $this: GET_VAR 'value-parameter action: (Int) -> Unit' type=(kotlin.Int) -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+                  p1: GET_VAR 'el: Int' type=kotlin.Int operator=null
+    FUN public fun almostFilter(array: kotlin.Array<kotlin.Int>, action: (kotlin.Int) -> kotlin.Int): kotlin.Unit
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<kotlin.Int>
+            CALL 'iterator(): Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'value-parameter array: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val el: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<Int>' type=kotlin.collections.Iterator<kotlin.Int> operator=null
+              BLOCK type=kotlin.Int operator=null
+                CALL 'invoke(Int): Int' type=kotlin.Int operator=INVOKE
+                  $this: GET_VAR 'value-parameter action: (Int) -> Int' type=(kotlin.Int) -> kotlin.Int operator=VARIABLE_AS_FUNCTION
+                  p1: GET_VAR 'el: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: kotlin.Array<kotlin.Int>
+          TYPE_OP operator=CAST typeOperand=kotlin.Array<kotlin.Int>
+            CALL 'arrayOfNulls(Int): Array<Int?>' type=kotlin.Array<kotlin.Int?> operator=null
+              size: CONST Int type=kotlin.Int value='3'
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+          index: CONST Int type=kotlin.Int value='0'
+          value: CONST Int type=kotlin.Int value='0'
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+          index: CONST Int type=kotlin.Int value='1'
+          value: CONST Int type=kotlin.Int value='1'
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+          index: CONST Int type=kotlin.Int value='2'
+          value: CONST Int type=kotlin.Int value='2'
+        CALL 'foreach(Array<Int>, (Int) -> Unit): Unit' type=kotlin.Unit operator=null
+          array: GET_VAR 'a: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+          action: BLOCK type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(el: kotlin.Int): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(Int): Unit'
+                  BLOCK type=kotlin.Unit? operator=SAFE_CALL
+                    VAR val tmp0_safe_receiver: java.io.PrintStream!
+                      GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+                    WHEN type=kotlin.Unit? operator=SAFE_CALL
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+                        arg1: CONST Null type=kotlin.Nothing? value='null'
+                      then: CONST Null type=kotlin.Nothing? value='null'
+                      else: CALL 'println(Int): Unit' type=kotlin.Unit operator=null
+                        $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                          GET_VAR 'tmp0_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+                        p0: GET_VAR 'value-parameter el: Int' type=kotlin.Int operator=null
+            CALLABLE_REFERENCE '<anonymous>(Int): Unit' type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+        CALL 'almostFilter(Array<Int>, (Int) -> Int): Unit' type=kotlin.Unit operator=null
+          array: GET_VAR 'a: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+          action: BLOCK type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+            FUN local final fun <anonymous>(el: kotlin.Int): kotlin.Int
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(Int): Int'
+                  GET_VAR 'value-parameter el: Int' type=kotlin.Int operator=null
+            CALLABLE_REFERENCE '<anonymous>(Int): Int' type=(kotlin.Int) -> kotlin.Int operator=LAMBDA
+        CALL 'main(Array<String>?): Unit' type=kotlin.Unit operator=null
+          args: CONST Null type=kotlin.Nothing? value='null'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

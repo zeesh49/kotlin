@@ -1,0 +1,12 @@
+MODULE <test-module>
+  FILE /kt5589.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.String = "OK"
+          CONST String type=kotlin.String value='OK'
+        FUN local final fun bar(y: kotlin.String = ...): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='bar(String = ...): String'
+              GET_VAR 'value-parameter y: String = ...' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'bar(String = ...): String' type=kotlin.String operator=null

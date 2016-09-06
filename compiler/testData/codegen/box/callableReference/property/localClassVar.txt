@@ -1,0 +1,22 @@
+MODULE <test-module>
+  FILE /localClassVar.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CLASS CLASS Local
+          CONSTRUCTOR public constructor Local()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              INSTANCE_INITIALIZER_CALL classDescriptor='Local'
+          PROPERTY public final var result: kotlin.String
+            EXPRESSION_BODY
+              CONST String type=kotlin.String value='Fail'
+        VAR val l: box.Local
+          CALL 'constructor Local()' type=box.Local operator=null
+        CALL 'set(Local, String): Unit' type=kotlin.Unit operator=null
+          $this: CALLABLE_REFERENCE 'result: String' type=kotlin.reflect.KMutableProperty1<box.Local, kotlin.String> operator=null
+          receiver: GET_VAR 'l: Local' type=box.Local operator=null
+          value: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'get(Local): String' type=kotlin.String operator=null
+            $this: CALLABLE_REFERENCE 'result: String' type=kotlin.reflect.KMutableProperty1<box.Local, kotlin.String> operator=null
+            receiver: GET_VAR 'l: Local' type=box.Local operator=null

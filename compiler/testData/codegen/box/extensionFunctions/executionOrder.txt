@@ -1,0 +1,50 @@
+MODULE <test-module>
+  FILE /executionOrder.kt
+    PROPERTY public var result: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    FUN public fun getReceiver(): kotlin.Int
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=PLUSEQ
+          CALL '<set-result>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+            <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+              $this: CALL '<get-result>(): String' type=kotlin.String operator=PLUSEQ
+              other: CONST String type=kotlin.String value='getReceiver->'
+        RETURN type=kotlin.Nothing from='getReceiver(): Int'
+          CONST Int type=kotlin.Int value='1'
+    FUN public fun getFun(b: kotlin.Int.(kotlin.Int) -> kotlin.Unit): kotlin.Int.(kotlin.Int) -> kotlin.Unit
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=PLUSEQ
+          CALL '<set-result>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+            <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+              $this: CALL '<get-result>(): String' type=kotlin.String operator=PLUSEQ
+              other: CONST String type=kotlin.String value='getFun()->'
+        RETURN type=kotlin.Nothing from='getFun(Int.(Int) -> Unit): Int.(Int) -> Unit'
+          GET_VAR 'value-parameter b: Int.(Int) -> Unit' type=kotlin.Int.(kotlin.Int) -> kotlin.Unit operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'invoke(Int) on Int: Unit' type=kotlin.Unit operator=null
+          $this: CALL 'getFun(Int.(Int) -> Unit): Int.(Int) -> Unit' type=kotlin.Int.(kotlin.Int) -> kotlin.Unit operator=null
+            b: BLOCK type=kotlin.Int.(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+              FUN local final fun kotlin.Int.<anonymous>(it: kotlin.Int): kotlin.Unit
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int) on Int: Unit'
+                    BLOCK type=kotlin.Unit operator=PLUSEQ
+                      CALL '<set-result>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+                        <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                          $this: CALL '<get-result>(): String' type=kotlin.String operator=PLUSEQ
+                          other: CONST String type=kotlin.String value='End'
+              CALLABLE_REFERENCE '<anonymous>(Int) on Int: Unit' type=kotlin.Int.(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+          $receiver: CALL 'getReceiver(): Int' type=kotlin.Int operator=null
+          p2: CONST Int type=kotlin.Int value='1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+              arg1: CONST String type=kotlin.String value='getFun()->getReceiver->End'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail '
+              CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

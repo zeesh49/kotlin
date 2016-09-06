@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /renamedFileClass.kt
+    FUN public fun foo(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(): String'
+          CALL 'bar(): String' type=kotlin.String operator=null
+    FUN public fun bar(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='bar(): String'
+          CALL 'qux(): String' type=kotlin.String operator=null
+    FUN public fun qux(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='qux(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(): String' type=kotlin.String operator=null

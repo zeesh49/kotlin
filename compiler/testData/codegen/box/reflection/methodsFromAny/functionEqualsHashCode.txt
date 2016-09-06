@@ -1,0 +1,66 @@
+MODULE <test-module>
+  FILE /functionEqualsHashCode.kt
+    FUN public fun top(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='top(): Int'
+          CONST Int type=kotlin.Int value='42'
+    FUN public fun kotlin.Int.intExt(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='intExt() on Int: Int'
+          $RECEIVER of 'intExt() on Int: Int' type=kotlin.Int
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun mem(): kotlin.Unit
+        BLOCK_BODY
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      FUN public final fun mem(): kotlin.Unit
+        BLOCK_BODY
+    FUN public fun checkEqual(x: kotlin.Any, y: kotlin.Any): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assertEquals(Any, Any, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+          actual: GET_VAR 'value-parameter y: Any' type=kotlin.Any operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+          actual: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'value-parameter y: Any' type=kotlin.Any operator=null
+          message: STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value='Elements are equal but their hash codes are not: '
+            CALL 'hashCode(): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+            CONST String type=kotlin.String value=' != '
+            CALL 'hashCode(): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'value-parameter y: Any' type=kotlin.Any operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'checkEqual(Any, Any): Unit' type=kotlin.Unit operator=null
+          x: CALLABLE_REFERENCE 'top(): Int' type=kotlin.reflect.KFunction0<kotlin.Int> operator=null
+          y: CALLABLE_REFERENCE 'top(): Int' type=kotlin.reflect.KFunction0<kotlin.Int> operator=null
+        CALL 'checkEqual(Any, Any): Unit' type=kotlin.Unit operator=null
+          x: CALLABLE_REFERENCE 'intExt() on Int: Int' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Int> operator=null
+          y: CALLABLE_REFERENCE 'intExt() on Int: Int' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Int> operator=null
+        CALL 'checkEqual(Any, Any): Unit' type=kotlin.Unit operator=null
+          x: CALLABLE_REFERENCE 'mem(): Unit' type=kotlin.reflect.KFunction1<A, kotlin.Unit> operator=null
+          y: CALLABLE_REFERENCE 'mem(): Unit' type=kotlin.reflect.KFunction1<A, kotlin.Unit> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALLABLE_REFERENCE 'top(): Int' type=kotlin.reflect.KFunction0<kotlin.Int> operator=null
+            arg1: CALLABLE_REFERENCE 'intExt() on Int: Int' type=kotlin.reflect.KFunction1<kotlin.Int, kotlin.Int> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALLABLE_REFERENCE 'top(): Int' type=kotlin.reflect.KFunction0<kotlin.Int> operator=null
+            arg1: CALLABLE_REFERENCE 'mem(): Unit' type=kotlin.reflect.KFunction1<A, kotlin.Unit> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALLABLE_REFERENCE 'mem(): Unit' type=kotlin.reflect.KFunction1<A, kotlin.Unit> operator=null
+            arg1: CALLABLE_REFERENCE 'mem(): Unit' type=kotlin.reflect.KFunction1<B, kotlin.Unit> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

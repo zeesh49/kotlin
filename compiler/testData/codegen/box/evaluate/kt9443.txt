@@ -1,0 +1,47 @@
+MODULE <test-module>
+  FILE /kt9443.kt
+    CLASS CLASS BaseClass
+      CONSTRUCTOR public constructor BaseClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='BaseClass'
+      PROPERTY protected open val menuId: kotlin.Int = 0
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+      FUN public final fun run(): kotlin.Pair<kotlin.String, kotlin.Boolean>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='run(): Pair<String, Boolean>'
+            CALL 'to(Boolean) on String: Pair<String, Boolean>' type=kotlin.Pair<kotlin.String, kotlin.Boolean> operator=null
+              $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+                CALL '<get-menuId>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'BaseClass' type=BaseClass
+              that: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL '<get-menuId>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'BaseClass' type=BaseClass
+                arg1: CONST Int type=kotlin.Int value='0'
+    CLASS CLASS ImplClass
+      CONSTRUCTOR public constructor ImplClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor BaseClass()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ImplClass'
+      PROPERTY protected open override val menuId: kotlin.Int = 3
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='3'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val result: kotlin.Pair<kotlin.String, kotlin.Boolean>
+          CALL 'run(): Pair<String, Boolean>' type=kotlin.Pair<kotlin.String, kotlin.Boolean> operator=null
+            $this: CALL 'constructor ImplClass()' type=ImplClass operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Pair<String, Boolean>' type=kotlin.Pair<kotlin.String, kotlin.Boolean> operator=null
+              arg1: CALL 'to(Boolean) on String: Pair<String, Boolean>' type=kotlin.Pair<kotlin.String, kotlin.Boolean> operator=null
+                $receiver: CONST String type=kotlin.String value='3'
+                that: CONST Boolean type=kotlin.Boolean value='false'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'result: Pair<String, Boolean>' type=kotlin.Pair<kotlin.String, kotlin.Boolean> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,188 @@
+MODULE <test-module>
+  FILE /kt496.kt
+    FUN public fun test1(): kotlin.Boolean
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='test1(): Boolean'
+              CONST Boolean type=kotlin.Boolean value='true'
+          finally: BLOCK type=kotlin.Unit operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CONST Boolean type=kotlin.Boolean value='true'
+              then: RETURN type=kotlin.Nothing from='test1(): Boolean'
+                CONST Boolean type=kotlin.Boolean value='false'
+    PROPERTY public var x: kotlin.Boolean
+      EXPRESSION_BODY
+        CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun test2(): kotlin.Boolean
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+          finally: BLOCK type=kotlin.Unit operator=null
+            CALL '<set-x>(Boolean): Unit' type=kotlin.Unit operator=EQ
+              <set-?>: CONST Boolean type=kotlin.Boolean value='false'
+        RETURN type=kotlin.Nothing from='test2(): Boolean'
+          CALL '<get-x>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+    FUN public fun test3(): kotlin.Int
+      BLOCK_BODY
+        VAR var y: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        TRY_CATCH type=kotlin.Int
+          try: BLOCK type=kotlin.Int operator=null
+            BLOCK type=kotlin.Int operator=PREFIX_INCR
+              VAR val tmp0: kotlin.Int
+                CALL 'inc(): Int' type=kotlin.Int operator=PREFIX_INCR
+                  $this: GET_VAR 'y: Int' type=kotlin.Int operator=PREFIX_INCR
+              SET_VAR 'y: Int' type=kotlin.Unit operator=PREFIX_INCR
+                GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+          finally: BLOCK type=kotlin.Int operator=null
+            BLOCK type=kotlin.Int operator=PREFIX_INCR
+              VAR val tmp1: kotlin.Int
+                CALL 'inc(): Int' type=kotlin.Int operator=PREFIX_INCR
+                  $this: GET_VAR 'y: Int' type=kotlin.Int operator=PREFIX_INCR
+              SET_VAR 'y: Int' type=kotlin.Unit operator=PREFIX_INCR
+                GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='test3(): Int'
+          GET_VAR 'y: Int' type=kotlin.Int operator=null
+    PROPERTY public var z: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='0'
+    FUN public fun test4(): kotlin.Int
+      BLOCK_BODY
+        CALL '<set-z>(Int): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: CONST Int type=kotlin.Int value='0'
+        RETURN type=kotlin.Nothing from='test4(): Int'
+          TRY_CATCH type=kotlin.Int
+            try: BLOCK type=kotlin.Int operator=null
+              TRY_CATCH type=kotlin.Int
+                try: BLOCK type=kotlin.Int operator=null
+                  BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                    BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                      VAR val tmp0: kotlin.Int
+                        CALL '<get-z>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      CALL '<set-z>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+                        <set-?>: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                          $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                      GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                finally: BLOCK type=kotlin.Int operator=null
+                  BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                    BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                      VAR val tmp1: kotlin.Int
+                        CALL '<get-z>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      CALL '<set-z>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+                        <set-?>: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                          $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                      GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+            finally: BLOCK type=kotlin.Int operator=null
+              BLOCK type=kotlin.Int operator=PREFIX_INCR
+                BLOCK type=kotlin.Int operator=PREFIX_INCR
+                  VAR val tmp2: kotlin.Int
+                    CALL 'inc(): Int' type=kotlin.Int operator=PREFIX_INCR
+                      $this: CALL '<get-z>(): Int' type=kotlin.Int operator=PREFIX_INCR
+                  CALL '<set-z>(Int): Unit' type=kotlin.Unit operator=PREFIX_INCR
+                    <set-?>: GET_VAR 'tmp2: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp2: Int' type=kotlin.Int operator=null
+    FUN public fun test5(): kotlin.Int
+      BLOCK_BODY
+        VAR var x: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        WHILE label=null operator=WHILE_LOOP
+          condition: CONST Boolean type=kotlin.Boolean value='true'
+          body: BLOCK type=kotlin.Int operator=null
+            TRY_CATCH type=kotlin.Int
+              try: BLOCK type=kotlin.Int operator=null
+                WHEN type=kotlin.Int operator=IF
+                  if: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+                    arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+                      $this: GET_VAR 'x: Int' type=kotlin.Int operator=null
+                      other: CONST Int type=kotlin.Int value='10'
+                  then: BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                    VAR val tmp0: kotlin.Int
+                      GET_VAR 'x: Int' type=kotlin.Int operator=POSTFIX_INCR
+                    SET_VAR 'x: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                      CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                        $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                    GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                  else: BREAK label=null loop.label=null depth=0
+              finally: BLOCK type=kotlin.Int operator=null
+                BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                  VAR val tmp1: kotlin.Int
+                    GET_VAR 'x: Int' type=kotlin.Int operator=POSTFIX_INCR
+                  SET_VAR 'x: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                    CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='test5(): Int'
+          GET_VAR 'x: Int' type=kotlin.Int operator=null
+    FUN public fun test6(): kotlin.Int
+      BLOCK_BODY
+        VAR var x: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+              $this: GET_VAR 'x: Int' type=kotlin.Int operator=null
+              other: CONST Int type=kotlin.Int value='10'
+          body: BLOCK type=kotlin.Nothing operator=null
+            TRY_CATCH type=kotlin.Nothing
+              try: BLOCK type=kotlin.Nothing operator=null
+                BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                  VAR val tmp0: kotlin.Int
+                    GET_VAR 'x: Int' type=kotlin.Int operator=POSTFIX_INCR
+                  SET_VAR 'x: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                    CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                CONTINUE label=null loop.label=null depth=0
+              finally: BLOCK type=kotlin.Int operator=null
+                BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                  VAR val tmp1: kotlin.Int
+                    GET_VAR 'x: Int' type=kotlin.Int operator=POSTFIX_INCR
+                  SET_VAR 'x: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                    CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='test6(): Int'
+          GET_VAR 'x: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'test1(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test1 failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'test2(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test2 failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test3(): Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test3 failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test4(): Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test4 failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test5(): Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='11'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test5 failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test6(): Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='10'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test6 failed'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

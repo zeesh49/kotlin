@@ -1,0 +1,73 @@
+MODULE <test-module>
+  FILE /simpleGetConstructors.kt
+    CLASS CLASS A
+      CONSTRUCTOR private constructor A(x: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CONSTRUCTOR public constructor A(s: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A(Int)'
+            x: CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A(String)'
+            s: CONST String type=kotlin.String value=''
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A(String)'
+            s: CONST String type=kotlin.String value=''
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      CLASS CLASS Nested
+        CONSTRUCTOR public constructor Nested()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Nested'
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='3'
+          actual: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: CALL '<get-constructors>(): Collection<KFunction<A>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<A>> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: CALL '<get-constructors>(): Collection<KFunction<B>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<B>> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'B' type=kotlin.reflect.KClass<B>
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'disjoint((Mutable)Collection<*>!, (Mutable)Collection<*>!): Boolean' type=kotlin.Boolean operator=null
+            p0: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+            p1: CALL '<get-constructors>(): Collection<KFunction<A>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<A>> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'disjoint((Mutable)Collection<*>!, (Mutable)Collection<*>!): Boolean' type=kotlin.Boolean operator=null
+            p0: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'B' type=kotlin.reflect.KClass<B>
+            p1: CALL '<get-constructors>(): Collection<KFunction<B>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<B>> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'B' type=kotlin.reflect.KClass<B>
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: CALL '<get-constructors>(): Collection<KFunction<C.Nested>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<C.Nested>> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'Nested' type=kotlin.reflect.KClass<C.Nested>
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: CALL '<get-constructors>(): Collection<KFunction<C.Inner>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<C.Inner>> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'Inner' type=kotlin.reflect.KClass<C.Inner>
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

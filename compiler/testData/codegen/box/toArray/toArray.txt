@@ -1,0 +1,112 @@
+MODULE <test-module>
+  FILE /toArray.kt
+    CLASS CLASS MyCollection
+      CONSTRUCTOR public constructor MyCollection<T>(delegate: kotlin.collections.Collection<T>)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'delegate: Collection<T>' type=kotlin.Unit operator=null
+            receiver: THIS of 'MyCollection' type=MyCollection<T>
+            value: GET_VAR 'value-parameter delegate: Collection<T>' type=kotlin.collections.Collection<T> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyCollection'
+      PROPERTY public final val delegate: kotlin.collections.Collection<T>
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter delegate: Collection<T>' type=kotlin.collections.Collection<T> operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY val `MyCollection$Collection$delegate`: kotlin.collections.Collection<T>
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter delegate: Collection<T>' type=kotlin.collections.Collection<T> operator=null
+      FUN public open override fun contains(element: T): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='contains(T): Boolean'
+            CALL 'contains(T): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MyCollection$Collection$delegate`: Collection<T>' type=kotlin.collections.Collection<T> operator=null
+              element: GET_VAR 'value-parameter element: T' type=T operator=null
+      FUN public open override fun containsAll(elements: kotlin.collections.Collection<T>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsAll(Collection<T>): Boolean'
+            CALL 'containsAll(Collection<T>): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MyCollection$Collection$delegate`: Collection<T>' type=kotlin.collections.Collection<T> operator=null
+              elements: GET_VAR 'value-parameter elements: Collection<T>' type=kotlin.collections.Collection<T> operator=null
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='isEmpty(): Boolean'
+            CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR '`MyCollection$Collection$delegate`: Collection<T>' type=kotlin.collections.Collection<T> operator=null
+      FUN public open override fun iterator(): kotlin.collections.Iterator<T>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='iterator(): Iterator<T>'
+            CALL 'iterator(): Iterator<T>' type=kotlin.collections.Iterator<T> operator=null
+              $this: GET_VAR '`MyCollection$Collection$delegate`: Collection<T>' type=kotlin.collections.Collection<T> operator=null
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-size>(): Int'
+              CALL '<get-size>(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR '`MyCollection$Collection$delegate`: Collection<T>' type=kotlin.collections.Collection<T> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val collection: java.util.Collection<*>
+          TYPE_OP operator=CAST typeOperand=java.util.Collection<*>
+            CALL 'constructor MyCollection(Collection<Int!>)' type=MyCollection<kotlin.Int!> operator=null
+              delegate: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.collections.List<kotlin.Int!>
+                CALL 'asList(vararg Int!): (Mutable)List<Int!>!' type=kotlin.collections.(Mutable)List<kotlin.Int!>! operator=null
+                  p0: VARARG type=(kotlin.Array<(kotlin.Int..kotlin.Int?)>..kotlin.Array<out (kotlin.Int..kotlin.Int?)>?) varargElementType=(kotlin.Int..kotlin.Int?)
+                    CONST Int type=kotlin.Int value='2'
+                    CONST Int type=kotlin.Int value='3'
+                    CONST Int type=kotlin.Int value='9'
+        VAR val array1: kotlin.Array<(out) kotlin.Any!>!
+          CALL 'toArray(): Array<(out) Any!>!' type=kotlin.Array<(out) kotlin.Any!>! operator=null
+            $this: GET_VAR 'collection: Collection<*>' type=java.util.Collection<*> operator=null
+        VAR val array2: kotlin.Array<(out) kotlin.Int!>!
+          CALL 'toArray(Array<(out) Int!>!): Array<(out) Int!>!' type=kotlin.Array<(out) kotlin.Int!>! operator=null
+            $this: GET_VAR 'collection: Collection<*>' type=java.util.Collection<*> operator=null
+            p0: TYPE_OP operator=CAST typeOperand=kotlin.Array<kotlin.Int>
+              CALL 'arrayOfNulls(Int): Array<Int?>' type=kotlin.Array<kotlin.Int?> operator=null
+                size: CONST Int type=kotlin.Int value='3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'isArrayOf() on Array<*>: Boolean' type=kotlin.Boolean operator=null
+              $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out kotlin.Any!>
+                GET_VAR 'array1: Array<(out) Any!>!' type=kotlin.Array<(out) kotlin.Any!>! operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CALL 'toString(): String' type=kotlin.String operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+                CALL 'getClass(): Class<*>!' type=java.lang.Class<*>! operator=null
+                  $this: TYPE_OP operator=CAST typeOperand=java.lang.Object
+                    GET_VAR 'array1: Array<(out) Any!>!' type=kotlin.Array<(out) kotlin.Any!>! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'isArrayOf() on Array<*>: Boolean' type=kotlin.Boolean operator=null
+              $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out kotlin.Int!>
+                GET_VAR 'array2: Array<(out) Int!>!' type=kotlin.Array<(out) kotlin.Int!>! operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CALL 'toString(): String' type=kotlin.String operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+                CALL 'getClass(): Class<*>!' type=java.lang.Class<*>! operator=null
+                  $this: TYPE_OP operator=CAST typeOperand=java.lang.Object
+                    GET_VAR 'array2: Array<(out) Int!>!' type=kotlin.Array<(out) kotlin.Int!>! operator=null
+        VAR val s1: kotlin.String!
+          CALL 'toString(Array<(out) Any!>!): String!' type=kotlin.String! operator=null
+            p0: GET_VAR 'array1: Array<(out) Any!>!' type=kotlin.Array<(out) kotlin.Any!>! operator=null
+        VAR val s2: kotlin.String!
+          CALL 'toString(Array<(out) Any!>!): String!' type=kotlin.String! operator=null
+            p0: GET_VAR 'array2: Array<(out) Int!>!' type=kotlin.Array<(out) kotlin.Int!>! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 's1: String!' type=kotlin.String! operator=null
+              arg1: CONST String type=kotlin.String value='[2, 3, 9]'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='s1 = '
+              GET_VAR 's1: String!' type=kotlin.String! operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 's2: String!' type=kotlin.String! operator=null
+              arg1: CONST String type=kotlin.String value='[2, 3, 9]'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='s2 = '
+              GET_VAR 's2: String!' type=kotlin.String! operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

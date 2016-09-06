@@ -1,0 +1,19 @@
+MODULE <test-module>
+  FILE /simpleClassLiterals.kt
+    CLASS CLASS Klass
+      CONSTRUCTOR public constructor Klass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Klass'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertNotNull(KClass<Int>?, String? = ...): KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=null
+          actual: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+        CALL 'assertNotNull(KClass<String>?, String? = ...): KClass<String>' type=kotlin.reflect.KClass<kotlin.String> operator=null
+          actual: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+        CALL 'assertNotNull(KClass<Klass>?, String? = ...): KClass<Klass>' type=kotlin.reflect.KClass<Klass> operator=null
+          actual: CLASS_REFERENCE 'Klass' type=kotlin.reflect.KClass<Klass>
+        CALL 'assertNotNull(KClass<Error /* = Error */>?, String? = ...): KClass<Error /* = Error */>' type=kotlin.reflect.KClass<kotlin.Error /* = java.lang.Error */> operator=null
+          actual: CLASS_REFERENCE 'Error' type=kotlin.reflect.KClass<kotlin.Error /* = java.lang.Error */>
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

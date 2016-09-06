@@ -1,0 +1,32 @@
+MODULE <test-module>
+  FILE /exhaustiveWhenInitialization.kt
+    CLASS ENUM_CLASS A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      ENUM_ENTRY enum entry V
+        init: ENUM_CONSTRUCTOR_CALL 'constructor A()' V
+      FUN public final fun values(): kotlin.Array<A>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): A
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          GET_ENUM_VALUE 'V' type=A
+        VAR val b: kotlin.Boolean
+        BLOCK type=kotlin.Unit operator=WHEN
+          VAR val tmp0_subject: A
+            GET_VAR 'a: A' type=A operator=null
+          WHEN type=kotlin.Unit operator=WHEN
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_subject: A' type=A operator=null
+              arg1: GET_ENUM_VALUE 'V' type=A
+            then: SET_VAR 'b: Boolean' type=kotlin.Unit operator=EQ
+              CONST Boolean type=kotlin.Boolean value='true'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: GET_VAR 'b: Boolean' type=kotlin.Boolean operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='FAIL'

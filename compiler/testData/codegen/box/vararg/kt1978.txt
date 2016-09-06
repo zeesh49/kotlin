@@ -1,0 +1,35 @@
+MODULE <test-module>
+  FILE /kt1978.kt
+    FUN public fun aa(vararg a: kotlin.String): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='aa(vararg String): String'
+          CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'value-parameter vararg a: String' type=kotlin.Array<out kotlin.String> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.String
+          CONST String type=kotlin.String value=''
+        VAR var i: kotlin.Int
+          CONST Int type=kotlin.Int value='1'
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+              $this: CONST Int type=kotlin.Int value='3'
+              other: BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                VAR val tmp0: kotlin.Int
+                  GET_VAR 'i: Int' type=kotlin.Int operator=POSTFIX_INCR
+                SET_VAR 'i: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                  CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                    $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+          body: BLOCK type=kotlin.Unit operator=null
+            SET_VAR 'result: String' type=kotlin.Unit operator=EQ
+              CALL 'aa(vararg String): String' type=kotlin.String operator=null
+                a: VARARG type=Array<out String> varargElementType=String
+                  WHEN type=kotlin.String operator=IF
+                    if: CONST Boolean type=kotlin.Boolean value='true'
+                    then: CONST String type=kotlin.String value='OK'
+                    else: CONST String type=kotlin.String value='fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          GET_VAR 'result: String' type=kotlin.String operator=null

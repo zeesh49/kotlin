@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /localExtendsLocalWithClosure.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val result: kotlin.String = "OK"
+          CONST String type=kotlin.String value='OK'
+        CLASS CLASS Local
+          CONSTRUCTOR public constructor Local(ok: kotlin.Boolean)
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+              SET_BACKING_FIELD 'ok: Boolean' type=kotlin.Unit operator=null
+                receiver: THIS of 'Local' type=box.Local
+                value: GET_VAR 'value-parameter ok: Boolean' type=kotlin.Boolean operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+              INSTANCE_INITIALIZER_CALL classDescriptor='Local'
+          PROPERTY public final val ok: kotlin.Boolean
+            EXPRESSION_BODY
+              GET_VAR 'value-parameter ok: Boolean' type=kotlin.Boolean operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          FUN public final fun result(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='result(): String'
+                WHEN type=kotlin.String operator=IF
+                  if: CALL '<get-ok>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+                    $this: THIS of 'Local' type=box.Local
+                  then: GET_VAR 'result: String' type=kotlin.String operator=null
+                  else: CONST String type=kotlin.String value='Fail'
+        CLASS CLASS Derived
+          CONSTRUCTOR public constructor Derived()
+            BLOCK_BODY
+              DELEGATING_CONSTRUCTOR_CALL 'constructor Local(Boolean)'
+                ok: CONST Boolean type=kotlin.Boolean value='true'
+              INSTANCE_INITIALIZER_CALL classDescriptor='Derived'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'result(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Derived()' type=box.Derived operator=null

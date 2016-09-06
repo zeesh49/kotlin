@@ -1,0 +1,81 @@
+MODULE <test-module>
+  FILE /kt756.kt
+    FUN public operator fun kotlin.Int?.unaryPlus(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='unaryPlus() on Int?: Int'
+          CALL 'unaryPlus(): Int' type=kotlin.Int operator=null
+            $this: BLOCK type=kotlin.Int operator=EXCLEXCL
+              VAR val tmp0_notnull: kotlin.Int?
+                $RECEIVER of 'unaryPlus() on Int?: Int' type=kotlin.Int?
+              WHEN type=kotlin.Int operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+    FUN public operator fun kotlin.Int?.dec(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='dec() on Int?: Int'
+          CALL 'dec(): Int' type=kotlin.Int operator=null
+            $this: BLOCK type=kotlin.Int operator=EXCLEXCL
+              VAR val tmp0_notnull: kotlin.Int?
+                $RECEIVER of 'dec() on Int?: Int' type=kotlin.Int?
+              WHEN type=kotlin.Int operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+    FUN public operator fun kotlin.Int?.inc(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='inc() on Int?: Int'
+          CALL 'inc(): Int' type=kotlin.Int operator=null
+            $this: BLOCK type=kotlin.Int operator=EXCLEXCL
+              VAR val tmp0_notnull: kotlin.Int?
+                $RECEIVER of 'inc() on Int?: Int' type=kotlin.Int?
+              WHEN type=kotlin.Int operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+    FUN public operator fun kotlin.Int?.unaryMinus(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='unaryMinus() on Int?: Int'
+          CALL 'unaryMinus(): Int' type=kotlin.Int operator=null
+            $this: BLOCK type=kotlin.Int operator=EXCLEXCL
+              VAR val tmp0_notnull: kotlin.Int?
+                $RECEIVER of 'unaryMinus() on Int?: Int' type=kotlin.Int?
+              WHEN type=kotlin.Int operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.Int? = 10
+          CONST Int type=kotlin.Int value='10'
+        BLOCK type=kotlin.Unit? operator=SAFE_CALL
+          VAR val tmp1_safe_receiver: java.io.PrintStream!
+            GET_BACKING_FIELD 'out: PrintStream!' type=java.io.PrintStream! operator=GET_PROPERTY
+          WHEN type=kotlin.Unit? operator=SAFE_CALL
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp1_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST Null type=kotlin.Nothing? value='null'
+            else: CALL 'println(Any!): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.io.PrintStream
+                GET_VAR 'tmp1_safe_receiver: PrintStream!' type=java.io.PrintStream! operator=null
+              p0: BLOCK type=kotlin.Int? operator=SAFE_CALL
+                VAR val tmp0_safe_receiver: kotlin.Int?
+                  GET_VAR 'x: Int?' type=kotlin.Int? operator=null
+                WHEN type=kotlin.Int? operator=SAFE_CALL
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_safe_receiver: Int?' type=kotlin.Int? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CONST Null type=kotlin.Nothing? value='null'
+                  else: CALL 'inv(): Int' type=kotlin.Int operator=null
+                    $this: GET_VAR 'tmp0_safe_receiver: Int?' type=kotlin.Int? operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

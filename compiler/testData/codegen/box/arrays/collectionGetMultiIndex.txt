@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /collectionGetMultiIndex.kt
+    FUN public operator fun java.util.ArrayList<kotlin.String>.get(index1: kotlin.Int, index2: kotlin.Int): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='get(Int, Int) on ArrayList<String>: String'
+          CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+            $this: $RECEIVER of 'get(Int, Int) on ArrayList<String>: String' type=java.util.ArrayList<kotlin.String>
+            index: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+              $this: GET_VAR 'value-parameter index1: Int' type=kotlin.Int operator=null
+              other: GET_VAR 'value-parameter index2: Int' type=kotlin.Int operator=null
+    FUN public operator fun java.util.ArrayList<kotlin.String>.set(index1: kotlin.Int, index2: kotlin.Int, elem: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        CALL 'set(Int, String): String' type=kotlin.String operator=EQ
+          $this: $RECEIVER of 'set(Int, Int, String) on ArrayList<String>: Unit' type=java.util.ArrayList<kotlin.String>
+          index: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+            $this: GET_VAR 'value-parameter index1: Int' type=kotlin.Int operator=null
+            other: GET_VAR 'value-parameter index2: Int' type=kotlin.Int operator=null
+          element: GET_VAR 'value-parameter elem: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val s: java.util.ArrayList<kotlin.String>
+          CALL 'constructor ArrayList(Int)' type=java.util.ArrayList<kotlin.String> operator=null
+            p0: CONST Int type=kotlin.Int value='1'
+        CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 's: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+          element: CONST String type=kotlin.String value=''
+        CALL 'set(Int, Int, String) on ArrayList<String>: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 's: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+          index1: CONST Int type=kotlin.Int value='1'
+          index2: CONST Int type=kotlin.Int value='-1'
+          elem: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'get(Int, Int) on ArrayList<String>: String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+            $receiver: GET_VAR 's: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+            index1: CONST Int type=kotlin.Int value='2'
+            index2: CONST Int type=kotlin.Int value='-2'

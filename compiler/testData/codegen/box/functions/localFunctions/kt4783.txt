@@ -1,0 +1,43 @@
+MODULE <test-module>
+  FILE /kt4783.kt
+    CLASS CLASS T
+      CONSTRUCTOR public constructor T(value: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'value: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'T' type=T
+            value: GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='T'
+      PROPERTY public final val value: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun local(): kotlin.Int
+      BLOCK_BODY
+        FUN local final operator fun T.get(s: kotlin.Int): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='get(Int) on T: Int'
+              CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                $this: GET_VAR 'value-parameter s: Int' type=kotlin.Int operator=null
+                other: CALL '<get-value>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: $RECEIVER of 'get(Int) on T: Int' type=T
+        VAR var t: T
+          CALL 'constructor T(Int)' type=T operator=null
+            value: CONST Int type=kotlin.Int value='11'
+        RETURN type=kotlin.Nothing from='local(): Int'
+          CALL 'get(Int) on T: Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+            $receiver: GET_VAR 't: T' type=T operator=null
+            s: CONST Int type=kotlin.Int value='2'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'local(): Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='22'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail1 '
+              CALL 'local(): Int' type=kotlin.Int operator=null
+              CONST String type=kotlin.String value=' '
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

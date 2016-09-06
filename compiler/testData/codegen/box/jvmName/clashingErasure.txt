@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /clashingErasure.kt
+    FUN public fun <T> kotlin.collections.List<T>.foo(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo() on List<T>: String'
+          CONST String type=kotlin.String value='foo'
+    FUN @kotlin.jvm.JvmName public fun kotlin.collections.List<kotlin.Int>.foo(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo() on List<Int>: String'
+          CONST String type=kotlin.String value='fooInt'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val strings: kotlin.String
+          CALL 'foo() on List<String>: String' type=kotlin.String operator=null
+            $receiver: CALL 'listOf(vararg String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              elements: VARARG type=Array<out String> varargElementType=String
+                CONST String type=kotlin.String value=''
+                CONST String type=kotlin.String value=''
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'strings: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='foo'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'strings: String' type=kotlin.String operator=null
+        VAR val ints: kotlin.String
+          CALL 'foo() on List<Int>: String' type=kotlin.String operator=null
+            $receiver: CALL 'listOf(vararg Int): List<Int>' type=kotlin.collections.List<kotlin.Int> operator=null
+              elements: VARARG type=Array<out Int> varargElementType=Int
+                CONST Int type=kotlin.Int value='1'
+                CONST Int type=kotlin.Int value='2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'ints: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='fooInt'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'ints: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

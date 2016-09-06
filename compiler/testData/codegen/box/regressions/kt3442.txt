@@ -1,0 +1,29 @@
+MODULE <test-module>
+  FILE /kt3442.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val m: java.util.HashMap<kotlin.String, kotlin.String?>
+          CALL 'hashMapOf(vararg Pair<String, String?>): HashMap<String, String?>' type=java.util.HashMap<kotlin.String, kotlin.String?> operator=null
+        CALL 'put(String, String?): String?' type=kotlin.String? operator=null
+          $this: GET_VAR 'm: HashMap<String, String?>' type=java.util.HashMap<kotlin.String, kotlin.String?> operator=null
+          key: CONST String type=kotlin.String value='b'
+          value: CONST Null type=kotlin.Nothing? value='null'
+        VAR val oldValue: kotlin.String?
+          CALL 'getOrPut(String, () -> String?) on MutableMap<String, String?>: String?' type=kotlin.String? operator=null
+            $receiver: GET_VAR 'm: HashMap<String, String?>' type=java.util.HashMap<kotlin.String, kotlin.String?> operator=null
+            key: CONST String type=kotlin.String value='b'
+            defaultValue: BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    CONST String type=kotlin.String value='Foo'
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'oldValue: String?' type=kotlin.String? operator=null
+              arg1: CONST String type=kotlin.String value='Foo'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: '
+              GET_VAR 'oldValue: String?' type=kotlin.String? operator=null

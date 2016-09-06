@@ -1,0 +1,328 @@
+MODULE <test-module>
+  FILE /simpleCallWithParams.kt
+    FUN public fun testProperLineNumberAfterInline(): kotlin.String
+      BLOCK_BODY
+        VAR var exceptionCount: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        TRY_CATCH type=kotlin.Any
+          try: BLOCK type=kotlin.Unit operator=null
+            CALL 'checkEquals(String, String): Unit' type=kotlin.Unit operator=null
+              p1: CALL 'test(): String' type=kotlin.String operator=null
+              p2: CONST String type=kotlin.String value='12'
+          catch e: BLOCK type=kotlin.Int operator=null
+            VAR val entry: java.lang.StackTraceElement!
+              CALL 'get(Int): StackTraceElement!' type=java.lang.StackTraceElement! operator=null
+                $this: BLOCK type=kotlin.Array<(out) java.lang.StackTraceElement!> operator=EXCLEXCL
+                  VAR val tmp0_notnull: kotlin.Array<(out) java.lang.StackTraceElement!>!
+                    CALL 'getStackTrace(): Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=null
+                      $this: TYPE_OP operator=CAST typeOperand=java.lang.Throwable
+                        GET_VAR 'e: AssertionError /* = AssertionError */' type=kotlin.AssertionError /* = java.lang.AssertionError */ operator=null
+                  WHEN type=kotlin.Array<(out) java.lang.StackTraceElement!> operator=null
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp0_notnull: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                    else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.StackTraceElement!>
+                      GET_VAR 'tmp0_notnull: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=null
+                index: CONST Int type=kotlin.Int value='1'
+            VAR val actual: kotlin.String
+              STRING_CONCATENATION type=kotlin.String
+                CALL 'getFileName(): String!' type=kotlin.String! operator=null
+                  $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.StackTraceElement
+                    GET_VAR 'entry: StackTraceElement!' type=java.lang.StackTraceElement! operator=null
+                CONST String type=kotlin.String value=':'
+                CALL 'getLineNumber(): Int' type=kotlin.Int operator=null
+                  $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.StackTraceElement
+                    GET_VAR 'entry: StackTraceElement!' type=java.lang.StackTraceElement! operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CONST String type=kotlin.String value='simpleCallWithParams.kt:7'
+                  arg1: GET_VAR 'actual: String' type=kotlin.String operator=null
+              then: BLOCK type=kotlin.Nothing operator=null
+                RETURN type=kotlin.Nothing from='testProperLineNumberAfterInline(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='fail 1: '
+                    GET_VAR 'actual: String' type=kotlin.String operator=null
+            BLOCK type=kotlin.Int operator=POSTFIX_INCR
+              VAR val tmp1: kotlin.Int
+                GET_VAR 'exceptionCount: Int' type=kotlin.Int operator=POSTFIX_INCR
+              SET_VAR 'exceptionCount: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        TRY_CATCH type=kotlin.Any
+          try: BLOCK type=kotlin.Unit operator=null
+            CALL 'checkEquals(String, String): Unit' type=kotlin.Unit operator=null
+              p1: CONST String type=kotlin.String value='12'
+              p2: CALL 'test(): String' type=kotlin.String operator=null
+          catch e: BLOCK type=kotlin.Int operator=null
+            VAR val entry: java.lang.StackTraceElement!
+              CALL 'get(Int): StackTraceElement!' type=java.lang.StackTraceElement! operator=GET_ARRAY_ELEMENT
+                $this: BLOCK type=kotlin.Array<(out) java.lang.StackTraceElement!> operator=EXCLEXCL
+                  VAR val tmp2_notnull: kotlin.Array<(out) java.lang.StackTraceElement!>!
+                    CALL '<get-stackTrace>() on AssertionError: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=GET_PROPERTY
+                      $receiver: GET_VAR 'e: AssertionError /* = AssertionError */' type=kotlin.AssertionError /* = java.lang.AssertionError */ operator=null
+                  WHEN type=kotlin.Array<(out) java.lang.StackTraceElement!> operator=null
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp2_notnull: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                    else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.StackTraceElement!>
+                      GET_VAR 'tmp2_notnull: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=null
+                index: CONST Int type=kotlin.Int value='1'
+            VAR val actual: kotlin.String
+              STRING_CONCATENATION type=kotlin.String
+                CALL 'getFileName(): String!' type=kotlin.String! operator=null
+                  $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.StackTraceElement
+                    GET_VAR 'entry: StackTraceElement!' type=java.lang.StackTraceElement! operator=null
+                CONST String type=kotlin.String value=':'
+                CALL 'getLineNumber(): Int' type=kotlin.Int operator=null
+                  $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.StackTraceElement
+                    GET_VAR 'entry: StackTraceElement!' type=java.lang.StackTraceElement! operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CONST String type=kotlin.String value='simpleCallWithParams.kt:20'
+                  arg1: GET_VAR 'actual: String' type=kotlin.String operator=null
+              then: BLOCK type=kotlin.Nothing operator=null
+                RETURN type=kotlin.Nothing from='testProperLineNumberAfterInline(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='fail 2: '
+                    GET_VAR 'actual: String' type=kotlin.String operator=null
+            BLOCK type=kotlin.Int operator=POSTFIX_INCR
+              VAR val tmp3: kotlin.Int
+                GET_VAR 'exceptionCount: Int' type=kotlin.Int operator=POSTFIX_INCR
+              SET_VAR 'exceptionCount: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp3: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp3: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='testProperLineNumberAfterInline(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'exceptionCount: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'
+    FUN public fun testProperLineForOtherParameters(): kotlin.String
+      BLOCK_BODY
+        VAR var exceptionCount: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        TRY_CATCH type=kotlin.Any
+          try: BLOCK type=kotlin.Unit operator=null
+            CALL 'checkEquals(String, String): Unit' type=kotlin.Unit operator=null
+              p1: CALL 'test(): String' type=kotlin.String operator=null
+              p2: CALL 'fail(): String' type=kotlin.String operator=null
+          catch e: BLOCK type=kotlin.Int operator=null
+            VAR val entry: java.lang.StackTraceElement!
+              CALL 'get(Int): StackTraceElement!' type=java.lang.StackTraceElement! operator=GET_ARRAY_ELEMENT
+                $this: BLOCK type=kotlin.Array<(out) java.lang.StackTraceElement!> operator=EXCLEXCL
+                  VAR val tmp0_notnull: kotlin.Array<(out) java.lang.StackTraceElement!>!
+                    CALL '<get-stackTrace>() on AssertionError: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=GET_PROPERTY
+                      $receiver: GET_VAR 'e: AssertionError /* = AssertionError */' type=kotlin.AssertionError /* = java.lang.AssertionError */ operator=null
+                  WHEN type=kotlin.Array<(out) java.lang.StackTraceElement!> operator=null
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp0_notnull: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                    else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.StackTraceElement!>
+                      GET_VAR 'tmp0_notnull: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=null
+                index: CONST Int type=kotlin.Int value='1'
+            VAR val actual: kotlin.String
+              STRING_CONCATENATION type=kotlin.String
+                CALL 'getFileName(): String!' type=kotlin.String! operator=null
+                  $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.StackTraceElement
+                    GET_VAR 'entry: StackTraceElement!' type=java.lang.StackTraceElement! operator=null
+                CONST String type=kotlin.String value=':'
+                CALL 'getLineNumber(): Int' type=kotlin.Int operator=null
+                  $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.StackTraceElement
+                    GET_VAR 'entry: StackTraceElement!' type=java.lang.StackTraceElement! operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CONST String type=kotlin.String value='simpleCallWithParams.kt:38'
+                  arg1: GET_VAR 'actual: String' type=kotlin.String operator=null
+              then: BLOCK type=kotlin.Nothing operator=null
+                RETURN type=kotlin.Nothing from='testProperLineForOtherParameters(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='fail 3: '
+                    GET_VAR 'actual: String' type=kotlin.String operator=null
+            BLOCK type=kotlin.Int operator=POSTFIX_INCR
+              VAR val tmp1: kotlin.Int
+                GET_VAR 'exceptionCount: Int' type=kotlin.Int operator=POSTFIX_INCR
+              SET_VAR 'exceptionCount: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+        TRY_CATCH type=kotlin.Any
+          try: BLOCK type=kotlin.Unit operator=null
+            CALL 'checkEquals(String, String): Unit' type=kotlin.Unit operator=null
+              p1: CALL 'fail(): String' type=kotlin.String operator=null
+              p2: CALL 'test(): String' type=kotlin.String operator=null
+          catch e: BLOCK type=kotlin.Int operator=null
+            VAR val entry: java.lang.StackTraceElement!
+              CALL 'get(Int): StackTraceElement!' type=java.lang.StackTraceElement! operator=GET_ARRAY_ELEMENT
+                $this: BLOCK type=kotlin.Array<(out) java.lang.StackTraceElement!> operator=EXCLEXCL
+                  VAR val tmp2_notnull: kotlin.Array<(out) java.lang.StackTraceElement!>!
+                    CALL '<get-stackTrace>() on AssertionError: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=GET_PROPERTY
+                      $receiver: GET_VAR 'e: AssertionError /* = AssertionError */' type=kotlin.AssertionError /* = java.lang.AssertionError */ operator=null
+                  WHEN type=kotlin.Array<(out) java.lang.StackTraceElement!> operator=null
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp2_notnull: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                    else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.StackTraceElement!>
+                      GET_VAR 'tmp2_notnull: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=null
+                index: CONST Int type=kotlin.Int value='1'
+            VAR val actual: kotlin.String
+              STRING_CONCATENATION type=kotlin.String
+                CALL 'getFileName(): String!' type=kotlin.String! operator=null
+                  $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.StackTraceElement
+                    GET_VAR 'entry: StackTraceElement!' type=java.lang.StackTraceElement! operator=null
+                CONST String type=kotlin.String value=':'
+                CALL 'getLineNumber(): Int' type=kotlin.Int operator=null
+                  $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.StackTraceElement
+                    GET_VAR 'entry: StackTraceElement!' type=java.lang.StackTraceElement! operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CONST String type=kotlin.String value='simpleCallWithParams.kt:52'
+                  arg1: GET_VAR 'actual: String' type=kotlin.String operator=null
+              then: BLOCK type=kotlin.Nothing operator=null
+                RETURN type=kotlin.Nothing from='testProperLineForOtherParameters(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='fail 4: '
+                    GET_VAR 'actual: String' type=kotlin.String operator=null
+            BLOCK type=kotlin.Int operator=POSTFIX_INCR
+              VAR val tmp3: kotlin.Int
+                GET_VAR 'exceptionCount: Int' type=kotlin.Int operator=POSTFIX_INCR
+              SET_VAR 'exceptionCount: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp3: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp3: Int' type=kotlin.Int operator=null
+        TRY_CATCH type=kotlin.Any
+          try: BLOCK type=kotlin.Unit operator=null
+            CALL 'checkEquals(String, String): Unit' type=kotlin.Unit operator=null
+              p1: CALL 'fail(): String' type=kotlin.String operator=null
+              p2: CALL 'test(): String' type=kotlin.String operator=null
+          catch e: BLOCK type=kotlin.Int operator=null
+            VAR val entry: java.lang.StackTraceElement!
+              CALL 'get(Int): StackTraceElement!' type=java.lang.StackTraceElement! operator=GET_ARRAY_ELEMENT
+                $this: BLOCK type=kotlin.Array<(out) java.lang.StackTraceElement!> operator=EXCLEXCL
+                  VAR val tmp4_notnull: kotlin.Array<(out) java.lang.StackTraceElement!>!
+                    CALL '<get-stackTrace>() on AssertionError: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=GET_PROPERTY
+                      $receiver: GET_VAR 'e: AssertionError /* = AssertionError */' type=kotlin.AssertionError /* = java.lang.AssertionError */ operator=null
+                  WHEN type=kotlin.Array<(out) java.lang.StackTraceElement!> operator=null
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp4_notnull: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                    else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.StackTraceElement!>
+                      GET_VAR 'tmp4_notnull: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=null
+                index: CONST Int type=kotlin.Int value='1'
+            VAR val actual: kotlin.String
+              STRING_CONCATENATION type=kotlin.String
+                CALL 'getFileName(): String!' type=kotlin.String! operator=null
+                  $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.StackTraceElement
+                    GET_VAR 'entry: StackTraceElement!' type=java.lang.StackTraceElement! operator=null
+                CONST String type=kotlin.String value=':'
+                CALL 'getLineNumber(): Int' type=kotlin.Int operator=null
+                  $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.StackTraceElement
+                    GET_VAR 'entry: StackTraceElement!' type=java.lang.StackTraceElement! operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CONST String type=kotlin.String value='simpleCallWithParams.kt:65'
+                  arg1: GET_VAR 'actual: String' type=kotlin.String operator=null
+              then: BLOCK type=kotlin.Nothing operator=null
+                RETURN type=kotlin.Nothing from='testProperLineForOtherParameters(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='fail 5: '
+                    GET_VAR 'actual: String' type=kotlin.String operator=null
+            BLOCK type=kotlin.Int operator=POSTFIX_INCR
+              VAR val tmp5: kotlin.Int
+                GET_VAR 'exceptionCount: Int' type=kotlin.Int operator=POSTFIX_INCR
+              SET_VAR 'exceptionCount: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp5: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp5: Int' type=kotlin.Int operator=null
+        TRY_CATCH type=kotlin.Any
+          try: BLOCK type=kotlin.Unit operator=null
+            CALL 'checkEquals(String, String): Unit' type=kotlin.Unit operator=null
+              p1: CALL 'fail(): String' type=kotlin.String operator=null
+              p2: CALL 'test(): String' type=kotlin.String operator=null
+          catch e: BLOCK type=kotlin.Int operator=null
+            VAR val entry: java.lang.StackTraceElement!
+              CALL 'get(Int): StackTraceElement!' type=java.lang.StackTraceElement! operator=GET_ARRAY_ELEMENT
+                $this: BLOCK type=kotlin.Array<(out) java.lang.StackTraceElement!> operator=EXCLEXCL
+                  VAR val tmp6_notnull: kotlin.Array<(out) java.lang.StackTraceElement!>!
+                    CALL '<get-stackTrace>() on AssertionError: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=GET_PROPERTY
+                      $receiver: GET_VAR 'e: AssertionError /* = AssertionError */' type=kotlin.AssertionError /* = java.lang.AssertionError */ operator=null
+                  WHEN type=kotlin.Array<(out) java.lang.StackTraceElement!> operator=null
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp6_notnull: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                    then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                    else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.StackTraceElement!>
+                      GET_VAR 'tmp6_notnull: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=null
+                index: CONST Int type=kotlin.Int value='1'
+            VAR val actual: kotlin.String
+              STRING_CONCATENATION type=kotlin.String
+                CALL 'getFileName(): String!' type=kotlin.String! operator=null
+                  $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.StackTraceElement
+                    GET_VAR 'entry: StackTraceElement!' type=java.lang.StackTraceElement! operator=null
+                CONST String type=kotlin.String value=':'
+                CALL 'getLineNumber(): Int' type=kotlin.Int operator=null
+                  $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.StackTraceElement
+                    GET_VAR 'entry: StackTraceElement!' type=java.lang.StackTraceElement! operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CONST String type=kotlin.String value='simpleCallWithParams.kt:77'
+                  arg1: GET_VAR 'actual: String' type=kotlin.String operator=null
+              then: BLOCK type=kotlin.Nothing operator=null
+                RETURN type=kotlin.Nothing from='testProperLineForOtherParameters(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='fail 6: '
+                    GET_VAR 'actual: String' type=kotlin.String operator=null
+            BLOCK type=kotlin.Int operator=POSTFIX_INCR
+              VAR val tmp7: kotlin.Int
+                GET_VAR 'exceptionCount: Int' type=kotlin.Int operator=POSTFIX_INCR
+              SET_VAR 'exceptionCount: Int' type=kotlin.Unit operator=POSTFIX_INCR
+                CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp7: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp7: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='testProperLineForOtherParameters(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'exceptionCount: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='4'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val res: kotlin.String
+          CALL 'testProperLineNumberAfterInline(): String' type=kotlin.String operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'res: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            GET_VAR 'res: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'testProperLineForOtherParameters(): String' type=kotlin.String operator=null
+    FUN public fun checkEquals(p1: kotlin.String, p2: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        THROW type=kotlin.Nothing
+          CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+            p0: CONST String type=kotlin.String value='fail'
+    FUN public inline fun test(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test(): String'
+          CONST String type=kotlin.String value='123'
+    FUN public fun fail(): kotlin.String
+      BLOCK_BODY
+        THROW type=kotlin.Nothing
+          CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+            p0: CONST String type=kotlin.String value='fail'

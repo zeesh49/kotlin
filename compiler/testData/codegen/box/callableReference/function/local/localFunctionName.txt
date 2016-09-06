@@ -1,0 +1,9 @@
+MODULE <test-module>
+  FILE /localFunctionName.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        FUN local final fun OK(): kotlin.Unit
+          BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'OK(): Unit' type=kotlin.reflect.KFunction0<kotlin.Unit> operator=null

@@ -1,0 +1,45 @@
+MODULE <test-module>
+  FILE /kt6153.kt
+    CLASS OBJECT Bug
+      CONSTRUCTOR private constructor Bug()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Bug'
+      FUN public final fun title(id: kotlin.Int): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='title(Int): String'
+            BLOCK type=kotlin.String operator=WHEN
+              VAR val tmp0_subject: kotlin.Int
+                GET_VAR 'value-parameter id: Int' type=kotlin.Int operator=null
+              WHEN type=kotlin.String operator=WHEN
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+                  arg1: CONST Int type=kotlin.Int value='0'
+                then: CONST String type=kotlin.String value='OK'
+                else: THROW type=kotlin.Nothing
+                  CALL 'constructor Exception(String!)' type=java.lang.Exception operator=null
+                    p0: STRING_CONCATENATION type=kotlin.String
+                      CONST String type=kotlin.String value='unsupported '
+                      GET_VAR 'value-parameter id: Int' type=kotlin.Int operator=null
+      FUN private final fun <T> T.header(id: kotlin.Int): java.lang.StringBuilder!
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='header(Int) on T: StringBuilder!'
+            CALL 'append(String!): StringBuilder!' type=java.lang.StringBuilder! operator=null
+              $this: CALL 'constructor StringBuilder()' type=java.lang.StringBuilder operator=null
+              p0: CALL 'title(Int): String' type=kotlin.String operator=null
+                $this: THIS of 'Bug' type=Bug
+                id: GET_VAR 'value-parameter id: Int' type=kotlin.Int operator=null
+      FUN public final fun run(): java.lang.StringBuilder!
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='run(): StringBuilder!'
+            CALL 'header(Int) on Bug: StringBuilder!' type=java.lang.StringBuilder! operator=null
+              $this: THIS of 'Bug' type=Bug
+              $receiver: THIS of 'Bug' type=Bug
+              id: CONST Int type=kotlin.Int value='0'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'toString(): String' type=kotlin.String operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.StringBuilder
+              CALL 'run(): StringBuilder!' type=java.lang.StringBuilder! operator=null
+                $this: GET_OBJECT 'Bug' type=Bug

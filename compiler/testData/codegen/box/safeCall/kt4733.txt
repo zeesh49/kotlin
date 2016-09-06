@@ -1,0 +1,76 @@
+MODULE <test-module>
+  FILE /kt4733.kt
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      PROPERTY public final val kotlin.Long.foo: kotlin.Long
+        PROPERTY_GETTER public final fun kotlin.Long.<get-foo>(): kotlin.Long
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-foo>() on Long: Long'
+              CALL 'plus(Int): Long' type=kotlin.Long operator=PLUS
+                $this: $RECEIVER of 'foo: Long on Long' type=kotlin.Long
+                other: CONST Int type=kotlin.Int value='1'
+      PROPERTY public final val kotlin.Int.foo: kotlin.Int
+        PROPERTY_GETTER public final fun kotlin.Int.<get-foo>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-foo>() on Int: Int'
+              CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: $RECEIVER of 'foo: Int on Int' type=kotlin.Int
+                other: CONST Int type=kotlin.Int value='1'
+      FUN public final fun testLong(): kotlin.Long?
+        BLOCK_BODY
+          VAR var s: kotlin.Long?
+            CONST Long type=kotlin.Long value='10'
+          RETURN type=kotlin.Nothing from='testLong(): Long?'
+            BLOCK type=kotlin.Long? operator=SAFE_CALL
+              VAR val tmp0_safe_receiver: kotlin.Long?
+                GET_VAR 's: Long?' type=kotlin.Long? operator=null
+              WHEN type=kotlin.Long? operator=SAFE_CALL
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_safe_receiver: Long?' type=kotlin.Long? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CONST Null type=kotlin.Nothing? value='null'
+                else: CALL '<get-foo>() on Long: Long' type=kotlin.Long operator=GET_PROPERTY
+                  $this: THIS of 'Test' type=Test
+                  $receiver: GET_VAR 'tmp0_safe_receiver: Long?' type=kotlin.Long? operator=null
+      FUN public final fun testInt(): kotlin.Int?
+        BLOCK_BODY
+          VAR var s: kotlin.Int?
+            CONST Int type=kotlin.Int value='11'
+          RETURN type=kotlin.Nothing from='testInt(): Int?'
+            BLOCK type=kotlin.Int? operator=SAFE_CALL
+              VAR val tmp0_safe_receiver: kotlin.Int?
+                GET_VAR 's: Int?' type=kotlin.Int? operator=null
+              WHEN type=kotlin.Int? operator=SAFE_CALL
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_safe_receiver: Int?' type=kotlin.Int? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CONST Null type=kotlin.Nothing? value='null'
+                else: CALL '<get-foo>() on Int: Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'Test' type=Test
+                  $receiver: GET_VAR 'tmp0_safe_receiver: Int?' type=kotlin.Int? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val s: Test
+          CALL 'constructor Test()' type=Test operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'testLong(): Long?' type=kotlin.Long? operator=null
+                $this: GET_VAR 's: Test' type=Test operator=null
+              arg1: CALL 'toLong(): Long' type=kotlin.Long operator=null
+                $this: CONST Int type=kotlin.Int value='11'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'testInt(): Int?' type=kotlin.Int? operator=null
+                $this: GET_VAR 's: Test' type=Test operator=null
+              arg1: CONST Int type=kotlin.Int value='12'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

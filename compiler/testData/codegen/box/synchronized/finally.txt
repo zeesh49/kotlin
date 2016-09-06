@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /finally.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val obj: java.lang.Object
+          TYPE_OP operator=CAST typeOperand=java.lang.Object
+            CONST String type=kotlin.String value=''
+        VAR val e: java.lang.IllegalArgumentException
+          CALL 'constructor IllegalArgumentException()' type=java.lang.IllegalArgumentException operator=null
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'synchronized(Any, () -> Nothing): Nothing' type=kotlin.Nothing operator=null
+              lock: GET_VAR 'obj: Object' type=java.lang.Object operator=null
+              block: BLOCK type=() -> kotlin.Nothing operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.Nothing
+                  BLOCK_BODY
+                    THROW type=kotlin.Nothing
+                      GET_VAR 'e: IllegalArgumentException' type=java.lang.IllegalArgumentException operator=null
+                CALLABLE_REFERENCE '<anonymous>(): Nothing' type=() -> kotlin.Nothing operator=LAMBDA
+          catch caught: BLOCK type=kotlin.Unit operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+                arg0: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQEQ
+                  arg0: GET_VAR 'caught: Throwable' type=kotlin.Throwable operator=null
+                  arg1: GET_VAR 'e: IllegalArgumentException' type=java.lang.IllegalArgumentException operator=null
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='Fail: '
+                  GET_VAR 'caught: Throwable' type=kotlin.Throwable operator=null
+            CALL 'assertThatThreadDoesNotOwnMonitor(Object): Unit' type=kotlin.Unit operator=null
+              obj: GET_VAR 'obj: Object' type=java.lang.Object operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun assertThatThreadDoesNotOwnMonitor(obj: java.lang.Object): kotlin.Unit
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'wait(Long): Unit' type=kotlin.Unit operator=null
+              $this: GET_VAR 'value-parameter obj: Object' type=java.lang.Object operator=null
+              p0: CONST Long type=kotlin.Long value='1'
+            THROW type=kotlin.Nothing
+              CALL 'constructor IllegalStateException(String!)' type=java.lang.IllegalStateException operator=null
+                p0: CONST String type=kotlin.String value='Not owning a monitor!'
+          catch e: BLOCK type=kotlin.Unit operator=null

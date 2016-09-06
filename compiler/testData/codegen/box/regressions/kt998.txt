@@ -1,0 +1,140 @@
+MODULE <test-module>
+  FILE /kt998.kt
+    FUN public fun findPairless(a: kotlin.IntArray): kotlin.Int
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL '<get-indices>() on IntArray: IntRange' type=kotlin.ranges.IntRange operator=GET_PROPERTY
+                $receiver: GET_VAR 'value-parameter a: IntArray' type=kotlin.IntArray operator=null
+          WHILE label=loop operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Nothing operator=null
+                BLOCK type=kotlin.Unit operator=FOR_LOOP
+                  VAR val tmp1_iterator: kotlin.collections.IntIterator
+                    CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+                      $this: CALL '<get-indices>() on IntArray: IntRange' type=kotlin.ranges.IntRange operator=GET_PROPERTY
+                        $receiver: GET_VAR 'value-parameter a: IntArray' type=kotlin.IntArray operator=null
+                  WHILE label=null operator=FOR_LOOP_INNER_WHILE
+                    condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+                      $this: GET_VAR 'tmp1_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+                    body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+                      VAR val j: kotlin.Int
+                        CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                          $this: GET_VAR 'tmp1_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+                      BLOCK type=kotlin.Unit operator=null
+                        WHEN type=kotlin.Unit operator=IF
+                          if: WHEN type=kotlin.Boolean operator=ANDAND
+                            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                                arg0: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                                arg1: GET_VAR 'j: Int' type=kotlin.Int operator=null
+                            then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                              arg0: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                                $this: GET_VAR 'value-parameter a: IntArray' type=kotlin.IntArray operator=null
+                                index: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                              arg1: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                                $this: GET_VAR 'value-parameter a: IntArray' type=kotlin.IntArray operator=null
+                                index: GET_VAR 'j: Int' type=kotlin.Int operator=null
+                            else: CONST Boolean type=kotlin.Boolean value='false'
+                          then: CONTINUE label=loop loop.label=loop depth=1
+                RETURN type=kotlin.Nothing from='findPairless(IntArray): Int'
+                  CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                    $this: GET_VAR 'value-parameter a: IntArray' type=kotlin.IntArray operator=null
+                    index: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='findPairless(IntArray): Int'
+          CONST Int type=kotlin.Int value='-1'
+    FUN public fun hasDuplicates(a: kotlin.IntArray): kotlin.Boolean
+      BLOCK_BODY
+        VAR var duplicate: kotlin.Boolean
+          CONST Boolean type=kotlin.Boolean value='false'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL '<get-indices>() on IntArray: IntRange' type=kotlin.ranges.IntRange operator=GET_PROPERTY
+                $receiver: GET_VAR 'value-parameter a: IntArray' type=kotlin.IntArray operator=null
+          WHILE label=loop operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                BLOCK type=kotlin.Unit operator=FOR_LOOP
+                  VAR val tmp1_iterator: kotlin.collections.IntIterator
+                    CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+                      $this: CALL '<get-indices>() on IntArray: IntRange' type=kotlin.ranges.IntRange operator=GET_PROPERTY
+                        $receiver: GET_VAR 'value-parameter a: IntArray' type=kotlin.IntArray operator=null
+                  WHILE label=null operator=FOR_LOOP_INNER_WHILE
+                    condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+                      $this: GET_VAR 'tmp1_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+                    body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+                      VAR val j: kotlin.Int
+                        CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                          $this: GET_VAR 'tmp1_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+                      BLOCK type=kotlin.Unit operator=null
+                        WHEN type=kotlin.Unit operator=IF
+                          if: WHEN type=kotlin.Boolean operator=ANDAND
+                            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                                arg0: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                                arg1: GET_VAR 'j: Int' type=kotlin.Int operator=null
+                            then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                              arg0: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                                $this: GET_VAR 'value-parameter a: IntArray' type=kotlin.IntArray operator=null
+                                index: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                              arg1: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                                $this: GET_VAR 'value-parameter a: IntArray' type=kotlin.IntArray operator=null
+                                index: GET_VAR 'j: Int' type=kotlin.Int operator=null
+                            else: CONST Boolean type=kotlin.Boolean value='false'
+                          then: BLOCK type=kotlin.Nothing operator=null
+                            SET_VAR 'duplicate: Boolean' type=kotlin.Unit operator=EQ
+                              CONST Boolean type=kotlin.Boolean value='true'
+                            BREAK label=loop loop.label=loop depth=1
+        RETURN type=kotlin.Nothing from='hasDuplicates(IntArray): Boolean'
+          GET_VAR 'duplicate: Boolean' type=kotlin.Boolean operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: kotlin.IntArray
+          CALL 'constructor IntArray(Int)' type=kotlin.IntArray operator=null
+            size: CONST Int type=kotlin.Int value='5'
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a: IntArray' type=kotlin.IntArray operator=null
+          index: CONST Int type=kotlin.Int value='0'
+          value: CONST Int type=kotlin.Int value='0'
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a: IntArray' type=kotlin.IntArray operator=null
+          index: CONST Int type=kotlin.Int value='1'
+          value: CONST Int type=kotlin.Int value='0'
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a: IntArray' type=kotlin.IntArray operator=null
+          index: CONST Int type=kotlin.Int value='2'
+          value: CONST Int type=kotlin.Int value='1'
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a: IntArray' type=kotlin.IntArray operator=null
+          index: CONST Int type=kotlin.Int value='3'
+          value: CONST Int type=kotlin.Int value='1'
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a: IntArray' type=kotlin.IntArray operator=null
+          index: CONST Int type=kotlin.Int value='4'
+          value: CONST Int type=kotlin.Int value='5'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'findPairless(IntArray): Int' type=kotlin.Int operator=null
+                a: GET_VAR 'a: IntArray' type=kotlin.IntArray operator=null
+              arg1: CONST Int type=kotlin.Int value='5'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'hasDuplicates(IntArray): Boolean' type=kotlin.Boolean operator=null
+              a: GET_VAR 'a: IntArray' type=kotlin.IntArray operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

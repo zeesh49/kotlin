@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /castFunctionToExtension.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f: (kotlin.String) -> kotlin.String
+          BLOCK type=(kotlin.String) -> kotlin.String operator=ANONYMOUS_FUNCTION
+            FUN local final fun <no name provided>(s: kotlin.String): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<no name provided>(String): String'
+                  GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+            CALLABLE_REFERENCE '<no name provided>(String): String' type=(kotlin.String) -> kotlin.String operator=ANONYMOUS_FUNCTION
+        VAR val g: kotlin.String.() -> kotlin.String
+          TYPE_OP operator=CAST typeOperand=kotlin.String.() -> kotlin.String
+            GET_VAR 'f: (String) -> String' type=(kotlin.String) -> kotlin.String operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke() on String: String' type=kotlin.String operator=INVOKE
+                $this: GET_VAR 'g: String.() -> String' type=kotlin.String.() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+                $receiver: CONST String type=kotlin.String value='OK'
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 1'
+        VAR val h: kotlin.String.() -> kotlin.String
+          BLOCK type=kotlin.String.() -> kotlin.String operator=ANONYMOUS_FUNCTION
+            FUN local final fun kotlin.String.<no name provided>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<no name provided>() on String: String'
+                  $RECEIVER of '<no name provided>() on String: String' type=kotlin.String
+            CALLABLE_REFERENCE '<no name provided>() on String: String' type=kotlin.String.() -> kotlin.String operator=ANONYMOUS_FUNCTION
+        VAR val i: (kotlin.String) -> kotlin.String
+          TYPE_OP operator=CAST typeOperand=(kotlin.String) -> kotlin.String
+            GET_VAR 'h: String.() -> String' type=kotlin.String.() -> kotlin.String operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'invoke(String): String' type=kotlin.String operator=INVOKE
+                $this: GET_VAR 'i: (String) -> String' type=(kotlin.String) -> kotlin.String operator=VARIABLE_AS_FUNCTION
+                p1: CONST String type=kotlin.String value='OK'
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

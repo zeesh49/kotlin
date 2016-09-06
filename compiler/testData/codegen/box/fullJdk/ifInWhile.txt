@@ -1,0 +1,41 @@
+MODULE <test-module>
+  FILE /ifInWhile.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val processors: kotlin.Int
+          CALL 'availableProcessors(): Int' type=kotlin.Int operator=null
+            $this: BLOCK type=java.lang.Runtime operator=EXCLEXCL
+              VAR val tmp0_notnull: java.lang.Runtime!
+                CALL 'getRuntime(): Runtime!' type=java.lang.Runtime! operator=null
+              WHEN type=java.lang.Runtime operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: Runtime!' type=java.lang.Runtime! operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Runtime
+                  GET_VAR 'tmp0_notnull: Runtime!' type=java.lang.Runtime! operator=null
+        VAR var threadNum: kotlin.Int
+          CONST Int type=kotlin.Int value='1'
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'LTEQ0(Int): Boolean' type=kotlin.Boolean operator=LTEQ
+            arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LTEQ
+              $this: GET_VAR 'threadNum: Int' type=kotlin.Int operator=null
+              other: CONST Int type=kotlin.Int value='1024'
+          body: BLOCK type=kotlin.Unit operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+                arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+                  $this: GET_VAR 'threadNum: Int' type=kotlin.Int operator=null
+                  other: CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                    $this: CONST Int type=kotlin.Int value='2'
+                    other: GET_VAR 'processors: Int' type=kotlin.Int operator=null
+              then: SET_VAR 'threadNum: Int' type=kotlin.Unit operator=PLUSEQ
+                CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                  $this: GET_VAR 'threadNum: Int' type=kotlin.Int operator=PLUSEQ
+                  other: CONST Int type=kotlin.Int value='1'
+              else: SET_VAR 'threadNum: Int' type=kotlin.Unit operator=MULTEQ
+                CALL 'times(Int): Int' type=kotlin.Int operator=MULTEQ
+                  $this: GET_VAR 'threadNum: Int' type=kotlin.Int operator=MULTEQ
+                  other: CONST Int type=kotlin.Int value='2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

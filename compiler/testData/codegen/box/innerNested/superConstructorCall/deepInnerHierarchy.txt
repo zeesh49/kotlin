@@ -1,0 +1,57 @@
+MODULE <test-module>
+  FILE /deepInnerHierarchy.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(s: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 's: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val s: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CLASS CLASS B
+        CONSTRUCTOR public constructor B(s: kotlin.String)
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor A(String)'
+              s: GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+            INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      CLASS CLASS C
+        CONSTRUCTOR public constructor C(s: kotlin.String, additional: kotlin.Double)
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor B(String)'
+              $this: THIS of 'A' type=A
+              s: GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+            INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      CLASS CLASS D
+        CONSTRUCTOR public constructor D(other: kotlin.Int, another: kotlin.Long, s: kotlin.String)
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor C(String, Double)'
+              $this: THIS of 'A' type=A
+              s: GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+              additional: CALL 'toDouble(): Double' type=kotlin.Double operator=null
+                $this: GET_VAR 'value-parameter another: Long' type=kotlin.Long operator=null
+            INSTANCE_INITIALIZER_CALL classDescriptor='D'
+      CLASS CLASS E
+        CONSTRUCTOR public constructor E()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor D(Int, Long, String)'
+              $this: THIS of 'A' type=A
+              other: CONST Int type=kotlin.Int value='0'
+              another: CONST Long type=kotlin.Long value='42'
+              s: CONST String type=kotlin.String value='OK'
+            INSTANCE_INITIALIZER_CALL classDescriptor='E'
+      CLASS CLASS F
+        CONSTRUCTOR public constructor F()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor E()'
+              $this: THIS of 'A' type=A
+            INSTANCE_INITIALIZER_CALL classDescriptor='F'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor F()' type=A.F operator=null
+              $this: CALL 'constructor A(String)' type=A operator=null
+                s: CONST String type=kotlin.String value='Fail'

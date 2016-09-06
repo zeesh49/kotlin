@@ -1,0 +1,10 @@
+MODULE <test-module>
+  FILE /kt3313.kt
+    FUN public fun <T> foo(t: T): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'foo(Nothing?): Unit' type=kotlin.Unit operator=null
+          t: CONST Null type=kotlin.Nothing? value='null'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

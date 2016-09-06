@@ -1,0 +1,196 @@
+MODULE <test-module>
+  FILE /inheritance.kt
+    CLASS CLASS X
+      CONSTRUCTOR public constructor X(x: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'x: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'X' type=X
+            value: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='X'
+      PROPERTY public final val x: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS INTERFACE Y
+      PROPERTY public abstract val y: kotlin.Int
+    CLASS CLASS YImpl
+      CONSTRUCTOR public constructor YImpl(y: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'y: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'YImpl' type=YImpl
+            value: GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='YImpl'
+      PROPERTY public open override val y: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS Point
+      CONSTRUCTOR public constructor Point(x: kotlin.Int, yy: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor X(Int)'
+            x: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='Point'
+      PROPERTY public open override val y: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter yy: Int' type=kotlin.Int operator=null
+    CLASS INTERFACE Abstract
+    CLASS CLASS P1
+      CONSTRUCTOR public constructor P1(x: kotlin.Int, yy: Y)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor X(Int)'
+            x: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='P1'
+      PROPERTY val `P1$Y$delegate`: Y
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter yy: Y' type=Y operator=null
+      PROPERTY public open override val y: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-y>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-y>(): Int'
+              CALL '<get-y>(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR '`P1$Y$delegate`: Y' type=Y operator=null
+    CLASS CLASS P2
+      CONSTRUCTOR public constructor P2(x: kotlin.Int, yy: Y)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor X(Int)'
+            x: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='P2'
+      PROPERTY val `P2$Y$delegate`: Y
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter yy: Y' type=Y operator=null
+      PROPERTY public open override val y: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-y>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-y>(): Int'
+              CALL '<get-y>(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR '`P2$Y$delegate`: Y' type=Y operator=null
+    CLASS CLASS P3
+      CONSTRUCTOR public constructor P3(x: kotlin.Int, yy: Y)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor X(Int)'
+            x: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='P3'
+      PROPERTY val `P3$Y$delegate`: Y
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter yy: Y' type=Y operator=null
+      PROPERTY public open override val y: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-y>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-y>(): Int'
+              CALL '<get-y>(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR '`P3$Y$delegate`: Y' type=Y operator=null
+    CLASS CLASS P4
+      CONSTRUCTOR public constructor P4(x: kotlin.Int, yy: Y)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor X(Int)'
+            x: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='P4'
+      PROPERTY val `P4$Y$delegate`: Y
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter yy: Y' type=Y operator=null
+      PROPERTY public open override val y: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-y>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-y>(): Int'
+              CALL '<get-y>(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR '`P4$Y$delegate`: Y' type=Y operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL 'constructor X(Int)' type=X operator=null
+                  x: CONST Int type=kotlin.Int value='239'
+              arg1: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='FAIL #1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-y>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL 'constructor YImpl(Int)' type=YImpl operator=null
+                  y: CONST Int type=kotlin.Int value='239'
+              arg1: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='FAIL #2'
+        VAR val p: Point
+          CALL 'constructor Point(Int, Int)' type=Point operator=null
+            x: CONST Int type=kotlin.Int value='240'
+            yy: CONST Int type=kotlin.Int value='-1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'p: Point' type=Point operator=null
+                other: CALL '<get-y>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'p: Point' type=Point operator=null
+              arg1: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='FAIL #3'
+        VAR val y: YImpl
+          CALL 'constructor YImpl(Int)' type=YImpl operator=null
+            y: CONST Int type=kotlin.Int value='-1'
+        VAR val p1: P1
+          CALL 'constructor P1(Int, Y)' type=P1 operator=null
+            x: CONST Int type=kotlin.Int value='240'
+            yy: GET_VAR 'y: YImpl' type=YImpl operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'p1: P1' type=P1 operator=null
+                other: CALL '<get-y>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'p1: P1' type=P1 operator=null
+              arg1: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='FAIL #4'
+        VAR val p2: P2
+          CALL 'constructor P2(Int, Y)' type=P2 operator=null
+            x: CONST Int type=kotlin.Int value='240'
+            yy: GET_VAR 'y: YImpl' type=YImpl operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'p2: P2' type=P2 operator=null
+                other: CALL '<get-y>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'p2: P2' type=P2 operator=null
+              arg1: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='FAIL #5'
+        VAR val p3: P3
+          CALL 'constructor P3(Int, Y)' type=P3 operator=null
+            x: CONST Int type=kotlin.Int value='240'
+            yy: GET_VAR 'y: YImpl' type=YImpl operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'p3: P3' type=P3 operator=null
+                other: CALL '<get-y>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'p3: P3' type=P3 operator=null
+              arg1: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='FAIL #6'
+        VAR val p4: P4
+          CALL 'constructor P4(Int, Y)' type=P4 operator=null
+            x: CONST Int type=kotlin.Int value='240'
+            yy: GET_VAR 'y: YImpl' type=YImpl operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'p4: P4' type=P4 operator=null
+                other: CALL '<get-y>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: GET_VAR 'p4: P4' type=P4 operator=null
+              arg1: CONST Int type=kotlin.Int value='239'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='FAIL #7'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

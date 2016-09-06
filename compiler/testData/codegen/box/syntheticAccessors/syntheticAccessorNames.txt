@@ -1,0 +1,113 @@
+MODULE <test-module>
+  FILE /syntheticAccessorNames.kt
+    CLASS CLASS PrivatePropertyGet
+      CONSTRUCTOR public constructor PrivatePropertyGet()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='PrivatePropertyGet'
+      PROPERTY private final val x: kotlin.Int = 42
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='42'
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+        PROPERTY public final val a: kotlin.Int = 42
+          EXPRESSION_BODY
+            CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'PrivatePropertyGet' type=PrivatePropertyGet
+    CLASS CLASS PrivatePropertySet
+      CONSTRUCTOR public constructor PrivatePropertySet()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='PrivatePropertySet'
+      PROPERTY private final var x: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='a'
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+        ANONYMOUS_INITIALIZER Inner
+          BLOCK_BODY
+            CALL '<set-x>(String): Unit' type=kotlin.Unit operator=EQ
+              $this: THIS of 'PrivatePropertySet' type=PrivatePropertySet
+              <set-?>: CONST String type=kotlin.String value='b'
+    CLASS CLASS PrivateMethod
+      CONSTRUCTOR public constructor PrivateMethod()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='PrivateMethod'
+      FUN private final fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value=''
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+        PROPERTY public final val a: kotlin.String
+          EXPRESSION_BODY
+            CALL 'foo(): String' type=kotlin.String operator=null
+              $this: THIS of 'PrivateMethod' type=PrivateMethod
+    FUN public fun check(klass: java.lang.Class<*>): kotlin.Unit
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<java.lang.reflect.Method!>
+            CALL 'iterator(): Iterator<Method!>' type=kotlin.collections.Iterator<java.lang.reflect.Method!> operator=FOR_LOOP_ITERATOR
+              $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<java.lang.reflect.Method!>
+                TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Method!>
+                  CALL 'getDeclaredMethods(): Array<(out) Method!>!' type=kotlin.Array<(out) java.lang.reflect.Method!>! operator=null
+                    $this: GET_VAR 'value-parameter klass: Class<*>' type=java.lang.Class<*> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<Method!>' type=kotlin.collections.Iterator<java.lang.reflect.Method!> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val method: java.lang.reflect.Method!
+                CALL 'next(): Method!' type=java.lang.reflect.Method! operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<Method!>' type=kotlin.collections.Iterator<java.lang.reflect.Method!> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: WHEN type=kotlin.Boolean operator=ANDAND
+                    if: CALL 'isSynthetic(): Boolean' type=kotlin.Boolean operator=null
+                      $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                        GET_VAR 'method: Method!' type=java.lang.reflect.Method! operator=null
+                    then: CALL 'startsWith(String, Boolean = ...) on String: Boolean' type=kotlin.Boolean operator=null
+                      $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+                        CALL 'getName(): String!' type=kotlin.String! operator=null
+                          $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                            GET_VAR 'method: Method!' type=java.lang.reflect.Method! operator=null
+                      prefix: STRING_CONCATENATION type=kotlin.String
+                        CONST String type=kotlin.String value='access'
+                        CONST String type=kotlin.String value='$'
+                    else: CONST Boolean type=kotlin.Boolean value='false'
+                  then: RETURN type=kotlin.Nothing from='check(Class<*>): Unit'
+        THROW type=kotlin.Nothing
+          CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+            p0: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='No synthetic methods starting with 'access'
+              CONST String type=kotlin.String value='$'
+              CONST String type=kotlin.String value='' found in class '
+              GET_VAR 'value-parameter klass: Class<*>' type=java.lang.Class<*> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'check(Class<*>): Unit' type=kotlin.Unit operator=null
+          klass: CALL '<get-java>() on KClass<PrivatePropertyGet>: Class<PrivatePropertyGet>' type=java.lang.Class<PrivatePropertyGet> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'PrivatePropertyGet' type=kotlin.reflect.KClass<PrivatePropertyGet>
+        CALL 'check(Class<*>): Unit' type=kotlin.Unit operator=null
+          klass: CALL '<get-java>() on KClass<PrivatePropertySet>: Class<PrivatePropertySet>' type=java.lang.Class<PrivatePropertySet> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'PrivatePropertySet' type=kotlin.reflect.KClass<PrivatePropertySet>
+        CALL 'check(Class<*>): Unit' type=kotlin.Unit operator=null
+          klass: CALL '<get-java>() on KClass<PrivateMethod>: Class<PrivateMethod>' type=java.lang.Class<PrivateMethod> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'PrivateMethod' type=kotlin.reflect.KClass<PrivateMethod>
+        CALL 'constructor Inner()' type=PrivatePropertyGet.Inner operator=null
+          $this: CALL 'constructor PrivatePropertyGet()' type=PrivatePropertyGet operator=null
+        CALL 'constructor Inner()' type=PrivatePropertySet.Inner operator=null
+          $this: CALL 'constructor PrivatePropertySet()' type=PrivatePropertySet operator=null
+        CALL 'constructor Inner()' type=PrivateMethod.Inner operator=null
+          $this: CALL 'constructor PrivateMethod()' type=PrivateMethod operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

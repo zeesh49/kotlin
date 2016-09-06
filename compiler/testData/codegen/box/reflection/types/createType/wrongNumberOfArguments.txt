@@ -1,0 +1,109 @@
+MODULE <test-module>
+  FILE /wrongNumberOfArguments.kt
+    FUN public fun test(classifier: kotlin.reflect.KClassifier, arguments: kotlin.collections.List<kotlin.reflect.KTypeProjection>): kotlin.Unit
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'createType(List<KTypeProjection> = ..., Boolean = ..., List<Annotation> = ...) on KClassifier: KType' type=kotlin.reflect.KType operator=null
+              $receiver: GET_VAR 'value-parameter classifier: KClassifier' type=kotlin.reflect.KClassifier operator=null
+              arguments: GET_VAR 'value-parameter arguments: List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: CONST String type=kotlin.String value='createType should have thrown IllegalArgumentException'
+          catch e: BLOCK type=kotlin.Unit operator=null
+    CLASS CLASS Outer
+      CONSTRUCTOR public constructor Outer<O>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner<I>()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+      CLASS CLASS Nested
+        CONSTRUCTOR public constructor Nested<N>()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Nested'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val p: kotlin.reflect.KTypeProjection
+          CALL '<get-STAR>(): KTypeProjection' type=kotlin.reflect.KTypeProjection operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of KTypeProjection' type=kotlin.reflect.KTypeProjection.Companion
+        CALL 'test(KClassifier, List<KTypeProjection>): Unit' type=kotlin.Unit operator=null
+          classifier: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+          arguments: CALL 'listOf(KTypeProjection): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+            element: GET_VAR 'p: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+        CALL 'test(KClassifier, List<KTypeProjection>): Unit' type=kotlin.Unit operator=null
+          classifier: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+          arguments: CALL 'listOf(vararg KTypeProjection): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+            elements: VARARG type=Array<out KTypeProjection> varargElementType=KTypeProjection
+              GET_VAR 'p: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+              GET_VAR 'p: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+        CALL 'test(KClassifier, List<KTypeProjection>): Unit' type=kotlin.Unit operator=null
+          classifier: CLASS_REFERENCE 'List' type=kotlin.reflect.KClass<kotlin.collections.List<*>>
+          arguments: CALL 'listOf(): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+        CALL 'test(KClassifier, List<KTypeProjection>): Unit' type=kotlin.Unit operator=null
+          classifier: CLASS_REFERENCE 'List' type=kotlin.reflect.KClass<kotlin.collections.List<*>>
+          arguments: CALL 'listOf(vararg KTypeProjection): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+            elements: VARARG type=Array<out KTypeProjection> varargElementType=KTypeProjection
+              GET_VAR 'p: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+              GET_VAR 'p: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+        CALL 'test(KClassifier, List<KTypeProjection>): Unit' type=kotlin.Unit operator=null
+          classifier: CLASS_REFERENCE 'Map' type=kotlin.reflect.KClass<kotlin.collections.Map<*, *>>
+          arguments: CALL 'listOf(): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+        CALL 'test(KClassifier, List<KTypeProjection>): Unit' type=kotlin.Unit operator=null
+          classifier: CLASS_REFERENCE 'Map' type=kotlin.reflect.KClass<kotlin.collections.Map<*, *>>
+          arguments: CALL 'listOf(KTypeProjection): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+            element: GET_VAR 'p: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+        CALL 'test(KClassifier, List<KTypeProjection>): Unit' type=kotlin.Unit operator=null
+          classifier: CLASS_REFERENCE 'Map' type=kotlin.reflect.KClass<kotlin.collections.Map<*, *>>
+          arguments: CALL 'listOf(vararg KTypeProjection): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+            elements: VARARG type=Array<out KTypeProjection> varargElementType=KTypeProjection
+              GET_VAR 'p: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+              GET_VAR 'p: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+              GET_VAR 'p: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+        CALL 'test(KClassifier, List<KTypeProjection>): Unit' type=kotlin.Unit operator=null
+          classifier: CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Any>>
+          arguments: CALL 'listOf(): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+        CALL 'test(KClassifier, List<KTypeProjection>): Unit' type=kotlin.Unit operator=null
+          classifier: CLASS_REFERENCE 'Outer' type=kotlin.reflect.KClass<Outer<*>>
+          arguments: CALL 'listOf(): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+        CALL 'test(KClassifier, List<KTypeProjection>): Unit' type=kotlin.Unit operator=null
+          classifier: CLASS_REFERENCE 'Outer' type=kotlin.reflect.KClass<Outer<*>>
+          arguments: CALL 'listOf(vararg KTypeProjection): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+            elements: VARARG type=Array<out KTypeProjection> varargElementType=KTypeProjection
+              GET_VAR 'p: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+              GET_VAR 'p: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+        CALL 'test(KClassifier, List<KTypeProjection>): Unit' type=kotlin.Unit operator=null
+          classifier: CLASS_REFERENCE 'Inner' type=kotlin.reflect.KClass<Outer<*>.Inner<*>>
+          arguments: CALL 'listOf(): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+        CALL 'test(KClassifier, List<KTypeProjection>): Unit' type=kotlin.Unit operator=null
+          classifier: CLASS_REFERENCE 'Inner' type=kotlin.reflect.KClass<Outer<*>.Inner<*>>
+          arguments: CALL 'listOf(KTypeProjection): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+            element: GET_VAR 'p: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+        CALL 'test(KClassifier, List<KTypeProjection>): Unit' type=kotlin.Unit operator=null
+          classifier: CLASS_REFERENCE 'Inner' type=kotlin.reflect.KClass<Outer<*>.Inner<*>>
+          arguments: CALL 'listOf(vararg KTypeProjection): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+            elements: VARARG type=Array<out KTypeProjection> varargElementType=KTypeProjection
+              GET_VAR 'p: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+              GET_VAR 'p: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+              GET_VAR 'p: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+        CALL 'test(KClassifier, List<KTypeProjection>): Unit' type=kotlin.Unit operator=null
+          classifier: CLASS_REFERENCE 'Nested' type=kotlin.reflect.KClass<Outer.Nested<*>>
+          arguments: CALL 'listOf(): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+        CALL 'test(KClassifier, List<KTypeProjection>): Unit' type=kotlin.Unit operator=null
+          classifier: CLASS_REFERENCE 'Nested' type=kotlin.reflect.KClass<Outer.Nested<*>>
+          arguments: CALL 'listOf(vararg KTypeProjection): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+            elements: VARARG type=Array<out KTypeProjection> varargElementType=KTypeProjection
+              GET_VAR 'p: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+              GET_VAR 'p: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+        CALL 'test(KClassifier, List<KTypeProjection>): Unit' type=kotlin.Unit operator=null
+          classifier: CALL 'single() on List<KTypeParameter>: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+            $receiver: CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'Outer' type=kotlin.reflect.KClass<Outer<*>>
+          arguments: CALL 'listOf(KTypeProjection): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+            element: GET_VAR 'p: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /rawStrings.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val s: kotlin.String = " foo \n bar "
+          STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value=' foo '
+            CONST String type=kotlin.String value='\'
+            CONST String type=kotlin.String value='n bar '
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 's: String' type=kotlin.String operator=null
+              arg1: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value=' foo '
+                CONST String type=kotlin.String value='\'
+                CONST String type=kotlin.String value='n bar '
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: ''
+              GET_VAR 's: String' type=kotlin.String operator=null
+              CONST String type=kotlin.String value='''
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

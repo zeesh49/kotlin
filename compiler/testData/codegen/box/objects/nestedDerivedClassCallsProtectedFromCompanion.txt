@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /nestedDerivedClassCallsProtectedFromCompanion.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      CLASS OBJECT companion object of A
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of A'
+        FUN protected final fun foo(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo(): String'
+              CONST String type=kotlin.String value='OK'
+      CLASS CLASS B
+        CONSTRUCTOR public constructor B()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='B'
+        FUN public final fun bar(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='bar(): String'
+              CALL 'foo(): String' type=kotlin.String operator=null
+                $this: THIS of 'companion object of A' type=A.Companion
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'bar(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor B()' type=A.B operator=null

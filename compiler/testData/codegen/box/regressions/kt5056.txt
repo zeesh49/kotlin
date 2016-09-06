@@ -1,0 +1,21 @@
+MODULE <test-module>
+  FILE /kt5056.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val list: kotlin.collections.List<kotlin.String>
+          CALL 'sorted() on Array<out String>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            $receiver: CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+              elements: VARARG type=Array<out String> varargElementType=String
+                CONST String type=kotlin.String value='a'
+                CONST String type=kotlin.String value='c'
+                CONST String type=kotlin.String value='b'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'list: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              arg1: CONST String type=kotlin.String value='[a, b, c]'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'list: List<String>' type=kotlin.collections.List<kotlin.String> operator=null

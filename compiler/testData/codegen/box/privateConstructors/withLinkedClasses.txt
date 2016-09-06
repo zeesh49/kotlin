@@ -1,0 +1,39 @@
+MODULE <test-module>
+  FILE /withLinkedClasses.kt
+    CLASS CLASS Outer
+      CONSTRUCTOR private constructor Outer(p: Outer?)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'p: Outer?' type=kotlin.Unit operator=null
+            receiver: THIS of 'Outer' type=Outer
+            value: GET_VAR 'value-parameter p: Outer?' type=Outer? operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+      PROPERTY public final val p: Outer?
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter p: Outer?' type=Outer? operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CLASS OBJECT First
+        CONSTRUCTOR private constructor First()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Outer(Outer?)'
+              p: CONST Null type=kotlin.Nothing? value='null'
+            INSTANCE_INITIALIZER_CALL classDescriptor='First'
+      CLASS CLASS Other
+        CONSTRUCTOR public constructor Other(p: Outer = ...)
+          p: EXPRESSION_BODY
+            GET_OBJECT 'First' type=Outer.First
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Outer(Outer?)'
+              p: GET_VAR 'value-parameter p: Outer = ...' type=Outer operator=null
+            INSTANCE_INITIALIZER_CALL classDescriptor='Other'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val second: Outer.Other
+          CALL 'constructor Other(Outer = ...)' type=Outer.Other operator=null
+        VAR val third: Outer.Other
+          CALL 'constructor Other(Outer = ...)' type=Outer.Other operator=null
+            p: GET_VAR 'second: Outer.Other' type=Outer.Other operator=null
+        VAR val fourth: Outer.Other
+          CALL 'constructor Other(Outer = ...)' type=Outer.Other operator=null
+            p: GET_VAR 'third: Outer.Other' type=Outer.Other operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

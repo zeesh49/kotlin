@@ -1,0 +1,21 @@
+MODULE <test-module>
+  FILE /field.kt
+    PROPERTY public var my: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+      PROPERTY_GETTER public fun <get-my>(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-my>(): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: GET_VAR 'field: String' type=kotlin.String operator=null
+              other: CONST String type=kotlin.String value='K'
+      PROPERTY_SETTER public fun <set-my>(arg: kotlin.String): kotlin.Unit
+        BLOCK_BODY
+          SET_BACKING_FIELD 'my: String' type=kotlin.Unit operator=EQ
+            value: GET_VAR 'value-parameter arg: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL '<set-my>(String): Unit' type=kotlin.Unit operator=EQ
+          arg: CONST String type=kotlin.String value='O'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-my>(): String' type=kotlin.String operator=GET_PROPERTY

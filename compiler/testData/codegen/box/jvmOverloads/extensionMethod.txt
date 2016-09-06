@@ -1,0 +1,41 @@
+MODULE <test-module>
+  FILE /extensionMethod.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+    FUN @kotlin.jvm.JvmOverloads public fun C.foo(o: kotlin.String, k: kotlin.String = ...): kotlin.String
+      k: EXPRESSION_BODY
+        CONST String type=kotlin.String value='K'
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(String, String = ...) on C: String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: GET_VAR 'value-parameter o: String' type=kotlin.String operator=null
+            other: GET_VAR 'value-parameter k: String = ...' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val m: java.lang.reflect.Method!
+          CALL 'getMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+            $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+              CALL 'loadClass(String!): Class<*>!' type=java.lang.Class<*>! operator=null
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.ClassLoader
+                  CALL 'getClassLoader(): ClassLoader!' type=java.lang.ClassLoader! operator=null
+                    $this: CALL '<get-java>() on KClass<C>: Class<C>' type=java.lang.Class<C> operator=GET_PROPERTY
+                      $receiver: CLASS_REFERENCE 'C' type=kotlin.reflect.KClass<C>
+                p0: CONST String type=kotlin.String value='ExtensionMethodKt'
+            p0: CONST String type=kotlin.String value='foo'
+            p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+              CALL '<get-java>() on KClass<C>: Class<C>' type=java.lang.Class<C> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'C' type=kotlin.reflect.KClass<C>
+              CALL '<get-java>() on KClass<String>: Class<String>' type=java.lang.Class<kotlin.String> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+        RETURN type=kotlin.Nothing from='box(): String'
+          TYPE_OP operator=CAST typeOperand=kotlin.String
+            CALL 'invoke(Any!, vararg Any!): Any!' type=kotlin.Any! operator=null
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                GET_VAR 'm: Method!' type=java.lang.reflect.Method! operator=null
+              p0: CONST Null type=kotlin.Nothing? value='null'
+              p1: VARARG type=(kotlin.Array<(kotlin.Any..kotlin.Any?)>..kotlin.Array<out (kotlin.Any..kotlin.Any?)>?) varargElementType=(kotlin.Any..kotlin.Any?)
+                CALL 'constructor C()' type=C operator=null
+                CONST String type=kotlin.String value='O'

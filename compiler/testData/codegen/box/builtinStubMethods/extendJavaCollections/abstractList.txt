@@ -1,0 +1,42 @@
+MODULE <test-module>
+  FILE /abstractList.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor AbstractList()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public open override fun get(index: kotlin.Int): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(Int): String'
+            CONST String type=kotlin.String value=''
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-size>(): Int'
+              CONST Int type=kotlin.Int value='0'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          CALL 'constructor A()' type=A operator=null
+        VAR val b: A
+          CALL 'constructor A()' type=A operator=null
+        CALL 'addAll(Collection<String!>): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: A' type=A operator=null
+          elements: GET_VAR 'b: A' type=A operator=null
+        CALL 'addAll(Int, Collection<String!>): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: A' type=A operator=null
+          index: CONST Int type=kotlin.Int value='0'
+          elements: GET_VAR 'b: A' type=A operator=null
+        CALL 'removeAll(Collection<String!>): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: A' type=A operator=null
+          elements: GET_VAR 'b: A' type=A operator=null
+        CALL 'retainAll(Collection<String!>): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: A' type=A operator=null
+          elements: GET_VAR 'b: A' type=A operator=null
+        CALL 'clear(): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'a: A' type=A operator=null
+        CALL 'remove(String!): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: A' type=A operator=null
+          element: CONST String type=kotlin.String value=''
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

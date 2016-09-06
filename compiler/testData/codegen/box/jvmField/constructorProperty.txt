@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /simple.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C(foo: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'foo: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'C' type=C
+            value: GET_VAR 'value-parameter foo: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      PROPERTY @kotlin.jvm.JvmField public final val foo: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter foo: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+            CALL 'invokeMethodWithPublicField(): String!' type=kotlin.String! operator=null

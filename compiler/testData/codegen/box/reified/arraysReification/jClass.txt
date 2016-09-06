@@ -1,0 +1,55 @@
+MODULE <test-module>
+  FILE /jClass.kt
+    FUN public inline fun <reified T : kotlin.Any> jClass(): java.lang.Class<T>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='jClass(): Class<T>'
+          CALL '<get-java>() on KClass<T>: Class<T>' type=java.lang.Class<T> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE '<reified T : Any>' type=kotlin.reflect.KClass<T>
+    FUN public inline fun <reified T : kotlin.Any> jClassArray(): java.lang.Class<kotlin.Array<T>>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='jClassArray(): Class<Array<T>>'
+          CALL 'jClass(): Class<Array<T>>' type=java.lang.Class<kotlin.Array<T>> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-simpleName>() on Class<Array<String>>: String!' type=kotlin.String! operator=GET_PROPERTY
+                $receiver: CALL 'jClass(): Class<Array<String>>' type=java.lang.Class<kotlin.Array<kotlin.String>> operator=null
+              arg1: CONST String type=kotlin.String value='String[]'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-simpleName>() on Class<IntArray>: String!' type=kotlin.String! operator=GET_PROPERTY
+                $receiver: CALL 'jClass(): Class<IntArray>' type=java.lang.Class<kotlin.IntArray> operator=null
+              arg1: CONST String type=kotlin.String value='int[]'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-simpleName>() on Class<Array<String>>: String!' type=kotlin.String! operator=GET_PROPERTY
+                $receiver: CALL 'jClassArray(): Class<Array<String>>' type=java.lang.Class<kotlin.Array<kotlin.String>> operator=null
+              arg1: CONST String type=kotlin.String value='String[]'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-simpleName>() on Class<Array<Array<String>>>: String!' type=kotlin.String! operator=GET_PROPERTY
+                $receiver: CALL 'jClassArray(): Class<Array<Array<String>>>' type=java.lang.Class<kotlin.Array<kotlin.Array<kotlin.String>>> operator=null
+              arg1: CONST String type=kotlin.String value='String[][]'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-simpleName>() on Class<Array<IntArray>>: String!' type=kotlin.String! operator=GET_PROPERTY
+                $receiver: CALL 'jClassArray(): Class<Array<IntArray>>' type=java.lang.Class<kotlin.Array<kotlin.IntArray>> operator=null
+              arg1: CONST String type=kotlin.String value='int[][]'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 5'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

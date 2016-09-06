@@ -1,0 +1,161 @@
+MODULE <test-module>
+  FILE /loopAndFinally.kt
+    CLASS CLASS MyString
+      CONSTRUCTOR public constructor MyString()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyString'
+      PROPERTY public final var s: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value=''
+      FUN public final operator fun plus(x: kotlin.String): MyString
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            VAR val tmp0_this: MyString
+              THIS of 'MyString' type=MyString
+            CALL '<set-s>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+              $this: GET_VAR 'tmp0_this: MyString' type=MyString operator=null
+              <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: CALL '<get-s>(): String' type=kotlin.String operator=PLUSEQ
+                  $this: GET_VAR 'tmp0_this: MyString' type=MyString operator=null
+                other: GET_VAR 'value-parameter x: String' type=kotlin.String operator=null
+          RETURN type=kotlin.Nothing from='plus(String): MyString'
+            THIS of 'MyString' type=MyString
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'MyString' type=MyString
+    FUN public fun test1(): MyString
+      BLOCK_BODY
+        VAR var r: MyString
+          CALL 'constructor MyString()' type=MyString operator=null
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'plus(String): MyString' type=MyString operator=PLUS
+              $this: GET_VAR 'r: MyString' type=MyString operator=null
+              x: CONST String type=kotlin.String value='Try'
+            WHILE label=null operator=WHILE_LOOP
+              condition: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                    $this: GET_VAR 'r: MyString' type=MyString operator=null
+                  arg1: CONST String type=kotlin.String value=''
+              body: BLOCK type=kotlin.Nothing operator=null
+                RETURN type=kotlin.Nothing from='test1(): MyString'
+                  CALL 'plus(String): MyString' type=MyString operator=PLUS
+                    $this: GET_VAR 'r: MyString' type=MyString operator=null
+                    x: CONST String type=kotlin.String value='Loop'
+            RETURN type=kotlin.Nothing from='test1(): MyString'
+              CALL 'plus(String): MyString' type=MyString operator=PLUS
+                $this: GET_VAR 'r: MyString' type=MyString operator=null
+                x: CONST String type=kotlin.String value='Fail'
+          finally: BLOCK type=MyString operator=null
+            CALL 'plus(String): MyString' type=MyString operator=PLUS
+              $this: GET_VAR 'r: MyString' type=MyString operator=null
+              x: CONST String type=kotlin.String value='Finally'
+    FUN public fun test2(): MyString
+      BLOCK_BODY
+        VAR var r: MyString
+          CALL 'constructor MyString()' type=MyString operator=null
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'plus(String): MyString' type=MyString operator=PLUS
+              $this: GET_VAR 'r: MyString' type=MyString operator=null
+              x: CONST String type=kotlin.String value='Try'
+            DO_WHILE label=null operator=DO_WHILE_LOOP
+              body: BLOCK type=kotlin.Unit operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                    arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                      arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                        $this: GET_VAR 'r: MyString' type=MyString operator=null
+                      arg1: CONST String type=kotlin.String value=''
+                  then: BLOCK type=kotlin.Nothing operator=null
+                    RETURN type=kotlin.Nothing from='test2(): MyString'
+                      CALL 'plus(String): MyString' type=MyString operator=PLUS
+                        $this: GET_VAR 'r: MyString' type=MyString operator=null
+                        x: CONST String type=kotlin.String value='Loop'
+              condition: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                    $this: GET_VAR 'r: MyString' type=MyString operator=null
+                  arg1: CONST String type=kotlin.String value=''
+            RETURN type=kotlin.Nothing from='test2(): MyString'
+              CALL 'plus(String): MyString' type=MyString operator=PLUS
+                $this: GET_VAR 'r: MyString' type=MyString operator=null
+                x: CONST String type=kotlin.String value='Fail'
+          finally: BLOCK type=MyString operator=null
+            CALL 'plus(String): MyString' type=MyString operator=PLUS
+              $this: GET_VAR 'r: MyString' type=MyString operator=null
+              x: CONST String type=kotlin.String value='Finally'
+    FUN public fun test3(): MyString
+      BLOCK_BODY
+        VAR var r: MyString
+          CALL 'constructor MyString()' type=MyString operator=null
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'plus(String): MyString' type=MyString operator=PLUS
+              $this: GET_VAR 'r: MyString' type=MyString operator=null
+              x: CONST String type=kotlin.String value='Try'
+            BLOCK type=kotlin.Unit operator=FOR_LOOP
+              VAR val tmp0_iterator: kotlin.collections.IntIterator
+                CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+                  $this: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                    $this: CONST Int type=kotlin.Int value='1'
+                    other: CONST Int type=kotlin.Int value='2'
+              WHILE label=null operator=FOR_LOOP_INNER_WHILE
+                condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+                body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+                  VAR val i: kotlin.Int
+                    CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                      $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+                  BLOCK type=kotlin.Nothing operator=null
+                    CALL 'plus(String): MyString' type=MyString operator=PLUS
+                      $this: GET_VAR 'r: MyString' type=MyString operator=null
+                      x: CONST String type=kotlin.String value='Loop'
+                    RETURN type=kotlin.Nothing from='test3(): MyString'
+                      GET_VAR 'r: MyString' type=MyString operator=null
+            RETURN type=kotlin.Nothing from='test3(): MyString'
+              CALL 'plus(String): MyString' type=MyString operator=PLUS
+                $this: GET_VAR 'r: MyString' type=MyString operator=null
+                x: CONST String type=kotlin.String value='Fail'
+          finally: BLOCK type=MyString operator=null
+            CALL 'plus(String): MyString' type=MyString operator=PLUS
+              $this: GET_VAR 'r: MyString' type=MyString operator=null
+              x: CONST String type=kotlin.String value='Finally'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: CALL 'test1(): MyString' type=MyString operator=null
+              arg1: CONST String type=kotlin.String value='TryLoopFinally'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail1: '
+              CALL 'test1(): MyString' type=MyString operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: CALL 'test2(): MyString' type=MyString operator=null
+              arg1: CONST String type=kotlin.String value='TryLoopFinally'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail2: '
+              CALL 'test2(): MyString' type=MyString operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: CALL 'test3(): MyString' type=MyString operator=null
+              arg1: CONST String type=kotlin.String value='TryLoopFinally'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail3: '
+              CALL 'test3(): MyString' type=MyString operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

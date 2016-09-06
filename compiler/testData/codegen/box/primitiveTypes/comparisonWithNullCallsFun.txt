@@ -1,0 +1,47 @@
+MODULE <test-module>
+  FILE /comparisonWithNullCallsFun.kt
+    PROPERTY public var entered: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='0'
+    FUN public fun <T> foo(t: T): T
+      BLOCK_BODY
+        BLOCK type=kotlin.Int operator=POSTFIX_INCR
+          BLOCK type=kotlin.Int operator=POSTFIX_INCR
+            VAR val tmp0: kotlin.Int
+              CALL '<get-entered>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+            CALL '<set-entered>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+              <set-?>: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+            GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='foo(T): T'
+          GET_VAR 'value-parameter t: T' type=T operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'foo(Nothing?): Nothing?' type=kotlin.Nothing? operator=null
+              t: CONST Null type=kotlin.Nothing? value='null'
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: BLOCK type=kotlin.Unit operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CONST Null type=kotlin.Nothing? value='null'
+            arg1: CALL 'foo(Nothing?): Nothing?' type=kotlin.Nothing? operator=null
+              t: CONST Null type=kotlin.Nothing? value='null'
+          then: BLOCK type=kotlin.Unit operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'foo(Nothing?): Nothing?' type=kotlin.Nothing? operator=null
+              t: CONST Null type=kotlin.Nothing? value='null'
+            arg1: CALL 'foo(Nothing?): Nothing?' type=kotlin.Nothing? operator=null
+              t: CONST Null type=kotlin.Nothing? value='null'
+          then: BLOCK type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-entered>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              arg1: CONST Int type=kotlin.Int value='4'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              CALL '<get-entered>(): Int' type=kotlin.Int operator=GET_PROPERTY

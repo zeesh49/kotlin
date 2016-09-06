@@ -1,0 +1,51 @@
+MODULE <test-module>
+  FILE /superCallInEnumLiteral.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'f(): String' type=kotlin.String operator=null
+              $this: GET_ENUM_VALUE 'E1' type=test.E
+            other: CALL 'f(): String' type=kotlin.String operator=null
+              $this: GET_ENUM_VALUE 'E2' type=test.E
+    CLASS ENUM_CLASS E
+      CONSTRUCTOR private constructor E()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='E'
+      ENUM_ENTRY enum entry E1
+        init: ENUM_CONSTRUCTOR_CALL 'constructor E1()' E1
+        class: CLASS ENUM_ENTRY E1
+          CONSTRUCTOR private constructor E1()
+            BLOCK_BODY
+              ENUM_CONSTRUCTOR_CALL 'constructor E()' super
+              INSTANCE_INITIALIZER_CALL classDescriptor='E1'
+          FUN public open override fun f(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='f(): String'
+                CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: CALL 'f(): String' superQualifier=E type=kotlin.String operator=null
+                    $this: THIS of 'E1' type=test.E
+                  other: CONST String type=kotlin.String value='O'
+      ENUM_ENTRY enum entry E2
+        init: ENUM_CONSTRUCTOR_CALL 'constructor E2()' E2
+        class: CLASS ENUM_ENTRY E2
+          CONSTRUCTOR private constructor E2()
+            BLOCK_BODY
+              ENUM_CONSTRUCTOR_CALL 'constructor E()' super
+              INSTANCE_INITIALIZER_CALL classDescriptor='E2'
+          FUN public open override fun f(): kotlin.String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='f(): String'
+                CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: CALL 'f(): String' superQualifier=E type=kotlin.String operator=null
+                    $this: THIS of 'E2' type=test.E
+                  other: CONST String type=kotlin.String value='K'
+      FUN public open fun f(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='f(): String'
+            CONST String type=kotlin.String value=''
+      FUN public final fun values(): kotlin.Array<test.E>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): test.E
+        SYNTHETIC_BODY kind=ENUM_VALUEOF

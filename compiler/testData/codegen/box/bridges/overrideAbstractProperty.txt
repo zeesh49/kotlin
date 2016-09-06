@@ -1,0 +1,23 @@
+MODULE <test-module>
+  FILE /overrideAbstractProperty.kt
+    CLASS CLASS AbstractClass
+      CONSTRUCTOR public constructor AbstractClass<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='AbstractClass'
+      PROPERTY public abstract val some: T
+    CLASS CLASS Class
+      CONSTRUCTOR public constructor Class()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor AbstractClass()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Class'
+      PROPERTY public open override val some: kotlin.String
+        PROPERTY_GETTER public open override fun <get-some>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-some>(): String'
+              CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-some>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor Class()' type=Class operator=null

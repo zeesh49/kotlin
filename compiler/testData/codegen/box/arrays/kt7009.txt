@@ -1,0 +1,20 @@
+MODULE <test-module>
+  FILE /kt7009.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val value: kotlin.Double
+          CALL 'get(Int): Double' type=kotlin.Double operator=GET_ARRAY_ELEMENT
+            $this: CALL '<get-second>(): DoubleArray' type=kotlin.DoubleArray operator=GET_PROPERTY
+              $this: CALL 'to(DoubleArray) on Int: Pair<Int, DoubleArray>' type=kotlin.Pair<kotlin.Int, kotlin.DoubleArray> operator=null
+                $receiver: CONST Int type=kotlin.Int value='1'
+                that: CALL 'doubleArrayOf(vararg Double): DoubleArray' type=kotlin.DoubleArray operator=null
+                  elements: VARARG type=DoubleArray varargElementType=Double
+                    CONST Double type=kotlin.Double value='1.0'
+            index: CONST Int type=kotlin.Int value='0'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'value: Double' type=kotlin.Double operator=null
+              arg1: CONST Double type=kotlin.Double value='1.0'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

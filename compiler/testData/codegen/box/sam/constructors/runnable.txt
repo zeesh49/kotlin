@@ -1,0 +1,20 @@
+MODULE <test-module>
+  FILE /runnable.kt
+    PROPERTY public var result: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='FAIL'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val r: java.lang.Runnable
+          CALL 'Runnable(() -> Unit): Runnable' type=java.lang.Runnable operator=null
+            function: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                    CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+                      <set-?>: CONST String type=kotlin.String value='OK'
+              CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'run(): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'r: Runnable' type=java.lang.Runnable operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY

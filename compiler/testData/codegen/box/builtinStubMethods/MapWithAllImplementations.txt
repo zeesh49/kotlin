@@ -1,0 +1,76 @@
+MODULE <test-module>
+  FILE /MapWithAllImplementations.kt
+    CLASS CLASS MyMap
+      CONSTRUCTOR public constructor MyMap<K, V>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyMap'
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-size>(): Int'
+              CONST Int type=kotlin.Int value='0'
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='isEmpty(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+      FUN public open override fun containsKey(key: K): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsKey(K): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+      FUN public open override fun containsValue(value: V): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsValue(V): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+      FUN public open override fun get(key: K): V?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(K): V?'
+            CONST Null type=kotlin.Nothing? value='null'
+      PROPERTY public open override val keys: kotlin.collections.Set<K>
+        PROPERTY_GETTER public open override fun <get-keys>(): kotlin.collections.Set<K>
+          BLOCK_BODY
+            THROW type=kotlin.Nothing
+              CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      PROPERTY public open override val values: kotlin.collections.Collection<V>
+        PROPERTY_GETTER public open override fun <get-values>(): kotlin.collections.Collection<V>
+          BLOCK_BODY
+            THROW type=kotlin.Nothing
+              CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      PROPERTY public open override val entries: kotlin.collections.Set<kotlin.collections.Map.Entry<K, V>>
+        PROPERTY_GETTER public open override fun <get-entries>(): kotlin.collections.Set<kotlin.collections.Map.Entry<K, V>>
+          BLOCK_BODY
+            THROW type=kotlin.Nothing
+              CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public final fun put(key: K, value: V): V?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='put(K, V): V?'
+            CONST Null type=kotlin.Nothing? value='null'
+      FUN public final fun remove(key: K): V?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='remove(K): V?'
+            CONST Null type=kotlin.Nothing? value='null'
+      FUN public final fun putAll(m: kotlin.collections.Map<out K, V>): kotlin.Unit
+        BLOCK_BODY
+      FUN public final fun clear(): kotlin.Unit
+        BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val myMap: MyMap<kotlin.String, kotlin.Int>
+          CALL 'constructor MyMap()' type=MyMap<kotlin.String, kotlin.Int> operator=null
+        VAR val map: java.util.Map<kotlin.String, kotlin.Int>
+          TYPE_OP operator=CAST typeOperand=java.util.Map<kotlin.String, kotlin.Int>
+            GET_VAR 'myMap: MyMap<String, Int>' type=MyMap<kotlin.String, kotlin.Int> operator=null
+        CALL 'put(String!, Int!): Int!' type=kotlin.Int! operator=null
+          $this: GET_VAR 'map: Map<String, Int>' type=java.util.Map<kotlin.String, kotlin.Int> operator=null
+          p0: CONST String type=kotlin.String value=''
+          p1: CONST Int type=kotlin.Int value='1'
+        CALL 'remove(Any!): Int!' type=kotlin.Int! operator=null
+          $this: GET_VAR 'map: Map<String, Int>' type=java.util.Map<kotlin.String, kotlin.Int> operator=null
+          p0: CONST String type=kotlin.String value=''
+        CALL 'putAll((MutableMap<out String!, out Int!>..Map<out String!, Int!>?)): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'map: Map<String, Int>' type=java.util.Map<kotlin.String, kotlin.Int> operator=null
+          p0: GET_VAR 'myMap: MyMap<String, Int>' type=MyMap<kotlin.String, kotlin.Int> operator=null
+        CALL 'clear(): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'map: Map<String, Int>' type=java.util.Map<kotlin.String, kotlin.Int> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

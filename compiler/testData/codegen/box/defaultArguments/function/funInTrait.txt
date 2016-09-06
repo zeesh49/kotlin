@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /funInTrait.kt
+    CLASS INTERFACE Foo
+      FUN public abstract fun foo(a: kotlin.Double = ...): kotlin.Double
+        a: EXPRESSION_BODY
+          CONST Double type=kotlin.Double value='1.0'
+    CLASS CLASS FooImpl
+      CONSTRUCTOR public constructor FooImpl()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='FooImpl'
+      FUN public open override fun foo(a: kotlin.Double = ...): kotlin.Double
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(Double = ...): Double'
+            GET_VAR 'value-parameter a: Double = ...' type=kotlin.Double operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(Double = ...): Double' type=kotlin.Double operator=null
+                $this: CALL 'constructor FooImpl()' type=FooImpl operator=null
+              arg1: CONST Double type=kotlin.Double value='1.0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'foo(Double = ...): Double' type=kotlin.Double operator=null
+                $this: CALL 'constructor FooImpl()' type=FooImpl operator=null
+                a: CONST Double type=kotlin.Double value='2.0'
+              arg1: CONST Double type=kotlin.Double value='2.0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

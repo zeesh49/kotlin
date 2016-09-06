@@ -1,0 +1,120 @@
+MODULE <test-module>
+  FILE /typeArguments.kt
+    FUN public fun string(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    CLASS CLASS Fourple
+      CONSTRUCTOR public constructor Fourple<A, B, C, D>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Fourple'
+    FUN public fun projections(): Fourple<kotlin.String, in kotlin.String, out kotlin.String, *>
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun array(): kotlin.Array<out kotlin.Number>
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun list(): kotlin.collections.List<kotlin.String>
+      BLOCK_BODY
+        BLOCK type=kotlin.Nothing operator=EXCLEXCL
+          VAR val tmp0_notnull: kotlin.Nothing?
+            CONST Null type=kotlin.Nothing? value='null'
+          WHEN type=kotlin.Nothing operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val string: kotlin.reflect.KType
+          CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'string(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+        CALL 'assertEquals(List<KTypeProjection>, List<KTypeProjection>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+          actual: CALL '<get-arguments>(): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=GET_PROPERTY
+            $this: GET_VAR 'string: KType' type=kotlin.reflect.KType operator=null
+        CALL 'assertEquals(List<KTypeProjection>, List<KTypeProjection>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(vararg KTypeProjection): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=null
+            elements: VARARG type=Array<out KTypeProjection> varargElementType=KTypeProjection
+              CALL 'invariant(KType): KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+                $this: GET_OBJECT 'companion object of KTypeProjection' type=kotlin.reflect.KTypeProjection.Companion
+                type: GET_VAR 'string: KType' type=kotlin.reflect.KType operator=null
+              CALL 'contravariant(KType): KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+                $this: GET_OBJECT 'companion object of KTypeProjection' type=kotlin.reflect.KTypeProjection.Companion
+                type: GET_VAR 'string: KType' type=kotlin.reflect.KType operator=null
+              CALL 'covariant(KType): KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+                $this: GET_OBJECT 'companion object of KTypeProjection' type=kotlin.reflect.KTypeProjection.Companion
+                type: GET_VAR 'string: KType' type=kotlin.reflect.KType operator=null
+              CALL '<get-STAR>(): KTypeProjection' type=kotlin.reflect.KTypeProjection operator=GET_PROPERTY
+                $this: GET_OBJECT 'companion object of KTypeProjection' type=kotlin.reflect.KTypeProjection.Companion
+          actual: CALL '<get-arguments>(): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=GET_PROPERTY
+            $this: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'projections(): Fourple<String, in String, out String, *>' type=kotlin.reflect.KFunction0<Fourple<kotlin.String, in kotlin.String, out kotlin.String, *>> operator=null
+        CALL 'assertEquals(List<KType?>, List<KType?>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(vararg KType?): List<KType?>' type=kotlin.collections.List<kotlin.reflect.KType?> operator=null
+            elements: VARARG type=Array<out KType?> varargElementType=KType?
+              GET_VAR 'string: KType' type=kotlin.reflect.KType operator=null
+              GET_VAR 'string: KType' type=kotlin.reflect.KType operator=null
+              GET_VAR 'string: KType' type=kotlin.reflect.KType operator=null
+              CONST Null type=kotlin.Nothing? value='null'
+          actual: CALL 'map((KTypeProjection) -> KType?) on Iterable<KTypeProjection>: List<KType?>' type=kotlin.collections.List<kotlin.reflect.KType?> operator=null
+            $receiver: CALL '<get-arguments>(): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=GET_PROPERTY
+              $this: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                $this: CALLABLE_REFERENCE 'projections(): Fourple<String, in String, out String, *>' type=kotlin.reflect.KFunction0<Fourple<kotlin.String, in kotlin.String, out kotlin.String, *>> operator=null
+            transform: CALLABLE_REFERENCE 'type: KType?' type=kotlin.reflect.KProperty1<kotlin.reflect.KTypeProjection, kotlin.reflect.KType?> operator=null
+        VAR val outNumber: kotlin.reflect.KTypeProjection
+          CALL 'single() on List<KTypeProjection>: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+            $receiver: CALL '<get-arguments>(): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=GET_PROPERTY
+              $this: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                $this: CALLABLE_REFERENCE 'array(): Array<out Number>' type=kotlin.reflect.KFunction0<kotlin.Array<out kotlin.Number>> operator=null
+        CALL 'assertEquals(KVariance?, KVariance?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_ENUM_VALUE 'OUT' type=kotlin.reflect.KVariance
+          actual: CALL '<get-variance>(): KVariance?' type=kotlin.reflect.KVariance? operator=GET_PROPERTY
+            $this: GET_VAR 'outNumber: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+        CALL 'assertEquals(KClassifier?, KClassifier?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CLASS_REFERENCE 'Number' type=kotlin.reflect.KClass<kotlin.Number>
+          actual: BLOCK type=kotlin.reflect.KClassifier? operator=SAFE_CALL
+            VAR val tmp0_safe_receiver: kotlin.reflect.KType?
+              CALL '<get-type>(): KType?' type=kotlin.reflect.KType? operator=GET_PROPERTY
+                $this: GET_VAR 'outNumber: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+            WHEN type=kotlin.reflect.KClassifier? operator=SAFE_CALL
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_safe_receiver: KType?' type=kotlin.reflect.KType? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CONST Null type=kotlin.Nothing? value='null'
+              else: CALL '<get-classifier>(): KClassifier?' type=kotlin.reflect.KClassifier? operator=GET_PROPERTY
+                $this: GET_VAR 'tmp0_safe_receiver: KType?' type=kotlin.reflect.KType? operator=null
+        CALL 'assertEquals(KVariance?, KVariance?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_ENUM_VALUE 'INVARIANT' type=kotlin.reflect.KVariance
+          actual: CALL '<get-variance>(): KVariance?' type=kotlin.reflect.KVariance? operator=GET_PROPERTY
+            $this: CALL 'single() on List<KTypeProjection>: KTypeProjection' type=kotlin.reflect.KTypeProjection operator=null
+              $receiver: CALL '<get-arguments>(): List<KTypeProjection>' type=kotlin.collections.List<kotlin.reflect.KTypeProjection> operator=GET_PROPERTY
+                $this: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+                  $this: CALLABLE_REFERENCE 'list(): List<String>' type=kotlin.reflect.KFunction0<kotlin.collections.List<kotlin.String>> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

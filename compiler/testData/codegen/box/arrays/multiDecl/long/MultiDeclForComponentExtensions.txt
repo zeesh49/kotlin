@@ -1,0 +1,70 @@
+MODULE <test-module>
+  FILE /MultiDeclForComponentExtensions.kt
+    FUN public operator fun kotlin.Long.component1(): kotlin.Long
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='component1() on Long: Long'
+          CALL 'plus(Int): Long' type=kotlin.Long operator=PLUS
+            $this: $RECEIVER of 'component1() on Long: Long' type=kotlin.Long
+            other: CONST Int type=kotlin.Int value='1'
+    FUN public operator fun kotlin.Long.component2(): kotlin.Long
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='component2() on Long: Long'
+          CALL 'plus(Int): Long' type=kotlin.Long operator=PLUS
+            $this: $RECEIVER of 'component2() on Long: Long' type=kotlin.Long
+            other: CONST Int type=kotlin.Int value='2'
+    FUN public fun doTest(l: kotlin.Array<kotlin.Long>): kotlin.String
+      BLOCK_BODY
+        VAR var s: kotlin.String
+          CONST String type=kotlin.String value=''
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<kotlin.Long>
+            CALL 'iterator(): Iterator<Long>' type=kotlin.collections.Iterator<kotlin.Long> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'value-parameter l: Array<Long>' type=kotlin.Array<kotlin.Long> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<Long>' type=kotlin.collections.Iterator<kotlin.Long> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val tmp1_loop_parameter: kotlin.Long
+                CALL 'next(): Long' type=kotlin.Long operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<Long>' type=kotlin.collections.Iterator<kotlin.Long> operator=null
+              VAR val a: kotlin.Long
+                CALL 'component1() on Long: Long' type=kotlin.Long operator=COMPONENT_N(index=1)
+                  $receiver: GET_VAR 'tmp1_loop_parameter: Long' type=kotlin.Long operator=null
+              VAR val b: kotlin.Long
+                CALL 'component2() on Long: Long' type=kotlin.Long operator=COMPONENT_N(index=2)
+                  $receiver: GET_VAR 'tmp1_loop_parameter: Long' type=kotlin.Long operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 's: String' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 's: String' type=kotlin.String operator=PLUSEQ
+                    other: STRING_CONCATENATION type=kotlin.String
+                      GET_VAR 'a: Long' type=kotlin.Long operator=null
+                      CONST String type=kotlin.String value=':'
+                      GET_VAR 'b: Long' type=kotlin.Long operator=null
+                      CONST String type=kotlin.String value=';'
+        RETURN type=kotlin.Nothing from='doTest(Array<Long>): String'
+          GET_VAR 's: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val l: kotlin.Array<kotlin.Long>
+          CALL 'constructor Array(Int, (Int) -> Long)' type=kotlin.Array<kotlin.Long> operator=null
+            size: CONST Int type=kotlin.Int value='3'
+            init: BLOCK type=(kotlin.Int) -> kotlin.Long operator=LAMBDA
+              FUN local final fun <anonymous>(x: kotlin.Int): kotlin.Long
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): Long'
+                    CALL 'toLong(): Long' type=kotlin.Long operator=null
+                      $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+              CALLABLE_REFERENCE '<anonymous>(Int): Long' type=(kotlin.Int) -> kotlin.Long operator=LAMBDA
+        VAR val s: kotlin.String
+          CALL 'doTest(Array<Long>): String' type=kotlin.String operator=null
+            l: GET_VAR 'l: Array<Long>' type=kotlin.Array<kotlin.Long> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 's: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='1:2;2:3;3:4;'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: '
+              GET_VAR 's: String' type=kotlin.String operator=null

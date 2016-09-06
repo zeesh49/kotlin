@@ -1,0 +1,32 @@
+MODULE <test-module>
+  FILE /accessorException.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun getMyStr(): kotlin.String
+        BLOCK_BODY
+          TRY_CATCH type=kotlin.Unit
+            try: BLOCK type=kotlin.Unit operator=null
+              VAR val a: kotlin.String
+                CALL '<get-str>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: THIS of 'companion object of A' type=A.Companion
+            catch e: BLOCK type=kotlin.Nothing operator=null
+              RETURN type=kotlin.Nothing from='getMyStr(): String'
+                CONST String type=kotlin.String value='OK'
+          RETURN type=kotlin.Nothing from='getMyStr(): String'
+            CONST String type=kotlin.String value='FAIL'
+      CLASS OBJECT companion object of A
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of A'
+        PROPERTY private final lateinit var str: kotlin.String
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          CALL 'constructor A()' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'getMyStr(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'a: A' type=A operator=null

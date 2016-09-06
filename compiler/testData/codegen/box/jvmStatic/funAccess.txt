@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /funAccess.kt
+    PROPERTY public var holder: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    FUN public fun getA(): A
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=PLUSEQ
+          CALL '<set-holder>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+            <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+              $this: CALL '<get-holder>(): String' type=kotlin.String operator=PLUSEQ
+              other: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='getA(): A'
+          GET_OBJECT 'A' type=A
+    CLASS OBJECT A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN @kotlin.jvm.JvmStatic public final fun a(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='a(): String'
+            CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'a(): String' type=kotlin.String operator=null
+            $this: CALL 'getA(): A' type=A operator=null

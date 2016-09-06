@@ -1,0 +1,164 @@
+MODULE <test-module>
+  FILE /propertyMetadataShouldBeCached.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var foo: kotlin.Int
+        delegate: PROPERTY val `foo$delegate`: IntHandler
+          EXPRESSION_BODY
+            GET_OBJECT 'IntHandler' type=IntHandler
+        PROPERTY_GETTER public final fun <get-foo>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-foo>(): Int'
+              CALL 'getValue(Any?, KProperty<*>): Int' type=kotlin.Int operator=null
+                $this: GET_BACKING_FIELD '`foo$delegate`: IntHandler' type=IntHandler operator=null
+                  receiver: THIS of 'A' type=A
+                t: THIS of 'A' type=A
+                p: CALLABLE_REFERENCE 'foo: Int' type=kotlin.reflect.KMutableProperty1<A, kotlin.Int> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+        PROPERTY_SETTER public final fun <set-foo>(<set-?>: kotlin.Int): kotlin.Unit
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<set-foo>(Int): Unit'
+              CALL 'setValue(Any?, KProperty<*>, Int): Unit' type=kotlin.Unit operator=null
+                $this: GET_BACKING_FIELD '`foo$delegate`: IntHandler' type=IntHandler operator=null
+                  receiver: THIS of 'A' type=A
+                t: THIS of 'A' type=A
+                p: CALLABLE_REFERENCE 'foo: Int' type=kotlin.reflect.KMutableProperty1<A, kotlin.Int> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+                value: GET_VAR 'value-parameter <set-?>: Int' type=kotlin.Int operator=null
+      CLASS OBJECT companion object of A
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of A'
+        PROPERTY public final var bar: kotlin.Any?
+          delegate: PROPERTY val `bar$delegate`: AnyHandler
+            EXPRESSION_BODY
+              GET_OBJECT 'AnyHandler' type=AnyHandler
+          PROPERTY_GETTER public final fun <get-bar>(): kotlin.Any?
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<get-bar>(): Any?'
+                CALL 'getValue(Any?, KProperty<*>): Any?' type=kotlin.Any? operator=null
+                  $this: GET_BACKING_FIELD '`bar$delegate`: AnyHandler' type=AnyHandler operator=null
+                    receiver: THIS of 'companion object of A' type=A.Companion
+                  t: THIS of 'companion object of A' type=A.Companion
+                  p: CALLABLE_REFERENCE 'bar: Any?' type=kotlin.reflect.KMutableProperty1<A.Companion, kotlin.Any?> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+          PROPERTY_SETTER public final fun <set-bar>(<set-?>: kotlin.Any?): kotlin.Unit
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<set-bar>(Any?): Unit'
+                CALL 'setValue(Any?, KProperty<*>, Any?): Unit' type=kotlin.Unit operator=null
+                  $this: GET_BACKING_FIELD '`bar$delegate`: AnyHandler' type=AnyHandler operator=null
+                    receiver: THIS of 'companion object of A' type=A.Companion
+                  t: THIS of 'companion object of A' type=A.Companion
+                  p: CALLABLE_REFERENCE 'bar: Any?' type=kotlin.reflect.KMutableProperty1<A.Companion, kotlin.Any?> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+                  value: GET_VAR 'value-parameter <set-?>: Any?' type=kotlin.Any? operator=null
+    PROPERTY public val baz: kotlin.String
+      delegate: PROPERTY val `baz$delegate`: StringHandler
+        EXPRESSION_BODY
+          GET_OBJECT 'StringHandler' type=StringHandler
+      PROPERTY_GETTER public fun <get-baz>(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-baz>(): String'
+            CALL 'getValue(Any?, KProperty<*>): String' type=kotlin.String operator=null
+              $this: GET_BACKING_FIELD '`baz$delegate`: StringHandler' type=StringHandler operator=null
+              t: CONST Null type=kotlin.Nothing? value='null'
+              p: CALLABLE_REFERENCE 'baz: String' type=kotlin.reflect.KProperty0<kotlin.String> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+    PROPERTY public val metadatas: java.util.IdentityHashMap<kotlin.reflect.KProperty<*>, kotlin.Unit>
+      EXPRESSION_BODY
+        CALL 'constructor IdentityHashMap()' type=java.util.IdentityHashMap<kotlin.reflect.KProperty<*>, kotlin.Unit> operator=null
+    FUN public fun record(p: kotlin.reflect.KProperty<*>): kotlin.Unit?
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='record(KProperty<*>): Unit?'
+          CALL 'put(KProperty<*>!, Unit!): Unit?' type=kotlin.Unit? operator=null
+            $this: CALL '<get-metadatas>(): IdentityHashMap<KProperty<*>, Unit>' type=java.util.IdentityHashMap<kotlin.reflect.KProperty<*>, kotlin.Unit> operator=GET_PROPERTY
+            key: GET_VAR 'value-parameter p: KProperty<*>' type=kotlin.reflect.KProperty<*> operator=null
+            value: GET_OBJECT 'Unit' type=kotlin.Unit
+    CLASS OBJECT IntHandler
+      CONSTRUCTOR private constructor IntHandler()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='IntHandler'
+      FUN public final operator fun getValue(t: kotlin.Any?, p: kotlin.reflect.KProperty<*>): kotlin.Int
+        BLOCK_BODY
+          CALL 'record(KProperty<*>): Unit?' type=kotlin.Unit? operator=null
+            p: GET_VAR 'value-parameter p: KProperty<*>' type=kotlin.reflect.KProperty<*> operator=null
+          RETURN type=kotlin.Nothing from='getValue(Any?, KProperty<*>): Int'
+            CONST Int type=kotlin.Int value='42'
+      FUN public final operator fun setValue(t: kotlin.Any?, p: kotlin.reflect.KProperty<*>, value: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+          CALL 'record(KProperty<*>): Unit?' type=kotlin.Unit? operator=null
+            p: GET_VAR 'value-parameter p: KProperty<*>' type=kotlin.reflect.KProperty<*> operator=null
+    CLASS OBJECT AnyHandler
+      CONSTRUCTOR private constructor AnyHandler()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='AnyHandler'
+      FUN public final operator fun getValue(t: kotlin.Any?, p: kotlin.reflect.KProperty<*>): kotlin.Any?
+        BLOCK_BODY
+          CALL 'record(KProperty<*>): Unit?' type=kotlin.Unit? operator=null
+            p: GET_VAR 'value-parameter p: KProperty<*>' type=kotlin.reflect.KProperty<*> operator=null
+          RETURN type=kotlin.Nothing from='getValue(Any?, KProperty<*>): Any?'
+            CONST Double type=kotlin.Double value='3.14'
+      FUN public final operator fun setValue(t: kotlin.Any?, p: kotlin.reflect.KProperty<*>, value: kotlin.Any?): kotlin.Unit
+        BLOCK_BODY
+          CALL 'record(KProperty<*>): Unit?' type=kotlin.Unit? operator=null
+            p: GET_VAR 'value-parameter p: KProperty<*>' type=kotlin.reflect.KProperty<*> operator=null
+    CLASS OBJECT StringHandler
+      CONSTRUCTOR private constructor StringHandler()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='StringHandler'
+      FUN public final operator fun getValue(t: kotlin.Any?, p: kotlin.reflect.KProperty<*>): kotlin.String
+        BLOCK_BODY
+          CALL 'record(KProperty<*>): Unit?' type=kotlin.Unit? operator=null
+            p: GET_VAR 'value-parameter p: KProperty<*>' type=kotlin.reflect.KProperty<*> operator=null
+          RETURN type=kotlin.Nothing from='getValue(Any?, KProperty<*>): String'
+            CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: GET_VAR 'value-parameter p: KProperty<*>' type=kotlin.reflect.KProperty<*> operator=null
+      FUN public final operator fun setValue(t: kotlin.Any?, p: kotlin.reflect.KProperty<*>, value: kotlin.String): kotlin.Unit
+        BLOCK_BODY
+          CALL 'record(KProperty<*>): Unit?' type=kotlin.Unit? operator=null
+            p: GET_VAR 'value-parameter p: KProperty<*>' type=kotlin.reflect.KProperty<*> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          CALL 'constructor A()' type=A operator=null
+        CALL '<set-foo>(Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a: A' type=A operator=null
+          <set-?>: CONST Int type=kotlin.Int value='42'
+        CALL '<set-foo>(Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a: A' type=A operator=null
+          <set-?>: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+            $this: CALL '<get-foo>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: GET_VAR 'a: A' type=A operator=null
+            other: CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: CALL '<get-baz>(): String' type=kotlin.String operator=GET_PROPERTY
+        CALL '<set-foo>(Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a: A' type=A operator=null
+          <set-?>: CONST Int type=kotlin.Int value='239'
+        CALL '<set-bar>(Any?): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_OBJECT 'companion object of A' type=A.Companion
+          <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL '<get-baz>(): String' type=kotlin.String operator=GET_PROPERTY
+            other: CALL '<get-foo>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: GET_VAR 'a: A' type=A operator=null
+        CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+          $this: CALL '<get-baz>(): String' type=kotlin.String operator=GET_PROPERTY
+          other: CALL '<get-bar>(): Any?' type=kotlin.Any? operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of A' type=A.Companion
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL '<get-keys>(): MutableSet<KProperty<*>!>' type=kotlin.collections.MutableSet<kotlin.reflect.KProperty<*>!> operator=GET_PROPERTY
+                  $this: CALL '<get-metadatas>(): IdentityHashMap<KProperty<*>, Unit>' type=java.util.IdentityHashMap<kotlin.reflect.KProperty<*>, kotlin.Unit> operator=GET_PROPERTY
+              arg1: CONST Int type=kotlin.Int value='3'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: only three instances of KProperty should have been created'
+              CONST String type=kotlin.String value='
+'
+              CALL '<get-keys>(): MutableSet<KProperty<*>!>' type=kotlin.collections.MutableSet<kotlin.reflect.KProperty<*>!> operator=GET_PROPERTY
+                $this: CALL '<get-metadatas>(): IdentityHashMap<KProperty<*>, Unit>' type=java.util.IdentityHashMap<kotlin.reflect.KProperty<*>, kotlin.Unit> operator=GET_PROPERTY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

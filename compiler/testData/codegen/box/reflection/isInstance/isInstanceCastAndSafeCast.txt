@@ -1,0 +1,144 @@
+MODULE <test-module>
+  FILE /isInstanceCastAndSafeCast.kt
+    FUN public fun testInstance(value: kotlin.Any?, klass: kotlin.reflect.KClass<*>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'isInstance(Any?): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'value-parameter klass: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+            value: GET_VAR 'value-parameter value: Any?' type=kotlin.Any? operator=null
+        CALL 'assertEquals(Any?, Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'value-parameter value: Any?' type=kotlin.Any? operator=null
+          actual: CALL 'safeCast(Any?) on KClass<*>: Any?' type=kotlin.Any? operator=null
+            $receiver: GET_VAR 'value-parameter klass: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+            value: GET_VAR 'value-parameter value: Any?' type=kotlin.Any? operator=null
+        CALL 'assertEquals(Any?, Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'value-parameter value: Any?' type=kotlin.Any? operator=null
+          actual: CALL 'cast(Any?) on KClass<*>: Any' type=kotlin.Any operator=null
+            $receiver: GET_VAR 'value-parameter klass: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+            value: GET_VAR 'value-parameter value: Any?' type=kotlin.Any? operator=null
+    FUN public fun testNotInstance(value: kotlin.Any?, klass: kotlin.reflect.KClass<*>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'isInstance(Any?): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'value-parameter klass: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+            value: GET_VAR 'value-parameter value: Any?' type=kotlin.Any? operator=null
+        CALL 'assertNull(Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'safeCast(Any?) on KClass<*>: Any?' type=kotlin.Any? operator=null
+            $receiver: GET_VAR 'value-parameter klass: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+            value: GET_VAR 'value-parameter value: Any?' type=kotlin.Any? operator=null
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'cast(Any?) on KClass<*>: Any' type=kotlin.Any operator=null
+              $receiver: GET_VAR 'value-parameter klass: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+              value: GET_VAR 'value-parameter value: Any?' type=kotlin.Any? operator=null
+            CALL 'fail(String? = ...): Nothing' type=kotlin.Nothing operator=null
+              message: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='Value should not be an instance of '
+                GET_VAR 'value-parameter klass: KClass<*>' type=kotlin.reflect.KClass<*> operator=null
+                CONST String type=kotlin.String value=': '
+                GET_VAR 'value-parameter value: Any?' type=kotlin.Any? operator=null
+          catch e: BLOCK type=kotlin.Unit operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'testInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: CALL 'constructor Any()' type=kotlin.Any operator=null
+          klass: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+        CALL 'testInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: CONST String type=kotlin.String value=''
+          klass: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+        CALL 'testInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: CONST String type=kotlin.String value=''
+          klass: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+        CALL 'testNotInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: CALL 'constructor Any()' type=kotlin.Any operator=null
+          klass: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+        CALL 'testNotInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: CONST Null type=kotlin.Nothing? value='null'
+          klass: CLASS_REFERENCE 'Any' type=kotlin.reflect.KClass<kotlin.Any>
+        CALL 'testNotInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: CONST Null type=kotlin.Nothing? value='null'
+          klass: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+        CALL 'testInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value=''
+          klass: CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.String>>
+        CALL 'testInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value=''
+          klass: CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.Any>>
+        CALL 'testNotInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: CALL 'arrayOf(vararg Any): Array<Any>' type=kotlin.Array<kotlin.Any> operator=null
+            elements: VARARG type=Array<out Any> varargElementType=Any
+              CALL 'constructor Any()' type=kotlin.Any operator=null
+          klass: CLASS_REFERENCE 'Array' type=kotlin.reflect.KClass<kotlin.Array<kotlin.String>>
+        CALL 'testInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: CALL 'listOf(String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            element: CONST String type=kotlin.String value=''
+          klass: CLASS_REFERENCE 'List' type=kotlin.reflect.KClass<kotlin.collections.List<*>>
+        CALL 'testInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: CALL 'listOf(String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            element: CONST String type=kotlin.String value=''
+          klass: CLASS_REFERENCE 'Collection' type=kotlin.reflect.KClass<kotlin.collections.Collection<*>>
+        CALL 'testInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: CONST Int type=kotlin.Int value='42'
+          klass: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+        CALL 'testInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: CONST Int type=kotlin.Int value='42'
+          klass: CALL '<get-kotlin>() on Class<Int>: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=GET_PROPERTY
+            $receiver: BLOCK type=java.lang.Class<kotlin.Int> operator=EXCLEXCL
+              VAR val tmp0_notnull: java.lang.Class<kotlin.Int>?
+                CALL '<get-javaPrimitiveType>() on KClass<Int>: Class<Int>?' type=java.lang.Class<kotlin.Int>? operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+              WHEN type=java.lang.Class<kotlin.Int> operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: Class<Int>?' type=java.lang.Class<kotlin.Int>? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: Class<Int>?' type=java.lang.Class<kotlin.Int>? operator=null
+        CALL 'testInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: CONST Int type=kotlin.Int value='42'
+          klass: CALL '<get-kotlin>() on Class<Int>: KClass<Int>' type=kotlin.reflect.KClass<kotlin.Int> operator=GET_PROPERTY
+            $receiver: BLOCK type=java.lang.Class<kotlin.Int> operator=EXCLEXCL
+              VAR val tmp1_notnull: java.lang.Class<kotlin.Int>
+                CALL '<get-javaObjectType>() on KClass<Int>: Class<Int>' type=java.lang.Class<kotlin.Int> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+              WHEN type=java.lang.Class<kotlin.Int> operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp1_notnull: Class<Int>' type=java.lang.Class<kotlin.Int> operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp1_notnull: Class<Int>' type=java.lang.Class<kotlin.Int> operator=null
+        CALL 'testNotInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: CONST Double type=kotlin.Double value='3.14'
+          klass: CLASS_REFERENCE 'Int' type=kotlin.reflect.KClass<kotlin.Int>
+        CALL 'testInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: BLOCK type=() -> kotlin.Unit operator=ANONYMOUS_FUNCTION
+            FUN local final fun <no name provided>(): kotlin.Unit
+              BLOCK_BODY
+            CALLABLE_REFERENCE '<no name provided>(): Unit' type=() -> kotlin.Unit operator=ANONYMOUS_FUNCTION
+          klass: CLASS_REFERENCE 'Function0' type=kotlin.reflect.KClass<kotlin.Function0<*>>
+        CALL 'testNotInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: BLOCK type=() -> kotlin.Unit operator=ANONYMOUS_FUNCTION
+            FUN local final fun <no name provided>(): kotlin.Unit
+              BLOCK_BODY
+            CALLABLE_REFERENCE '<no name provided>(): Unit' type=() -> kotlin.Unit operator=ANONYMOUS_FUNCTION
+          klass: CLASS_REFERENCE 'Function1' type=kotlin.reflect.KClass<kotlin.Function1<*, *>>
+        CALL 'testNotInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: BLOCK type=() -> kotlin.Unit operator=ANONYMOUS_FUNCTION
+            FUN local final fun <no name provided>(): kotlin.Unit
+              BLOCK_BODY
+            CALLABLE_REFERENCE '<no name provided>(): Unit' type=() -> kotlin.Unit operator=ANONYMOUS_FUNCTION
+          klass: CLASS_REFERENCE 'Function2' type=kotlin.reflect.KClass<kotlin.Function2<*, *, *>>
+        CALL 'testNotInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: CALLABLE_REFERENCE 'testInstance(Any?, KClass<*>): Unit' type=kotlin.reflect.KFunction2<kotlin.Any?, kotlin.reflect.KClass<*>, kotlin.Unit> operator=null
+          klass: CLASS_REFERENCE 'Function0' type=kotlin.reflect.KClass<kotlin.Function0<*>>
+        CALL 'testNotInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: CALLABLE_REFERENCE 'testInstance(Any?, KClass<*>): Unit' type=kotlin.reflect.KFunction2<kotlin.Any?, kotlin.reflect.KClass<*>, kotlin.Unit> operator=null
+          klass: CLASS_REFERENCE 'Function1' type=kotlin.reflect.KClass<kotlin.Function1<*, *>>
+        CALL 'testInstance(Any?, KClass<*>): Unit' type=kotlin.Unit operator=null
+          value: CALLABLE_REFERENCE 'testInstance(Any?, KClass<*>): Unit' type=kotlin.reflect.KFunction2<kotlin.Any?, kotlin.reflect.KClass<*>, kotlin.Unit> operator=null
+          klass: CLASS_REFERENCE 'Function2' type=kotlin.reflect.KClass<kotlin.Function2<*, *, *>>
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

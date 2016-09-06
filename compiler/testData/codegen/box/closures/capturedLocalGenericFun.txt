@@ -1,0 +1,23 @@
+MODULE <test-module>
+  FILE /capturedLocalGenericFun.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        FUN local final fun <T> local(s: T): T
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='local(T): T'
+              GET_VAR 'value-parameter s: T' type=T operator=null
+        FUN local final fun test(s: kotlin.Int): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='test(Int): Int'
+              CALL 'local(Int): Int' type=kotlin.Int operator=null
+                s: GET_VAR 'value-parameter s: Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test(Int): Int' type=kotlin.Int operator=null
+                s: CONST Int type=kotlin.Int value='10'
+              arg1: CONST Int type=kotlin.Int value='10'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,49 @@
+MODULE <test-module>
+  FILE /postfixIncrementOnShortSmartCast.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var i: kotlin.Short?
+        SET_VAR 'i: Short?' type=kotlin.Unit operator=EQ
+          CONST Short type=kotlin.Short value='10'
+        VAR val j: kotlin.Short?
+          BLOCK type=kotlin.Short? operator=POSTFIX_INCR
+            VAR val tmp0: kotlin.Short?
+              GET_VAR 'i: Short?' type=kotlin.Short? operator=POSTFIX_INCR
+            SET_VAR 'i: Short?' type=kotlin.Unit operator=POSTFIX_INCR
+              CALL 'inc(): Short' type=kotlin.Short operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp0: Short?' type=kotlin.Short? operator=null
+            GET_VAR 'tmp0: Short?' type=kotlin.Short? operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL 'toInt(): Int' type=kotlin.Int operator=null
+                  $this: BLOCK type=kotlin.Short operator=EXCLEXCL
+                    VAR val tmp1_notnull: kotlin.Short?
+                      GET_VAR 'j: Short?' type=kotlin.Short? operator=null
+                    WHEN type=kotlin.Short operator=null
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'tmp1_notnull: Short?' type=kotlin.Short? operator=null
+                        arg1: CONST Null type=kotlin.Nothing? value='null'
+                      then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                      else: GET_VAR 'tmp1_notnull: Short?' type=kotlin.Short? operator=null
+                arg1: CONST Int type=kotlin.Int value='10'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL 'toInt(): Int' type=kotlin.Int operator=null
+                  $this: BLOCK type=kotlin.Short operator=EXCLEXCL
+                    VAR val tmp2_notnull: kotlin.Short?
+                      GET_VAR 'i: Short?' type=kotlin.Short? operator=null
+                    WHEN type=kotlin.Short operator=null
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'tmp2_notnull: Short?' type=kotlin.Short? operator=null
+                        arg1: CONST Null type=kotlin.Nothing? value='null'
+                      then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                      else: GET_VAR 'tmp2_notnull: Short?' type=kotlin.Short? operator=null
+                arg1: CONST Int type=kotlin.Int value='11'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail j = '
+              GET_VAR 'j: Short?' type=kotlin.Short? operator=null
+              CONST String type=kotlin.String value=' i = '
+              GET_VAR 'i: Short?' type=kotlin.Short? operator=null

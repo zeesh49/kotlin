@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /kt1413.kt
+    CLASS INTERFACE I
+      FUN public abstract fun f(): kotlin.Unit
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      FUN public final fun foo(): kotlin.Unit
+        BLOCK_BODY
+          VAR val i: t.I
+            BLOCK type=t.Test.foo.<no name provided> operator=OBJECT_LITERAL
+              CLASS CLASS <no name provided>
+                CONSTRUCTOR public constructor <no name provided>()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                FUN public open override fun f(): kotlin.Unit
+                  BLOCK_BODY
+                    FUN local final fun local(): kotlin.Unit
+                      BLOCK_BODY
+                        CALL 'bar(): Unit' type=kotlin.Unit operator=null
+                          $this: THIS of 'Test' type=t.Test
+                    CALL 'local(): Unit' type=kotlin.Unit operator=null
+              CALL 'constructor <no name provided>()' type=t.Test.foo.<no name provided> operator=OBJECT_LITERAL
+          CALL 'f(): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR 'i: I' type=t.I operator=null
+      FUN public final fun bar(): kotlin.Unit
+        BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'foo(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor Test()' type=t.Test operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

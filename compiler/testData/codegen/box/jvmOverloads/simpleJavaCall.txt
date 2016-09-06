@@ -1,0 +1,22 @@
+MODULE <test-module>
+  FILE /simple.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      FUN @kotlin.jvm.JvmOverloads public final fun foo(o: kotlin.String = ..., k: kotlin.String = ...): kotlin.String
+        o: EXPRESSION_BODY
+          CONST String type=kotlin.String value='O'
+        k: EXPRESSION_BODY
+          CONST String type=kotlin.String value='K'
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(String = ..., String = ...): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: GET_VAR 'value-parameter o: String = ...' type=kotlin.String operator=null
+              other: GET_VAR 'value-parameter k: String = ...' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+            CALL 'invokeMethodWithOverloads(): String!' type=kotlin.String! operator=null

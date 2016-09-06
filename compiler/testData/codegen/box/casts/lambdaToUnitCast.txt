@@ -1,0 +1,16 @@
+MODULE <test-module>
+  FILE /lambdaToUnitCast.kt
+    PROPERTY public val foo: () -> kotlin.Unit
+      EXPRESSION_BODY
+        BLOCK type=() -> kotlin.Unit operator=LAMBDA
+          FUN local final fun <anonymous>(): kotlin.Unit
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+          CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TYPE_OP operator=CAST typeOperand=kotlin.Unit
+          CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+            $this: CALL '<get-foo>(): () -> Unit' type=() -> kotlin.Unit operator=GET_PROPERTY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

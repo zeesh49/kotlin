@@ -1,0 +1,501 @@
+MODULE <test-module>
+  FILE /genericClassWithGetSet.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<T>(value: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'value: T' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A<T>
+            value: GET_VAR 'value-parameter value: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final var value: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final operator fun get(i: kotlin.Int): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(Int): T'
+            CALL '<get-value>(): T' type=T operator=GET_PROPERTY
+              $this: THIS of 'A' type=A<T>
+      FUN public final operator fun set(i: kotlin.Int, newValue: T): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-value>(T): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'A' type=A<T>
+            <set-?>: GET_VAR 'value-parameter newValue: T' type=T operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val aByte: A<kotlin.Byte>
+          CALL 'constructor A(Byte)' type=A<kotlin.Byte> operator=null
+            value: CONST Byte type=kotlin.Byte value='1'
+        VAR var bByte: kotlin.Byte
+          CONST Byte type=kotlin.Byte value='1'
+        VAR val aShort: A<kotlin.Short>
+          CALL 'constructor A(Short)' type=A<kotlin.Short> operator=null
+            value: CONST Short type=kotlin.Short value='1'
+        VAR var bShort: kotlin.Short
+          CONST Short type=kotlin.Short value='1'
+        VAR val aInt: A<kotlin.Int>
+          CALL 'constructor A(Int)' type=A<kotlin.Int> operator=null
+            value: CONST Int type=kotlin.Int value='1'
+        VAR var bInt: kotlin.Int
+          CONST Int type=kotlin.Int value='1'
+        VAR val aLong: A<kotlin.Long>
+          CALL 'constructor A(Long)' type=A<kotlin.Long> operator=null
+            value: CONST Long type=kotlin.Long value='1'
+        VAR var bLong: kotlin.Long
+          CONST Long type=kotlin.Long value='1'
+        VAR val aFloat: A<kotlin.Float>
+          CALL 'constructor A(Float)' type=A<kotlin.Float> operator=null
+            value: CONST Float type=kotlin.Float value='1.0'
+        VAR var bFloat: kotlin.Float
+          CONST Float type=kotlin.Float value='1.0'
+        VAR val aDouble: A<kotlin.Double>
+          CALL 'constructor A(Double)' type=A<kotlin.Double> operator=null
+            value: CONST Double type=kotlin.Double value='1.0'
+        VAR var bDouble: kotlin.Double
+          CONST Double type=kotlin.Double value='1.0'
+        BLOCK type=kotlin.Byte operator=POSTFIX_INCR
+          VAR val tmp0_array: A<kotlin.Byte>
+            GET_VAR 'aByte: A<Byte>' type=A<kotlin.Byte> operator=null
+          VAR val tmp1_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          VAR val tmp2: kotlin.Byte
+            CALL 'get(Int): Byte' type=kotlin.Byte operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp0_array: A<Byte>' type=A<kotlin.Byte> operator=null
+              i: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+          CALL 'set(Int, Byte): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+            $this: GET_VAR 'tmp0_array: A<Byte>' type=A<kotlin.Byte> operator=null
+            i: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+            newValue: CALL 'inc(): Byte' type=kotlin.Byte operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp2: Byte' type=kotlin.Byte operator=null
+          GET_VAR 'tmp2: Byte' type=kotlin.Byte operator=null
+        BLOCK type=kotlin.Byte operator=POSTFIX_INCR
+          VAR val tmp3: kotlin.Byte
+            GET_VAR 'bByte: Byte' type=kotlin.Byte operator=POSTFIX_INCR
+          SET_VAR 'bByte: Byte' type=kotlin.Unit operator=POSTFIX_INCR
+            CALL 'inc(): Byte' type=kotlin.Byte operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp3: Byte' type=kotlin.Byte operator=null
+          GET_VAR 'tmp3: Byte' type=kotlin.Byte operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Byte' type=kotlin.Byte operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aByte: A<Byte>' type=A<kotlin.Byte> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              arg1: GET_VAR 'bByte: Byte' type=kotlin.Byte operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed post-increment Byte: '
+              CALL 'get(Int): Byte' type=kotlin.Byte operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aByte: A<Byte>' type=A<kotlin.Byte> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              CONST String type=kotlin.String value=' != '
+              GET_VAR 'bByte: Byte' type=kotlin.Byte operator=null
+        BLOCK type=kotlin.Byte operator=POSTFIX_DECR
+          VAR val tmp4_array: A<kotlin.Byte>
+            GET_VAR 'aByte: A<Byte>' type=A<kotlin.Byte> operator=null
+          VAR val tmp5_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          VAR val tmp6: kotlin.Byte
+            CALL 'get(Int): Byte' type=kotlin.Byte operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp4_array: A<Byte>' type=A<kotlin.Byte> operator=null
+              i: GET_VAR 'tmp5_index0: Int' type=kotlin.Int operator=null
+          CALL 'set(Int, Byte): Unit' type=kotlin.Unit operator=POSTFIX_DECR
+            $this: GET_VAR 'tmp4_array: A<Byte>' type=A<kotlin.Byte> operator=null
+            i: GET_VAR 'tmp5_index0: Int' type=kotlin.Int operator=null
+            newValue: CALL 'dec(): Byte' type=kotlin.Byte operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp6: Byte' type=kotlin.Byte operator=null
+          GET_VAR 'tmp6: Byte' type=kotlin.Byte operator=null
+        BLOCK type=kotlin.Byte operator=POSTFIX_DECR
+          VAR val tmp7: kotlin.Byte
+            GET_VAR 'bByte: Byte' type=kotlin.Byte operator=POSTFIX_DECR
+          SET_VAR 'bByte: Byte' type=kotlin.Unit operator=POSTFIX_DECR
+            CALL 'dec(): Byte' type=kotlin.Byte operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp7: Byte' type=kotlin.Byte operator=null
+          GET_VAR 'tmp7: Byte' type=kotlin.Byte operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Byte' type=kotlin.Byte operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aByte: A<Byte>' type=A<kotlin.Byte> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              arg1: GET_VAR 'bByte: Byte' type=kotlin.Byte operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed post-decrement Byte: '
+              CALL 'get(Int): Byte' type=kotlin.Byte operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aByte: A<Byte>' type=A<kotlin.Byte> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              CONST String type=kotlin.String value=' != '
+              GET_VAR 'bByte: Byte' type=kotlin.Byte operator=null
+        BLOCK type=kotlin.Short operator=POSTFIX_INCR
+          VAR val tmp8_array: A<kotlin.Short>
+            GET_VAR 'aShort: A<Short>' type=A<kotlin.Short> operator=null
+          VAR val tmp9_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          VAR val tmp10: kotlin.Short
+            CALL 'get(Int): Short' type=kotlin.Short operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp8_array: A<Short>' type=A<kotlin.Short> operator=null
+              i: GET_VAR 'tmp9_index0: Int' type=kotlin.Int operator=null
+          CALL 'set(Int, Short): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+            $this: GET_VAR 'tmp8_array: A<Short>' type=A<kotlin.Short> operator=null
+            i: GET_VAR 'tmp9_index0: Int' type=kotlin.Int operator=null
+            newValue: CALL 'inc(): Short' type=kotlin.Short operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp10: Short' type=kotlin.Short operator=null
+          GET_VAR 'tmp10: Short' type=kotlin.Short operator=null
+        BLOCK type=kotlin.Short operator=POSTFIX_INCR
+          VAR val tmp11: kotlin.Short
+            GET_VAR 'bShort: Short' type=kotlin.Short operator=POSTFIX_INCR
+          SET_VAR 'bShort: Short' type=kotlin.Unit operator=POSTFIX_INCR
+            CALL 'inc(): Short' type=kotlin.Short operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp11: Short' type=kotlin.Short operator=null
+          GET_VAR 'tmp11: Short' type=kotlin.Short operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Short' type=kotlin.Short operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aShort: A<Short>' type=A<kotlin.Short> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              arg1: GET_VAR 'bShort: Short' type=kotlin.Short operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed post-increment Short: '
+              CALL 'get(Int): Short' type=kotlin.Short operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aShort: A<Short>' type=A<kotlin.Short> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              CONST String type=kotlin.String value=' != '
+              GET_VAR 'bShort: Short' type=kotlin.Short operator=null
+        BLOCK type=kotlin.Short operator=POSTFIX_DECR
+          VAR val tmp12_array: A<kotlin.Short>
+            GET_VAR 'aShort: A<Short>' type=A<kotlin.Short> operator=null
+          VAR val tmp13_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          VAR val tmp14: kotlin.Short
+            CALL 'get(Int): Short' type=kotlin.Short operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp12_array: A<Short>' type=A<kotlin.Short> operator=null
+              i: GET_VAR 'tmp13_index0: Int' type=kotlin.Int operator=null
+          CALL 'set(Int, Short): Unit' type=kotlin.Unit operator=POSTFIX_DECR
+            $this: GET_VAR 'tmp12_array: A<Short>' type=A<kotlin.Short> operator=null
+            i: GET_VAR 'tmp13_index0: Int' type=kotlin.Int operator=null
+            newValue: CALL 'dec(): Short' type=kotlin.Short operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp14: Short' type=kotlin.Short operator=null
+          GET_VAR 'tmp14: Short' type=kotlin.Short operator=null
+        BLOCK type=kotlin.Short operator=POSTFIX_DECR
+          VAR val tmp15: kotlin.Short
+            GET_VAR 'bShort: Short' type=kotlin.Short operator=POSTFIX_DECR
+          SET_VAR 'bShort: Short' type=kotlin.Unit operator=POSTFIX_DECR
+            CALL 'dec(): Short' type=kotlin.Short operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp15: Short' type=kotlin.Short operator=null
+          GET_VAR 'tmp15: Short' type=kotlin.Short operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Short' type=kotlin.Short operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aShort: A<Short>' type=A<kotlin.Short> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              arg1: GET_VAR 'bShort: Short' type=kotlin.Short operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed post-decrement Short: '
+              CALL 'get(Int): Short' type=kotlin.Short operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aShort: A<Short>' type=A<kotlin.Short> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              CONST String type=kotlin.String value=' != '
+              GET_VAR 'bShort: Short' type=kotlin.Short operator=null
+        BLOCK type=kotlin.Int operator=POSTFIX_INCR
+          VAR val tmp16_array: A<kotlin.Int>
+            GET_VAR 'aInt: A<Int>' type=A<kotlin.Int> operator=null
+          VAR val tmp17_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          VAR val tmp18: kotlin.Int
+            CALL 'get(Int): Int' type=kotlin.Int operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp16_array: A<Int>' type=A<kotlin.Int> operator=null
+              i: GET_VAR 'tmp17_index0: Int' type=kotlin.Int operator=null
+          CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+            $this: GET_VAR 'tmp16_array: A<Int>' type=A<kotlin.Int> operator=null
+            i: GET_VAR 'tmp17_index0: Int' type=kotlin.Int operator=null
+            newValue: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp18: Int' type=kotlin.Int operator=null
+          GET_VAR 'tmp18: Int' type=kotlin.Int operator=null
+        BLOCK type=kotlin.Int operator=POSTFIX_INCR
+          VAR val tmp19: kotlin.Int
+            GET_VAR 'bInt: Int' type=kotlin.Int operator=POSTFIX_INCR
+          SET_VAR 'bInt: Int' type=kotlin.Unit operator=POSTFIX_INCR
+            CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp19: Int' type=kotlin.Int operator=null
+          GET_VAR 'tmp19: Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aInt: A<Int>' type=A<kotlin.Int> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              arg1: GET_VAR 'bInt: Int' type=kotlin.Int operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed post-increment Int: '
+              CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aInt: A<Int>' type=A<kotlin.Int> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              CONST String type=kotlin.String value=' != '
+              GET_VAR 'bInt: Int' type=kotlin.Int operator=null
+        BLOCK type=kotlin.Int operator=POSTFIX_DECR
+          VAR val tmp20_array: A<kotlin.Int>
+            GET_VAR 'aInt: A<Int>' type=A<kotlin.Int> operator=null
+          VAR val tmp21_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          VAR val tmp22: kotlin.Int
+            CALL 'get(Int): Int' type=kotlin.Int operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp20_array: A<Int>' type=A<kotlin.Int> operator=null
+              i: GET_VAR 'tmp21_index0: Int' type=kotlin.Int operator=null
+          CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=POSTFIX_DECR
+            $this: GET_VAR 'tmp20_array: A<Int>' type=A<kotlin.Int> operator=null
+            i: GET_VAR 'tmp21_index0: Int' type=kotlin.Int operator=null
+            newValue: CALL 'dec(): Int' type=kotlin.Int operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp22: Int' type=kotlin.Int operator=null
+          GET_VAR 'tmp22: Int' type=kotlin.Int operator=null
+        BLOCK type=kotlin.Int operator=POSTFIX_DECR
+          VAR val tmp23: kotlin.Int
+            GET_VAR 'bInt: Int' type=kotlin.Int operator=POSTFIX_DECR
+          SET_VAR 'bInt: Int' type=kotlin.Unit operator=POSTFIX_DECR
+            CALL 'dec(): Int' type=kotlin.Int operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp23: Int' type=kotlin.Int operator=null
+          GET_VAR 'tmp23: Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aInt: A<Int>' type=A<kotlin.Int> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              arg1: GET_VAR 'bInt: Int' type=kotlin.Int operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed post-decrement Int: '
+              CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aInt: A<Int>' type=A<kotlin.Int> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              CONST String type=kotlin.String value=' != '
+              GET_VAR 'bInt: Int' type=kotlin.Int operator=null
+        BLOCK type=kotlin.Long operator=POSTFIX_INCR
+          VAR val tmp24_array: A<kotlin.Long>
+            GET_VAR 'aLong: A<Long>' type=A<kotlin.Long> operator=null
+          VAR val tmp25_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          VAR val tmp26: kotlin.Long
+            CALL 'get(Int): Long' type=kotlin.Long operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp24_array: A<Long>' type=A<kotlin.Long> operator=null
+              i: GET_VAR 'tmp25_index0: Int' type=kotlin.Int operator=null
+          CALL 'set(Int, Long): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+            $this: GET_VAR 'tmp24_array: A<Long>' type=A<kotlin.Long> operator=null
+            i: GET_VAR 'tmp25_index0: Int' type=kotlin.Int operator=null
+            newValue: CALL 'inc(): Long' type=kotlin.Long operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp26: Long' type=kotlin.Long operator=null
+          GET_VAR 'tmp26: Long' type=kotlin.Long operator=null
+        BLOCK type=kotlin.Long operator=POSTFIX_INCR
+          VAR val tmp27: kotlin.Long
+            GET_VAR 'bLong: Long' type=kotlin.Long operator=POSTFIX_INCR
+          SET_VAR 'bLong: Long' type=kotlin.Unit operator=POSTFIX_INCR
+            CALL 'inc(): Long' type=kotlin.Long operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp27: Long' type=kotlin.Long operator=null
+          GET_VAR 'tmp27: Long' type=kotlin.Long operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Long' type=kotlin.Long operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aLong: A<Long>' type=A<kotlin.Long> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              arg1: GET_VAR 'bLong: Long' type=kotlin.Long operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed post-increment Long: '
+              CALL 'get(Int): Long' type=kotlin.Long operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aLong: A<Long>' type=A<kotlin.Long> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              CONST String type=kotlin.String value=' != '
+              GET_VAR 'bLong: Long' type=kotlin.Long operator=null
+        BLOCK type=kotlin.Long operator=POSTFIX_DECR
+          VAR val tmp28_array: A<kotlin.Long>
+            GET_VAR 'aLong: A<Long>' type=A<kotlin.Long> operator=null
+          VAR val tmp29_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          VAR val tmp30: kotlin.Long
+            CALL 'get(Int): Long' type=kotlin.Long operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp28_array: A<Long>' type=A<kotlin.Long> operator=null
+              i: GET_VAR 'tmp29_index0: Int' type=kotlin.Int operator=null
+          CALL 'set(Int, Long): Unit' type=kotlin.Unit operator=POSTFIX_DECR
+            $this: GET_VAR 'tmp28_array: A<Long>' type=A<kotlin.Long> operator=null
+            i: GET_VAR 'tmp29_index0: Int' type=kotlin.Int operator=null
+            newValue: CALL 'dec(): Long' type=kotlin.Long operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp30: Long' type=kotlin.Long operator=null
+          GET_VAR 'tmp30: Long' type=kotlin.Long operator=null
+        BLOCK type=kotlin.Long operator=POSTFIX_DECR
+          VAR val tmp31: kotlin.Long
+            GET_VAR 'bLong: Long' type=kotlin.Long operator=POSTFIX_DECR
+          SET_VAR 'bLong: Long' type=kotlin.Unit operator=POSTFIX_DECR
+            CALL 'dec(): Long' type=kotlin.Long operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp31: Long' type=kotlin.Long operator=null
+          GET_VAR 'tmp31: Long' type=kotlin.Long operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Long' type=kotlin.Long operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aLong: A<Long>' type=A<kotlin.Long> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              arg1: GET_VAR 'bLong: Long' type=kotlin.Long operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed post-decrement Long: '
+              CALL 'get(Int): Long' type=kotlin.Long operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aLong: A<Long>' type=A<kotlin.Long> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              CONST String type=kotlin.String value=' != '
+              GET_VAR 'bLong: Long' type=kotlin.Long operator=null
+        BLOCK type=kotlin.Float operator=POSTFIX_INCR
+          VAR val tmp32_array: A<kotlin.Float>
+            GET_VAR 'aFloat: A<Float>' type=A<kotlin.Float> operator=null
+          VAR val tmp33_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          VAR val tmp34: kotlin.Float
+            CALL 'get(Int): Float' type=kotlin.Float operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp32_array: A<Float>' type=A<kotlin.Float> operator=null
+              i: GET_VAR 'tmp33_index0: Int' type=kotlin.Int operator=null
+          CALL 'set(Int, Float): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+            $this: GET_VAR 'tmp32_array: A<Float>' type=A<kotlin.Float> operator=null
+            i: GET_VAR 'tmp33_index0: Int' type=kotlin.Int operator=null
+            newValue: CALL 'inc(): Float' type=kotlin.Float operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp34: Float' type=kotlin.Float operator=null
+          GET_VAR 'tmp34: Float' type=kotlin.Float operator=null
+        BLOCK type=kotlin.Float operator=POSTFIX_INCR
+          VAR val tmp35: kotlin.Float
+            GET_VAR 'bFloat: Float' type=kotlin.Float operator=POSTFIX_INCR
+          SET_VAR 'bFloat: Float' type=kotlin.Unit operator=POSTFIX_INCR
+            CALL 'inc(): Float' type=kotlin.Float operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp35: Float' type=kotlin.Float operator=null
+          GET_VAR 'tmp35: Float' type=kotlin.Float operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Float' type=kotlin.Float operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aFloat: A<Float>' type=A<kotlin.Float> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              arg1: GET_VAR 'bFloat: Float' type=kotlin.Float operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed post-increment Float: '
+              CALL 'get(Int): Float' type=kotlin.Float operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aFloat: A<Float>' type=A<kotlin.Float> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              CONST String type=kotlin.String value=' != '
+              GET_VAR 'bFloat: Float' type=kotlin.Float operator=null
+        BLOCK type=kotlin.Float operator=POSTFIX_DECR
+          VAR val tmp36_array: A<kotlin.Float>
+            GET_VAR 'aFloat: A<Float>' type=A<kotlin.Float> operator=null
+          VAR val tmp37_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          VAR val tmp38: kotlin.Float
+            CALL 'get(Int): Float' type=kotlin.Float operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp36_array: A<Float>' type=A<kotlin.Float> operator=null
+              i: GET_VAR 'tmp37_index0: Int' type=kotlin.Int operator=null
+          CALL 'set(Int, Float): Unit' type=kotlin.Unit operator=POSTFIX_DECR
+            $this: GET_VAR 'tmp36_array: A<Float>' type=A<kotlin.Float> operator=null
+            i: GET_VAR 'tmp37_index0: Int' type=kotlin.Int operator=null
+            newValue: CALL 'dec(): Float' type=kotlin.Float operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp38: Float' type=kotlin.Float operator=null
+          GET_VAR 'tmp38: Float' type=kotlin.Float operator=null
+        BLOCK type=kotlin.Float operator=POSTFIX_DECR
+          VAR val tmp39: kotlin.Float
+            GET_VAR 'bFloat: Float' type=kotlin.Float operator=POSTFIX_DECR
+          SET_VAR 'bFloat: Float' type=kotlin.Unit operator=POSTFIX_DECR
+            CALL 'dec(): Float' type=kotlin.Float operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp39: Float' type=kotlin.Float operator=null
+          GET_VAR 'tmp39: Float' type=kotlin.Float operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Float' type=kotlin.Float operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aFloat: A<Float>' type=A<kotlin.Float> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              arg1: GET_VAR 'bFloat: Float' type=kotlin.Float operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed post-decrement Float: '
+              CALL 'get(Int): Float' type=kotlin.Float operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aFloat: A<Float>' type=A<kotlin.Float> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              CONST String type=kotlin.String value=' != '
+              GET_VAR 'bFloat: Float' type=kotlin.Float operator=null
+        BLOCK type=kotlin.Double operator=POSTFIX_INCR
+          VAR val tmp40_array: A<kotlin.Double>
+            GET_VAR 'aDouble: A<Double>' type=A<kotlin.Double> operator=null
+          VAR val tmp41_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          VAR val tmp42: kotlin.Double
+            CALL 'get(Int): Double' type=kotlin.Double operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp40_array: A<Double>' type=A<kotlin.Double> operator=null
+              i: GET_VAR 'tmp41_index0: Int' type=kotlin.Int operator=null
+          CALL 'set(Int, Double): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+            $this: GET_VAR 'tmp40_array: A<Double>' type=A<kotlin.Double> operator=null
+            i: GET_VAR 'tmp41_index0: Int' type=kotlin.Int operator=null
+            newValue: CALL 'inc(): Double' type=kotlin.Double operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp42: Double' type=kotlin.Double operator=null
+          GET_VAR 'tmp42: Double' type=kotlin.Double operator=null
+        BLOCK type=kotlin.Double operator=POSTFIX_INCR
+          VAR val tmp43: kotlin.Double
+            GET_VAR 'bDouble: Double' type=kotlin.Double operator=POSTFIX_INCR
+          SET_VAR 'bDouble: Double' type=kotlin.Unit operator=POSTFIX_INCR
+            CALL 'inc(): Double' type=kotlin.Double operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp43: Double' type=kotlin.Double operator=null
+          GET_VAR 'tmp43: Double' type=kotlin.Double operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Double' type=kotlin.Double operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aDouble: A<Double>' type=A<kotlin.Double> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              arg1: GET_VAR 'bDouble: Double' type=kotlin.Double operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed post-increment Double: '
+              CALL 'get(Int): Double' type=kotlin.Double operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aDouble: A<Double>' type=A<kotlin.Double> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              CONST String type=kotlin.String value=' != '
+              GET_VAR 'bDouble: Double' type=kotlin.Double operator=null
+        BLOCK type=kotlin.Double operator=POSTFIX_DECR
+          VAR val tmp44_array: A<kotlin.Double>
+            GET_VAR 'aDouble: A<Double>' type=A<kotlin.Double> operator=null
+          VAR val tmp45_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          VAR val tmp46: kotlin.Double
+            CALL 'get(Int): Double' type=kotlin.Double operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp44_array: A<Double>' type=A<kotlin.Double> operator=null
+              i: GET_VAR 'tmp45_index0: Int' type=kotlin.Int operator=null
+          CALL 'set(Int, Double): Unit' type=kotlin.Unit operator=POSTFIX_DECR
+            $this: GET_VAR 'tmp44_array: A<Double>' type=A<kotlin.Double> operator=null
+            i: GET_VAR 'tmp45_index0: Int' type=kotlin.Int operator=null
+            newValue: CALL 'dec(): Double' type=kotlin.Double operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp46: Double' type=kotlin.Double operator=null
+          GET_VAR 'tmp46: Double' type=kotlin.Double operator=null
+        BLOCK type=kotlin.Double operator=POSTFIX_DECR
+          VAR val tmp47: kotlin.Double
+            GET_VAR 'bDouble: Double' type=kotlin.Double operator=POSTFIX_DECR
+          SET_VAR 'bDouble: Double' type=kotlin.Unit operator=POSTFIX_DECR
+            CALL 'dec(): Double' type=kotlin.Double operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp47: Double' type=kotlin.Double operator=null
+          GET_VAR 'tmp47: Double' type=kotlin.Double operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Double' type=kotlin.Double operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aDouble: A<Double>' type=A<kotlin.Double> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              arg1: GET_VAR 'bDouble: Double' type=kotlin.Double operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed post-decrement Double: '
+              CALL 'get(Int): Double' type=kotlin.Double operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'aDouble: A<Double>' type=A<kotlin.Double> operator=null
+                i: CONST Int type=kotlin.Int value='0'
+              CONST String type=kotlin.String value=' != '
+              GET_VAR 'bDouble: Double' type=kotlin.Double operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

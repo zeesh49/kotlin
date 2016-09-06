@@ -1,0 +1,22 @@
+MODULE <test-module>
+  FILE /kt2151.kt
+    FUN public fun foo(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CONST Boolean type=kotlin.Boolean value='true'
+            then: BLOCK type=kotlin.String operator=null
+              VAR var x: kotlin.String
+                CONST String type=kotlin.String value='OK'
+              FUN local final fun foo(): kotlin.Unit
+                BLOCK_BODY
+                  SET_VAR 'x: String' type=kotlin.Unit operator=PLUSEQ
+                    CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                      $this: GET_VAR 'x: String' type=kotlin.String operator=PLUSEQ
+                      other: CONST String type=kotlin.String value='fail'
+              GET_VAR 'x: String' type=kotlin.String operator=null
+            else: CONST String type=kotlin.String value='fail'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(): String' type=kotlin.String operator=null

@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /syntheticAccessor.kt
+    CLASS OBJECT A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY private final val p: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+      CLASS OBJECT B
+        CONSTRUCTOR private constructor B()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='B'
+        PROPERTY public final val z: kotlin.String = "OK"
+          EXPRESSION_BODY
+            CALL '<get-p>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-z>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_OBJECT 'B' type=A.B

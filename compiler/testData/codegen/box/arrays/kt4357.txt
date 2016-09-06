@@ -1,0 +1,32 @@
+MODULE <test-module>
+  FILE /kt4357.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val array: kotlin.IntArray
+          CALL 'intArrayOf(vararg Int): IntArray' type=kotlin.IntArray operator=null
+            elements: VARARG type=IntArray varargElementType=Int
+              CONST Int type=kotlin.Int value='11'
+              CONST Int type=kotlin.Int value='12'
+              CONST Int type=kotlin.Int value='13'
+        VAR val p: kotlin.Int
+          CALL 'get(Int): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'array: IntArray' type=kotlin.IntArray operator=null
+            index: CONST Int type=kotlin.Int value='0'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'p: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='11'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              GET_VAR 'p: Int' type=kotlin.Int operator=null
+        VAR val stringArray: kotlin.Array<kotlin.String>
+          CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='OK'
+              CONST String type=kotlin.String value='FAIL'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'get(Int): String' type=kotlin.String operator=null
+            $this: GET_VAR 'stringArray: Array<String>' type=kotlin.Array<kotlin.String> operator=null
+            index: CONST Int type=kotlin.Int value='0'

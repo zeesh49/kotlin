@@ -1,0 +1,39 @@
+MODULE <test-module>
+  FILE /jvmStaticExternalPrivate.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      CLASS OBJECT companion object of C
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of C'
+        FUN @kotlin.jvm.JvmStatic private final external fun foo(): kotlin.Unit
+      FUN public final fun bar(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'foo(): Unit' type=kotlin.Unit operator=null
+            $this: THIS of 'companion object of C' type=C.Companion
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'bar(): Unit' type=kotlin.Unit operator=null
+              $this: CALL 'constructor C()' type=C operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Link error expected'
+          catch e: BLOCK type=kotlin.Unit operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                    $this: GET_VAR 'e: UnsatisfiedLinkError' type=java.lang.UnsatisfiedLinkError operator=null
+                  arg1: CONST String type=kotlin.String value='C.foo()V'
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: CONST String type=kotlin.String value='Fail 1: '
+                  other: CALL '<get-message>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                    $this: GET_VAR 'e: UnsatisfiedLinkError' type=java.lang.UnsatisfiedLinkError operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

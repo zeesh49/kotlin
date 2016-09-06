@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /longRangeWithExplicitDot.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val l: kotlin.Long = 1.toLong()
+          CONST Long type=kotlin.Long value='1'
+        VAR val l2: kotlin.Long = 2.toLong()
+          CONST Long type=kotlin.Long value='2'
+        VAR val r: kotlin.ranges.LongRange
+          CALL 'rangeTo(Long): LongRange' type=kotlin.ranges.LongRange operator=null
+            $this: GET_VAR 'l: Long' type=kotlin.Long operator=null
+            other: GET_VAR 'l2: Long' type=kotlin.Long operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL '<get-start>(): Long' type=kotlin.Long operator=GET_PROPERTY
+                  $this: GET_VAR 'r: LongRange' type=kotlin.ranges.LongRange operator=null
+                arg1: GET_VAR 'l: Long' type=kotlin.Long operator=null
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL '<get-endInclusive>(): Long' type=kotlin.Long operator=GET_PROPERTY
+                  $this: GET_VAR 'r: LongRange' type=kotlin.ranges.LongRange operator=null
+                arg1: GET_VAR 'l2: Long' type=kotlin.Long operator=null
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

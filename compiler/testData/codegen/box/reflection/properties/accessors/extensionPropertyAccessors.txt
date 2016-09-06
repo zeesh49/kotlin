@@ -1,0 +1,41 @@
+MODULE <test-module>
+  FILE /extensionPropertyAccessors.kt
+    PROPERTY public var state: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    PROPERTY public var kotlin.String.prop: kotlin.String
+      PROPERTY_GETTER public fun kotlin.String.<get-prop>(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-prop>() on String: String'
+            CALL 'toString(): String' type=kotlin.String operator=null
+              $this: CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: $RECEIVER of 'prop: String on String' type=kotlin.String
+      PROPERTY_SETTER public fun kotlin.String.<set-prop>(value: kotlin.String): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-state>(String): Unit' type=kotlin.Unit operator=EQ
+            <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: $RECEIVER of 'prop: String on String' type=kotlin.String
+              other: GET_VAR 'value-parameter value: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val prop: kotlin.reflect.KMutableProperty1<kotlin.String, kotlin.String>
+          CALLABLE_REFERENCE 'prop: String on String' type=kotlin.reflect.KMutableProperty1<kotlin.String, kotlin.String> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='3'
+          actual: CALL 'invoke(String): String' type=kotlin.String operator=null
+            $this: CALL '<get-getter>(): KProperty1.Getter<String, String>' type=kotlin.reflect.KProperty1.Getter<kotlin.String, kotlin.String> operator=GET_PROPERTY
+              $this: GET_VAR 'prop: KMutableProperty1<String, String>' type=kotlin.reflect.KMutableProperty1<kotlin.String, kotlin.String> operator=null
+            p1: CONST String type=kotlin.String value='abc'
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='5'
+          actual: CALL 'invoke(String): String' type=kotlin.String operator=INVOKE
+            $this: CALL '<get-getter>(): KProperty1.Getter<String, String>' type=kotlin.reflect.KProperty1.Getter<kotlin.String, kotlin.String> operator=GET_PROPERTY
+              $this: GET_VAR 'prop: KMutableProperty1<String, String>' type=kotlin.reflect.KMutableProperty1<kotlin.String, kotlin.String> operator=null
+            p1: CONST String type=kotlin.String value='defgh'
+        CALL 'invoke(String, String): Unit' type=kotlin.Unit operator=INVOKE
+          $this: CALL '<get-setter>(): KMutableProperty1.Setter<String, String>' type=kotlin.reflect.KMutableProperty1.Setter<kotlin.String, kotlin.String> operator=GET_PROPERTY
+            $this: GET_VAR 'prop: KMutableProperty1<String, String>' type=kotlin.reflect.KMutableProperty1<kotlin.String, kotlin.String> operator=null
+          p1: CONST String type=kotlin.String value='O'
+          p2: CONST String type=kotlin.String value='K'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-state>(): String' type=kotlin.String operator=GET_PROPERTY

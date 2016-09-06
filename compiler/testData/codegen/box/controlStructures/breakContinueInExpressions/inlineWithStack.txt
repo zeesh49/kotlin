@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /inlineWithStack.kt
+    FUN public inline fun bar(block: () -> kotlin.String): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='bar(() -> String): String'
+          CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+            $this: GET_VAR 'value-parameter block: () -> String' type=() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+    FUN public inline fun bar2(): kotlin.String
+      BLOCK_BODY
+        WHILE label=null operator=WHILE_LOOP
+          condition: CONST Boolean type=kotlin.Boolean value='true'
+          body: BREAK label=null loop.label=null depth=0
+        RETURN type=kotlin.Nothing from='bar2(): String'
+          CALL 'bar(() -> String): String' type=kotlin.String operator=null
+            block: BLOCK type=() -> kotlin.Nothing operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Nothing
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='bar2(): String'
+                    CONST String type=kotlin.String value='def'
+              CALLABLE_REFERENCE '<anonymous>(): Nothing' type=() -> kotlin.Nothing operator=LAMBDA
+    FUN public fun foobar(x: kotlin.String, y: kotlin.String, z: kotlin.String): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foobar(String, String, String): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: GET_VAR 'value-parameter x: String' type=kotlin.String operator=null
+              other: GET_VAR 'value-parameter y: String' type=kotlin.String operator=null
+            other: GET_VAR 'value-parameter z: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val test: kotlin.String
+          CALL 'foobar(String, String, String): String' type=kotlin.String operator=null
+            x: CONST String type=kotlin.String value='abc'
+            y: CALL 'bar2(): String' type=kotlin.String operator=null
+            z: CONST String type=kotlin.String value='ghi'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'test: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='abcdefghi'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed, test='
+              GET_VAR 'test: String' type=kotlin.String operator=null

@@ -1,0 +1,127 @@
+MODULE <test-module>
+  FILE /1.kt
+    FUN public fun testX(): kotlin.Unit
+      BLOCK_BODY
+        VAR val field: java.lang.reflect.Field
+          BLOCK type=java.lang.reflect.Field operator=ELVIS
+            VAR val tmp0_elvis_lhs: java.lang.reflect.Field?
+              CALL '<get-javaField>() on KProperty<*>: Field?' type=java.lang.reflect.Field? operator=GET_PROPERTY
+                $receiver: CALLABLE_REFERENCE 'x: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+            WHEN type=java.lang.reflect.Field operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_elvis_lhs: Field?' type=java.lang.reflect.Field? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: THROW type=kotlin.Nothing
+                CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                  p0: STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='No java field for '
+                    CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                      $this: CALLABLE_REFERENCE 'x: String' type=kotlin.reflect.KMutableProperty0<kotlin.String> operator=null
+              else: GET_VAR 'tmp0_elvis_lhs: Field?' type=java.lang.reflect.Field? operator=null
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'get(Any!): Any!' type=kotlin.Any! operator=null
+              $this: GET_VAR 'field: Field' type=java.lang.reflect.Field operator=null
+              p0: CONST Null type=kotlin.Nothing? value='null'
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: CONST String type=kotlin.String value='Fail: field.get should fail because the field is private'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        CALL 'setAccessible(Boolean): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'field: Field' type=java.lang.reflect.Field operator=null
+          p0: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'assertEquals(Any!, Any!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='I am x'
+          actual: CALL 'get(Any!): Any!' type=kotlin.Any! operator=null
+            $this: GET_VAR 'field: Field' type=java.lang.reflect.Field operator=null
+            p0: CONST Null type=kotlin.Nothing? value='null'
+        CALL 'set(Any!, Any!): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'field: Field' type=java.lang.reflect.Field operator=null
+          p0: CONST Null type=kotlin.Nothing? value='null'
+          p1: CONST String type=kotlin.String value='OK'
+    FUN public fun testY(): kotlin.Unit
+      BLOCK_BODY
+        VAR val field: java.lang.reflect.Field
+          BLOCK type=java.lang.reflect.Field operator=ELVIS
+            VAR val tmp0_elvis_lhs: java.lang.reflect.Field?
+              CALL '<get-javaField>() on KProperty<*>: Field?' type=java.lang.reflect.Field? operator=GET_PROPERTY
+                $receiver: CALLABLE_REFERENCE 'y: String' type=kotlin.reflect.KProperty0<kotlin.String> operator=null
+            WHEN type=java.lang.reflect.Field operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_elvis_lhs: Field?' type=java.lang.reflect.Field? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: THROW type=kotlin.Nothing
+                CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                  p0: STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='No java field for '
+                    CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                      $this: CALLABLE_REFERENCE 'y: String' type=kotlin.reflect.KProperty0<kotlin.String> operator=null
+              else: GET_VAR 'tmp0_elvis_lhs: Field?' type=java.lang.reflect.Field? operator=null
+        CALL 'assertEquals(Any!, Any!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='I am const y'
+          actual: CALL 'get(Any!): Any!' type=kotlin.Any! operator=null
+            $this: GET_VAR 'field: Field' type=java.lang.reflect.Field operator=null
+            p0: CONST Null type=kotlin.Nothing? value='null'
+        CALL 'setAccessible(Boolean): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'field: Field' type=java.lang.reflect.Field operator=null
+          p0: CONST Boolean type=kotlin.Boolean value='false'
+        CALL 'assertEquals(Any!, Any!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='I am const y'
+          actual: CALL 'get(Any!): Any!' type=kotlin.Any! operator=null
+            $this: GET_VAR 'field: Field' type=java.lang.reflect.Field operator=null
+            p0: CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun testZ(): kotlin.Unit
+      BLOCK_BODY
+        VAR val field: java.lang.reflect.Field
+          BLOCK type=java.lang.reflect.Field operator=ELVIS
+            VAR val tmp0_elvis_lhs: java.lang.reflect.Field?
+              CALL '<get-javaField>() on KProperty<*>: Field?' type=java.lang.reflect.Field? operator=GET_PROPERTY
+                $receiver: CALL '<get-refZ>(): KProperty0<String>' type=kotlin.reflect.KProperty0<kotlin.String> operator=GET_PROPERTY
+            WHEN type=java.lang.reflect.Field operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_elvis_lhs: Field?' type=java.lang.reflect.Field? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: THROW type=kotlin.Nothing
+                CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                  p0: STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='No java field for '
+                    CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                      $this: CALL '<get-refZ>(): KProperty0<String>' type=kotlin.reflect.KProperty0<kotlin.String> operator=GET_PROPERTY
+              else: GET_VAR 'tmp0_elvis_lhs: Field?' type=java.lang.reflect.Field? operator=null
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'get(Any!): Any!' type=kotlin.Any! operator=null
+              $this: GET_VAR 'field: Field' type=java.lang.reflect.Field operator=null
+              p0: CONST Null type=kotlin.Nothing? value='null'
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: CONST String type=kotlin.String value='IllegalAccessError expected'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        CALL 'setAccessible(Boolean): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'field: Field' type=java.lang.reflect.Field operator=null
+          p0: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'assertEquals(Any!, Any!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='I am private const val Z'
+          actual: CALL 'get(Any!): Any!' type=kotlin.Any! operator=null
+            $this: GET_VAR 'field: Field' type=java.lang.reflect.Field operator=null
+            p0: CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'testX(): Unit' type=kotlin.Unit operator=null
+        CALL 'testY(): Unit' type=kotlin.Unit operator=null
+        CALL 'testZ(): Unit' type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-x>(): String' type=kotlin.String operator=GET_PROPERTY
+  FILE /2.kt
+    PROPERTY public var x: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='I am x'
+    PROPERTY public const val y: kotlin.String = "I am const y"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='I am const y'
+    PROPERTY private const val z: kotlin.String = "I am private const val Z"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='I am private const val Z'
+    PROPERTY public val refZ: kotlin.reflect.KProperty0<kotlin.String>
+      EXPRESSION_BODY
+        CALLABLE_REFERENCE 'z: String' type=kotlin.reflect.KProperty0<kotlin.String> operator=null

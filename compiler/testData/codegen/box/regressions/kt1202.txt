@@ -1,0 +1,415 @@
+MODULE <test-module>
+  FILE /kt1202.kt
+    CLASS INTERFACE Expression
+    CLASS CLASS Num
+      CONSTRUCTOR public constructor Num(value: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'value: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'Num' type=testeval.Num
+            value: GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Num'
+      PROPERTY public final val value: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS Sum
+      CONSTRUCTOR public constructor Sum(left: testeval.Expression, right: testeval.Expression)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'left: Expression' type=kotlin.Unit operator=null
+            receiver: THIS of 'Sum' type=testeval.Sum
+            value: GET_VAR 'value-parameter left: Expression' type=testeval.Expression operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'right: Expression' type=kotlin.Unit operator=null
+            receiver: THIS of 'Sum' type=testeval.Sum
+            value: GET_VAR 'value-parameter right: Expression' type=testeval.Expression operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Sum'
+      PROPERTY public final val left: testeval.Expression
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter left: Expression' type=testeval.Expression operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val right: testeval.Expression
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter right: Expression' type=testeval.Expression operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS Mult
+      CONSTRUCTOR public constructor Mult(left: testeval.Expression, right: testeval.Expression)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'left: Expression' type=kotlin.Unit operator=null
+            receiver: THIS of 'Mult' type=testeval.Mult
+            value: GET_VAR 'value-parameter left: Expression' type=testeval.Expression operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'right: Expression' type=kotlin.Unit operator=null
+            receiver: THIS of 'Mult' type=testeval.Mult
+            value: GET_VAR 'value-parameter right: Expression' type=testeval.Expression operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Mult'
+      PROPERTY public final val left: testeval.Expression
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter left: Expression' type=testeval.Expression operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val right: testeval.Expression
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter right: Expression' type=testeval.Expression operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun eval(e: testeval.Expression): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='eval(Expression): Int'
+          BLOCK type=kotlin.Int operator=WHEN
+            VAR val tmp0_subject: testeval.Expression
+              GET_VAR 'value-parameter e: Expression' type=testeval.Expression operator=null
+            WHEN type=kotlin.Int operator=WHEN
+              if: TYPE_OP operator=INSTANCEOF typeOperand=testeval.Num
+                GET_VAR 'tmp0_subject: Expression' type=testeval.Expression operator=null
+              then: CALL '<get-value>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=testeval.Num
+                  GET_VAR 'value-parameter e: Expression' type=testeval.Expression operator=null
+              if: TYPE_OP operator=INSTANCEOF typeOperand=testeval.Sum
+                GET_VAR 'tmp0_subject: Expression' type=testeval.Expression operator=null
+              then: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CALL 'eval(Expression): Int' type=kotlin.Int operator=null
+                  e: CALL '<get-left>(): Expression' type=testeval.Expression operator=GET_PROPERTY
+                    $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=testeval.Sum
+                      GET_VAR 'value-parameter e: Expression' type=testeval.Expression operator=null
+                other: CALL 'eval(Expression): Int' type=kotlin.Int operator=null
+                  e: CALL '<get-right>(): Expression' type=testeval.Expression operator=GET_PROPERTY
+                    $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=testeval.Sum
+                      GET_VAR 'value-parameter e: Expression' type=testeval.Expression operator=null
+              if: TYPE_OP operator=INSTANCEOF typeOperand=testeval.Mult
+                GET_VAR 'tmp0_subject: Expression' type=testeval.Expression operator=null
+              then: CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                $this: CALL 'eval(Expression): Int' type=kotlin.Int operator=null
+                  e: CALL '<get-left>(): Expression' type=testeval.Expression operator=GET_PROPERTY
+                    $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=testeval.Mult
+                      GET_VAR 'value-parameter e: Expression' type=testeval.Expression operator=null
+                other: CALL 'eval(Expression): Int' type=kotlin.Int operator=null
+                  e: CALL '<get-right>(): Expression' type=testeval.Expression operator=GET_PROPERTY
+                    $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=testeval.Mult
+                      GET_VAR 'value-parameter e: Expression' type=testeval.Expression operator=null
+              else: THROW type=kotlin.Nothing
+                CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                  p0: CONST String type=kotlin.String value='Unknown expression'
+    CLASS INTERFACE ParseResult
+      PROPERTY public abstract val success: kotlin.Boolean
+      PROPERTY public abstract val value: T
+    CLASS CLASS Success
+      CONSTRUCTOR public constructor Success<T>(value: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'value: T' type=kotlin.Unit operator=null
+            receiver: THIS of 'Success' type=testeval.Success<T>
+            value: GET_VAR 'value-parameter value: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Success'
+      PROPERTY public open override val value: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public open override val success: kotlin.Boolean = true
+        EXPRESSION_BODY
+          CONST Boolean type=kotlin.Boolean value='true'
+    CLASS CLASS Failure
+      CONSTRUCTOR public constructor Failure(message: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'message: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Failure' type=testeval.Failure
+            value: GET_VAR 'value-parameter message: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Failure'
+      PROPERTY public final val message: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter message: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public open override val success: kotlin.Boolean = false
+        EXPRESSION_BODY
+          CONST Boolean type=kotlin.Boolean value='false'
+      PROPERTY public open override val value: kotlin.Nothing
+        EXPRESSION_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException(String!)' type=java.lang.UnsupportedOperationException operator=null
+              p0: CONST String type=kotlin.String value='Don't call value on a Failure'
+    CLASS CLASS Token
+      CONSTRUCTOR public constructor Token(text: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'text: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Token' type=testeval.Token
+            value: GET_VAR 'value-parameter text: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Token'
+      PROPERTY public final val text: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter text: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public open override fun toString(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='toString(): String'
+            CALL '<get-text>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'Token' type=testeval.Token
+    CLASS OBJECT LPAR
+      CONSTRUCTOR private constructor LPAR()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Token(String)'
+            text: CONST String type=kotlin.String value='('
+          INSTANCE_INITIALIZER_CALL classDescriptor='LPAR'
+    CLASS OBJECT RPAR
+      CONSTRUCTOR private constructor RPAR()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Token(String)'
+            text: CONST String type=kotlin.String value=')'
+          INSTANCE_INITIALIZER_CALL classDescriptor='RPAR'
+    CLASS OBJECT PLUS
+      CONSTRUCTOR private constructor PLUS()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Token(String)'
+            text: CONST String type=kotlin.String value='+'
+          INSTANCE_INITIALIZER_CALL classDescriptor='PLUS'
+    CLASS OBJECT TIMES
+      CONSTRUCTOR private constructor TIMES()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Token(String)'
+            text: CONST String type=kotlin.String value='*'
+          INSTANCE_INITIALIZER_CALL classDescriptor='TIMES'
+    CLASS OBJECT EOF
+      CONSTRUCTOR private constructor EOF()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Token(String)'
+            text: CONST String type=kotlin.String value='EOF'
+          INSTANCE_INITIALIZER_CALL classDescriptor='EOF'
+    CLASS CLASS Number
+      CONSTRUCTOR public constructor Number(text: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Token(String)'
+            text: GET_VAR 'value-parameter text: String' type=kotlin.String operator=null
+          INSTANCE_INITIALIZER_CALL classDescriptor='Number'
+    CLASS CLASS Error
+      CONSTRUCTOR public constructor Error(text: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Token(String)'
+            text: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='[Error: '
+              GET_VAR 'value-parameter text: String' type=kotlin.String operator=null
+              CONST String type=kotlin.String value=']'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Error'
+    FUN public fun tokenize(text: kotlin.String): java.util.Deque<testeval.Token>
+      BLOCK_BODY
+        VAR val result: java.util.LinkedList<testeval.Token>
+          CALL 'constructor LinkedList()' type=java.util.LinkedList<testeval.Token> operator=null
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.CharIterator
+            CALL 'iterator() on CharSequence: CharIterator' type=kotlin.collections.CharIterator operator=FOR_LOOP_ITERATOR
+              $receiver: GET_VAR 'value-parameter text: String' type=kotlin.String operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: CharIterator' type=kotlin.collections.CharIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val c: kotlin.Char
+                CALL 'next(): Char' type=kotlin.Char operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: CharIterator' type=kotlin.collections.CharIterator operator=null
+              BLOCK type=kotlin.Boolean operator=null
+                CALL 'add(Token): Boolean' type=kotlin.Boolean operator=null
+                  $this: GET_VAR 'result: LinkedList<Token>' type=java.util.LinkedList<testeval.Token> operator=null
+                  element: BLOCK type=testeval.Token operator=WHEN
+                    VAR val tmp1_subject: kotlin.Char
+                      GET_VAR 'c: Char' type=kotlin.Char operator=null
+                    WHEN type=testeval.Token operator=WHEN
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'tmp1_subject: Char' type=kotlin.Char operator=null
+                        arg1: CONST Char type=kotlin.Char value='('
+                      then: GET_OBJECT 'LPAR' type=testeval.LPAR
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'tmp1_subject: Char' type=kotlin.Char operator=null
+                        arg1: CONST Char type=kotlin.Char value=')'
+                      then: GET_OBJECT 'RPAR' type=testeval.RPAR
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'tmp1_subject: Char' type=kotlin.Char operator=null
+                        arg1: CONST Char type=kotlin.Char value='+'
+                      then: GET_OBJECT 'PLUS' type=testeval.PLUS
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'tmp1_subject: Char' type=kotlin.Char operator=null
+                        arg1: CONST Char type=kotlin.Char value='*'
+                      then: GET_OBJECT 'TIMES' type=testeval.TIMES
+                      if: CALL 'contains(Char): Boolean' type=kotlin.Boolean operator=IN
+                        $this: CALL 'rangeTo(Char): CharRange' type=kotlin.ranges.CharRange operator=RANGE
+                          $this: CONST Char type=kotlin.Char value='0'
+                          other: CONST Char type=kotlin.Char value='9'
+                        value: GET_VAR 'tmp1_subject: Char' type=kotlin.Char operator=null
+                      then: CALL 'constructor Number(String)' type=testeval.Number operator=null
+                        text: CALL 'toString(): String' type=kotlin.String operator=null
+                          $this: GET_VAR 'c: Char' type=kotlin.Char operator=null
+                      else: CALL 'constructor Error(String)' type=testeval.Error operator=null
+                        text: CALL 'toString(): String' type=kotlin.String operator=null
+                          $this: GET_VAR 'c: Char' type=kotlin.Char operator=null
+        CALL 'add(Token): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'result: LinkedList<Token>' type=java.util.LinkedList<testeval.Token> operator=null
+          element: GET_OBJECT 'EOF' type=testeval.EOF
+        RETURN type=kotlin.Nothing from='tokenize(String): Deque<Token>'
+          GET_VAR 'result: LinkedList<Token>' type=java.util.LinkedList<testeval.Token> operator=null
+    FUN public fun parseSum(tokens: java.util.Deque<testeval.Token>): testeval.ParseResult<testeval.Expression>
+      BLOCK_BODY
+        VAR val left: testeval.ParseResult<testeval.Expression>
+          CALL 'parseMult(Deque<Token>): ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+            tokens: GET_VAR 'value-parameter tokens: Deque<Token>' type=java.util.Deque<testeval.Token> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL '<get-success>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+              $this: GET_VAR 'left: ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+          then: RETURN type=kotlin.Nothing from='parseSum(Deque<Token>): ParseResult<Expression>'
+            GET_VAR 'left: ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'peek(): Token!' type=testeval.Token! operator=null
+              $this: GET_VAR 'value-parameter tokens: Deque<Token>' type=java.util.Deque<testeval.Token> operator=null
+            arg1: GET_OBJECT 'PLUS' type=testeval.PLUS
+          then: BLOCK type=kotlin.Nothing operator=null
+            CALL 'pop(): Token!' type=testeval.Token! operator=null
+              $this: GET_VAR 'value-parameter tokens: Deque<Token>' type=java.util.Deque<testeval.Token> operator=null
+            VAR val right: testeval.ParseResult<testeval.Expression>
+              CALL 'parseSum(Deque<Token>): ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+                tokens: GET_VAR 'value-parameter tokens: Deque<Token>' type=java.util.Deque<testeval.Token> operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+                $this: CALL '<get-success>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+                  $this: GET_VAR 'right: ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+              then: RETURN type=kotlin.Nothing from='parseSum(Deque<Token>): ParseResult<Expression>'
+                GET_VAR 'right: ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+            RETURN type=kotlin.Nothing from='parseSum(Deque<Token>): ParseResult<Expression>'
+              CALL 'constructor Success(Sum)' type=testeval.Success<testeval.Sum> operator=null
+                value: CALL 'constructor Sum(Expression, Expression)' type=testeval.Sum operator=null
+                  left: CALL '<get-value>(): Expression' type=testeval.Expression operator=GET_PROPERTY
+                    $this: GET_VAR 'left: ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+                  right: CALL '<get-value>(): Expression' type=testeval.Expression operator=GET_PROPERTY
+                    $this: GET_VAR 'right: ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+        RETURN type=kotlin.Nothing from='parseSum(Deque<Token>): ParseResult<Expression>'
+          GET_VAR 'left: ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+    FUN public fun parseMult(tokens: java.util.Deque<testeval.Token>): testeval.ParseResult<testeval.Expression>
+      BLOCK_BODY
+        VAR val left: testeval.ParseResult<testeval.Expression>
+          CALL 'parseAtomic(Deque<Token>): ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+            tokens: GET_VAR 'value-parameter tokens: Deque<Token>' type=java.util.Deque<testeval.Token> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL '<get-success>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+              $this: GET_VAR 'left: ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+          then: RETURN type=kotlin.Nothing from='parseMult(Deque<Token>): ParseResult<Expression>'
+            GET_VAR 'left: ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'peek(): Token!' type=testeval.Token! operator=null
+              $this: GET_VAR 'value-parameter tokens: Deque<Token>' type=java.util.Deque<testeval.Token> operator=null
+            arg1: GET_OBJECT 'PLUS' type=testeval.PLUS
+          then: BLOCK type=kotlin.Nothing operator=null
+            CALL 'pop(): Token!' type=testeval.Token! operator=null
+              $this: GET_VAR 'value-parameter tokens: Deque<Token>' type=java.util.Deque<testeval.Token> operator=null
+            VAR val right: testeval.ParseResult<testeval.Expression>
+              CALL 'parseMult(Deque<Token>): ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+                tokens: GET_VAR 'value-parameter tokens: Deque<Token>' type=java.util.Deque<testeval.Token> operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+                $this: CALL '<get-success>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+                  $this: GET_VAR 'right: ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+              then: RETURN type=kotlin.Nothing from='parseMult(Deque<Token>): ParseResult<Expression>'
+                GET_VAR 'right: ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+            RETURN type=kotlin.Nothing from='parseMult(Deque<Token>): ParseResult<Expression>'
+              CALL 'constructor Success(Mult)' type=testeval.Success<testeval.Mult> operator=null
+                value: CALL 'constructor Mult(Expression, Expression)' type=testeval.Mult operator=null
+                  left: CALL '<get-value>(): Expression' type=testeval.Expression operator=GET_PROPERTY
+                    $this: GET_VAR 'left: ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+                  right: CALL '<get-value>(): Expression' type=testeval.Expression operator=GET_PROPERTY
+                    $this: GET_VAR 'right: ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+        RETURN type=kotlin.Nothing from='parseMult(Deque<Token>): ParseResult<Expression>'
+          GET_VAR 'left: ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+    FUN public fun parseAtomic(tokens: java.util.Deque<testeval.Token>): testeval.ParseResult<testeval.Expression>
+      BLOCK_BODY
+        VAR val token: testeval.Token!
+          CALL 'poll(): Token!' type=testeval.Token! operator=null
+            $this: GET_VAR 'value-parameter tokens: Deque<Token>' type=java.util.Deque<testeval.Token> operator=null
+        RETURN type=kotlin.Nothing from='parseAtomic(Deque<Token>): ParseResult<Expression>'
+          BLOCK type=testeval.ParseResult<testeval.Expression> operator=WHEN
+            VAR val tmp0_subject: testeval.Token!
+              GET_VAR 'token: Token!' type=testeval.Token! operator=null
+            WHEN type=testeval.ParseResult<testeval.Expression> operator=WHEN
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Token!' type=testeval.Token! operator=null
+                arg1: GET_OBJECT 'LPAR' type=testeval.LPAR
+              then: BLOCK type=testeval.ParseResult<testeval.Expression> operator=null
+                VAR val result: testeval.ParseResult<testeval.Expression>
+                  CALL 'parseSum(Deque<Token>): ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+                    tokens: GET_VAR 'value-parameter tokens: Deque<Token>' type=java.util.Deque<testeval.Token> operator=null
+                VAR val rpar: testeval.Token!
+                  CALL 'poll(): Token!' type=testeval.Token! operator=null
+                    $this: GET_VAR 'value-parameter tokens: Deque<Token>' type=java.util.Deque<testeval.Token> operator=null
+                WHEN type=testeval.ParseResult<testeval.Expression> operator=IF
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'rpar: Token!' type=testeval.Token! operator=null
+                    arg1: GET_OBJECT 'RPAR' type=testeval.RPAR
+                  then: GET_VAR 'result: ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+                  else: CALL 'constructor Failure(String)' type=testeval.Failure operator=null
+                    message: CONST String type=kotlin.String value='Expecting ')''
+              if: TYPE_OP operator=INSTANCEOF typeOperand=testeval.Number
+                GET_VAR 'tmp0_subject: Token!' type=testeval.Token! operator=null
+              then: CALL 'constructor Success(Num)' type=testeval.Success<testeval.Num> operator=null
+                value: CALL 'constructor Num(Int)' type=testeval.Num operator=null
+                  value: CALL 'parseInt(String!): Int' type=kotlin.Int operator=null
+                    p0: CALL '<get-text>(): String' type=kotlin.String operator=GET_PROPERTY
+                      $this: TYPE_OP operator=CAST typeOperand=testeval.Token
+                        GET_VAR 'token: Token!' type=testeval.Token! operator=null
+              else: CALL 'constructor Failure(String)' type=testeval.Failure operator=null
+                message: CONST String type=kotlin.String value='Unexpected EOF'
+    FUN public fun parse(text: kotlin.String): testeval.ParseResult<testeval.Expression>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='parse(String): ParseResult<Expression>'
+          CALL 'parseSum(Deque<Token>): ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+            tokens: CALL 'tokenize(String): Deque<Token>' type=java.util.Deque<testeval.Token> operator=null
+              text: GET_VAR 'value-parameter text: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CONST Int type=kotlin.Int value='1'
+              arg1: CALL 'eval(Expression): Int' type=kotlin.Int operator=null
+                e: CALL 'constructor Num(Int)' type=testeval.Num operator=null
+                  value: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CONST Int type=kotlin.Int value='2'
+              arg1: CALL 'eval(Expression): Int' type=kotlin.Int operator=null
+                e: CALL 'constructor Sum(Expression, Expression)' type=testeval.Sum operator=null
+                  left: CALL 'constructor Num(Int)' type=testeval.Num operator=null
+                    value: CONST Int type=kotlin.Int value='1'
+                  right: CALL 'constructor Num(Int)' type=testeval.Num operator=null
+                    value: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CONST Int type=kotlin.Int value='3'
+              arg1: CALL 'eval(Expression): Int' type=kotlin.Int operator=null
+                e: CALL 'constructor Mult(Expression, Expression)' type=testeval.Mult operator=null
+                  left: CALL 'constructor Num(Int)' type=testeval.Num operator=null
+                    value: CONST Int type=kotlin.Int value='3'
+                  right: CALL 'constructor Num(Int)' type=testeval.Num operator=null
+                    value: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CONST Int type=kotlin.Int value='6'
+              arg1: CALL 'eval(Expression): Int' type=kotlin.Int operator=null
+                e: CALL 'constructor Mult(Expression, Expression)' type=testeval.Mult operator=null
+                  left: CALL 'constructor Num(Int)' type=testeval.Num operator=null
+                    value: CONST Int type=kotlin.Int value='3'
+                  right: CALL 'constructor Sum(Expression, Expression)' type=testeval.Sum operator=null
+                    left: CALL 'constructor Num(Int)' type=testeval.Num operator=null
+                      value: CONST Int type=kotlin.Int value='1'
+                    right: CALL 'constructor Num(Int)' type=testeval.Num operator=null
+                      value: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CONST Int type=kotlin.Int value='1'
+              arg1: CALL 'eval(Expression): Int' type=kotlin.Int operator=null
+                e: CALL '<get-value>(): Expression' type=testeval.Expression operator=GET_PROPERTY
+                  $this: CALL 'parse(String): ParseResult<Expression>' type=testeval.ParseResult<testeval.Expression> operator=null
+                    text: CONST String type=kotlin.String value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 5'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

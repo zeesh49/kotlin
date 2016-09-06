@@ -1,0 +1,149 @@
+MODULE <test-module>
+  FILE /varargInAnnotationParameter.kt
+    CLASS ANNOTATION_CLASS Ann
+      PROPERTY public final val p: kotlin.IntArray
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter vararg p: Int' type=kotlin.IntArray operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS MyClass1
+      CONSTRUCTOR public constructor MyClass1()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyClass1'
+    CLASS CLASS MyClass2
+      CONSTRUCTOR public constructor MyClass2()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyClass2'
+    CLASS CLASS MyClass3
+      CONSTRUCTOR public constructor MyClass3()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyClass3'
+    CLASS CLASS MyClass4
+      CONSTRUCTOR public constructor MyClass4()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyClass4'
+    CLASS CLASS MyClass5
+      CONSTRUCTOR public constructor MyClass5()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyClass5'
+    CLASS CLASS MyClass6
+      CONSTRUCTOR public constructor MyClass6()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyClass6'
+    CLASS CLASS MyClass7
+      CONSTRUCTOR public constructor MyClass7()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyClass7'
+    CLASS CLASS MyClass8
+      CONSTRUCTOR public constructor MyClass8()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyClass8'
+    CLASS CLASS MyClass9
+      CONSTRUCTOR public constructor MyClass9()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyClass9'
+    CLASS CLASS MyClass10
+      CONSTRUCTOR public constructor MyClass10()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyClass10'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'test(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          klass: CALL '<get-java>() on KClass<MyClass1>: Class<MyClass1>' type=java.lang.Class<MyClass1> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'MyClass1' type=kotlin.reflect.KClass<MyClass1>
+          expected: CONST String type=kotlin.String value=''
+        CALL 'test(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          klass: CALL '<get-java>() on KClass<MyClass2>: Class<MyClass2>' type=java.lang.Class<MyClass2> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'MyClass2' type=kotlin.reflect.KClass<MyClass2>
+          expected: CONST String type=kotlin.String value='1'
+        CALL 'test(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          klass: CALL '<get-java>() on KClass<MyClass3>: Class<MyClass3>' type=java.lang.Class<MyClass3> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'MyClass3' type=kotlin.reflect.KClass<MyClass3>
+          expected: CONST String type=kotlin.String value='12'
+        CALL 'test(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          klass: CALL '<get-java>() on KClass<MyClass4>: Class<MyClass4>' type=java.lang.Class<MyClass4> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'MyClass4' type=kotlin.reflect.KClass<MyClass4>
+          expected: CONST String type=kotlin.String value=''
+        CALL 'test(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          klass: CALL '<get-java>() on KClass<MyClass5>: Class<MyClass5>' type=java.lang.Class<MyClass5> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'MyClass5' type=kotlin.reflect.KClass<MyClass5>
+          expected: CONST String type=kotlin.String value='1'
+        CALL 'test(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          klass: CALL '<get-java>() on KClass<MyClass6>: Class<MyClass6>' type=java.lang.Class<MyClass6> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'MyClass6' type=kotlin.reflect.KClass<MyClass6>
+          expected: CONST String type=kotlin.String value='12'
+        CALL 'test(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          klass: CALL '<get-java>() on KClass<MyClass7>: Class<MyClass7>' type=java.lang.Class<MyClass7> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'MyClass7' type=kotlin.reflect.KClass<MyClass7>
+          expected: CONST String type=kotlin.String value='1'
+        CALL 'test(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          klass: CALL '<get-java>() on KClass<MyClass8>: Class<MyClass8>' type=java.lang.Class<MyClass8> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'MyClass8' type=kotlin.reflect.KClass<MyClass8>
+          expected: CONST String type=kotlin.String value=''
+        CALL 'test(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          klass: CALL '<get-java>() on KClass<MyClass9>: Class<MyClass9>' type=java.lang.Class<MyClass9> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'MyClass9' type=kotlin.reflect.KClass<MyClass9>
+          expected: CONST String type=kotlin.String value='1'
+        CALL 'test(Class<*>, String): Unit' type=kotlin.Unit operator=null
+          klass: CALL '<get-java>() on KClass<MyClass10>: Class<MyClass10>' type=java.lang.Class<MyClass10> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'MyClass10' type=kotlin.reflect.KClass<MyClass10>
+          expected: CONST String type=kotlin.String value='12'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun test(klass: java.lang.Class<*>, expected: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        VAR val ann: Ann!
+          CALL 'getAnnotation(Class<Ann!>!): Ann!' type=Ann! operator=null
+            $this: GET_VAR 'value-parameter klass: Class<*>' type=java.lang.Class<*> operator=null
+            p0: CALL '<get-java>() on KClass<Ann>: Class<Ann>' type=java.lang.Class<Ann> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'Ann' type=kotlin.reflect.KClass<Ann>
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'ann: Ann!' type=Ann! operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: THROW type=kotlin.Nothing
+            CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+              p0: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='fail: cannot find Ann on '
+                GET_VAR 'value-parameter klass: Class<*>' type=java.lang.Class<*> operator=null
+        VAR var result: kotlin.String
+          CONST String type=kotlin.String value=''
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: CALL '<get-p>(): IntArray' type=kotlin.IntArray operator=GET_PROPERTY
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=Ann
+                  GET_VAR 'ann: Ann!' type=Ann! operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'result: String' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 'result: String' type=kotlin.String operator=PLUSEQ
+                    other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: String' type=kotlin.String operator=null
+              arg1: GET_VAR 'value-parameter expected: String' type=kotlin.String operator=null
+          then: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='fail: expected = '
+                  GET_VAR 'value-parameter expected: String' type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=', actual = '
+                  GET_VAR 'result: String' type=kotlin.String operator=null

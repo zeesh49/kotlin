@@ -1,0 +1,67 @@
+MODULE <test-module>
+  FILE /forLoopMemberExtensionAll.kt
+    CLASS CLASS It
+      CONSTRUCTOR public constructor It()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='It'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+    CLASS CLASS X
+      CONSTRUCTOR public constructor X()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='X'
+      PROPERTY public final var hasNext: kotlin.Boolean
+        EXPRESSION_BODY
+          CONST Boolean type=kotlin.Boolean value='true'
+      FUN public final operator fun It.hasNext(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='hasNext() on It: Boolean'
+            WHEN type=kotlin.Boolean operator=IF
+              if: CALL '<get-hasNext>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+                $this: THIS of 'X' type=X
+              then: BLOCK type=kotlin.Boolean operator=null
+                CALL '<set-hasNext>(Boolean): Unit' type=kotlin.Unit operator=EQ
+                  $this: THIS of 'X' type=X
+                  <set-?>: CONST Boolean type=kotlin.Boolean value='false'
+                CONST Boolean type=kotlin.Boolean value='true'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+      FUN public final operator fun It.next(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='next() on It: Int'
+            CONST Int type=kotlin.Int value='5'
+      FUN public final operator fun C.iterator(): It
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='iterator() on C: It'
+            CALL 'constructor It()' type=It operator=null
+      FUN public final fun test(): kotlin.Unit
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=FOR_LOOP
+            VAR val tmp0_iterator: It
+              CALL 'iterator() on C: It' type=It operator=FOR_LOOP_ITERATOR
+                $this: THIS of 'X' type=X
+                $receiver: CALL 'constructor C()' type=C operator=null
+            WHILE label=null operator=FOR_LOOP_INNER_WHILE
+              condition: CALL 'hasNext() on It: Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+                $this: THIS of 'X' type=X
+                $receiver: GET_VAR 'tmp0_iterator: It' type=It operator=null
+              body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+                VAR val i: kotlin.Int
+                  CALL 'next() on It: Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                    $this: THIS of 'X' type=X
+                    $receiver: GET_VAR 'tmp0_iterator: It' type=It operator=null
+                BLOCK type=kotlin.Unit operator=null
+                  CALL 'foo(Int): Unit' type=kotlin.Unit operator=null
+                    x: GET_VAR 'i: Int' type=kotlin.Int operator=null
+    FUN public fun foo(x: kotlin.Int): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'test(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor X()' type=X operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

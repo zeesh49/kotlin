@@ -1,0 +1,22 @@
+MODULE <test-module>
+  FILE /kt12891.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        LOCAL_DELEGATED_PROPERTY val x: kotlin.String
+          VAR val `x$delegate`: kotlin.Lazy<kotlin.String>
+            CALL 'lazy(() -> String): Lazy<String>' type=kotlin.Lazy<kotlin.String> operator=null
+              initializer: BLOCK type=() -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                      CONST String type=kotlin.String value='OK'
+                CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+          LOCAL_PROPERTY_ACCESSOR <get-x>(): String
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<get-x>(): String'
+                CALL 'getValue(Any?, KProperty<*>) on Lazy<String>: String' type=kotlin.String operator=null
+                  $receiver: GET_VAR '`x$delegate`: Lazy<String>' type=kotlin.Lazy<kotlin.String> operator=null
+                  thisRef: CONST Null type=kotlin.Nothing? value='null'
+                  property: CALLABLE_REFERENCE 'x: String' type=kotlin.reflect.KProperty0<kotlin.String> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-x>(): String' type=kotlin.String operator=GET_LOCAL_PROPERTY

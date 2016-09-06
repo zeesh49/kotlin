@@ -1,0 +1,98 @@
+MODULE <test-module>
+  FILE /strListContains.kt
+    CLASS CLASS StrList
+      CONSTRUCTOR public constructor StrList()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='StrList'
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            THROW type=kotlin.Nothing
+              CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun contains(o: kotlin.String?): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='contains(String?): Boolean'
+            WHEN type=kotlin.Boolean operator=OROR
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'value-parameter o: String?' type=kotlin.String? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CONST Boolean type=kotlin.Boolean value='true'
+              else: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'value-parameter o: String?' type=kotlin.String? operator=null
+                arg1: CONST String type=kotlin.String value='abc'
+      FUN public open override fun iterator(): kotlin.collections.Iterator<kotlin.String>
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun containsAll(c: kotlin.collections.Collection<kotlin.String?>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsAll(Collection<String?>): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+      FUN public open override fun get(index: kotlin.Int): kotlin.String
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun indexOf(o: kotlin.String?): kotlin.Int
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun lastIndexOf(o: kotlin.String?): kotlin.Int
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun listIterator(): kotlin.collections.ListIterator<kotlin.String?>
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun listIterator(index: kotlin.Int): kotlin.collections.ListIterator<kotlin.String?>
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun subList(fromIndex: kotlin.Int, toIndex: kotlin.Int): kotlin.collections.List<kotlin.String?>
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+    FUN public fun <E> kotlin.collections.Collection<E>.forceContains(x: kotlin.Any?): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='forceContains(Any?) on Collection<E>: Boolean'
+          CALL 'contains(E): Boolean' type=kotlin.Boolean operator=null
+            $this: $RECEIVER of 'forceContains(Any?) on Collection<E>: Boolean' type=kotlin.collections.Collection<E>
+            element: TYPE_OP operator=CAST typeOperand=E
+              GET_VAR 'value-parameter x: Any?' type=kotlin.Any? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val strList: StrList
+          CALL 'constructor StrList()' type=StrList operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'forceContains(Any?) on Collection<String?>: Boolean' type=kotlin.Boolean operator=null
+            $receiver: GET_VAR 'strList: StrList' type=StrList operator=null
+            x: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'forceContains(Any?) on Collection<String?>: Boolean' type=kotlin.Boolean operator=null
+              $receiver: GET_VAR 'strList: StrList' type=StrList operator=null
+              x: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'forceContains(Any?) on Collection<String?>: Boolean' type=kotlin.Boolean operator=null
+            $receiver: GET_VAR 'strList: StrList' type=StrList operator=null
+            x: CONST String type=kotlin.String value='cde'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'forceContains(Any?) on Collection<String?>: Boolean' type=kotlin.Boolean operator=null
+              $receiver: GET_VAR 'strList: StrList' type=StrList operator=null
+              x: CONST String type=kotlin.String value='abc'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

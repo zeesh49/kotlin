@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /kt865.kt
+    CLASS CLASS Template
+      CONSTRUCTOR public constructor Template()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Template'
+      PROPERTY public final val collected: java.util.ArrayList<kotlin.String>
+        EXPRESSION_BODY
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.String> operator=null
+      FUN public final operator fun kotlin.String.unaryPlus(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+            $this: CALL '<get-collected>(): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=GET_PROPERTY
+              $this: THIS of 'Template' type=Template
+            element: $RECEIVER of 'unaryPlus() on String: Unit' type=kotlin.String
+      FUN public final fun test(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'unaryPlus() on String: Unit' type=kotlin.Unit operator=UPLUS
+            $this: THIS of 'Template' type=Template
+            $receiver: CONST String type=kotlin.String value='239'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val u: Template
+          CALL 'constructor Template()' type=Template operator=null
+        CALL 'test(): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'u: Template' type=Template operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: CALL '<get-collected>(): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=GET_PROPERTY
+                    $this: GET_VAR 'u: Template' type=Template operator=null
+                arg1: CONST Int type=kotlin.Int value='1'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL 'get(Int): String' type=kotlin.String operator=null
+                  $this: CALL '<get-collected>(): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=GET_PROPERTY
+                    $this: GET_VAR 'u: Template' type=Template operator=null
+                  index: CONST Int type=kotlin.Int value='0'
+                arg1: CONST String type=kotlin.String value='239'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

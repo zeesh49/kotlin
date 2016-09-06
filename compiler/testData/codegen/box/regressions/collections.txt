@@ -1,0 +1,483 @@
+MODULE <test-module>
+  FILE /collections.kt
+    FUN public fun <T> testCollectionSize(c: kotlin.collections.Collection<T>): kotlin.Unit
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='testCollectionSize(Collection<T>): Unit'
+          CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+            expected: CONST Int type=kotlin.Int value='0'
+            actual: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: GET_VAR 'value-parameter c: Collection<T>' type=kotlin.collections.Collection<T> operator=null
+    FUN public fun <T> testCollectionIsEmpty(c: kotlin.collections.Collection<T>): kotlin.Unit
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='testCollectionIsEmpty(Collection<T>): Unit'
+          CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+            actual: CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR 'value-parameter c: Collection<T>' type=kotlin.collections.Collection<T> operator=null
+    FUN public fun <T> testCollectionContains(c: kotlin.collections.Collection<T>): kotlin.Unit
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='testCollectionContains(Collection<T>): Unit'
+          CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+            actual: CALL 'contains(Any?) on Iterable<Any?>: Boolean' type=kotlin.Boolean operator=null
+              $receiver: GET_VAR 'value-parameter c: Collection<T>' type=kotlin.collections.Collection<T> operator=null
+              element: TYPE_OP operator=CAST typeOperand=kotlin.Any?
+                CONST Int type=kotlin.Int value='1'
+    FUN public fun <T> testCollectionIterator(c: kotlin.collections.Collection<T>): kotlin.Unit
+      BLOCK_BODY
+        VAR val it: kotlin.collections.Iterator<T>
+          CALL 'iterator(): Iterator<T>' type=kotlin.collections.Iterator<T> operator=null
+            $this: GET_VAR 'value-parameter c: Collection<T>' type=kotlin.collections.Collection<T> operator=null
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'it: Iterator<T>' type=kotlin.collections.Iterator<T> operator=null
+          body: BLOCK type=kotlin.Unit operator=null
+            CALL 'assertEquals(Any?, Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+              expected: CONST Int type=kotlin.Int value='1'
+              actual: TYPE_OP operator=CAST typeOperand=kotlin.Any?
+                CALL 'next(): T' type=T operator=null
+                  $this: GET_VAR 'it: Iterator<T>' type=kotlin.collections.Iterator<T> operator=null
+    FUN public fun <T> testCollectionContainsAll(c: kotlin.collections.Collection<T>): kotlin.Unit
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='testCollectionContainsAll(Collection<T>): Unit'
+          CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+            actual: CALL 'containsAll(Collection<T>): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR 'value-parameter c: Collection<T>' type=kotlin.collections.Collection<T> operator=null
+              elements: GET_VAR 'value-parameter c: Collection<T>' type=kotlin.collections.Collection<T> operator=null
+    FUN public fun <T> testMutableCollectionAdd(c: kotlin.collections.MutableCollection<T>, t: T): kotlin.Unit
+      BLOCK_BODY
+        CALL 'add(T): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'value-parameter c: MutableCollection<T>' type=kotlin.collections.MutableCollection<T> operator=null
+          element: GET_VAR 'value-parameter t: T' type=T operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: GET_VAR 'value-parameter c: MutableCollection<T>' type=kotlin.collections.MutableCollection<T> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'contains(T): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'value-parameter c: MutableCollection<T>' type=kotlin.collections.MutableCollection<T> operator=null
+            element: GET_VAR 'value-parameter t: T' type=T operator=null
+    FUN public fun <T> testMutableCollectionRemove(c: kotlin.collections.MutableCollection<T>, t: T): kotlin.Unit
+      BLOCK_BODY
+        CALL 'remove(T): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'value-parameter c: MutableCollection<T>' type=kotlin.collections.MutableCollection<T> operator=null
+          element: GET_VAR 'value-parameter t: T' type=T operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='0'
+          actual: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: GET_VAR 'value-parameter c: MutableCollection<T>' type=kotlin.collections.MutableCollection<T> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'contains(T): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'value-parameter c: MutableCollection<T>' type=kotlin.collections.MutableCollection<T> operator=null
+            element: GET_VAR 'value-parameter t: T' type=T operator=null
+    FUN public fun <T> testMutableCollectionIterator(c: kotlin.collections.MutableCollection<T>, t: T): kotlin.Unit
+      BLOCK_BODY
+        CALL 'add(T): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'value-parameter c: MutableCollection<T>' type=kotlin.collections.MutableCollection<T> operator=null
+          element: GET_VAR 'value-parameter t: T' type=T operator=null
+        VAR val it: kotlin.collections.MutableIterator<T>
+          CALL 'iterator(): MutableIterator<T>' type=kotlin.collections.MutableIterator<T> operator=null
+            $this: GET_VAR 'value-parameter c: MutableCollection<T>' type=kotlin.collections.MutableCollection<T> operator=null
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'it: MutableIterator<T>' type=kotlin.collections.MutableIterator<T> operator=null
+          body: BLOCK type=kotlin.Unit operator=null
+            CALL 'next(): T' type=T operator=null
+              $this: GET_VAR 'it: MutableIterator<T>' type=kotlin.collections.MutableIterator<T> operator=null
+            CALL 'remove(): Unit' type=kotlin.Unit operator=null
+              $this: GET_VAR 'it: MutableIterator<T>' type=kotlin.collections.MutableIterator<T> operator=null
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='0'
+          actual: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: GET_VAR 'value-parameter c: MutableCollection<T>' type=kotlin.collections.MutableCollection<T> operator=null
+    FUN public fun <T> testMutableCollectionAddAll(c: kotlin.collections.MutableCollection<T>, t1: T, t2: T): kotlin.Unit
+      BLOCK_BODY
+        CALL 'addAll(Collection<T>): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'value-parameter c: MutableCollection<T>' type=kotlin.collections.MutableCollection<T> operator=null
+          elements: CALL 'arrayListOf(vararg T): ArrayList<T>' type=java.util.ArrayList<T> operator=null
+            elements: VARARG type=Array<out T> varargElementType=T
+              GET_VAR 'value-parameter t1: T' type=T operator=null
+              GET_VAR 'value-parameter t2: T' type=T operator=null
+        CALL 'assertEquals(MutableCollection<T!>, MutableCollection<T!>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'arrayListOf(vararg T!): ArrayList<T!>' type=java.util.ArrayList<T!> operator=null
+            elements: VARARG type=Array<out (T..T?)> varargElementType=(T..T?)
+              GET_VAR 'value-parameter t1: T' type=T operator=null
+              GET_VAR 'value-parameter t2: T' type=T operator=null
+          actual: GET_VAR 'value-parameter c: MutableCollection<T>' type=kotlin.collections.MutableCollection<T> operator=null
+    FUN public fun <T> testMutableCollectionRemoveAll(c: kotlin.collections.MutableCollection<T>, t1: T, t2: T): kotlin.Unit
+      BLOCK_BODY
+        CALL 'addAll(Collection<T>): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'value-parameter c: MutableCollection<T>' type=kotlin.collections.MutableCollection<T> operator=null
+          elements: CALL 'arrayListOf(vararg T): ArrayList<T>' type=java.util.ArrayList<T> operator=null
+            elements: VARARG type=Array<out T> varargElementType=T
+              GET_VAR 'value-parameter t1: T' type=T operator=null
+              GET_VAR 'value-parameter t2: T' type=T operator=null
+        CALL 'removeAll(Collection<T>): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'value-parameter c: MutableCollection<T>' type=kotlin.collections.MutableCollection<T> operator=null
+          elements: CALL 'arrayListOf(vararg T): ArrayList<T>' type=java.util.ArrayList<T> operator=null
+            elements: VARARG type=Array<out T> varargElementType=T
+              GET_VAR 'value-parameter t1: T' type=T operator=null
+        CALL 'assertEquals(MutableCollection<T!>, MutableCollection<T!>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'arrayListOf(vararg T!): ArrayList<T!>' type=java.util.ArrayList<T!> operator=null
+            elements: VARARG type=Array<out (T..T?)> varargElementType=(T..T?)
+              GET_VAR 'value-parameter t2: T' type=T operator=null
+          actual: GET_VAR 'value-parameter c: MutableCollection<T>' type=kotlin.collections.MutableCollection<T> operator=null
+    FUN public fun <T> testMutableCollectionRetainAll(c: kotlin.collections.MutableCollection<T>, t1: T, t2: T): kotlin.Unit
+      BLOCK_BODY
+        CALL 'addAll(Collection<T>): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'value-parameter c: MutableCollection<T>' type=kotlin.collections.MutableCollection<T> operator=null
+          elements: CALL 'arrayListOf(vararg T): ArrayList<T>' type=java.util.ArrayList<T> operator=null
+            elements: VARARG type=Array<out T> varargElementType=T
+              GET_VAR 'value-parameter t1: T' type=T operator=null
+              GET_VAR 'value-parameter t2: T' type=T operator=null
+        CALL 'retainAll(Collection<T>): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'value-parameter c: MutableCollection<T>' type=kotlin.collections.MutableCollection<T> operator=null
+          elements: CALL 'arrayListOf(vararg T): ArrayList<T>' type=java.util.ArrayList<T> operator=null
+            elements: VARARG type=Array<out T> varargElementType=T
+              GET_VAR 'value-parameter t1: T' type=T operator=null
+        CALL 'assertEquals(MutableCollection<T>, MutableCollection<T>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'arrayListOf(vararg T): ArrayList<T>' type=java.util.ArrayList<T> operator=null
+            elements: VARARG type=Array<out T> varargElementType=T
+              GET_VAR 'value-parameter t1: T' type=T operator=null
+          actual: GET_VAR 'value-parameter c: MutableCollection<T>' type=kotlin.collections.MutableCollection<T> operator=null
+    FUN public fun <T> testMutableCollectionClear(c: kotlin.collections.MutableCollection<T>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'clear(): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'value-parameter c: MutableCollection<T>' type=kotlin.collections.MutableCollection<T> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'value-parameter c: MutableCollection<T>' type=kotlin.collections.MutableCollection<T> operator=null
+    FUN public fun testCollection(): kotlin.Unit
+      BLOCK_BODY
+        CALL 'testCollectionSize(Collection<Int>): Unit' type=kotlin.Unit operator=null
+          c: CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+        CALL 'testCollectionIsEmpty(Collection<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL 'arrayListOf(vararg String): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+        CALL 'testCollectionContains(Collection<Int>): Unit' type=kotlin.Unit operator=null
+          c: CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+            elements: VARARG type=Array<out Int> varargElementType=Int
+              CONST Int type=kotlin.Int value='1'
+        CALL 'testCollectionIterator(Collection<Int>): Unit' type=kotlin.Unit operator=null
+          c: CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+            elements: VARARG type=Array<out Int> varargElementType=Int
+              CONST Int type=kotlin.Int value='1'
+        CALL 'testCollectionContainsAll(Collection<String>): Unit' type=kotlin.Unit operator=null
+          c: CALL 'arrayListOf(vararg String): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='a'
+              CONST String type=kotlin.String value='b'
+        CALL 'testMutableCollectionAdd(MutableCollection<String>, String): Unit' type=kotlin.Unit operator=null
+          c: CALL 'arrayListOf(vararg String): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+          t: CONST String type=kotlin.String value=''
+        CALL 'testMutableCollectionRemove(MutableCollection<String>, String): Unit' type=kotlin.Unit operator=null
+          c: CALL 'arrayListOf(vararg String): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='a'
+          t: CONST String type=kotlin.String value='a'
+        CALL 'testMutableCollectionIterator(MutableCollection<Int>, Int): Unit' type=kotlin.Unit operator=null
+          c: CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          t: CONST Int type=kotlin.Int value='1'
+        CALL 'testMutableCollectionAddAll(MutableCollection<Int>, Int, Int): Unit' type=kotlin.Unit operator=null
+          c: CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          t1: CONST Int type=kotlin.Int value='1'
+          t2: CONST Int type=kotlin.Int value='2'
+        CALL 'testMutableCollectionRemoveAll(MutableCollection<Int>, Int, Int): Unit' type=kotlin.Unit operator=null
+          c: CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          t1: CONST Int type=kotlin.Int value='1'
+          t2: CONST Int type=kotlin.Int value='2'
+        CALL 'testMutableCollectionRetainAll(MutableCollection<Int>, Int, Int): Unit' type=kotlin.Unit operator=null
+          c: CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          t1: CONST Int type=kotlin.Int value='1'
+          t2: CONST Int type=kotlin.Int value='2'
+        CALL 'testMutableCollectionClear(MutableCollection<Int>): Unit' type=kotlin.Unit operator=null
+          c: CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+            elements: VARARG type=Array<out Int> varargElementType=Int
+              CONST Int type=kotlin.Int value='1'
+              CONST Int type=kotlin.Int value='2'
+    FUN public fun <T> testListGet(l: kotlin.collections.List<T>, t: T): kotlin.Unit
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='testListGet(List<T>, T): Unit'
+          CALL 'assertEquals(T, T, String? = ...): Unit' type=kotlin.Unit operator=null
+            expected: GET_VAR 'value-parameter t: T' type=T operator=null
+            actual: CALL 'get(Int): T' type=T operator=null
+              $this: GET_VAR 'value-parameter l: List<T>' type=kotlin.collections.List<T> operator=null
+              index: CONST Int type=kotlin.Int value='0'
+    FUN public fun <T> testListIndexOf(l: kotlin.collections.List<T>, t: T): kotlin.Unit
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='testListIndexOf(List<T>, T): Unit'
+          CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+            expected: CONST Int type=kotlin.Int value='0'
+            actual: CALL 'indexOf(T): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'value-parameter l: List<T>' type=kotlin.collections.List<T> operator=null
+              element: GET_VAR 'value-parameter t: T' type=T operator=null
+    FUN public fun <T> testListIterator(l: kotlin.collections.List<T>, t1: T, t2: T): kotlin.Unit
+      BLOCK_BODY
+        VAR val indexes: java.util.ArrayList<kotlin.Int>
+          CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+        VAR val result: java.util.ArrayList<T>
+          CALL 'arrayListOf(vararg T): ArrayList<T>' type=java.util.ArrayList<T> operator=null
+        VAR val it: kotlin.collections.ListIterator<T>
+          CALL 'listIterator(): ListIterator<T>' type=kotlin.collections.ListIterator<T> operator=null
+            $this: GET_VAR 'value-parameter l: List<T>' type=kotlin.collections.List<T> operator=null
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'it: ListIterator<T>' type=kotlin.collections.ListIterator<T> operator=null
+          body: BLOCK type=kotlin.Boolean operator=null
+            CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR 'indexes: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+              element: CALL 'nextIndex(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'it: ListIterator<T>' type=kotlin.collections.ListIterator<T> operator=null
+            CALL 'add(T): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR 'result: ArrayList<T>' type=java.util.ArrayList<T> operator=null
+              element: CALL 'next(): T' type=T operator=null
+                $this: GET_VAR 'it: ListIterator<T>' type=kotlin.collections.ListIterator<T> operator=null
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'hasPrevious(): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'it: ListIterator<T>' type=kotlin.collections.ListIterator<T> operator=null
+          body: BLOCK type=kotlin.Boolean operator=null
+            CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR 'indexes: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+              element: CALL 'previousIndex(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'it: ListIterator<T>' type=kotlin.collections.ListIterator<T> operator=null
+            CALL 'add(T): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR 'result: ArrayList<T>' type=java.util.ArrayList<T> operator=null
+              element: CALL 'previous(): T' type=T operator=null
+                $this: GET_VAR 'it: ListIterator<T>' type=kotlin.collections.ListIterator<T> operator=null
+        CALL 'assertEquals(ArrayList<Int>, ArrayList<Int>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+            elements: VARARG type=Array<out Int> varargElementType=Int
+              CONST Int type=kotlin.Int value='0'
+              CONST Int type=kotlin.Int value='1'
+              CONST Int type=kotlin.Int value='1'
+              CONST Int type=kotlin.Int value='0'
+          actual: GET_VAR 'indexes: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+        CALL 'assertEquals(ArrayList<T>, ArrayList<T>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'arrayListOf(vararg T): ArrayList<T>' type=java.util.ArrayList<T> operator=null
+            elements: VARARG type=Array<out T> varargElementType=T
+              GET_VAR 'value-parameter t1: T' type=T operator=null
+              GET_VAR 'value-parameter t2: T' type=T operator=null
+              GET_VAR 'value-parameter t2: T' type=T operator=null
+              GET_VAR 'value-parameter t1: T' type=T operator=null
+          actual: GET_VAR 'result: ArrayList<T>' type=java.util.ArrayList<T> operator=null
+    FUN public fun <T> testListSublist(l: kotlin.collections.List<T>, t: T): kotlin.Unit
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='testListSublist(List<T>, T): Unit'
+          CALL 'assertEquals(List<T!>, List<T!>, String? = ...): Unit' type=kotlin.Unit operator=null
+            expected: CALL 'arrayListOf(vararg T): ArrayList<T>' type=java.util.ArrayList<T> operator=null
+              elements: VARARG type=Array<out T> varargElementType=T
+                GET_VAR 'value-parameter t: T' type=T operator=null
+            actual: CALL 'subList(Int, Int): List<T>' type=kotlin.collections.List<T> operator=null
+              $this: GET_VAR 'value-parameter l: List<T>' type=kotlin.collections.List<T> operator=null
+              fromIndex: CONST Int type=kotlin.Int value='0'
+              toIndex: CONST Int type=kotlin.Int value='1'
+    FUN public fun <T> testMutableListSet(l: kotlin.collections.MutableList<T>, t: T): kotlin.Unit
+      BLOCK_BODY
+        CALL 'set(Int, T): T' type=T operator=null
+          $this: GET_VAR 'value-parameter l: MutableList<T>' type=kotlin.collections.MutableList<T> operator=null
+          index: CONST Int type=kotlin.Int value='0'
+          element: GET_VAR 'value-parameter t: T' type=T operator=null
+        CALL 'assertEquals(MutableList<T>, MutableList<T>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'arrayListOf(vararg T): ArrayList<T>' type=java.util.ArrayList<T> operator=null
+            elements: VARARG type=Array<out T> varargElementType=T
+              GET_VAR 'value-parameter t: T' type=T operator=null
+          actual: GET_VAR 'value-parameter l: MutableList<T>' type=kotlin.collections.MutableList<T> operator=null
+    FUN public fun <T> testMutableListIterator(l: kotlin.collections.MutableList<T>, t1: T, t2: T, t3: T): kotlin.Unit
+      BLOCK_BODY
+        VAR val it: kotlin.collections.MutableListIterator<T>
+          CALL 'listIterator(): MutableListIterator<T>' type=kotlin.collections.MutableListIterator<T> operator=null
+            $this: GET_VAR 'value-parameter l: MutableList<T>' type=kotlin.collections.MutableList<T> operator=null
+        WHILE label=null operator=WHILE_LOOP
+          condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'it: MutableListIterator<T>' type=kotlin.collections.MutableListIterator<T> operator=null
+          body: BLOCK type=kotlin.Unit operator=null
+            CALL 'next(): T' type=T operator=null
+              $this: GET_VAR 'it: MutableListIterator<T>' type=kotlin.collections.MutableListIterator<T> operator=null
+            CALL 'add(T): Unit' type=kotlin.Unit operator=null
+              $this: GET_VAR 'it: MutableListIterator<T>' type=kotlin.collections.MutableListIterator<T> operator=null
+              element: GET_VAR 'value-parameter t3: T' type=T operator=null
+        CALL 'assertEquals(MutableList<T>, MutableList<T>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'arrayListOf(vararg T): ArrayList<T>' type=java.util.ArrayList<T> operator=null
+            elements: VARARG type=Array<out T> varargElementType=T
+              GET_VAR 'value-parameter t1: T' type=T operator=null
+              GET_VAR 'value-parameter t3: T' type=T operator=null
+              GET_VAR 'value-parameter t2: T' type=T operator=null
+              GET_VAR 'value-parameter t3: T' type=T operator=null
+          actual: GET_VAR 'value-parameter l: MutableList<T>' type=kotlin.collections.MutableList<T> operator=null
+    FUN public fun testList(): kotlin.Unit
+      BLOCK_BODY
+        CALL 'testListGet(List<Int>, Int): Unit' type=kotlin.Unit operator=null
+          l: CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+            elements: VARARG type=Array<out Int> varargElementType=Int
+              CONST Int type=kotlin.Int value='1'
+          t: CONST Int type=kotlin.Int value='1'
+        CALL 'testListIndexOf(List<Int>, Int): Unit' type=kotlin.Unit operator=null
+          l: CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+            elements: VARARG type=Array<out Int> varargElementType=Int
+              CONST Int type=kotlin.Int value='1'
+          t: CONST Int type=kotlin.Int value='1'
+        CALL 'testListIterator(List<String>, String, String): Unit' type=kotlin.Unit operator=null
+          l: CALL 'arrayListOf(vararg String): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='a'
+              CONST String type=kotlin.String value='b'
+          t1: CONST String type=kotlin.String value='a'
+          t2: CONST String type=kotlin.String value='b'
+        CALL 'testListSublist(List<Int>, Int): Unit' type=kotlin.Unit operator=null
+          l: CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+            elements: VARARG type=Array<out Int> varargElementType=Int
+              CONST Int type=kotlin.Int value='1'
+              CONST Int type=kotlin.Int value='2'
+          t: CONST Int type=kotlin.Int value='1'
+        CALL 'testMutableListSet(MutableList<Int>, Int): Unit' type=kotlin.Unit operator=null
+          l: CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+            elements: VARARG type=Array<out Int> varargElementType=Int
+              CONST Int type=kotlin.Int value='2'
+          t: CONST Int type=kotlin.Int value='4'
+        CALL 'testMutableListIterator(MutableList<Int>, Int, Int, Int): Unit' type=kotlin.Unit operator=null
+          l: CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+            elements: VARARG type=Array<out Int> varargElementType=Int
+              CONST Int type=kotlin.Int value='1'
+              CONST Int type=kotlin.Int value='2'
+          t1: CONST Int type=kotlin.Int value='1'
+          t2: CONST Int type=kotlin.Int value='2'
+          t3: CONST Int type=kotlin.Int value='3'
+    FUN public fun <K, V> testMapContainsKey(map: kotlin.collections.Map<K, V>, k: K): kotlin.Unit
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='testMapContainsKey(Map<K, V>, K): Unit'
+          CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+            actual: CALL 'containsKey(K): Boolean' type=kotlin.Boolean operator=null
+              $this: GET_VAR 'value-parameter map: Map<K, V>' type=kotlin.collections.Map<K, V> operator=null
+              key: GET_VAR 'value-parameter k: K' type=K operator=null
+    FUN public fun <K, V> testMapKeys(map: kotlin.collections.Map<K, V>, k1: K, k2: K): kotlin.Unit
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='testMapKeys(Map<K, V>, K, K): Unit'
+          CALL 'assertEqualCollections(Collection<K>, Collection<K>): Unit' type=kotlin.Unit operator=null
+            c1: CALL 'hashSetOf(vararg K): HashSet<K>' type=java.util.HashSet<K> operator=null
+              elements: VARARG type=Array<out K> varargElementType=K
+                GET_VAR 'value-parameter k1: K' type=K operator=null
+                GET_VAR 'value-parameter k2: K' type=K operator=null
+            c2: CALL '<get-keys>(): Set<K>' type=kotlin.collections.Set<K> operator=GET_PROPERTY
+              $this: GET_VAR 'value-parameter map: Map<K, V>' type=kotlin.collections.Map<K, V> operator=null
+    FUN public fun <K, V> testMapValues(map: kotlin.collections.Map<K, V>, v1: V, v2: V): kotlin.Unit
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='testMapValues(Map<K, V>, V, V): Unit'
+          CALL 'assertEqualCollections(Collection<V>, Collection<V>): Unit' type=kotlin.Unit operator=null
+            c1: CALL 'hashSetOf(vararg V): HashSet<V>' type=java.util.HashSet<V> operator=null
+              elements: VARARG type=Array<out V> varargElementType=V
+                GET_VAR 'value-parameter v1: V' type=V operator=null
+                GET_VAR 'value-parameter v2: V' type=V operator=null
+            c2: CALL '<get-values>(): Collection<V>' type=kotlin.collections.Collection<V> operator=GET_PROPERTY
+              $this: GET_VAR 'value-parameter map: Map<K, V>' type=kotlin.collections.Map<K, V> operator=null
+    FUN public fun <K, V> testMapEntrySet(map: kotlin.collections.Map<K, V>, k: K, v: V): kotlin.Unit
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<kotlin.collections.Map.Entry<K, V>>
+            CALL 'iterator(): Iterator<Map.Entry<K, V>>' type=kotlin.collections.Iterator<kotlin.collections.Map.Entry<K, V>> operator=FOR_LOOP_ITERATOR
+              $this: CALL '<get-entries>(): Set<Map.Entry<K, V>>' type=kotlin.collections.Set<kotlin.collections.Map.Entry<K, V>> operator=GET_PROPERTY
+                $this: GET_VAR 'value-parameter map: Map<K, V>' type=kotlin.collections.Map<K, V> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<Map.Entry<K, V>>' type=kotlin.collections.Iterator<kotlin.collections.Map.Entry<K, V>> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val entry: kotlin.collections.Map.Entry<K, V>
+                CALL 'next(): Map.Entry<K, V>' type=kotlin.collections.Map.Entry<K, V> operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<Map.Entry<K, V>>' type=kotlin.collections.Iterator<kotlin.collections.Map.Entry<K, V>> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                CALL 'assertEquals(K, K, String? = ...): Unit' type=kotlin.Unit operator=null
+                  expected: GET_VAR 'value-parameter k: K' type=K operator=null
+                  actual: CALL '<get-key>(): K' type=K operator=GET_PROPERTY
+                    $this: GET_VAR 'entry: Map.Entry<K, V>' type=kotlin.collections.Map.Entry<K, V> operator=null
+                CALL 'assertEquals(V, V, String? = ...): Unit' type=kotlin.Unit operator=null
+                  expected: GET_VAR 'value-parameter v: V' type=V operator=null
+                  actual: CALL '<get-value>(): V' type=V operator=GET_PROPERTY
+                    $this: GET_VAR 'entry: Map.Entry<K, V>' type=kotlin.collections.Map.Entry<K, V> operator=null
+    FUN public fun <K, V> testMutableMapEntry(map: kotlin.collections.MutableMap<K, V>, k1: K, v: V): kotlin.Unit
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.MutableIterator<kotlin.collections.MutableMap.MutableEntry<K, V>>
+            CALL 'iterator(): MutableIterator<MutableMap.MutableEntry<K, V>>' type=kotlin.collections.MutableIterator<kotlin.collections.MutableMap.MutableEntry<K, V>> operator=FOR_LOOP_ITERATOR
+              $this: CALL '<get-entries>(): MutableSet<MutableMap.MutableEntry<K, V>>' type=kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<K, V>> operator=GET_PROPERTY
+                $this: GET_VAR 'value-parameter map: MutableMap<K, V>' type=kotlin.collections.MutableMap<K, V> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: MutableIterator<MutableMap.MutableEntry<K, V>>' type=kotlin.collections.MutableIterator<kotlin.collections.MutableMap.MutableEntry<K, V>> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val entry: kotlin.collections.MutableMap.MutableEntry<K, V>
+                CALL 'next(): MutableMap.MutableEntry<K, V>' type=kotlin.collections.MutableMap.MutableEntry<K, V> operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: MutableIterator<MutableMap.MutableEntry<K, V>>' type=kotlin.collections.MutableIterator<kotlin.collections.MutableMap.MutableEntry<K, V>> operator=null
+              BLOCK type=V operator=null
+                CALL 'setValue(V): V' type=V operator=null
+                  $this: GET_VAR 'entry: MutableMap.MutableEntry<K, V>' type=kotlin.collections.MutableMap.MutableEntry<K, V> operator=null
+                  newValue: GET_VAR 'value-parameter v: V' type=V operator=null
+        CALL 'assertEquals(MutableMap<K!, V!>, MutableMap<K!, V!>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'hashMapOf(vararg Pair<K!, V!>): HashMap<K!, V!>' type=java.util.HashMap<K!, V!> operator=null
+            pairs: VARARG type=Array<out Pair<(K..K?), (V..V?)>> varargElementType=Pair<(K..K?), (V..V?)>
+              CALL 'to(V) on K: Pair<K, V>' type=kotlin.Pair<K, V> operator=null
+                $receiver: GET_VAR 'value-parameter k1: K' type=K operator=null
+                that: GET_VAR 'value-parameter v: V' type=V operator=null
+          actual: GET_VAR 'value-parameter map: MutableMap<K, V>' type=kotlin.collections.MutableMap<K, V> operator=null
+    FUN public fun testMap(): kotlin.Unit
+      BLOCK_BODY
+        CALL 'testMapContainsKey(Map<Int, Char>, Int): Unit' type=kotlin.Unit operator=null
+          map: CALL 'hashMapOf(vararg Pair<Int, Char>): HashMap<Int, Char>' type=java.util.HashMap<kotlin.Int, kotlin.Char> operator=null
+            pairs: VARARG type=Array<out Pair<Int, Char>> varargElementType=Pair<Int, Char>
+              CALL 'to(Char) on Int: Pair<Int, Char>' type=kotlin.Pair<kotlin.Int, kotlin.Char> operator=null
+                $receiver: CONST Int type=kotlin.Int value='1'
+                that: CONST Char type=kotlin.Char value='a'
+              CALL 'to(Char) on Int: Pair<Int, Char>' type=kotlin.Pair<kotlin.Int, kotlin.Char> operator=null
+                $receiver: CONST Int type=kotlin.Int value='2'
+                that: CONST Char type=kotlin.Char value='b'
+          k: CONST Int type=kotlin.Int value='2'
+        CALL 'testMapKeys(Map<Int, Char>, Int, Int): Unit' type=kotlin.Unit operator=null
+          map: CALL 'hashMapOf(vararg Pair<Int, Char>): HashMap<Int, Char>' type=java.util.HashMap<kotlin.Int, kotlin.Char> operator=null
+            pairs: VARARG type=Array<out Pair<Int, Char>> varargElementType=Pair<Int, Char>
+              CALL 'to(Char) on Int: Pair<Int, Char>' type=kotlin.Pair<kotlin.Int, kotlin.Char> operator=null
+                $receiver: CONST Int type=kotlin.Int value='1'
+                that: CONST Char type=kotlin.Char value='a'
+              CALL 'to(Char) on Int: Pair<Int, Char>' type=kotlin.Pair<kotlin.Int, kotlin.Char> operator=null
+                $receiver: CONST Int type=kotlin.Int value='2'
+                that: CONST Char type=kotlin.Char value='b'
+          k1: CONST Int type=kotlin.Int value='1'
+          k2: CONST Int type=kotlin.Int value='2'
+        CALL 'testMapValues(Map<Int, Char>, Char, Char): Unit' type=kotlin.Unit operator=null
+          map: CALL 'hashMapOf(vararg Pair<Int, Char>): HashMap<Int, Char>' type=java.util.HashMap<kotlin.Int, kotlin.Char> operator=null
+            pairs: VARARG type=Array<out Pair<Int, Char>> varargElementType=Pair<Int, Char>
+              CALL 'to(Char) on Int: Pair<Int, Char>' type=kotlin.Pair<kotlin.Int, kotlin.Char> operator=null
+                $receiver: CONST Int type=kotlin.Int value='1'
+                that: CONST Char type=kotlin.Char value='a'
+              CALL 'to(Char) on Int: Pair<Int, Char>' type=kotlin.Pair<kotlin.Int, kotlin.Char> operator=null
+                $receiver: CONST Int type=kotlin.Int value='2'
+                that: CONST Char type=kotlin.Char value='b'
+          v1: CONST Char type=kotlin.Char value='a'
+          v2: CONST Char type=kotlin.Char value='b'
+        CALL 'testMapEntrySet(Map<Int, Char>, Int, Char): Unit' type=kotlin.Unit operator=null
+          map: CALL 'hashMapOf(vararg Pair<Int, Char>): HashMap<Int, Char>' type=java.util.HashMap<kotlin.Int, kotlin.Char> operator=null
+            pairs: VARARG type=Array<out Pair<Int, Char>> varargElementType=Pair<Int, Char>
+              CALL 'to(Char) on Int: Pair<Int, Char>' type=kotlin.Pair<kotlin.Int, kotlin.Char> operator=null
+                $receiver: CONST Int type=kotlin.Int value='1'
+                that: CONST Char type=kotlin.Char value='a'
+          k: CONST Int type=kotlin.Int value='1'
+          v: CONST Char type=kotlin.Char value='a'
+        CALL 'testMutableMapEntry(MutableMap<Int, Char>, Int, Char): Unit' type=kotlin.Unit operator=null
+          map: CALL 'hashMapOf(vararg Pair<Int, Char>): HashMap<Int, Char>' type=java.util.HashMap<kotlin.Int, kotlin.Char> operator=null
+            pairs: VARARG type=Array<out Pair<Int, Char>> varargElementType=Pair<Int, Char>
+              CALL 'to(Char) on Int: Pair<Int, Char>' type=kotlin.Pair<kotlin.Int, kotlin.Char> operator=null
+                $receiver: CONST Int type=kotlin.Int value='1'
+                that: CONST Char type=kotlin.Char value='a'
+          k1: CONST Int type=kotlin.Int value='1'
+          v: CONST Char type=kotlin.Char value='b'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'testCollection(): Unit' type=kotlin.Unit operator=null
+        CALL 'testList(): Unit' type=kotlin.Unit operator=null
+        CALL 'testMap(): Unit' type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun <T> assertEqualCollections(c1: kotlin.collections.Collection<T>, c2: kotlin.collections.Collection<T>): kotlin.Unit
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='assertEqualCollections(Collection<T>, Collection<T>): Unit'
+          CALL 'assertEquals(HashSet<T>, HashSet<T>, String? = ...): Unit' type=kotlin.Unit operator=null
+            expected: CALL 'toCollection(HashSet<T>) on Iterable<T>: HashSet<T>' type=java.util.HashSet<T> operator=null
+              $receiver: GET_VAR 'value-parameter c1: Collection<T>' type=kotlin.collections.Collection<T> operator=null
+              destination: CALL 'hashSetOf(vararg T): HashSet<T>' type=java.util.HashSet<T> operator=null
+            actual: CALL 'toCollection(HashSet<T>) on Iterable<T>: HashSet<T>' type=java.util.HashSet<T> operator=null
+              $receiver: GET_VAR 'value-parameter c2: Collection<T>' type=kotlin.collections.Collection<T> operator=null
+              destination: CALL 'hashSetOf(vararg T): HashSet<T>' type=java.util.HashSet<T> operator=null

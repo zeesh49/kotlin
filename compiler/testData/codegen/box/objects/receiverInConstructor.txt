@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /receiverInConstructor.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(v: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'v: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter v: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public open val v: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter v: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun A.a(newv: kotlin.String): A
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='a(String) on A: A'
+          BLOCK type=a.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor A(String)'
+                    v: CONST String type=kotlin.String value='fail'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              PROPERTY public open override val v: kotlin.String
+                EXPRESSION_BODY
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                    $this: CALL '<get-v>(): String' type=kotlin.String operator=GET_PROPERTY
+                      $this: $RECEIVER of 'a(String) on A: A' type=A
+                    other: GET_VAR 'value-parameter newv: String' type=kotlin.String operator=null
+            CALL 'constructor <no name provided>()' type=a.<no name provided> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-v>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'a(String) on A: A' type=A operator=null
+              $receiver: CALL 'constructor A(String)' type=A operator=null
+                v: CONST String type=kotlin.String value='O'
+              newv: CONST String type=kotlin.String value='K'

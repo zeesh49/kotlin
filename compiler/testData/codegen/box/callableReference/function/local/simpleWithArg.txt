@@ -1,0 +1,12 @@
+MODULE <test-module>
+  FILE /simpleWithArg.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        FUN local final fun foo(s: kotlin.String): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo(String): String'
+              GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'invoke(String): String' type=kotlin.String operator=null
+            $this: CALLABLE_REFERENCE 'foo(String): String' type=kotlin.reflect.KFunction1<kotlin.String, kotlin.String> operator=null
+            p1: CONST String type=kotlin.String value='OK'

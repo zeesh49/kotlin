@@ -1,0 +1,150 @@
+MODULE <test-module>
+  FILE /kt238.kt
+    FUN public fun t1(): kotlin.Unit
+      BLOCK_BODY
+        VAR val a1: kotlin.Array<kotlin.String?>
+          CALL 'arrayOfNulls(Int): Array<String?>' type=kotlin.Array<kotlin.String?> operator=null
+            size: CONST Int type=kotlin.Int value='1'
+        CALL 'set(Int, String?): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a1: Array<String?>' type=kotlin.Array<kotlin.String?> operator=null
+          index: CONST Int type=kotlin.Int value='0'
+          value: CONST String type=kotlin.String value='0'
+        VAR val s: kotlin.String?
+          CALL 'get(Int): String?' type=kotlin.String? operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'a1: Array<String?>' type=kotlin.Array<kotlin.String?> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+    FUN public fun t2(): kotlin.Unit
+      BLOCK_BODY
+        VAR val a2: kotlin.Array<kotlin.Int>
+          TYPE_OP operator=CAST typeOperand=kotlin.Array<kotlin.Int>
+            CALL 'arrayOfNulls(Int): Array<Int?>' type=kotlin.Array<kotlin.Int?> operator=null
+              size: CONST Int type=kotlin.Int value='1'
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a2: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+          index: CONST Int type=kotlin.Int value='0'
+          value: CONST Int type=kotlin.Int value='0'
+        VAR var i: kotlin.Int
+          CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'a2: Array<Int>' type=kotlin.Array<kotlin.Int> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+    FUN public fun t3(): kotlin.Unit
+      BLOCK_BODY
+        VAR val a3: kotlin.Array<kotlin.Int?>
+          CALL 'arrayOfNulls(Int): Array<Int?>' type=kotlin.Array<kotlin.Int?> operator=null
+            size: CONST Int type=kotlin.Int value='1'
+        CALL 'set(Int, Int?): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'a3: Array<Int?>' type=kotlin.Array<kotlin.Int?> operator=null
+          index: CONST Int type=kotlin.Int value='0'
+          value: CONST Int type=kotlin.Int value='0'
+        VAR var j: kotlin.Int?
+          CALL 'get(Int): Int?' type=kotlin.Int? operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'a3: Array<Int?>' type=kotlin.Array<kotlin.Int?> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+        VAR var k: kotlin.Int
+          BLOCK type=kotlin.Int operator=ELVIS
+            VAR val tmp0_elvis_lhs: kotlin.Int?
+              CALL 'get(Int): Int?' type=kotlin.Int? operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'a3: Array<Int?>' type=kotlin.Array<kotlin.Int?> operator=null
+                index: CONST Int type=kotlin.Int value='0'
+            WHEN type=kotlin.Int operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_elvis_lhs: Int?' type=kotlin.Int? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CONST Int type=kotlin.Int value='5'
+              else: GET_VAR 'tmp0_elvis_lhs: Int?' type=kotlin.Int? operator=null
+    FUN public fun t4(): kotlin.Unit
+      BLOCK_BODY
+        VAR val b1: StrangeIntArray
+          CALL 'constructor StrangeIntArray(Int)' type=StrangeIntArray operator=null
+            size: CONST Int type=kotlin.Int value='10'
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'b1: StrangeIntArray' type=StrangeIntArray operator=null
+          index: CONST Int type=kotlin.Int value='4'
+          v: CONST Int type=kotlin.Int value='5'
+        VAR var i: kotlin.Int
+          CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'b1: StrangeIntArray' type=StrangeIntArray operator=null
+            index: CONST Int type=kotlin.Int value='1'
+    FUN public fun t5(): kotlin.Unit
+      BLOCK_BODY
+        VAR val b2: StrangeArray<kotlin.Int>
+          CALL 'constructor StrangeArray(Int, Int)' type=StrangeArray<kotlin.Int> operator=null
+            size: CONST Int type=kotlin.Int value='10'
+            defaultValue: CONST Int type=kotlin.Int value='0'
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'b2: StrangeArray<Int>' type=StrangeArray<kotlin.Int> operator=null
+          index: CONST Int type=kotlin.Int value='4'
+          v: CONST Int type=kotlin.Int value='5'
+        CALL 'set(Int, Int): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'b2: StrangeArray<Int>' type=StrangeArray<kotlin.Int> operator=null
+          index: CONST Int type=kotlin.Int value='4'
+          v: CONST Int type=kotlin.Int value='5'
+        VAR var i: kotlin.Int
+          CALL 'get(Int): Int' type=kotlin.Int operator=null
+            $this: GET_VAR 'b2: StrangeArray<Int>' type=StrangeArray<kotlin.Int> operator=null
+            index: CONST Int type=kotlin.Int value='2'
+        SET_VAR 'i: Int' type=kotlin.Unit operator=EQ
+          CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'b2: StrangeArray<Int>' type=StrangeArray<kotlin.Int> operator=null
+            index: CONST Int type=kotlin.Int value='1'
+    FUN public fun t6(): kotlin.Unit
+      BLOCK_BODY
+        VAR val b3: StrangeArray<kotlin.Int?>
+          CALL 'constructor StrangeArray(Int, Int?)' type=StrangeArray<kotlin.Int?> operator=null
+            size: CONST Int type=kotlin.Int value='10'
+            defaultValue: CONST Int type=kotlin.Int value='0'
+        CALL 'set(Int, Int?): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'b3: StrangeArray<Int?>' type=StrangeArray<kotlin.Int?> operator=null
+          index: CONST Int type=kotlin.Int value='5'
+          v: CONST Int type=kotlin.Int value='6'
+        CALL 'set(Int, Int?): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'b3: StrangeArray<Int?>' type=StrangeArray<kotlin.Int?> operator=null
+          index: CONST Int type=kotlin.Int value='4'
+          v: CONST Int type=kotlin.Int value='5'
+        VAR val v: kotlin.Int?
+          CALL 'get(Int): Int?' type=kotlin.Int? operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'b3: StrangeArray<Int?>' type=StrangeArray<kotlin.Int?> operator=null
+            index: CONST Int type=kotlin.Int value='1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    CLASS CLASS StrangeArray
+      CONSTRUCTOR public constructor StrangeArray<T>(size: kotlin.Int, defaultValue: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'defaultValue: T' type=kotlin.Unit operator=null
+            receiver: THIS of 'StrangeArray' type=StrangeArray<T>
+            value: GET_VAR 'value-parameter defaultValue: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='StrangeArray'
+      PROPERTY private final var defaultValue: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter defaultValue: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final operator fun get(index: kotlin.Int): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(Int): T'
+            CALL '<get-defaultValue>(): T' type=T operator=GET_PROPERTY
+              $this: THIS of 'StrangeArray' type=StrangeArray<T>
+      FUN public final operator fun set(index: kotlin.Int, v: T): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-defaultValue>(T): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'StrangeArray' type=StrangeArray<T>
+            <set-?>: GET_VAR 'value-parameter v: T' type=T operator=null
+    CLASS CLASS StrangeIntArray
+      CONSTRUCTOR public constructor StrangeIntArray(size: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='StrangeIntArray'
+      PROPERTY private final var defaultValue: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+      FUN public final operator fun get(index: kotlin.Int): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(Int): Int'
+            CALL '<get-defaultValue>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'StrangeIntArray' type=StrangeIntArray
+      FUN public final operator fun set(index: kotlin.Int, v: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-defaultValue>(Int): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'StrangeIntArray' type=StrangeIntArray
+            <set-?>: GET_VAR 'value-parameter v: Int' type=kotlin.Int operator=null

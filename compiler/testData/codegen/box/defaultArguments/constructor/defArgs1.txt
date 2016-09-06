@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /defArgs1.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(a: kotlin.Int = ...)
+        a: EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'a: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter a: Int = ...' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val a: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter a: Int = ...' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=ANDAND
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-a>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL 'constructor A(Int = ...)' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+            then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-a>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL 'constructor A(Int = ...)' type=A operator=null
+                  a: CONST Int type=kotlin.Int value='1'
+              arg1: CONST Int type=kotlin.Int value='1'
+            else: CONST Boolean type=kotlin.Boolean value='false'
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='fail'

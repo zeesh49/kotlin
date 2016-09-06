@@ -1,0 +1,49 @@
+MODULE <test-module>
+  FILE /privateProperty.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(result: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'result: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter result: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY private final var result: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter result: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          CALL 'constructor A(String)' type=A operator=null
+            result: CONST String type=kotlin.String value='abc'
+        VAR val p: kotlin.reflect.KMutableProperty1<A, kotlin.String>
+          TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty1<A, kotlin.String>
+            CALL 'single() on Iterable<KProperty1<A, *>>: KProperty1<A, *>' type=kotlin.reflect.KProperty1<A, *> operator=null
+              $receiver: CALL '<get-declaredMemberProperties>() on KClass<A>: Collection<KProperty1<A, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<A, *>> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+        CALL '<set-isAccessible>(Boolean) on KCallable<*>: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 'p: KMutableProperty1<A, String>' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+          value: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='abc'
+          actual: CALL 'call(vararg Any?): String' type=kotlin.String operator=null
+            $this: GET_VAR 'p: KMutableProperty1<A, String>' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              GET_VAR 'a: A' type=A operator=null
+        CALL 'assertEquals(Unit, Unit, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_OBJECT 'Unit' type=kotlin.Unit
+          actual: CALL 'call(vararg Any?): Unit' type=kotlin.Unit operator=null
+            $this: CALL '<get-setter>(): KMutableProperty1.Setter<A, String>' type=kotlin.reflect.KMutableProperty1.Setter<A, kotlin.String> operator=GET_PROPERTY
+              $this: GET_VAR 'p: KMutableProperty1<A, String>' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              GET_VAR 'a: A' type=A operator=null
+              CONST String type=kotlin.String value='def'
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='def'
+          actual: CALL 'call(vararg Any?): String' type=kotlin.String operator=null
+            $this: CALL '<get-getter>(): KProperty1.Getter<A, String>' type=kotlin.reflect.KProperty1.Getter<A, kotlin.String> operator=GET_PROPERTY
+              $this: GET_VAR 'p: KMutableProperty1<A, String>' type=kotlin.reflect.KMutableProperty1<A, kotlin.String> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              GET_VAR 'a: A' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

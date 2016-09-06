@@ -1,0 +1,23 @@
+MODULE <test-module>
+  FILE /kt434.kt
+    FUN public fun kotlin.String.decodeURI(encoding: kotlin.String): kotlin.String?
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='decodeURI(String) on String: String?'
+          TRY_CATCH type=kotlin.String?
+            try: BLOCK type=kotlin.String! operator=null
+              CALL 'decode(String!, String!): String!' type=kotlin.String! operator=null
+                p0: $RECEIVER of 'decodeURI(String) on String: String?' type=kotlin.String
+                p1: GET_VAR 'value-parameter encoding: String' type=kotlin.String operator=null
+            catch e: BLOCK type=kotlin.Nothing? operator=null
+              CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'decodeURI(String) on String: String?' type=kotlin.String? operator=null
+                $receiver: CONST String type=kotlin.String value='hhh'
+                encoding: CONST String type=kotlin.String value=''
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

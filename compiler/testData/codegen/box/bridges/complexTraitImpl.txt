@@ -1,0 +1,87 @@
+MODULE <test-module>
+  FILE /complexTraitImpl.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public abstract fun foo(): kotlin.collections.List<kotlin.String>
+    CLASS INTERFACE B
+      FUN public open fun foo(): java.util.ArrayList<kotlin.String>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): ArrayList<String>'
+            CALL 'constructor ArrayList((MutableCollection<out String!>..Collection<String!>?))' type=java.util.ArrayList<kotlin.String> operator=null
+              p0: CALL 'asList(vararg String!): (Mutable)List<String!>!' type=kotlin.collections.(Mutable)List<kotlin.String!>! operator=null
+                p0: VARARG type=(kotlin.Array<(kotlin.String..kotlin.String?)>..kotlin.Array<out (kotlin.String..kotlin.String?)>?) varargElementType=(kotlin.String..kotlin.String?)
+                  CONST String type=kotlin.String value='B'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      FUN public open override fun foo(): java.util.ArrayList<kotlin.String>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): ArrayList<String>'
+            CALL 'foo(): ArrayList<String>' superQualifier=B type=java.util.ArrayList<kotlin.String> operator=null
+              $this: THIS of 'C' type=B
+    CLASS INTERFACE D
+      FUN public abstract fun foo(): kotlin.collections.Collection<kotlin.String>
+    CLASS CLASS E
+      CONSTRUCTOR public constructor E()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor C()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='E'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val e: E
+          CALL 'constructor E()' type=E operator=null
+        VAR var r: kotlin.String
+          CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+            $this: CALL 'foo(): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+              $this: GET_VAR 'e: E' type=E operator=null
+            index: CONST Int type=kotlin.Int value='0'
+        VAR val d: D
+          GET_VAR 'e: E' type=E operator=null
+        VAR val c: C
+          GET_VAR 'e: E' type=E operator=null
+        VAR val b: B
+          GET_VAR 'e: E' type=E operator=null
+        VAR val a: A
+          GET_VAR 'e: E' type=E operator=null
+        SET_VAR 'r: String' type=kotlin.Unit operator=PLUSEQ
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+            $this: GET_VAR 'r: String' type=kotlin.String operator=PLUSEQ
+            other: CALL 'next(): String' type=kotlin.String operator=null
+              $this: CALL 'iterator(): Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+                $this: CALL 'foo(): Collection<String>' type=kotlin.collections.Collection<kotlin.String> operator=null
+                  $this: GET_VAR 'd: D' type=D operator=null
+        SET_VAR 'r: String' type=kotlin.Unit operator=PLUSEQ
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+            $this: GET_VAR 'r: String' type=kotlin.String operator=PLUSEQ
+            other: CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+              $this: CALL 'foo(): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+                $this: GET_VAR 'c: C' type=C operator=null
+              index: CONST Int type=kotlin.Int value='0'
+        SET_VAR 'r: String' type=kotlin.Unit operator=PLUSEQ
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+            $this: GET_VAR 'r: String' type=kotlin.String operator=PLUSEQ
+            other: CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+              $this: CALL 'foo(): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+                $this: GET_VAR 'b: B' type=B operator=null
+              index: CONST Int type=kotlin.Int value='0'
+        SET_VAR 'r: String' type=kotlin.Unit operator=PLUSEQ
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+            $this: GET_VAR 'r: String' type=kotlin.String operator=PLUSEQ
+            other: CALL 'get(Int): String' type=kotlin.String operator=GET_ARRAY_ELEMENT
+              $this: CALL 'foo(): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+                $this: GET_VAR 'a: A' type=A operator=null
+              index: CONST Int type=kotlin.Int value='0'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'r: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='BBBBB'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'r: String' type=kotlin.String operator=null

@@ -1,0 +1,49 @@
+MODULE <test-module>
+  FILE /differentTypes.kt
+    FUN public inline fun bar(x: kotlin.Int, y: kotlin.Long, z: kotlin.Byte, s: kotlin.String): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='bar(Int, Long, Byte, String): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: CALL 'toString(): String' type=kotlin.String operator=null
+                  $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                other: CALL 'toString(): String' type=kotlin.String operator=null
+                  $this: GET_VAR 'value-parameter y: Long' type=kotlin.Long operator=null
+              other: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'value-parameter z: Byte' type=kotlin.Byte operator=null
+            other: GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+    FUN public fun foobar(x: kotlin.Int, y: kotlin.Long, s: kotlin.String, z: kotlin.Byte): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foobar(Int, Long, String, Byte): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: CALL 'toString(): String' type=kotlin.String operator=null
+                  $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                other: CALL 'toString(): String' type=kotlin.String operator=null
+                  $this: GET_VAR 'value-parameter y: Long' type=kotlin.Long operator=null
+              other: GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+            other: CALL 'toString(): String' type=kotlin.String operator=null
+              $this: GET_VAR 'value-parameter z: Byte' type=kotlin.Byte operator=null
+    FUN public fun foo(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(): String'
+          CALL 'foobar(Int, Long, String, Byte): String' type=kotlin.String operator=null
+            x: CONST Int type=kotlin.Int value='1'
+            y: CONST Long type=kotlin.Long value='2'
+            s: CALL 'bar(Int, Long, Byte, String): String' type=kotlin.String operator=null
+              x: CONST Int type=kotlin.Int value='3'
+              y: CONST Long type=kotlin.Long value='4'
+              z: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+                $this: CONST Int type=kotlin.Int value='5'
+              s: CONST String type=kotlin.String value='6'
+            z: CALL 'toByte(): Byte' type=kotlin.Byte operator=null
+              $this: CONST Int type=kotlin.Int value='7'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='1234567'
+          actual: CALL 'foo(): String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

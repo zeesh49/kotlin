@@ -1,0 +1,81 @@
+MODULE <test-module>
+  FILE /typedDelegation.kt
+    CLASS INTERFACE A
+      PROPERTY public abstract var zzzValue: T
+      FUN public abstract fun zzz(): T
+    CLASS CLASS Base
+      CONSTRUCTOR public constructor Base<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Base'
+      PROPERTY public open override var zzzValue: T?
+        EXPRESSION_BODY
+          CONST Null type=kotlin.Nothing? value='null'
+      FUN public open override fun zzz(): T?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='zzz(): T?'
+            CALL '<get-zzzValue>(): T?' type=T? operator=GET_PROPERTY
+              $this: THIS of 'Base' type=Base<T>
+    CLASS CLASS X
+      CONSTRUCTOR public constructor X()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='X'
+      PROPERTY val `X$A$delegate`: Base<kotlin.String?>
+        EXPRESSION_BODY
+          CALL 'constructor Base()' type=Base<kotlin.String?> operator=null
+      FUN public open override fun zzz(): kotlin.String?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='zzz(): String?'
+            CALL 'zzz(): String?' type=kotlin.String? operator=null
+              $this: GET_VAR '`X$A$delegate`: Base<String?>' type=Base<kotlin.String?> operator=null
+      PROPERTY public open override var zzzValue: kotlin.String?
+        PROPERTY_GETTER public open override fun <get-zzzValue>(): kotlin.String?
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-zzzValue>(): String?'
+              CALL '<get-zzzValue>(): String?' type=kotlin.String? operator=null
+                $this: GET_VAR '`X$A$delegate`: Base<String?>' type=Base<kotlin.String?> operator=null
+        PROPERTY_SETTER public open override fun <set-zzzValue>(<set-?>: kotlin.String?): kotlin.Unit
+          BLOCK_BODY
+            CALL '<set-zzzValue>(String?): Unit' type=kotlin.Unit operator=null
+              $this: GET_VAR '`X$A$delegate`: Base<String?>' type=Base<kotlin.String?> operator=null
+              <set-?>: GET_VAR 'value-parameter <set-?>: String?' type=kotlin.String? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'zzz(): String?' type=kotlin.String? operator=null
+          $this: TYPE_OP operator=CAST typeOperand=A<kotlin.String?>
+            CALL 'constructor Base()' type=Base<kotlin.String?> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'zzz(): String?' type=kotlin.String? operator=null
+                $this: CALL 'constructor X()' type=X operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail'
+        VAR val x: X
+          CALL 'constructor X()' type=X operator=null
+        CALL '<set-zzzValue>(String?): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'x: X' type=X operator=null
+          <set-?>: CONST String type=kotlin.String value='aa'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-zzzValue>(): String?' type=kotlin.String? operator=GET_PROPERTY
+                $this: GET_VAR 'x: X' type=X operator=null
+              arg1: CONST String type=kotlin.String value='aa'
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'zzz(): String?' type=kotlin.String? operator=null
+                $this: GET_VAR 'x: X' type=X operator=null
+              arg1: CONST String type=kotlin.String value='aa'
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail 3'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

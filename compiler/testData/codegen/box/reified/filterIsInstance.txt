@@ -1,0 +1,60 @@
+MODULE <test-module>
+  FILE /filterIsInstance.kt
+    FUN public inline fun <reified T> kotlin.Array<kotlin.Any>.filterIsInstance(): kotlin.collections.List<T>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='filterIsInstance() on Array<Any>: List<T>'
+          CALL 'map((Any) -> T) on Iterable<Any>: List<T>' type=kotlin.collections.List<T> operator=null
+            $receiver: CALL 'filter((Any) -> Boolean) on Array<out Any>: List<Any>' type=kotlin.collections.List<kotlin.Any> operator=null
+              $receiver: $RECEIVER of 'filterIsInstance() on Array<Any>: List<T>' type=kotlin.Array<kotlin.Any>
+              predicate: BLOCK type=(kotlin.Any) -> kotlin.Boolean operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.Any): kotlin.Boolean
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(Any): Boolean'
+                      TYPE_OP operator=INSTANCEOF typeOperand=T
+                        GET_VAR 'value-parameter it: Any' type=kotlin.Any operator=null
+                CALLABLE_REFERENCE '<anonymous>(Any): Boolean' type=(kotlin.Any) -> kotlin.Boolean operator=LAMBDA
+            transform: BLOCK type=(kotlin.Any) -> T operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.Any): T
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Any): T'
+                    TYPE_OP operator=CAST typeOperand=T
+                      GET_VAR 'value-parameter it: Any' type=kotlin.Any operator=null
+              CALLABLE_REFERENCE '<anonymous>(Any): T' type=(kotlin.Any) -> T operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val src: kotlin.Array<kotlin.Any>
+          CALL 'arrayOf(vararg Any): Array<Any>' type=kotlin.Array<kotlin.Any> operator=null
+            elements: VARARG type=Array<out Any> varargElementType=Any
+              CONST Int type=kotlin.Int value='1'
+              CONST Int type=kotlin.Int value='2'
+              CALL 'toDouble(): Double' type=kotlin.Double operator=null
+                $this: CONST Int type=kotlin.Int value='3'
+              CONST String type=kotlin.String value='abc'
+              CONST String type=kotlin.String value='cde'
+        CALL 'assertEquals(List<Int>, List<Int>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'arrayListOf(vararg Int): ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+            elements: VARARG type=Array<out Int> varargElementType=Int
+              CONST Int type=kotlin.Int value='1'
+              CONST Int type=kotlin.Int value='2'
+          actual: CALL 'filterIsInstance() on Array<Any>: List<Int>' type=kotlin.collections.List<kotlin.Int> operator=null
+            $receiver: GET_VAR 'src: Array<Any>' type=kotlin.Array<kotlin.Any> operator=null
+        CALL 'assertEquals(List<Double>, List<Double>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'arrayListOf(vararg Double): ArrayList<Double>' type=java.util.ArrayList<kotlin.Double> operator=null
+            elements: VARARG type=Array<out Double> varargElementType=Double
+              CONST Double type=kotlin.Double value='3.0'
+          actual: CALL 'filterIsInstance() on Array<Any>: List<Double>' type=kotlin.collections.List<kotlin.Double> operator=null
+            $receiver: GET_VAR 'src: Array<Any>' type=kotlin.Array<kotlin.Any> operator=null
+        CALL 'assertEquals(List<String!>, List<String!>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'arrayListOf(vararg String): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='abc'
+              CONST String type=kotlin.String value='cde'
+          actual: CALL 'filterIsInstance() on Array<Any>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            $receiver: GET_VAR 'src: Array<Any>' type=kotlin.Array<kotlin.Any> operator=null
+        CALL 'assertEquals(List<Any>, List<Any>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'toList() on Array<out Any>: List<Any>' type=kotlin.collections.List<kotlin.Any> operator=null
+            $receiver: GET_VAR 'src: Array<Any>' type=kotlin.Array<kotlin.Any> operator=null
+          actual: CALL 'filterIsInstance() on Array<Any>: List<Any>' type=kotlin.collections.List<kotlin.Any> operator=null
+            $receiver: GET_VAR 'src: Array<Any>' type=kotlin.Array<kotlin.Any> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

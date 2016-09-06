@@ -1,0 +1,59 @@
+MODULE <test-module>
+  FILE /main.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: BLOCK type=kotlin.reflect.KFunction<*>? operator=SAFE_CALL
+              VAR val tmp0_safe_receiver: java.lang.reflect.Method?
+                CALL '<get-javaMethod>() on KFunction<*>: Method?' type=java.lang.reflect.Method? operator=GET_PROPERTY
+                  $receiver: CALLABLE_REFERENCE 'box(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+              WHEN type=kotlin.reflect.KFunction<*>? operator=SAFE_CALL
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_safe_receiver: Method?' type=java.lang.reflect.Method? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CONST Null type=kotlin.Nothing? value='null'
+                else: CALL '<get-kotlinFunction>() on Method: KFunction<*>?' type=kotlin.reflect.KFunction<*>? operator=GET_PROPERTY
+                  $this: GET_VAR 'tmp0_safe_receiver: Method?' type=java.lang.reflect.Method? operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail box'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: BLOCK type=kotlin.reflect.KFunction<*>? operator=SAFE_CALL
+              VAR val tmp1_safe_receiver: java.lang.reflect.Method?
+                CALL '<get-javaMethod>() on KFunction<*>: Method?' type=java.lang.reflect.Method? operator=GET_PROPERTY
+                  $receiver: CALLABLE_REFERENCE 'test1(): Unit' type=kotlin.reflect.KFunction0<kotlin.Unit> operator=null
+              WHEN type=kotlin.reflect.KFunction<*>? operator=SAFE_CALL
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp1_safe_receiver: Method?' type=java.lang.reflect.Method? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CONST Null type=kotlin.Nothing? value='null'
+                else: CALL '<get-kotlinFunction>() on Method: KFunction<*>?' type=kotlin.reflect.KFunction<*>? operator=GET_PROPERTY
+                  $this: GET_VAR 'tmp1_safe_receiver: Method?' type=java.lang.reflect.Method? operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail test1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: BLOCK type=kotlin.reflect.KFunction<*>? operator=SAFE_CALL
+              VAR val tmp2_safe_receiver: java.lang.reflect.Method?
+                CALL '<get-javaMethod>() on KFunction<*>: Method?' type=java.lang.reflect.Method? operator=GET_PROPERTY
+                  $receiver: CALLABLE_REFERENCE 'test2(): Unit' type=kotlin.reflect.KFunction0<kotlin.Unit> operator=null
+              WHEN type=kotlin.reflect.KFunction<*>? operator=SAFE_CALL
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp2_safe_receiver: Method?' type=java.lang.reflect.Method? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CONST Null type=kotlin.Nothing? value='null'
+                else: CALL '<get-kotlinFunction>() on Method: KFunction<*>?' type=kotlin.reflect.KFunction<*>? operator=GET_PROPERTY
+                  $this: GET_VAR 'tmp2_safe_receiver: Method?' type=java.lang.reflect.Method? operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail test2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun test1(): kotlin.Unit
+      BLOCK_BODY
+  FILE /test.kt
+    FUN public fun test2(): kotlin.Unit
+      BLOCK_BODY

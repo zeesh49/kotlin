@@ -1,0 +1,49 @@
+MODULE <test-module>
+  FILE /statementLikeLastExpression.kt
+    PROPERTY public var globalResult: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    CLASS CLASS Controller
+      CONSTRUCTOR public constructor Controller()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Controller'
+      FUN public final suspend fun suspendWithValue(v: kotlin.String, x: kotlin.coroutines.Continuation<kotlin.String>): kotlin.Unit
+        BLOCK_BODY
+          CALL 'resume(String): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR 'value-parameter x: Continuation<String>' type=kotlin.coroutines.Continuation<kotlin.String> operator=null
+            data: GET_VAR 'value-parameter v: String' type=kotlin.String operator=null
+      FUN public final operator fun handleResult(x: kotlin.String, c: kotlin.coroutines.Continuation<kotlin.Nothing>): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-globalResult>(String): Unit' type=kotlin.Unit operator=EQ
+            <set-?>: GET_VAR 'value-parameter x: String' type=kotlin.String operator=null
+    FUN public fun builder(coroutine c: Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'resume(Unit): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'invoke(Controller): Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=INVOKE
+            $this: GET_VAR 'value-parameter coroutine c: Controller.() -> Continuation<Unit>' type=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+            p1: CALL 'constructor Controller()' type=Controller operator=null
+          data: GET_OBJECT 'Unit' type=kotlin.Unit
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var condition: kotlin.Boolean
+          CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'builder(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+            BLOCK type=Controller.() -> kotlin.String operator=LAMBDA
+              FUN local final fun Controller.<anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Controller: String'
+                    WHEN type=kotlin.String operator=IF
+                      if: GET_VAR 'condition: Boolean' type=kotlin.Boolean operator=null
+                      then: BLOCK type=kotlin.String operator=null
+                        CALL 'suspendWithValue(String): String' type=kotlin.String operator=null
+                          $this: $RECEIVER of '<anonymous>() on Controller: String' type=Controller
+                          v: CONST String type=kotlin.String value='OK'
+                      else: BLOCK type=kotlin.String operator=null
+                        CALL 'suspendWithValue(String): String' type=kotlin.String operator=null
+                          $this: $RECEIVER of '<anonymous>() on Controller: String' type=Controller
+                          v: CONST String type=kotlin.String value='fail 1'
+              CALLABLE_REFERENCE '<anonymous>() on Controller: String' type=Controller.() -> kotlin.String operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-globalResult>(): String' type=kotlin.String operator=GET_PROPERTY

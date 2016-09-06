@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /kt3850.kt
+    CLASS CLASS One
+      CONSTRUCTOR public constructor One()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='One'
+      PROPERTY public final val a1: kotlin.Array<One.a1.<no name provided>>
+        EXPRESSION_BODY
+          CALL 'arrayOf(vararg <no name provided>): Array<<no name provided>>' type=kotlin.Array<One.a1.<no name provided>> operator=null
+            elements: VARARG type=Array<out <no name provided>> varargElementType=<no name provided>
+              BLOCK type=One.a1.<no name provided> operator=OBJECT_LITERAL
+                CLASS CLASS <no name provided>
+                  CONSTRUCTOR public constructor <no name provided>()
+                    BLOCK_BODY
+                      DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                      INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                  PROPERTY public final val fy: kotlin.String = "text"
+                    EXPRESSION_BODY
+                      CONST String type=kotlin.String value='text'
+                CALL 'constructor <no name provided>()' type=One.a1.<no name provided> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-fy>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: CALL 'get(Int): <no name provided>' type=One.a1.<no name provided> operator=GET_ARRAY_ELEMENT
+                  $this: CALL '<get-a1>(): Array<<no name provided>>' type=kotlin.Array<One.a1.<no name provided>> operator=GET_PROPERTY
+                    $this: CALL 'constructor One()' type=One operator=null
+                  index: CONST Int type=kotlin.Int value='0'
+              arg1: CONST String type=kotlin.String value='text'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

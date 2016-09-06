@@ -1,0 +1,15 @@
+MODULE <test-module>
+  FILE /test.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val sub: Box<kotlin.Long>
+          CALL 'constructor Box(Long!)' type=Box<kotlin.Long> operator=null
+            value: CONST Long type=kotlin.Long value='-1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-value>() on Box<Long>: Long!' type=kotlin.Long! operator=GET_PROPERTY
+                $receiver: GET_VAR 'sub: Box<Long>' type=Box<kotlin.Long> operator=null
+              arg1: CONST Long type=kotlin.Long value='-1'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

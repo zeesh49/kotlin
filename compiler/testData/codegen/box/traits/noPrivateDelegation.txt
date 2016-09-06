@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /noPrivateDelegation.kt
+    CLASS INTERFACE Z
+      FUN private final fun extension(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='extension(): String'
+            CONST String type=kotlin.String value='OK'
+    CLASS OBJECT Z2
+      CONSTRUCTOR private constructor Z2()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Z2'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val size: kotlin.Int
+          CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<java.lang.reflect.Method!>
+              TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Method!>
+                CALL '<get-declaredMethods>() on Class<*>: Array<(out) Method!>!' type=kotlin.Array<(out) java.lang.reflect.Method!>! operator=GET_PROPERTY
+                  $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+                    CALL 'forName(String!): Class<*>!' type=java.lang.Class<*>! operator=null
+                      p0: CONST String type=kotlin.String value='Z2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'size: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: '
+              GET_VAR 'size: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,127 @@
+MODULE <test-module>
+  FILE /companionObjectFunction.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      CLASS OBJECT companion object of C
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of C'
+        FUN @kotlin.jvm.JvmStatic public final fun foo(s: kotlin.String): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo(String): Int'
+              CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val foo: kotlin.reflect.KFunction<*>
+          TYPE_OP operator=CAST typeOperand=kotlin.reflect.KFunction<*>
+            CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+              $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                $this: CLASS_REFERENCE 'companion object of C' type=kotlin.reflect.KClass<C.Companion>
+              predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                      CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                          $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                        arg1: CONST String type=kotlin.String value='foo'
+                CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+        VAR val j: java.lang.reflect.Method
+          BLOCK type=java.lang.reflect.Method operator=ELVIS
+            VAR val tmp0_elvis_lhs: java.lang.reflect.Method?
+              CALL '<get-javaMethod>() on KFunction<*>: Method?' type=java.lang.reflect.Method? operator=GET_PROPERTY
+                $receiver: GET_VAR 'foo: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+            WHEN type=java.lang.reflect.Method operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_elvis_lhs: Method?' type=java.lang.reflect.Method? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                CONST String type=kotlin.String value='Fail: no Java method found for C::foo'
+              else: GET_VAR 'tmp0_elvis_lhs: Method?' type=java.lang.reflect.Method? operator=null
+        CALL 'assertEquals(Any!, Any!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='3'
+          actual: CALL 'invoke(Any!, vararg Any!): Any!' type=kotlin.Any! operator=null
+            $this: GET_VAR 'j: Method' type=java.lang.reflect.Method operator=null
+            p0: GET_OBJECT 'companion object of C' type=C.Companion
+            p1: VARARG type=(kotlin.Array<(kotlin.Any..kotlin.Any?)>..kotlin.Array<out (kotlin.Any..kotlin.Any?)>?) varargElementType=(kotlin.Any..kotlin.Any?)
+              CONST String type=kotlin.String value='abc'
+        VAR val k: kotlin.reflect.KFunction<*>
+          BLOCK type=kotlin.reflect.KFunction<*> operator=ELVIS
+            VAR val tmp1_elvis_lhs: kotlin.reflect.KFunction<*>?
+              CALL '<get-kotlinFunction>() on Method: KFunction<*>?' type=kotlin.reflect.KFunction<*>? operator=GET_PROPERTY
+                $receiver: GET_VAR 'j: Method' type=java.lang.reflect.Method operator=null
+            WHEN type=kotlin.reflect.KFunction<*> operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp1_elvis_lhs: KFunction<*>?' type=kotlin.reflect.KFunction<*>? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                CONST String type=kotlin.String value='Fail: no Kotlin function found for Java method C::foo'
+              else: GET_VAR 'tmp1_elvis_lhs: KFunction<*>?' type=kotlin.reflect.KFunction<*>? operator=null
+        CALL 'assertEquals(Any?, Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='3'
+          actual: CALL 'call(vararg Any?): Any?' type=kotlin.Any? operator=null
+            $this: GET_VAR 'k: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              GET_OBJECT 'companion object of C' type=C.Companion
+              CONST String type=kotlin.String value='def'
+        VAR val staticMethod: java.lang.reflect.Method!
+          CALL 'getDeclaredMethod(String!, vararg Class<*>!): Method!' type=java.lang.reflect.Method! operator=null
+            $this: CALL '<get-java>() on KClass<C>: Class<C>' type=java.lang.Class<C> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'C' type=kotlin.reflect.KClass<C>
+            p0: CONST String type=kotlin.String value='foo'
+            p1: VARARG type=(kotlin.Array<(java.lang.Class<*>..java.lang.Class<*>?)>..kotlin.Array<out (java.lang.Class<*>..java.lang.Class<*>?)>?) varargElementType=(java.lang.Class<*>..java.lang.Class<*>?)
+              CALL '<get-java>() on KClass<String>: Class<String>' type=java.lang.Class<kotlin.String> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'String' type=kotlin.reflect.KClass<kotlin.String>
+        VAR val k2: kotlin.reflect.KFunction<*>
+          BLOCK type=kotlin.reflect.KFunction<*> operator=ELVIS
+            VAR val tmp2_elvis_lhs: kotlin.reflect.KFunction<*>?
+              CALL '<get-kotlinFunction>() on Method: KFunction<*>?' type=kotlin.reflect.KFunction<*>? operator=GET_PROPERTY
+                $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Method
+                  GET_VAR 'staticMethod: Method!' type=java.lang.reflect.Method! operator=null
+            WHEN type=kotlin.reflect.KFunction<*> operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp2_elvis_lhs: KFunction<*>?' type=kotlin.reflect.KFunction<*>? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                CONST String type=kotlin.String value='Fail: no Kotlin function found for static bridge for @JvmStatic method in companion object C::foo'
+              else: GET_VAR 'tmp2_elvis_lhs: KFunction<*>?' type=kotlin.reflect.KFunction<*>? operator=null
+        CALL 'assertEquals(Any?, Any?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='3'
+          actual: CALL 'call(vararg Any?): Any?' type=kotlin.Any? operator=null
+            $this: GET_VAR 'k2: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              GET_OBJECT 'companion object of C' type=C.Companion
+              CONST String type=kotlin.String value='ghi'
+        CALL 'assertFailsWith(KClass<NullPointerException /* = NullPointerException */>, () -> Unit): NullPointerException /* = NullPointerException */' type=kotlin.NullPointerException /* = java.lang.NullPointerException */ operator=null
+          exceptionClass: CLASS_REFERENCE 'NullPointerException' type=kotlin.reflect.KClass<kotlin.NullPointerException /* = java.lang.NullPointerException */>
+          block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  BLOCK type=kotlin.Any operator=EXCLEXCL
+                    VAR val tmp0_notnull: kotlin.Any?
+                      CALL 'call(vararg Any?): Any?' type=kotlin.Any? operator=null
+                        $this: GET_VAR 'k2: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+                        args: VARARG type=Array<out Any?> varargElementType=Any?
+                          CONST Null type=kotlin.Nothing? value='null'
+                          CONST String type=kotlin.String value=''
+                    WHEN type=kotlin.Any operator=null
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'tmp0_notnull: Any?' type=kotlin.Any? operator=null
+                        arg1: CONST Null type=kotlin.Nothing? value='null'
+                      then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                      else: GET_VAR 'tmp0_notnull: Any?' type=kotlin.Any? operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        VAR val j2: java.lang.reflect.Method?
+          CALL '<get-javaMethod>() on KFunction<*>: Method?' type=java.lang.reflect.Method? operator=GET_PROPERTY
+            $receiver: GET_VAR 'k2: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+        CALL 'assertEquals(Method?, Method?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'j: Method' type=java.lang.reflect.Method operator=null
+          actual: GET_VAR 'j2: Method?' type=java.lang.reflect.Method? operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

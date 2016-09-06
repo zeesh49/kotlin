@@ -1,0 +1,35 @@
+MODULE <test-module>
+  FILE /nonDefaultParameterOmitted.kt
+    FUN public fun foo(x: kotlin.Int, y: kotlin.Int = ...): kotlin.Int
+      y: EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='2'
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(Int, Int = ...): Int'
+          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+            $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+            other: GET_VAR 'value-parameter y: Int = ...' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'callBy(Map<KParameter, Any?>): Int' type=kotlin.Int operator=null
+              $this: CALLABLE_REFERENCE 'foo(Int, Int = ...): Int' type=kotlin.reflect.KFunction2<kotlin.Int, kotlin.Int, kotlin.Int> operator=null
+              args: CALL 'mapOf(): Map<KParameter, Any?>' type=kotlin.collections.Map<kotlin.reflect.KParameter, kotlin.Any?> operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail: IllegalArgumentException must have been thrown'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'callBy(Map<KParameter, Any?>): Int' type=kotlin.Int operator=null
+              $this: CALLABLE_REFERENCE 'foo(Int, Int = ...): Int' type=kotlin.reflect.KFunction2<kotlin.Int, kotlin.Int, kotlin.Int> operator=null
+              args: CALL 'mapOf(Pair<KParameter, Int>): Map<KParameter, Int>' type=kotlin.collections.Map<kotlin.reflect.KParameter, kotlin.Int> operator=null
+                pair: CALL 'to(Int) on KParameter: Pair<KParameter, Int>' type=kotlin.Pair<kotlin.reflect.KParameter, kotlin.Int> operator=null
+                  $receiver: CALL 'last() on List<KParameter>: KParameter' type=kotlin.reflect.KParameter operator=null
+                    $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                      $this: CALLABLE_REFERENCE 'foo(Int, Int = ...): Int' type=kotlin.reflect.KFunction2<kotlin.Int, kotlin.Int, kotlin.Int> operator=null
+                  that: CONST Int type=kotlin.Int value='1'
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail: IllegalArgumentException must have been thrown'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

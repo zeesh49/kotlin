@@ -1,0 +1,55 @@
+MODULE <test-module>
+  FILE /declarationSiteVariance.kt
+    CLASS CLASS Triple
+      CONSTRUCTOR public constructor Triple<in A, B, out C>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Triple'
+      FUN public final fun <T> foo(): T
+        BLOCK_BODY
+          BLOCK type=kotlin.Nothing operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+            WHEN type=kotlin.Nothing operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(List<KVariance>, List<KVariance>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(vararg KVariance): List<KVariance>' type=kotlin.collections.List<kotlin.reflect.KVariance> operator=null
+            elements: VARARG type=Array<out KVariance> varargElementType=KVariance
+              GET_ENUM_VALUE 'IN' type=kotlin.reflect.KVariance
+              GET_ENUM_VALUE 'INVARIANT' type=kotlin.reflect.KVariance
+              GET_ENUM_VALUE 'OUT' type=kotlin.reflect.KVariance
+          actual: CALL 'map((KTypeParameter) -> KVariance) on Iterable<KTypeParameter>: List<KVariance>' type=kotlin.collections.List<kotlin.reflect.KVariance> operator=null
+            $receiver: CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'Triple' type=kotlin.reflect.KClass<Triple<*, *, *>>
+            transform: BLOCK type=(kotlin.reflect.KTypeParameter) -> kotlin.reflect.KVariance operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KTypeParameter): kotlin.reflect.KVariance
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KTypeParameter): KVariance'
+                    CALL '<get-variance>(): KVariance' type=kotlin.reflect.KVariance operator=GET_PROPERTY
+                      $this: GET_VAR 'value-parameter it: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+              CALLABLE_REFERENCE '<anonymous>(KTypeParameter): KVariance' type=(kotlin.reflect.KTypeParameter) -> kotlin.reflect.KVariance operator=LAMBDA
+        CALL 'assertEquals(KVariance, KVariance, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_ENUM_VALUE 'INVARIANT' type=kotlin.reflect.KVariance
+          actual: CALL '<get-variance>(): KVariance' type=kotlin.reflect.KVariance operator=GET_PROPERTY
+            $this: CALL 'single() on List<KTypeParameter>: KTypeParameter' type=kotlin.reflect.KTypeParameter operator=null
+              $receiver: CALL '<get-typeParameters>(): List<KTypeParameter>' type=kotlin.collections.List<kotlin.reflect.KTypeParameter> operator=GET_PROPERTY
+                $this: CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                  $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                    $this: CLASS_REFERENCE 'Triple' type=kotlin.reflect.KClass<Triple<*, *, *>>
+                  predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+                    FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                            arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                              $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                            arg1: CONST String type=kotlin.String value='foo'
+                    CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

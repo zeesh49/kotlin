@@ -1,0 +1,52 @@
+MODULE <test-module>
+  FILE /kt318.kt
+    PROPERTY public var result: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    CLASS INTERFACE Base
+    CLASS CLASS Child
+      CONSTRUCTOR public constructor Child()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Child'
+    CLASS INTERFACE A
+      FUN public open fun <E : T> foo(a: E): kotlin.Unit
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            CALL '<set-result>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+              <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: CALL '<get-result>(): String' type=kotlin.String operator=PLUSEQ
+                other: CONST String type=kotlin.String value='A'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      FUN public open override fun <E : Child> foo(a: E): kotlin.Unit
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            CALL '<set-result>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+              <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: CALL '<get-result>(): String' type=kotlin.String operator=PLUSEQ
+                other: CONST String type=kotlin.String value='B'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val b: B
+          CALL 'constructor B()' type=B operator=null
+        CALL 'foo(Child): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'b: B' type=B operator=null
+          a: CALL 'constructor Child()' type=Child operator=null
+        VAR val a: A<Child>
+          GET_VAR 'b: B' type=B operator=null
+        CALL 'foo(Child): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'a: A<Child>' type=A<Child> operator=null
+          a: CALL 'constructor Child()' type=Child operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+              arg1: CONST String type=kotlin.String value='BB'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY

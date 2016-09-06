@@ -1,0 +1,176 @@
+MODULE <test-module>
+  FILE /constFlags.kt
+    PROPERTY private const val privateConst: kotlin.Int = 1
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='1'
+    PROPERTY public const val publicConst: kotlin.Int = 3
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='3'
+    CLASS OBJECT A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY private const final val privateConst: kotlin.Int = 1
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+      PROPERTY public const final val publicConst: kotlin.Int = 3
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='3'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      CLASS OBJECT companion object of B
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of B'
+        PROPERTY private const final val privateConst: kotlin.Int = 1
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='1'
+        PROPERTY protected const final val protectedConst: kotlin.Int = 2
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='2'
+        PROPERTY public const final val publicConst: kotlin.Int = 3
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value='3'
+    FUN public fun check(clazz: java.lang.Class<*>, expectProtected: kotlin.Boolean = ...): kotlin.Unit
+      expectProtected: EXPRESSION_BODY
+        CONST Boolean type=kotlin.Boolean value='true'
+      BLOCK_BODY
+        VAR val fields: kotlin.collections.List<java.lang.reflect.Field!>
+          CALL 'filter((Field!) -> Boolean) on Array<out Field!>: List<Field!>' type=kotlin.collections.List<java.lang.reflect.Field!> operator=null
+            $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Field!>
+              CALL '<get-declaredFields>() on Class<*>: Array<(out) Field!>!' type=kotlin.Array<(out) java.lang.reflect.Field!>! operator=GET_PROPERTY
+                $receiver: GET_VAR 'value-parameter clazz: Class<*>' type=java.lang.Class<*> operator=null
+            predicate: BLOCK type=(java.lang.reflect.Field!) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(it: java.lang.reflect.Field!): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Field!): Boolean'
+                    CALL 'contains(CharSequence, Boolean = ...) on CharSequence: Boolean' type=kotlin.Boolean operator=null
+                      $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+                        CALL '<get-name>() on Field: String!' type=kotlin.String! operator=GET_PROPERTY
+                          $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+                            GET_VAR 'value-parameter it: Field!' type=java.lang.reflect.Field! operator=null
+                      other: CONST String type=kotlin.String value='Const'
+              CALLABLE_REFERENCE '<anonymous>(Field!): Boolean' type=(java.lang.reflect.Field!) -> kotlin.Boolean operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'all((Field!) -> Boolean) on Iterable<Field!>: Boolean' type=kotlin.Boolean operator=null
+            $receiver: GET_VAR 'fields: List<Field!>' type=kotlin.collections.List<java.lang.reflect.Field!> operator=null
+            predicate: BLOCK type=(java.lang.reflect.Field!) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(it: java.lang.reflect.Field!): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Field!): Boolean'
+                    CALL 'isStatic(Int): Boolean' type=kotlin.Boolean operator=null
+                      p0: CALL '<get-modifiers>() on Field: Int' type=kotlin.Int operator=GET_PROPERTY
+                        $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+                          GET_VAR 'value-parameter it: Field!' type=java.lang.reflect.Field! operator=null
+              CALLABLE_REFERENCE '<anonymous>(Field!): Boolean' type=(java.lang.reflect.Field!) -> kotlin.Boolean operator=LAMBDA
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='`'
+                    GET_VAR 'value-parameter clazz: Class<*>' type=java.lang.Class<*> operator=null
+                    CONST String type=kotlin.String value='` contains non-static fields'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'isPrivate(Int): Boolean' type=kotlin.Boolean operator=null
+            p0: CALL '<get-modifiers>() on Field: Int' type=kotlin.Int operator=GET_PROPERTY
+              $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+                CALL 'single((Field!) -> Boolean) on Iterable<Field!>: Field!' type=java.lang.reflect.Field! operator=null
+                  $receiver: GET_VAR 'fields: List<Field!>' type=kotlin.collections.List<java.lang.reflect.Field!> operator=null
+                  predicate: BLOCK type=(java.lang.reflect.Field!) -> kotlin.Boolean operator=LAMBDA
+                    FUN local final fun <anonymous>(it: java.lang.reflect.Field!): kotlin.Boolean
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(Field!): Boolean'
+                          CALL 'contains(CharSequence, Boolean = ...) on CharSequence: Boolean' type=kotlin.Boolean operator=null
+                            $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+                              CALL '<get-name>() on Field: String!' type=kotlin.String! operator=GET_PROPERTY
+                                $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+                                  GET_VAR 'value-parameter it: Field!' type=java.lang.reflect.Field! operator=null
+                            other: CONST String type=kotlin.String value='private'
+                    CALLABLE_REFERENCE '<anonymous>(Field!): Boolean' type=(java.lang.reflect.Field!) -> kotlin.Boolean operator=LAMBDA
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='`'
+                    GET_VAR 'value-parameter clazz: Class<*>' type=java.lang.Class<*> operator=null
+                    CONST String type=kotlin.String value='`.privateConst is not private'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'isPublic(Int): Boolean' type=kotlin.Boolean operator=null
+            p0: CALL '<get-modifiers>() on Field: Int' type=kotlin.Int operator=GET_PROPERTY
+              $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+                CALL 'single((Field!) -> Boolean) on Iterable<Field!>: Field!' type=java.lang.reflect.Field! operator=null
+                  $receiver: GET_VAR 'fields: List<Field!>' type=kotlin.collections.List<java.lang.reflect.Field!> operator=null
+                  predicate: BLOCK type=(java.lang.reflect.Field!) -> kotlin.Boolean operator=LAMBDA
+                    FUN local final fun <anonymous>(it: java.lang.reflect.Field!): kotlin.Boolean
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(Field!): Boolean'
+                          CALL 'contains(CharSequence, Boolean = ...) on CharSequence: Boolean' type=kotlin.Boolean operator=null
+                            $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+                              CALL '<get-name>() on Field: String!' type=kotlin.String! operator=GET_PROPERTY
+                                $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+                                  GET_VAR 'value-parameter it: Field!' type=java.lang.reflect.Field! operator=null
+                            other: CONST String type=kotlin.String value='public'
+                    CALLABLE_REFERENCE '<anonymous>(Field!): Boolean' type=(java.lang.reflect.Field!) -> kotlin.Boolean operator=LAMBDA
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='`'
+                    GET_VAR 'value-parameter clazz: Class<*>' type=java.lang.Class<*> operator=null
+                    CONST String type=kotlin.String value='`.publicConst is not public'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: GET_VAR 'value-parameter expectProtected: Boolean = ...' type=kotlin.Boolean operator=null
+          then: BLOCK type=kotlin.Unit operator=null
+            CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+              value: CALL 'isProtected(Int): Boolean' type=kotlin.Boolean operator=null
+                p0: CALL '<get-modifiers>() on Field: Int' type=kotlin.Int operator=GET_PROPERTY
+                  $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+                    CALL 'single((Field!) -> Boolean) on Iterable<Field!>: Field!' type=java.lang.reflect.Field! operator=null
+                      $receiver: GET_VAR 'fields: List<Field!>' type=kotlin.collections.List<java.lang.reflect.Field!> operator=null
+                      predicate: BLOCK type=(java.lang.reflect.Field!) -> kotlin.Boolean operator=LAMBDA
+                        FUN local final fun <anonymous>(it: java.lang.reflect.Field!): kotlin.Boolean
+                          BLOCK_BODY
+                            RETURN type=kotlin.Nothing from='<anonymous>(Field!): Boolean'
+                              CALL 'contains(CharSequence, Boolean = ...) on CharSequence: Boolean' type=kotlin.Boolean operator=null
+                                $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+                                  CALL '<get-name>() on Field: String!' type=kotlin.String! operator=GET_PROPERTY
+                                    $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+                                      GET_VAR 'value-parameter it: Field!' type=java.lang.reflect.Field! operator=null
+                                other: CONST String type=kotlin.String value='protected'
+                        CALLABLE_REFERENCE '<anonymous>(Field!): Boolean' type=(java.lang.reflect.Field!) -> kotlin.Boolean operator=LAMBDA
+              lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                      STRING_CONCATENATION type=kotlin.String
+                        CONST String type=kotlin.String value='`'
+                        GET_VAR 'value-parameter clazz: Class<*>' type=java.lang.Class<*> operator=null
+                        CONST String type=kotlin.String value='`.protectedConst is not protected'
+                CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'check(Class<*>, Boolean = ...): Unit' type=kotlin.Unit operator=null
+          clazz: CALL '<get-java>() on KClass<A>: Class<A>' type=java.lang.Class<A> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+          expectProtected: CONST Boolean type=kotlin.Boolean value='false'
+        CALL 'check(Class<*>, Boolean = ...): Unit' type=kotlin.Unit operator=null
+          clazz: CALL '<get-java>() on KClass<B>: Class<B>' type=java.lang.Class<B> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'B' type=kotlin.reflect.KClass<B>
+        CALL 'check(Class<*>, Boolean = ...): Unit' type=kotlin.Unit operator=null
+          clazz: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.Class<*>
+            CALL 'forName(String!): Class<*>!' type=java.lang.Class<*>! operator=null
+              p0: CONST String type=kotlin.String value='XYZ'
+          expectProtected: CONST Boolean type=kotlin.Boolean value='false'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

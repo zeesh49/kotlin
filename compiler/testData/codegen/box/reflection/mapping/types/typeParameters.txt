@@ -1,0 +1,40 @@
+MODULE <test-module>
+  FILE /typeParameters.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun foo(t: T): kotlin.Unit
+        BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f: kotlin.reflect.KFunction2<A<kotlin.String>, kotlin.String, kotlin.Unit>
+          CALLABLE_REFERENCE 'foo(String): Unit' type=kotlin.reflect.KFunction2<A<kotlin.String>, kotlin.String, kotlin.Unit> operator=null
+        VAR val t: java.lang.reflect.Type
+          CALL '<get-javaType>() on KType: Type' type=java.lang.reflect.Type operator=GET_PROPERTY
+            $receiver: CALL '<get-type>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALL 'last() on List<KParameter>: KParameter' type=kotlin.reflect.KParameter operator=null
+                $receiver: CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+                  $this: GET_VAR 'f: KFunction2<A<String>, String, Unit>' type=kotlin.reflect.KFunction2<A<kotlin.String>, kotlin.String, kotlin.Unit> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=java.lang.reflect.TypeVariable<*>
+            GET_VAR 't: Type' type=java.lang.reflect.Type operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail, t should be a type variable: '
+              GET_VAR 't: Type' type=java.lang.reflect.Type operator=null
+        CALL 'assertEquals(String!, String!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='T'
+          actual: CALL '<get-name>() on TypeVariable<*>: String!' type=kotlin.String! operator=GET_PROPERTY
+            $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=java.lang.reflect.TypeVariable<*>
+              GET_VAR 't: Type' type=java.lang.reflect.Type operator=null
+        CALL 'assertEquals(String!, String!, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='A'
+          actual: CALL '<get-name>() on Class<*>: String!' type=kotlin.String! operator=GET_PROPERTY
+            $receiver: TYPE_OP operator=CAST typeOperand=java.lang.Class<*>
+              CALL '<get-genericDeclaration>() on TypeVariable<*>: GenericDeclaration!' type=java.lang.reflect.GenericDeclaration! operator=GET_PROPERTY
+                $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=java.lang.reflect.TypeVariable<*>
+                  GET_VAR 't: Type' type=java.lang.reflect.Type operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

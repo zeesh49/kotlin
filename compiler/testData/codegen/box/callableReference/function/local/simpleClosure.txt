@@ -1,0 +1,13 @@
+MODULE <test-module>
+  FILE /simpleClosure.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val result: kotlin.String = "OK"
+          CONST String type=kotlin.String value='OK'
+        FUN local final fun foo(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo(): String'
+              GET_VAR 'result: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'invoke(): String' type=kotlin.String operator=null
+            $this: CALLABLE_REFERENCE 'foo(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null

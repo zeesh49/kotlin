@@ -1,0 +1,21 @@
+MODULE <test-module>
+  FILE /fieldInsideLambda.kt
+    PROPERTY public val my: kotlin.String = "O"
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='O'
+      PROPERTY_GETTER public fun <get-my>(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-my>(): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CALL 'invoke(): String' type=kotlin.String operator=null
+                $this: BLOCK type=() -> kotlin.String operator=LAMBDA
+                  FUN local final fun <anonymous>(): kotlin.String
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                        GET_VAR 'field: String' type=kotlin.String operator=null
+                  CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+              other: CONST String type=kotlin.String value='K'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-my>(): String' type=kotlin.String operator=GET_PROPERTY

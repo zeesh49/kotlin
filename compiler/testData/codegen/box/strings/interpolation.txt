@@ -1,0 +1,42 @@
+MODULE <test-module>
+  FILE /interpolation.kt
+    FUN public fun test(p: kotlin.String?): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test(String?): String'
+          STRING_CONCATENATION type=kotlin.String
+            BLOCK type=kotlin.String operator=ELVIS
+              VAR val tmp0_elvis_lhs: kotlin.String?
+                GET_VAR 'value-parameter p: String?' type=kotlin.String? operator=null
+              WHEN type=kotlin.String operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_elvis_lhs: String?' type=kotlin.String? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CONST String type=kotlin.String value='Default'
+                else: GET_VAR 'tmp0_elvis_lhs: String?' type=kotlin.String? operator=null
+            CONST String type=kotlin.String value=' test'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test(String?): String' type=kotlin.String operator=null
+                p: CONST Null type=kotlin.Nothing? value='null'
+              arg1: CONST String type=kotlin.String value='Default test'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              CALL 'test(String?): String' type=kotlin.String operator=null
+                p: CONST Null type=kotlin.Nothing? value='null'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test(String?): String' type=kotlin.String operator=null
+                p: CONST String type=kotlin.String value='Good'
+              arg1: CONST String type=kotlin.String value='Good test'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              CALL 'test(String?): String' type=kotlin.String operator=null
+                p: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

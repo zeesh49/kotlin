@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /kt3492TraitProperty.kt
+    CLASS INTERFACE A
+      PROPERTY public open val foo: kotlin.String
+        PROPERTY_GETTER public open fun <get-foo>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-foo>(): String'
+              CONST String type=kotlin.String value='OK'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor B()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      CLASS CLASS D
+        CONSTRUCTOR public constructor D()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='D'
+        PROPERTY public final val foo: kotlin.String
+          EXPRESSION_BODY
+            CALL '<get-foo>(): String' superQualifier=B type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'C' type=B
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-foo>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: CALL 'constructor D()' type=C.D operator=null
+              $this: CALL 'constructor C()' type=C operator=null

@@ -1,0 +1,288 @@
+MODULE <test-module>
+  FILE /incInObject.kt
+    CLASS OBJECT A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY private final var r: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+      FUN public final fun test(): kotlin.Int
+        BLOCK_BODY
+          BLOCK type=kotlin.Int operator=POSTFIX_INCR
+            VAR val tmp0_this: A
+              THIS of 'A' type=A
+            BLOCK type=kotlin.Int operator=POSTFIX_INCR
+              VAR val tmp1: kotlin.Int
+                CALL '<get-r>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp0_this: A' type=A operator=null
+              CALL '<set-r>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp0_this: A' type=A operator=null
+                <set-?>: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+          BLOCK type=kotlin.Int operator=PREFIX_INCR
+            VAR val tmp2_this: A
+              THIS of 'A' type=A
+            BLOCK type=kotlin.Int operator=PREFIX_INCR
+              VAR val tmp3: kotlin.Int
+                CALL 'inc(): Int' type=kotlin.Int operator=PREFIX_INCR
+                  $this: CALL '<get-r>(): Int' type=kotlin.Int operator=PREFIX_INCR
+                    $this: GET_VAR 'tmp2_this: A' type=A operator=null
+              CALL '<set-r>(Int): Unit' type=kotlin.Unit operator=PREFIX_INCR
+                $this: GET_VAR 'tmp2_this: A' type=A operator=null
+                <set-?>: GET_VAR 'tmp3: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp3: Int' type=kotlin.Int operator=null
+          RETURN type=kotlin.Nothing from='test(): Int'
+            CALL '<get-r>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+      PROPERTY public final var holder: kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value=''
+      PROPERTY public final var r2: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+        PROPERTY_GETTER public final fun <get-r2>(): kotlin.Int
+          BLOCK_BODY
+            BLOCK type=kotlin.Unit operator=PLUSEQ
+              VAR val tmp0_this: A
+                THIS of 'A' type=A
+              CALL '<set-holder>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+                $this: GET_VAR 'tmp0_this: A' type=A operator=null
+                <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                  $this: CALL '<get-holder>(): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 'tmp0_this: A' type=A operator=null
+                  other: CONST String type=kotlin.String value='getR2'
+            RETURN type=kotlin.Nothing from='<get-r2>(): Int'
+              GET_VAR 'field: Int' type=kotlin.Int operator=null
+      FUN public final fun test2(): kotlin.Int
+        BLOCK_BODY
+          BLOCK type=kotlin.Int operator=POSTFIX_INCR
+            VAR val tmp0_this: A
+              THIS of 'A' type=A
+            BLOCK type=kotlin.Int operator=POSTFIX_INCR
+              VAR val tmp1: kotlin.Int
+                CALL '<get-r2>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp0_this: A' type=A operator=null
+              CALL '<set-r2>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp0_this: A' type=A operator=null
+                <set-?>: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+          BLOCK type=kotlin.Int operator=PREFIX_INCR
+            VAR val tmp2_this: A
+              THIS of 'A' type=A
+            BLOCK type=kotlin.Int operator=PREFIX_INCR
+              VAR val tmp3: kotlin.Int
+                CALL 'inc(): Int' type=kotlin.Int operator=PREFIX_INCR
+                  $this: CALL '<get-r2>(): Int' type=kotlin.Int operator=PREFIX_INCR
+                    $this: GET_VAR 'tmp2_this: A' type=A operator=null
+              CALL '<set-r2>(Int): Unit' type=kotlin.Unit operator=PREFIX_INCR
+                $this: GET_VAR 'tmp2_this: A' type=A operator=null
+                <set-?>: GET_VAR 'tmp3: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp3: Int' type=kotlin.Int operator=null
+          RETURN type=kotlin.Nothing from='test2(): Int'
+            CALL '<get-r2>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+      PROPERTY public final var r3: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+        PROPERTY_SETTER public final fun <set-r3>(p: kotlin.Int): kotlin.Unit
+          BLOCK_BODY
+            BLOCK type=kotlin.Unit operator=PLUSEQ
+              VAR val tmp0_this: A
+                THIS of 'A' type=A
+              CALL '<set-holder>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+                $this: GET_VAR 'tmp0_this: A' type=A operator=null
+                <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                  $this: CALL '<get-holder>(): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 'tmp0_this: A' type=A operator=null
+                  other: CONST String type=kotlin.String value='setR3'
+            SET_BACKING_FIELD 'r3: Int' type=kotlin.Unit operator=EQ
+              value: GET_VAR 'value-parameter p: Int' type=kotlin.Int operator=null
+      FUN public final fun test3(): kotlin.Int
+        BLOCK_BODY
+          BLOCK type=kotlin.Int operator=POSTFIX_INCR
+            VAR val tmp0_this: A
+              THIS of 'A' type=A
+            BLOCK type=kotlin.Int operator=POSTFIX_INCR
+              VAR val tmp1: kotlin.Int
+                CALL '<get-r3>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp0_this: A' type=A operator=null
+              CALL '<set-r3>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp0_this: A' type=A operator=null
+                p: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+          BLOCK type=kotlin.Int operator=PREFIX_INCR
+            VAR val tmp2_this: A
+              THIS of 'A' type=A
+            BLOCK type=kotlin.Int operator=PREFIX_INCR
+              VAR val tmp3: kotlin.Int
+                CALL 'inc(): Int' type=kotlin.Int operator=PREFIX_INCR
+                  $this: CALL '<get-r3>(): Int' type=kotlin.Int operator=PREFIX_INCR
+                    $this: GET_VAR 'tmp2_this: A' type=A operator=null
+              CALL '<set-r3>(Int): Unit' type=kotlin.Unit operator=PREFIX_INCR
+                $this: GET_VAR 'tmp2_this: A' type=A operator=null
+                p: GET_VAR 'tmp3: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp3: Int' type=kotlin.Int operator=null
+          RETURN type=kotlin.Nothing from='test3(): Int'
+            CALL '<get-r3>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+      PROPERTY public final var r4: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+        PROPERTY_GETTER public final fun <get-r4>(): kotlin.Int
+          BLOCK_BODY
+            BLOCK type=kotlin.Unit operator=PLUSEQ
+              VAR val tmp0_this: A
+                THIS of 'A' type=A
+              CALL '<set-holder>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+                $this: GET_VAR 'tmp0_this: A' type=A operator=null
+                <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                  $this: CALL '<get-holder>(): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 'tmp0_this: A' type=A operator=null
+                  other: CONST String type=kotlin.String value='getR4'
+            RETURN type=kotlin.Nothing from='<get-r4>(): Int'
+              GET_VAR 'field: Int' type=kotlin.Int operator=null
+        PROPERTY_SETTER public final fun <set-r4>(p: kotlin.Int): kotlin.Unit
+          BLOCK_BODY
+            BLOCK type=kotlin.Unit operator=PLUSEQ
+              VAR val tmp0_this: A
+                THIS of 'A' type=A
+              CALL '<set-holder>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+                $this: GET_VAR 'tmp0_this: A' type=A operator=null
+                <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                  $this: CALL '<get-holder>(): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 'tmp0_this: A' type=A operator=null
+                  other: CONST String type=kotlin.String value='setR4'
+            SET_BACKING_FIELD 'r4: Int' type=kotlin.Unit operator=EQ
+              value: GET_VAR 'value-parameter p: Int' type=kotlin.Int operator=null
+      FUN public final fun test4(): kotlin.Int
+        BLOCK_BODY
+          BLOCK type=kotlin.Int operator=POSTFIX_INCR
+            VAR val tmp0_this: A
+              THIS of 'A' type=A
+            BLOCK type=kotlin.Int operator=POSTFIX_INCR
+              VAR val tmp1: kotlin.Int
+                CALL '<get-r4>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp0_this: A' type=A operator=null
+              CALL '<set-r4>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp0_this: A' type=A operator=null
+                p: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+          BLOCK type=kotlin.Unit operator=PLUSEQ
+            VAR val tmp2_this: A
+              THIS of 'A' type=A
+            CALL '<set-holder>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+              $this: GET_VAR 'tmp2_this: A' type=A operator=null
+              <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                $this: CALL '<get-holder>(): String' type=kotlin.String operator=PLUSEQ
+                  $this: GET_VAR 'tmp2_this: A' type=A operator=null
+                other: CONST String type=kotlin.String value=':'
+          BLOCK type=kotlin.Int operator=PREFIX_INCR
+            VAR val tmp3_this: A
+              THIS of 'A' type=A
+            BLOCK type=kotlin.Int operator=PREFIX_INCR
+              VAR val tmp4: kotlin.Int
+                CALL 'inc(): Int' type=kotlin.Int operator=PREFIX_INCR
+                  $this: CALL '<get-r4>(): Int' type=kotlin.Int operator=PREFIX_INCR
+                    $this: GET_VAR 'tmp3_this: A' type=A operator=null
+              CALL '<set-r4>(Int): Unit' type=kotlin.Unit operator=PREFIX_INCR
+                $this: GET_VAR 'tmp3_this: A' type=A operator=null
+                p: GET_VAR 'tmp4: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp4: Int' type=kotlin.Int operator=null
+          RETURN type=kotlin.Nothing from='test4(): Int'
+            CALL '<get-r4>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val p: kotlin.Int
+          CALL 'test(): Int' type=kotlin.Int operator=null
+            $this: GET_OBJECT 'A' type=A
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'p: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='3'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              GET_VAR 'p: Int' type=kotlin.Int operator=null
+        VAR val p2: kotlin.Int
+          CALL 'test2(): Int' type=kotlin.Int operator=null
+            $this: GET_OBJECT 'A' type=A
+        VAR val holderValue: kotlin.String
+          CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_OBJECT 'A' type=A
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'p2: Int' type=kotlin.Int operator=null
+                arg1: CONST Int type=kotlin.Int value='3'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'holderValue: String' type=kotlin.String operator=null
+                arg1: CONST String type=kotlin.String value='getR2getR2getR2getR2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 2:  '
+              GET_VAR 'p2: Int' type=kotlin.Int operator=null
+              CONST String type=kotlin.String value=' '
+              GET_VAR 'holderValue: String' type=kotlin.String operator=null
+        CALL '<set-holder>(String): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_OBJECT 'A' type=A
+          <set-?>: CONST String type=kotlin.String value=''
+        VAR val p3: kotlin.Int
+          CALL 'test3(): Int' type=kotlin.Int operator=null
+            $this: GET_OBJECT 'A' type=A
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'p3: Int' type=kotlin.Int operator=null
+                arg1: CONST Int type=kotlin.Int value='3'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: GET_OBJECT 'A' type=A
+                arg1: CONST String type=kotlin.String value='setR3setR3'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 3:  '
+              GET_VAR 'p3: Int' type=kotlin.Int operator=null
+              CONST String type=kotlin.String value=' '
+              CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_OBJECT 'A' type=A
+        CALL '<set-holder>(String): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_OBJECT 'A' type=A
+          <set-?>: CONST String type=kotlin.String value=''
+        VAR val p4: kotlin.Int
+          CALL 'test4(): Int' type=kotlin.Int operator=null
+            $this: GET_OBJECT 'A' type=A
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'p4: Int' type=kotlin.Int operator=null
+                arg1: CONST Int type=kotlin.Int value='3'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: GET_OBJECT 'A' type=A
+                arg1: CONST String type=kotlin.String value='getR4setR4:getR4setR4getR4getR4'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 4:  '
+              GET_VAR 'p4: Int' type=kotlin.Int operator=null
+              CONST String type=kotlin.String value=' '
+              CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_OBJECT 'A' type=A
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

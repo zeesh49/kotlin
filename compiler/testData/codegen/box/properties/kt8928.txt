@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /kt8928.kt
+    CLASS CLASS App
+      CONSTRUCTOR public constructor App()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='App'
+      FUN public final fun init(): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-s>(String): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'companion object of App' type=App.Companion
+            <set-?>: CONST String type=kotlin.String value='OK'
+      CLASS OBJECT companion object of App
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of App'
+        PROPERTY public final var s: kotlin.String
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='Fail'
+          PROPERTY_SETTER private final fun <set-s>(<set-?>: kotlin.String): kotlin.Unit
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'init(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor App()' type=App operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of App' type=App.Companion

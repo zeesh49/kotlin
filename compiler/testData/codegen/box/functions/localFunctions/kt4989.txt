@@ -1,0 +1,98 @@
+MODULE <test-module>
+  FILE /kt4989.kt
+    CLASS CLASS It
+      CONSTRUCTOR public constructor It(id: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'id: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'It' type=It
+            value: GET_VAR 'value-parameter id: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='It'
+      PROPERTY public final val id: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter id: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val projectId: kotlin.String = "projectId"
+          CONST String type=kotlin.String value='projectId'
+        VAR val it: It
+          CALL 'constructor It(String)' type=It operator=null
+            id: CONST String type=kotlin.String value='it'
+        FUN local final fun selectMetaRunnerId(): kotlin.String
+          BLOCK_BODY
+            FUN local final operator fun kotlin.Int?.inc(): kotlin.Int
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='inc() on Int?: Int'
+                  CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                    $this: BLOCK type=kotlin.Int operator=ELVIS
+                      VAR val tmp0_elvis_lhs: kotlin.Int?
+                        $RECEIVER of 'inc() on Int?: Int' type=kotlin.Int?
+                      WHEN type=kotlin.Int operator=null
+                        if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: GET_VAR 'tmp0_elvis_lhs: Int?' type=kotlin.Int? operator=null
+                          arg1: CONST Null type=kotlin.Nothing? value='null'
+                        then: CONST Int type=kotlin.Int value='0'
+                        else: GET_VAR 'tmp0_elvis_lhs: Int?' type=kotlin.Int? operator=null
+                    other: CONST Int type=kotlin.Int value='1'
+            VAR var counter: kotlin.Int?
+              CONST Null type=kotlin.Nothing? value='null'
+            FUN local final fun path(metaRunnerId: kotlin.String): kotlin.Boolean
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='path(String): Boolean'
+                  CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                    arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                      arg0: GET_VAR 'counter: Int?' type=kotlin.Int? operator=null
+                      arg1: CONST Int type=kotlin.Int value='2'
+            WHILE label=null operator=WHILE_LOOP
+              condition: CONST Boolean type=kotlin.Boolean value='true'
+              body: BLOCK type=kotlin.Int? operator=null
+                VAR val name: kotlin.String
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                    $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                      $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                        $this: GET_VAR 'projectId: String' type=kotlin.String operator=null
+                        other: CONST String type=kotlin.String value='_'
+                      other: CALL '<get-id>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'it: It' type=It operator=null
+                    other: WHEN type=kotlin.String operator=IF
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'counter: Int?' type=kotlin.Int? operator=null
+                        arg1: CONST Null type=kotlin.Nothing? value='null'
+                      then: CONST String type=kotlin.String value=''
+                      else: STRING_CONCATENATION type=kotlin.String
+                        CONST String type=kotlin.String value='_'
+                        GET_VAR 'counter: Int?' type=kotlin.Int? operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+                    $this: CALL 'path(String): Boolean' type=kotlin.Boolean operator=null
+                      metaRunnerId: GET_VAR 'name: String' type=kotlin.String operator=null
+                  then: BLOCK type=kotlin.Nothing operator=null
+                    RETURN type=kotlin.Nothing from='selectMetaRunnerId(): String'
+                      GET_VAR 'name: String' type=kotlin.String operator=null
+                BLOCK type=kotlin.Int? operator=POSTFIX_INCR
+                  VAR val tmp0: kotlin.Int?
+                    GET_VAR 'counter: Int?' type=kotlin.Int? operator=POSTFIX_INCR
+                  SET_VAR 'counter: Int?' type=kotlin.Unit operator=POSTFIX_INCR
+                    CALL 'inc() on Int?: Int' type=kotlin.Int operator=POSTFIX_INCR
+                      $receiver: GET_VAR 'tmp0: Int?' type=kotlin.Int? operator=null
+                  GET_VAR 'tmp0: Int?' type=kotlin.Int? operator=null
+        VAR val X: kotlin.String
+          CALL 'selectMetaRunnerId(): String' type=kotlin.String operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'X: String' type=kotlin.String operator=null
+              arg1: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                    $this: GET_VAR 'projectId: String' type=kotlin.String operator=null
+                    other: CONST String type=kotlin.String value='_'
+                  other: CALL '<get-id>(): String' type=kotlin.String operator=GET_PROPERTY
+                    $this: GET_VAR 'it: It' type=It operator=null
+                other: CONST String type=kotlin.String value='_2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: '
+              GET_VAR 'X: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

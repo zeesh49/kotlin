@@ -1,0 +1,64 @@
+MODULE <test-module>
+  FILE /kt500.kt
+    PROPERTY public var GUEST_USER_ID: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='3'
+    PROPERTY public val USER_ID: kotlin.Int
+      EXPRESSION_BODY
+        TRY_CATCH type=kotlin.Int
+          try: BLOCK type=kotlin.Int operator=null
+            CALL 'getUserIdFromEnvironment(): Int' type=kotlin.Int operator=null
+          catch e: BLOCK type=kotlin.Int operator=null
+            BLOCK type=kotlin.Int operator=PREFIX_INCR
+              BLOCK type=kotlin.Int operator=PREFIX_INCR
+                VAR val tmp0: kotlin.Int
+                  CALL 'inc(): Int' type=kotlin.Int operator=PREFIX_INCR
+                    $this: CALL '<get-GUEST_USER_ID>(): Int' type=kotlin.Int operator=PREFIX_INCR
+                CALL '<set-GUEST_USER_ID>(Int): Unit' type=kotlin.Unit operator=PREFIX_INCR
+                  <set-?>: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+    PROPERTY public val USER_ID_2: kotlin.Int
+      EXPRESSION_BODY
+        TRY_CATCH type=kotlin.Int
+          try: BLOCK type=kotlin.Int operator=null
+            CALL 'getUserIdFromEnvironment(): Int' type=kotlin.Int operator=null
+          catch e: BLOCK type=kotlin.Int operator=null
+            CALL '<get-GUEST_USER_ID>(): Int' type=kotlin.Int operator=GET_PROPERTY
+          finally: BLOCK type=kotlin.Int operator=null
+            BLOCK type=kotlin.Int operator=POSTFIX_INCR
+              BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                VAR val tmp0: kotlin.Int
+                  CALL '<get-GUEST_USER_ID>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                CALL '<set-GUEST_USER_ID>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+                  <set-?>: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                    $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+                GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+    FUN public fun getUserIdFromEnvironment(): kotlin.Int
+      BLOCK_BODY
+        THROW type=kotlin.Nothing
+          CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-USER_ID>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              arg1: CONST Int type=kotlin.Int value='4'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test0 failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-USER_ID_2>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              arg1: CONST Int type=kotlin.Int value='4'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test2 failed'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-GUEST_USER_ID>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              arg1: CONST Int type=kotlin.Int value='5'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='test3 failed'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

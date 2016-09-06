@@ -1,0 +1,54 @@
+MODULE <test-module>
+  FILE /extensionFun.kt
+    CLASS CLASS Outer
+      CONSTRUCTOR public constructor Outer()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+      CLASS CLASS Nested
+        CONSTRUCTOR public constructor Nested()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Nested'
+      CLASS CLASS Inner
+        CONSTRUCTOR public constructor Inner()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='Inner'
+      FUN public final fun Outer.Inner.foo(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'constructor Outer()' type=Outer operator=null
+          CALL 'constructor Nested()' type=Outer.Nested operator=null
+          CALL 'constructor Inner()' type=Outer.Inner operator=null
+            $this: THIS of 'Outer' type=Outer
+      FUN public final fun Outer.Nested.bar(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'constructor Outer()' type=Outer operator=null
+          CALL 'constructor Nested()' type=Outer.Nested operator=null
+          CALL 'constructor Inner()' type=Outer.Inner operator=null
+            $this: THIS of 'Outer' type=Outer
+      FUN public final fun Outer.baz(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'constructor Outer()' type=Outer operator=null
+          CALL 'constructor Nested()' type=Outer.Nested operator=null
+          CALL 'constructor Inner()' type=Outer.Inner operator=null
+            $this: $RECEIVER of 'baz() on Outer: Unit' type=Outer
+      FUN public final fun box(): kotlin.String
+        BLOCK_BODY
+          CALL 'foo() on Outer.Inner: Unit' type=kotlin.Unit operator=null
+            $this: THIS of 'Outer' type=Outer
+            $receiver: CALL 'constructor Inner()' type=Outer.Inner operator=null
+              $this: THIS of 'Outer' type=Outer
+          CALL 'bar() on Outer.Nested: Unit' type=kotlin.Unit operator=null
+            $this: THIS of 'Outer' type=Outer
+            $receiver: CALL 'constructor Nested()' type=Outer.Nested operator=null
+          CALL 'baz() on Outer: Unit' type=kotlin.Unit operator=null
+            $this: THIS of 'Outer' type=Outer
+            $receiver: THIS of 'Outer' type=Outer
+          RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'box(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Outer()' type=Outer operator=null

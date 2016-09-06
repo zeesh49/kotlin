@@ -1,0 +1,71 @@
+MODULE <test-module>
+  FILE /kt475.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val array: java.util.ArrayList<kotlin.String>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.String> operator=null
+        CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'array: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+          element: CONST String type=kotlin.String value='0'
+        CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'array: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+          element: CONST String type=kotlin.String value='1'
+        CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'array: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+          element: CONST String type=kotlin.String value='2'
+        CALL '<set-last>(T) on ArrayList<T>: Unit' type=kotlin.Unit operator=EQ
+          $receiver: TYPE_OP operator=IMPLICIT_CAST typeOperand=java.util.ArrayList<T>
+            GET_VAR 'array: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+          el: TYPE_OP operator=IMPLICIT_CAST typeOperand=T
+            CONST String type=kotlin.String value='5'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL '<get-length>() on ArrayList<String>: Int' type=kotlin.Int operator=GET_PROPERTY
+                  $receiver: GET_VAR 'array: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+                arg1: CONST Int type=kotlin.Int value='3'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL '<get-last>() on ArrayList<String>: String' type=kotlin.String operator=GET_PROPERTY
+                  $receiver: GET_VAR 'array: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+                arg1: CONST String type=kotlin.String value='5'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'
+    PROPERTY public var <T> java.util.ArrayList<T>.length: kotlin.Int
+      PROPERTY_GETTER public fun java.util.ArrayList<T>.<get-length>(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-length>() on ArrayList<T>: Int'
+            CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: $RECEIVER of 'length: Int on ArrayList<T>' type=java.util.ArrayList<T>
+      PROPERTY_SETTER public fun java.util.ArrayList<T>.<set-length>(value: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor Error()' type=java.lang.Error operator=null
+    PROPERTY public var <T> java.util.ArrayList<T>.last: T
+      PROPERTY_GETTER public fun java.util.ArrayList<T>.<get-last>(): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-last>() on ArrayList<T>: T'
+            BLOCK type=T operator=EXCLEXCL
+              VAR val tmp0_notnull: T
+                CALL 'get(Int): T' type=T operator=null
+                  $this: $RECEIVER of 'last: T on ArrayList<T>' type=java.util.ArrayList<T>
+                  index: CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+                    $this: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                      $this: $RECEIVER of 'last: T on ArrayList<T>' type=java.util.ArrayList<T>
+                    other: CONST Int type=kotlin.Int value='1'
+              WHEN type=T operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: T' type=T operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: T' type=T operator=null
+      PROPERTY_SETTER public fun java.util.ArrayList<T>.<set-last>(el: T): kotlin.Unit
+        BLOCK_BODY
+          CALL 'set(Int, T): T' type=T operator=null
+            $this: $RECEIVER of 'last: T on ArrayList<T>' type=java.util.ArrayList<T>
+            index: CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+              $this: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: $RECEIVER of 'last: T on ArrayList<T>' type=java.util.ArrayList<T>
+              other: CONST Int type=kotlin.Int value='1'
+            element: GET_VAR 'value-parameter el: T' type=T operator=null

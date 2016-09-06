@@ -1,0 +1,104 @@
+MODULE <test-module>
+  FILE /innerSuspensionCalls.kt
+    CLASS CLASS Controller
+      CONSTRUCTOR public constructor Controller()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Controller'
+      PROPERTY public final var i: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+      FUN public final suspend fun suspendHere(x: kotlin.coroutines.Continuation<kotlin.String>): kotlin.Unit
+        BLOCK_BODY
+          CALL 'resume(String): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR 'value-parameter x: Continuation<String>' type=kotlin.coroutines.Continuation<kotlin.String> operator=null
+            data: CALL 'toString(): String' type=kotlin.String operator=null
+              $this: BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                VAR val tmp0_this: Controller
+                  THIS of 'Controller' type=Controller
+                BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                  VAR val tmp1: kotlin.Int
+                    CALL '<get-i>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp0_this: Controller' type=Controller operator=null
+                  CALL '<set-i>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+                    $this: GET_VAR 'tmp0_this: Controller' type=Controller operator=null
+                    <set-?>: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                  GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+    FUN public fun builder(coroutine c: Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'resume(Unit): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'invoke(Controller): Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=INVOKE
+            $this: GET_VAR 'value-parameter coroutine c: Controller.() -> Continuation<Unit>' type=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+            p1: CALL 'constructor Controller()' type=Controller operator=null
+          data: GET_OBJECT 'Unit' type=kotlin.Unit
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.String
+          CONST String type=kotlin.String value=''
+        CALL 'builder(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+            BLOCK type=Controller.() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun Controller.<anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  SET_VAR 'result: String' type=kotlin.Unit operator=PLUSEQ
+                    CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                      $this: GET_VAR 'result: String' type=kotlin.String operator=PLUSEQ
+                      other: CONST String type=kotlin.String value='-'
+                  SET_VAR 'result: String' type=kotlin.Unit operator=PLUSEQ
+                    CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                      $this: GET_VAR 'result: String' type=kotlin.String operator=PLUSEQ
+                      other: CALL 'suspendHere(): String' type=kotlin.String operator=null
+                        $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Controller: Unit'
+                    WHEN type=kotlin.Unit operator=IF
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'result: String' type=kotlin.String operator=null
+                        arg1: CONST String type=kotlin.String value='-0'
+                      then: BLOCK type=kotlin.Unit operator=null
+                        CALL 'builder(coroutine Controller.() -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+                          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.() -> kotlin.coroutines.Continuation<kotlin.Unit>
+                            BLOCK type=Controller.() -> kotlin.Unit operator=LAMBDA
+                              FUN local final fun Controller.<anonymous>(): kotlin.Unit
+                                BLOCK_BODY
+                                  SET_VAR 'result: String' type=kotlin.Unit operator=PLUSEQ
+                                    CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                                      $this: GET_VAR 'result: String' type=kotlin.String operator=PLUSEQ
+                                      other: CONST String type=kotlin.String value='+'
+                                  SET_VAR 'result: String' type=kotlin.Unit operator=PLUSEQ
+                                    CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                                      $this: GET_VAR 'result: String' type=kotlin.String operator=PLUSEQ
+                                      other: CALL 'suspendHere(): String' type=kotlin.String operator=null
+                                        $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                                  SET_VAR 'result: String' type=kotlin.Unit operator=PLUSEQ
+                                    CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                                      $this: GET_VAR 'result: String' type=kotlin.String operator=PLUSEQ
+                                      other: CALL 'suspendHere(): String' type=kotlin.String operator=null
+                                        $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                                  RETURN type=kotlin.Nothing from='<anonymous>() on Controller: Unit'
+                                    SET_VAR 'result: String' type=kotlin.Unit operator=PLUSEQ
+                                      CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                                        $this: GET_VAR 'result: String' type=kotlin.String operator=PLUSEQ
+                                        other: CONST String type=kotlin.String value='#'
+                              CALLABLE_REFERENCE '<anonymous>() on Controller: Unit' type=Controller.() -> kotlin.Unit operator=LAMBDA
+                        SET_VAR 'result: String' type=kotlin.Unit operator=PLUSEQ
+                          CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                            $this: GET_VAR 'result: String' type=kotlin.String operator=PLUSEQ
+                            other: CALL 'suspendHere(): String' type=kotlin.String operator=null
+                              $this: $RECEIVER of '<anonymous>() on Controller: Unit' type=Controller
+                        SET_VAR 'result: String' type=kotlin.Unit operator=PLUSEQ
+                          CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                            $this: GET_VAR 'result: String' type=kotlin.String operator=PLUSEQ
+                            other: CONST String type=kotlin.String value='&'
+              CALLABLE_REFERENCE '<anonymous>() on Controller: Unit' type=Controller.() -> kotlin.Unit operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='-0+01#1&'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: '
+              GET_VAR 'result: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

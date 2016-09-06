@@ -1,0 +1,54 @@
+MODULE <test-module>
+  FILE /noBridgeOnMutableCollectionInheritance.kt
+    CLASS INTERFACE A
+      FUN public abstract fun foo(): kotlin.collections.Collection<kotlin.String>
+    CLASS INTERFACE B
+      FUN public abstract override fun foo(): kotlin.collections.MutableCollection<kotlin.String>
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      FUN public open override fun foo(): kotlin.collections.MutableList<kotlin.String>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): MutableList<String>'
+            CALL 'constructor ArrayList((MutableCollection<out String!>..Collection<String!>?))' type=java.util.ArrayList<kotlin.String> operator=null
+              p0: CALL 'asList(vararg String!): (Mutable)List<String!>!' type=kotlin.collections.(Mutable)List<kotlin.String!>! operator=null
+                p0: VARARG type=(kotlin.Array<(kotlin.String..kotlin.String?)>..kotlin.Array<out (kotlin.String..kotlin.String?)>?) varargElementType=(kotlin.String..kotlin.String?)
+                  CONST String type=kotlin.String value='C'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val c: C
+          CALL 'constructor C()' type=C operator=null
+        VAR var r: kotlin.String
+          CALL 'next(): String' type=kotlin.String operator=null
+            $this: CALL 'iterator(): MutableIterator<String>' type=kotlin.collections.MutableIterator<kotlin.String> operator=null
+              $this: CALL 'foo(): MutableList<String>' type=kotlin.collections.MutableList<kotlin.String> operator=null
+                $this: GET_VAR 'c: C' type=C operator=null
+        VAR val b: B
+          GET_VAR 'c: C' type=C operator=null
+        VAR val a: A
+          GET_VAR 'c: C' type=C operator=null
+        SET_VAR 'r: String' type=kotlin.Unit operator=PLUSEQ
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+            $this: GET_VAR 'r: String' type=kotlin.String operator=PLUSEQ
+            other: CALL 'next(): String' type=kotlin.String operator=null
+              $this: CALL 'iterator(): MutableIterator<String>' type=kotlin.collections.MutableIterator<kotlin.String> operator=null
+                $this: CALL 'foo(): MutableCollection<String>' type=kotlin.collections.MutableCollection<kotlin.String> operator=null
+                  $this: GET_VAR 'b: B' type=B operator=null
+        SET_VAR 'r: String' type=kotlin.Unit operator=PLUSEQ
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+            $this: GET_VAR 'r: String' type=kotlin.String operator=PLUSEQ
+            other: CALL 'next(): String' type=kotlin.String operator=null
+              $this: CALL 'iterator(): Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+                $this: CALL 'foo(): Collection<String>' type=kotlin.collections.Collection<kotlin.String> operator=null
+                  $this: GET_VAR 'a: A' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'r: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='CCC'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'r: String' type=kotlin.String operator=null

@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /memberOfGenericClass.kt
+    PROPERTY public var result: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='Fail'
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun foo(t: T): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+            <set-?>: TYPE_OP operator=CAST typeOperand=kotlin.String
+              GET_VAR 'value-parameter t: T' type=T operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'call(vararg Any?): Unit' type=kotlin.Unit operator=null
+          $this: CALLABLE_REFERENCE 'foo(String): Unit' type=kotlin.reflect.KFunction2<A<kotlin.String>, kotlin.String, kotlin.Unit> operator=null
+          args: VARARG type=Array<out Any?> varargElementType=Any?
+            CALL 'constructor A()' type=A<kotlin.String> operator=null
+            CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY

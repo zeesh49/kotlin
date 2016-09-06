@@ -1,0 +1,65 @@
+MODULE <test-module>
+  FILE /inheritedImplementations.kt
+    CLASS CLASS SetStringImpl
+      CONSTRUCTOR public constructor SetStringImpl()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SetStringImpl'
+      FUN public final fun add(s: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='add(String): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+      FUN public final fun remove(o: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='remove(String): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+      FUN public final fun clear(): kotlin.Unit
+        BLOCK_BODY
+    CLASS CLASS S
+      CONSTRUCTOR public constructor S()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor SetStringImpl()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='S'
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-size>(): Int'
+              CONST Int type=kotlin.Int value='0'
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='isEmpty(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+      FUN public open override fun contains(o: kotlin.String): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='contains(String): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+      FUN public open override fun iterator(): kotlin.collections.Iterator<kotlin.String>
+        BLOCK_BODY
+          BLOCK type=kotlin.Nothing operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.Nothing?
+              CONST Null type=kotlin.Nothing? value='null'
+            WHEN type=kotlin.Nothing operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Nothing?' type=kotlin.Nothing? operator=null
+      FUN public open override fun containsAll(c: kotlin.collections.Collection<kotlin.String>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsAll(Collection<String>): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val s: java.util.Set<kotlin.String>
+          TYPE_OP operator=CAST typeOperand=java.util.Set<kotlin.String>
+            CALL 'constructor S()' type=S operator=null
+        CALL 'add(String!): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 's: Set<String>' type=java.util.Set<kotlin.String> operator=null
+          element: CONST String type=kotlin.String value=''
+        CALL 'remove(String!): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 's: Set<String>' type=java.util.Set<kotlin.String> operator=null
+          element: CONST String type=kotlin.String value=''
+        CALL 'clear(): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 's: Set<String>' type=java.util.Set<kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

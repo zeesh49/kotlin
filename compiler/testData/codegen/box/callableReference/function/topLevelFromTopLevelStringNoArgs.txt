@@ -1,0 +1,13 @@
+MODULE <test-module>
+  FILE /topLevelFromTopLevelStringNoArgs.kt
+    FUN public fun foo(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.reflect.KFunction0<kotlin.String>
+          CALLABLE_REFERENCE 'foo(): String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+            $this: GET_VAR 'x: KFunction0<String>' type=kotlin.reflect.KFunction0<kotlin.String> operator=VARIABLE_AS_FUNCTION

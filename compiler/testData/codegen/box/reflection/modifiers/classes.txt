@@ -1,0 +1,162 @@
+MODULE <test-module>
+  FILE /classes.kt
+    CLASS CLASS S
+      CONSTRUCTOR private constructor S()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='S'
+      CLASS CLASS DataClass
+        CONSTRUCTOR public constructor DataClass(x: kotlin.Int)
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor S()'
+            SET_BACKING_FIELD 'x: Int' type=kotlin.Unit operator=null
+              receiver: THIS of 'DataClass' type=S.DataClass
+              value: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            INSTANCE_INITIALIZER_CALL classDescriptor='DataClass'
+        PROPERTY public final val x: kotlin.Int
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+        FUN public final operator fun component1(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='component1(): Int'
+              CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: THIS of 'DataClass' type=S.DataClass
+        FUN public final fun copy(x: kotlin.Int = ...): S.DataClass
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='copy(Int = ...): S.DataClass'
+              CALL 'constructor DataClass(Int)' type=S.DataClass operator=null
+                x: GET_VAR 'value-parameter x: Int = ...' type=kotlin.Int operator=null
+        FUN public open override fun toString(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='toString(): String'
+              STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='DataClass('
+                CONST String type=kotlin.String value='x='
+                CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'DataClass' type=S.DataClass
+                CONST String type=kotlin.String value=')'
+        FUN public open override fun hashCode(): kotlin.Int
+          BLOCK_BODY
+            VAR val tmp0_result: kotlin.Int
+              CONST Int type=kotlin.Int value='0'
+            SET_VAR 'tmp0_result: Int' type=kotlin.Unit operator=EQ
+              CALL 'hashCode(): Int' type=kotlin.Int operator=null
+                $this: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'DataClass' type=S.DataClass
+            RETURN type=kotlin.Nothing from='hashCode(): Int'
+              GET_VAR 'tmp0_result: Int' type=kotlin.Int operator=null
+        FUN public open override fun equals(other: kotlin.Any?): kotlin.Boolean
+          BLOCK_BODY
+            WHEN type=kotlin.Unit operator=null
+              if: CALL 'EQEQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQEQ
+                arg0: THIS of 'DataClass' type=S.DataClass
+                arg1: GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+              then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+                CONST Boolean type=kotlin.Boolean value='true'
+            WHEN type=kotlin.Unit operator=null
+              if: TYPE_OP operator=NOT_INSTANCEOF typeOperand=S.DataClass
+                GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+              then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+                CONST Boolean type=kotlin.Boolean value='false'
+            VAR val tmp0_other_with_cast: S.DataClass
+              TYPE_OP operator=CAST typeOperand=S.DataClass
+                GET_VAR 'value-parameter other: Any?' type=kotlin.Any? operator=null
+            WHEN type=kotlin.Unit operator=null
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                    $this: THIS of 'DataClass' type=S.DataClass
+                  arg1: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                    $this: GET_VAR 'tmp0_other_with_cast: S.DataClass' type=S.DataClass operator=null
+              then: RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+                CONST Boolean type=kotlin.Boolean value='false'
+            RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+              CONST Boolean type=kotlin.Boolean value='true'
+      CLASS CLASS InnerClass
+        CONSTRUCTOR public constructor InnerClass()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='InnerClass'
+      CLASS OBJECT companion object of S
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of S'
+      CLASS OBJECT NonCompanionObject
+        CONSTRUCTOR private constructor NonCompanionObject()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='NonCompanionObject'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isSealed>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'S' type=kotlin.reflect.KClass<S>
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isFinal>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'S' type=kotlin.reflect.KClass<S>
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isOpen>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'S' type=kotlin.reflect.KClass<S>
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isAbstract>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'S' type=kotlin.reflect.KClass<S>
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isData>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'S' type=kotlin.reflect.KClass<S>
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isInner>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'S' type=kotlin.reflect.KClass<S>
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isCompanion>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'S' type=kotlin.reflect.KClass<S>
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isSealed>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'DataClass' type=kotlin.reflect.KClass<S.DataClass>
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isData>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'DataClass' type=kotlin.reflect.KClass<S.DataClass>
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isInner>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'DataClass' type=kotlin.reflect.KClass<S.DataClass>
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isCompanion>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'DataClass' type=kotlin.reflect.KClass<S.DataClass>
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isSealed>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'InnerClass' type=kotlin.reflect.KClass<S.InnerClass>
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isData>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'InnerClass' type=kotlin.reflect.KClass<S.InnerClass>
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isInner>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'InnerClass' type=kotlin.reflect.KClass<S.InnerClass>
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isCompanion>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'InnerClass' type=kotlin.reflect.KClass<S.InnerClass>
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isSealed>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'companion object of S' type=kotlin.reflect.KClass<S.Companion>
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isData>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'companion object of S' type=kotlin.reflect.KClass<S.Companion>
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isInner>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'companion object of S' type=kotlin.reflect.KClass<S.Companion>
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isCompanion>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'companion object of S' type=kotlin.reflect.KClass<S.Companion>
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isSealed>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'NonCompanionObject' type=kotlin.reflect.KClass<S.NonCompanionObject>
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isData>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'NonCompanionObject' type=kotlin.reflect.KClass<S.NonCompanionObject>
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isInner>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'NonCompanionObject' type=kotlin.reflect.KClass<S.NonCompanionObject>
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isCompanion>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CLASS_REFERENCE 'NonCompanionObject' type=kotlin.reflect.KClass<S.NonCompanionObject>
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

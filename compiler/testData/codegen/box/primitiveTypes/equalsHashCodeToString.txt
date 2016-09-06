@@ -1,0 +1,110 @@
+MODULE <test-module>
+  FILE /equalsHashCodeToString.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val b: kotlin.Byte = 42.toByte()
+          CONST Byte type=kotlin.Byte value='42'
+        VAR val c: kotlin.Char = \u007A ('z')
+          CONST Char type=kotlin.Char value='z'
+        VAR val s: kotlin.Short = 239.toShort()
+          CONST Short type=kotlin.Short value='239'
+        VAR val i: kotlin.Int = -1
+          CONST Int type=kotlin.Int value='-1'
+        VAR val j: kotlin.Long = -42.toLong()
+          CONST Long type=kotlin.Long value='-42'
+        VAR val f: kotlin.Float = 3.14.toFloat()
+          CONST Float type=kotlin.Float value='3.14'
+        VAR val d: kotlin.Double = -2.72.toDouble()
+          CONST Double type=kotlin.Double value='-2.72'
+        VAR val z: kotlin.Boolean = true
+          CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'equals(Any?): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+          other: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+        CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+          arg0: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+          arg1: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+        CALL 'hashCode(): Int' type=kotlin.Int operator=null
+          $this: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+        CALL 'toString(): String' type=kotlin.String operator=null
+          $this: GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+        GET_VAR 'b: Byte' type=kotlin.Byte operator=null
+        CALL 'equals(Any?): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'c: Char' type=kotlin.Char operator=null
+          other: GET_VAR 'c: Char' type=kotlin.Char operator=null
+        CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+          arg0: GET_VAR 'c: Char' type=kotlin.Char operator=null
+          arg1: GET_VAR 'c: Char' type=kotlin.Char operator=null
+        CALL 'hashCode(): Int' type=kotlin.Int operator=null
+          $this: GET_VAR 'c: Char' type=kotlin.Char operator=null
+        CALL 'toString(): String' type=kotlin.String operator=null
+          $this: GET_VAR 'c: Char' type=kotlin.Char operator=null
+        GET_VAR 'c: Char' type=kotlin.Char operator=null
+        CALL 'equals(Any?): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 's: Short' type=kotlin.Short operator=null
+          other: GET_VAR 's: Short' type=kotlin.Short operator=null
+        CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+          arg0: GET_VAR 's: Short' type=kotlin.Short operator=null
+          arg1: GET_VAR 's: Short' type=kotlin.Short operator=null
+        CALL 'hashCode(): Int' type=kotlin.Int operator=null
+          $this: GET_VAR 's: Short' type=kotlin.Short operator=null
+        CALL 'toString(): String' type=kotlin.String operator=null
+          $this: GET_VAR 's: Short' type=kotlin.Short operator=null
+        GET_VAR 's: Short' type=kotlin.Short operator=null
+        CALL 'equals(Any?): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+          other: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+          arg0: GET_VAR 'i: Int' type=kotlin.Int operator=null
+          arg1: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        CALL 'hashCode(): Int' type=kotlin.Int operator=null
+          $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        CALL 'toString(): String' type=kotlin.String operator=null
+          $this: GET_VAR 'i: Int' type=kotlin.Int operator=null
+        GET_VAR 'i: Int' type=kotlin.Int operator=null
+        CALL 'equals(Any?): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'j: Long' type=kotlin.Long operator=null
+          other: GET_VAR 'j: Long' type=kotlin.Long operator=null
+        CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+          arg0: GET_VAR 'j: Long' type=kotlin.Long operator=null
+          arg1: GET_VAR 'j: Long' type=kotlin.Long operator=null
+        CALL 'hashCode(): Int' type=kotlin.Int operator=null
+          $this: GET_VAR 'j: Long' type=kotlin.Long operator=null
+        CALL 'toString(): String' type=kotlin.String operator=null
+          $this: GET_VAR 'j: Long' type=kotlin.Long operator=null
+        GET_VAR 'j: Long' type=kotlin.Long operator=null
+        CALL 'equals(Any?): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'f: Float' type=kotlin.Float operator=null
+          other: GET_VAR 'f: Float' type=kotlin.Float operator=null
+        CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+          arg0: GET_VAR 'f: Float' type=kotlin.Float operator=null
+          arg1: GET_VAR 'f: Float' type=kotlin.Float operator=null
+        CALL 'hashCode(): Int' type=kotlin.Int operator=null
+          $this: GET_VAR 'f: Float' type=kotlin.Float operator=null
+        CALL 'toString(): String' type=kotlin.String operator=null
+          $this: GET_VAR 'f: Float' type=kotlin.Float operator=null
+        GET_VAR 'f: Float' type=kotlin.Float operator=null
+        CALL 'equals(Any?): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'd: Double' type=kotlin.Double operator=null
+          other: GET_VAR 'd: Double' type=kotlin.Double operator=null
+        CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+          arg0: GET_VAR 'd: Double' type=kotlin.Double operator=null
+          arg1: GET_VAR 'd: Double' type=kotlin.Double operator=null
+        CALL 'hashCode(): Int' type=kotlin.Int operator=null
+          $this: GET_VAR 'd: Double' type=kotlin.Double operator=null
+        CALL 'toString(): String' type=kotlin.String operator=null
+          $this: GET_VAR 'd: Double' type=kotlin.Double operator=null
+        GET_VAR 'd: Double' type=kotlin.Double operator=null
+        CALL 'equals(Any?): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'z: Boolean' type=kotlin.Boolean operator=null
+          other: GET_VAR 'z: Boolean' type=kotlin.Boolean operator=null
+        CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+          arg0: GET_VAR 'z: Boolean' type=kotlin.Boolean operator=null
+          arg1: GET_VAR 'z: Boolean' type=kotlin.Boolean operator=null
+        CALL 'hashCode(): Int' type=kotlin.Int operator=null
+          $this: GET_VAR 'z: Boolean' type=kotlin.Boolean operator=null
+        CALL 'toString(): String' type=kotlin.String operator=null
+          $this: GET_VAR 'z: Boolean' type=kotlin.Boolean operator=null
+        GET_VAR 'z: Boolean' type=kotlin.Boolean operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

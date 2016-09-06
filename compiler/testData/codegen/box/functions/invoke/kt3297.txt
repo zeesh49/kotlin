@@ -1,0 +1,30 @@
+MODULE <test-module>
+  FILE /kt3297.kt
+    FUN public infix fun <R> (() -> R).or(alt: () -> R): R
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='or(() -> R) on () -> R: R'
+              CALL 'invoke(): R' type=R operator=null
+                $this: $RECEIVER of 'or(() -> R) on () -> R: R' type=() -> R
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='or(() -> R) on () -> R: R'
+              CALL 'invoke(): R' type=R operator=INVOKE
+                $this: GET_VAR 'value-parameter alt: () -> R' type=() -> R operator=VARIABLE_AS_FUNCTION
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'or(() -> String) on () -> String: String' type=kotlin.String operator=null
+            $receiver: BLOCK type=() -> kotlin.Nothing operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Nothing
+                BLOCK_BODY
+                  THROW type=kotlin.Nothing
+                    CALL 'constructor RuntimeException(String!)' type=java.lang.RuntimeException operator=null
+                      p0: CONST String type=kotlin.String value='fail'
+              CALLABLE_REFERENCE '<anonymous>(): Nothing' type=() -> kotlin.Nothing operator=LAMBDA
+            alt: BLOCK type=() -> kotlin.String operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.String
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                    CONST String type=kotlin.String value='OK'
+              CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA

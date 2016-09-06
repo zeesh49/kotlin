@@ -1,0 +1,47 @@
+MODULE <test-module>
+  FILE /implicitSmartCastThis.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      FUN public final fun foo(i: kotlin.Int): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(Int): Int'
+            GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+    FUN public fun A.test(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test() on A: Int'
+          WHEN type=kotlin.Int operator=IF
+            if: TYPE_OP operator=INSTANCEOF typeOperand=B
+              $RECEIVER of 'test() on A: Int' type=A
+            then: CALL 'foo(Int): Int' type=kotlin.Int operator=null
+              $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=B
+                $RECEIVER of 'test() on A: Int' type=A
+              i: CONST Int type=kotlin.Int value='42'
+            else: CONST Int type=kotlin.Int value='0'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test() on A: Int' type=kotlin.Int operator=null
+                $receiver: CALL 'constructor B()' type=B operator=null
+              arg1: CONST Int type=kotlin.Int value='42'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test() on A: Int' type=kotlin.Int operator=null
+                $receiver: CALL 'constructor A()' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,103 @@
+MODULE <test-module>
+  FILE /simpleGetFunctions.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun mem(): kotlin.Unit
+        BLOCK_BODY
+      FUN public final fun kotlin.Int.memExt(): kotlin.Unit
+        BLOCK_BODY
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val all: kotlin.collections.List<kotlin.String>
+          CALL 'sorted() on Iterable<String>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            $receiver: CALL 'map((KFunction<*>) -> String) on Iterable<KFunction<*>>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              $receiver: CALL '<get-functions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+              transform: BLOCK type=(kotlin.reflect.KFunction<*>) -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KFunction<*>): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KFunction<*>): String'
+                      CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+                CALLABLE_REFERENCE '<anonymous>(KFunction<*>): String' type=(kotlin.reflect.KFunction<*>) -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'all: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            arg1: CALL 'listOf(vararg String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              elements: VARARG type=Array<out String> varargElementType=String
+                CONST String type=kotlin.String value='equals'
+                CONST String type=kotlin.String value='hashCode'
+                CONST String type=kotlin.String value='mem'
+                CONST String type=kotlin.String value='memExt'
+                CONST String type=kotlin.String value='toString'
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='Fail A functions: '
+                    CALL '<get-functions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+                      $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        VAR val declared: kotlin.collections.List<kotlin.String>
+          CALL 'sorted() on Iterable<String>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            $receiver: CALL 'map((KFunction<*>) -> String) on Iterable<KFunction<*>>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              $receiver: CALL '<get-declaredFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+              transform: BLOCK type=(kotlin.reflect.KFunction<*>) -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KFunction<*>): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KFunction<*>): String'
+                      CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+                CALLABLE_REFERENCE '<anonymous>(KFunction<*>): String' type=(kotlin.reflect.KFunction<*>) -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'declared: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            arg1: CALL 'listOf(vararg String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              elements: VARARG type=Array<out String> varargElementType=String
+                CONST String type=kotlin.String value='mem'
+                CONST String type=kotlin.String value='memExt'
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='Fail A declaredFunctions: '
+                    CALL '<get-declaredFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+                      $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        VAR val declaredSubclass: kotlin.collections.List<kotlin.String>
+          CALL 'sorted() on Iterable<String>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            $receiver: CALL 'map((KFunction<*>) -> String) on Iterable<KFunction<*>>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              $receiver: CALL '<get-declaredFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'B' type=kotlin.reflect.KClass<B>
+              transform: BLOCK type=(kotlin.reflect.KFunction<*>) -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KFunction<*>): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KFunction<*>): String'
+                      CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+                CALLABLE_REFERENCE '<anonymous>(KFunction<*>): String' type=(kotlin.reflect.KFunction<*>) -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'isEmpty(): Boolean' type=kotlin.Boolean operator=null
+            $this: GET_VAR 'declaredSubclass: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='Fail B declaredFunctions: '
+                    CALL '<get-declaredFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+                      $receiver: CLASS_REFERENCE 'B' type=kotlin.reflect.KClass<B>
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

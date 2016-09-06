@@ -1,0 +1,151 @@
+MODULE <test-module>
+  FILE /propertyAccess.kt
+    PROPERTY public var holder: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value=''
+    FUN public fun getA(): A
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=PLUSEQ
+          CALL '<set-holder>(String): Unit' type=kotlin.Unit operator=PLUSEQ
+            <set-?>: CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+              $this: CALL '<get-holder>(): String' type=kotlin.String operator=PLUSEQ
+              other: CONST String type=kotlin.String value='getA()'
+        RETURN type=kotlin.Nothing from='getA(): A'
+          GET_OBJECT 'A' type=A
+    CLASS OBJECT A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY @kotlin.jvm.JvmStatic public final var a: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+      PROPERTY public final var b: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+        PROPERTY_GETTER @kotlin.jvm.JvmStatic public final fun <get-b>(): kotlin.Int
+      PROPERTY public final var c: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+        PROPERTY_SETTER @kotlin.jvm.JvmStatic public final fun <set-c>(<set-?>: kotlin.Int): kotlin.Unit
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-a>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: CALL 'getA(): A' type=A operator=null
+                arg1: CONST Int type=kotlin.Int value='1'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+                arg1: CONST String type=kotlin.String value='getA()'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+        CALL '<set-holder>(String): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: CONST String type=kotlin.String value=''
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-b>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: CALL 'getA(): A' type=A operator=null
+                arg1: CONST Int type=kotlin.Int value='1'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+                arg1: CONST String type=kotlin.String value='getA()'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 2: '
+              CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+        CALL '<set-holder>(String): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: CONST String type=kotlin.String value=''
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-c>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: CALL 'getA(): A' type=A operator=null
+                arg1: CONST Int type=kotlin.Int value='1'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+                arg1: CONST String type=kotlin.String value='getA()'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 3: '
+              CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+        CALL '<set-holder>(String): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: CONST String type=kotlin.String value=''
+        CALL '<set-a>(Int): Unit' type=kotlin.Unit operator=EQ
+          $this: CALL 'getA(): A' type=A operator=null
+          <set-?>: CONST Int type=kotlin.Int value='2'
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-a>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: CALL 'getA(): A' type=A operator=null
+                arg1: CONST Int type=kotlin.Int value='2'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+                arg1: CONST String type=kotlin.String value='getA()getA()'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+        CALL '<set-holder>(String): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: CONST String type=kotlin.String value=''
+        CALL '<set-b>(Int): Unit' type=kotlin.Unit operator=EQ
+          $this: CALL 'getA(): A' type=A operator=null
+          <set-?>: CONST Int type=kotlin.Int value='2'
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-b>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: CALL 'getA(): A' type=A operator=null
+                arg1: CONST Int type=kotlin.Int value='2'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+                arg1: CONST String type=kotlin.String value='getA()getA()'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 2: '
+              CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+        CALL '<set-holder>(String): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: CONST String type=kotlin.String value=''
+        CALL '<set-c>(Int): Unit' type=kotlin.Unit operator=EQ
+          $this: CALL 'getA(): A' type=A operator=null
+          <set-?>: CONST Int type=kotlin.Int value='2'
+        WHEN type=kotlin.Unit operator=IF
+          if: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-c>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: CALL 'getA(): A' type=A operator=null
+                arg1: CONST Int type=kotlin.Int value='2'
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+                arg1: CONST String type=kotlin.String value='getA()getA()'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 3: '
+              CALL '<get-holder>(): String' type=kotlin.String operator=GET_PROPERTY
+        CALL '<set-holder>(String): Unit' type=kotlin.Unit operator=EQ
+          <set-?>: CONST String type=kotlin.String value=''
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

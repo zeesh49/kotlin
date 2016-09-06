@@ -1,0 +1,89 @@
+MODULE <test-module>
+  FILE /propertyAndFunctionNameClash.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'test(List<String>) on ListTag: Unit' type=kotlin.Unit operator=null
+          $receiver: CALL 'constructor ListTag()' type=d.ListTag operator=null
+          list: CALL 'listOf(vararg String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            strings: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='a'
+              CONST String type=kotlin.String value='b'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    FUN public fun d.ListTag.test(list: kotlin.collections.List<kotlin.String>): kotlin.Unit
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<kotlin.String>
+            CALL 'iterator(): Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'value-parameter list: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val item: kotlin.String
+                CALL 'next(): String' type=kotlin.String operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                CALL 'item(LI.() -> Unit) on ListTag: Unit' type=kotlin.Unit operator=null
+                  $receiver: $RECEIVER of 'test(List<String>) on ListTag: Unit' type=d.ListTag
+                  body: BLOCK type=d.LI.() -> kotlin.Unit operator=LAMBDA
+                    FUN local final fun d.LI.<anonymous>(): kotlin.Unit
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>() on LI: Unit'
+                          CALL 'a(A.() -> Unit) on HtmlTag: Unit' type=kotlin.Unit operator=null
+                            $receiver: $RECEIVER of '<anonymous>() on LI: Unit' type=d.LI
+                            contents: BLOCK type=d.A.() -> kotlin.Unit operator=LAMBDA
+                              FUN local final fun d.A.<anonymous>(): kotlin.Unit
+                                BLOCK_BODY
+                                  RETURN type=kotlin.Nothing from='<anonymous>() on A: Unit'
+                                    CALL '<set-text>(String): Unit' type=kotlin.Unit operator=EQ
+                                      $this: $RECEIVER of '<anonymous>() on A: Unit' type=d.A
+                                      <set-?>: GET_VAR 'item: String' type=kotlin.String operator=null
+                              CALLABLE_REFERENCE '<anonymous>() on A: Unit' type=d.A.() -> kotlin.Unit operator=LAMBDA
+                    CALLABLE_REFERENCE '<anonymous>() on LI: Unit' type=d.LI.() -> kotlin.Unit operator=LAMBDA
+    CLASS CLASS HtmlTag
+      CONSTRUCTOR public constructor HtmlTag()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='HtmlTag'
+    CLASS CLASS ListTag
+      CONSTRUCTOR public constructor ListTag()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor HtmlTag()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ListTag'
+    CLASS CLASS LI
+      CONSTRUCTOR public constructor LI()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor ListTag()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='LI'
+    FUN public fun d.ListTag.item(body: d.LI.() -> kotlin.Unit): kotlin.Unit
+      BLOCK_BODY
+    FUN public fun d.HtmlTag.a(contents: d.A.() -> kotlin.Unit): kotlin.Unit
+      BLOCK_BODY
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor HtmlTag()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public abstract var text: kotlin.String
+    FUN public fun listOf(vararg strings: kotlin.String): kotlin.collections.List<kotlin.String>
+      BLOCK_BODY
+        VAR val list: java.util.ArrayList<kotlin.String>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.String> operator=null
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<kotlin.String>
+            CALL 'iterator(): Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'value-parameter vararg strings: String' type=kotlin.Array<out kotlin.String> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val s: kotlin.String
+                CALL 'next(): String' type=kotlin.String operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+              BLOCK type=kotlin.Boolean operator=null
+                CALL 'add(String): Boolean' type=kotlin.Boolean operator=null
+                  $this: GET_VAR 'list: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null
+                  element: GET_VAR 's: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='listOf(vararg String): List<String>'
+          GET_VAR 'list: ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=null

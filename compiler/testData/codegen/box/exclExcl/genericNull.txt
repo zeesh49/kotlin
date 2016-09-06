@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /genericNull.kt
+    FUN public fun <T> foo(t: T): kotlin.Unit
+      BLOCK_BODY
+        BLOCK type=T operator=EXCLEXCL
+          VAR val tmp0_notnull: T
+            GET_VAR 'value-parameter t: T' type=T operator=null
+          WHEN type=T operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_notnull: T' type=T operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+            else: GET_VAR 'tmp0_notnull: T' type=T operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            CALL 'foo(Any?): Unit' type=kotlin.Unit operator=null
+              t: CONST Null type=kotlin.Nothing? value='null'
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='Fail'

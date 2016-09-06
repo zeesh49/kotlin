@@ -1,0 +1,89 @@
+MODULE <test-module>
+  FILE /component.kt
+    CLASS CLASS S
+      CONSTRUCTOR public constructor S(a: kotlin.String, b: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'a: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'S' type=S
+            value: GET_VAR 'value-parameter a: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'b: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'S' type=S
+            value: GET_VAR 'value-parameter b: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='S'
+      PROPERTY public final val a: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter a: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val b: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter b: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final operator fun component1(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component1(): String'
+            CALL '<get-a>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'S' type=S
+      FUN public final operator fun component2(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component2(): String'
+            CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'S' type=S
+    FUN public operator fun S.component3(): kotlin.String!
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='component3() on S: String!'
+          CALL 'substring(Int): String!' type=kotlin.String! operator=null
+            $this: TYPE_OP operator=CAST typeOperand=java.lang.String
+              CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: CALL '<get-a>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: $RECEIVER of 'component3() on S: String!' type=S
+                other: CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: $RECEIVER of 'component3() on S: String!' type=S
+            p0: CONST Int type=kotlin.Int value='2'
+    CLASS CLASS Tester
+      CONSTRUCTOR public constructor Tester()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Tester'
+      FUN public final fun box(): kotlin.String
+        BLOCK_BODY
+          BLOCK type=kotlin.Unit operator=DESTRUCTURING_DECLARATION
+            VAR val tmp0_container: S
+              CALL 'constructor S(String, String)' type=S operator=null
+                a: CONST String type=kotlin.String value='O'
+                b: CONST String type=kotlin.String value='K'
+            VAR val o: kotlin.String
+              CALL 'component1(): String' type=kotlin.String operator=COMPONENT_N(index=1)
+                $this: GET_VAR 'tmp0_container: S' type=S operator=null
+            VAR val k: kotlin.String
+              CALL 'component2(): String' type=kotlin.String operator=COMPONENT_N(index=2)
+                $this: GET_VAR 'tmp0_container: S' type=S operator=null
+            VAR val ok: kotlin.String!
+              CALL 'component3() on S: String!' type=kotlin.String! operator=COMPONENT_N(index=3)
+                $receiver: GET_VAR 'tmp0_container: S' type=S operator=null
+            VAR val ok2: kotlin.String!
+              CALL 'component4() on S: String!' type=kotlin.String! operator=COMPONENT_N(index=4)
+                $this: THIS of 'Tester' type=Tester
+                $receiver: GET_VAR 'tmp0_container: S' type=S operator=null
+          RETURN type=kotlin.Nothing from='box(): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: GET_VAR 'o: String' type=kotlin.String operator=null
+                  other: GET_VAR 'k: String' type=kotlin.String operator=null
+                other: GET_VAR 'ok: String!' type=kotlin.String! operator=null
+              other: GET_VAR 'ok2: String!' type=kotlin.String! operator=null
+      FUN public final operator fun S.component4(): kotlin.String!
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='component4() on S: String!'
+            CALL 'substring(Int): String!' type=kotlin.String! operator=null
+              $this: TYPE_OP operator=CAST typeOperand=java.lang.String
+                CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                  $this: CALL '<get-a>(): String' type=kotlin.String operator=GET_PROPERTY
+                    $this: $RECEIVER of 'component4() on S: String!' type=S
+                  other: CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+                    $this: $RECEIVER of 'component4() on S: String!' type=S
+              p0: CONST Int type=kotlin.Int value='2'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'box(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Tester()' type=Tester operator=null

@@ -1,0 +1,103 @@
+MODULE <test-module>
+  FILE /kt12200Const.kt
+    CLASS OBJECT ThingTemplate
+      CONSTRUCTOR private constructor ThingTemplate()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ThingTemplate'
+      PROPERTY public const final val prop: kotlin.Int = 0
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+    CLASS CLASS ThingVal
+      CONSTRUCTOR public constructor ThingVal()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ThingVal'
+      PROPERTY public final val prop: kotlin.Int = 0
+        EXPRESSION_BODY
+          CALL '<get-prop>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: GET_OBJECT 'ThingTemplate' type=ThingTemplate
+    CLASS CLASS ThingVar
+      CONSTRUCTOR public constructor ThingVar()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ThingVar'
+      PROPERTY public final var prop: kotlin.Int
+        EXPRESSION_BODY
+          CALL '<get-prop>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: GET_OBJECT 'ThingTemplate' type=ThingTemplate
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val template: ThingTemplate
+          GET_OBJECT 'ThingTemplate' type=ThingTemplate
+        VAR val javaClass: java.lang.Class<ThingTemplate>
+          CALL '<get-java>() on KClass<ThingTemplate>: Class<ThingTemplate>' type=java.lang.Class<ThingTemplate> operator=GET_PROPERTY
+            $receiver: CLASS_REFERENCE 'ThingTemplate' type=kotlin.reflect.KClass<ThingTemplate>
+        VAR val field: java.lang.reflect.Field
+          BLOCK type=java.lang.reflect.Field operator=EXCLEXCL
+            VAR val tmp0_notnull: java.lang.reflect.Field!
+              CALL 'getDeclaredField(String!): Field!' type=java.lang.reflect.Field! operator=null
+                $this: GET_VAR 'javaClass: Class<ThingTemplate>' type=java.lang.Class<ThingTemplate> operator=null
+                p0: CONST String type=kotlin.String value='prop'
+            WHEN type=java.lang.reflect.Field operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Field!' type=java.lang.reflect.Field! operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+                GET_VAR 'tmp0_notnull: Field!' type=java.lang.reflect.Field! operator=null
+        CALL '<set-isAccessible>(Boolean) on Field: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 'field: Field' type=java.lang.reflect.Field operator=null
+          <set-?>: CONST Boolean type=kotlin.Boolean value='true'
+        VAR val modifiersField: java.lang.reflect.Field!
+          CALL 'getDeclaredField(String!): Field!' type=java.lang.reflect.Field! operator=null
+            $this: BLOCK type=java.lang.Class<java.lang.reflect.Field> operator=EXCLEXCL
+              VAR val tmp1_notnull: java.lang.Class<java.lang.reflect.Field>
+                CALL '<get-java>() on KClass<Field>: Class<Field>' type=java.lang.Class<java.lang.reflect.Field> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'Field' type=kotlin.reflect.KClass<java.lang.reflect.Field>
+              WHEN type=java.lang.Class<java.lang.reflect.Field> operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp1_notnull: Class<Field>' type=java.lang.Class<java.lang.reflect.Field> operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp1_notnull: Class<Field>' type=java.lang.Class<java.lang.reflect.Field> operator=null
+            p0: CONST String type=kotlin.String value='modifiers'
+        CALL '<set-isAccessible>(Boolean) on Field: Unit' type=kotlin.Unit operator=EQ
+          $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+            GET_VAR 'modifiersField: Field!' type=java.lang.reflect.Field! operator=null
+          <set-?>: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'setInt(Any!, Int): Unit' type=kotlin.Unit operator=null
+          $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+            GET_VAR 'modifiersField: Field!' type=java.lang.reflect.Field! operator=null
+          p0: GET_VAR 'field: Field' type=java.lang.reflect.Field operator=null
+          p1: CALL 'and(Int): Int' type=kotlin.Int operator=null
+            $this: CALL '<get-modifiers>() on Field: Int' type=kotlin.Int operator=GET_PROPERTY
+              $receiver: GET_VAR 'field: Field' type=java.lang.reflect.Field operator=null
+            other: CALL 'inv(): Int' type=kotlin.Int operator=null
+              $this: GET_BACKING_FIELD 'FINAL: Int' type=kotlin.Int operator=GET_PROPERTY
+        CALL 'set(Any!, Any!): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'field: Field' type=java.lang.reflect.Field operator=null
+          p0: CONST Null type=kotlin.Nothing? value='null'
+          p1: CONST Int type=kotlin.Int value='1'
+        VAR val thingVal: ThingVal
+          CALL 'constructor ThingVal()' type=ThingVal operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'thingVal: ThingVal' type=ThingVal operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        VAR val thingVar: ThingVar
+          CALL 'constructor ThingVar()' type=ThingVar operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-prop>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'thingVar: ThingVar' type=ThingVar operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

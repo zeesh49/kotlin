@@ -1,0 +1,35 @@
+MODULE <test-module>
+  FILE /kt665.kt
+    FUN public fun f(x: kotlin.Long, zzz: kotlin.Long = ...): kotlin.Long
+      zzz: EXPRESSION_BODY
+        CONST Long type=kotlin.Long value='1'
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='f(Long, Long = ...): Long'
+          WHEN type=kotlin.Long operator=IF
+            if: CALL 'LTEQ0(Int): Boolean' type=kotlin.Boolean operator=LTEQ
+              arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LTEQ
+                $this: GET_VAR 'value-parameter x: Long' type=kotlin.Long operator=null
+                other: CONST Int type=kotlin.Int value='1'
+            then: GET_VAR 'value-parameter zzz: Long = ...' type=kotlin.Long operator=null
+            else: CALL 'f(Long, Long = ...): Long' type=kotlin.Long operator=null
+              x: CALL 'minus(Int): Long' type=kotlin.Long operator=MINUS
+                $this: GET_VAR 'value-parameter x: Long' type=kotlin.Long operator=null
+                other: CONST Int type=kotlin.Int value='1'
+              zzz: CALL 'times(Long): Long' type=kotlin.Long operator=MUL
+                $this: GET_VAR 'value-parameter x: Long' type=kotlin.Long operator=null
+                other: GET_VAR 'value-parameter zzz: Long = ...' type=kotlin.Long operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val six: kotlin.Long = 6.toLong()
+          CONST Long type=kotlin.Long value='6'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'f(Long, Long = ...): Long' type=kotlin.Long operator=null
+                x: GET_VAR 'six: Long' type=kotlin.Long operator=null
+              arg1: CALL 'toLong(): Long' type=kotlin.Long operator=null
+                $this: CONST Int type=kotlin.Int value='720'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,53 @@
+MODULE <test-module>
+  FILE /kt8089.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      CLASS OBJECT companion object of C
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of C'
+        PROPERTY private final val s: kotlin.String
+        PROPERTY private final var s2: kotlin.String
+        ANONYMOUS_INITIALIZER companion object of C
+          BLOCK_BODY
+            SET_BACKING_FIELD 's: String' type=kotlin.Unit operator=null
+              receiver: THIS of 'companion object of C' type=C.Companion
+              value: CONST String type=kotlin.String value='O'
+            CALL '<set-s2>(String): Unit' type=kotlin.Unit operator=EQ
+              $this: THIS of 'companion object of C' type=C.Companion
+              <set-?>: CONST String type=kotlin.String value='O'
+        FUN public final fun foo(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo(): String'
+              CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'companion object of C' type=C.Companion
+        FUN public final fun foo2(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo2(): String'
+              CALL '<get-s2>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'companion object of C' type=C.Companion
+        FUN public final fun bar2(): kotlin.Unit
+          BLOCK_BODY
+            CALL '<set-s2>(String): Unit' type=kotlin.Unit operator=EQ
+              $this: THIS of 'companion object of C' type=C.Companion
+              <set-?>: CONST String type=kotlin.String value='K'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL 'foo(): String' type=kotlin.String operator=null
+              $this: GET_OBJECT 'companion object of C' type=C.Companion
+            other: CALL 'invoke(): String' type=kotlin.String operator=null
+              $this: BLOCK type=() -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.String
+                  BLOCK_BODY
+                    CALL 'bar2(): Unit' type=kotlin.Unit operator=null
+                      $this: GET_OBJECT 'companion object of C' type=C.Companion
+                    RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                      CALL 'foo2(): String' type=kotlin.String operator=null
+                        $this: GET_OBJECT 'companion object of C' type=C.Companion
+                CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA

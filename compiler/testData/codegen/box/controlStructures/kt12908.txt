@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /kt12908.kt
+    PROPERTY public var field: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='0'
+    FUN public fun next(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='next(): Int'
+          BLOCK type=kotlin.Int operator=PREFIX_INCR
+            BLOCK type=kotlin.Int operator=PREFIX_INCR
+              VAR val tmp0: kotlin.Int
+                CALL 'inc(): Int' type=kotlin.Int operator=PREFIX_INCR
+                  $this: CALL '<get-field>(): Int' type=kotlin.Int operator=PREFIX_INCR
+              CALL '<set-field>(Int): Unit' type=kotlin.Unit operator=PREFIX_INCR
+                <set-?>: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+              GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val task: kotlin.String
+        DO_WHILE label=null operator=DO_WHILE_LOOP
+          body: BLOCK type=kotlin.Unit operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL 'mod(Int): Int' type=kotlin.Int operator=PERC
+                  $this: CALL 'next(): Int' type=kotlin.Int operator=null
+                  other: CONST Int type=kotlin.Int value='2'
+                arg1: CONST Int type=kotlin.Int value='0'
+              then: BLOCK type=kotlin.Nothing operator=null
+                SET_VAR 'task: String' type=kotlin.Unit operator=EQ
+                  CONST String type=kotlin.String value='OK'
+                BREAK label=null loop.label=null depth=0
+          condition: CONST Boolean type=kotlin.Boolean value='true'
+        RETURN type=kotlin.Nothing from='box(): String'
+          GET_VAR 'task: String' type=kotlin.String operator=null

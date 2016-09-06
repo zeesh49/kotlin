@@ -1,0 +1,42 @@
+MODULE <test-module>
+  FILE /mappedClassIsEqualToClassLiteral.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a1: kotlin.reflect.KClass<A>
+          CALL '<get-kotlin>() on Class<A>: KClass<A>' type=kotlin.reflect.KClass<A> operator=GET_PROPERTY
+            $receiver: CALL '<get-java>() on KClass<A>: Class<A>' type=java.lang.Class<A> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+        VAR val a2: kotlin.reflect.KClass<A>
+          CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'a1: KClass<A>' type=kotlin.reflect.KClass<A> operator=null
+              arg1: GET_VAR 'a2: KClass<A>' type=kotlin.reflect.KClass<A> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail equals'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'a1: KClass<A>' type=kotlin.reflect.KClass<A> operator=null
+              arg1: CALL 'hashCode(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'a2: KClass<A>' type=kotlin.reflect.KClass<A> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail hashCode'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'a1: KClass<A>' type=kotlin.reflect.KClass<A> operator=null
+              arg1: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'a2: KClass<A>' type=kotlin.reflect.KClass<A> operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail toString'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

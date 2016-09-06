@@ -1,0 +1,31 @@
+MODULE <test-module>
+  FILE /defaultargs6.kt
+    CLASS INTERFACE A
+      FUN public open fun foo(x: kotlin.Int, y: kotlin.Int = ..., z: kotlin.Int = ...): kotlin.Int
+        y: EXPRESSION_BODY
+          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+            $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+            other: CONST Int type=kotlin.Int value='20'
+        z: EXPRESSION_BODY
+          CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+            $this: GET_VAR 'value-parameter y: Int = ...' type=kotlin.Int operator=null
+            other: CONST Int type=kotlin.Int value='2'
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(Int, Int = ..., Int = ...): Int'
+            GET_VAR 'value-parameter z: Int = ...' type=kotlin.Int operator=null
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'foo(Int, Int = ..., Int = ...): Int' type=kotlin.Int operator=null
+                $this: CALL 'constructor B()' type=B operator=null
+                x: CONST Int type=kotlin.Int value='1'
+              arg1: CONST Int type=kotlin.Int value='42'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='Fail'

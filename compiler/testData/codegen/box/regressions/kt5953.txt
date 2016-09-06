@@ -1,0 +1,43 @@
+MODULE <test-module>
+  FILE /kt5953.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val res: kotlin.collections.List<kotlin.Unit>
+          CALL 'map((Int) -> Unit) on Iterable<Int>: List<Unit>' type=kotlin.collections.List<kotlin.Unit> operator=null
+            $receiver: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+              $this: CONST Int type=kotlin.Int value='1'
+              other: CONST Int type=kotlin.Int value='3'
+            transform: BLOCK type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.Int): kotlin.Unit
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): Unit'
+                    WHEN type=kotlin.Unit operator=IF
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+                        arg1: CONST Int type=kotlin.Int value='1'
+                      then: CONST Int type=kotlin.Int value='2'
+              CALLABLE_REFERENCE '<anonymous>(Int): Unit' type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+        VAR var result: kotlin.String
+          CONST String type=kotlin.String value=''
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<kotlin.Unit>
+            CALL 'iterator(): Iterator<Unit>' type=kotlin.collections.Iterator<kotlin.Unit> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'res: List<Unit>' type=kotlin.collections.List<kotlin.Unit> operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<Unit>' type=kotlin.collections.Iterator<kotlin.Unit> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Unit
+                CALL 'next(): Unit' type=kotlin.Unit operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<Unit>' type=kotlin.collections.Iterator<kotlin.Unit> operator=null
+              SET_VAR 'result: String' type=kotlin.Unit operator=PLUSEQ
+                CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                  $this: GET_VAR 'result: String' type=kotlin.String operator=PLUSEQ
+                  other: CONST String type=kotlin.String value=' '
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'result: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='   '
+            then: CONST String type=kotlin.String value='OK'
+            else: GET_VAR 'result: String' type=kotlin.String operator=null

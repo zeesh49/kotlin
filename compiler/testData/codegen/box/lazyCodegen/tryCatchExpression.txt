@@ -1,0 +1,27 @@
+MODULE <test-module>
+  FILE /tryCatchExpression.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val p: kotlin.Int
+        EXPRESSION_BODY
+          TRY_CATCH type=kotlin.Int
+            try: BLOCK type=kotlin.Int operator=null
+              CONST Int type=kotlin.Int value='1'
+            catch e: BLOCK type=kotlin.Nothing operator=null
+              THROW type=kotlin.Nothing
+                CALL 'constructor RuntimeException()' type=java.lang.RuntimeException operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-p>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL 'constructor A()' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /kt4281.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+      FUN public final fun test(x: kotlin.Int): kotlin.Unit
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+            then: RETURN type=kotlin.Nothing from='test(Int): Unit'
+          WHEN type=kotlin.Unit operator=IF
+            if: TYPE_OP operator=INSTANCEOF typeOperand=D
+              THIS of 'C' type=C
+            then: BLOCK type=kotlin.Unit operator=null
+              VAR val d: D
+                TYPE_OP operator=IMPLICIT_CAST typeOperand=D
+                  THIS of 'C' type=C
+              CALL 'test(Int): Unit' type=kotlin.Unit operator=null
+                $this: GET_VAR 'd: D' type=D operator=null
+                x: CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+                  $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+                  other: CONST Int type=kotlin.Int value='1'
+    CLASS CLASS D
+      CONSTRUCTOR public constructor D()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor C()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='D'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'test(Int): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor D()' type=D operator=null
+          x: CONST Int type=kotlin.Int value='10'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

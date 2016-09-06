@@ -1,0 +1,29 @@
+MODULE <test-module>
+  FILE /kt1249.kt
+    CLASS CLASS TestClass
+      CONSTRUCTOR public constructor TestClass(body: () -> kotlin.Unit)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'body: () -> Unit' type=kotlin.Unit operator=null
+            receiver: THIS of 'TestClass' type=TestClass
+            value: GET_VAR 'value-parameter body: () -> Unit' type=() -> kotlin.Unit operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='TestClass'
+      PROPERTY public final val body: () -> kotlin.Unit
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter body: () -> Unit' type=() -> kotlin.Unit operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun run(): kotlin.Unit
+        BLOCK_BODY
+          CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+            $this: CALL '<get-body>(): () -> Unit' type=() -> kotlin.Unit operator=GET_PROPERTY
+              $this: THIS of 'TestClass' type=TestClass
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'run(): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor TestClass(() -> Unit)' type=TestClass operator=null
+            body: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun <anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+              CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

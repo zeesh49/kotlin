@@ -1,0 +1,102 @@
+MODULE <test-module>
+  FILE /simple.kt
+    CLASS OBJECT A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val b: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+      PROPERTY @kotlin.jvm.JvmStatic public final val c: kotlin.String = "OK"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+      FUN @kotlin.jvm.JvmStatic public final fun test1(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test1(): String'
+            CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'A' type=A
+      FUN @kotlin.jvm.JvmStatic public final fun test2(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test2(): String'
+            CALL 'test1(): String' type=kotlin.String operator=null
+              $this: THIS of 'A' type=A
+      FUN public final fun test3(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test3(): String'
+            CALL 'test5() on String: String' type=kotlin.String operator=null
+              $this: THIS of 'A' type=A
+              $receiver: CONST String type=kotlin.String value='1'
+      FUN @kotlin.jvm.JvmStatic public final fun test4(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test4(): String'
+            CALL 'test5() on String: String' type=kotlin.String operator=null
+              $this: THIS of 'A' type=A
+              $receiver: CONST String type=kotlin.String value='1'
+      FUN @kotlin.jvm.JvmStatic public final fun kotlin.String.test5(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test5() on String: String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: $RECEIVER of 'test5() on String: String' type=kotlin.String
+              other: CALL '<get-b>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'A' type=A
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test1(): String' type=kotlin.String operator=null
+                $this: GET_OBJECT 'A' type=A
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test2(): String' type=kotlin.String operator=null
+                $this: GET_OBJECT 'A' type=A
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test3(): String' type=kotlin.String operator=null
+                $this: GET_OBJECT 'A' type=A
+              arg1: CONST String type=kotlin.String value='1OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test4(): String' type=kotlin.String operator=null
+                $this: GET_OBJECT 'A' type=A
+              arg1: CONST String type=kotlin.String value='1OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'with(A, A.() -> String): String' type=kotlin.String operator=null
+                receiver: GET_OBJECT 'A' type=A
+                block: BLOCK type=A.() -> kotlin.String operator=LAMBDA
+                  FUN local final fun A.<anonymous>(): kotlin.String
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>() on A: String'
+                        CALL 'test5() on String: String' type=kotlin.String operator=null
+                          $this: $RECEIVER of '<anonymous>() on A: String' type=A
+                          $receiver: CONST String type=kotlin.String value='1'
+                  CALLABLE_REFERENCE '<anonymous>() on A: String' type=A.() -> kotlin.String operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='1OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 5'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-c>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_OBJECT 'A' type=A
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 6'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,21 @@
+MODULE <test-module>
+  FILE /toString.kt
+    CLASS ENUM_CLASS State
+      CONSTRUCTOR private constructor State()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='State'
+      ENUM_ENTRY enum entry O
+        init: ENUM_CONSTRUCTOR_CALL 'constructor State()' O
+      ENUM_ENTRY enum entry K
+        init: ENUM_CONSTRUCTOR_CALL 'constructor State()' K
+      FUN public final fun values(): kotlin.Array<State>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): State
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          STRING_CONCATENATION type=kotlin.String
+            GET_ENUM_VALUE 'O' type=State
+            GET_ENUM_VALUE 'K' type=State

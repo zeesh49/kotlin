@@ -1,0 +1,67 @@
+MODULE <test-module>
+  FILE /functionNtoStringGeneric.kt
+    FUN public fun <T> bar(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='bar(): String'
+          CALL 'toString(): String' type=kotlin.String operator=null
+            $this: BLOCK type=(T) -> T operator=LAMBDA
+              FUN local final fun <anonymous>(t: T): T
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(T): T'
+                    GET_VAR 'value-parameter t: T' type=T operator=null
+              CALLABLE_REFERENCE '<anonymous>(T): T' type=(T) -> T operator=LAMBDA
+    CLASS CLASS Baz
+      CONSTRUCTOR public constructor Baz<T, V>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Baz'
+      FUN public final fun <V : T> baz(v: V): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='baz(V): String'
+            CALL 'toString(): String' type=kotlin.String operator=null
+              $this: BLOCK type=(kotlin.collections.List<T>) -> V operator=ANONYMOUS_FUNCTION
+                FUN local final fun <no name provided>(t: kotlin.collections.List<T>): V
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<no name provided>(List<T>): V'
+                      GET_VAR 'value-parameter v: V' type=V operator=null
+                CALLABLE_REFERENCE '<no name provided>(List<T>): V' type=(kotlin.collections.List<T>) -> V operator=ANONYMOUS_FUNCTION
+    CLASS CLASS Foo
+      CONSTRUCTOR public constructor Foo<T, U : kotlin.collections.List<T>>(lambda: (T) -> U)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'lambda: (T) -> U' type=kotlin.Unit operator=null
+            receiver: THIS of 'Foo' type=Foo<T, U>
+            value: GET_VAR 'value-parameter lambda: (T) -> U' type=(T) -> U operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      PROPERTY public final val lambda: (T) -> U
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter lambda: (T) -> U' type=(T) -> U operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS Bar
+      CONSTRUCTOR public constructor Bar<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Foo((T) -> List<T>)'
+            lambda: BLOCK type=(T) -> kotlin.collections.List<T> operator=LAMBDA
+              FUN local final fun <anonymous>(it: T): kotlin.collections.List<T>
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(T): List<T>'
+                    CALL 'listOf(T): List<T>' type=kotlin.collections.List<T> operator=null
+                      element: GET_VAR 'value-parameter it: T' type=T operator=null
+              CALLABLE_REFERENCE '<anonymous>(T): List<T>' type=(T) -> kotlin.collections.List<T> operator=LAMBDA
+          INSTANCE_INITIALIZER_CALL classDescriptor='Bar'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='(T) -> T'
+          actual: CALL 'bar(): String' type=kotlin.String operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='(kotlin.collections.List<T>) -> V'
+          actual: CALL 'baz(String): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Baz()' type=Baz<kotlin.String, kotlin.Int> operator=null
+            v: CONST String type=kotlin.String value=''
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='(T) -> kotlin.collections.List<T>'
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL '<get-lambda>(): (Int) -> List<Int>' type=(kotlin.Int) -> kotlin.collections.List<kotlin.Int> operator=GET_PROPERTY
+              $this: CALL 'constructor Bar()' type=Bar<kotlin.Int> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

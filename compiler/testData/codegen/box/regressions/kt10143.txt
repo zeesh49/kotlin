@@ -1,0 +1,84 @@
+MODULE <test-module>
+  FILE /Main.kt
+    CLASS CLASS Derived
+      CONSTRUCTOR public constructor Derived()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Outer()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Derived'
+      ANONYMOUS_INITIALIZER Derived
+        BLOCK_BODY
+          CALL 'my(Outer.My.() -> Unit): Outer.My' type=another.Outer.My operator=null
+            $this: THIS of 'Derived' type=other.Derived
+            init: BLOCK type=another.Outer.My.() -> kotlin.Unit operator=LAMBDA
+              FUN local final fun another.Outer.My.<anonymous>(): kotlin.Unit
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>() on Outer.My: Unit'
+                    CALL 'initStage(() -> Unit): Outer.Stage' type=another.Outer.Stage operator=null
+                      $this: $RECEIVER of '<anonymous>() on Outer.My: Unit' type=another.Outer.My
+                      f: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                        FUN local final fun <anonymous>(): kotlin.Unit
+                          BLOCK_BODY
+                            RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                        CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+              CALLABLE_REFERENCE '<anonymous>() on Outer.My: Unit' type=another.Outer.My.() -> kotlin.Unit operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'constructor Derived()' type=other.Derived operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+  FILE /Outer.kt
+    CLASS CLASS Outer
+      CONSTRUCTOR public constructor Outer()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+      CLASS CLASS Stage
+        CONSTRUCTOR public constructor Stage(run: () -> kotlin.Unit)
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            SET_BACKING_FIELD 'run: () -> Unit' type=kotlin.Unit operator=null
+              receiver: THIS of 'Stage' type=another.Outer.Stage
+              value: GET_VAR 'value-parameter run: () -> Unit' type=() -> kotlin.Unit operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            INSTANCE_INITIALIZER_CALL classDescriptor='Stage'
+        PROPERTY public final val run: () -> kotlin.Unit
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter run: () -> Unit' type=() -> kotlin.Unit operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CLASS CLASS My
+        CONSTRUCTOR public constructor My(stage: another.Outer.Stage? = ...)
+          stage: EXPRESSION_BODY
+            CONST Null type=kotlin.Nothing? value='null'
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            SET_BACKING_FIELD 'stage: Outer.Stage?' type=kotlin.Unit operator=null
+              receiver: THIS of 'My' type=another.Outer.My
+              value: GET_VAR 'value-parameter stage: Outer.Stage? = ...' type=another.Outer.Stage? operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            INSTANCE_INITIALIZER_CALL classDescriptor='My'
+        PROPERTY public final var stage: another.Outer.Stage?
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter stage: Outer.Stage? = ...' type=another.Outer.Stage? operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+        FUN public final fun initStage(f: () -> kotlin.Unit): another.Outer.Stage
+          BLOCK_BODY
+            CALL '<set-stage>(Outer.Stage?): Unit' type=kotlin.Unit operator=EQ
+              $this: THIS of 'My' type=another.Outer.My
+              <set-?>: CALL 'constructor Stage(() -> Unit)' type=another.Outer.Stage operator=null
+                run: GET_VAR 'value-parameter f: () -> Unit' type=() -> kotlin.Unit operator=null
+            RETURN type=kotlin.Nothing from='initStage(() -> Unit): Outer.Stage'
+              BLOCK type=another.Outer.Stage operator=EXCLEXCL
+                VAR val tmp0_notnull: another.Outer.Stage?
+                  CALL '<get-stage>(): Outer.Stage?' type=another.Outer.Stage? operator=GET_PROPERTY
+                    $this: THIS of 'My' type=another.Outer.My
+                WHEN type=another.Outer.Stage operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_notnull: Outer.Stage?' type=another.Outer.Stage? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: GET_VAR 'tmp0_notnull: Outer.Stage?' type=another.Outer.Stage? operator=null
+      FUN protected final fun my(init: another.Outer.My.() -> kotlin.Unit): another.Outer.My
+        BLOCK_BODY
+          VAR val result: another.Outer.My
+            CALL 'constructor My(Outer.Stage? = ...)' type=another.Outer.My operator=null
+          CALL 'invoke() on Outer.My: Unit' type=kotlin.Unit operator=INVOKE
+            $this: GET_VAR 'value-parameter init: Outer.My.() -> Unit' type=another.Outer.My.() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+            $receiver: GET_VAR 'result: Outer.My' type=another.Outer.My operator=null
+          RETURN type=kotlin.Nothing from='my(Outer.My.() -> Unit): Outer.My'
+            GET_VAR 'result: Outer.My' type=another.Outer.My operator=null

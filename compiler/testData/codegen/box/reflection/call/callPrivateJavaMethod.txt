@@ -1,0 +1,77 @@
+MODULE <test-module>
+  FILE /K.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val c: kotlin.reflect.KFunction<J>
+          CALL 'single() on Iterable<KFunction<J>>: KFunction<J>' type=kotlin.reflect.KFunction<J> operator=null
+            $receiver: CALL '<get-constructors>(): Collection<KFunction<J>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<J>> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'J' type=kotlin.reflect.KClass<J>
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isAccessible>() on KCallable<*>: Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $receiver: GET_VAR 'c: KFunction<J>' type=kotlin.reflect.KFunction<J> operator=null
+        CALL 'assertFailsWith(KClass<IllegalCallableAccessException>, () -> Unit): IllegalCallableAccessException' type=kotlin.reflect.IllegalCallableAccessException operator=null
+          exceptionClass: CLASS_REFERENCE 'IllegalCallableAccessException' type=kotlin.reflect.KClass<kotlin.reflect.IllegalCallableAccessException>
+          block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  CALL 'call(vararg Any?): J' type=J operator=null
+                    $this: GET_VAR 'c: KFunction<J>' type=kotlin.reflect.KFunction<J> operator=null
+                    args: VARARG type=Array<out Any?> varargElementType=Any?
+                      CONST String type=kotlin.String value=''
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL '<set-isAccessible>(Boolean) on KCallable<*>: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 'c: KFunction<J>' type=kotlin.reflect.KFunction<J> operator=null
+          value: CONST Boolean type=kotlin.Boolean value='true'
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isAccessible>() on KCallable<*>: Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $receiver: GET_VAR 'c: KFunction<J>' type=kotlin.reflect.KFunction<J> operator=null
+        VAR val j: J
+          CALL 'call(vararg Any?): J' type=J operator=null
+            $this: GET_VAR 'c: KFunction<J>' type=kotlin.reflect.KFunction<J> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CONST String type=kotlin.String value='OK'
+        VAR val m: kotlin.reflect.KCallable<*>
+          CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+            $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'J' type=kotlin.reflect.KClass<J>
+            predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                    CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                      arg1: CONST String type=kotlin.String value='getResult'
+              CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isAccessible>() on KCallable<*>: Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $receiver: GET_VAR 'm: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+        CALL 'assertFailsWith(KClass<IllegalCallableAccessException>, () -> Unit): IllegalCallableAccessException' type=kotlin.reflect.IllegalCallableAccessException operator=null
+          exceptionClass: CLASS_REFERENCE 'IllegalCallableAccessException' type=kotlin.reflect.KClass<kotlin.reflect.IllegalCallableAccessException>
+          block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  BLOCK type=kotlin.Any operator=EXCLEXCL
+                    VAR val tmp0_notnull: kotlin.Any?
+                      CALL 'call(vararg Any?): Any?' type=kotlin.Any? operator=null
+                        $this: GET_VAR 'm: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                        args: VARARG type=Array<out Any?> varargElementType=Any?
+                          GET_VAR 'j: J' type=J operator=null
+                    WHEN type=kotlin.Any operator=null
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: GET_VAR 'tmp0_notnull: Any?' type=kotlin.Any? operator=null
+                        arg1: CONST Null type=kotlin.Nothing? value='null'
+                      then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                      else: GET_VAR 'tmp0_notnull: Any?' type=kotlin.Any? operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL '<set-isAccessible>(Boolean) on KCallable<*>: Unit' type=kotlin.Unit operator=EQ
+          $receiver: GET_VAR 'm: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+          value: CONST Boolean type=kotlin.Boolean value='true'
+        RETURN type=kotlin.Nothing from='box(): String'
+          TYPE_OP operator=CAST typeOperand=kotlin.String
+            CALL 'call(vararg Any?): Any?' type=kotlin.Any? operator=null
+              $this: GET_VAR 'm: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+              args: VARARG type=Array<out Any?> varargElementType=Any?
+                GET_VAR 'j: J' type=J operator=null

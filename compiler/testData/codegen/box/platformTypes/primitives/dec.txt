@@ -1,0 +1,94 @@
+MODULE <test-module>
+  FILE /dec.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val l: java.util.ArrayList<kotlin.Int>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.Int> operator=null
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'l: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='1'
+        VAR var x: kotlin.Int
+          CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'l: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+        VAR var y: kotlin.Int
+          CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+            $this: GET_VAR 'l: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+            index: CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Int operator=POSTFIX_DECR
+          VAR val tmp0_array: java.util.ArrayList<kotlin.Int>
+            GET_VAR 'l: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          VAR val tmp1_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          VAR val tmp2: kotlin.Int
+            CALL 'get(Int): Int' type=kotlin.Int operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp0_array: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+              index: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+          CALL 'set(Int, Int): Int' type=kotlin.Int operator=POSTFIX_DECR
+            $this: GET_VAR 'tmp0_array: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+            index: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+            element: CALL 'dec(): Int' type=kotlin.Int operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp2: Int' type=kotlin.Int operator=null
+          GET_VAR 'tmp2: Int' type=kotlin.Int operator=null
+        BLOCK type=kotlin.Int operator=PREFIX_DECR
+          VAR val tmp3_array: java.util.ArrayList<kotlin.Int>
+            GET_VAR 'l: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          VAR val tmp4_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          VAR val tmp5: kotlin.Int
+            CALL 'dec(): Int' type=kotlin.Int operator=PREFIX_DECR
+              $this: CALL 'get(Int): Int' type=kotlin.Int operator=PREFIX_DECR
+                $this: GET_VAR 'tmp3_array: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+                index: GET_VAR 'tmp4_index0: Int' type=kotlin.Int operator=null
+          CALL 'set(Int, Int): Int' type=kotlin.Int operator=PREFIX_DECR
+            $this: GET_VAR 'tmp3_array: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+            index: GET_VAR 'tmp4_index0: Int' type=kotlin.Int operator=null
+            element: GET_VAR 'tmp5: Int' type=kotlin.Int operator=null
+          GET_VAR 'tmp5: Int' type=kotlin.Int operator=null
+        BLOCK type=kotlin.Int operator=POSTFIX_DECR
+          VAR val tmp6: kotlin.Int
+            GET_VAR 'x: Int' type=kotlin.Int operator=POSTFIX_DECR
+          SET_VAR 'x: Int' type=kotlin.Unit operator=POSTFIX_DECR
+            CALL 'dec(): Int' type=kotlin.Int operator=POSTFIX_DECR
+              $this: GET_VAR 'tmp6: Int' type=kotlin.Int operator=null
+          GET_VAR 'tmp6: Int' type=kotlin.Int operator=null
+        BLOCK type=kotlin.Int operator=PREFIX_DECR
+          VAR val tmp7: kotlin.Int
+            CALL 'dec(): Int' type=kotlin.Int operator=PREFIX_DECR
+              $this: GET_VAR 'y: Int' type=kotlin.Int operator=PREFIX_DECR
+          SET_VAR 'y: Int' type=kotlin.Unit operator=PREFIX_DECR
+            GET_VAR 'tmp7: Int' type=kotlin.Int operator=null
+          GET_VAR 'tmp7: Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'l: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+                index: CONST Int type=kotlin.Int value='0'
+              arg1: CONST Int type=kotlin.Int value='-1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              CALL 'get(Int): Int' type=kotlin.Int operator=GET_ARRAY_ELEMENT
+                $this: GET_VAR 'l: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+                index: CONST Int type=kotlin.Int value='0'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'x: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail x: '
+              GET_VAR 'x: Int' type=kotlin.Int operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'y: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='0'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail y: '
+              GET_VAR 'y: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

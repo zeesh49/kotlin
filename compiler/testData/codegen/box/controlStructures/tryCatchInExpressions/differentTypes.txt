@@ -1,0 +1,39 @@
+MODULE <test-module>
+  FILE /differentTypes.kt
+    FUN public fun foo(b: kotlin.Byte, s: kotlin.String, i: kotlin.Int, d: kotlin.Double, li: kotlin.Long): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(Byte, String, Int, Double, Long): String'
+          STRING_CONCATENATION type=kotlin.String
+            GET_VAR 'value-parameter b: Byte' type=kotlin.Byte operator=null
+            CONST String type=kotlin.String value=' '
+            GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+            CONST String type=kotlin.String value=' '
+            GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+            CONST String type=kotlin.String value=' '
+            GET_VAR 'value-parameter d: Double' type=kotlin.Double operator=null
+            CONST String type=kotlin.String value=' '
+            GET_VAR 'value-parameter li: Long' type=kotlin.Long operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val test: kotlin.String
+          CALL 'foo(Byte, String, Int, Double, Long): String' type=kotlin.String operator=null
+            b: CONST Byte type=kotlin.Byte value='1'
+            s: CONST String type=kotlin.String value='abc'
+            i: CONST Int type=kotlin.Int value='1'
+            d: CONST Double type=kotlin.Double value='1.0'
+            li: TRY_CATCH type=kotlin.Long
+              try: BLOCK type=kotlin.Long operator=null
+                CONST Long type=kotlin.Long value='1'
+              catch e: BLOCK type=kotlin.Long operator=null
+                CONST Long type=kotlin.Long value='10'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'test: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='1 abc 1 1.0 1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Failed, test=='
+              GET_VAR 'test: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

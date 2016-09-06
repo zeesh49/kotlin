@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /safeCallOnLong.kt
+    FUN public fun f(b: kotlin.Long.(kotlin.Long) -> kotlin.Long): kotlin.Long
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='f(Long.(Long) -> Long): Long'
+          BLOCK type=kotlin.Long? operator=SAFE_CALL
+            VAR val tmp0_safe_receiver: kotlin.Long
+              CONST Long type=kotlin.Long value='1'
+            WHEN type=kotlin.Long? operator=SAFE_CALL
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_safe_receiver: Long' type=kotlin.Long operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CONST Null type=kotlin.Nothing? value='null'
+              else: CALL 'invoke(Long) on Long: Long' type=kotlin.Long operator=INVOKE
+                $this: GET_VAR 'value-parameter b: Long.(Long) -> Long' type=kotlin.Long.(kotlin.Long) -> kotlin.Long operator=VARIABLE_AS_FUNCTION
+                $receiver: GET_VAR 'tmp0_safe_receiver: Long' type=kotlin.Long operator=null
+                p2: CONST Long type=kotlin.Long value='2'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.Long
+          CALL 'f(Long.(Long) -> Long): Long' type=kotlin.Long operator=null
+            b: BLOCK type=kotlin.Long.(kotlin.Long) -> kotlin.Long operator=LAMBDA
+              FUN local final fun kotlin.Long.<anonymous>(it: kotlin.Long): kotlin.Long
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Long) on Long: Long'
+                    CALL 'plus(Long): Long' type=kotlin.Long operator=PLUS
+                      $this: $RECEIVER of '<anonymous>(Long) on Long: Long' type=kotlin.Long
+                      other: GET_VAR 'value-parameter it: Long' type=kotlin.Long operator=null
+              CALLABLE_REFERENCE '<anonymous>(Long) on Long: Long' type=kotlin.Long.(kotlin.Long) -> kotlin.Long operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'x: Long' type=kotlin.Long operator=null
+              arg1: CONST Long type=kotlin.Long value='3'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail '
+              GET_VAR 'x: Long' type=kotlin.Long operator=null

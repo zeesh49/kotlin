@@ -1,0 +1,81 @@
+MODULE <test-module>
+  FILE /overloadPlusToPlusAssign.kt
+    CLASS CLASS ArrayWrapper
+      CONSTRUCTOR public constructor ArrayWrapper<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='ArrayWrapper'
+      PROPERTY public final val contents: java.util.ArrayList<T>
+        EXPRESSION_BODY
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<T> operator=null
+      FUN public final fun add(item: T): kotlin.Unit
+        BLOCK_BODY
+          CALL 'add(T): Boolean' type=kotlin.Boolean operator=null
+            $this: CALL '<get-contents>(): ArrayList<T>' type=java.util.ArrayList<T> operator=GET_PROPERTY
+              $this: THIS of 'ArrayWrapper' type=ArrayWrapper<T>
+            element: GET_VAR 'value-parameter item: T' type=T operator=null
+      FUN public final operator fun plus(rhs: ArrayWrapper<T>): ArrayWrapper<T>
+        BLOCK_BODY
+          VAR val result: ArrayWrapper<T>
+            CALL 'constructor ArrayWrapper()' type=ArrayWrapper<T> operator=null
+          CALL 'addAll(Collection<T>): Boolean' type=kotlin.Boolean operator=null
+            $this: CALL '<get-contents>(): ArrayList<T>' type=java.util.ArrayList<T> operator=GET_PROPERTY
+              $this: GET_VAR 'result: ArrayWrapper<T>' type=ArrayWrapper<T> operator=null
+            elements: CALL '<get-contents>(): ArrayList<T>' type=java.util.ArrayList<T> operator=GET_PROPERTY
+              $this: THIS of 'ArrayWrapper' type=ArrayWrapper<T>
+          CALL 'addAll(Collection<T>): Boolean' type=kotlin.Boolean operator=null
+            $this: CALL '<get-contents>(): ArrayList<T>' type=java.util.ArrayList<T> operator=GET_PROPERTY
+              $this: GET_VAR 'result: ArrayWrapper<T>' type=ArrayWrapper<T> operator=null
+            elements: CALL '<get-contents>(): ArrayList<T>' type=java.util.ArrayList<T> operator=GET_PROPERTY
+              $this: GET_VAR 'value-parameter rhs: ArrayWrapper<T>' type=ArrayWrapper<T> operator=null
+          RETURN type=kotlin.Nothing from='plus(ArrayWrapper<T>): ArrayWrapper<T>'
+            GET_VAR 'result: ArrayWrapper<T>' type=ArrayWrapper<T> operator=null
+      FUN public final operator fun get(index: kotlin.Int): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(Int): T'
+            BLOCK type=T operator=EXCLEXCL
+              VAR val tmp0_notnull: T
+                CALL 'get(Int): T' type=T operator=null
+                  $this: CALL '<get-contents>(): ArrayList<T>' type=java.util.ArrayList<T> operator=GET_PROPERTY
+                    $this: THIS of 'ArrayWrapper' type=ArrayWrapper<T>
+                  index: GET_VAR 'value-parameter index: Int' type=kotlin.Int operator=null
+              WHEN type=T operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: T' type=T operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: T' type=T operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var v1: ArrayWrapper<kotlin.String>
+          CALL 'constructor ArrayWrapper()' type=ArrayWrapper<kotlin.String> operator=null
+        VAR val v2: ArrayWrapper<kotlin.String>
+          CALL 'constructor ArrayWrapper()' type=ArrayWrapper<kotlin.String> operator=null
+        CALL 'add(String): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'v1: ArrayWrapper<String>' type=ArrayWrapper<kotlin.String> operator=null
+          item: CONST String type=kotlin.String value='foo'
+        VAR val v3: ArrayWrapper<kotlin.String>
+          GET_VAR 'v1: ArrayWrapper<String>' type=ArrayWrapper<kotlin.String> operator=null
+        CALL 'add(String): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'v2: ArrayWrapper<String>' type=ArrayWrapper<kotlin.String> operator=null
+          item: CONST String type=kotlin.String value='bar'
+        SET_VAR 'v1: ArrayWrapper<String>' type=kotlin.Unit operator=PLUSEQ
+          CALL 'plus(ArrayWrapper<String>): ArrayWrapper<String>' type=ArrayWrapper<kotlin.String> operator=PLUSEQ
+            $this: GET_VAR 'v1: ArrayWrapper<String>' type=ArrayWrapper<kotlin.String> operator=PLUSEQ
+            rhs: GET_VAR 'v2: ArrayWrapper<String>' type=ArrayWrapper<kotlin.String> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: WHEN type=kotlin.Boolean operator=ANDAND
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: CALL '<get-contents>(): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=GET_PROPERTY
+                    $this: GET_VAR 'v1: ArrayWrapper<String>' type=ArrayWrapper<kotlin.String> operator=null
+                arg1: CONST Int type=kotlin.Int value='2'
+              then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: CALL '<get-contents>(): ArrayList<String>' type=java.util.ArrayList<kotlin.String> operator=GET_PROPERTY
+                    $this: GET_VAR 'v3: ArrayWrapper<String>' type=ArrayWrapper<kotlin.String> operator=null
+                arg1: CONST Int type=kotlin.Int value='1'
+              else: CONST Boolean type=kotlin.Boolean value='false'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

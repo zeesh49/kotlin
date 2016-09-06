@@ -1,0 +1,49 @@
+MODULE <test-module>
+  FILE /progressionExpression.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        VAR val intRange: kotlin.ranges.IntProgression
+          CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+            $this: CONST Int type=kotlin.Int value='1'
+            other: CONST Int type=kotlin.Int value='3'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.IntIterator
+            CALL 'iterator(): IntIterator' type=kotlin.collections.IntIterator operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'intRange: IntProgression' type=kotlin.ranges.IntProgression operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val i: kotlin.Int?
+                CALL 'next(): Int' type=kotlin.Int operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: IntIterator' type=kotlin.collections.IntIterator operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'result: Int' type=kotlin.Unit operator=EQ
+                  CALL 'sum(Int, Int?): Int' type=kotlin.Int operator=null
+                    i: GET_VAR 'result: Int' type=kotlin.Int operator=null
+                    z: GET_VAR 'i: Int?' type=kotlin.Int? operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='6'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail: '
+              GET_VAR 'result: Int' type=kotlin.Int operator=null
+    FUN public fun sum(i: kotlin.Int, z: kotlin.Int?): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='sum(Int, Int?): Int'
+          CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+            $this: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+            other: BLOCK type=kotlin.Int operator=EXCLEXCL
+              VAR val tmp0_notnull: kotlin.Int?
+                GET_VAR 'value-parameter z: Int?' type=kotlin.Int? operator=null
+              WHEN type=kotlin.Int operator=null
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                else: GET_VAR 'tmp0_notnull: Int?' type=kotlin.Int? operator=null

@@ -1,0 +1,385 @@
+MODULE <test-module>
+  FILE /weirdMutableCasts.kt
+    FUN public fun unsupported(): kotlin.Nothing
+      BLOCK_BODY
+        THROW type=kotlin.Nothing
+          CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+    CLASS CLASS Weird
+      CONSTRUCTOR public constructor Weird()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Weird'
+      FUN public open override fun next(): kotlin.String
+        BLOCK_BODY
+          CALL 'unsupported(): Nothing' type=kotlin.Nothing operator=null
+      FUN public open override fun hasNext(): kotlin.Boolean
+        BLOCK_BODY
+          CALL 'unsupported(): Nothing' type=kotlin.Nothing operator=null
+      PROPERTY public open override val key: kotlin.String
+        PROPERTY_GETTER public open override fun <get-key>(): kotlin.String
+          BLOCK_BODY
+            CALL 'unsupported(): Nothing' type=kotlin.Nothing operator=null
+      PROPERTY public open override val value: kotlin.String
+        PROPERTY_GETTER public open override fun <get-value>(): kotlin.String
+          BLOCK_BODY
+            CALL 'unsupported(): Nothing' type=kotlin.Nothing operator=null
+      FUN public open override fun setValue(value: kotlin.String): kotlin.String
+        BLOCK_BODY
+          CALL 'unsupported(): Nothing' type=kotlin.Nothing operator=null
+      FUN public open override fun iterator(): kotlin.collections.MutableIterator<kotlin.String>
+        BLOCK_BODY
+          CALL 'unsupported(): Nothing' type=kotlin.Nothing operator=null
+    FUN public inline fun asFailsWithCCE(operation: kotlin.String, cast: () -> kotlin.Unit): kotlin.Unit
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+              $this: GET_VAR 'value-parameter cast: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='asFailsWithCCE(String, () -> Unit): Unit'
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=': should throw ClassCastException, got '
+                  GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+        THROW type=kotlin.Nothing
+          CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+            p0: STRING_CONCATENATION type=kotlin.String
+              GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+              CONST String type=kotlin.String value=': should throw ClassCastException, no exception thrown'
+    FUN public inline fun asSucceeds(operation: kotlin.String, cast: () -> kotlin.Unit): kotlin.Unit
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            CALL 'invoke(): Unit' type=kotlin.Unit operator=INVOKE
+              $this: GET_VAR 'value-parameter cast: () -> Unit' type=() -> kotlin.Unit operator=VARIABLE_AS_FUNCTION
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=': should not throw exceptions, got '
+                  GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+    FUN public inline fun safeAsReturnsNull(operation: kotlin.String, cast: () -> kotlin.Any?): kotlin.Unit
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            VAR val x: kotlin.Any?
+              CALL 'invoke(): Any?' type=kotlin.Any? operator=INVOKE
+                $this: GET_VAR 'value-parameter cast: () -> Any?' type=() -> kotlin.Any? operator=VARIABLE_AS_FUNCTION
+            CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+              value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'x: Any?' type=kotlin.Any? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                      STRING_CONCATENATION type=kotlin.String
+                        GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                        CONST String type=kotlin.String value=': should return null, got '
+                        GET_VAR 'x: Any?' type=kotlin.Any? operator=null
+                CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=': should not throw exceptions, got '
+                  GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+    FUN public inline fun safeAsReturnsNonNull(operation: kotlin.String, cast: () -> kotlin.Any?): kotlin.Unit
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            VAR val x: kotlin.Any?
+              CALL 'invoke(): Any?' type=kotlin.Any? operator=INVOKE
+                $this: GET_VAR 'value-parameter cast: () -> Any?' type=() -> kotlin.Any? operator=VARIABLE_AS_FUNCTION
+            CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+              value: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                  arg0: GET_VAR 'x: Any?' type=kotlin.Any? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+              lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                      STRING_CONCATENATION type=kotlin.String
+                        GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                        CONST String type=kotlin.String value=': should return non-null'
+                CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=': should not throw exceptions, got '
+                  GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+    FUN public inline fun <reified T> reifiedIs(x: kotlin.Any): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='reifiedIs(Any): Boolean'
+          TYPE_OP operator=INSTANCEOF typeOperand=T
+            GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+    FUN public inline fun <reified T> reifiedIsNot(x: kotlin.Any): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='reifiedIsNot(Any): Boolean'
+          TYPE_OP operator=NOT_INSTANCEOF typeOperand=T
+            GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+    FUN public inline fun <reified T> reifiedAsSucceeds(x: kotlin.Any, operation: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        TRY_CATCH type=T
+          try: BLOCK type=T operator=null
+            TYPE_OP operator=CAST typeOperand=T
+              GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=': should not throw exceptions, got '
+                  GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+    FUN public inline fun <reified T> reifiedAsFailsWithCCE(x: kotlin.Any, operation: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        TRY_CATCH type=T
+          try: BLOCK type=T operator=null
+            TYPE_OP operator=CAST typeOperand=T
+              GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='reifiedAsFailsWithCCE(Any, String): Unit'
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=': should throw ClassCastException, got '
+                  GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+        THROW type=kotlin.Nothing
+          CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+            p0: STRING_CONCATENATION type=kotlin.String
+              GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+              CONST String type=kotlin.String value=': should fail with CCE, no exception thrown'
+    FUN public inline fun <reified T> reifiedSafeAsReturnsNonNull(x: kotlin.Any?, operation: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        VAR val y: T?
+          TRY_CATCH type=T?
+            try: BLOCK type=T? operator=null
+              TYPE_OP operator=SAFE_CAST typeOperand=T
+                GET_VAR 'value-parameter x: Any?' type=kotlin.Any? operator=null
+            catch e: BLOCK type=kotlin.Nothing operator=null
+              THROW type=kotlin.Nothing
+                CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                  p0: STRING_CONCATENATION type=kotlin.String
+                    GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                    CONST String type=kotlin.String value=': should not throw exceptions, got '
+                    GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'y: T?' type=T? operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=': should return non-null, got null'
+    FUN public inline fun <reified T> reifiedSafeAsReturnsNull(x: kotlin.Any?, operation: kotlin.String): kotlin.Unit
+      BLOCK_BODY
+        VAR val y: T?
+          TRY_CATCH type=T?
+            try: BLOCK type=T? operator=null
+              TYPE_OP operator=SAFE_CAST typeOperand=T
+                GET_VAR 'value-parameter x: Any?' type=kotlin.Any? operator=null
+            catch e: BLOCK type=kotlin.Nothing operator=null
+              THROW type=kotlin.Nothing
+                CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                  p0: STRING_CONCATENATION type=kotlin.String
+                    GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                    CONST String type=kotlin.String value=': should not throw exceptions, got '
+                    GET_VAR 'e: Throwable' type=kotlin.Throwable operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'y: T?' type=T? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: BLOCK type=kotlin.Nothing operator=null
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError(Any!)' type=java.lang.AssertionError operator=null
+                p0: STRING_CONCATENATION type=kotlin.String
+                  GET_VAR 'value-parameter operation: String' type=kotlin.String operator=null
+                  CONST String type=kotlin.String value=': should return null, got '
+                  GET_VAR 'y: T?' type=T? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val w: kotlin.Any
+          CALL 'constructor Weird()' type=Weird operator=null
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.collections.Iterator<*>
+            GET_VAR 'w: Any' type=kotlin.Any operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='w is Iterator<*>'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=NOT_INSTANCEOF typeOperand=kotlin.collections.MutableIterator<*>
+            GET_VAR 'w: Any' type=kotlin.Any operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='w !is MutableIterator<*>'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.collections.MutableIterable<*>
+            GET_VAR 'w: Any' type=kotlin.Any operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='w is MutableIterable<*>'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: TYPE_OP operator=INSTANCEOF typeOperand=kotlin.collections.MutableMap.MutableEntry<*, *>
+            GET_VAR 'w: Any' type=kotlin.Any operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='w is MutableMap.MutableEntry<*, *>'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'asSucceeds(String, () -> Unit): Unit' type=kotlin.Unit operator=null
+          operation: CONST String type=kotlin.String value='w as Iterator<*>'
+          cast: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  TYPE_OP operator=CAST typeOperand=kotlin.collections.Iterator<*>
+                    GET_VAR 'w: Any' type=kotlin.Any operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'asFailsWithCCE(String, () -> Unit): Unit' type=kotlin.Unit operator=null
+          operation: CONST String type=kotlin.String value='w as MutableIterator<*>'
+          cast: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  TYPE_OP operator=CAST typeOperand=kotlin.collections.MutableIterator<*>
+                    GET_VAR 'w: Any' type=kotlin.Any operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'asSucceeds(String, () -> Unit): Unit' type=kotlin.Unit operator=null
+          operation: CONST String type=kotlin.String value='w as MutableIterable<*>'
+          cast: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  TYPE_OP operator=CAST typeOperand=kotlin.collections.MutableIterable<*>
+                    GET_VAR 'w: Any' type=kotlin.Any operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'asSucceeds(String, () -> Unit): Unit' type=kotlin.Unit operator=null
+          operation: CONST String type=kotlin.String value='w as MutableMap.MutableEntry<*, *>'
+          cast: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  TYPE_OP operator=CAST typeOperand=kotlin.collections.MutableMap.MutableEntry<*, *>
+                    GET_VAR 'w: Any' type=kotlin.Any operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'safeAsReturnsNonNull(String, () -> Any?): Unit' type=kotlin.Unit operator=null
+          operation: CONST String type=kotlin.String value='w as Iterator<*>'
+          cast: BLOCK type=() -> kotlin.collections.Iterator<*>? operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.collections.Iterator<*>?
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Iterator<*>?'
+                  TYPE_OP operator=SAFE_CAST typeOperand=kotlin.collections.Iterator<*>
+                    GET_VAR 'w: Any' type=kotlin.Any operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Iterator<*>?' type=() -> kotlin.collections.Iterator<*>? operator=LAMBDA
+        CALL 'safeAsReturnsNull(String, () -> Any?): Unit' type=kotlin.Unit operator=null
+          operation: CONST String type=kotlin.String value='w as? MutableIterator<*>'
+          cast: BLOCK type=() -> kotlin.collections.MutableIterator<*>? operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.collections.MutableIterator<*>?
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): MutableIterator<*>?'
+                  TYPE_OP operator=SAFE_CAST typeOperand=kotlin.collections.MutableIterator<*>
+                    GET_VAR 'w: Any' type=kotlin.Any operator=null
+            CALLABLE_REFERENCE '<anonymous>(): MutableIterator<*>?' type=() -> kotlin.collections.MutableIterator<*>? operator=LAMBDA
+        CALL 'safeAsReturnsNonNull(String, () -> Any?): Unit' type=kotlin.Unit operator=null
+          operation: CONST String type=kotlin.String value='w as? MutableIterable<*>'
+          cast: BLOCK type=() -> kotlin.collections.MutableIterable<*>? operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.collections.MutableIterable<*>?
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): MutableIterable<*>?'
+                  TYPE_OP operator=SAFE_CAST typeOperand=kotlin.collections.MutableIterable<*>
+                    GET_VAR 'w: Any' type=kotlin.Any operator=null
+            CALLABLE_REFERENCE '<anonymous>(): MutableIterable<*>?' type=() -> kotlin.collections.MutableIterable<*>? operator=LAMBDA
+        CALL 'safeAsReturnsNonNull(String, () -> Any?): Unit' type=kotlin.Unit operator=null
+          operation: CONST String type=kotlin.String value='w as? MutableMap.MutableEntry<*, *>'
+          cast: BLOCK type=() -> kotlin.collections.MutableMap.MutableEntry<*, *>? operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.collections.MutableMap.MutableEntry<*, *>?
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): MutableMap.MutableEntry<*, *>?'
+                  TYPE_OP operator=SAFE_CAST typeOperand=kotlin.collections.MutableMap.MutableEntry<*, *>
+                    GET_VAR 'w: Any' type=kotlin.Any operator=null
+            CALLABLE_REFERENCE '<anonymous>(): MutableMap.MutableEntry<*, *>?' type=() -> kotlin.collections.MutableMap.MutableEntry<*, *>? operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'reifiedIs(Any): Boolean' type=kotlin.Boolean operator=null
+            x: GET_VAR 'w: Any' type=kotlin.Any operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='reifiedIs<Iterator<*>>(w)'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'reifiedIsNot(Any): Boolean' type=kotlin.Boolean operator=null
+            x: GET_VAR 'w: Any' type=kotlin.Any operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='reifiedIsNot<MutableIterator<*>>(w)'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'reifiedIs(Any): Boolean' type=kotlin.Boolean operator=null
+            x: GET_VAR 'w: Any' type=kotlin.Any operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='reifiedIs<MutableIterable<*>>(w)'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'reifiedIs(Any): Boolean' type=kotlin.Boolean operator=null
+            x: GET_VAR 'w: Any' type=kotlin.Any operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='reifiedIs<MutableMap.MutableEntry<*, *>>(w)'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'w: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reified w as Iterator<*>'
+        CALL 'reifiedAsFailsWithCCE(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'w: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reified w as MutableIterator<*>'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'w: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reified w as MutableIterable<*>'
+        CALL 'reifiedAsSucceeds(Any, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'w: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reified w as MutableMap.MutableEntry<*, *>'
+        CALL 'reifiedSafeAsReturnsNonNull(Any?, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'w: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reified w as? Iterator<*>'
+        CALL 'reifiedSafeAsReturnsNull(Any?, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'w: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reified w as? MutableIterator<*>'
+        CALL 'reifiedSafeAsReturnsNonNull(Any?, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'w: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reified w as? MutableIterable<*>'
+        CALL 'reifiedSafeAsReturnsNonNull(Any?, String): Unit' type=kotlin.Unit operator=null
+          x: GET_VAR 'w: Any' type=kotlin.Any operator=null
+          operation: CONST String type=kotlin.String value='reified w as? MutableMap.MutableEntry<*, *>'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

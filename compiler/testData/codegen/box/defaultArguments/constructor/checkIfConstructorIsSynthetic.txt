@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /checkIfConstructorIsSynthetic.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(value: kotlin.Int = ...)
+        value: EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val constructors: kotlin.collections.List<java.lang.reflect.Constructor<*>!>
+          CALL 'filter((Constructor<*>!) -> Boolean) on Array<out Constructor<*>!>: List<Constructor<*>!>' type=kotlin.collections.List<java.lang.reflect.Constructor<*>!> operator=null
+            $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Constructor<*>!>
+              CALL 'getConstructors(): Array<(out) Constructor<*>!>!' type=kotlin.Array<(out) java.lang.reflect.Constructor<*>!>! operator=null
+                $this: CALL '<get-java>() on KClass<A>: Class<A>' type=java.lang.Class<A> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+            predicate: BLOCK type=(java.lang.reflect.Constructor<*>!) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(it: java.lang.reflect.Constructor<*>!): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Constructor<*>!): Boolean'
+                    CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+                      $this: CALL 'isSynthetic(): Boolean' type=kotlin.Boolean operator=null
+                        $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Constructor<*>
+                          GET_VAR 'value-parameter it: Constructor<*>!' type=java.lang.reflect.Constructor<*>! operator=null
+              CALLABLE_REFERENCE '<anonymous>(Constructor<*>!): Boolean' type=(java.lang.reflect.Constructor<*>!) -> kotlin.Boolean operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'constructors: List<Constructor<*>!>' type=kotlin.collections.List<java.lang.reflect.Constructor<*>!> operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+            then: CONST String type=kotlin.String value='OK'
+            else: CALL 'toString(): String' type=kotlin.String operator=null
+              $this: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'constructors: List<Constructor<*>!>' type=kotlin.collections.List<java.lang.reflect.Constructor<*>!> operator=null

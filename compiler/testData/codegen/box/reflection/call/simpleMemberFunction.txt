@@ -1,0 +1,40 @@
+MODULE <test-module>
+  FILE /simpleMemberFunction.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun foo(x: kotlin.Int, y: kotlin.Int): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(Int, Int): Int'
+            CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+              $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+              other: GET_VAR 'value-parameter y: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.Int
+          CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+            $this: CALLABLE_REFERENCE 'foo(Int, Int): Int' type=kotlin.reflect.KFunction3<A, kotlin.Int, kotlin.Int, kotlin.Int> operator=null
+            args: VARARG type=Array<out Any?> varargElementType=Any?
+              CALL 'constructor A()' type=A operator=null
+              CONST Int type=kotlin.Int value='42'
+              CONST Int type=kotlin.Int value='239'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'x: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='281'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'x: Int' type=kotlin.Int operator=null
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'call(vararg Any?): Int' type=kotlin.Int operator=null
+              $this: CALLABLE_REFERENCE 'foo(Int, Int): Int' type=kotlin.reflect.KFunction3<A, kotlin.Int, kotlin.Int, kotlin.Int> operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail: no exception'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

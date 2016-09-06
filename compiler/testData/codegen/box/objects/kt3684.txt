@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /kt3684.kt
+    CLASS CLASS X
+      CONSTRUCTOR public constructor X(n: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'n: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'X' type=X
+            value: GET_VAR 'value-parameter n: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='X'
+      PROPERTY private final val n: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter n: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CALL 'print(): String' type=kotlin.String operator=null
+              $this: BLOCK type=X.foo.<no name provided> operator=OBJECT_LITERAL
+                CLASS CLASS <no name provided>
+                  CONSTRUCTOR public constructor <no name provided>()
+                    BLOCK_BODY
+                      DELEGATING_CONSTRUCTOR_CALL 'constructor X(String)'
+                        n: CONST String type=kotlin.String value='inner'
+                      INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+                  FUN public final fun print(): kotlin.String
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='print(): String'
+                        CALL '<get-n>(): String' type=kotlin.String operator=GET_PROPERTY
+                          $this: THIS of 'X' type=X
+                CALL 'constructor <no name provided>()' type=X.foo.<no name provided> operator=OBJECT_LITERAL
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'foo(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor X(String)' type=X operator=null
+              n: CONST String type=kotlin.String value='OK'

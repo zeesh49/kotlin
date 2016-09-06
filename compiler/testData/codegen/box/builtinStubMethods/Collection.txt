@@ -1,0 +1,107 @@
+MODULE <test-module>
+  FILE /Collection.kt
+    CLASS CLASS MyCollection
+      CONSTRUCTOR public constructor MyCollection<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyCollection'
+      PROPERTY public open override val size: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-size>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-size>(): Int'
+              CONST Int type=kotlin.Int value='0'
+      FUN public open override fun isEmpty(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='isEmpty(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+      FUN public open override fun contains(o: T): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='contains(T): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+      FUN public open override fun iterator(): kotlin.collections.Iterator<T>
+        BLOCK_BODY
+          THROW type=kotlin.Nothing
+            CALL 'constructor UnsupportedOperationException()' type=java.lang.UnsupportedOperationException operator=null
+      FUN public open override fun containsAll(c: kotlin.collections.Collection<T>): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='containsAll(Collection<T>): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+      FUN public open override fun hashCode(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='hashCode(): Int'
+            CONST Int type=kotlin.Int value='0'
+      FUN public open override fun equals(other: kotlin.Any?): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='equals(Any?): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+    FUN public fun expectUoe(block: () -> kotlin.Any): kotlin.Unit
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'invoke(): Any' type=kotlin.Any operator=INVOKE
+              $this: GET_VAR 'value-parameter block: () -> Any' type=() -> kotlin.Any operator=VARIABLE_AS_FUNCTION
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError()' type=java.lang.AssertionError operator=null
+          catch e: BLOCK type=kotlin.Unit operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val myCollection: MyCollection<kotlin.String>
+          CALL 'constructor MyCollection()' type=MyCollection<kotlin.String> operator=null
+        VAR val collection: java.util.Collection<kotlin.String>
+          TYPE_OP operator=CAST typeOperand=java.util.Collection<kotlin.String>
+            GET_VAR 'myCollection: MyCollection<String>' type=MyCollection<kotlin.String> operator=null
+        CALL 'expectUoe(() -> Any): Unit' type=kotlin.Unit operator=null
+          block: BLOCK type=() -> kotlin.Boolean operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Boolean
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Boolean'
+                  CALL 'add(String!): Boolean' type=kotlin.Boolean operator=null
+                    $this: GET_VAR 'collection: Collection<String>' type=java.util.Collection<kotlin.String> operator=null
+                    p0: CONST String type=kotlin.String value=''
+            CALLABLE_REFERENCE '<anonymous>(): Boolean' type=() -> kotlin.Boolean operator=LAMBDA
+        CALL 'expectUoe(() -> Any): Unit' type=kotlin.Unit operator=null
+          block: BLOCK type=() -> kotlin.Boolean operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Boolean
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Boolean'
+                  CALL 'remove(Any!): Boolean' type=kotlin.Boolean operator=null
+                    $this: GET_VAR 'collection: Collection<String>' type=java.util.Collection<kotlin.String> operator=null
+                    p0: CONST String type=kotlin.String value=''
+            CALLABLE_REFERENCE '<anonymous>(): Boolean' type=() -> kotlin.Boolean operator=LAMBDA
+        CALL 'expectUoe(() -> Any): Unit' type=kotlin.Unit operator=null
+          block: BLOCK type=() -> kotlin.Boolean operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Boolean
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Boolean'
+                  CALL 'addAll((MutableCollection<out String!>..Collection<String!>?)): Boolean' type=kotlin.Boolean operator=null
+                    $this: GET_VAR 'collection: Collection<String>' type=java.util.Collection<kotlin.String> operator=null
+                    p0: GET_VAR 'myCollection: MyCollection<String>' type=MyCollection<kotlin.String> operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Boolean' type=() -> kotlin.Boolean operator=LAMBDA
+        CALL 'expectUoe(() -> Any): Unit' type=kotlin.Unit operator=null
+          block: BLOCK type=() -> kotlin.Boolean operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Boolean
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Boolean'
+                  CALL 'removeAll((Mutable)Collection<*>!): Boolean' type=kotlin.Boolean operator=null
+                    $this: GET_VAR 'collection: Collection<String>' type=java.util.Collection<kotlin.String> operator=null
+                    p0: GET_VAR 'myCollection: MyCollection<String>' type=MyCollection<kotlin.String> operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Boolean' type=() -> kotlin.Boolean operator=LAMBDA
+        CALL 'expectUoe(() -> Any): Unit' type=kotlin.Unit operator=null
+          block: BLOCK type=() -> kotlin.Boolean operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Boolean
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Boolean'
+                  CALL 'retainAll((Mutable)Collection<*>!): Boolean' type=kotlin.Boolean operator=null
+                    $this: GET_VAR 'collection: Collection<String>' type=java.util.Collection<kotlin.String> operator=null
+                    p0: GET_VAR 'myCollection: MyCollection<String>' type=MyCollection<kotlin.String> operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Boolean' type=() -> kotlin.Boolean operator=LAMBDA
+        CALL 'expectUoe(() -> Any): Unit' type=kotlin.Unit operator=null
+          block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  CALL 'clear(): Unit' type=kotlin.Unit operator=null
+                    $this: GET_VAR 'collection: Collection<String>' type=java.util.Collection<kotlin.String> operator=null
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

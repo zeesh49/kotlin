@@ -1,0 +1,35 @@
+MODULE <test-module>
+  FILE /runnableAccessingClosure2.kt
+    CLASS CLASS Box
+      CONSTRUCTOR public constructor Box(s: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 's: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Box' type=Box
+            value: GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Box'
+      PROPERTY public final val s: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final fun extract(): kotlin.String
+        BLOCK_BODY
+          VAR var result: kotlin.String
+            CONST String type=kotlin.String value=''
+          CALL 'run(): Unit' type=kotlin.Unit operator=null
+            $this: CALL 'Runnable(() -> Unit): Runnable' type=java.lang.Runnable operator=null
+              function: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.Unit
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                      SET_VAR 'result: String' type=kotlin.Unit operator=EQ
+                        CALL '<get-s>(): String' type=kotlin.String operator=GET_PROPERTY
+                          $this: THIS of 'Box' type=Box
+                CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+          RETURN type=kotlin.Nothing from='extract(): String'
+            GET_VAR 'result: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'extract(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Box(String)' type=Box operator=null
+              s: CONST String type=kotlin.String value='OK'

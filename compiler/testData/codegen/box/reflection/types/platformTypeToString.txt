@@ -1,0 +1,16 @@
+MODULE <test-module>
+  FILE /K.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.String!'
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'string(): String!' type=kotlin.reflect.KFunction0<kotlin.String!> operator=null
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.collections.(Mutable)List<kotlin.Any!>!'
+          actual: CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL '<get-returnType>(): KType' type=kotlin.reflect.KType operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'list(): (Mutable)List<Any!>!' type=kotlin.reflect.KFunction0<kotlin.collections.(Mutable)List<kotlin.Any!>!> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

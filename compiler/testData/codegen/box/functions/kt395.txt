@@ -1,0 +1,32 @@
+MODULE <test-module>
+  FILE /kt395.kt
+    FUN public fun kotlin.Any.with(operation: kotlin.Any.() -> kotlin.Any): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='with(Any.() -> Any) on Any: String'
+          CALL 'toString(): String' type=kotlin.String operator=null
+            $this: CALL 'invoke() on Any: Any' type=kotlin.Any operator=INVOKE
+              $this: GET_VAR 'value-parameter operation: Any.() -> Any' type=kotlin.Any.() -> kotlin.Any operator=VARIABLE_AS_FUNCTION
+              $receiver: $RECEIVER of 'with(Any.() -> Any) on Any: String' type=kotlin.Any
+    PROPERTY public val f: (kotlin.Int) -> kotlin.Unit
+      EXPRESSION_BODY
+        BLOCK type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+          FUN local final fun <anonymous>(a: kotlin.Int): kotlin.Unit
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<anonymous>(Int): Unit'
+          CALLABLE_REFERENCE '<anonymous>(Int): Unit' type=(kotlin.Int) -> kotlin.Unit operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'with(Any.() -> Any) on Any: String' type=kotlin.String operator=null
+                $receiver: CONST Int type=kotlin.Int value='20'
+                operation: BLOCK type=kotlin.Any.() -> kotlin.Any operator=LAMBDA
+                  FUN local final fun kotlin.Any.<anonymous>(): kotlin.Any
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>() on Any: Any'
+                        $RECEIVER of '<anonymous>() on Any: Any' type=kotlin.Any
+                  CALLABLE_REFERENCE '<anonymous>() on Any: Any' type=kotlin.Any.() -> kotlin.Any operator=LAMBDA
+              arg1: CONST String type=kotlin.String value='20'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

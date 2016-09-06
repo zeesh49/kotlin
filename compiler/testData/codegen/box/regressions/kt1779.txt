@@ -1,0 +1,60 @@
+MODULE <test-module>
+  FILE /kt1779.kt
+    CLASS CLASS MyIterator
+      CONSTRUCTOR public constructor MyIterator()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor AbstractIterator()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyIterator'
+      PROPERTY public final var i: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+      FUN public open override fun computeNext(): kotlin.Unit
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+              arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+                $this: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'MyIterator' type=MyIterator
+                other: CONST Int type=kotlin.Int value='5'
+            then: CALL 'setNext(String): Unit' type=kotlin.Unit operator=null
+              $this: THIS of 'MyIterator' type=MyIterator
+              value: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                  VAR val tmp0_this: MyIterator
+                    THIS of 'MyIterator' type=MyIterator
+                  BLOCK type=kotlin.Int operator=POSTFIX_INCR
+                    VAR val tmp1: kotlin.Int
+                      CALL '<get-i>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                        $this: GET_VAR 'tmp0_this: MyIterator' type=MyIterator operator=null
+                    CALL '<set-i>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+                      $this: GET_VAR 'tmp0_this: MyIterator' type=MyIterator operator=null
+                      <set-?>: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                        $this: GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+                    GET_VAR 'tmp1: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var k: kotlin.String
+          CONST String type=kotlin.String value=''
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<kotlin.String>
+            CALL 'iterator() on Iterator<String>: Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=FOR_LOOP_ITERATOR
+              $receiver: CALL 'constructor MyIterator()' type=MyIterator operator=null
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val x: kotlin.String
+                CALL 'next(): String' type=kotlin.String operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<String>' type=kotlin.collections.Iterator<kotlin.String> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                SET_VAR 'k: String' type=kotlin.Unit operator=PLUSEQ
+                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUSEQ
+                    $this: GET_VAR 'k: String' type=kotlin.String operator=PLUSEQ
+                    other: GET_VAR 'x: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'k: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='01234'
+            then: CONST String type=kotlin.String value='OK'
+            else: GET_VAR 'k: String' type=kotlin.String operator=null

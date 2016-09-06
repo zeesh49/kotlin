@@ -1,0 +1,259 @@
+MODULE <test-module>
+  FILE /extensionPropertyReceiverToString.kt
+    FUN public fun check(expected: kotlin.String, p: kotlin.reflect.KProperty1<*, *>): kotlin.Unit
+      BLOCK_BODY
+        VAR var s: kotlin.String
+          CALL 'toString(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'value-parameter p: KProperty1<*, *>' type=kotlin.reflect.KProperty1<*, *> operator=null
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: WHEN type=kotlin.Boolean operator=OROR
+            if: CALL 'startsWith(String, Boolean = ...) on String: Boolean' type=kotlin.Boolean operator=null
+              $receiver: GET_VAR 's: String' type=kotlin.String operator=null
+              prefix: CONST String type=kotlin.String value='val '
+            then: CONST Boolean type=kotlin.Boolean value='true'
+            else: CALL 'startsWith(String, Boolean = ...) on String: Boolean' type=kotlin.Boolean operator=null
+              $receiver: GET_VAR 's: String' type=kotlin.String operator=null
+              prefix: CONST String type=kotlin.String value='var '
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='Fail val/var: '
+                    GET_VAR 's: String' type=kotlin.String operator=null
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        SET_VAR 's: String' type=kotlin.Unit operator=EQ
+          CALL 'substring(Int) on String: String' type=kotlin.String operator=null
+            $receiver: GET_VAR 's: String' type=kotlin.String operator=null
+            startIndex: CONST Int type=kotlin.Int value='4'
+        SET_VAR 's: String' type=kotlin.Unit operator=EQ
+          CALL 'substringBeforeLast(Char, String = ...) on String: String' type=kotlin.String operator=null
+            $receiver: GET_VAR 's: String' type=kotlin.String operator=null
+            delimiter: CONST Char type=kotlin.Char value=':'
+        SET_VAR 's: String' type=kotlin.Unit operator=EQ
+          CALL 'substringBeforeLast(Char, String = ...) on String: String' type=kotlin.String operator=null
+            $receiver: GET_VAR 's: String' type=kotlin.String operator=null
+            delimiter: CONST Char type=kotlin.Char value='.'
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_VAR 'value-parameter expected: String' type=kotlin.String operator=null
+          actual: GET_VAR 's: String' type=kotlin.String operator=null
+    PROPERTY public val kotlin.Boolean.x: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.Boolean.<get-x>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-x>() on Boolean: Any'
+            $RECEIVER of 'x: Any on Boolean' type=kotlin.Boolean
+    PROPERTY public val kotlin.Char.x: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.Char.<get-x>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-x>() on Char: Any'
+            $RECEIVER of 'x: Any on Char' type=kotlin.Char
+    PROPERTY public val kotlin.Byte.x: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.Byte.<get-x>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-x>() on Byte: Any'
+            $RECEIVER of 'x: Any on Byte' type=kotlin.Byte
+    PROPERTY public val kotlin.Short.x: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.Short.<get-x>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-x>() on Short: Any'
+            $RECEIVER of 'x: Any on Short' type=kotlin.Short
+    PROPERTY public val kotlin.Int.x: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.Int.<get-x>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-x>() on Int: Any'
+            $RECEIVER of 'x: Any on Int' type=kotlin.Int
+    PROPERTY public val kotlin.Float.x: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.Float.<get-x>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-x>() on Float: Any'
+            $RECEIVER of 'x: Any on Float' type=kotlin.Float
+    PROPERTY public val kotlin.Long.x: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.Long.<get-x>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-x>() on Long: Any'
+            $RECEIVER of 'x: Any on Long' type=kotlin.Long
+    PROPERTY public val kotlin.Double.x: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.Double.<get-x>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-x>() on Double: Any'
+            $RECEIVER of 'x: Any on Double' type=kotlin.Double
+    PROPERTY public val kotlin.BooleanArray.x: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.BooleanArray.<get-x>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-x>() on BooleanArray: Any'
+            $RECEIVER of 'x: Any on BooleanArray' type=kotlin.BooleanArray
+    PROPERTY public val kotlin.CharArray.x: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.CharArray.<get-x>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-x>() on CharArray: Any'
+            $RECEIVER of 'x: Any on CharArray' type=kotlin.CharArray
+    PROPERTY public val kotlin.ByteArray.x: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.ByteArray.<get-x>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-x>() on ByteArray: Any'
+            $RECEIVER of 'x: Any on ByteArray' type=kotlin.ByteArray
+    PROPERTY public val kotlin.ShortArray.x: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.ShortArray.<get-x>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-x>() on ShortArray: Any'
+            $RECEIVER of 'x: Any on ShortArray' type=kotlin.ShortArray
+    PROPERTY public val kotlin.IntArray.x: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.IntArray.<get-x>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-x>() on IntArray: Any'
+            $RECEIVER of 'x: Any on IntArray' type=kotlin.IntArray
+    PROPERTY public val kotlin.FloatArray.x: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.FloatArray.<get-x>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-x>() on FloatArray: Any'
+            $RECEIVER of 'x: Any on FloatArray' type=kotlin.FloatArray
+    PROPERTY public val kotlin.LongArray.x: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.LongArray.<get-x>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-x>() on LongArray: Any'
+            $RECEIVER of 'x: Any on LongArray' type=kotlin.LongArray
+    PROPERTY public val kotlin.DoubleArray.x: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.DoubleArray.<get-x>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-x>() on DoubleArray: Any'
+            $RECEIVER of 'x: Any on DoubleArray' type=kotlin.DoubleArray
+    PROPERTY public val kotlin.Array<kotlin.Int>.a1: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.Array<kotlin.Int>.<get-a1>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-a1>() on Array<Int>: Any'
+            $RECEIVER of 'a1: Any on Array<Int>' type=kotlin.Array<kotlin.Int>
+    PROPERTY public val kotlin.Array<kotlin.Any>.a2: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.Array<kotlin.Any>.<get-a2>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-a2>() on Array<Any>: Any'
+            $RECEIVER of 'a2: Any on Array<Any>' type=kotlin.Array<kotlin.Any>
+    PROPERTY public val kotlin.Array<kotlin.Array<kotlin.String>>.a3: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.Array<kotlin.Array<kotlin.String>>.<get-a3>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-a3>() on Array<Array<String>>: Any'
+            $RECEIVER of 'a3: Any on Array<Array<String>>' type=kotlin.Array<kotlin.Array<kotlin.String>>
+    PROPERTY public val kotlin.Array<kotlin.BooleanArray>.a4: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.Array<kotlin.BooleanArray>.<get-a4>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-a4>() on Array<BooleanArray>: Any'
+            $RECEIVER of 'a4: Any on Array<BooleanArray>' type=kotlin.Array<kotlin.BooleanArray>
+    PROPERTY public val kotlin.Any?.n1: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.Any?.<get-n1>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-n1>() on Any?: Any'
+            CALL 'constructor Any()' type=kotlin.Any operator=null
+    PROPERTY public val kotlin.Int?.n2: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.Int?.<get-n2>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-n2>() on Int?: Any'
+            CALL 'constructor Any()' type=kotlin.Any operator=null
+    PROPERTY public val kotlin.Array<kotlin.Any>?.n3: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.Array<kotlin.Any>?.<get-n3>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-n3>() on Array<Any>?: Any'
+            CALL 'constructor Any()' type=kotlin.Any operator=null
+    PROPERTY public val kotlin.Array<kotlin.Any?>.n4: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.Array<kotlin.Any?>.<get-n4>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-n4>() on Array<Any?>: Any'
+            CALL 'constructor Any()' type=kotlin.Any operator=null
+    PROPERTY public val kotlin.Array<kotlin.Any?>?.n5: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.Array<kotlin.Any?>?.<get-n5>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-n5>() on Array<Any?>?: Any'
+            CALL 'constructor Any()' type=kotlin.Any operator=null
+    PROPERTY public val kotlin.collections.Map<kotlin.String, java.lang.Runnable>.m: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.collections.Map<kotlin.String, java.lang.Runnable>.<get-m>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-m>() on Map<String, Runnable>: Any'
+            $RECEIVER of 'm: Any on Map<String, Runnable>' type=kotlin.collections.Map<kotlin.String, java.lang.Runnable>
+    PROPERTY public val kotlin.collections.List<kotlin.collections.MutableSet<kotlin.Array<kotlin.CharSequence>>>.l: kotlin.Any
+      PROPERTY_GETTER public fun kotlin.collections.List<kotlin.collections.MutableSet<kotlin.Array<kotlin.CharSequence>>>.<get-l>(): kotlin.Any
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-l>() on List<MutableSet<Array<CharSequence>>>: Any'
+            $RECEIVER of 'l: Any on List<MutableSet<Array<CharSequence>>>' type=kotlin.collections.List<kotlin.collections.MutableSet<kotlin.Array<kotlin.CharSequence>>>
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Boolean'
+          p: CALLABLE_REFERENCE 'x: Any on Boolean' type=kotlin.reflect.KProperty1<kotlin.Boolean, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Char'
+          p: CALLABLE_REFERENCE 'x: Any on Char' type=kotlin.reflect.KProperty1<kotlin.Char, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Byte'
+          p: CALLABLE_REFERENCE 'x: Any on Byte' type=kotlin.reflect.KProperty1<kotlin.Byte, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Short'
+          p: CALLABLE_REFERENCE 'x: Any on Short' type=kotlin.reflect.KProperty1<kotlin.Short, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Int'
+          p: CALLABLE_REFERENCE 'x: Any on Int' type=kotlin.reflect.KProperty1<kotlin.Int, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Float'
+          p: CALLABLE_REFERENCE 'x: Any on Float' type=kotlin.reflect.KProperty1<kotlin.Float, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Long'
+          p: CALLABLE_REFERENCE 'x: Any on Long' type=kotlin.reflect.KProperty1<kotlin.Long, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Double'
+          p: CALLABLE_REFERENCE 'x: Any on Double' type=kotlin.reflect.KProperty1<kotlin.Double, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.BooleanArray'
+          p: CALLABLE_REFERENCE 'x: Any on BooleanArray' type=kotlin.reflect.KProperty1<kotlin.BooleanArray, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.CharArray'
+          p: CALLABLE_REFERENCE 'x: Any on CharArray' type=kotlin.reflect.KProperty1<kotlin.CharArray, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.ByteArray'
+          p: CALLABLE_REFERENCE 'x: Any on ByteArray' type=kotlin.reflect.KProperty1<kotlin.ByteArray, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.ShortArray'
+          p: CALLABLE_REFERENCE 'x: Any on ShortArray' type=kotlin.reflect.KProperty1<kotlin.ShortArray, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.IntArray'
+          p: CALLABLE_REFERENCE 'x: Any on IntArray' type=kotlin.reflect.KProperty1<kotlin.IntArray, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.FloatArray'
+          p: CALLABLE_REFERENCE 'x: Any on FloatArray' type=kotlin.reflect.KProperty1<kotlin.FloatArray, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.LongArray'
+          p: CALLABLE_REFERENCE 'x: Any on LongArray' type=kotlin.reflect.KProperty1<kotlin.LongArray, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.DoubleArray'
+          p: CALLABLE_REFERENCE 'x: Any on DoubleArray' type=kotlin.reflect.KProperty1<kotlin.DoubleArray, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Any?'
+          p: CALLABLE_REFERENCE 'n1: Any on Any?' type=kotlin.reflect.KProperty1<kotlin.Any?, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Int?'
+          p: CALLABLE_REFERENCE 'n2: Any on Int?' type=kotlin.reflect.KProperty1<kotlin.Int?, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Array<kotlin.Any>?'
+          p: CALLABLE_REFERENCE 'n3: Any on Array<Any>?' type=kotlin.reflect.KProperty1<kotlin.Array<kotlin.Any>?, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Array<kotlin.Any?>'
+          p: CALLABLE_REFERENCE 'n4: Any on Array<Any?>' type=kotlin.reflect.KProperty1<kotlin.Array<kotlin.Any?>, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Array<kotlin.Any?>?'
+          p: CALLABLE_REFERENCE 'n5: Any on Array<Any?>?' type=kotlin.reflect.KProperty1<kotlin.Array<kotlin.Any?>?, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Array<kotlin.Int>'
+          p: CALLABLE_REFERENCE 'a1: Any on Array<Int>' type=kotlin.reflect.KProperty1<kotlin.Array<kotlin.Int>, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Array<kotlin.Any>'
+          p: CALLABLE_REFERENCE 'a2: Any on Array<Any>' type=kotlin.reflect.KProperty1<kotlin.Array<kotlin.Any>, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Array<kotlin.Array<kotlin.String>>'
+          p: CALLABLE_REFERENCE 'a3: Any on Array<Array<String>>' type=kotlin.reflect.KProperty1<kotlin.Array<kotlin.Array<kotlin.String>>, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.Array<kotlin.BooleanArray>'
+          p: CALLABLE_REFERENCE 'a4: Any on Array<BooleanArray>' type=kotlin.reflect.KProperty1<kotlin.Array<kotlin.BooleanArray>, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.collections.Map<kotlin.String, java.lang.Runnable>'
+          p: CALLABLE_REFERENCE 'm: Any on Map<String, Runnable>' type=kotlin.reflect.KProperty1<kotlin.collections.Map<kotlin.String, java.lang.Runnable>, kotlin.Any> operator=null
+        CALL 'check(String, KProperty1<*, *>): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='kotlin.collections.List<kotlin.collections.MutableSet<kotlin.Array<kotlin.CharSequence>>>'
+          p: CALLABLE_REFERENCE 'l: Any on List<MutableSet<Array<CharSequence>>>' type=kotlin.reflect.KProperty1<kotlin.collections.List<kotlin.collections.MutableSet<kotlin.Array<kotlin.CharSequence>>>, kotlin.Any> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

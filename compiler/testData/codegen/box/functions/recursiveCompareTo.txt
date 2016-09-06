@@ -1,0 +1,35 @@
+MODULE <test-module>
+  FILE /recursiveCompareTo.kt
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+    FUN public operator fun C.compareTo(o: C): kotlin.Int
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: $RECEIVER of 'compareTo(C) on C: Int' type=C
+            arg1: GET_VAR 'value-parameter o: C' type=C operator=null
+          then: RETURN type=kotlin.Nothing from='compareTo(C) on C: Int'
+            CONST Int type=kotlin.Int value='0'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'GTEQ0(Int): Boolean' type=kotlin.Boolean operator=GTEQ
+            arg0: CALL 'compareTo(C) on C: Int' type=kotlin.Int operator=GTEQ
+              $receiver: GET_VAR 'value-parameter o: C' type=C operator=null
+              o: GET_VAR 'value-parameter o: C' type=C operator=null
+          then: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='compareTo(C) on C: Int'
+              CONST Int type=kotlin.Int value='1'
+        RETURN type=kotlin.Nothing from='compareTo(C) on C: Int'
+          CONST Int type=kotlin.Int value='-1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+              arg0: CALL 'compareTo(C) on C: Int' type=kotlin.Int operator=GT
+                $receiver: CALL 'constructor C()' type=C operator=null
+                o: CALL 'constructor C()' type=C operator=null
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='FAIL'

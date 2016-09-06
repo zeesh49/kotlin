@@ -1,0 +1,65 @@
+MODULE <test-module>
+  FILE /platformTypeAssertionStackTrace.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: java.util.AbstractList<kotlin.String>
+          TYPE_OP operator=CAST typeOperand=java.util.AbstractList<kotlin.String>
+            CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.String> operator=null
+        CALL 'add(String!): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'a: AbstractList<String>' type=java.util.AbstractList<kotlin.String> operator=null
+          element: CONST Null type=kotlin.Nothing? value='null'
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            VAR val b: kotlin.String
+              TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+                CALL 'get(Int): String!' type=kotlin.String! operator=GET_ARRAY_ELEMENT
+                  $this: GET_VAR 'a: AbstractList<String>' type=java.util.AbstractList<kotlin.String> operator=null
+                  index: CONST Int type=kotlin.Int value='0'
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='Fail: an exception should be thrown'
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            VAR val st: kotlin.Array<(out) java.lang.StackTraceElement!>!
+              CALL 'getStackTrace(): Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=null
+                $this: TYPE_OP operator=CAST typeOperand=java.lang.Throwable
+                  GET_VAR 'e: IllegalStateException /* = IllegalStateException */' type=kotlin.IllegalStateException /* = java.lang.IllegalStateException */ operator=null
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'LT0(Int): Boolean' type=kotlin.Boolean operator=LT
+                arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=LT
+                  $this: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                    $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<java.lang.StackTraceElement!>
+                      TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.StackTraceElement!>
+                        GET_VAR 'st: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=null
+                  other: CONST Int type=kotlin.Int value='5'
+              then: BLOCK type=kotlin.Nothing operator=null
+                RETURN type=kotlin.Nothing from='box(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='Fail: very small stack trace, should at least have current function and JUnit reflective calls: '
+                    CALL 'toString(Array<(out) Any!>!): String!' type=kotlin.String! operator=null
+                      p0: GET_VAR 'st: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=null
+            VAR val top: java.lang.StackTraceElement!
+              CALL 'get(Int): StackTraceElement!' type=java.lang.StackTraceElement! operator=GET_ARRAY_ELEMENT
+                $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<java.lang.StackTraceElement!>
+                  TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.StackTraceElement!>
+                    GET_VAR 'st: Array<(out) StackTraceElement!>!' type=kotlin.Array<(out) java.lang.StackTraceElement!>! operator=null
+                index: CONST Int type=kotlin.Int value='0'
+            WHEN type=kotlin.Unit operator=IF
+              if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+                $this: WHEN type=kotlin.Boolean operator=ANDAND
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: CALL 'getClassName(): String!' type=kotlin.String! operator=null
+                      $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.StackTraceElement
+                        GET_VAR 'top: StackTraceElement!' type=java.lang.StackTraceElement! operator=null
+                    arg1: CONST String type=kotlin.String value='PlatformTypeAssertionStackTraceKt'
+                  then: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: CALL 'getMethodName(): String!' type=kotlin.String! operator=null
+                      $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.StackTraceElement
+                        GET_VAR 'top: StackTraceElement!' type=java.lang.StackTraceElement! operator=null
+                    arg1: CONST String type=kotlin.String value='box'
+                  else: CONST Boolean type=kotlin.Boolean value='false'
+              then: BLOCK type=kotlin.Nothing operator=null
+                RETURN type=kotlin.Nothing from='box(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='Fail: top stack trace element should be PlatformTypeAssertionStackTraceKt.box() from default package, but was '
+                    GET_VAR 'top: StackTraceElement!' type=java.lang.StackTraceElement! operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'

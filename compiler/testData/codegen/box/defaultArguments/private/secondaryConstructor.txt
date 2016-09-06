@@ -1,0 +1,29 @@
+MODULE <test-module>
+  FILE /secondaryConstructor.kt
+    PROPERTY public var state: kotlin.String
+      EXPRESSION_BODY
+        CONST String type=kotlin.String value='Fail'
+    CLASS CLASS A
+      CONSTRUCTOR private constructor A(x: kotlin.String = ...)
+        x: EXPRESSION_BODY
+          CONST String type=kotlin.String value='OK'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+          CALL '<set-state>(String): Unit' type=kotlin.Unit operator=EQ
+            <set-?>: GET_VAR 'value-parameter x: String = ...' type=kotlin.String operator=null
+      CLASS OBJECT companion object of A
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of A'
+        FUN public final fun foo(): A
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo(): A'
+              CALL 'constructor A(String = ...)' type=A operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'foo(): A' type=A operator=null
+          $this: GET_OBJECT 'companion object of A' type=A.Companion
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-state>(): String' type=kotlin.String operator=GET_PROPERTY

@@ -1,0 +1,23 @@
+MODULE <test-module>
+  FILE /invokeKProperty.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(foo: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'foo: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'A' type=A
+            value: GET_VAR 'value-parameter foo: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val foo: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter foo: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          TYPE_OP operator=CAST typeOperand=kotlin.String
+            CALL 'invoke(A): Any?' type=kotlin.Any? operator=null
+              $this: CALL 'single() on Iterable<KProperty1<A, *>>: KProperty1<A, *>' type=kotlin.reflect.KProperty1<A, *> operator=null
+                $receiver: CALL '<get-declaredMemberProperties>() on KClass<A>: Collection<KProperty1<A, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<A, *>> operator=GET_PROPERTY
+                  $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+              p1: CALL 'constructor A(String)' type=A operator=null
+                foo: CONST String type=kotlin.String value='OK'

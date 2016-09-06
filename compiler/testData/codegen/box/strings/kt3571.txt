@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /kt3571.kt
+    CLASS CLASS Thing
+      CONSTRUCTOR public constructor Thing(delegate: kotlin.CharSequence)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Thing'
+      PROPERTY val `Thing$CharSequence$delegate`: kotlin.CharSequence
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter delegate: CharSequence' type=kotlin.CharSequence operator=null
+      FUN public open override fun get(index: kotlin.Int): kotlin.Char
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='get(Int): Char'
+            CALL 'get(Int): Char' type=kotlin.Char operator=null
+              $this: GET_VAR '`Thing$CharSequence$delegate`: CharSequence' type=kotlin.CharSequence operator=null
+              index: GET_VAR 'value-parameter index: Int' type=kotlin.Int operator=null
+      FUN public open override fun subSequence(startIndex: kotlin.Int, endIndex: kotlin.Int): kotlin.CharSequence
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='subSequence(Int, Int): CharSequence'
+            CALL 'subSequence(Int, Int): CharSequence' type=kotlin.CharSequence operator=null
+              $this: GET_VAR '`Thing$CharSequence$delegate`: CharSequence' type=kotlin.CharSequence operator=null
+              startIndex: GET_VAR 'value-parameter startIndex: Int' type=kotlin.Int operator=null
+              endIndex: GET_VAR 'value-parameter endIndex: Int' type=kotlin.Int operator=null
+      PROPERTY public open override val length: kotlin.Int
+        PROPERTY_GETTER public open override fun <get-length>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-length>(): Int'
+              CALL '<get-length>(): Int' type=kotlin.Int operator=null
+                $this: GET_VAR '`Thing$CharSequence$delegate`: CharSequence' type=kotlin.CharSequence operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val l: kotlin.Int
+          CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: CALL 'constructor Thing(CharSequence)' type=Thing operator=null
+              delegate: CONST String type=kotlin.String value='hello there'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'l: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='11'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'l: Int' type=kotlin.Int operator=null

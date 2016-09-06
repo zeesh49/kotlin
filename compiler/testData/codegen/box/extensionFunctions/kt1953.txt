@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /kt1953.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val sb: java.lang.StringBuilder
+          CALL 'constructor StringBuilder()' type=java.lang.StringBuilder operator=null
+        FUN local final operator fun kotlin.String.unaryPlus(): kotlin.Unit
+          BLOCK_BODY
+            CALL 'append(String!): StringBuilder!' type=java.lang.StringBuilder! operator=null
+              $this: GET_VAR 'sb: StringBuilder' type=java.lang.StringBuilder operator=null
+              p0: $RECEIVER of 'unaryPlus() on String: Unit' type=kotlin.String
+        CALL 'unaryPlus() on String: Unit' type=kotlin.Unit operator=UPLUS
+          $receiver: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          BLOCK type=kotlin.String operator=EXCLEXCL
+            VAR val tmp0_notnull: kotlin.String
+              CALL 'toString(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'sb: StringBuilder' type=java.lang.StringBuilder operator=null
+            WHEN type=kotlin.String operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: String' type=kotlin.String operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: String' type=kotlin.String operator=null

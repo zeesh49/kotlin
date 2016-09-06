@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /kt1611.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'doBar(String): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Foo()' type=Foo operator=null
+            str: CONST String type=kotlin.String value='OK'
+    CLASS CLASS Foo
+      CONSTRUCTOR public constructor Foo()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      PROPERTY public final val bar: (kotlin.String) -> kotlin.String
+        EXPRESSION_BODY
+          BLOCK type=(kotlin.String) -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(it: kotlin.String): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(String): String'
+                  GET_VAR 'value-parameter it: String' type=kotlin.String operator=null
+            CALLABLE_REFERENCE '<anonymous>(String): String' type=(kotlin.String) -> kotlin.String operator=LAMBDA
+      FUN public final fun doBar(str: kotlin.String): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='doBar(String): String'
+            CALL 'invoke(String): String' type=kotlin.String operator=INVOKE
+              $this: CALL '<get-bar>(): (String) -> String' type=(kotlin.String) -> kotlin.String operator=GET_PROPERTY
+                $this: THIS of 'Foo' type=Foo
+              p1: GET_VAR 'value-parameter str: String' type=kotlin.String operator=null

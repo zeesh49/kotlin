@@ -1,0 +1,84 @@
+MODULE <test-module>
+  FILE /delegated.kt
+    PROPERTY public val four: kotlin.Int
+      delegate: PROPERTY val `four$delegate`: NumberDecrypter
+        EXPRESSION_BODY
+          GET_OBJECT 'NumberDecrypter' type=NumberDecrypter
+      PROPERTY_GETTER public fun <get-four>(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-four>(): Int'
+            CALL 'getValue(Any?, KProperty<*>): Int' type=kotlin.Int operator=null
+              $this: GET_BACKING_FIELD '`four$delegate`: NumberDecrypter' type=NumberDecrypter operator=null
+              instance: CONST Null type=kotlin.Nothing? value='null'
+              data: CALLABLE_REFERENCE 'four: Int' type=kotlin.reflect.KProperty0<kotlin.Int> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val two: kotlin.Int
+        delegate: PROPERTY val `two$delegate`: NumberDecrypter
+          EXPRESSION_BODY
+            GET_OBJECT 'NumberDecrypter' type=NumberDecrypter
+        PROPERTY_GETTER public final fun <get-two>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-two>(): Int'
+              CALL 'getValue(Any?, KProperty<*>): Int' type=kotlin.Int operator=null
+                $this: GET_BACKING_FIELD '`two$delegate`: NumberDecrypter' type=NumberDecrypter operator=null
+                  receiver: THIS of 'A' type=A
+                instance: THIS of 'A' type=A
+                data: CALLABLE_REFERENCE 'two: Int' type=kotlin.reflect.KProperty1<A, kotlin.Int> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+    CLASS OBJECT NumberDecrypter
+      CONSTRUCTOR private constructor NumberDecrypter()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='NumberDecrypter'
+      FUN public final operator fun getValue(instance: kotlin.Any?, data: kotlin.reflect.KProperty<*>): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getValue(Any?, KProperty<*>): Int'
+            BLOCK type=kotlin.Int operator=WHEN
+              VAR val tmp0_subject: kotlin.String
+                CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                  $this: GET_VAR 'value-parameter data: KProperty<*>' type=kotlin.reflect.KProperty<*> operator=null
+              WHEN type=kotlin.Int operator=WHEN
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_subject: String' type=kotlin.String operator=null
+                  arg1: CONST String type=kotlin.String value='four'
+                then: CONST Int type=kotlin.Int value='4'
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_subject: String' type=kotlin.String operator=null
+                  arg1: CONST String type=kotlin.String value='two'
+                then: CONST Int type=kotlin.Int value='2'
+                else: THROW type=kotlin.Nothing
+                  CALL 'constructor AssertionError()' type=java.lang.AssertionError operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.Int
+          CALL 'get(): Int' type=kotlin.Int operator=null
+            $this: CALLABLE_REFERENCE 'four: Int' type=kotlin.reflect.KProperty0<kotlin.Int> operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'x: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='4'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail x: '
+              GET_VAR 'x: Int' type=kotlin.Int operator=null
+        VAR val a: A
+          CALL 'constructor A()' type=A operator=null
+        VAR val y: kotlin.Int
+          CALL 'get(A): Int' type=kotlin.Int operator=null
+            $this: CALLABLE_REFERENCE 'two: Int' type=kotlin.reflect.KProperty1<A, kotlin.Int> operator=null
+            receiver: GET_VAR 'a: A' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'y: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail y: '
+              GET_VAR 'y: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

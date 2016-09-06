@@ -1,0 +1,145 @@
+MODULE <test-module>
+  FILE /innerClassLabeledSuper2.kt
+    CLASS INTERFACE BK
+      FUN public abstract fun foo(): kotlin.String
+      FUN public abstract fun bar(): kotlin.String
+    CLASS INTERFACE KTrait
+      FUN public open override fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CALL 'bar(): String' type=kotlin.String operator=null
+              $this: THIS of 'KTrait' type=KTrait
+    CLASS CLASS K
+      CONSTRUCTOR public constructor K()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='K'
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor K()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public open override fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value='A.foo'
+      FUN public open override fun bar(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='bar(): String'
+            CONST String type=kotlin.String value='A.bar'
+      CLASS CLASS B
+        CONSTRUCTOR public constructor B()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor K()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='B'
+        FUN public open override fun foo(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='foo(): String'
+              CONST String type=kotlin.String value='B.foo'
+        FUN public open override fun bar(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='bar(): String'
+              CONST String type=kotlin.String value='B.bar'
+        FUN public final fun test1(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='test1(): String'
+              CALL 'foo(): String' superQualifier=K type=kotlin.String operator=null
+                $this: THIS of 'A' type=K
+        FUN public final fun test2(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='test2(): String'
+              CALL 'foo(): String' superQualifier=K type=kotlin.String operator=null
+                $this: THIS of 'B' type=K
+        FUN public final fun test3(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='test3(): String'
+              CALL 'foo(): String' superQualifier=K type=kotlin.String operator=null
+                $this: THIS of 'B' type=K
+        FUN public final fun test4(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='test4(): String'
+              CALL 'foo(): String' superQualifier=K type=kotlin.String operator=null
+                $this: THIS of 'A' type=K
+        FUN public final fun test5(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='test5(): String'
+              CALL 'foo(): String' superQualifier=K type=kotlin.String operator=null
+                $this: THIS of 'B' type=K
+        FUN public final fun test6(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='test6(): String'
+              CALL 'foo(): String' superQualifier=K type=kotlin.String operator=null
+                $this: THIS of 'B' type=K
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val b: A.B
+          CALL 'constructor B()' type=A.B operator=null
+            $this: CALL 'constructor A()' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test1(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'b: A.B' type=A.B operator=null
+              arg1: CONST String type=kotlin.String value='A.bar'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='test1 '
+              CALL 'test1(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'b: A.B' type=A.B operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test2(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'b: A.B' type=A.B operator=null
+              arg1: CONST String type=kotlin.String value='B.bar'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='test2 '
+              CALL 'test2(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'b: A.B' type=A.B operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test3(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'b: A.B' type=A.B operator=null
+              arg1: CONST String type=kotlin.String value='B.bar'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='test3 '
+              CALL 'test3(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'b: A.B' type=A.B operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test4(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'b: A.B' type=A.B operator=null
+              arg1: CONST String type=kotlin.String value='A.bar'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='test4 '
+              CALL 'test4(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'b: A.B' type=A.B operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test5(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'b: A.B' type=A.B operator=null
+              arg1: CONST String type=kotlin.String value='B.bar'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='test5 '
+              CALL 'test5(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'b: A.B' type=A.B operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test6(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'b: A.B' type=A.B operator=null
+              arg1: CONST String type=kotlin.String value='B.bar'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='test6 '
+              CALL 'test6(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'b: A.B' type=A.B operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

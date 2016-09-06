@@ -1,0 +1,44 @@
+MODULE <test-module>
+  FILE /syntheticFields.kt
+    CLASS ENUM_CLASS A
+      CONSTRUCTOR private constructor A()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun values(): kotlin.Array<A>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): A
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<java.lang.reflect.Field!>
+            CALL 'iterator(): Iterator<Field!>' type=kotlin.collections.Iterator<java.lang.reflect.Field!> operator=FOR_LOOP_ITERATOR
+              $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.Array<java.lang.reflect.Field!>
+                TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Array<out java.lang.reflect.Field!>
+                  CALL 'getDeclaredFields(): Array<(out) Field!>!' type=kotlin.Array<(out) java.lang.reflect.Field!>! operator=null
+                    $this: CALL '<get-java>() on KClass<A>: Class<A>' type=java.lang.Class<A> operator=GET_PROPERTY
+                      $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<Field!>' type=kotlin.collections.Iterator<java.lang.reflect.Field!> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val field: java.lang.reflect.Field!
+                CALL 'next(): Field!' type=java.lang.reflect.Field! operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<Field!>' type=kotlin.collections.Iterator<java.lang.reflect.Field!> operator=null
+              BLOCK type=kotlin.Unit operator=null
+                VAR val prop: kotlin.reflect.KProperty<*>?
+                  CALL '<get-kotlin>() on Field: KProperty<*>?' type=kotlin.reflect.KProperty<*>? operator=GET_PROPERTY
+                    $receiver: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=java.lang.reflect.Field
+                      GET_VAR 'field: Field!' type=java.lang.reflect.Field! operator=null
+                WHEN type=kotlin.Unit operator=IF
+                  if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                    arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                      arg0: GET_VAR 'prop: KProperty<*>?' type=kotlin.reflect.KProperty<*>? operator=null
+                      arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: RETURN type=kotlin.Nothing from='box(): String'
+                    STRING_CONCATENATION type=kotlin.String
+                      CONST String type=kotlin.String value='Fail, property found: '
+                      GET_VAR 'prop: KProperty<*>?' type=kotlin.reflect.KProperty<*>? operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

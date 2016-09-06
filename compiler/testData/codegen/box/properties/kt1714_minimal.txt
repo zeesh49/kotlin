@@ -1,0 +1,20 @@
+MODULE <test-module>
+  FILE /kt1714_minimal.kt
+    CLASS INTERFACE A
+      PROPERTY public abstract val v: kotlin.Int
+    CLASS CLASS AImpl
+      CONSTRUCTOR public constructor AImpl()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='AImpl'
+      PROPERTY public open override val v: kotlin.Int = 5
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='5'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          CALL 'constructor AImpl()' type=AImpl operator=null
+        CALL '<get-v>(): Int' type=kotlin.Int operator=GET_PROPERTY
+          $this: GET_VAR 'a: A' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

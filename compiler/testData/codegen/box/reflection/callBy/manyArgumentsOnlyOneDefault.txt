@@ -1,0 +1,74 @@
+MODULE <test-module>
+  FILE /manyArgumentsOnlyOneDefault.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun foo(p01: kotlin.Int, p02: kotlin.Int, p03: kotlin.Int, p04: kotlin.Int, p05: kotlin.Int, p06: kotlin.Int, p07: kotlin.Int, p08: kotlin.Int, p09: kotlin.Int, p10: kotlin.Int, p11: kotlin.Int, p12: kotlin.Int, p13: kotlin.Int, p14: kotlin.Int, p15: kotlin.Int, p16: kotlin.Int, p17: kotlin.Int, p18: kotlin.Int, p19: kotlin.Int, p20: kotlin.Int, p21: kotlin.Int, p22: kotlin.Int, p23: kotlin.Int, p24: kotlin.Int, p25: kotlin.Int, p26: kotlin.Int, p27: kotlin.Int, p28: kotlin.Int, p29: kotlin.Int, p30: kotlin.Int, p31: kotlin.Int, p32: kotlin.Int, p33: kotlin.Int, p34: kotlin.Int, p35: kotlin.Int, p36: kotlin.Int, p37: kotlin.Int, p38: kotlin.Int, p39: kotlin.Int, p40: kotlin.Int, p41: kotlin.Int, p42: kotlin.Int = ..., p43: kotlin.Int, p44: kotlin.Int, p45: kotlin.Int, p46: kotlin.Int, p47: kotlin.Int, p48: kotlin.Int, p49: kotlin.Int, p50: kotlin.Int, p51: kotlin.Int, p52: kotlin.Int, p53: kotlin.Int, p54: kotlin.Int, p55: kotlin.Int, p56: kotlin.Int, p57: kotlin.Int, p58: kotlin.Int, p59: kotlin.Int, p60: kotlin.Int, p61: kotlin.Int, p62: kotlin.Int, p63: kotlin.Int, p64: kotlin.Int, p65: kotlin.Int, p66: kotlin.Int, p67: kotlin.Int, p68: kotlin.Int, p69: kotlin.Int, p70: kotlin.Int): kotlin.Unit
+        p42: EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='239'
+        BLOCK_BODY
+          CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+            expected: CONST Int type=kotlin.Int value='1'
+            actual: GET_VAR 'value-parameter p01: Int' type=kotlin.Int operator=null
+          CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+            expected: CONST Int type=kotlin.Int value='41'
+            actual: GET_VAR 'value-parameter p41: Int' type=kotlin.Int operator=null
+          CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+            expected: CONST Int type=kotlin.Int value='239'
+            actual: GET_VAR 'value-parameter p42: Int = ...' type=kotlin.Int operator=null
+          CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+            expected: CONST Int type=kotlin.Int value='43'
+            actual: GET_VAR 'value-parameter p43: Int' type=kotlin.Int operator=null
+          CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+            expected: CONST Int type=kotlin.Int value='70'
+            actual: GET_VAR 'value-parameter p70: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f: kotlin.reflect.KCallable<*>
+          CALL 'single((KCallable<*>) -> Boolean) on Iterable<KCallable<*>>: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+            $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+            predicate: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.Boolean
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): Boolean'
+                    CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                      arg1: CONST String type=kotlin.String value='foo'
+              CALLABLE_REFERENCE '<anonymous>(KCallable<*>): Boolean' type=(kotlin.reflect.KCallable<*>) -> kotlin.Boolean operator=LAMBDA
+        VAR val parameters: kotlin.collections.List<kotlin.reflect.KParameter>
+          CALL '<get-parameters>(): List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=GET_PROPERTY
+            $this: GET_VAR 'f: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+        CALL 'callBy(Map<KParameter, Any?>): Any?' type=kotlin.Any? operator=null
+          $this: GET_VAR 'f: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+          args: CALL 'mapOf(vararg Pair<KParameter, Any>): Map<KParameter, Any>' type=kotlin.collections.Map<kotlin.reflect.KParameter, kotlin.Any> operator=null
+            pairs: VARARG type=Array<out Pair<KParameter, Any>> varargElementType=Pair<KParameter, Any>
+              CALL 'to(A) on KParameter: Pair<KParameter, A>' type=kotlin.Pair<kotlin.reflect.KParameter, A> operator=null
+                $receiver: CALL 'first() on List<KParameter>: KParameter' type=kotlin.reflect.KParameter operator=null
+                  $receiver: GET_VAR 'parameters: List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=null
+                that: CALL 'constructor A()' type=A operator=null
+              SPREAD_ELEMENT
+                CALL 'toTypedArray() on Collection<Pair<KParameter, Int>>: Array<Pair<KParameter, Int>>' type=kotlin.Array<kotlin.Pair<kotlin.reflect.KParameter, kotlin.Int>> operator=null
+                  $receiver: CALL 'map((Int) -> Pair<KParameter, Int>) on Iterable<Int>: List<Pair<KParameter, Int>>' type=kotlin.collections.List<kotlin.Pair<kotlin.reflect.KParameter, kotlin.Int>> operator=null
+                    $receiver: CALL 'plus(Iterable<Int>) on Iterable<Int>: List<Int>' type=kotlin.collections.List<kotlin.Int> operator=PLUS
+                      $receiver: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                        $this: CONST Int type=kotlin.Int value='1'
+                        other: CONST Int type=kotlin.Int value='41'
+                      elements: CALL 'rangeTo(Int): IntRange' type=kotlin.ranges.IntRange operator=RANGE
+                        $this: CONST Int type=kotlin.Int value='43'
+                        other: CONST Int type=kotlin.Int value='70'
+                    transform: BLOCK type=(kotlin.Int) -> kotlin.Pair<kotlin.reflect.KParameter, kotlin.Int> operator=LAMBDA
+                      FUN local final fun <anonymous>(i: kotlin.Int): kotlin.Pair<kotlin.reflect.KParameter, kotlin.Int>
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='<anonymous>(Int): Pair<KParameter, Int>'
+                            CALL 'to(Int) on KParameter: Pair<KParameter, Int>' type=kotlin.Pair<kotlin.reflect.KParameter, kotlin.Int> operator=null
+                              $receiver: CALL 'get(Int): KParameter' type=kotlin.reflect.KParameter operator=GET_ARRAY_ELEMENT
+                                $this: GET_VAR 'parameters: List<KParameter>' type=kotlin.collections.List<kotlin.reflect.KParameter> operator=null
+                                index: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+                              that: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=null
+                      CALLABLE_REFERENCE '<anonymous>(Int): Pair<KParameter, Int>' type=(kotlin.Int) -> kotlin.Pair<kotlin.reflect.KParameter, kotlin.Int> operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

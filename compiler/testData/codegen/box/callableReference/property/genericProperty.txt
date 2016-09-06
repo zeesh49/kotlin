@@ -1,0 +1,78 @@
+MODULE <test-module>
+  FILE /genericProperty.kt
+    CLASS CLASS Value
+      CONSTRUCTOR public constructor Value<T>(value: T = ..., text: kotlin.String? = ...)
+        value: EXPRESSION_BODY
+          TYPE_OP operator=CAST typeOperand=T
+            CONST Null type=kotlin.Nothing? value='null'
+        text: EXPRESSION_BODY
+          CONST Null type=kotlin.Nothing? value='null'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'value: T' type=kotlin.Unit operator=null
+            receiver: THIS of 'Value' type=Value<T>
+            value: GET_VAR 'value-parameter value: T = ...' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'text: String?' type=kotlin.Unit operator=null
+            receiver: THIS of 'Value' type=Value<T>
+            value: GET_VAR 'value-parameter text: String? = ...' type=kotlin.String? operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Value'
+      PROPERTY public final var value: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter value: T = ...' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final var text: kotlin.String?
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter text: String? = ...' type=kotlin.String? operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    PROPERTY public val <T> Value<T>.additionalText: kotlin.String?
+      delegate: PROPERTY val `additionalText$delegate`: DVal<Value<T>, kotlin.String?, kotlin.reflect.KMutableProperty1<Value<T>, kotlin.String?>>
+        EXPRESSION_BODY
+          CALL 'constructor DVal(KMutableProperty1<Value<T>, String?>)' type=DVal<Value<T>, kotlin.String?, kotlin.reflect.KMutableProperty1<Value<T>, kotlin.String?>> operator=null
+            kmember: CALLABLE_REFERENCE 'text: String?' type=kotlin.reflect.KMutableProperty1<Value<T>, kotlin.String?> operator=null
+      PROPERTY_GETTER public fun Value<T>.<get-additionalText>(): kotlin.String?
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-additionalText>() on Value<T>: String?'
+            CALL 'getValue(Value<T>, KProperty<*>): String?' type=kotlin.String? operator=null
+              $this: GET_BACKING_FIELD '`additionalText$delegate`: DVal<Value<T>, String?, KMutableProperty1<Value<T>, String?>>' type=DVal<Value<T>, kotlin.String?, kotlin.reflect.KMutableProperty1<Value<T>, kotlin.String?>> operator=null
+              t: $RECEIVER of 'additionalText: String? on Value<T>' type=Value<T>
+              p: CALLABLE_REFERENCE 'additionalText: String? on Value<T>' type=kotlin.reflect.KProperty1<Value<T>, kotlin.String?> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+    PROPERTY public val <T> Value<T>.additionalValue: T
+      delegate: PROPERTY val `additionalValue$delegate`: DVal<Value<T>, T, kotlin.reflect.KMutableProperty1<Value<T>, T>>
+        EXPRESSION_BODY
+          CALL 'constructor DVal(KMutableProperty1<Value<T>, T>)' type=DVal<Value<T>, T, kotlin.reflect.KMutableProperty1<Value<T>, T>> operator=null
+            kmember: CALLABLE_REFERENCE 'value: T' type=kotlin.reflect.KMutableProperty1<Value<T>, T> operator=null
+      PROPERTY_GETTER public fun Value<T>.<get-additionalValue>(): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='<get-additionalValue>() on Value<T>: T'
+            CALL 'getValue(Value<T>, KProperty<*>): T' type=T operator=null
+              $this: GET_BACKING_FIELD '`additionalValue$delegate`: DVal<Value<T>, T, KMutableProperty1<Value<T>, T>>' type=DVal<Value<T>, T, kotlin.reflect.KMutableProperty1<Value<T>, T>> operator=null
+              t: $RECEIVER of 'additionalValue: T on Value<T>' type=Value<T>
+              p: CALLABLE_REFERENCE 'additionalValue: T on Value<T>' type=kotlin.reflect.KProperty1<Value<T>, T> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+    CLASS CLASS DVal
+      CONSTRUCTOR public constructor DVal<T, R, P : kotlin.reflect.KProperty1<T, R>>(kmember: P)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'kmember: P' type=kotlin.Unit operator=null
+            receiver: THIS of 'DVal' type=DVal<T, R, P>
+            value: GET_VAR 'value-parameter kmember: P' type=P operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='DVal'
+      PROPERTY public final val kmember: P
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter kmember: P' type=P operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final operator fun getValue(t: T, p: kotlin.reflect.KProperty<*>): R
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getValue(T, KProperty<*>): R'
+            CALL 'get(T): R' type=R operator=null
+              $this: CALL '<get-kmember>(): P' type=P operator=GET_PROPERTY
+                $this: THIS of 'DVal' type=DVal<T, R, P>
+              receiver: GET_VAR 'value-parameter t: T' type=T operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val p: Value<kotlin.String>
+          CALL 'constructor Value(String = ..., String? = ...)' type=Value<kotlin.String> operator=null
+            value: CONST String type=kotlin.String value='O'
+            text: CONST String type=kotlin.String value='K'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL '<get-additionalValue>() on Value<String>: String' type=kotlin.String operator=GET_PROPERTY
+              $receiver: GET_VAR 'p: Value<String>' type=Value<kotlin.String> operator=null
+            other: CALL '<get-additionalText>() on Value<String>: String?' type=kotlin.String? operator=GET_PROPERTY
+              $receiver: GET_VAR 'p: Value<String>' type=Value<kotlin.String> operator=null

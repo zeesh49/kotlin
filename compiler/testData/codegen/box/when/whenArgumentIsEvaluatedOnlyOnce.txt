@@ -1,0 +1,38 @@
+MODULE <test-module>
+  FILE /whenArgumentIsEvaluatedOnlyOnce.kt
+    PROPERTY public var x: kotlin.Int
+      EXPRESSION_BODY
+        CONST Int type=kotlin.Int value='0'
+    FUN public fun inc(): kotlin.Int
+      BLOCK_BODY
+        BLOCK type=kotlin.Int operator=POSTFIX_INCR
+          BLOCK type=kotlin.Int operator=POSTFIX_INCR
+            VAR val tmp0: kotlin.Int
+              CALL '<get-x>(): Int' type=kotlin.Int operator=POSTFIX_INCR
+            CALL '<set-x>(Int): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+              <set-?>: CALL 'inc(): Int' type=kotlin.Int operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+            GET_VAR 'tmp0: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='inc(): Int'
+          CONST Int type=kotlin.Int value='0'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val al: java.util.ArrayList<kotlin.Int>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.Int> operator=null
+        BLOCK type=kotlin.Unit operator=WHEN
+          VAR val tmp0_subject: kotlin.Int
+            CALL 'inc(): Int' type=kotlin.Int operator=null
+          WHEN type=kotlin.Unit operator=WHEN
+            if: CALL 'contains(Int): Boolean' type=kotlin.Boolean operator=IN
+              $this: GET_VAR 'al: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+              element: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+            then: RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='fail 1'
+            else: BLOCK type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL '<get-x>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              arg1: CONST Int type=kotlin.Int value='1'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail 2'

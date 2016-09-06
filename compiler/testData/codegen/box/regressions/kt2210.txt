@@ -1,0 +1,16 @@
+MODULE <test-module>
+  FILE /kt2210.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<T>(t: kotlin.Array<kotlin.Array<T>>)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val a: kotlin.Array<kotlin.Array<T>>
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter t: Array<Array<T>>' type=kotlin.Array<kotlin.Array<T>> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'constructor A(Array<Array<Int>>)' type=A<kotlin.Int> operator=null
+          t: CALL 'arrayOf(vararg Array<Int>): Array<Array<Int>>' type=kotlin.Array<kotlin.Array<kotlin.Int>> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

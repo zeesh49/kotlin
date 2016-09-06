@@ -1,0 +1,16 @@
+MODULE <test-module>
+  FILE /KC.kt
+    CLASS INTERFACE T
+      FUN public open fun foo(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(): String'
+            CONST String type=kotlin.String value='OK'
+    CLASS CLASS KC
+      CONSTRUCTOR public constructor KC()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='KC'
+    FUN public fun box(): kotlin.String!
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String!'
+          CALL 'bar(): String!' type=kotlin.String! operator=null

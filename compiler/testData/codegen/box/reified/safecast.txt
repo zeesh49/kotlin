@@ -1,0 +1,29 @@
+MODULE <test-module>
+  FILE /safecast.kt
+    FUN public inline fun <reified T> safecast(x: kotlin.Any?): T?
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='safecast(Any?): T?'
+          TYPE_OP operator=SAFE_CAST typeOperand=T
+            GET_VAR 'value-parameter x: Any?' type=kotlin.Any? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.String?
+          CALL 'safecast(Any?): String?' type=kotlin.String? operator=null
+            x: CONST String type=kotlin.String value='abc'
+        CALL 'assertEquals(String?, String?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='abc'
+          actual: GET_VAR 'x: String?' type=kotlin.String? operator=null
+        VAR val y: kotlin.Int?
+          CALL 'safecast(Any?): Int?' type=kotlin.Int? operator=null
+            x: CONST Int type=kotlin.Int value='1'
+        CALL 'assertEquals(Int?, Int?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: GET_VAR 'y: Int?' type=kotlin.Int? operator=null
+        VAR val z: kotlin.Int?
+          CALL 'safecast(Any?): Int?' type=kotlin.Int? operator=null
+            x: CONST String type=kotlin.String value='abc'
+        CALL 'assertEquals(Int?, Int?, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Null type=kotlin.Nothing? value='null'
+          actual: GET_VAR 'z: Int?' type=kotlin.Int? operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,185 @@
+MODULE <test-module>
+  FILE /kt4138.kt
+    CLASS CLASS Delegate
+      CONSTRUCTOR public constructor Delegate<T>(inner: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'inner: T' type=kotlin.Unit operator=null
+            receiver: THIS of 'Delegate' type=Delegate<T>
+            value: GET_VAR 'value-parameter inner: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Delegate'
+      PROPERTY public final var inner: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter inner: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final operator fun getValue(t: kotlin.Any?, p: kotlin.reflect.KProperty<*>): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getValue(Any?, KProperty<*>): T'
+            CALL '<get-inner>(): T' type=T operator=GET_PROPERTY
+              $this: THIS of 'Delegate' type=Delegate<T>
+      FUN public final operator fun setValue(t: kotlin.Any?, p: kotlin.reflect.KProperty<*>, i: T): kotlin.Unit
+        BLOCK_BODY
+          CALL '<set-inner>(T): Unit' type=kotlin.Unit operator=EQ
+            $this: THIS of 'Delegate' type=Delegate<T>
+            <set-?>: GET_VAR 'value-parameter i: T' type=T operator=null
+    CLASS CLASS Foo
+      CONSTRUCTOR public constructor Foo(f: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'f: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'Foo' type=Foo
+            value: GET_VAR 'value-parameter f: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      PROPERTY public final val f: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter f: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CLASS OBJECT companion object of Foo
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of Foo'
+        PROPERTY public final val A: Foo
+          delegate: PROPERTY val `A$delegate`: Delegate<Foo>
+            EXPRESSION_BODY
+              CALL 'constructor Delegate(Foo)' type=Delegate<Foo> operator=null
+                inner: CALL 'constructor Foo(Int)' type=Foo operator=null
+                  f: CONST Int type=kotlin.Int value='11'
+          PROPERTY_GETTER public final fun <get-A>(): Foo
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<get-A>(): Foo'
+                CALL 'getValue(Any?, KProperty<*>): Foo' type=Foo operator=null
+                  $this: GET_BACKING_FIELD '`A$delegate`: Delegate<Foo>' type=Delegate<Foo> operator=null
+                    receiver: THIS of 'companion object of Foo' type=Foo.Companion
+                  t: THIS of 'companion object of Foo' type=Foo.Companion
+                  p: CALLABLE_REFERENCE 'A: Foo' type=kotlin.reflect.KProperty1<Foo.Companion, Foo> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+        PROPERTY public final var B: Foo
+          delegate: PROPERTY val `B$delegate`: Delegate<Foo>
+            EXPRESSION_BODY
+              CALL 'constructor Delegate(Foo)' type=Delegate<Foo> operator=null
+                inner: CALL 'constructor Foo(Int)' type=Foo operator=null
+                  f: CONST Int type=kotlin.Int value='11'
+          PROPERTY_GETTER public final fun <get-B>(): Foo
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<get-B>(): Foo'
+                CALL 'getValue(Any?, KProperty<*>): Foo' type=Foo operator=null
+                  $this: GET_BACKING_FIELD '`B$delegate`: Delegate<Foo>' type=Delegate<Foo> operator=null
+                    receiver: THIS of 'companion object of Foo' type=Foo.Companion
+                  t: THIS of 'companion object of Foo' type=Foo.Companion
+                  p: CALLABLE_REFERENCE 'B: Foo' type=kotlin.reflect.KMutableProperty1<Foo.Companion, Foo> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+          PROPERTY_SETTER public final fun <set-B>(<set-?>: Foo): kotlin.Unit
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<set-B>(Foo): Unit'
+                CALL 'setValue(Any?, KProperty<*>, Foo): Unit' type=kotlin.Unit operator=null
+                  $this: GET_BACKING_FIELD '`B$delegate`: Delegate<Foo>' type=Delegate<Foo> operator=null
+                    receiver: THIS of 'companion object of Foo' type=Foo.Companion
+                  t: THIS of 'companion object of Foo' type=Foo.Companion
+                  p: CALLABLE_REFERENCE 'B: Foo' type=kotlin.reflect.KMutableProperty1<Foo.Companion, Foo> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+                  i: GET_VAR 'value-parameter <set-?>: Foo' type=Foo operator=null
+    CLASS INTERFACE FooTrait
+      CLASS OBJECT companion object of FooTrait
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of FooTrait'
+        PROPERTY public final val A: Foo
+          delegate: PROPERTY val `A$delegate`: Delegate<Foo>
+            EXPRESSION_BODY
+              CALL 'constructor Delegate(Foo)' type=Delegate<Foo> operator=null
+                inner: CALL 'constructor Foo(Int)' type=Foo operator=null
+                  f: CONST Int type=kotlin.Int value='11'
+          PROPERTY_GETTER public final fun <get-A>(): Foo
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<get-A>(): Foo'
+                CALL 'getValue(Any?, KProperty<*>): Foo' type=Foo operator=null
+                  $this: GET_BACKING_FIELD '`A$delegate`: Delegate<Foo>' type=Delegate<Foo> operator=null
+                    receiver: THIS of 'companion object of FooTrait' type=FooTrait.Companion
+                  t: THIS of 'companion object of FooTrait' type=FooTrait.Companion
+                  p: CALLABLE_REFERENCE 'A: Foo' type=kotlin.reflect.KProperty1<FooTrait.Companion, Foo> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+        PROPERTY public final var B: Foo
+          delegate: PROPERTY val `B$delegate`: Delegate<Foo>
+            EXPRESSION_BODY
+              CALL 'constructor Delegate(Foo)' type=Delegate<Foo> operator=null
+                inner: CALL 'constructor Foo(Int)' type=Foo operator=null
+                  f: CONST Int type=kotlin.Int value='11'
+          PROPERTY_GETTER public final fun <get-B>(): Foo
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<get-B>(): Foo'
+                CALL 'getValue(Any?, KProperty<*>): Foo' type=Foo operator=null
+                  $this: GET_BACKING_FIELD '`B$delegate`: Delegate<Foo>' type=Delegate<Foo> operator=null
+                    receiver: THIS of 'companion object of FooTrait' type=FooTrait.Companion
+                  t: THIS of 'companion object of FooTrait' type=FooTrait.Companion
+                  p: CALLABLE_REFERENCE 'B: Foo' type=kotlin.reflect.KMutableProperty1<FooTrait.Companion, Foo> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+          PROPERTY_SETTER public final fun <set-B>(<set-?>: Foo): kotlin.Unit
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='<set-B>(Foo): Unit'
+                CALL 'setValue(Any?, KProperty<*>, Foo): Unit' type=kotlin.Unit operator=null
+                  $this: GET_BACKING_FIELD '`B$delegate`: Delegate<Foo>' type=Delegate<Foo> operator=null
+                    receiver: THIS of 'companion object of FooTrait' type=FooTrait.Companion
+                  t: THIS of 'companion object of FooTrait' type=FooTrait.Companion
+                  p: CALLABLE_REFERENCE 'B: Foo' type=kotlin.reflect.KMutableProperty1<FooTrait.Companion, Foo> operator=PROPERTY_REFERENCE_FOR_DELEGATE
+                  i: GET_VAR 'value-parameter <set-?>: Foo' type=Foo operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-f>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL '<get-A>(): Foo' type=Foo operator=GET_PROPERTY
+                  $this: GET_OBJECT 'companion object of Foo' type=Foo.Companion
+              arg1: CONST Int type=kotlin.Int value='11'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-f>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL '<get-B>(): Foo' type=Foo operator=GET_PROPERTY
+                  $this: GET_OBJECT 'companion object of Foo' type=Foo.Companion
+              arg1: CONST Int type=kotlin.Int value='11'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        CALL '<set-B>(Foo): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_OBJECT 'companion object of Foo' type=Foo.Companion
+          <set-?>: CALL 'constructor Foo(Int)' type=Foo operator=null
+            f: CONST Int type=kotlin.Int value='12'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-f>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL '<get-B>(): Foo' type=Foo operator=GET_PROPERTY
+                  $this: GET_OBJECT 'companion object of Foo' type=Foo.Companion
+              arg1: CONST Int type=kotlin.Int value='12'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-f>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL '<get-A>(): Foo' type=Foo operator=GET_PROPERTY
+                  $this: GET_OBJECT 'companion object of FooTrait' type=FooTrait.Companion
+              arg1: CONST Int type=kotlin.Int value='11'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-f>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL '<get-B>(): Foo' type=Foo operator=GET_PROPERTY
+                  $this: GET_OBJECT 'companion object of FooTrait' type=FooTrait.Companion
+              arg1: CONST Int type=kotlin.Int value='11'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 5'
+        CALL '<set-B>(Foo): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_OBJECT 'companion object of FooTrait' type=FooTrait.Companion
+          <set-?>: CALL 'constructor Foo(Int)' type=Foo operator=null
+            f: CONST Int type=kotlin.Int value='12'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-f>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL '<get-B>(): Foo' type=Foo operator=GET_PROPERTY
+                  $this: GET_OBJECT 'companion object of FooTrait' type=FooTrait.Companion
+              arg1: CONST Int type=kotlin.Int value='12'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 6'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,39 @@
+MODULE <test-module>
+  FILE /propertyInClassAccessor.kt
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      PROPERTY public final val kotlin.Int.innerGetter: kotlin.Int
+        PROPERTY_GETTER public final fun kotlin.Int.<get-innerGetter>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-innerGetter>() on Int: Int'
+              $RECEIVER of 'innerGetter: Int on Int' type=kotlin.Int
+      FUN public final fun test(): kotlin.Int
+        BLOCK_BODY
+          VAR val i: kotlin.Int = 1
+            CONST Int type=kotlin.Int value='1'
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL '<get-innerGetter>() on Int: Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'Test' type=Test
+                  $receiver: GET_VAR 'i: Int' type=kotlin.Int operator=null
+                arg1: CONST Int type=kotlin.Int value='1'
+            then: RETURN type=kotlin.Nothing from='test(): Int'
+              CONST Int type=kotlin.Int value='0'
+          RETURN type=kotlin.Nothing from='test(): Int'
+            CONST Int type=kotlin.Int value='1'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'test(): Int' type=kotlin.Int operator=null
+                $this: CALL 'constructor Test()' type=Test operator=null
+              arg1: CONST Int type=kotlin.Int value='1'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='inner getter or setter failed'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

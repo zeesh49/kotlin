@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /classMemberFromClass.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public final fun foo(k: kotlin.Int): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(Int): Int'
+            GET_VAR 'value-parameter k: Int' type=kotlin.Int operator=null
+      FUN public final fun result(): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='result(): Int'
+            CALL 'invoke(A, Int): Int' type=kotlin.Int operator=null
+              $this: CALLABLE_REFERENCE 'foo(Int): Int' type=kotlin.reflect.KFunction2<A, kotlin.Int, kotlin.Int> operator=null
+              p1: THIS of 'A' type=A
+              p2: CONST Int type=kotlin.Int value='111'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val result: kotlin.Int
+          CALL 'result(): Int' type=kotlin.Int operator=null
+            $this: CALL 'constructor A()' type=A operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='111'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'result: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

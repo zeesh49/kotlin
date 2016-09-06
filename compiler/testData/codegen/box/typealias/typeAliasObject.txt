@@ -1,0 +1,33 @@
+MODULE <test-module>
+  FILE /typeAliasObject.kt
+    CLASS OBJECT OHolder
+      CONSTRUCTOR private constructor OHolder()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='OHolder'
+      PROPERTY public final val O: kotlin.String = "O"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='O'
+    TYPEALIAS typealias OHolderAlias = OHolder type=OHolder
+    CLASS CLASS KHolder
+      CONSTRUCTOR public constructor KHolder()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='KHolder'
+      CLASS OBJECT companion object of KHolder
+        CONSTRUCTOR private constructor Companion()
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            INSTANCE_INITIALIZER_CALL classDescriptor='companion object of KHolder'
+        PROPERTY public final val K: kotlin.String = "K"
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value='K'
+    TYPEALIAS typealias KHolderAlias = KHolder type=KHolder
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+            $this: CALL '<get-O>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: GET_OBJECT 'OHolder' type=OHolder
+            other: CALL '<get-K>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: GET_OBJECT 'companion object of KHolder' type=KHolder.Companion

@@ -1,0 +1,101 @@
+MODULE <test-module>
+  FILE /fakeGenericCovariantOverrideWithDelegation.kt
+    CLASS INTERFACE A
+      FUN public abstract fun foo(t: T): kotlin.String
+    CLASS INTERFACE B
+      FUN public open fun foo(t: kotlin.Int): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(Int): String'
+            CONST String type=kotlin.String value='B'
+    CLASS CLASS Z
+      CONSTRUCTOR public constructor Z()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Z'
+    CLASS CLASS Z1
+      CONSTRUCTOR public constructor Z1()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Z1'
+      PROPERTY val `Z1$B$delegate`: Z
+        EXPRESSION_BODY
+          CALL 'constructor Z()' type=Z operator=null
+      FUN public open override fun foo(t: kotlin.Int): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(Int): String'
+            CALL 'foo(Int): String' type=kotlin.String operator=null
+              $this: GET_VAR '`Z1$B$delegate`: Z' type=Z operator=null
+              t: GET_VAR 'value-parameter t: Int' type=kotlin.Int operator=null
+    CLASS CLASS Z2
+      CONSTRUCTOR public constructor Z2()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Z2'
+      PROPERTY val `Z2$B$delegate`: Z
+        EXPRESSION_BODY
+          CALL 'constructor Z()' type=Z operator=null
+      FUN public open override fun foo(t: kotlin.Int): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(Int): String'
+            CALL 'foo(Int): String' type=kotlin.String operator=null
+              $this: GET_VAR '`Z2$B$delegate`: Z' type=Z operator=null
+              t: GET_VAR 'value-parameter t: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val z1: Z1
+          CALL 'constructor Z1()' type=Z1 operator=null
+        VAR val z2: Z2
+          CALL 'constructor Z2()' type=Z2 operator=null
+        VAR val z1a: A<kotlin.Int>
+          GET_VAR 'z1: Z1' type=Z1 operator=null
+        VAR val z1b: B
+          GET_VAR 'z1: Z1' type=Z1 operator=null
+        VAR val z2a: A<kotlin.Int>
+          GET_VAR 'z2: Z2' type=Z2 operator=null
+        VAR val z2b: B
+          GET_VAR 'z2: Z2' type=Z2 operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=WHEN
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'foo(Int): String' type=kotlin.String operator=null
+                  $this: GET_VAR 'z1: Z1' type=Z1 operator=null
+                  t: CONST Int type=kotlin.Int value='0'
+                arg1: CONST String type=kotlin.String value='B'
+            then: CONST String type=kotlin.String value='Fail #1'
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'foo(Int): String' type=kotlin.String operator=null
+                  $this: GET_VAR 'z1a: A<Int>' type=A<kotlin.Int> operator=null
+                  t: CONST Int type=kotlin.Int value='0'
+                arg1: CONST String type=kotlin.String value='B'
+            then: CONST String type=kotlin.String value='Fail #2'
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'foo(Int): String' type=kotlin.String operator=null
+                  $this: GET_VAR 'z1b: B' type=B operator=null
+                  t: CONST Int type=kotlin.Int value='0'
+                arg1: CONST String type=kotlin.String value='B'
+            then: CONST String type=kotlin.String value='Fail #3'
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'foo(Int): String' type=kotlin.String operator=null
+                  $this: GET_VAR 'z2: Z2' type=Z2 operator=null
+                  t: CONST Int type=kotlin.Int value='0'
+                arg1: CONST String type=kotlin.String value='B'
+            then: CONST String type=kotlin.String value='Fail #4'
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'foo(Int): String' type=kotlin.String operator=null
+                  $this: GET_VAR 'z2a: A<Int>' type=A<kotlin.Int> operator=null
+                  t: CONST Int type=kotlin.Int value='0'
+                arg1: CONST String type=kotlin.String value='B'
+            then: CONST String type=kotlin.String value='Fail #5'
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: CALL 'foo(Int): String' type=kotlin.String operator=null
+                  $this: GET_VAR 'z2b: B' type=B operator=null
+                  t: CONST Int type=kotlin.Int value='0'
+                arg1: CONST String type=kotlin.String value='B'
+            then: CONST String type=kotlin.String value='Fail #6'
+            else: CONST String type=kotlin.String value='OK'

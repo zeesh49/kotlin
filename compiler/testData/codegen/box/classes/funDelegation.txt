@@ -1,0 +1,54 @@
+MODULE <test-module>
+  FILE /funDelegation.kt
+    CLASS CLASS Base
+      CONSTRUCTOR public constructor Base()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Base'
+      FUN public final fun n(n: kotlin.Int): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='n(Int): Int'
+            CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+              $this: GET_VAR 'value-parameter n: Int' type=kotlin.Int operator=null
+              other: CONST Int type=kotlin.Int value='1'
+    CLASS INTERFACE Abstract
+    CLASS CLASS Derived1
+      CONSTRUCTOR public constructor Derived1()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Base()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Derived1'
+    CLASS CLASS Derived2
+      CONSTRUCTOR public constructor Derived2()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Base()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Derived2'
+    FUN public fun test(s: Base): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='test(Base): Boolean'
+          CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL 'n(Int): Int' type=kotlin.Int operator=null
+              $this: GET_VAR 'value-parameter s: Base' type=Base operator=null
+              n: CONST Int type=kotlin.Int value='238'
+            arg1: CONST Int type=kotlin.Int value='239'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'test(Base): Boolean' type=kotlin.Boolean operator=null
+              s: CALL 'constructor Base()' type=Base operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail #1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'test(Base): Boolean' type=kotlin.Boolean operator=null
+              s: CALL 'constructor Derived1()' type=Derived1 operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail #2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'test(Base): Boolean' type=kotlin.Boolean operator=null
+              s: CALL 'constructor Derived2()' type=Derived2 operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail #3'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

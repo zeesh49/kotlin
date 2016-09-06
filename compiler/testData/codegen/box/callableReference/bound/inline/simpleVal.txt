@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /simpleVal.kt
+    FUN public inline fun go(f: () -> kotlin.String): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='go(() -> String): String'
+          CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+            $this: GET_VAR 'value-parameter f: () -> String' type=() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+    FUN public fun kotlin.String.id(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='id() on String: String'
+          $RECEIVER of 'id() on String: String' type=kotlin.String
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.String = "OK"
+          CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'go(() -> String): String' type=kotlin.String operator=null
+            f: CALLABLE_REFERENCE 'id() on String: String' type=kotlin.reflect.KFunction0<kotlin.String> operator=null

@@ -1,0 +1,26 @@
+MODULE <test-module>
+  FILE /exceptionOnNoMatch.kt
+    FUN public fun isZero(x: kotlin.Int): kotlin.Boolean
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='isZero(Int): Boolean'
+          BLOCK type=kotlin.Boolean operator=WHEN
+            VAR val tmp0_subject: kotlin.Int
+              GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+            WHEN type=kotlin.Boolean operator=WHEN
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Int' type=kotlin.Int operator=null
+                arg1: CONST Int type=kotlin.Int value='0'
+              then: CONST Boolean type=kotlin.Boolean value='true'
+              else: THROW type=kotlin.Nothing
+                CALL 'constructor Exception()' type=java.lang.Exception operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Boolean
+          try: BLOCK type=kotlin.Boolean operator=null
+            CALL 'isZero(Int): Boolean' type=kotlin.Boolean operator=null
+              x: CONST Int type=kotlin.Int value='1'
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='Fail'

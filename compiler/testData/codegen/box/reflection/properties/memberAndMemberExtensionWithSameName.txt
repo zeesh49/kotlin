@@ -1,0 +1,115 @@
+MODULE <test-module>
+  FILE /memberAndMemberExtensionWithSameName.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val foo: kotlin.String = "member"
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value='member'
+      PROPERTY public final val kotlin.Unit.foo: kotlin.String
+        PROPERTY_GETTER public final fun kotlin.Unit.<get-foo>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-foo>() on Unit: String'
+              CONST String type=kotlin.String value='extension'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'run(() -> Unit): Unit' type=kotlin.Unit operator=null
+          block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                VAR val foo: kotlin.reflect.KProperty1<A, *>
+                  CALL 'single() on Iterable<KProperty1<A, *>>: KProperty1<A, *>' type=kotlin.reflect.KProperty1<A, *> operator=null
+                    $receiver: CALL '<get-memberProperties>() on KClass<A>: Collection<KProperty1<A, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<A, *>> operator=GET_PROPERTY
+                      $receiver: CALL '<get-kotlin>() on Class<A>: KClass<A>' type=kotlin.reflect.KClass<A> operator=GET_PROPERTY
+                        $receiver: CALL '<get-java>() on KClass<A>: Class<A>' type=java.lang.Class<A> operator=GET_PROPERTY
+                          $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+                CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+                  value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                      $this: GET_VAR 'foo: KProperty1<A, *>' type=kotlin.reflect.KProperty1<A, *> operator=null
+                    arg1: CONST String type=kotlin.String value='foo'
+                  lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+                    FUN local final fun <anonymous>(): kotlin.String
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                          STRING_CONCATENATION type=kotlin.String
+                            CONST String type=kotlin.String value='Fail name: '
+                            GET_VAR 'foo: KProperty1<A, *>' type=kotlin.reflect.KProperty1<A, *> operator=null
+                            CONST String type=kotlin.String value=' ('
+                            CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                              $this: GET_VAR 'foo: KProperty1<A, *>' type=kotlin.reflect.KProperty1<A, *> operator=null
+                            CONST String type=kotlin.String value=')'
+                    CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+                    value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: CALL 'get(A): Any?' type=kotlin.Any? operator=null
+                        $this: GET_VAR 'foo: KProperty1<A, *>' type=kotlin.reflect.KProperty1<A, *> operator=null
+                        receiver: CALL 'constructor A()' type=A operator=null
+                      arg1: CONST String type=kotlin.String value='member'
+                    lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+                      FUN local final fun <anonymous>(): kotlin.String
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                            STRING_CONCATENATION type=kotlin.String
+                              CONST String type=kotlin.String value='Fail value: '
+                              CALL 'get(A): Any?' type=kotlin.Any? operator=null
+                                $this: GET_VAR 'foo: KProperty1<A, *>' type=kotlin.reflect.KProperty1<A, *> operator=null
+                                receiver: CALL 'constructor A()' type=A operator=null
+                      CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        CALL 'run(() -> Unit): Unit' type=kotlin.Unit operator=null
+          block: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.Unit
+              BLOCK_BODY
+                VAR val foo: kotlin.reflect.KProperty2<A, *, *>
+                  CALL 'single() on Iterable<KProperty2<A, *, *>>: KProperty2<A, *, *>' type=kotlin.reflect.KProperty2<A, *, *> operator=null
+                    $receiver: CALL '<get-memberExtensionProperties>() on KClass<A>: Collection<KProperty2<A, *, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty2<A, *, *>> operator=GET_PROPERTY
+                      $receiver: CALL '<get-kotlin>() on Class<A>: KClass<A>' type=kotlin.reflect.KClass<A> operator=GET_PROPERTY
+                        $receiver: CALL '<get-java>() on KClass<A>: Class<A>' type=java.lang.Class<A> operator=GET_PROPERTY
+                          $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+                CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+                  value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                      $this: GET_VAR 'foo: KProperty2<A, *, *>' type=kotlin.reflect.KProperty2<A, *, *> operator=null
+                    arg1: CONST String type=kotlin.String value='foo'
+                  lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+                    FUN local final fun <anonymous>(): kotlin.String
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                          STRING_CONCATENATION type=kotlin.String
+                            CONST String type=kotlin.String value='Fail name: '
+                            GET_VAR 'foo: KProperty2<A, *, *>' type=kotlin.reflect.KProperty2<A, *, *> operator=null
+                            CONST String type=kotlin.String value=' ('
+                            CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                              $this: GET_VAR 'foo: KProperty2<A, *, *>' type=kotlin.reflect.KProperty2<A, *, *> operator=null
+                            CONST String type=kotlin.String value=')'
+                    CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+                TYPE_OP operator=CAST typeOperand=kotlin.reflect.KProperty2<A, kotlin.Unit, *>
+                  GET_VAR 'foo: KProperty2<A, *, *>' type=kotlin.reflect.KProperty2<A, *, *> operator=null
+                RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                  CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+                    value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: CALL 'get(A, Unit): Any?' type=kotlin.Any? operator=null
+                        $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.reflect.KProperty2<A, kotlin.Unit, kotlin.Any?>
+                          GET_VAR 'foo: KProperty2<A, *, *>' type=kotlin.reflect.KProperty2<A, *, *> operator=null
+                        receiver1: CALL 'constructor A()' type=A operator=null
+                        receiver2: GET_OBJECT 'Unit' type=kotlin.Unit
+                      arg1: CONST String type=kotlin.String value='extension'
+                    lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+                      FUN local final fun <anonymous>(): kotlin.String
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                            STRING_CONCATENATION type=kotlin.String
+                              CONST String type=kotlin.String value='Fail value: '
+                              CALL 'get(A, Unit): Any?' type=kotlin.Any? operator=null
+                                $this: TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.reflect.KProperty2<A, kotlin.Unit, kotlin.Any?>
+                                  GET_VAR 'foo: KProperty2<A, *, *>' type=kotlin.reflect.KProperty2<A, *, *> operator=null
+                                receiver1: CALL 'constructor A()' type=A operator=null
+                                receiver2: GET_OBJECT 'Unit' type=kotlin.Unit
+                      CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+            CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

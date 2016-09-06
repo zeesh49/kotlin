@@ -1,0 +1,25 @@
+MODULE <test-module>
+  FILE /kt9924.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      FUN public abstract fun test(a: T, b: kotlin.Boolean = ...): kotlin.String
+        b: EXPRESSION_BODY
+          CONST Boolean type=kotlin.Boolean value='false'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      FUN public open override fun test(a: kotlin.String, b: kotlin.Boolean = ...): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='test(String, Boolean = ...): String'
+            GET_VAR 'value-parameter a: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'test(String, Boolean = ...): String' type=kotlin.String operator=null
+            $this: CALL 'constructor B()' type=B operator=null
+            a: CONST String type=kotlin.String value='OK'

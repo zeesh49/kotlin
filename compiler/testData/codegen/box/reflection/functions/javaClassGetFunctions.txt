@@ -1,0 +1,65 @@
+MODULE <test-module>
+  FILE /K.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(vararg String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='equals'
+              CONST String type=kotlin.String value='hashCode'
+              CONST String type=kotlin.String value='member'
+              CONST String type=kotlin.String value='staticMethod'
+              CONST String type=kotlin.String value='toString'
+          actual: CALL 'sorted() on Iterable<String>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            $receiver: CALL 'map((KCallable<*>) -> String) on Iterable<KCallable<*>>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              $receiver: CALL '<get-members>(): Collection<KCallable<*>>' type=kotlin.collections.Collection<kotlin.reflect.KCallable<*>> operator=GET_PROPERTY
+                $this: CLASS_REFERENCE 'J' type=kotlin.reflect.KClass<J>
+              transform: BLOCK type=(kotlin.reflect.KCallable<*>) -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KCallable<*>): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KCallable<*>): String'
+                      CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KCallable<*>' type=kotlin.reflect.KCallable<*> operator=null
+                CALLABLE_REFERENCE '<anonymous>(KCallable<*>): String' type=(kotlin.reflect.KCallable<*>) -> kotlin.String operator=LAMBDA
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(vararg String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='equals'
+              CONST String type=kotlin.String value='hashCode'
+              CONST String type=kotlin.String value='member'
+              CONST String type=kotlin.String value='staticMethod'
+              CONST String type=kotlin.String value='toString'
+          actual: CALL 'sorted() on Iterable<String>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            $receiver: CALL 'map((KFunction<*>) -> String) on Iterable<KFunction<*>>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              $receiver: CALL '<get-functions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'J' type=kotlin.reflect.KClass<J>
+              transform: BLOCK type=(kotlin.reflect.KFunction<*>) -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KFunction<*>): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KFunction<*>): String'
+                      CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+                CALLABLE_REFERENCE '<anonymous>(KFunction<*>): String' type=(kotlin.reflect.KFunction<*>) -> kotlin.String operator=LAMBDA
+        CALL 'assertEquals(List<String>, List<String>, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CALL 'listOf(vararg String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            elements: VARARG type=Array<out String> varargElementType=String
+              CONST String type=kotlin.String value='member'
+              CONST String type=kotlin.String value='staticMethod'
+          actual: CALL 'sorted() on Iterable<String>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            $receiver: CALL 'map((KFunction<*>) -> String) on Iterable<KFunction<*>>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              $receiver: CALL '<get-declaredFunctions>() on KClass<*>: Collection<KFunction<*>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<*>> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'J' type=kotlin.reflect.KClass<J>
+              transform: BLOCK type=(kotlin.reflect.KFunction<*>) -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KFunction<*>): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KFunction<*>): String'
+                      CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+                CALLABLE_REFERENCE '<anonymous>(KFunction<*>): String' type=(kotlin.reflect.KFunction<*>) -> kotlin.String operator=LAMBDA
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST Int type=kotlin.Int value='1'
+          actual: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: CALL '<get-constructors>(): Collection<KFunction<J>>' type=kotlin.collections.Collection<kotlin.reflect.KFunction<J>> operator=GET_PROPERTY
+              $this: CLASS_REFERENCE 'J' type=kotlin.reflect.KClass<J>
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

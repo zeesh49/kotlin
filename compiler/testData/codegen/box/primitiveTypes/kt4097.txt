@@ -1,0 +1,53 @@
+MODULE <test-module>
+  FILE /kt4097.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val shouldBeTrue: kotlin.Boolean
+          CALL 'contains(Long): Boolean' type=kotlin.Boolean operator=IN
+            $this: CALL 'rangeTo(Long): LongRange' type=kotlin.ranges.LongRange operator=RANGE
+              $this: CONST Long type=kotlin.Long value='123456789123456789'
+              other: CONST Long type=kotlin.Long value='987654321987654321'
+            value: CONST Long type=kotlin.Long value='555555555555555555'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: GET_VAR 'shouldBeTrue: Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 1'
+        VAR val shouldBeFalse: kotlin.Boolean
+          CALL 'contains(Long): Boolean' type=kotlin.Boolean operator=IN
+            $this: CALL 'rangeTo(Long): LongRange' type=kotlin.ranges.LongRange operator=RANGE
+              $this: CONST Long type=kotlin.Long value='6000000000'
+              other: CONST Long type=kotlin.Long value='9000000000'
+            value: CONST Long type=kotlin.Long value='5000000000'
+        WHEN type=kotlin.Unit operator=IF
+          if: GET_VAR 'shouldBeFalse: Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=NOT_IN
+            arg0: CALL 'contains(Long): Boolean' type=kotlin.Boolean operator=NOT_IN
+              $this: CALL 'rangeTo(Long): LongRange' type=kotlin.ranges.LongRange operator=RANGE
+                $this: CONST Long type=kotlin.Long value='100100100100'
+                other: CONST Long type=kotlin.Long value='200200200200'
+              value: CONST Long type=kotlin.Long value='123123123123'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail 3'
+        RETURN type=kotlin.Nothing from='box(): String'
+          BLOCK type=kotlin.String operator=WHEN
+            VAR val tmp0_subject: kotlin.Long
+              CONST Long type=kotlin.Long value='9876543210'
+            WHEN type=kotlin.String operator=WHEN
+              if: CALL 'contains(Long): Boolean' type=kotlin.Boolean operator=IN
+                $this: CALL 'rangeTo(Long): LongRange' type=kotlin.ranges.LongRange operator=RANGE
+                  $this: CONST Long type=kotlin.Long value='2000000000'
+                  other: CONST Long type=kotlin.Long value='3333333333'
+                value: GET_VAR 'tmp0_subject: Long' type=kotlin.Long operator=null
+              then: CONST String type=kotlin.String value='Fail 4'
+              if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCL
+                arg0: CALL 'contains(Long): Boolean' type=kotlin.Boolean operator=NOT_IN
+                  $this: CALL 'rangeTo(Long): LongRange' type=kotlin.ranges.LongRange operator=RANGE
+                    $this: CONST Long type=kotlin.Long value='8888888888'
+                    other: CONST Long type=kotlin.Long value='9999999999'
+                  value: GET_VAR 'tmp0_subject: Long' type=kotlin.Long operator=null
+              then: CONST String type=kotlin.String value='Fail 5'
+              else: CONST String type=kotlin.String value='OK'

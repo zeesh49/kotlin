@@ -1,0 +1,19 @@
+MODULE <test-module>
+  FILE /Kotlin.kt
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor First()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      FUN public final inline fun doTest(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='doTest(): String'
+            CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+              $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.String
+                GET_BACKING_FIELD 'TEST: String!' type=kotlin.String! operator=GET_PROPERTY
+              other: CALL 'test(): String!' type=kotlin.String! operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'doTest(): String' type=kotlin.String operator=null
+            $this: CALL 'constructor Test()' type=anotherPackage.Test operator=null

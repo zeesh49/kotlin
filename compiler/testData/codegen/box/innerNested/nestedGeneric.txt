@@ -1,0 +1,40 @@
+MODULE <test-module>
+  FILE /nestedGeneric.kt
+    CLASS CLASS Outer
+      CONSTRUCTOR public constructor Outer()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Outer'
+      CLASS CLASS Nested
+        CONSTRUCTOR public constructor Nested<T>(t: T)
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+            SET_BACKING_FIELD 't: T' type=kotlin.Unit operator=null
+              receiver: THIS of 'Nested' type=Outer.Nested<T>
+              value: GET_VAR 'value-parameter t: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+            INSTANCE_INITIALIZER_CALL classDescriptor='Nested'
+        PROPERTY public final val t: T
+          EXPRESSION_BODY
+            GET_VAR 'value-parameter t: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+        FUN public final fun box(): T
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='box(): T'
+              CALL '<get-t>(): T' type=T operator=GET_PROPERTY
+                $this: THIS of 'Nested' type=Outer.Nested<T>
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'box(): String' type=kotlin.String operator=null
+                $this: CALL 'constructor Nested(String)' type=Outer.Nested<kotlin.String> operator=null
+                  t: CONST String type=kotlin.String value='OK'
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail'
+        VAR val x: Outer.Nested<kotlin.String>
+          CALL 'constructor Nested(String)' type=Outer.Nested<kotlin.String> operator=null
+            t: CONST String type=kotlin.String value='OK'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL 'box(): String' type=kotlin.String operator=null
+            $this: GET_VAR 'x: Outer.Nested<String>' type=Outer.Nested<kotlin.String> operator=null

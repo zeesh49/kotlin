@@ -1,0 +1,18 @@
+MODULE <test-module>
+  FILE /kt1172.kt
+    FUN public fun scheduleRefresh(vararg files: java.lang.Object): kotlin.Unit
+      BLOCK_BODY
+        CALL 'constructor ArrayList((MutableCollection<out Object!>..Collection<Object!>?))' type=java.util.ArrayList<java.lang.Object> operator=null
+          p0: CALL 'map((Object) -> Object) on Array<out Object>: List<Object>' type=kotlin.collections.List<java.lang.Object> operator=null
+            $receiver: GET_VAR 'value-parameter vararg files: Object' type=kotlin.Array<out java.lang.Object> operator=null
+            transform: BLOCK type=(java.lang.Object) -> java.lang.Object operator=LAMBDA
+              FUN local final fun <anonymous>(it: java.lang.Object): java.lang.Object
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Object): Object'
+                    GET_VAR 'value-parameter it: Object' type=java.lang.Object operator=null
+              CALLABLE_REFERENCE '<anonymous>(Object): Object' type=(java.lang.Object) -> java.lang.Object operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'scheduleRefresh(vararg Object): Unit' type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,53 @@
+MODULE <test-module>
+  FILE /innerClassInLocalClass.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val a: kotlin.Int = 1
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='1'
+      FUN public final fun calc(): kotlin.Int
+        BLOCK_BODY
+          CLASS CLASS B
+            CONSTRUCTOR public constructor B()
+              BLOCK_BODY
+                DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                INSTANCE_INITIALIZER_CALL classDescriptor='B'
+            PROPERTY public final val b: kotlin.Int = 2
+              EXPRESSION_BODY
+                CONST Int type=kotlin.Int value='2'
+            CLASS CLASS C
+              CONSTRUCTOR public constructor C()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='C'
+              PROPERTY public final val c: kotlin.Int = 3
+                EXPRESSION_BODY
+                  CONST Int type=kotlin.Int value='3'
+              FUN public final fun calc(): kotlin.Int
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='calc(): Int'
+                    CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                      $this: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                        $this: CALL '<get-a>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                          $this: THIS of 'A' type=A
+                        other: CALL '<get-b>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                          $this: THIS of 'B' type=A.calc.B
+                      other: CALL '<get-c>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                        $this: THIS of 'C' type=A.calc.B.C
+          RETURN type=kotlin.Nothing from='calc(): Int'
+            CALL 'calc(): Int' type=kotlin.Int operator=null
+              $this: CALL 'constructor C()' type=A.calc.B.C operator=null
+                $this: CALL 'constructor B()' type=A.calc.B operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'calc(): Int' type=kotlin.Int operator=null
+                $this: CALL 'constructor A()' type=A operator=null
+              arg1: CONST Int type=kotlin.Int value='6'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

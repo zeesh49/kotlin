@@ -1,0 +1,121 @@
+MODULE <test-module>
+  FILE /lambdaParameters.kt
+    CLASS CLASS Controller
+      CONSTRUCTOR public constructor Controller()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Controller'
+      FUN public final suspend fun suspendHere(v: kotlin.String, x: kotlin.coroutines.Continuation<kotlin.String>): kotlin.Unit
+        BLOCK_BODY
+          CALL 'resume(String): Unit' type=kotlin.Unit operator=null
+            $this: GET_VAR 'value-parameter x: Continuation<String>' type=kotlin.coroutines.Continuation<kotlin.String> operator=null
+            data: GET_VAR 'value-parameter v: String' type=kotlin.String operator=null
+    FUN public fun builder(coroutine c: Controller.(kotlin.Long, kotlin.String) -> kotlin.coroutines.Continuation<kotlin.Unit>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'resume(Unit): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'invoke(Controller, Long, String): Continuation<Unit>' type=kotlin.coroutines.Continuation<kotlin.Unit> operator=INVOKE
+            $this: GET_VAR 'value-parameter coroutine c: Controller.(Long, String) -> Continuation<Unit>' type=Controller.(kotlin.Long, kotlin.String) -> kotlin.coroutines.Continuation<kotlin.Unit> operator=VARIABLE_AS_FUNCTION
+            p1: CALL 'constructor Controller()' type=Controller operator=null
+            p2: CONST Long type=kotlin.Long value='56'
+            p3: CONST String type=kotlin.String value='OK'
+          data: GET_OBJECT 'Unit' type=kotlin.Unit
+    FUN public fun noinline(l: () -> kotlin.String): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='noinline(() -> String): String'
+          CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+            $this: GET_VAR 'value-parameter l: () -> String' type=() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+    FUN public inline fun inline(l: () -> kotlin.String): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='inline(() -> String): String'
+          CALL 'invoke(): String' type=kotlin.String operator=INVOKE
+            $this: GET_VAR 'value-parameter l: () -> String' type=() -> kotlin.String operator=VARIABLE_AS_FUNCTION
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var result: kotlin.String
+          CONST String type=kotlin.String value=''
+        CALL 'builder(coroutine Controller.(Long, String) -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.(kotlin.Long, kotlin.String) -> kotlin.coroutines.Continuation<kotlin.Unit>
+            BLOCK type=Controller.(kotlin.Long, kotlin.String) -> kotlin.Unit operator=LAMBDA
+              FUN local final fun Controller.<anonymous>(l: kotlin.Long, s: kotlin.String): kotlin.Unit
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Long, String) on Controller: Unit'
+                    SET_VAR 'result: String' type=kotlin.Unit operator=EQ
+                      CALL 'suspendHere(String): String' type=kotlin.String operator=null
+                        $this: $RECEIVER of '<anonymous>(Long, String) on Controller: Unit' type=Controller
+                        v: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                          $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                            $this: GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+                            other: CONST String type=kotlin.String value='#'
+                          other: GET_VAR 'value-parameter l: Long' type=kotlin.Long operator=null
+              CALLABLE_REFERENCE '<anonymous>(Long, String) on Controller: Unit' type=Controller.(kotlin.Long, kotlin.String) -> kotlin.Unit operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='OK#56'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 1: '
+              GET_VAR 'result: String' type=kotlin.String operator=null
+        CALL 'builder(coroutine Controller.(Long, String) -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.(kotlin.Long, kotlin.String) -> kotlin.coroutines.Continuation<kotlin.Unit>
+            BLOCK type=Controller.(kotlin.Long, kotlin.String) -> kotlin.Unit operator=LAMBDA
+              FUN local final fun Controller.<anonymous>(l: kotlin.Long, s: kotlin.String): kotlin.Unit
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Long, String) on Controller: Unit'
+                    SET_VAR 'result: String' type=kotlin.Unit operator=EQ
+                      CALL 'suspendHere(String): String' type=kotlin.String operator=null
+                        $this: $RECEIVER of '<anonymous>(Long, String) on Controller: Unit' type=Controller
+                        v: CALL 'noinline(() -> String): String' type=kotlin.String operator=null
+                          l: BLOCK type=() -> kotlin.String operator=LAMBDA
+                            FUN local final fun <anonymous>(): kotlin.String
+                              BLOCK_BODY
+                                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                                    $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                                      $this: GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+                                      other: CONST String type=kotlin.String value='#'
+                                    other: GET_VAR 'value-parameter l: Long' type=kotlin.Long operator=null
+                            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+              CALLABLE_REFERENCE '<anonymous>(Long, String) on Controller: Unit' type=Controller.(kotlin.Long, kotlin.String) -> kotlin.Unit operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='OK#56'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 2: '
+              GET_VAR 'result: String' type=kotlin.String operator=null
+        CALL 'builder(coroutine Controller.(Long, String) -> Continuation<Unit>): Unit' type=kotlin.Unit operator=null
+          c: TYPE_OP operator=IMPLICIT_CAST typeOperand=Controller.(kotlin.Long, kotlin.String) -> kotlin.coroutines.Continuation<kotlin.Unit>
+            BLOCK type=Controller.(kotlin.Long, kotlin.String) -> kotlin.Unit operator=LAMBDA
+              FUN local final fun Controller.<anonymous>(l: kotlin.Long, s: kotlin.String): kotlin.Unit
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Long, String) on Controller: Unit'
+                    SET_VAR 'result: String' type=kotlin.Unit operator=EQ
+                      CALL 'suspendHere(String): String' type=kotlin.String operator=null
+                        $this: $RECEIVER of '<anonymous>(Long, String) on Controller: Unit' type=Controller
+                        v: CALL 'inline(() -> String): String' type=kotlin.String operator=null
+                          l: BLOCK type=() -> kotlin.String operator=LAMBDA
+                            FUN local final fun <anonymous>(): kotlin.String
+                              BLOCK_BODY
+                                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                                  CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                                    $this: CALL 'plus(Any?): String' type=kotlin.String operator=PLUS
+                                      $this: GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+                                      other: CONST String type=kotlin.String value='#'
+                                    other: GET_VAR 'value-parameter l: Long' type=kotlin.Long operator=null
+                            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+              CALLABLE_REFERENCE '<anonymous>(Long, String) on Controller: Unit' type=Controller.(kotlin.Long, kotlin.String) -> kotlin.Unit operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'result: String' type=kotlin.String operator=null
+              arg1: CONST String type=kotlin.String value='OK#56'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='fail 3: '
+              GET_VAR 'result: String' type=kotlin.String operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

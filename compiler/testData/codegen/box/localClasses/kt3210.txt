@@ -1,0 +1,50 @@
+MODULE <test-module>
+  FILE /kt3210.kt
+    CLASS INTERFACE SomeTrait
+    CLASS INTERFACE KotlinProcessor
+      FUN public abstract fun execute(callback: org.example.KotlinCallback<T>?): kotlin.Unit
+    CLASS INTERFACE KotlinCallback
+      FUN public abstract fun on(t: T): kotlin.Unit
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test(name: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      FUN public open override fun execute(callback: org.example.KotlinCallback<org.example.SomeTrait>?): kotlin.Unit
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+                arg0: GET_VAR 'value-parameter callback: KotlinCallback<SomeTrait>?' type=org.example.KotlinCallback<org.example.SomeTrait>? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: BLOCK type=kotlin.Unit operator=null
+              CLASS CLASS InlineTrait
+                CONSTRUCTOR public constructor InlineTrait()
+                  BLOCK_BODY
+                    DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                    INSTANCE_INITIALIZER_CALL classDescriptor='InlineTrait'
+              VAR var inlineTrait: org.example.Test.execute.InlineTrait
+                CALL 'constructor InlineTrait()' type=org.example.Test.execute.InlineTrait operator=null
+              CALL 'on(SomeTrait): Unit' type=kotlin.Unit operator=null
+                $this: GET_VAR 'value-parameter callback: KotlinCallback<SomeTrait>?' type=org.example.KotlinCallback<org.example.SomeTrait>? operator=null
+                t: GET_VAR 'inlineTrait: InlineTrait' type=org.example.Test.execute.InlineTrait operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var f: kotlin.String
+          CONST String type=kotlin.String value='fail'
+        CALL 'execute(KotlinCallback<SomeTrait>?): Unit' type=kotlin.Unit operator=null
+          $this: CALL 'constructor Test(String)' type=org.example.Test operator=null
+            name: CONST String type=kotlin.String value='OK'
+          callback: BLOCK type=org.example.box.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              FUN public open override fun on(t: org.example.SomeTrait): kotlin.Unit
+                BLOCK_BODY
+                  SET_VAR 'f: String' type=kotlin.Unit operator=EQ
+                    CONST String type=kotlin.String value='OK'
+            CALL 'constructor <no name provided>()' type=org.example.box.<no name provided> operator=OBJECT_LITERAL
+        RETURN type=kotlin.Nothing from='box(): String'
+          GET_VAR 'f: String' type=kotlin.String operator=null

@@ -1,0 +1,34 @@
+MODULE <test-module>
+  FILE /kt12982_protectedPropertyReference.kt
+    CLASS CLASS Foo
+      CONSTRUCTOR public constructor Foo()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Foo'
+      PROPERTY protected final var x: kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+      FUN public final fun getX(): kotlin.reflect.KMutableProperty1<Foo, kotlin.Int>
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='getX(): KMutableProperty1<Foo, Int>'
+            CALLABLE_REFERENCE 'x: Int' type=kotlin.reflect.KMutableProperty1<Foo, kotlin.Int> operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x: kotlin.reflect.KMutableProperty1<Foo, kotlin.Int>
+          CALL 'getX(): KMutableProperty1<Foo, Int>' type=kotlin.reflect.KMutableProperty1<Foo, kotlin.Int> operator=null
+            $this: CALL 'constructor Foo()' type=Foo operator=null
+        VAR val foo: Foo
+          CALL 'constructor Foo()' type=Foo operator=null
+        CALL 'set(Foo, Int): Unit' type=kotlin.Unit operator=null
+          $this: GET_VAR 'x: KMutableProperty1<Foo, Int>' type=kotlin.reflect.KMutableProperty1<Foo, kotlin.Int> operator=null
+          receiver: GET_VAR 'foo: Foo' type=Foo operator=null
+          value: CONST Int type=kotlin.Int value='42'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'get(Foo): Int' type=kotlin.Int operator=null
+                $this: GET_VAR 'x: KMutableProperty1<Foo, Int>' type=kotlin.reflect.KMutableProperty1<Foo, kotlin.Int> operator=null
+                receiver: GET_VAR 'foo: Foo' type=Foo operator=null
+              arg1: CONST Int type=kotlin.Int value='42'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='Fail'

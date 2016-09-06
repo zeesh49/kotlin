@@ -1,0 +1,88 @@
+MODULE <test-module>
+  FILE /simpleGetProperties.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A(param: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public final val int: kotlin.Int
+        PROPERTY_GETTER public final fun <get-int>(): kotlin.Int
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-int>(): Int'
+              CONST Int type=kotlin.Int value='42'
+      PROPERTY public final val string: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter param: String' type=kotlin.String operator=null
+      PROPERTY public final var anyVar: kotlin.Any?
+        EXPRESSION_BODY
+          CONST Null type=kotlin.Nothing? value='null'
+      PROPERTY public final val kotlin.collections.List<kotlin.ranges.IntRange>.extensionToList: kotlin.Unit
+        PROPERTY_GETTER public final fun kotlin.collections.List<kotlin.ranges.IntRange>.<get-extensionToList>(): kotlin.Unit
+          BLOCK_BODY
+      FUN public final fun notAProperty(): kotlin.Unit
+        BLOCK_BODY
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val klass: kotlin.reflect.KClass<A>
+          CALL '<get-kotlin>() on Class<A>: KClass<A>' type=kotlin.reflect.KClass<A> operator=GET_PROPERTY
+            $receiver: CALL '<get-java>() on KClass<A>: Class<A>' type=java.lang.Class<A> operator=GET_PROPERTY
+              $receiver: CLASS_REFERENCE 'A' type=kotlin.reflect.KClass<A>
+        VAR val props: kotlin.collections.Collection<kotlin.reflect.KProperty1<A, *>>
+          CALL '<get-memberProperties>() on KClass<A>: Collection<KProperty1<A, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<A, *>> operator=GET_PROPERTY
+            $receiver: GET_VAR 'klass: KClass<A>' type=kotlin.reflect.KClass<A> operator=null
+        VAR val names: kotlin.collections.List<kotlin.String>
+          CALL 'sorted() on Iterable<String>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            $receiver: CALL 'map((KProperty1<A, *>) -> String) on Iterable<KProperty1<A, *>>: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              $receiver: GET_VAR 'props: Collection<KProperty1<A, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<A, *>> operator=null
+              transform: BLOCK type=(kotlin.reflect.KProperty1<A, *>) -> kotlin.String operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KProperty1<A, *>): kotlin.String
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KProperty1<A, *>): String'
+                      CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                        $this: GET_VAR 'value-parameter it: KProperty1<A, *>' type=kotlin.reflect.KProperty1<A, *> operator=null
+                CALLABLE_REFERENCE '<anonymous>(KProperty1<A, *>): String' type=(kotlin.reflect.KProperty1<A, *>) -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'names: List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+            arg1: CALL 'listOf(vararg String): List<String>' type=kotlin.collections.List<kotlin.String> operator=null
+              elements: VARARG type=Array<out String> varargElementType=String
+                CONST String type=kotlin.String value='anyVar'
+                CONST String type=kotlin.String value='int'
+                CONST String type=kotlin.String value='string'
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  STRING_CONCATENATION type=kotlin.String
+                    CONST String type=kotlin.String value='Fail names: '
+                    GET_VAR 'props: Collection<KProperty1<A, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<A, *>> operator=null
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        VAR val stringProp: kotlin.reflect.KProperty1<A, *>
+          BLOCK type=kotlin.reflect.KProperty1<A, *> operator=ELVIS
+            VAR val tmp0_elvis_lhs: kotlin.reflect.KProperty1<A, *>?
+              CALL 'firstOrNull((KProperty1<A, *>) -> Boolean) on Iterable<KProperty1<A, *>>: KProperty1<A, *>?' type=kotlin.reflect.KProperty1<A, *>? operator=null
+                $receiver: GET_VAR 'props: Collection<KProperty1<A, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<A, *>> operator=null
+                predicate: BLOCK type=(kotlin.reflect.KProperty1<A, *>) -> kotlin.Boolean operator=LAMBDA
+                  FUN local final fun <anonymous>(it: kotlin.reflect.KProperty1<A, *>): kotlin.Boolean
+                    BLOCK_BODY
+                      RETURN type=kotlin.Nothing from='<anonymous>(KProperty1<A, *>): Boolean'
+                        CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                          arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                            $this: GET_VAR 'value-parameter it: KProperty1<A, *>' type=kotlin.reflect.KProperty1<A, *> operator=null
+                          arg1: CONST String type=kotlin.String value='string'
+                  CALLABLE_REFERENCE '<anonymous>(KProperty1<A, *>): Boolean' type=(kotlin.reflect.KProperty1<A, *>) -> kotlin.Boolean operator=LAMBDA
+            WHEN type=kotlin.reflect.KProperty1<A, *> operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_elvis_lhs: KProperty1<A, *>?' type=kotlin.reflect.KProperty1<A, *>? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: RETURN type=kotlin.Nothing from='box(): String'
+                STRING_CONCATENATION type=kotlin.String
+                  CONST String type=kotlin.String value='Fail, string not found: '
+                  GET_VAR 'props: Collection<KProperty1<A, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<A, *>> operator=null
+              else: GET_VAR 'tmp0_elvis_lhs: KProperty1<A, *>?' type=kotlin.reflect.KProperty1<A, *>? operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          TYPE_OP operator=CAST typeOperand=kotlin.String
+            CALL 'get(A): Any?' type=kotlin.Any? operator=null
+              $this: GET_VAR 'stringProp: KProperty1<A, *>' type=kotlin.reflect.KProperty1<A, *> operator=null
+              receiver: CALL 'constructor A(String)' type=A operator=null
+                param: CONST String type=kotlin.String value='OK'

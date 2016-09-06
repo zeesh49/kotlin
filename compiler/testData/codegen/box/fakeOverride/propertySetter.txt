@@ -1,0 +1,36 @@
+MODULE <test-module>
+  FILE /propertySetter.kt
+    CLASS INTERFACE T
+      PROPERTY public abstract var result: kotlin.String
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public open override var result: kotlin.String
+        PROPERTY_GETTER public open override fun <get-result>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-result>(): String'
+              CONST String type=kotlin.String value=''
+        PROPERTY_SETTER public open override fun <set-result>(value: kotlin.String): kotlin.Unit
+          BLOCK_BODY
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    CLASS CLASS C
+      CONSTRUCTOR public constructor C()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor A()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='C'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+          $this: CALL 'constructor B()' type=B operator=null
+          value: CONST String type=kotlin.String value=''
+        CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+          $this: CALL 'constructor C()' type=C operator=null
+          <set-?>: CONST String type=kotlin.String value=''
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

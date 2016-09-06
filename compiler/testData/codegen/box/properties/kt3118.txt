@@ -1,0 +1,27 @@
+MODULE <test-module>
+  FILE /kt3118.kt
+    CLASS CLASS Test
+      CONSTRUCTOR public constructor Test()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Test'
+      PROPERTY private final val hello: kotlin.String
+        PROPERTY_GETTER private final fun <get-hello>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-hello>(): String'
+              CONST String type=kotlin.String value='hello'
+      FUN public final fun sayHello(): kotlin.String
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='sayHello(): String'
+            CALL '<get-hello>(): String' type=kotlin.String operator=GET_PROPERTY
+              $this: THIS of 'Test' type=testing.Test
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'sayHello(): String' type=kotlin.String operator=null
+                $this: CALL 'constructor Test()' type=testing.Test operator=null
+              arg1: CONST String type=kotlin.String value='hello'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

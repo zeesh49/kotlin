@@ -1,0 +1,70 @@
+MODULE <test-module>
+  FILE /exhaustiveBreakContinue.kt
+    CLASS ENUM_CLASS Color
+      CONSTRUCTOR private constructor Color()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='Color'
+      ENUM_ENTRY enum entry RED
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Color()' RED
+      ENUM_ENTRY enum entry GREEN
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Color()' GREEN
+      ENUM_ENTRY enum entry BLUE
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Color()' BLUE
+      FUN public final fun values(): kotlin.Array<Color>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): Color
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun foo(arr: kotlin.Array<Color>): Color
+      BLOCK_BODY
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.Iterator<Color>
+            CALL 'iterator(): Iterator<Color>' type=kotlin.collections.Iterator<Color> operator=FOR_LOOP_ITERATOR
+              $this: GET_VAR 'value-parameter arr: Array<Color>' type=kotlin.Array<Color> operator=null
+          WHILE label=loop operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: Iterator<Color>' type=kotlin.collections.Iterator<Color> operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val color: Color
+                CALL 'next(): Color' type=Color operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: Iterator<Color>' type=kotlin.collections.Iterator<Color> operator=null
+              BLOCK type=kotlin.Nothing operator=null
+                BLOCK type=kotlin.Nothing operator=WHEN
+                  VAR val tmp1_subject: Color
+                    GET_VAR 'color: Color' type=Color operator=null
+                  WHEN type=kotlin.Nothing operator=WHEN
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp1_subject: Color' type=Color operator=null
+                      arg1: GET_ENUM_VALUE 'RED' type=Color
+                    then: RETURN type=kotlin.Nothing from='foo(Array<Color>): Color'
+                      GET_VAR 'color: Color' type=Color operator=null
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp1_subject: Color' type=Color operator=null
+                      arg1: GET_ENUM_VALUE 'GREEN' type=Color
+                    then: BREAK label=loop loop.label=loop depth=0
+                    if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                      arg0: GET_VAR 'tmp1_subject: Color' type=Color operator=null
+                      arg1: GET_ENUM_VALUE 'BLUE' type=Color
+                    then: WHEN type=kotlin.Nothing operator=IF
+                      if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: CALL '<get-size>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                          $this: GET_VAR 'value-parameter arr: Array<Color>' type=kotlin.Array<Color> operator=null
+                        arg1: CONST Int type=kotlin.Int value='1'
+                      then: RETURN type=kotlin.Nothing from='foo(Array<Color>): Color'
+                        GET_VAR 'color: Color' type=Color operator=null
+                      else: CONTINUE label=loop loop.label=loop depth=0
+        RETURN type=kotlin.Nothing from='foo(Array<Color>): Color'
+          GET_ENUM_VALUE 'GREEN' type=Color
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: CALL 'foo(Array<Color>): Color' type=Color operator=null
+                arr: CALL 'arrayOf(vararg Color): Array<Color>' type=kotlin.Array<Color> operator=null
+                  elements: VARARG type=Array<out Color> varargElementType=Color
+                    GET_ENUM_VALUE 'BLUE' type=Color
+                    GET_ENUM_VALUE 'GREEN' type=Color
+              arg1: GET_ENUM_VALUE 'GREEN' type=Color
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='FAIL'

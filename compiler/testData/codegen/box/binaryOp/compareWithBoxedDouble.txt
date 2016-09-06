@@ -1,0 +1,17 @@
+MODULE <test-module>
+  FILE /test.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val j: Holder
+          CALL 'constructor Holder(Double!)' type=Holder operator=null
+            value: CONST Double type=kotlin.Double value='0.99'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'GT0(Int): Boolean' type=kotlin.Boolean operator=GT
+              arg0: CALL 'compareTo(Int): Int' type=kotlin.Int operator=GT
+                $this: TYPE_OP operator=IMPLICIT_NOTNULL typeOperand=kotlin.Double
+                  GET_BACKING_FIELD 'value: Double!' type=kotlin.Double! operator=GET_PROPERTY
+                    receiver: GET_VAR 'j: Holder' type=Holder operator=null
+                other: CONST Int type=kotlin.Int value='0'
+            then: CONST String type=kotlin.String value='OK'
+            else: CONST String type=kotlin.String value='fail'

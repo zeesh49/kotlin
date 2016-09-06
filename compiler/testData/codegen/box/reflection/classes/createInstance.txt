@@ -1,0 +1,182 @@
+MODULE <test-module>
+  FILE /createInstance.kt
+    CLASS CLASS Simple
+      CONSTRUCTOR public constructor Simple()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Simple'
+    CLASS CLASS PrimaryWithDefaults
+      CONSTRUCTOR public constructor PrimaryWithDefaults(d1: kotlin.String = ..., d2: kotlin.Int = ...)
+        d1: EXPRESSION_BODY
+          CONST String type=kotlin.String value='d1'
+        d2: EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='2'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'd1: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'PrimaryWithDefaults' type=PrimaryWithDefaults
+            value: GET_VAR 'value-parameter d1: String = ...' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          SET_BACKING_FIELD 'd2: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'PrimaryWithDefaults' type=PrimaryWithDefaults
+            value: GET_VAR 'value-parameter d2: Int = ...' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='PrimaryWithDefaults'
+      PROPERTY public final val d1: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter d1: String = ...' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      PROPERTY public final val d2: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter d2: Int = ...' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    CLASS CLASS Secondary
+      CONSTRUCTOR public constructor Secondary(s: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 's: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'Secondary' type=Secondary
+            value: GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='Secondary'
+      PROPERTY public final val s: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CONSTRUCTOR public constructor Secondary()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Secondary(String)'
+            s: CONST String type=kotlin.String value='s'
+    CLASS CLASS SecondaryWithDefaults
+      CONSTRUCTOR public constructor SecondaryWithDefaults(s: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 's: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'SecondaryWithDefaults' type=SecondaryWithDefaults
+            value: GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='SecondaryWithDefaults'
+      PROPERTY public final val s: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CONSTRUCTOR public constructor SecondaryWithDefaults(x: kotlin.Int = ...)
+        x: EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor SecondaryWithDefaults(String)'
+            s: CALL 'toString(): String' type=kotlin.String operator=null
+              $this: GET_VAR 'value-parameter x: Int = ...' type=kotlin.Int operator=null
+    CLASS CLASS SecondaryWithDefaultsNoPrimary
+      CONSTRUCTOR public constructor SecondaryWithDefaultsNoPrimary(x: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SecondaryWithDefaultsNoPrimary'
+      CONSTRUCTOR public constructor SecondaryWithDefaultsNoPrimary(s: kotlin.String = ...)
+        s: EXPRESSION_BODY
+          CONST String type=kotlin.String value=''
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SecondaryWithDefaultsNoPrimary'
+    CLASS CLASS NoNoArgConstructor
+      CONSTRUCTOR public constructor NoNoArgConstructor(s: kotlin.String)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 's: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'NoNoArgConstructor' type=NoNoArgConstructor
+            value: GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='NoNoArgConstructor'
+      PROPERTY public final val s: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s: String' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CONSTRUCTOR public constructor NoNoArgConstructor(x: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor NoNoArgConstructor(String)'
+            s: CALL 'toString(): String' type=kotlin.String operator=null
+              $this: GET_VAR 'value-parameter x: Int' type=kotlin.Int operator=null
+    CLASS CLASS NoArgAndDefault
+      CONSTRUCTOR public constructor NoArgAndDefault()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='NoArgAndDefault'
+      CONSTRUCTOR public constructor NoArgAndDefault(x: kotlin.Int = ...)
+        x: EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor NoArgAndDefault()'
+    CLASS CLASS DefaultPrimaryAndDefaultSecondary
+      CONSTRUCTOR public constructor DefaultPrimaryAndDefaultSecondary(s: kotlin.String = ...)
+        s: EXPRESSION_BODY
+          CONST String type=kotlin.String value=''
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 's: String' type=kotlin.Unit operator=null
+            receiver: THIS of 'DefaultPrimaryAndDefaultSecondary' type=DefaultPrimaryAndDefaultSecondary
+            value: GET_VAR 'value-parameter s: String = ...' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='DefaultPrimaryAndDefaultSecondary'
+      PROPERTY public final val s: kotlin.String
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter s: String = ...' type=kotlin.String operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      CONSTRUCTOR public constructor DefaultPrimaryAndDefaultSecondary(x: kotlin.Int = ...)
+        x: EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor DefaultPrimaryAndDefaultSecondary(String = ...)'
+            s: CALL 'toString(): String' type=kotlin.String operator=null
+              $this: GET_VAR 'value-parameter x: Int = ...' type=kotlin.Int operator=null
+    CLASS CLASS SeveralDefaultSecondaries
+      CONSTRUCTOR public constructor SeveralDefaultSecondaries(x: kotlin.Int = ...)
+        x: EXPRESSION_BODY
+          CONST Int type=kotlin.Int value='0'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SeveralDefaultSecondaries'
+      CONSTRUCTOR public constructor SeveralDefaultSecondaries(s: kotlin.String = ...)
+        s: EXPRESSION_BODY
+          CONST String type=kotlin.String value=''
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SeveralDefaultSecondaries'
+      CONSTRUCTOR public constructor SeveralDefaultSecondaries(d: kotlin.Double = ...)
+        d: EXPRESSION_BODY
+          CONST Double type=kotlin.Double value='3.14'
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='SeveralDefaultSecondaries'
+    CLASS CLASS PrivateConstructor
+      CONSTRUCTOR private constructor PrivateConstructor()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='PrivateConstructor'
+    CLASS OBJECT Object
+      CONSTRUCTOR private constructor Object()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='Object'
+    FUN public inline fun <reified T : kotlin.Any> test(): kotlin.Unit
+      BLOCK_BODY
+        VAR val instance: T
+          CALL 'createInstance() on KClass<T>: T' type=T operator=null
+            $receiver: CLASS_REFERENCE '<reified T : Any>' type=kotlin.reflect.KClass<T>
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: TYPE_OP operator=INSTANCEOF typeOperand=T
+            GET_VAR 'instance: T' type=T operator=null
+    FUN public inline fun <reified T : kotlin.Any> testFail(): kotlin.Unit
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'createInstance() on KClass<T>: T' type=T operator=null
+              $receiver: CLASS_REFERENCE '<reified T : Any>' type=kotlin.reflect.KClass<T>
+            CALL 'fail(String? = ...): Nothing' type=kotlin.Nothing operator=null
+              message: STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value='createInstance should have failed on '
+                CLASS_REFERENCE '<reified T : Any>' type=kotlin.reflect.KClass<T>
+          catch e: BLOCK type=kotlin.Unit operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'test(): Unit' type=kotlin.Unit operator=null
+        CALL 'test(): Unit' type=kotlin.Unit operator=null
+        CALL 'test(): Unit' type=kotlin.Unit operator=null
+        CALL 'test(): Unit' type=kotlin.Unit operator=null
+        CALL 'test(): Unit' type=kotlin.Unit operator=null
+        CALL 'test(): Unit' type=kotlin.Unit operator=null
+        CALL 'testFail(): Unit' type=kotlin.Unit operator=null
+        CALL 'testFail(): Unit' type=kotlin.Unit operator=null
+        CALL 'testFail(): Unit' type=kotlin.Unit operator=null
+        CALL 'testFail(): Unit' type=kotlin.Unit operator=null
+        CALL 'testFail(): Unit' type=kotlin.Unit operator=null
+        CALL 'testFail(): Unit' type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

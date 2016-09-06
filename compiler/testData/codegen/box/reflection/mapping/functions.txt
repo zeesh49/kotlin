@@ -1,0 +1,101 @@
+MODULE <test-module>
+  FILE /functions.kt
+    CLASS CLASS K
+      CONSTRUCTOR public constructor K()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='K'
+      FUN public final fun foo(s: kotlin.String): kotlin.Int
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='foo(String): Int'
+            CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+              $this: GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+    FUN public fun bar(s: kotlin.String): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='bar(String): Int'
+          CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: GET_VAR 'value-parameter s: String' type=kotlin.String operator=null
+    FUN public fun kotlin.String.baz(): kotlin.Int
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='baz() on String: Int'
+          CALL '<get-length>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: $RECEIVER of 'baz() on String: Int' type=kotlin.String
+    FUN public fun check(f: kotlin.reflect.KFunction<kotlin.Int>): kotlin.Unit
+      BLOCK_BODY
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL '<get-javaConstructor>() on KFunction<Int>: Constructor<Int>?' type=java.lang.reflect.Constructor<kotlin.Int>? operator=GET_PROPERTY
+              $receiver: GET_VAR 'value-parameter f: KFunction<Int>' type=kotlin.reflect.KFunction<kotlin.Int> operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Fail f constructor'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-javaMethod>() on KFunction<*>: Method?' type=java.lang.reflect.Method? operator=GET_PROPERTY
+                $receiver: GET_VAR 'value-parameter f: KFunction<Int>' type=kotlin.reflect.KFunction<kotlin.Int> operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Fail f method'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        VAR val m: java.lang.reflect.Method
+          BLOCK type=java.lang.reflect.Method operator=EXCLEXCL
+            VAR val tmp0_notnull: java.lang.reflect.Method?
+              CALL '<get-javaMethod>() on KFunction<*>: Method?' type=java.lang.reflect.Method? operator=GET_PROPERTY
+                $receiver: GET_VAR 'value-parameter f: KFunction<Int>' type=kotlin.reflect.KFunction<kotlin.Int> operator=null
+            WHEN type=java.lang.reflect.Method operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_notnull: Method?' type=java.lang.reflect.Method? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp0_notnull: Method?' type=java.lang.reflect.Method? operator=null
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-kotlinFunction>() on Method: KFunction<*>?' type=kotlin.reflect.KFunction<*>? operator=GET_PROPERTY
+                $receiver: GET_VAR 'm: Method' type=java.lang.reflect.Method operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Fail m function'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+        VAR val ff: kotlin.reflect.KFunction<*>
+          BLOCK type=kotlin.reflect.KFunction<*> operator=EXCLEXCL
+            VAR val tmp1_notnull: kotlin.reflect.KFunction<*>?
+              CALL '<get-kotlinFunction>() on Method: KFunction<*>?' type=kotlin.reflect.KFunction<*>? operator=GET_PROPERTY
+                $receiver: GET_VAR 'm: Method' type=java.lang.reflect.Method operator=null
+            WHEN type=kotlin.reflect.KFunction<*> operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp1_notnull: KFunction<*>?' type=kotlin.reflect.KFunction<*>? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+              else: GET_VAR 'tmp1_notnull: KFunction<*>?' type=kotlin.reflect.KFunction<*>? operator=null
+        CALL 'assert(Boolean, () -> Any): Unit' type=kotlin.Unit operator=null
+          value: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: GET_VAR 'value-parameter f: KFunction<Int>' type=kotlin.reflect.KFunction<kotlin.Int> operator=null
+            arg1: GET_VAR 'ff: KFunction<*>' type=kotlin.reflect.KFunction<*> operator=null
+          lazyMessage: BLOCK type=() -> kotlin.String operator=LAMBDA
+            FUN local final fun <anonymous>(): kotlin.String
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='<anonymous>(): String'
+                  CONST String type=kotlin.String value='Fail f != ff'
+            CALLABLE_REFERENCE '<anonymous>(): String' type=() -> kotlin.String operator=LAMBDA
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'check(KFunction<Int>): Unit' type=kotlin.Unit operator=null
+          f: CALLABLE_REFERENCE 'foo(String): Int' type=kotlin.reflect.KFunction2<K, kotlin.String, kotlin.Int> operator=null
+        CALL 'check(KFunction<Int>): Unit' type=kotlin.Unit operator=null
+          f: CALLABLE_REFERENCE 'bar(String): Int' type=kotlin.reflect.KFunction1<kotlin.String, kotlin.Int> operator=null
+        CALL 'check(KFunction<Int>): Unit' type=kotlin.Unit operator=null
+          f: CALLABLE_REFERENCE 'baz() on String: Int' type=kotlin.reflect.KFunction1<kotlin.String, kotlin.Int> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

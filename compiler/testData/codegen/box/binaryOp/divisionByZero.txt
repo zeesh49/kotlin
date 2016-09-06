@@ -1,0 +1,62 @@
+MODULE <test-module>
+  FILE /divisionByZero.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a1: kotlin.Int = 0
+          CONST Int type=kotlin.Int value='0'
+        VAR val a2: kotlin.Int
+          TRY_CATCH type=kotlin.Int
+            try: BLOCK type=kotlin.Int operator=null
+              CALL 'div(Int): Int' type=kotlin.Int operator=DIV
+                $this: CONST Int type=kotlin.Int value='1'
+                other: CONST Int type=kotlin.Int value='0'
+            catch e: BLOCK type=kotlin.Int operator=null
+              CONST Int type=kotlin.Int value='0'
+        VAR val a3: kotlin.Int
+          TRY_CATCH type=kotlin.Int
+            try: BLOCK type=kotlin.Int operator=null
+              CALL 'div(Int): Int' type=kotlin.Int operator=DIV
+                $this: CONST Int type=kotlin.Int value='1'
+                other: GET_VAR 'a1: Int' type=kotlin.Int operator=null
+            catch e: BLOCK type=kotlin.Int operator=null
+              CONST Int type=kotlin.Int value='0'
+        VAR val a4: kotlin.Int
+          TRY_CATCH type=kotlin.Int
+            try: BLOCK type=kotlin.Int operator=null
+              CALL 'div(Int): Int' type=kotlin.Int operator=DIV
+                $this: CONST Int type=kotlin.Int value='1'
+                other: GET_VAR 'a2: Int' type=kotlin.Int operator=null
+            catch e: BLOCK type=kotlin.Int operator=null
+              CONST Int type=kotlin.Int value='0'
+        VAR val a5: kotlin.Int
+          TRY_CATCH type=kotlin.Int
+            try: BLOCK type=kotlin.Int operator=null
+              CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                $this: CONST Int type=kotlin.Int value='2'
+                other: CALL 'div(Int): Int' type=kotlin.Int operator=DIV
+                  $this: CONST Int type=kotlin.Int value='1'
+                  other: CONST Int type=kotlin.Int value='0'
+            catch e: BLOCK type=kotlin.Int operator=null
+              CONST Int type=kotlin.Int value='0'
+        VAR val a6: kotlin.Int
+          TRY_CATCH type=kotlin.Int
+            try: BLOCK type=kotlin.Int operator=null
+              CALL 'div(Int): Int' type=kotlin.Int operator=DIV
+                $this: CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                  $this: CONST Int type=kotlin.Int value='2'
+                  other: CONST Int type=kotlin.Int value='1'
+                other: CONST Int type=kotlin.Int value='0'
+            catch e: BLOCK type=kotlin.Int operator=null
+              CONST Int type=kotlin.Int value='0'
+        TRY_CATCH type=kotlin.Unit
+          try: BLOCK type=kotlin.Unit operator=null
+            VAR val s1: kotlin.String
+              TYPE_OP operator=IMPLICIT_CAST typeOperand=kotlin.String
+                CALL 'times(Int): Int' type=kotlin.Int operator=MUL
+                  $this: CONST Int type=kotlin.Int value='2'
+                  other: CALL 'div(Int): Int' type=kotlin.Int operator=DIV
+                    $this: CONST Int type=kotlin.Int value='1'
+                    other: CONST Int type=kotlin.Int value='0'
+          catch e: BLOCK type=kotlin.Unit operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

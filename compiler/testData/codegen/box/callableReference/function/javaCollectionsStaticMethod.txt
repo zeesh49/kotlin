@@ -1,0 +1,28 @@
+MODULE <test-module>
+  FILE /javaCollectionsStaticMethod.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val numbers: java.util.ArrayList<kotlin.Int>
+          CALL 'constructor ArrayList()' type=java.util.ArrayList<kotlin.Int> operator=null
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'numbers: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='1'
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'numbers: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='2'
+        CALL 'add(Int): Boolean' type=kotlin.Boolean operator=null
+          $this: GET_VAR 'numbers: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          element: CONST Int type=kotlin.Int value='3'
+        CALL 'invoke((Mutable)List<*>!, Int): Unit' type=kotlin.Unit operator=null
+          $this: CALLABLE_REFERENCE 'rotate((Mutable)List<*>!, Int): Unit' type=kotlin.reflect.KFunction2<kotlin.collections.(Mutable)List<*>!, kotlin.Int, kotlin.Unit> operator=null
+          p1: GET_VAR 'numbers: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+          p2: CONST Int type=kotlin.Int value='1'
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'numbers: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null
+              arg1: CONST String type=kotlin.String value='[3, 1, 2]'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'numbers: ArrayList<Int>' type=java.util.ArrayList<kotlin.Int> operator=null

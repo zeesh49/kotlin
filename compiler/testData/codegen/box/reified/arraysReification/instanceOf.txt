@@ -1,0 +1,86 @@
+MODULE <test-module>
+  FILE /instanceOf.kt
+    FUN public inline fun <reified T> foo(x: kotlin.Any?): kotlin.Pair<kotlin.Boolean, kotlin.Boolean>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(Any?): Pair<Boolean, Boolean>'
+          CALL 'constructor Pair(Boolean, Boolean)' type=kotlin.Pair<kotlin.Boolean, kotlin.Boolean> operator=null
+            first: TYPE_OP operator=INSTANCEOF typeOperand=T
+              GET_VAR 'value-parameter x: Any?' type=kotlin.Any? operator=null
+            second: TYPE_OP operator=INSTANCEOF typeOperand=T?
+              GET_VAR 'value-parameter x: Any?' type=kotlin.Any? operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val x1: kotlin.Pair<kotlin.Boolean, kotlin.Boolean>
+          CALL 'foo(Any?): Pair<Boolean, Boolean>' type=kotlin.Pair<kotlin.Boolean, kotlin.Boolean> operator=null
+            x: CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+              elements: VARARG type=Array<out String> varargElementType=String
+                CONST String type=kotlin.String value=''
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'x1: Pair<Boolean, Boolean>' type=kotlin.Pair<kotlin.Boolean, kotlin.Boolean> operator=null
+              arg1: CONST String type=kotlin.String value='(true, true)'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 1'
+        VAR val x2: kotlin.Pair<kotlin.Boolean, kotlin.Boolean>
+          CALL 'foo(Any?): Pair<Boolean, Boolean>' type=kotlin.Pair<kotlin.Boolean, kotlin.Boolean> operator=null
+            x: CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+              elements: VARARG type=Array<out String> varargElementType=String
+                CONST String type=kotlin.String value=''
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'x2: Pair<Boolean, Boolean>' type=kotlin.Pair<kotlin.Boolean, kotlin.Boolean> operator=null
+              arg1: CONST String type=kotlin.String value='(true, true)'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 2'
+        VAR val x3: kotlin.Pair<kotlin.Boolean, kotlin.Boolean>
+          CALL 'foo(Any?): Pair<Boolean, Boolean>' type=kotlin.Pair<kotlin.Boolean, kotlin.Boolean> operator=null
+            x: CONST Null type=kotlin.Nothing? value='null'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'x3: Pair<Boolean, Boolean>' type=kotlin.Pair<kotlin.Boolean, kotlin.Boolean> operator=null
+              arg1: CONST String type=kotlin.String value='(false, true)'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        VAR val x4: kotlin.Pair<kotlin.Boolean, kotlin.Boolean>
+          CALL 'foo(Any?): Pair<Boolean, Boolean>' type=kotlin.Pair<kotlin.Boolean, kotlin.Boolean> operator=null
+            x: CONST Null type=kotlin.Nothing? value='null'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'x4: Pair<Boolean, Boolean>' type=kotlin.Pair<kotlin.Boolean, kotlin.Boolean> operator=null
+              arg1: CONST String type=kotlin.String value='(true, true)'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        VAR val x5: kotlin.Pair<kotlin.Boolean, kotlin.Boolean>
+          CALL 'foo(Any?): Pair<Boolean, Boolean>' type=kotlin.Pair<kotlin.Boolean, kotlin.Boolean> operator=null
+            x: CALL 'arrayOf(vararg String): Array<String>' type=kotlin.Array<kotlin.String> operator=null
+              elements: VARARG type=Array<out String> varargElementType=String
+                CONST String type=kotlin.String value=''
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'x5: Pair<Boolean, Boolean>' type=kotlin.Pair<kotlin.Boolean, kotlin.Boolean> operator=null
+              arg1: CONST String type=kotlin.String value='(false, false)'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 5'
+        VAR val x6: kotlin.Pair<kotlin.Boolean, kotlin.Boolean>
+          CALL 'foo(Any?): Pair<Boolean, Boolean>' type=kotlin.Pair<kotlin.Boolean, kotlin.Boolean> operator=null
+            x: CONST Null type=kotlin.Nothing? value='null'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL 'toString(): String' type=kotlin.String operator=null
+                $this: GET_VAR 'x6: Pair<Boolean, Boolean>' type=kotlin.Pair<kotlin.Boolean, kotlin.Boolean> operator=null
+              arg1: CONST String type=kotlin.String value='(true, true)'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 6'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

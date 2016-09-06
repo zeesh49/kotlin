@@ -1,0 +1,64 @@
+MODULE <test-module>
+  FILE /asSafeFail.kt
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val a: A
+          CALL 'constructor A()' type=A operator=null
+        TYPE_OP operator=SAFE_CAST typeOperand=B
+          GET_VAR 'a: A' type=A operator=null
+        BLOCK type=kotlin.Any operator=ELVIS
+          VAR val tmp0_elvis_lhs: B?
+            TYPE_OP operator=SAFE_CAST typeOperand=B
+              GET_VAR 'a: A' type=A operator=null
+          WHEN type=kotlin.Any operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp0_elvis_lhs: B?' type=B? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CONST String type=kotlin.String value='fail'
+            else: GET_VAR 'tmp0_elvis_lhs: B?' type=B? operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: TYPE_OP operator=SAFE_CAST typeOperand=B
+                CALL 'constructor A()' type=A operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: TYPE_OP operator=SAFE_CAST typeOperand=B
+                GET_VAR 'a: A' type=A operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail2'
+        VAR val v: kotlin.Any
+          BLOCK type=kotlin.Any operator=ELVIS
+            VAR val tmp1_elvis_lhs: B?
+              TYPE_OP operator=SAFE_CAST typeOperand=B
+                GET_VAR 'a: A' type=A operator=null
+            WHEN type=kotlin.Any operator=null
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp1_elvis_lhs: B?' type=B? operator=null
+                arg1: CONST Null type=kotlin.Nothing? value='null'
+              then: CONST String type=kotlin.String value='fail'
+              else: GET_VAR 'tmp1_elvis_lhs: B?' type=B? operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'v: Any' type=kotlin.Any operator=null
+              arg1: CONST String type=kotlin.String value='fail'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail4'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

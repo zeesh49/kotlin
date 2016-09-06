@@ -1,0 +1,14 @@
+MODULE <test-module>
+  FILE /defaultObjectMapping.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(Int, Int, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_BACKING_FIELD 'MIN_VALUE: Int' type=kotlin.Int operator=GET_PROPERTY
+          actual: CALL '<get-MIN_VALUE>(): Int' type=kotlin.Int operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Int' type=kotlin.Int.Companion
+        CALL 'assertEquals(Byte, Byte, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: GET_BACKING_FIELD 'MAX_VALUE: Byte' type=kotlin.Byte operator=GET_PROPERTY
+          actual: CALL '<get-MAX_VALUE>(): Byte' type=kotlin.Byte operator=GET_PROPERTY
+            $this: GET_OBJECT 'companion object of Byte' type=kotlin.Byte.Companion
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

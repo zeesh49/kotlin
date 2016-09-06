@@ -1,0 +1,35 @@
+MODULE <test-module>
+  FILE /Iterator.kt
+    CLASS CLASS MyIterator
+      CONSTRUCTOR public constructor MyIterator<T>(v: T)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'v: T' type=kotlin.Unit operator=null
+            receiver: THIS of 'MyIterator' type=MyIterator<T>
+            value: GET_VAR 'value-parameter v: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyIterator'
+      PROPERTY public final val v: T
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter v: T' type=T operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public open override fun next(): T
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='next(): T'
+            CALL '<get-v>(): T' type=T operator=GET_PROPERTY
+              $this: THIS of 'MyIterator' type=MyIterator<T>
+      FUN public open override fun hasNext(): kotlin.Boolean
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='hasNext(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        TRY_CATCH type=kotlin.Nothing
+          try: BLOCK type=kotlin.Nothing operator=null
+            CALL 'remove(): Unit' type=kotlin.Unit operator=null
+              $this: TYPE_OP operator=CAST typeOperand=java.util.Iterator<kotlin.String>
+                CALL 'constructor MyIterator(String)' type=MyIterator<kotlin.String> operator=null
+                  v: CONST String type=kotlin.String value=''
+            THROW type=kotlin.Nothing
+              CALL 'constructor AssertionError()' type=java.lang.AssertionError operator=null
+          catch e: BLOCK type=kotlin.Nothing operator=null
+            RETURN type=kotlin.Nothing from='box(): String'
+              CONST String type=kotlin.String value='OK'

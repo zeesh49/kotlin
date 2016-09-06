@@ -1,0 +1,57 @@
+MODULE <test-module>
+  FILE /kt4265.kt
+    FUN public fun <T : kotlin.Any, R> T.let(f: (T) -> R): R
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='let((T) -> R) on T: R'
+          CALL 'invoke(T): R' type=R operator=INVOKE
+            $this: GET_VAR 'value-parameter f: (T) -> R' type=(T) -> R operator=VARIABLE_AS_FUNCTION
+            p1: $RECEIVER of 'let((T) -> R) on T: R' type=T
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val o: kotlin.String? = null
+          CONST Null type=kotlin.Nothing? value='null'
+        VAR var state: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=ELVIS
+          VAR val tmp1_elvis_lhs: kotlin.Unit?
+            BLOCK type=kotlin.Unit? operator=SAFE_CALL
+              VAR val tmp0_safe_receiver: kotlin.String?
+                GET_VAR 'o: String?' type=kotlin.String? operator=null
+              WHEN type=kotlin.Unit? operator=SAFE_CALL
+                if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                  arg0: GET_VAR 'tmp0_safe_receiver: String?' type=kotlin.String? operator=null
+                  arg1: CONST Null type=kotlin.Nothing? value='null'
+                then: CONST Null type=kotlin.Nothing? value='null'
+                else: CALL 'let((String) -> Unit) on String: Unit' type=kotlin.Unit operator=null
+                  $this: GET_VAR 'tmp0_safe_receiver: String?' type=kotlin.String? operator=null
+                  f: BLOCK type=(kotlin.String) -> kotlin.Unit operator=LAMBDA
+                    FUN local final fun <anonymous>(it: kotlin.String): kotlin.Unit
+                      BLOCK_BODY
+                        RETURN type=kotlin.Nothing from='<anonymous>(String): Unit'
+                          SET_VAR 'state: Int' type=kotlin.Unit operator=EQ
+                            CONST Int type=kotlin.Int value='1'
+                    CALLABLE_REFERENCE '<anonymous>(String): Unit' type=(kotlin.String) -> kotlin.Unit operator=LAMBDA
+          WHEN type=kotlin.Unit operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'tmp1_elvis_lhs: Unit?' type=kotlin.Unit? operator=null
+              arg1: CONST Null type=kotlin.Nothing? value='null'
+            then: CALL 'invoke(): Unit' type=kotlin.Unit operator=null
+              $this: BLOCK type=() -> kotlin.Unit operator=LAMBDA
+                FUN local final fun <anonymous>(): kotlin.Unit
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(): Unit'
+                      SET_VAR 'state: Int' type=kotlin.Unit operator=EQ
+                        CONST Int type=kotlin.Int value='2'
+                CALLABLE_REFERENCE '<anonymous>(): Unit' type=() -> kotlin.Unit operator=LAMBDA
+            else: GET_VAR 'tmp1_elvis_lhs: Unit?' type=kotlin.Unit? operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: GET_VAR 'state: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='2'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail: '
+              GET_VAR 'state: Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

@@ -1,0 +1,24 @@
+MODULE <test-module>
+  FILE /kt2509.kt
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'constructor A()' type=A operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
+    CLASS CLASS A
+      CONSTRUCTOR public constructor A()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor B()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='A'
+      PROPERTY public open override var foo: kotlin.Array<kotlin.Int?>
+        EXPRESSION_BODY
+          CALL 'arrayOf(vararg Int?): Array<Int?>' type=kotlin.Array<kotlin.Int?> operator=null
+            elements: VARARG type=Array<out Int?> varargElementType=Int?
+              CONST Int type=kotlin.Int value='12'
+              CONST Int type=kotlin.Int value='13'
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY public abstract var foo: kotlin.Array<kotlin.Int?>

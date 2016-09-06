@@ -1,0 +1,40 @@
+MODULE <test-module>
+  FILE /forInString.kt
+    FUN public fun foo(): kotlin.Int
+      BLOCK_BODY
+        VAR var sum: kotlin.Int
+          CONST Int type=kotlin.Int value='0'
+        BLOCK type=kotlin.Unit operator=FOR_LOOP
+          VAR val tmp0_iterator: kotlin.collections.CharIterator
+            CALL 'iterator() on CharSequence: CharIterator' type=kotlin.collections.CharIterator operator=FOR_LOOP_ITERATOR
+              $receiver: CONST String type=kotlin.String value='239'
+          WHILE label=null operator=FOR_LOOP_INNER_WHILE
+            condition: CALL 'hasNext(): Boolean' type=kotlin.Boolean operator=FOR_LOOP_HAS_NEXT
+              $this: GET_VAR 'tmp0_iterator: CharIterator' type=kotlin.collections.CharIterator operator=null
+            body: BLOCK type=kotlin.Unit operator=FOR_LOOP_INNER_WHILE
+              VAR val c: kotlin.Char
+                CALL 'next(): Char' type=kotlin.Char operator=FOR_LOOP_NEXT
+                  $this: GET_VAR 'tmp0_iterator: CharIterator' type=kotlin.collections.CharIterator operator=null
+              SET_VAR 'sum: Int' type=kotlin.Unit operator=PLUSEQ
+                CALL 'plus(Int): Int' type=kotlin.Int operator=PLUSEQ
+                  $this: GET_VAR 'sum: Int' type=kotlin.Int operator=PLUSEQ
+                  other: CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+                    $this: CALL 'toInt(): Int' type=kotlin.Int operator=null
+                      $this: GET_VAR 'c: Char' type=kotlin.Char operator=null
+                    other: CALL 'toInt(): Int' type=kotlin.Int operator=null
+                      $this: CONST Char type=kotlin.Char value='0'
+        RETURN type=kotlin.Nothing from='foo(): Int'
+          GET_VAR 'sum: Int' type=kotlin.Int operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val f: kotlin.Int
+          CALL 'foo(): Int' type=kotlin.Int operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          WHEN type=kotlin.String operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'f: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='14'
+            then: CONST String type=kotlin.String value='OK'
+            else: STRING_CONCATENATION type=kotlin.String
+              CONST String type=kotlin.String value='Fail '
+              GET_VAR 'f: Int' type=kotlin.Int operator=null

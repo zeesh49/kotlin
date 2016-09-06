@@ -1,0 +1,53 @@
+MODULE <test-module>
+  FILE /delegationProperty.kt
+    CLASS INTERFACE A
+      PROPERTY public abstract var result: T
+    CLASS CLASS B
+      CONSTRUCTOR public constructor B(a: A<kotlin.String>)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='B'
+      PROPERTY val `B$A$delegate`: A<kotlin.String>
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter a: A<String>' type=A<kotlin.String> operator=null
+      PROPERTY public open override var result: kotlin.String
+        PROPERTY_GETTER public open override fun <get-result>(): kotlin.String
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='<get-result>(): String'
+              CALL '<get-result>(): String' type=kotlin.String operator=null
+                $this: GET_VAR '`B$A$delegate`: A<String>' type=A<kotlin.String> operator=null
+        PROPERTY_SETTER public open override fun <set-result>(<set-?>: kotlin.String): kotlin.Unit
+          BLOCK_BODY
+            CALL '<set-result>(String): Unit' type=kotlin.Unit operator=null
+              $this: GET_VAR '`B$A$delegate`: A<String>' type=A<kotlin.String> operator=null
+              <set-?>: GET_VAR 'value-parameter <set-?>: String' type=kotlin.String operator=null
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val o: box.<no name provided>
+          BLOCK type=box.<no name provided> operator=OBJECT_LITERAL
+            CLASS CLASS <no name provided>
+              CONSTRUCTOR public constructor <no name provided>()
+                BLOCK_BODY
+                  DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+                  INSTANCE_INITIALIZER_CALL classDescriptor='<no name provided>'
+              PROPERTY public open override var result: kotlin.String
+                EXPRESSION_BODY
+                  CONST String type=kotlin.String value='Fail'
+            CALL 'constructor <no name provided>()' type=box.<no name provided> operator=OBJECT_LITERAL
+        VAR val b: A<kotlin.String>
+          CALL 'constructor B(A<String>)' type=B operator=null
+            a: GET_VAR 'o: <no name provided>' type=box.<no name provided> operator=null
+        CALL '<set-result>(String): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'b: A<String>' type=A<kotlin.String> operator=null
+          <set-?>: CONST String type=kotlin.String value='OK'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+                $this: GET_VAR 'b: A<String>' type=A<kotlin.String> operator=null
+              arg1: CONST String type=kotlin.String value='OK'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CALL '<get-result>(): String' type=kotlin.String operator=GET_PROPERTY
+            $this: GET_VAR 'b: A<String>' type=A<kotlin.String> operator=null

@@ -1,0 +1,63 @@
+MODULE <test-module>
+  FILE /subjectAny.kt
+    CLASS ENUM_CLASS Season
+      CONSTRUCTOR private constructor Season()
+        BLOCK_BODY
+          ENUM_CONSTRUCTOR_CALL 'constructor Enum(String, Int)' super
+          INSTANCE_INITIALIZER_CALL classDescriptor='Season'
+      ENUM_ENTRY enum entry WINTER
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Season()' WINTER
+      ENUM_ENTRY enum entry SPRING
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Season()' SPRING
+      ENUM_ENTRY enum entry SUMMER
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Season()' SUMMER
+      ENUM_ENTRY enum entry AUTUMN
+        init: ENUM_CONSTRUCTOR_CALL 'constructor Season()' AUTUMN
+      FUN public final fun values(): kotlin.Array<Season>
+        SYNTHETIC_BODY kind=ENUM_VALUES
+      FUN public final fun valueOf(value: kotlin.String): Season
+        SYNTHETIC_BODY kind=ENUM_VALUEOF
+    FUN public fun foo(x: kotlin.Any): kotlin.String
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='foo(Any): String'
+          BLOCK type=kotlin.String operator=WHEN
+            VAR val tmp0_subject: kotlin.Any
+              GET_VAR 'value-parameter x: Any' type=kotlin.Any operator=null
+            WHEN type=kotlin.String operator=WHEN
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Any' type=kotlin.Any operator=null
+                arg1: GET_ENUM_VALUE 'WINTER' type=Season
+              then: CONST String type=kotlin.String value='winter'
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Any' type=kotlin.Any operator=null
+                arg1: GET_ENUM_VALUE 'SPRING' type=Season
+              then: CONST String type=kotlin.String value='spring'
+              if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                arg0: GET_VAR 'tmp0_subject: Any' type=kotlin.Any operator=null
+                arg1: GET_ENUM_VALUE 'SUMMER' type=Season
+              then: CONST String type=kotlin.String value='summer'
+              else: CONST String type=kotlin.String value='other'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='winter'
+          actual: CALL 'foo(Any): String' type=kotlin.String operator=null
+            x: GET_ENUM_VALUE 'WINTER' type=Season
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='spring'
+          actual: CALL 'foo(Any): String' type=kotlin.String operator=null
+            x: GET_ENUM_VALUE 'SPRING' type=Season
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='summer'
+          actual: CALL 'foo(Any): String' type=kotlin.String operator=null
+            x: GET_ENUM_VALUE 'SUMMER' type=Season
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='other'
+          actual: CALL 'foo(Any): String' type=kotlin.String operator=null
+            x: GET_ENUM_VALUE 'AUTUMN' type=Season
+        CALL 'assertEquals(String, String, String? = ...): Unit' type=kotlin.Unit operator=null
+          expected: CONST String type=kotlin.String value='other'
+          actual: CALL 'foo(Any): String' type=kotlin.String operator=null
+            x: CONST Int type=kotlin.Int value='123'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

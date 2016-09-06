@@ -1,0 +1,471 @@
+MODULE <test-module>
+  FILE /kt471.kt
+    CLASS CLASS MyNumber
+      CONSTRUCTOR public constructor MyNumber(i: kotlin.Int)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'i: Int' type=kotlin.Unit operator=null
+            receiver: THIS of 'MyNumber' type=MyNumber
+            value: GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyNumber'
+      PROPERTY public final val i: kotlin.Int
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter i: Int' type=kotlin.Int operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN public final operator fun inc(): MyNumber
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='inc(): MyNumber'
+            CALL 'constructor MyNumber(Int)' type=MyNumber operator=null
+              i: CALL 'plus(Int): Int' type=kotlin.Int operator=PLUS
+                $this: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                  $this: THIS of 'MyNumber' type=MyNumber
+                other: CONST Int type=kotlin.Int value='1'
+    CLASS CLASS MNR
+      CONSTRUCTOR public constructor MNR(ref: MyNumber)
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          SET_BACKING_FIELD 'ref: MyNumber' type=kotlin.Unit operator=null
+            receiver: THIS of 'MNR' type=MNR
+            value: GET_VAR 'value-parameter ref: MyNumber' type=MyNumber operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+          INSTANCE_INITIALIZER_CALL classDescriptor='MNR'
+      PROPERTY public final var ref: MyNumber
+        EXPRESSION_BODY
+          GET_VAR 'value-parameter ref: MyNumber' type=MyNumber operator=INITIALIZE_PROPERTY_FROM_PARAMETER
+    FUN public fun test1(): kotlin.Boolean
+      BLOCK_BODY
+        VAR var m: MyNumber
+          CALL 'constructor MyNumber(Int)' type=MyNumber operator=null
+            i: CONST Int type=kotlin.Int value='42'
+        BLOCK type=MyNumber operator=POSTFIX_INCR
+          VAR val tmp0: MyNumber
+            GET_VAR 'm: MyNumber' type=MyNumber operator=POSTFIX_INCR
+          SET_VAR 'm: MyNumber' type=kotlin.Unit operator=POSTFIX_INCR
+            CALL 'inc(): MyNumber' type=MyNumber operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp0: MyNumber' type=MyNumber operator=null
+          GET_VAR 'tmp0: MyNumber' type=MyNumber operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'm: MyNumber' type=MyNumber operator=null
+              arg1: CONST Int type=kotlin.Int value='43'
+          then: RETURN type=kotlin.Nothing from='test1(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+        RETURN type=kotlin.Nothing from='test1(): Boolean'
+          CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun test2(): kotlin.Boolean
+      BLOCK_BODY
+        VAR var m: MyNumber
+          CALL 'constructor MyNumber(Int)' type=MyNumber operator=null
+            i: CONST Int type=kotlin.Int value='44'
+        VAR var m2: MyNumber
+          BLOCK type=MyNumber operator=POSTFIX_INCR
+            VAR val tmp0: MyNumber
+              GET_VAR 'm: MyNumber' type=MyNumber operator=POSTFIX_INCR
+            SET_VAR 'm: MyNumber' type=kotlin.Unit operator=POSTFIX_INCR
+              CALL 'inc(): MyNumber' type=MyNumber operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp0: MyNumber' type=MyNumber operator=null
+            GET_VAR 'tmp0: MyNumber' type=MyNumber operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'm2: MyNumber' type=MyNumber operator=null
+              arg1: CONST Int type=kotlin.Int value='44'
+          then: RETURN type=kotlin.Nothing from='test2(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'm: MyNumber' type=MyNumber operator=null
+              arg1: CONST Int type=kotlin.Int value='45'
+          then: RETURN type=kotlin.Nothing from='test2(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+        RETURN type=kotlin.Nothing from='test2(): Boolean'
+          CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun test3(): kotlin.Boolean
+      BLOCK_BODY
+        VAR var mnr: MNR
+          CALL 'constructor MNR(MyNumber)' type=MNR operator=null
+            ref: CALL 'constructor MyNumber(Int)' type=MyNumber operator=null
+              i: CONST Int type=kotlin.Int value='42'
+        BLOCK type=MyNumber operator=POSTFIX_INCR
+          VAR val tmp0_this: MNR
+            GET_VAR 'mnr: MNR' type=MNR operator=null
+          BLOCK type=MyNumber operator=POSTFIX_INCR
+            VAR val tmp1: MyNumber
+              CALL '<get-ref>(): MyNumber' type=MyNumber operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp0_this: MNR' type=MNR operator=null
+            CALL '<set-ref>(MyNumber): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp0_this: MNR' type=MNR operator=null
+              <set-?>: CALL 'inc(): MyNumber' type=MyNumber operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp1: MyNumber' type=MyNumber operator=null
+            GET_VAR 'tmp1: MyNumber' type=MyNumber operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL '<get-ref>(): MyNumber' type=MyNumber operator=GET_PROPERTY
+                  $this: GET_VAR 'mnr: MNR' type=MNR operator=null
+              arg1: CONST Int type=kotlin.Int value='43'
+          then: RETURN type=kotlin.Nothing from='test3(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+        RETURN type=kotlin.Nothing from='test3(): Boolean'
+          CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun test4(): kotlin.Boolean
+      BLOCK_BODY
+        VAR var mnr: MNR
+          CALL 'constructor MNR(MyNumber)' type=MNR operator=null
+            ref: CALL 'constructor MyNumber(Int)' type=MyNumber operator=null
+              i: CONST Int type=kotlin.Int value='42'
+        VAR val m3: MyNumber
+          BLOCK type=MyNumber operator=POSTFIX_INCR
+            VAR val tmp0_this: MNR
+              GET_VAR 'mnr: MNR' type=MNR operator=null
+            BLOCK type=MyNumber operator=POSTFIX_INCR
+              VAR val tmp1: MyNumber
+                CALL '<get-ref>(): MyNumber' type=MyNumber operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp0_this: MNR' type=MNR operator=null
+              CALL '<set-ref>(MyNumber): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp0_this: MNR' type=MNR operator=null
+                <set-?>: CALL 'inc(): MyNumber' type=MyNumber operator=POSTFIX_INCR
+                  $this: GET_VAR 'tmp1: MyNumber' type=MyNumber operator=null
+              GET_VAR 'tmp1: MyNumber' type=MyNumber operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'm3: MyNumber' type=MyNumber operator=null
+              arg1: CONST Int type=kotlin.Int value='42'
+          then: RETURN type=kotlin.Nothing from='test4(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+        RETURN type=kotlin.Nothing from='test4(): Boolean'
+          CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun test5(): kotlin.Boolean
+      BLOCK_BODY
+        VAR var mnr: kotlin.Array<MyNumber>
+          CALL 'constructor Array(Int, (Int) -> MyNumber)' type=kotlin.Array<MyNumber> operator=null
+            size: CONST Int type=kotlin.Int value='2'
+            init: BLOCK type=(kotlin.Int) -> MyNumber operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.Int): MyNumber
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): MyNumber'
+                    CALL 'constructor MyNumber(Int)' type=MyNumber operator=null
+                      i: CONST Int type=kotlin.Int value='42'
+              CALLABLE_REFERENCE '<anonymous>(Int): MyNumber' type=(kotlin.Int) -> MyNumber operator=LAMBDA
+        BLOCK type=MyNumber operator=POSTFIX_INCR
+          VAR val tmp0_array: kotlin.Array<MyNumber>
+            GET_VAR 'mnr: Array<MyNumber>' type=kotlin.Array<MyNumber> operator=null
+          VAR val tmp1_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='0'
+          VAR val tmp2: MyNumber
+            CALL 'get(Int): MyNumber' type=MyNumber operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp0_array: Array<MyNumber>' type=kotlin.Array<MyNumber> operator=null
+              index: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+          CALL 'set(Int, MyNumber): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+            $this: GET_VAR 'tmp0_array: Array<MyNumber>' type=kotlin.Array<MyNumber> operator=null
+            index: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+            value: CALL 'inc(): MyNumber' type=MyNumber operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp2: MyNumber' type=MyNumber operator=null
+          GET_VAR 'tmp2: MyNumber' type=MyNumber operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL 'get(Int): MyNumber' type=MyNumber operator=GET_ARRAY_ELEMENT
+                  $this: GET_VAR 'mnr: Array<MyNumber>' type=kotlin.Array<MyNumber> operator=null
+                  index: CONST Int type=kotlin.Int value='0'
+              arg1: CONST Int type=kotlin.Int value='43'
+          then: RETURN type=kotlin.Nothing from='test5(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+        RETURN type=kotlin.Nothing from='test5(): Boolean'
+          CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun test6(): kotlin.Boolean
+      BLOCK_BODY
+        VAR var mnr: kotlin.Array<MyNumber>
+          CALL 'constructor Array(Int, (Int) -> MyNumber)' type=kotlin.Array<MyNumber> operator=null
+            size: CONST Int type=kotlin.Int value='2'
+            init: BLOCK type=(kotlin.Int) -> MyNumber operator=LAMBDA
+              FUN local final fun <anonymous>(it: kotlin.Int): MyNumber
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='<anonymous>(Int): MyNumber'
+                    CALL 'constructor MyNumber(Int)' type=MyNumber operator=null
+                      i: CALL 'minus(Int): Int' type=kotlin.Int operator=MINUS
+                        $this: CONST Int type=kotlin.Int value='42'
+                        other: GET_VAR 'value-parameter it: Int' type=kotlin.Int operator=null
+              CALLABLE_REFERENCE '<anonymous>(Int): MyNumber' type=(kotlin.Int) -> MyNumber operator=LAMBDA
+        CALL 'set(Int, MyNumber): Unit' type=kotlin.Unit operator=EQ
+          $this: GET_VAR 'mnr: Array<MyNumber>' type=kotlin.Array<MyNumber> operator=null
+          index: CONST Int type=kotlin.Int value='1'
+          value: BLOCK type=MyNumber operator=POSTFIX_INCR
+            VAR val tmp0_array: kotlin.Array<MyNumber>
+              GET_VAR 'mnr: Array<MyNumber>' type=kotlin.Array<MyNumber> operator=null
+            VAR val tmp1_index0: kotlin.Int
+              CONST Int type=kotlin.Int value='0'
+            VAR val tmp2: MyNumber
+              CALL 'get(Int): MyNumber' type=MyNumber operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp0_array: Array<MyNumber>' type=kotlin.Array<MyNumber> operator=null
+                index: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+            CALL 'set(Int, MyNumber): Unit' type=kotlin.Unit operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp0_array: Array<MyNumber>' type=kotlin.Array<MyNumber> operator=null
+              index: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+              value: CALL 'inc(): MyNumber' type=MyNumber operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp2: MyNumber' type=MyNumber operator=null
+            GET_VAR 'tmp2: MyNumber' type=MyNumber operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL 'get(Int): MyNumber' type=MyNumber operator=GET_ARRAY_ELEMENT
+                  $this: GET_VAR 'mnr: Array<MyNumber>' type=kotlin.Array<MyNumber> operator=null
+                  index: CONST Int type=kotlin.Int value='0'
+              arg1: CONST Int type=kotlin.Int value='43'
+          then: RETURN type=kotlin.Nothing from='test6(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL 'get(Int): MyNumber' type=MyNumber operator=GET_ARRAY_ELEMENT
+                  $this: GET_VAR 'mnr: Array<MyNumber>' type=kotlin.Array<MyNumber> operator=null
+                  index: CONST Int type=kotlin.Int value='1'
+              arg1: CONST Int type=kotlin.Int value='42'
+          then: RETURN type=kotlin.Nothing from='test6(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+        RETURN type=kotlin.Nothing from='test6(): Boolean'
+          CONST Boolean type=kotlin.Boolean value='true'
+    CLASS CLASS MyArrayList
+      CONSTRUCTOR public constructor MyArrayList<T>()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='MyArrayList'
+      PROPERTY private final var value17: T?
+        EXPRESSION_BODY
+          CONST Null type=kotlin.Nothing? value='null'
+      PROPERTY private final var value39: T?
+        EXPRESSION_BODY
+          CONST Null type=kotlin.Nothing? value='null'
+      FUN public final operator fun get(index: kotlin.Int): T
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'value-parameter index: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='17'
+            then: RETURN type=kotlin.Nothing from='get(Int): T'
+              BLOCK type=T operator=EXCLEXCL
+                VAR val tmp0_notnull: T?
+                  CALL '<get-value17>(): T?' type=T? operator=GET_PROPERTY
+                    $this: THIS of 'MyArrayList' type=MyArrayList<T>
+                WHEN type=T operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp0_notnull: T?' type=T? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: GET_VAR 'tmp0_notnull: T?' type=T? operator=null
+          WHEN type=kotlin.Unit operator=IF
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'value-parameter index: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='39'
+            then: RETURN type=kotlin.Nothing from='get(Int): T'
+              BLOCK type=T operator=EXCLEXCL
+                VAR val tmp1_notnull: T?
+                  CALL '<get-value39>(): T?' type=T? operator=GET_PROPERTY
+                    $this: THIS of 'MyArrayList' type=MyArrayList<T>
+                WHEN type=T operator=null
+                  if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                    arg0: GET_VAR 'tmp1_notnull: T?' type=T? operator=null
+                    arg1: CONST Null type=kotlin.Nothing? value='null'
+                  then: CALL 'THROW_NPE(): Nothing' type=kotlin.Nothing operator=EXCLEXCL
+                  else: GET_VAR 'tmp1_notnull: T?' type=T? operator=null
+          THROW type=kotlin.Nothing
+            CALL 'constructor Exception()' type=java.lang.Exception operator=null
+      FUN public final operator fun set(index: kotlin.Int, value: T): T?
+        BLOCK_BODY
+          WHEN type=kotlin.Unit operator=WHEN
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'value-parameter index: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='17'
+            then: CALL '<set-value17>(T?): Unit' type=kotlin.Unit operator=EQ
+              $this: THIS of 'MyArrayList' type=MyArrayList<T>
+              <set-?>: GET_VAR 'value-parameter value: T' type=T operator=null
+            if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+              arg0: GET_VAR 'value-parameter index: Int' type=kotlin.Int operator=null
+              arg1: CONST Int type=kotlin.Int value='39'
+            then: CALL '<set-value39>(T?): Unit' type=kotlin.Unit operator=EQ
+              $this: THIS of 'MyArrayList' type=MyArrayList<T>
+              <set-?>: GET_VAR 'value-parameter value: T' type=T operator=null
+            else: THROW type=kotlin.Nothing
+              CALL 'constructor Exception()' type=java.lang.Exception operator=null
+          RETURN type=kotlin.Nothing from='set(Int, T): T?'
+            CONST Null type=kotlin.Nothing? value='null'
+    FUN public fun test7(): kotlin.Boolean
+      BLOCK_BODY
+        VAR var mnr: MyArrayList<MyNumber>
+          CALL 'constructor MyArrayList()' type=MyArrayList<MyNumber> operator=null
+        CALL 'set(Int, MyNumber): MyNumber?' type=MyNumber? operator=EQ
+          $this: GET_VAR 'mnr: MyArrayList<MyNumber>' type=MyArrayList<MyNumber> operator=null
+          index: CONST Int type=kotlin.Int value='17'
+          value: CALL 'constructor MyNumber(Int)' type=MyNumber operator=null
+            i: CONST Int type=kotlin.Int value='42'
+        BLOCK type=MyNumber operator=POSTFIX_INCR
+          VAR val tmp0_array: MyArrayList<MyNumber>
+            GET_VAR 'mnr: MyArrayList<MyNumber>' type=MyArrayList<MyNumber> operator=null
+          VAR val tmp1_index0: kotlin.Int
+            CONST Int type=kotlin.Int value='17'
+          VAR val tmp2: MyNumber
+            CALL 'get(Int): MyNumber' type=MyNumber operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp0_array: MyArrayList<MyNumber>' type=MyArrayList<MyNumber> operator=null
+              index: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+          CALL 'set(Int, MyNumber): MyNumber?' type=MyNumber? operator=POSTFIX_INCR
+            $this: GET_VAR 'tmp0_array: MyArrayList<MyNumber>' type=MyArrayList<MyNumber> operator=null
+            index: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+            value: CALL 'inc(): MyNumber' type=MyNumber operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp2: MyNumber' type=MyNumber operator=null
+          GET_VAR 'tmp2: MyNumber' type=MyNumber operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL 'get(Int): MyNumber' type=MyNumber operator=GET_ARRAY_ELEMENT
+                  $this: GET_VAR 'mnr: MyArrayList<MyNumber>' type=MyArrayList<MyNumber> operator=null
+                  index: CONST Int type=kotlin.Int value='17'
+              arg1: CONST Int type=kotlin.Int value='43'
+          then: RETURN type=kotlin.Nothing from='test7(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+        RETURN type=kotlin.Nothing from='test7(): Boolean'
+          CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun test8(): kotlin.Boolean
+      BLOCK_BODY
+        VAR var mnr: MyArrayList<MyNumber>
+          CALL 'constructor MyArrayList()' type=MyArrayList<MyNumber> operator=null
+        CALL 'set(Int, MyNumber): MyNumber?' type=MyNumber? operator=EQ
+          $this: GET_VAR 'mnr: MyArrayList<MyNumber>' type=MyArrayList<MyNumber> operator=null
+          index: CONST Int type=kotlin.Int value='17'
+          value: CALL 'constructor MyNumber(Int)' type=MyNumber operator=null
+            i: CONST Int type=kotlin.Int value='42'
+        CALL 'set(Int, MyNumber): MyNumber?' type=MyNumber? operator=EQ
+          $this: GET_VAR 'mnr: MyArrayList<MyNumber>' type=MyArrayList<MyNumber> operator=null
+          index: CONST Int type=kotlin.Int value='39'
+          value: BLOCK type=MyNumber operator=POSTFIX_INCR
+            VAR val tmp0_array: MyArrayList<MyNumber>
+              GET_VAR 'mnr: MyArrayList<MyNumber>' type=MyArrayList<MyNumber> operator=null
+            VAR val tmp1_index0: kotlin.Int
+              CONST Int type=kotlin.Int value='17'
+            VAR val tmp2: MyNumber
+              CALL 'get(Int): MyNumber' type=MyNumber operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp0_array: MyArrayList<MyNumber>' type=MyArrayList<MyNumber> operator=null
+                index: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+            CALL 'set(Int, MyNumber): MyNumber?' type=MyNumber? operator=POSTFIX_INCR
+              $this: GET_VAR 'tmp0_array: MyArrayList<MyNumber>' type=MyArrayList<MyNumber> operator=null
+              index: GET_VAR 'tmp1_index0: Int' type=kotlin.Int operator=null
+              value: CALL 'inc(): MyNumber' type=MyNumber operator=POSTFIX_INCR
+                $this: GET_VAR 'tmp2: MyNumber' type=MyNumber operator=null
+            GET_VAR 'tmp2: MyNumber' type=MyNumber operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL 'get(Int): MyNumber' type=MyNumber operator=GET_ARRAY_ELEMENT
+                  $this: GET_VAR 'mnr: MyArrayList<MyNumber>' type=MyArrayList<MyNumber> operator=null
+                  index: CONST Int type=kotlin.Int value='17'
+              arg1: CONST Int type=kotlin.Int value='43'
+          then: RETURN type=kotlin.Nothing from='test8(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: CALL 'get(Int): MyNumber' type=MyNumber operator=GET_ARRAY_ELEMENT
+                  $this: GET_VAR 'mnr: MyArrayList<MyNumber>' type=MyArrayList<MyNumber> operator=null
+                  index: CONST Int type=kotlin.Int value='39'
+              arg1: CONST Int type=kotlin.Int value='42'
+          then: RETURN type=kotlin.Nothing from='test8(): Boolean'
+            CONST Boolean type=kotlin.Boolean value='false'
+        RETURN type=kotlin.Nothing from='test8(): Boolean'
+          CONST Boolean type=kotlin.Boolean value='true'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR var m: MyNumber
+          CALL 'constructor MyNumber(Int)' type=MyNumber operator=null
+            i: CONST Int type=kotlin.Int value='42'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'test1(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail test 1'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'test2(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail test 2'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'test3(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail test 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'test4(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail test 4'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'test5(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail test 5'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'test6(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail test 6'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'test7(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail test 7'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'not(): Boolean' type=kotlin.Boolean operator=EXCL
+            $this: CALL 'test8(): Boolean' type=kotlin.Boolean operator=null
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail test 8'
+        BLOCK type=MyNumber operator=PREFIX_INCR
+          VAR val tmp0: MyNumber
+            CALL 'inc(): MyNumber' type=MyNumber operator=PREFIX_INCR
+              $this: GET_VAR 'm: MyNumber' type=MyNumber operator=PREFIX_INCR
+          SET_VAR 'm: MyNumber' type=kotlin.Unit operator=PREFIX_INCR
+            GET_VAR 'tmp0: MyNumber' type=MyNumber operator=null
+          GET_VAR 'tmp0: MyNumber' type=MyNumber operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'm: MyNumber' type=MyNumber operator=null
+              arg1: CONST Int type=kotlin.Int value='43'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 0'
+        VAR var m1: MyNumber
+          BLOCK type=MyNumber operator=PREFIX_INCR
+            VAR val tmp1: MyNumber
+              CALL 'inc(): MyNumber' type=MyNumber operator=PREFIX_INCR
+                $this: GET_VAR 'm: MyNumber' type=MyNumber operator=PREFIX_INCR
+            SET_VAR 'm: MyNumber' type=kotlin.Unit operator=PREFIX_INCR
+              GET_VAR 'tmp1: MyNumber' type=MyNumber operator=null
+            GET_VAR 'tmp1: MyNumber' type=MyNumber operator=null
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'm1: MyNumber' type=MyNumber operator=null
+              arg1: CONST Int type=kotlin.Int value='44'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 3'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'NOT(Boolean): Boolean' type=kotlin.Boolean operator=EXCLEQ
+            arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EXCLEQ
+              arg0: CALL '<get-i>(): Int' type=kotlin.Int operator=GET_PROPERTY
+                $this: GET_VAR 'm: MyNumber' type=MyNumber operator=null
+              arg1: CONST Int type=kotlin.Int value='44'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='fail 4'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

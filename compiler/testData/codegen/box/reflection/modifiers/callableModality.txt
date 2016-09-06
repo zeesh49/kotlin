@@ -1,0 +1,115 @@
+MODULE <test-module>
+  FILE /callableModality.kt
+    CLASS INTERFACE Interface
+      FUN public open fun openFun(): kotlin.Unit
+        BLOCK_BODY
+      FUN public abstract fun abstractFun(): kotlin.Unit
+    CLASS CLASS AbstractClass
+      CONSTRUCTOR public constructor AbstractClass()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='AbstractClass'
+      PROPERTY public final val finalVal: kotlin.Unit
+        EXPRESSION_BODY
+          GET_OBJECT 'Unit' type=kotlin.Unit
+      PROPERTY public open val openVal: kotlin.Unit
+        EXPRESSION_BODY
+          GET_OBJECT 'Unit' type=kotlin.Unit
+      PROPERTY public abstract var abstractVar: kotlin.Unit
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isFinal>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'openFun(): Unit' type=kotlin.reflect.KFunction1<Interface, kotlin.Unit> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isOpen>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'openFun(): Unit' type=kotlin.reflect.KFunction1<Interface, kotlin.Unit> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isAbstract>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'openFun(): Unit' type=kotlin.reflect.KFunction1<Interface, kotlin.Unit> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isFinal>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'abstractFun(): Unit' type=kotlin.reflect.KFunction1<Interface, kotlin.Unit> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isOpen>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'abstractFun(): Unit' type=kotlin.reflect.KFunction1<Interface, kotlin.Unit> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isAbstract>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'abstractFun(): Unit' type=kotlin.reflect.KFunction1<Interface, kotlin.Unit> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isFinal>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'finalVal: Unit' type=kotlin.reflect.KProperty1<AbstractClass, kotlin.Unit> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isOpen>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'finalVal: Unit' type=kotlin.reflect.KProperty1<AbstractClass, kotlin.Unit> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isAbstract>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'finalVal: Unit' type=kotlin.reflect.KProperty1<AbstractClass, kotlin.Unit> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isFinal>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALL '<get-getter>(): KProperty1.Getter<AbstractClass, Unit>' type=kotlin.reflect.KProperty1.Getter<AbstractClass, kotlin.Unit> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'finalVal: Unit' type=kotlin.reflect.KProperty1<AbstractClass, kotlin.Unit> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isOpen>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALL '<get-getter>(): KProperty1.Getter<AbstractClass, Unit>' type=kotlin.reflect.KProperty1.Getter<AbstractClass, kotlin.Unit> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'finalVal: Unit' type=kotlin.reflect.KProperty1<AbstractClass, kotlin.Unit> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isAbstract>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALL '<get-getter>(): KProperty1.Getter<AbstractClass, Unit>' type=kotlin.reflect.KProperty1.Getter<AbstractClass, kotlin.Unit> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'finalVal: Unit' type=kotlin.reflect.KProperty1<AbstractClass, kotlin.Unit> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isFinal>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'openVal: Unit' type=kotlin.reflect.KProperty1<AbstractClass, kotlin.Unit> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isOpen>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'openVal: Unit' type=kotlin.reflect.KProperty1<AbstractClass, kotlin.Unit> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isAbstract>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'openVal: Unit' type=kotlin.reflect.KProperty1<AbstractClass, kotlin.Unit> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isFinal>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALL '<get-getter>(): KProperty1.Getter<AbstractClass, Unit>' type=kotlin.reflect.KProperty1.Getter<AbstractClass, kotlin.Unit> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'openVal: Unit' type=kotlin.reflect.KProperty1<AbstractClass, kotlin.Unit> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isOpen>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALL '<get-getter>(): KProperty1.Getter<AbstractClass, Unit>' type=kotlin.reflect.KProperty1.Getter<AbstractClass, kotlin.Unit> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'openVal: Unit' type=kotlin.reflect.KProperty1<AbstractClass, kotlin.Unit> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isAbstract>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALL '<get-getter>(): KProperty1.Getter<AbstractClass, Unit>' type=kotlin.reflect.KProperty1.Getter<AbstractClass, kotlin.Unit> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'openVal: Unit' type=kotlin.reflect.KProperty1<AbstractClass, kotlin.Unit> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isFinal>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'abstractVar: Unit' type=kotlin.reflect.KMutableProperty1<AbstractClass, kotlin.Unit> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isOpen>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'abstractVar: Unit' type=kotlin.reflect.KMutableProperty1<AbstractClass, kotlin.Unit> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isAbstract>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALLABLE_REFERENCE 'abstractVar: Unit' type=kotlin.reflect.KMutableProperty1<AbstractClass, kotlin.Unit> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isFinal>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALL '<get-getter>(): KProperty1.Getter<AbstractClass, Unit>' type=kotlin.reflect.KProperty1.Getter<AbstractClass, kotlin.Unit> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'abstractVar: Unit' type=kotlin.reflect.KMutableProperty1<AbstractClass, kotlin.Unit> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isOpen>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALL '<get-getter>(): KProperty1.Getter<AbstractClass, Unit>' type=kotlin.reflect.KProperty1.Getter<AbstractClass, kotlin.Unit> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'abstractVar: Unit' type=kotlin.reflect.KMutableProperty1<AbstractClass, kotlin.Unit> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isAbstract>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALL '<get-getter>(): KProperty1.Getter<AbstractClass, Unit>' type=kotlin.reflect.KProperty1.Getter<AbstractClass, kotlin.Unit> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'abstractVar: Unit' type=kotlin.reflect.KMutableProperty1<AbstractClass, kotlin.Unit> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isFinal>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALL '<get-setter>(): KMutableProperty1.Setter<AbstractClass, Unit>' type=kotlin.reflect.KMutableProperty1.Setter<AbstractClass, kotlin.Unit> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'abstractVar: Unit' type=kotlin.reflect.KMutableProperty1<AbstractClass, kotlin.Unit> operator=null
+        CALL 'assertFalse(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isOpen>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALL '<get-setter>(): KMutableProperty1.Setter<AbstractClass, Unit>' type=kotlin.reflect.KMutableProperty1.Setter<AbstractClass, kotlin.Unit> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'abstractVar: Unit' type=kotlin.reflect.KMutableProperty1<AbstractClass, kotlin.Unit> operator=null
+        CALL 'assertTrue(Boolean, String? = ...): Unit' type=kotlin.Unit operator=null
+          actual: CALL '<get-isAbstract>(): Boolean' type=kotlin.Boolean operator=GET_PROPERTY
+            $this: CALL '<get-setter>(): KMutableProperty1.Setter<AbstractClass, Unit>' type=kotlin.reflect.KMutableProperty1.Setter<AbstractClass, kotlin.Unit> operator=GET_PROPERTY
+              $this: CALLABLE_REFERENCE 'abstractVar: Unit' type=kotlin.reflect.KMutableProperty1<AbstractClass, kotlin.Unit> operator=null
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'

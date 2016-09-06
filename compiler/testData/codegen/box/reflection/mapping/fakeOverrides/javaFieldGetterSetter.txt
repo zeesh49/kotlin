@@ -1,0 +1,54 @@
+MODULE <test-module>
+  FILE /javaFieldGetterSetter.kt
+    CLASS CLASS TestBase
+      CONSTRUCTOR public constructor TestBase()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor Any()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='TestBase'
+      PROPERTY public final var id: kotlin.Long
+        EXPRESSION_BODY
+          CONST Long type=kotlin.Long value='0'
+    CLASS CLASS TestChild
+      CONSTRUCTOR public constructor TestChild()
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'constructor TestBase()'
+          INSTANCE_INITIALIZER_CALL classDescriptor='TestChild'
+    FUN public fun box(): kotlin.String
+      BLOCK_BODY
+        VAR val property: kotlin.reflect.KMutableProperty<*>
+          TYPE_OP operator=CAST typeOperand=kotlin.reflect.KMutableProperty<*>
+            CALL 'first((KProperty1<TestChild, *>) -> Boolean) on Iterable<KProperty1<TestChild, *>>: KProperty1<TestChild, *>' type=kotlin.reflect.KProperty1<TestChild, *> operator=null
+              $receiver: CALL '<get-memberProperties>() on KClass<TestChild>: Collection<KProperty1<TestChild, *>>' type=kotlin.collections.Collection<kotlin.reflect.KProperty1<TestChild, *>> operator=GET_PROPERTY
+                $receiver: CLASS_REFERENCE 'TestChild' type=kotlin.reflect.KClass<TestChild>
+              predicate: BLOCK type=(kotlin.reflect.KProperty1<TestChild, *>) -> kotlin.Boolean operator=LAMBDA
+                FUN local final fun <anonymous>(it: kotlin.reflect.KProperty1<TestChild, *>): kotlin.Boolean
+                  BLOCK_BODY
+                    RETURN type=kotlin.Nothing from='<anonymous>(KProperty1<TestChild, *>): Boolean'
+                      CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+                        arg0: CALL '<get-name>(): String' type=kotlin.String operator=GET_PROPERTY
+                          $this: GET_VAR 'value-parameter it: KProperty1<TestChild, *>' type=kotlin.reflect.KProperty1<TestChild, *> operator=null
+                        arg1: CONST String type=kotlin.String value='id'
+                CALLABLE_REFERENCE '<anonymous>(KProperty1<TestChild, *>): Boolean' type=(kotlin.reflect.KProperty1<TestChild, *>) -> kotlin.Boolean operator=LAMBDA
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL '<get-javaField>() on KProperty<*>: Field?' type=java.lang.reflect.Field? operator=GET_PROPERTY
+              $receiver: GET_VAR 'property: KMutableProperty<*>' type=kotlin.reflect.KMutableProperty<*> operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail: no field'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL '<get-javaGetter>() on KProperty<*>: Method?' type=java.lang.reflect.Method? operator=GET_PROPERTY
+              $receiver: GET_VAR 'property: KMutableProperty<*>' type=kotlin.reflect.KMutableProperty<*> operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail: no getter'
+        WHEN type=kotlin.Unit operator=IF
+          if: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean operator=EQEQ
+            arg0: CALL '<get-javaSetter>() on KMutableProperty<*>: Method?' type=java.lang.reflect.Method? operator=GET_PROPERTY
+              $receiver: GET_VAR 'property: KMutableProperty<*>' type=kotlin.reflect.KMutableProperty<*> operator=null
+            arg1: CONST Null type=kotlin.Nothing? value='null'
+          then: RETURN type=kotlin.Nothing from='box(): String'
+            CONST String type=kotlin.String value='Fail: no setter'
+        RETURN type=kotlin.Nothing from='box(): String'
+          CONST String type=kotlin.String value='OK'
