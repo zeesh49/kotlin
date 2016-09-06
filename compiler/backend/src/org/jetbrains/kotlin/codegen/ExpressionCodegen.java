@@ -54,6 +54,7 @@ import org.jetbrains.kotlin.coroutines.CoroutineUtilKt;
 import org.jetbrains.kotlin.descriptors.*;
 import org.jetbrains.kotlin.descriptors.impl.LocalVariableDescriptor;
 import org.jetbrains.kotlin.descriptors.impl.SyntheticFieldDescriptor;
+import org.jetbrains.kotlin.descriptors.impl.TypeAliasConstructorDescriptor;
 import org.jetbrains.kotlin.diagnostics.DiagnosticUtils;
 import org.jetbrains.kotlin.diagnostics.Errors;
 import org.jetbrains.kotlin.incremental.components.NoLookupLocation;
@@ -3977,6 +3978,9 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
         FunctionDescriptor accessibleDescriptor = accessibleFunctionDescriptor(resolvedCall);
         assert accessibleDescriptor instanceof ConstructorDescriptor :
                 "getConstructorDescriptor must be called only for constructors: " + accessibleDescriptor;
+        if (accessibleDescriptor instanceof TypeAliasConstructorDescriptor) {
+            return ((TypeAliasConstructorDescriptor) accessibleDescriptor).getUnderlyingConstructorDescriptor();
+        }
         return (ConstructorDescriptor) accessibleDescriptor;
     }
 
