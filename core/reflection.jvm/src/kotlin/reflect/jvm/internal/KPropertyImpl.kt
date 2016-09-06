@@ -48,37 +48,13 @@ internal interface KPropertyImpl<out R> : KProperty<R>, KCallableImpl<R> {
     override val isConst: Boolean
         get() = descriptor.isConst
 
-    abstract class Accessor<out R> : KProperty.Accessor<R> {
-        abstract override val property: KPropertyImpl<R>
+    interface Accessor<out R> : KProperty.Accessor<R> {
+        override val property: KPropertyImpl<R>
 
-        internal abstract val descriptor: PropertyAccessorDescriptor
-
-        @Suppress("unused") // Used as an implementation of KFunction#isInline in subclasses
-        val isInline: Boolean
-            get() = descriptor.isInline
-
-        @Suppress("unused")
-        val isExternal: Boolean
-            get() = descriptor.isExternal
-
-        @Suppress("unused")
-        val isOperator: Boolean
-            get() = descriptor.isOperator
-
-        @Suppress("unused")
-        val isInfix: Boolean
-            get() = descriptor.isInfix
-
-        @Suppress("unused")
-        val isTailrec: Boolean
-            get() = descriptor.isTailrec
-
-        @Suppress("unused")
-        val isSuspend: Boolean
-            get() = descriptor.isSuspend
+        val descriptor: PropertyAccessorDescriptor
     }
 
-    abstract class Getter<out R> : Accessor<R>(), KProperty.Getter<R>, KCallableImpl<R> {
+    abstract class Getter<out R> : Accessor<R>, KProperty.Getter<R>, KCallableImpl<R> {
         override val name: String get() = "<get-${property.name}>"
 
         override val container: KDeclarationContainerImpl get() = property.container
@@ -93,9 +69,16 @@ internal interface KPropertyImpl<out R> : KProperty<R>, KCallableImpl<R> {
         }
 
         override val defaultCaller: FunctionCaller<*>? get() = null
+
+        override val isInline: Boolean get() = descriptor.isInline
+        override val isExternal: Boolean get() = descriptor.isExternal
+        override val isOperator: Boolean get() = descriptor.isOperator
+        override val isInfix: Boolean get() = descriptor.isInfix
+        override val isTailrec: Boolean get() = descriptor.isTailrec
+        override val isSuspend: Boolean get() = descriptor.isSuspend
     }
 
-    abstract class Setter<R> : Accessor<R>(), KMutableProperty.Setter<R>, KCallableImpl<Unit> {
+    abstract class Setter<R> : Accessor<R>, KMutableProperty.Setter<R>, KCallableImpl<Unit> {
         override val name: String get() = "<set-${property.name}>"
 
         override val container: KDeclarationContainerImpl get() = property.container
@@ -110,6 +93,13 @@ internal interface KPropertyImpl<out R> : KProperty<R>, KCallableImpl<R> {
         }
 
         override val defaultCaller: FunctionCaller<*>? get() = null
+
+        override val isInline: Boolean get() = descriptor.isInline
+        override val isExternal: Boolean get() = descriptor.isExternal
+        override val isOperator: Boolean get() = descriptor.isOperator
+        override val isInfix: Boolean get() = descriptor.isInfix
+        override val isTailrec: Boolean get() = descriptor.isTailrec
+        override val isSuspend: Boolean get() = descriptor.isSuspend
     }
 }
 
