@@ -35,7 +35,7 @@ internal abstract class KPropertyImpl<out R> protected constructor(
         override val name: String,
         val signature: String,
         descriptorInitialValue: PropertyDescriptor?
-) : KProperty<R>, KCallableImpl<R> {
+) : KCallableImpl<R>(), KProperty<R> {
     constructor(container: KDeclarationContainerImpl, name: String, signature: String) : this(
             container, name, signature, null
     )
@@ -109,7 +109,7 @@ internal abstract class KPropertyImpl<out R> protected constructor(
         val descriptor: PropertyAccessorDescriptor
     }
 
-    abstract class Getter<out R> : Accessor<R>, KProperty.Getter<R>, KCallableImpl<R> {
+    abstract class Getter<out R> : KCallableImpl<R>(), Accessor<R>, KProperty.Getter<R> {
         override val name: String get() = "<get-${property.name}>"
 
         override val container: KDeclarationContainerImpl get() = property.container
@@ -133,7 +133,7 @@ internal abstract class KPropertyImpl<out R> protected constructor(
         override val isSuspend: Boolean get() = descriptor.isSuspend
     }
 
-    abstract class Setter<R> : Accessor<R>, KMutableProperty.Setter<R>, KCallableImpl<Unit> {
+    abstract class Setter<R> : KCallableImpl<Unit>(), Accessor<R>, KMutableProperty.Setter<R> {
         override val name: String get() = "<set-${property.name}>"
 
         override val container: KDeclarationContainerImpl get() = property.container
