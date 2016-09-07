@@ -66,43 +66,48 @@ public class ReflectionFactoryImpl extends ReflectionFactory {
 
     @Override
     public KFunction function(FunctionReference f) {
-        KDeclarationContainer owner = f.getOwner();
-        return new KFunctionImpl(
-                owner instanceof KDeclarationContainerImpl ? ((KDeclarationContainerImpl) owner) : EmptyContainerForLocal.INSTANCE,
-                f.getName(),
-                f.getSignature()
-        );
+        return new KFunctionImpl(getOwner(f), f.getName(), f.getSignature());
     }
 
     // Properties
 
     @Override
     public KProperty0 property0(PropertyReference0 p) {
-        return new KProperty0Augmented(p);
+        return new KProperty0Impl(getOwner(p), p.getName(), p.getSignature());
     }
 
     @Override
     public KMutableProperty0 mutableProperty0(MutablePropertyReference0 p) {
-        return new KMutableProperty0Augmented(p);
+        return new KMutableProperty0Impl(getOwner(p), p.getName(), p.getSignature());
     }
 
     @Override
     public KProperty1 property1(PropertyReference1 p) {
-        return new KProperty1Augmented(p);
+        return new KProperty1Impl(getOwner(p), p.getName(), p.getSignature());
     }
 
     @Override
     public KMutableProperty1 mutableProperty1(MutablePropertyReference1 p) {
-        return new KMutableProperty1Augmented(p);
+        return new KMutableProperty1Impl(getOwner(p), p.getName(), p.getSignature());
     }
 
     @Override
     public KProperty2 property2(PropertyReference2 p) {
-        return new KProperty2Augmented(p);
+        return new KProperty2Impl(getOwner(p), p.getName(), p.getSignature());
     }
 
     @Override
     public KMutableProperty2 mutableProperty2(MutablePropertyReference2 p) {
-        return new KMutableProperty2Augmented(p);
+        return new KMutableProperty2Impl(getOwner(p), p.getName(), p.getSignature());
+    }
+
+    private static KDeclarationContainerImpl getOwner(CallableReference reference) {
+        KDeclarationContainer owner = reference.getOwner();
+        return owner instanceof KDeclarationContainerImpl ? ((KDeclarationContainerImpl) owner) : EmptyContainerForLocal.INSTANCE;
+    }
+
+    private static KDeclarationContainerImpl getOwner(FunctionReference reference) {
+        KDeclarationContainer owner = reference.getOwner();
+        return owner instanceof KDeclarationContainerImpl ? ((KDeclarationContainerImpl) owner) : EmptyContainerForLocal.INSTANCE;
     }
 }

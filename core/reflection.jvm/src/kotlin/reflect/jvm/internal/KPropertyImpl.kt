@@ -32,7 +32,7 @@ import kotlin.reflect.jvm.internal.JvmPropertySignature.*
 
 internal abstract class KPropertyImpl<out R> protected constructor(
         override val container: KDeclarationContainerImpl,
-        name: String,
+        override val name: String,
         val signature: String,
         descriptorInitialValue: PropertyDescriptor?
 ) : KProperty<R>, KCallableImpl<R> {
@@ -83,8 +83,6 @@ internal abstract class KPropertyImpl<out R> protected constructor(
     }
 
     override val descriptor: PropertyDescriptor get() = descriptor_()
-
-    override val name: String get() = descriptor.name.asString()
 
     override val caller: FunctionCaller<*> get() = getter.caller
 
