@@ -19,7 +19,6 @@ package kotlin.reflect.jvm.internal;
 import kotlin.jvm.internal.*;
 import kotlin.reflect.*;
 import kotlin.reflect.jvm.ReflectLambdaKt;
-import org.jetbrains.kotlin.descriptors.FunctionDescriptor;
 
 /**
  * @suppress
@@ -67,7 +66,12 @@ public class ReflectionFactoryImpl extends ReflectionFactory {
 
     @Override
     public KFunction function(FunctionReference f) {
-        return new KFunctionFromReferenceImpl(f);
+        KDeclarationContainer owner = f.getOwner();
+        return new KFunctionImpl(
+                owner instanceof KDeclarationContainerImpl ? ((KDeclarationContainerImpl) owner) : EmptyContainerForLocal.INSTANCE,
+                f.getName(),
+                f.getSignature()
+        );
     }
 
     // Properties
