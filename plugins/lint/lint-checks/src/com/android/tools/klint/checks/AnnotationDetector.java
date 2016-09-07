@@ -684,7 +684,7 @@ public class AnnotationDetector extends Detector implements JavaPsiScanner {
                             ListIterator<PsiElement> iterator = fields.listIterator();
                             while (iterator.hasNext()) {
                                 PsiElement field = iterator.next();
-                                if (field.equals(resolved)) {
+                                if (field.isEquivalentTo(resolved)) {
                                     iterator.remove();
                                     found = true;
                                     break;

@@ -16,6 +16,7 @@
 
 package org.jetbrains.uast.java
 
+import com.intellij.psi.PsiAnnotationMethod
 import com.intellij.psi.PsiMethod
 import com.intellij.psi.PsiNameIdentifierOwner
 import org.jetbrains.uast.*
@@ -40,7 +41,20 @@ open class JavaUMethod(
     override fun equals(other: Any?) = this === other
     override fun hashCode() = psi.hashCode()
 
-    private companion object {
-        tailrec fun unwrap(psi: PsiMethod): PsiMethod = if (psi is UMethod) unwrap(psi.psi) else psi
+    companion object {
+        private tailrec fun unwrap(psi: PsiMethod): PsiMethod = if (psi is UMethod) unwrap(psi.psi) else psi
+        
+        fun create(psi: PsiMethod, languagePlugin: UastLanguagePlugin, containingElement: UElement?) = when (psi) {
+            is PsiAnnotationMethod -> JavaUAnnotationMethod(psi, languagePlugin, containingElement)
+            else -> JavaUMethod(psi, languagePlugin, containingElement)
+        }
     }
+}
+
+class JavaUAnnotationMethod(
+        override val psi: PsiAnnotationMethod,
+        languagePlugin: UastLanguagePlugin,
+        containingElement: UElement?
+) : JavaUMethod(psi, languagePlugin, containingElement), UAnnotationMethod {
+    override val uastDefaultValue by lz { languagePlugin.convertOpt<UExpression>(psi.defaultValue, this) }
 }

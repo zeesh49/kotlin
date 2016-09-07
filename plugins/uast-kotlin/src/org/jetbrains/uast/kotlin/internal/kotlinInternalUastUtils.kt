@@ -57,7 +57,7 @@ internal fun DeclarationDescriptor.toSource() = try {
 
 internal fun <T> lz(initializer: () -> T) = lazy(LazyThreadSafetyMode.NONE, initializer)
 
-internal fun KotlinType.toPsiType(element: KtElement, boxed: Boolean): PsiType {
+internal fun KotlinType.toPsiType(source: UElement, element: KtElement, boxed: Boolean): PsiType {
     if (this.isError) return UastErrorType
     
     val project = element.project
@@ -73,12 +73,13 @@ internal fun KotlinType.toPsiType(element: KtElement, boxed: Boolean): PsiType {
     val javaType = SignatureParsing.parseTypeString(signature, StubBuildingVisitor.GUESSING_MAPPER)
     val typeInfo = TypeInfo.fromString(javaType, false)
     val typeText = TypeInfo.createTypeText(typeInfo) ?: return UastErrorType
-    return ClsTypeElementImpl(element, typeText, '\u0000').type
+    
+    return ClsTypeElementImpl(source.getParentOfType<UDeclaration>(false)?.psi ?: element, typeText, '\u0000').type
 }
 
-internal fun KtTypeReference?.toPsiType(boxed: Boolean = false): PsiType {
+internal fun KtTypeReference?.toPsiType(source: UElement, boxed: Boolean = false): PsiType {
     if (this == null) return UastErrorType
-    return (analyze()[BindingContext.TYPE, this] ?: return UastErrorType).toPsiType(this, boxed)
+    return (analyze()[BindingContext.TYPE, this] ?: return UastErrorType).toPsiType(source, this, boxed)
 }
 
 internal fun KtClassOrObject.toPsiType(): PsiType {

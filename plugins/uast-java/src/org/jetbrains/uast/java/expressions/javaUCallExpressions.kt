@@ -29,11 +29,10 @@ class JavaUCallExpression(
     override val kind: UastCallKind
         get() = UastCallKind.METHOD_CALL
 
-    override val methodReference by lz {
+    override val methodIdentifier by lz {
         val methodExpression = psi.methodExpression
         val nameElement = methodExpression.referenceNameElement ?: return@lz null
-        val name = methodExpression.referenceName ?: return@lz null
-        JavaUSimpleNameReferenceExpression(nameElement, name, this, methodExpression) 
+        UIdentifier(nameElement, this) 
     }
 
     override val classReference: UReferenceExpression?
@@ -100,7 +99,7 @@ class JavaConstructorUCallExpression(
     override val receiverType: PsiType?
         get() = null
     
-    override val methodReference: UReferenceExpression?
+    override val methodIdentifier: UIdentifier?
         get() = null
 
     override val classReference by lz {
@@ -152,7 +151,7 @@ class JavaArrayInitializerUCallExpression(
         override val psi: PsiArrayInitializerExpression,
         override val containingElement: UElement?
 ) : JavaAbstractUExpression(), UCallExpression, PsiElementBacked {
-    override val methodReference: UReferenceExpression?
+    override val methodIdentifier: UIdentifier?
         get() = null
 
     override val classReference: UReferenceExpression?
@@ -192,7 +191,7 @@ class JavaAnnotationArrayInitializerUCallExpression(
     override val kind: UastCallKind
         get() = UastCallKind.NESTED_ARRAY_INITIALIZER
 
-    override val methodReference: UReferenceExpression?
+    override val methodIdentifier: UIdentifier?
         get() = null
 
     override val classReference: UReferenceExpression?

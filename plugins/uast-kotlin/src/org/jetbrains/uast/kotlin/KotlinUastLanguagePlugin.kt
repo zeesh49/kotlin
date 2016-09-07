@@ -114,9 +114,11 @@ class KotlinUastLanguagePlugin : UastLanguagePlugin() {
         
         val original = element.originalElement
         return when (original) {
-            is KtLightMethod -> KotlinUMethod(original, this, parent)
+            is KtLightMethod -> KotlinUMethod.create(original, this, parent)
             is KtLightClass -> KotlinUClass.create(original, this, parent)
-            is KtLightField, is KtLightParameter -> KotlinUVariable.create(original as PsiVariable, this, parent)
+            is KtLightField, is KtLightParameter, is UastKotlinPsiParameter, is UastKotlinPsiVariable -> {
+                KotlinUVariable.create(original as PsiVariable, this, parent)
+            }
 
             is KtClassOrObject -> original.toLightClass()?.let { lightClass -> KotlinUClass.create(lightClass, this, parent) }
             is KtFunction -> {
@@ -142,7 +144,7 @@ internal object KotlinConverter : UastConverter {
         is KtParameterList -> KotlinUVariableDeclarationsExpression(parent).apply {
             val languagePlugin = parent!!.getLanguagePlugin()
             variables = element.parameters.mapIndexed { i, p -> 
-                KotlinUVariable.create(UastKotlinPsiParameter.create(p, element, i), languagePlugin, this)
+                KotlinUVariable.create(UastKotlinPsiParameter.create(p, element, parent, i), languagePlugin, this)
             }
         }
         is KtClassBody -> KotlinUExpressionList(element, KotlinSpecialExpressionKinds.CLASS_BODY, parent).apply {
@@ -152,7 +154,7 @@ internal object KotlinConverter : UastConverter {
         is KtExpression -> KotlinConverter.convertExpression(element, parent)
         else -> {
             if (element is LeafPsiElement && element.elementType == KtTokens.IDENTIFIER) {
-                asSimpleReference(element, parent)
+                UIdentifier(element, parent)
             } else {
                 null
             }
@@ -165,7 +167,7 @@ internal object KotlinConverter : UastConverter {
     ): UVariableDeclarationsExpression {
         val languagePlugin = parent!!.getLanguagePlugin()
         val parentPsiElement = (parent as? PsiElementBacked)?.psi
-        val variable = KotlinUVariable.create(UastKotlinPsiVariable.create(psi, parentPsiElement), languagePlugin, parent)
+        val variable = KotlinUVariable.create(UastKotlinPsiVariable.create(psi, parentPsiElement, parent), languagePlugin, parent)
         return KotlinUVariableDeclarationsExpression(parent).apply { variables = listOf(variable) }
     }
     
@@ -204,12 +206,12 @@ internal object KotlinConverter : UastConverter {
         }
         is KtDestructuringDeclaration -> KotlinUVariableDeclarationsExpression(parent).apply {
             val languagePlugin = parent!!.getLanguagePlugin()
-            val tempAssignment = KotlinUVariable.create(UastKotlinPsiVariable.create(expression), languagePlugin, parent)
+            val tempAssignment = KotlinUVariable.create(UastKotlinPsiVariable.create(expression, parent), languagePlugin, parent)
             val destructuringAssignments = expression.entries.mapIndexed { i, entry ->
                 val psiFactory = KtPsiFactory(expression.project)
                 val initializer = psiFactory.createExpression("${tempAssignment.name}.component${i + 1}()")
                 KotlinUVariable.create(UastKotlinPsiVariable.create(
-                        entry, tempAssignment.psi, initializer), languagePlugin, parent) 
+                        entry, tempAssignment.psi, parent, initializer), languagePlugin, parent) 
             }
             variables = listOf(tempAssignment) + destructuringAssignments
         }
@@ -247,12 +249,7 @@ internal object KotlinConverter : UastConverter {
 
         else -> UnknownKotlinExpression(expression, parent)
     }
-
-    internal fun asSimpleReference(element: PsiElement?, parent: UElement?): USimpleNameReferenceExpression? {
-        if (element == null) return null
-        return KotlinNameUSimpleReferenceExpression(element, KtPsiUtil.unquoteIdentifier(element.text), parent)
-    }
-
+    
     internal fun convertOrEmpty(expression: KtExpression?, parent: UElement?): UExpression {
         return if (expression != null) convertExpression(expression, parent) else UastEmptyExpression
     }

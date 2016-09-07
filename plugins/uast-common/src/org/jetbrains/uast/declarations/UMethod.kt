@@ -20,5 +20,22 @@ interface UMethod : UDeclaration, PsiMethod {
         visitor.afterVisitMethod(this)
     }
 
-    override fun logString() = "UMethod (name = $name"
+    override fun logString() = "UMethod (name = $name)"
+}
+
+interface UAnnotationMethod : UMethod, PsiAnnotationMethod {
+    override val psi: PsiAnnotationMethod
+    val uastDefaultValue: UExpression?
+
+    override fun getDefaultValue() = psi.defaultValue
+
+    override fun accept(visitor: UastVisitor) {
+        if (visitor.visitMethod(this)) return
+        uastAnnotations.acceptList(visitor)
+        uastBody?.accept(visitor)
+        uastDefaultValue?.accept(visitor)
+        visitor.afterVisitMethod(this)
+    }
+
+    override fun logString() = "UAnnotationMethod (name = $name)"
 }

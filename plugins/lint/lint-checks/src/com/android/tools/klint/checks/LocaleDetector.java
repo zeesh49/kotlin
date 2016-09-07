@@ -101,7 +101,7 @@ public class LocaleDetector extends Detector implements Detector.UastScanner {
     @Override
     public void visitMethod(@NonNull JavaContext context, @Nullable UastVisitor visitor,
             @NonNull UCallExpression call, @NonNull UMethod method) {
-        if (context.getEvaluator().isMemberInClass(method, TYPE_STRING)) {
+        if (JavaEvaluator.isMemberInClass(method, TYPE_STRING)) {
             String name = method.getName();
             if (name.equals(FORMAT_METHOD)) {
                 checkFormat(context, method, call);

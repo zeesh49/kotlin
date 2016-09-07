@@ -148,7 +148,7 @@ public class LogDetector extends Detector implements Detector.UastScanner {
     public void visitMethod(@NonNull JavaContext context, @Nullable UastVisitor visitor,
             @NonNull UCallExpression node, @NonNull UMethod method) {
         JavaEvaluator evaluator = context.getEvaluator();
-        if (!evaluator.isMemberInClass(method, LOG_CLS)) {
+        if (!JavaEvaluator.isMemberInClass(method, LOG_CLS)) {
             return;
         }
 
@@ -165,7 +165,7 @@ public class LogDetector extends Detector implements Detector.UastScanner {
             String message = String.format("The log call Log.%1$s(...) should be " +
                             "conditional: surround with `if (Log.isLoggable(...))` or " +
                             "`if (BuildConfig.DEBUG) { ... }`",
-                    node.getMethodReference());
+                    node.getMethodIdentifier());
             context.report(CONDITIONAL, node, context.getUastLocation(node), message);
         }
 
@@ -233,7 +233,7 @@ public class LogDetector extends Detector implements Detector.UastScanner {
 
         return false;
     }
-
+    
     private static boolean checkWithinConditional(
             @NonNull JavaContext context,
             @Nullable UElement curr,
@@ -241,8 +241,9 @@ public class LogDetector extends Detector implements Detector.UastScanner {
         while (curr != null) {
             if (curr instanceof UIfExpression) {
                 UIfExpression ifNode = (UIfExpression) curr;
-                if (ifNode.getCondition() instanceof UCallExpression) {
-                    UCallExpression call = (UCallExpression) ifNode.getCondition();
+                List<UExpression> chain = UastUtils.getQualifiedChain(ifNode.getCondition());
+                if (!chain.isEmpty() && chain.get(chain.size() - 1) instanceof UCallExpression) {
+                    UCallExpression call = (UCallExpression) chain.get(chain.size() - 1);
                     if (IS_LOGGABLE.equals(call.getMethodName())) {
                         checkTagConsistent(context, logCall, call);
                     }
@@ -340,7 +341,7 @@ public class LogDetector extends Detector implements Detector.UastScanner {
                     "Mismatched logging levels: when checking `isLoggable` level `%1$s`, the " +
                             "corresponding log call should be `Log.%2$s`, not `Log.%3$s`",
                     resolved.getName(), expectedCall, logCallName);
-            Location location = context.getUastLocation(logCall.getMethodReference());
+            Location location = context.getUastLocation(logCall.getMethodIdentifier());
             Location alternate = context.getUastLocation(isLoggableLevel);
             alternate.setMessage("Conflicting tag");
             location.setSecondary(alternate);

@@ -18,16 +18,19 @@ package org.jetbrains.uast.kotlin.declarations
 
 import org.jetbrains.kotlin.asJava.elements.KtLightElement
 import org.jetbrains.kotlin.asJava.elements.KtLightMethod
+import org.jetbrains.kotlin.asJava.elements.KtLightMethodImpl
 import org.jetbrains.kotlin.psi.KtFunction
+import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.uast.kotlin.lz
 import org.jetbrains.uast.*
 import org.jetbrains.uast.java.JavaUMethod
 
 open class KotlinUMethod(
-        override val psi: KtLightMethod,
+        psi: KtLightMethod,
         languagePlugin: UastLanguagePlugin,
         containingElement: UElement?
 ) : JavaUMethod(psi, languagePlugin, containingElement) {
+    override val psi: KtLightMethod = psi
     private val kotlinOrigin = (psi.originalElement as KtLightElement<*, *>).kotlinOrigin
 
     override val uastBody by lz {
@@ -37,5 +40,24 @@ open class KotlinUMethod(
             else -> null
         } ?: return@lz null
         languagePlugin.convertOpt<UExpression>(bodyExpression, this)
+    }
+    
+    companion object {
+        fun create(psi: KtLightMethod, languagePlugin: UastLanguagePlugin, containingElement: UElement?) = when (psi) {
+            is KtLightMethodImpl.KtLightAnnotationMethod -> KotlinUAnnotationMethod(psi, languagePlugin, containingElement)
+            else -> KotlinUMethod(psi, languagePlugin, containingElement)
+        }
+    }
+}
+
+class KotlinUAnnotationMethod(
+        override val psi: KtLightMethodImpl.KtLightAnnotationMethod,
+        languagePlugin: UastLanguagePlugin,
+        containingElement: UElement?
+) : KotlinUMethod(psi, languagePlugin, containingElement), UAnnotationMethod {
+    override val uastDefaultValue by lz {
+        val annotationParameter = psi.kotlinOrigin as? KtParameter ?: return@lz null
+        val defaultValue = annotationParameter.defaultValue ?: return@lz null
+        languagePlugin.convertOpt<UExpression>(defaultValue, this)
     }
 }

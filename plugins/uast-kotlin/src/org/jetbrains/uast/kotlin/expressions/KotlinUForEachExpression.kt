@@ -32,7 +32,7 @@ class KotlinUForEachExpression(
     override val body by lz { KotlinConverter.convertOrEmpty(psi.body, this) }
     
     override val variable by lz {
-        val parameter = psi.loopParameter?.let { UastKotlinPsiParameter.create(it, psi, 0) } 
+        val parameter = psi.loopParameter?.let { UastKotlinPsiParameter.create(it, psi, this, 0) } 
                 ?: UastPsiParameterNotResolved(psi, KotlinLanguage.INSTANCE)
         KotlinUParameter(parameter, getLanguagePlugin(), this)
     }

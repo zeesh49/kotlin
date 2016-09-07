@@ -178,7 +178,7 @@ public class RecyclerViewDetector extends Detector implements Detector.UastScann
                 // this means that the *last* element will overwrite previous entries,
                 // and we end up with the last reference for each parent which is what we
                 // want
-                UExpression statement = UastUtils.getParentOfType(reference, UExpression.class);
+                UExpression statement = UastUtils.getParentOfType(reference, UExpression.class, true);
                 if (statement != null) {
                     parentToChildren.put(statement.getContainingElement(), reference);
                 }

@@ -8,6 +8,8 @@ import com.intellij.psi.PsiNamedElement
 import com.intellij.psi.util.PsiTreeUtil
 import org.jetbrains.uast.expressions.UReferenceExpression
 
+inline fun <reified T : UElement> UElement.getParentOfType(strict: Boolean = true): T? = getParentOfType(T::class.java, strict)
+
 @JvmOverloads
 fun <T : UElement> UElement.getParentOfType(parentClass: Class<out UElement>, strict: Boolean = true): T? {
     var element = (if (strict) containingElement else this) ?: return null
@@ -22,7 +24,7 @@ fun <T : UElement> UElement.getParentOfType(parentClass: Class<out UElement>, st
 
 fun <T : UElement> UElement.getParentOfType(
         parentClass: Class<out UElement>, 
-        strict: Boolean = true, 
+        strict: Boolean = true,
         vararg terminators: Class<out UElement>
 ): T? {
     var element = (if (strict) containingElement else this) ?: return null
@@ -38,9 +40,17 @@ fun <T : UElement> UElement.getParentOfType(
     }
 }
 
-fun <T : UElement> UElement.getParentOfType(strict: Boolean, vararg parentClasses: Class<out T>): T? {
+fun <T : UElement> UElement.getParentOfType(
+        strict: Boolean = true, 
+        firstParentClass: Class<out T>,
+        vararg parentClasses: Class<out T>
+): T? {
     var element = (if (strict) containingElement else this) ?: return null
     while (true) {
+        if (firstParentClass.isInstance(element)) {
+            @Suppress("UNCHECKED_CAST")
+            return element as T
+        }
         if (parentClasses.any { it.isInstance(element) }) {
             @Suppress("UNCHECKED_CAST")
             return element as T

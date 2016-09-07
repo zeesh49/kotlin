@@ -103,7 +103,7 @@ open class KotlinUEnumConstant(
         get() = null
     override val receiverType: PsiType?
         get() = null
-    override val methodReference: UReferenceExpression?
+    override val methodIdentifier: UIdentifier?
         get() = null
     override val classReference: UReferenceExpression?
         get() = null

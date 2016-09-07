@@ -27,10 +27,10 @@ class KotlinUTypeCheckExpression(
 ) : KotlinAbstractUExpression(), UBinaryExpressionWithType, PsiElementBacked, KotlinUElementWithType, KotlinEvaluatableUElement {
     override val operand by lz { KotlinConverter.convertExpression(psi.leftHandSide, this) }
     
-    override val type by lz { psi.typeReference.toPsiType() }
+    override val type by lz { psi.typeReference.toPsiType(this) }
     
     override val typeReference by lz { 
-        psi.typeReference?.let { KotlinUTypeReferenceExpression(it.toPsiType(), it, this) } 
+        psi.typeReference?.let { KotlinUTypeReferenceExpression(it.toPsiType(this), it, this) } 
     }
     
     override val operationKind = KotlinBinaryExpressionWithTypeKinds.NEGATED_INSTANCE_CHECK

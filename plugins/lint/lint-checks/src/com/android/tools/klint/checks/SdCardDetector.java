@@ -27,6 +27,8 @@ import com.android.tools.klint.detector.api.Location;
 import com.android.tools.klint.detector.api.Scope;
 import com.android.tools.klint.detector.api.Severity;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.uast.UClass;
 import org.jetbrains.uast.UElement;
 import org.jetbrains.uast.ULiteralExpression;
 import org.jetbrains.uast.UastLiteralUtils;
@@ -85,6 +87,11 @@ public class SdCardDetector extends Detector implements Detector.UastScanner {
 
         private StringChecker(JavaContext context) {
             mContext = context;
+        }
+
+        @Override
+        public boolean visitClass(@NotNull UClass node) {
+            return super.visitClass(node);
         }
 
         @Override

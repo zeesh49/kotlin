@@ -52,7 +52,7 @@ interface UEnumConstant : UField, UCallExpression, PsiEnumConstant {
     override fun accept(visitor: UastVisitor) {
         if (visitor.visitVariable(this)) return
         uastAnnotations.acceptList(visitor)
-        methodReference?.accept(visitor)
+        methodIdentifier?.accept(visitor)
         classReference?.accept(visitor)
         valueArguments.acceptList(visitor)
         visitor.afterVisitVariable(this)

@@ -41,7 +41,7 @@ interface UCallExpression : UExpression, UResolvable {
     /**
      * Returns the function reference expression if the call is a non-constructor method call, null otherwise.
      */
-    val methodReference: UReferenceExpression?
+    val methodIdentifier: UIdentifier?
 
     /**
      * Returns the class reference if the call is a constructor call, null otherwise.
@@ -77,15 +77,16 @@ interface UCallExpression : UExpression, UResolvable {
 
     override fun accept(visitor: UastVisitor) {
         if (visitor.visitCallExpression(this)) return
-        methodReference?.accept(visitor)
+        methodIdentifier?.accept(visitor)
         classReference?.accept(visitor)
         valueArguments.acceptList(visitor)
         visitor.afterVisitCallExpression(this)
     }
 
-    override fun logString() = log("UCallExpression ($kind, argCount = $valueArgumentCount)", methodReference, valueArguments)
+    override fun logString() = log("UCallExpression ($kind, argCount = $valueArgumentCount)", methodIdentifier, valueArguments)
+    
     override fun renderString(): String {
-        val ref = methodName ?: classReference?.renderString() ?: methodReference?.renderString() ?: "<noref>"
+        val ref = classReference?.renderString() ?: methodName ?: methodIdentifier?.renderString() ?: "<noref>"
         return ref + "(" + valueArguments.joinToString { it.renderString() } + ")"
     }
 }

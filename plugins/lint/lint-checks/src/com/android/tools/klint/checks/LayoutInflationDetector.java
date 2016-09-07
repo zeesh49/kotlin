@@ -161,14 +161,14 @@ public class LayoutInflationDetector extends LayoutDetector implements Detector.
             return;
         }
 
+        UExpression second = arguments.get(1);
+        if (!UastLiteralUtils.isNullLiteral(second)) {
+            return;
+        }
+
         UExpression first = arguments.get(0);
         AndroidReference androidReference = UastLintUtils.toAndroidReferenceViaResolve(first);
         if (androidReference == null) {
-            return;
-        }
-        
-        UExpression second = arguments.get(1);
-        if (!UastLiteralUtils.isNullLiteral(second)) {
             return;
         }
 

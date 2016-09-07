@@ -220,7 +220,7 @@ public class JavaContext extends Context {
                 return getLocation(nameIdentifier);
             }
         } else if (element instanceof UCallExpression) {
-            UElement methodReference = ((UCallExpression) element).getMethodReference();
+            UElement methodReference = ((UCallExpression) element).getMethodIdentifier();
             if (methodReference != null) {
                 return getUastLocation(methodReference);
             }

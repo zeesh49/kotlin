@@ -31,10 +31,10 @@ class KotlinUBinaryExpressionWithType(
         KotlinUElementWithType, KotlinEvaluatableUElement {
     
     override val operand by lz { KotlinConverter.convertExpression(psi.left, this) }
-    override val type by lz { psi.right.toPsiType() }
+    override val type by lz { psi.right.toPsiType(this) }
     
     override val typeReference by lz { 
-        psi.right?.let { KotlinUTypeReferenceExpression(it.toPsiType(), it, this) } 
+        psi.right?.let { KotlinUTypeReferenceExpression(it.toPsiType(this), it, this) } 
     }
     
     override val operationKind = when (psi.operationReference.getReferencedNameElementType()) {

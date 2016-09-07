@@ -88,7 +88,7 @@ class JavaUastLanguagePlugin : UastLanguagePlugin() {
             is PsiJavaFile -> JavaUFile(element, this)
             is UDeclaration -> element
             is PsiClass -> JavaUClass.create(element, this, parent)
-            is PsiMethod -> JavaUMethod(element, this, parent)
+            is PsiMethod -> JavaUMethod.create(element, this, parent)
             is PsiVariable -> JavaUVariable.create(element, this, parent)
             is UAnnotation -> SimpleUAnnotation(element, this, parent)
             else -> null

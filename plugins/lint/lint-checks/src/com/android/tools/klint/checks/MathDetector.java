@@ -87,7 +87,7 @@ public class MathDetector extends Detector implements Detector.UastScanner {
                     "Use `java.lang.Math#%1$s` instead of `android.util.FloatMath#%1$s()` " +
                             "since it is faster as of API 8", method.getName());
             
-            Location location = context.getUastLocation(call.getMethodReference());
+            Location location = context.getUastLocation(call.getMethodIdentifier());
             context.report(ISSUE, call, location, message);
         }
     }

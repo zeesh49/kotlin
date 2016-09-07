@@ -27,7 +27,7 @@ interface KotlinUElementWithType : UExpression, PsiElementBacked {
     override fun getExpressionType(): PsiType? {
         val ktElement = psi as? KtExpression ?: return null
         val ktType = ktElement.analyze()[BindingContext.EXPRESSION_TYPE_INFO, ktElement]?.type ?: return null
-        return ktType.toPsiType(ktElement, boxed = false)
+        return ktType.toPsiType(this, ktElement, boxed = false)
     }
 }
 

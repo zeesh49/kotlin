@@ -26,7 +26,7 @@ class JavaUObjectLiteralExpression(
 ) : JavaAbstractUExpression(), UObjectLiteralExpression, PsiElementBacked {
     override val declaration by lz { JavaUClass.create(psi.anonymousClass!!, getLanguagePlugin(), this) }
 
-    override val methodReference = null
+    override val methodIdentifier = null
 
     override val classReference by lz {
         psi.classReference?.let { ref ->

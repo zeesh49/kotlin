@@ -39,6 +39,8 @@ import com.intellij.psi.PsiModifier;
 import com.intellij.psi.PsiModifierList;
 import com.intellij.psi.PsiType;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.uast.UClass;
 import org.jetbrains.uast.UField;
 import org.jetbrains.uast.UVariable;
 import org.jetbrains.uast.visitor.AbstractUastVisitor;
@@ -87,6 +89,11 @@ public class LeakDetector extends Detector implements Detector.UastScanner {
 
         private FieldChecker(JavaContext context) {
             mContext = context;
+        }
+
+        @Override
+        public boolean visitClass(@NotNull UClass node) {
+            return super.visitClass(node);
         }
 
         @Override

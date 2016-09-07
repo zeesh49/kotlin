@@ -31,7 +31,7 @@ class KotlinUObjectLiteralExpression(
     override fun getExpressionType() = psi.objectDeclaration.toPsiType()
 
     //TODO
-    override val methodReference: UReferenceExpression?
+    override val methodIdentifier: UIdentifier?
         get() = null
     override val classReference: UReferenceExpression?
         get() = null

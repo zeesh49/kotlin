@@ -244,8 +244,8 @@ public class UastLintUtils {
         PsiVariable variable = (PsiVariable) declaration;
         if (!(variable instanceof PsiField) 
                 || variable.getType() != PsiType.INT
-                || variable.hasModifierProperty(PsiModifier.STATIC) 
-                || variable.hasModifierProperty(PsiModifier.FINAL)) {
+                || !variable.hasModifierProperty(PsiModifier.STATIC) 
+                || !variable.hasModifierProperty(PsiModifier.FINAL)) {
             return null;
         }
         

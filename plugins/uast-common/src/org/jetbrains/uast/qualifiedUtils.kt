@@ -69,7 +69,7 @@ fun UExpression.asQualifiedPath(): List<String>? {
  *
  * @return list of qualified expressions, or the empty list if the received expression is not a qualified expression.
  */
-fun UExpression.getQualifiedChain(): List<UExpression> {
+fun UExpression?.getQualifiedChain(): List<UExpression> {
     fun collect(expr: UQualifiedReferenceExpression, chains: MutableList<UExpression>) {
         val receiver = expr.receiver.unwrapParenthesis()
         if (receiver is UQualifiedReferenceExpression) {
@@ -86,7 +86,8 @@ fun UExpression.getQualifiedChain(): List<UExpression> {
         }
     }
 
-    val qualifiedExpression = this.getOutermostQualified() ?: return emptyList()
+    if (this == null) return emptyList()
+    val qualifiedExpression = this as? UQualifiedReferenceExpression ?: return listOf(this)
     val chains = mutableListOf<UExpression>()
     collect(qualifiedExpression, chains)
     return chains

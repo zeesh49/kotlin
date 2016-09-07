@@ -26,7 +26,7 @@ class KotlinUClassLiteralExpression(
         override val psi: KtClassLiteralExpression,
         override val containingElement: UElement?
 ) : KotlinAbstractUExpression(), UClassLiteralExpression, PsiElementBacked, KotlinUElementWithType {
-    override val type by lz { psi.typeReference.toPsiType(boxed = true) }
+    override val type by lz { psi.typeReference.toPsiType(this, boxed = true) }
     
     override val expression: UExpression?
         get() = null
