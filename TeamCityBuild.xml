@@ -18,6 +18,8 @@
 
     <property name="plugin.zip" value="${artifact.output.path}/kotlin-plugin-${build.number}.zip"/>
 
+    <property name="bootstrap.build.no.tests" value="false"/>
+
     <macrodef name="echoprop">
         <attribute name="prop"/>
         <sequential>
@@ -95,7 +97,13 @@
         <delete dir="${version_substitute_dir}" quiet="true"/>
     </target>
 
-    <target name="pre_build" depends="writeVersionToTemplateFiles, cleanupArtifacts"/>
+    <target name="modifyBuildParameters">
+        <!-- don't run compiler tests -->
+        <echo message="##teamcity[setParameter name='idea.build.18.run.configurations' value='All Non Compiler Tests']"/>
+        <echo message="##teamcity[setParameter name='idea.build.16.run.configurations' value='']"/>
+    </target>
+
+    <target name="pre_build" depends="writeVersionToTemplateFiles, cleanupArtifacts, modifyBuildParameters"/>
 
     <target name="zipArtifacts">
         <macrodef name="zipPlugin">
@@ -157,14 +165,16 @@
 
     <condition property="need.remove.artifacts" value="true">
         <and>
-            <matches pattern="rr/.*" string="${teamcity.build.branch}"/>
+            <matches pattern="rr[i]?/.*" string="${teamcity.build.branch}"/>
             <not>
-                <matches pattern="rr/internal/.*" string="${teamcity.build.branch}"/>
+                <matches pattern="rr[i]?/internal/.*" string="${teamcity.build.branch}"/>
             </not>
         </and>
     </condition>
 
-    <target name="remove_internal_artifacts" description="Remove internal artifacts for rr/* branches, but store them for rr/internal/*" if="need.remove.artifacts">
+    <target name="remove_internal_artifacts"
+            description="Remove internal artifacts for rr[i]?/* branches, but store them for rr[i]?/internal/*"
+            if="need.remove.artifacts">
         <echo message="Remove internal artifacts" />
 
         <delete failonerror="false" verbose="true">
