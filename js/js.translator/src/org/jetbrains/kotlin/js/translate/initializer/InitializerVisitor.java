@@ -49,6 +49,8 @@ public final class InitializerVisitor extends TranslatorVisitor<Void> {
         if (initializer != null) {
             JsStatement statement = generateInitializerForProperty(context, getPropertyDescriptor(context.bindingContext(), property),
                                                                    Translation.translateAsExpression(initializer, context));
+            result.addAll(context.getCurrentBlock().getStatements());
+            context.getCurrentBlock().getStatements().clear();
             if (!JsAstUtils.isEmptyStatement(statement)) {
                 result.add(statement);
             }

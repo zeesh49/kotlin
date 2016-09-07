@@ -113,7 +113,7 @@ public final class ClassInitializerTranslator extends AbstractTranslator {
         }
 
         delegationTranslator.addInitCode(initializerStatements);
-        new InitializerVisitor(initializerStatements).traverseContainer(classDeclaration, context());
+        new InitializerVisitor(initializerStatements).traverseContainer(classDeclaration, context().innerBlock());
 
         List<JsStatement> statements = initFunction.getBody().getStatements();
 
