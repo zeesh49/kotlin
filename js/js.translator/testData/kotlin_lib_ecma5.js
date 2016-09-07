@@ -381,6 +381,19 @@
             return object instanceof klass;
         }
 
+        var proto = Object.getPrototypeOf(klass);
+        if (proto != null) {
+            proto = proto.constructor;
+        }
+        if (proto != null && "$metadata$" in proto) {
+            var metadata = proto.$metadata$;
+            if ('type' in metadata) {
+                if (metadata.type === Kotlin.TYPE.OBJECT) {
+                    return object === klass;
+                }
+            }
+        }
+
         // In WebKit (JavaScriptCore) for some interfaces from DOM typeof returns "object", nevertheless they can be used in RHS of instanceof
         if (isNativeClass(klass)) {
             return object instanceof klass;
