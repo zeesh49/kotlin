@@ -1,0 +1,262 @@
+/*
+ * Copyright 2010-2016 JetBrains s.r.o.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.jetbrains.kotlin.idea.codeInsight
+
+import com.intellij.psi.ElementDescriptionUtil
+import com.intellij.psi.PsiElement
+import com.intellij.refactoring.util.RefactoringDescriptionLocation
+import com.intellij.usageView.UsageViewShortNameLocation
+import com.intellij.xml.breadcrumbs.BreadcrumbsInfoProvider
+import org.jetbrains.kotlin.KtNodeTypes
+import org.jetbrains.kotlin.idea.KotlinLanguage
+import org.jetbrains.kotlin.psi.*
+import org.jetbrains.kotlin.psi.psiUtil.getCallNameExpression
+import org.jetbrains.kotlin.renderer.render
+import org.jetbrains.kotlin.resolve.calls.callUtil.getValueArgumentsInParentheses
+import kotlin.reflect.KClass
+
+class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
+    private abstract class ElementHandler<TElement : KtElement>(val type: KClass<TElement>) {
+        abstract fun elementInfo(element: TElement): String
+        abstract fun elementTooltip(element: TElement): String
+
+        open fun accepts(element: TElement): Boolean = true
+    }
+
+    private val handlers = listOf<ElementHandler<*>>(
+            LambdaHandler,
+            DeclarationHandler,
+            IfHandler,
+            ElseHandler,
+            TryHandler,
+            CatchHandler,
+            FinallyHandler,
+            WhileHandler,
+            DoWhileHandler,
+            WhenHandler,
+            WhenEntryHandler,
+            ForHandler
+    )
+
+    private object LambdaHandler : ElementHandler<KtFunctionLiteral>(KtFunctionLiteral::class) {
+        override fun elementInfo(element: KtFunctionLiteral): String {
+            val lambdaExpression = element.parent as KtLambdaExpression
+
+            val parent = lambdaExpression.parent
+            when (parent) {
+                is KtLambdaArgument -> {
+                    val callExpression = parent.parent as? KtCallExpression
+                    val callName = callExpression?.getCallNameExpression()?.getReferencedName()
+                    if (callName != null) {
+                        var argumentText = "(...)"
+                        if (callExpression.valueArgumentList != null) {
+                            val arguments = callExpression.getValueArgumentsInParentheses()
+                            when (arguments.size) {
+                                0 -> argumentText = "()"
+                                1 -> {
+                                    val argument = arguments.single()
+                                    val argumentExpression = argument.getArgumentExpression()
+                                    if (!argument.isNamed() && argument.getSpreadElement() == null && argumentExpression != null) {
+                                        argumentText = "(" + argumentExpression.shortText() + ")"
+                                    }
+                                }
+                            }
+                        }
+                        else {
+                            argumentText = ""
+                        }
+
+                        return callName + argumentText + " {...}"
+                    }
+                }
+
+                is KtProperty -> {
+                    val name = parent.nameAsName
+                    if (lambdaExpression == parent.initializer && name != null) {
+                        val valOrVar = if (parent.isVar) "var" else "val"
+                        return valOrVar + " " + name.render() + " = {...}"
+                    }
+                }
+            }
+
+            return "{...}"
+        }
+
+        //TODO
+        override fun elementTooltip(element: KtFunctionLiteral): String {
+            return ElementDescriptionUtil.getElementDescription(element, RefactoringDescriptionLocation.WITH_PARENT)
+        }
+    }
+
+    private object DeclarationHandler : ElementHandler<KtDeclaration>(KtDeclaration::class) {
+        override fun accepts(element: KtDeclaration): Boolean {
+            return element !is KtProperty
+        }
+
+        override fun elementInfo(element: KtDeclaration): String {
+            val description = ElementDescriptionUtil.getElementDescription(element, UsageViewShortNameLocation.INSTANCE)
+            val suffix = if (element is KtFunction) "()" else null
+            return if (suffix != null) description + suffix else description
+        }
+
+        override fun elementTooltip(element: KtDeclaration): String {
+            return ElementDescriptionUtil.getElementDescription(element, RefactoringDescriptionLocation.WITH_PARENT)
+        }
+    }
+
+    private abstract class ConstructWithExpressionHandler<TExpression : KtExpression>(
+            private val constructName: String,
+            type: KClass<TExpression>
+    ) : ElementHandler<TExpression>(type) {
+        protected abstract fun extractExpression(construct: TExpression): KtExpression?
+
+        override fun elementInfo(element: TExpression) = element.buildText(shortText = true)
+        override fun elementTooltip(element: TExpression) = element.buildText(shortText = false)
+
+        protected fun TExpression.buildText(shortText: Boolean): String {
+            val expression = extractExpression(this)
+            if (expression == null || shortText && !expression.isSimple()) {
+                return constructName
+            }
+            return "$constructName (${expression.text})"
+        }
+    }
+
+    private object IfHandler : ConstructWithExpressionHandler<KtIfExpression>("if", KtIfExpression::class) {
+        override fun extractExpression(construct: KtIfExpression) = construct.condition
+
+        override fun elementInfo(element: KtIfExpression): String {
+            return elseIfPrefix(element) + super.elementInfo(element)
+        }
+
+        override fun elementTooltip(element: KtIfExpression): String {
+            return elseIfPrefix(element) + super.elementTooltip(element)
+        }
+
+        private fun elseIfPrefix(element: KtIfExpression): String {
+            val isElseIf = element.parent.node.elementType == KtNodeTypes.ELSE
+            return if (isElseIf) "else " else ""
+        }
+    }
+
+    private object ElseHandler : ElementHandler<KtContainerNode>(KtContainerNode::class) {
+        override fun accepts(element: KtContainerNode): Boolean {
+            return element.node.elementType == KtNodeTypes.ELSE
+                   && (element.parent as KtIfExpression).`else` !is KtIfExpression // filter out "else if"
+
+        }
+
+        override fun elementInfo(element: KtContainerNode): String {
+            return "else"
+        }
+
+        override fun elementTooltip(element: KtContainerNode): String {
+            val ifExpression = element.parent as KtIfExpression
+            return "else (of '" + IfHandler.elementTooltip(ifExpression) + "')"
+        }
+    }
+
+    private object TryHandler : ElementHandler<KtTryExpression>(KtTryExpression::class) {
+        override fun elementInfo(element: KtTryExpression) = "try"
+        override fun elementTooltip(element: KtTryExpression) = "try"
+    }
+
+    private object CatchHandler : ElementHandler<KtCatchClause>(KtCatchClause::class) {
+        override fun elementInfo(element: KtCatchClause): String {
+            val text = element.catchParameter?.text ?: ""
+            return "catch ($text)"
+        }
+
+        override fun elementTooltip(element: KtCatchClause): String {
+            return elementInfo(element)
+        }
+    }
+
+    private object FinallyHandler : ElementHandler<KtFinallySection>(KtFinallySection::class) {
+        override fun elementInfo(element: KtFinallySection) = "finally"
+        override fun elementTooltip(element: KtFinallySection) = "finally"
+    }
+
+    private object WhileHandler : ConstructWithExpressionHandler<KtWhileExpression>("while", KtWhileExpression::class) {
+        override fun extractExpression(construct: KtWhileExpression) = construct.condition
+    }
+
+    private object DoWhileHandler : ElementHandler<KtDoWhileExpression>(KtDoWhileExpression::class) {
+        override fun elementInfo(element: KtDoWhileExpression) = "do"
+        override fun elementTooltip(element: KtDoWhileExpression) = "do"
+    }
+
+    private object WhenHandler : ConstructWithExpressionHandler<KtWhenExpression>("when", KtWhenExpression::class) {
+        override fun extractExpression(construct: KtWhenExpression) = construct.subjectExpression
+    }
+
+    private object WhenEntryHandler : ElementHandler<KtWhenEntry>(KtWhenEntry::class) {
+        override fun elementInfo(element: KtWhenEntry) = element.buildText(shortText = true)
+        override fun elementTooltip(element: KtWhenEntry) = element.buildText(shortText = false)
+
+        private fun KtWhenEntry.buildText(shortText: Boolean): String {
+            if (isElse) {
+                return "else ->"
+            }
+            else {
+                return conditions.joinToString(separator = ", ") { it.text } + " ->" //TODO
+            }
+        }
+    }
+
+    private object ForHandler : ElementHandler<KtForExpression>(KtForExpression::class) {
+        override fun elementInfo(element: KtForExpression) = element.buildText(shortText = true)
+        override fun elementTooltip(element: KtForExpression) = element.buildText(shortText = false)
+
+        private fun KtForExpression.buildText(shortText: Boolean): String {
+            return "for" //TODO?
+        }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun handler(e: PsiElement): ElementHandler<in KtElement>? {
+        if (e !is KtElement) return null
+        val handler = handlers.firstOrNull { it.type.java.isInstance(e) && (it as ElementHandler<in KtElement>).accepts(e) }
+        return handler as ElementHandler<in KtElement>?
+    }
+
+    override fun getLanguages() = arrayOf(KotlinLanguage.INSTANCE)
+
+    override fun acceptElement(e: PsiElement) = handler(e) != null
+
+    override fun getElementInfo(e: PsiElement): String {
+        return handler(e)!!.elementInfo(e as KtElement)
+    }
+
+    override fun getElementTooltip(e: PsiElement): String {
+        return handler(e)!!.elementTooltip(e as KtElement)
+    }
+
+    override fun getParent(e: PsiElement): PsiElement? {
+        val node = e.node ?: return null
+        when (node.elementType) {
+            KtNodeTypes.ELSE, KtNodeTypes.CATCH, KtNodeTypes.FINALLY -> return e.parent.parent
+            else -> return e.parent
+        }
+    }
+}
+
+private fun KtExpression.shortText() = if (this.isSimple()) text else "..."
+
+private fun KtExpression.isSimple(): Boolean {
+    return this is KtNameReferenceExpression || this is KtConstantExpression //TODO: better criteria?
+}
