@@ -40,6 +40,9 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
 
     private val handlers = listOf<ElementHandler<*>>(
             LambdaHandler,
+            AnonymousObjectHandler,
+            AnonymousFunctionHandler,
+            PropertyAccessorHandler,
             DeclarationHandler,
             IfHandler,
             ElseHandler,
@@ -103,6 +106,60 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
         //TODO
         override fun elementTooltip(element: KtFunctionLiteral): String {
             return ElementDescriptionUtil.getElementDescription(element, RefactoringDescriptionLocation.WITH_PARENT)
+        }
+    }
+
+    private object AnonymousObjectHandler : ElementHandler<KtObjectDeclaration>(KtObjectDeclaration::class) {
+        override fun accepts(element: KtObjectDeclaration) = element.isObjectLiteral()
+
+        override fun elementInfo(element: KtObjectDeclaration) = element.buildText(TextKind.INFO)
+        override fun elementTooltip(element: KtObjectDeclaration) = element.buildText(TextKind.TOOLTIP)
+
+        private fun KtObjectDeclaration.buildText(kind: TextKind): String {
+            return buildString {
+                append("object")
+
+                val superTypeEntries = getSuperTypeListEntries()
+                if (superTypeEntries.isNotEmpty()) {
+                    append(" : ")
+
+                    if (kind == TextKind.INFO) {
+                        val entry = superTypeEntries.first()
+                        entry.typeReference?.text?.truncateStart(kind)?.let { append(it) }
+                        if (superTypeEntries.size > 1) {
+                            if (!endsWith(elipsis)) {
+                                append(",${elipsis}")
+                            }
+                        }
+                    }
+                    else {
+                        append(superTypeEntries.joinToString(separator = ", ") { it.typeReference?.text ?: "" }.truncateEnd(kind))
+                    }
+                }
+            }
+        }
+    }
+
+    private object AnonymousFunctionHandler : ElementHandler<KtNamedFunction>(KtNamedFunction::class) {
+        override fun accepts(element: KtNamedFunction) = element.name == null
+
+        override fun elementInfo(element: KtNamedFunction) = element.buildText(TextKind.INFO)
+        override fun elementTooltip(element: KtNamedFunction) = element.buildText(TextKind.TOOLTIP)
+
+        private fun KtNamedFunction.buildText(kind: TextKind): String {
+            return "fun(" +
+                   valueParameters.joinToString(separator = ", ") { if (kind == TextKind.INFO) it.name ?: "" else it.text }.truncateEnd(kind) +
+                   ")"
+        }
+    }
+
+    private object PropertyAccessorHandler : ElementHandler<KtPropertyAccessor>(KtPropertyAccessor::class) {
+        override fun elementInfo(element: KtPropertyAccessor): String {
+            return element.property.name + "." + (if (element.isGetter) "get" else "set")
+        }
+
+        override fun elementTooltip(element: KtPropertyAccessor): String {
+            return DeclarationHandler.elementTooltip(element)
         }
     }
 

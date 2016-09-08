@@ -35,6 +35,18 @@ public class BreadcrumbsTestGenerated extends AbstractBreadcrumbsTest {
         KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("idea/testData/codeInsight/breadcrumbs"), Pattern.compile("^(.+)\\.kt$"), true);
     }
 
+    @TestMetadata("AnonymousObjects.kt")
+    public void testAnonymousObjects() throws Exception {
+        String fileName = KotlinTestUtils.navigationMetadata("idea/testData/codeInsight/breadcrumbs/AnonymousObjects.kt");
+        doTest(fileName);
+    }
+
+    @TestMetadata("Declarations.kt")
+    public void testDeclarations() throws Exception {
+        String fileName = KotlinTestUtils.navigationMetadata("idea/testData/codeInsight/breadcrumbs/Declarations.kt");
+        doTest(fileName);
+    }
+
     @TestMetadata("For.kt")
     public void testFor() throws Exception {
         String fileName = KotlinTestUtils.navigationMetadata("idea/testData/codeInsight/breadcrumbs/For.kt");
@@ -50,6 +62,12 @@ public class BreadcrumbsTestGenerated extends AbstractBreadcrumbsTest {
     @TestMetadata("Lambdas.kt")
     public void testLambdas() throws Exception {
         String fileName = KotlinTestUtils.navigationMetadata("idea/testData/codeInsight/breadcrumbs/Lambdas.kt");
+        doTest(fileName);
+    }
+
+    @TestMetadata("PropertyAccessor.kt")
+    public void testPropertyAccessor() throws Exception {
+        String fileName = KotlinTestUtils.navigationMetadata("idea/testData/codeInsight/breadcrumbs/PropertyAccessor.kt");
         doTest(fileName);
     }
 
