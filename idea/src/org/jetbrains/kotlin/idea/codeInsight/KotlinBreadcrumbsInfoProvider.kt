@@ -242,7 +242,10 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
         override fun elementTooltip(element: KtForExpression) = element.buildText(TextKind.TOOLTIP)
 
         private fun KtForExpression.buildText(kind: TextKind): String {
-            return "for" //TODO?
+            val parameterText = loopParameter?.nameAsName?.render() ?: destructuringParameter?.text ?: return "for"
+            val collectionText = loopRange?.text ?: ""
+            val text = (parameterText + " in " + collectionText).truncateEnd(kind)
+            return "for($text)"
         }
     }
 

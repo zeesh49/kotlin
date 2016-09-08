@@ -35,6 +35,12 @@ public class BreadcrumbsTestGenerated extends AbstractBreadcrumbsTest {
         KotlinTestUtils.assertAllTestsPresentByMetadata(this.getClass(), new File("idea/testData/codeInsight/breadcrumbs"), Pattern.compile("^(.+)\\.kt$"), true);
     }
 
+    @TestMetadata("For.kt")
+    public void testFor() throws Exception {
+        String fileName = KotlinTestUtils.navigationMetadata("idea/testData/codeInsight/breadcrumbs/For.kt");
+        doTest(fileName);
+    }
+
     @TestMetadata("If.kt")
     public void testIf() throws Exception {
         String fileName = KotlinTestUtils.navigationMetadata("idea/testData/codeInsight/breadcrumbs/If.kt");
