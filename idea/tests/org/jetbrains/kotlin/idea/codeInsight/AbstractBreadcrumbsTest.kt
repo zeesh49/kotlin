@@ -38,9 +38,9 @@ abstract class AbstractBreadcrumbsTest : KotlinLightPlatformCodeInsightFixtureTe
                 .filter { provider.acceptElement(it) }
                 .toList()
                 .asReversed()
-        val crumbs = elements.joinToString(separator = " > ") { provider.getElementInfo(it) }
-        val tooltips = elements.joinToString(separator = "\n") { provider.getElementTooltip(it) }
-        val resultText = "Crumbs: $crumbs\nTooltips:\n$tooltips"
+        val crumbs = elements.joinToString(separator = "\n") { "  " + provider.getElementInfo(it) }
+        val tooltips = elements.joinToString(separator = "\n") { "  " + provider.getElementTooltip(it) }
+        val resultText = "Crumbs:\n$crumbs\nTooltips:\n$tooltips"
         KotlinTestUtils.assertEqualsToFile(File(testDataPath + "/" + File(path).nameWithoutExtension + ".txt"), resultText)
     }
 }
