@@ -25,6 +25,7 @@ import org.jetbrains.kotlin.KtNodeTypes
 import org.jetbrains.kotlin.idea.KotlinLanguage
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.getCallNameExpression
+import org.jetbrains.kotlin.psi.psiUtil.getQualifiedExpressionForSelector
 import org.jetbrains.kotlin.renderer.render
 import org.jetbrains.kotlin.resolve.calls.callUtil.getValueArgumentsInParentheses
 import kotlin.reflect.KClass
@@ -62,6 +63,10 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
                     val callExpression = parent.parent as? KtCallExpression
                     val callName = callExpression?.getCallNameExpression()?.getReferencedName()
                     if (callName != null) {
+                        val receiverText = callExpression.getQualifiedExpressionForSelector()?.let {
+                            it.receiverExpression.text.orElipsis(TextKind.INFO) + it.operationSign.value
+                        } ?: ""
+
                         var argumentText = "($elipsis)"
                         if (callExpression.valueArgumentList != null) {
                             val arguments = callExpression.getValueArgumentsInParentheses()
@@ -75,10 +80,10 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
                                     }
                                 }
                             }
-                            return "$callName$argumentText {$elipsis}"
+                            return "$receiverText$callName$argumentText {$elipsis}"
                         }
                         else {
-                            return "$callName{$elipsis}"
+                            return "$receiverText$callName{$elipsis}"
                         }
                     }
                 }
