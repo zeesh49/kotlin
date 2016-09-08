@@ -18821,6 +18821,12 @@ public class DiagnosticsTestGenerated extends AbstractDiagnosticsTest {
                     doTest(fileName);
                 }
 
+                @TestMetadata("conditionExprAssignment.kt")
+                public void testConditionExprAssignment() throws Exception {
+                    String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/diagnostics/tests/smartCasts/varnotnull/conditionExprAssignment.kt");
+                    doTest(fileName);
+                }
+
                 @TestMetadata("doWhileWithBreak.kt")
                 public void testDoWhileWithBreak() throws Exception {
                     String fileName = KotlinTestUtils.navigationMetadata("compiler/testData/diagnostics/tests/smartCasts/varnotnull/doWhileWithBreak.kt");
