@@ -7,5 +7,5 @@ fun foo(flag: Boolean) {
         x = if (flag) "34" else "12"
     }
 
-    x<!UNSAFE_CALL!>.<!>hashCode()
+    <!DEBUG_INFO_SMARTCAST!>x<!>.hashCode()
 }
