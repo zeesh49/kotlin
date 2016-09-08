@@ -86,8 +86,10 @@ class PatternMatchingTypingVisitor internal constructor(facade: ExpressionTyping
 
         val dataFlowInfoForEntries = analyzeConditionsInWhenEntries(expression, contextAfterSubject, subjectDataFlowValue, subjectType)
         val whenReturnType = inferTypeForWhenExpression(expression, contextWithExpectedType, contextAfterSubject, dataFlowInfoForEntries)
+        val whenResultValue = whenReturnType?.let { DataFlowValueFactory.createDataFlowValue(expression, it, contextAfterSubject) }
 
-        val branchesTypeInfo = joinWhenExpressionBranches(expression, contextAfterSubject, whenReturnType, jumpOutPossibleInSubject)
+        val branchesTypeInfo =
+                joinWhenExpressionBranches(expression, contextAfterSubject, whenReturnType, jumpOutPossibleInSubject, whenResultValue)
 
         val isExhaustive = WhenChecker.isWhenExhaustive(expression, trace)
 
@@ -172,7 +174,8 @@ class PatternMatchingTypingVisitor internal constructor(facade: ExpressionTyping
             expression: KtWhenExpression,
             contextAfterSubject: ExpressionTypingContext,
             resultType: KotlinType?,
-            jumpOutPossibleInSubject: Boolean
+            jumpOutPossibleInSubject: Boolean,
+            whenResultValue: DataFlowValue?
     ): KotlinTypeInfo {
         val bindingContext = contextAfterSubject.trace.bindingContext
 
@@ -189,7 +192,14 @@ class PatternMatchingTypingVisitor internal constructor(facade: ExpressionTyping
                 errorTypeExistInBranch = true
             }
 
-            val entryDataFlowInfo = entryTypeInfo.dataFlowInfo
+            val entryDataFlowInfo =
+                    if (whenResultValue != null && entryType != null) {
+                        val entryValue = DataFlowValueFactory.createDataFlowValue(entryExpression, entryType, contextAfterSubject)
+                        entryTypeInfo.dataFlowInfo.assign(whenResultValue, entryValue)
+                    }
+                    else {
+                        entryTypeInfo.dataFlowInfo
+                    }
 
             currentDataFlowInfo =
                     if (entryType != null && KotlinBuiltIns.isNothing(entryType))
