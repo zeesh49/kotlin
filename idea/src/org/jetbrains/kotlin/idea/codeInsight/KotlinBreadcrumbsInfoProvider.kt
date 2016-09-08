@@ -191,9 +191,8 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
         override fun extractExpression(construct: KtWhileExpression) = construct.condition
     }
 
-    private object DoWhileHandler : ElementHandler<KtDoWhileExpression>(KtDoWhileExpression::class) {
-        override fun elementInfo(element: KtDoWhileExpression) = "do"
-        override fun elementTooltip(element: KtDoWhileExpression) = "do"
+    private object DoWhileHandler : ConstructWithExpressionHandler<KtDoWhileExpression>("do $elipsis while", KtDoWhileExpression::class) {
+        override fun extractExpression(construct: KtDoWhileExpression) = construct.condition
     }
 
     private object WhenHandler : ConstructWithExpressionHandler<KtWhenExpression>("when", KtWhenExpression::class) {
