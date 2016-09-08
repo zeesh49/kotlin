@@ -18,6 +18,7 @@ package org.jetbrains.uast.java
 import com.intellij.psi.JavaTokenType
 import com.intellij.psi.PsiPrefixExpression
 import org.jetbrains.uast.UElement
+import org.jetbrains.uast.UIdentifier
 import org.jetbrains.uast.UPrefixExpression
 import org.jetbrains.uast.UastPrefixOperator
 import org.jetbrains.uast.psi.PsiElementBacked
@@ -27,6 +28,11 @@ class JavaUPrefixExpression(
         override val containingElement: UElement?
 ) : JavaAbstractUExpression(), UPrefixExpression, PsiElementBacked {
     override val operand by lz { JavaConverter.convertOrEmpty(psi.operand, this) }
+
+    override val operatorIdentifier: UIdentifier?
+        get() = UIdentifier(psi.operationSign, this)
+
+    override fun resolve() = null
 
     override val operator = when (psi.operationTokenType) {
         JavaTokenType.PLUS -> UastPrefixOperator.UNARY_PLUS

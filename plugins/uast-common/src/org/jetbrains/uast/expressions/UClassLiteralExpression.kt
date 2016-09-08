@@ -26,8 +26,15 @@ interface UClassLiteralExpression : UExpression {
     override fun logString() = "UClassLiteralExpression"
     override fun renderString() = (type?.name) ?: "(${expression?.renderString() ?: "<no expression>"})" + "::class"
 
+    /**
+     * Returns a type of this class literal, or null if the type can't be determined in a compile-time.
+     */
     val type: PsiType?
-    
+
+    /**
+     * Returns an expression for this class literal expression.
+     * Might be null if the [type] is specified.
+     */
     val expression: UExpression?
     
     override fun accept(visitor: UastVisitor) {

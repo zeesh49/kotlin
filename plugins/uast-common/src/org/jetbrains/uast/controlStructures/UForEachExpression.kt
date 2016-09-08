@@ -15,7 +15,6 @@
  */
 package org.jetbrains.uast
 
-import com.intellij.psi.PsiParameter
 import org.jetbrains.uast.internal.log
 import org.jetbrains.uast.visitor.UastVisitor
 

@@ -16,9 +16,14 @@
 package org.jetbrains.uast.java
 
 import com.intellij.openapi.util.Key
-import com.intellij.psi.*
+import com.intellij.psi.JavaTokenType
+import com.intellij.psi.PsiAnnotation
+import com.intellij.psi.PsiModifierListOwner
 import com.intellij.psi.tree.IElementType
-import org.jetbrains.uast.*
+import org.jetbrains.uast.UDeclaration
+import org.jetbrains.uast.UElement
+import org.jetbrains.uast.UastBinaryOperator
+import org.jetbrains.uast.UastLanguagePlugin
 import java.lang.ref.WeakReference
 
 internal val CACHED_UELEMENT_KEY = Key.create<WeakReference<UElement>>("cached-java-uelement")

@@ -23,15 +23,24 @@ import org.jetbrains.uast.visitor.UastVisitor
  * Represents an expression or statement (which is considered as an expression in Uast).
  */
 interface UExpression : UElement {
+    /**
+     * Returns the expression value or null if the value can't be calculated.
+     */
     fun evaluate(): Any? = null
+
+    /**
+     * Returns the String expression value, or null if the value can't be calculated or if the calculated value is not a String. 
+     */
     fun evaluateString(): String? = evaluate() as? String
-    
+
+    /**
+     * Returns true if this expression value is used.
+     * Do not rely on this property too much, its value can be approximate in some cases.
+     */
     val isUsedAsExpression: Boolean
 
     /**
-     * Returns expression type.
-     *
-     * @return expression type, or null if type can not be inferred, or if this expression is a statement.
+     * Returns expression type, or null if type can not be inferred, or if this expression is a statement.
      */
     fun getExpressionType(): PsiType? = null
 

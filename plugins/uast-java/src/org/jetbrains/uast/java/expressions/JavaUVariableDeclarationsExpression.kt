@@ -1,6 +1,5 @@
 package org.jetbrains.uast.java
 
-import com.intellij.psi.PsiVariable
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UVariable
 import org.jetbrains.uast.UVariableDeclarationsExpression

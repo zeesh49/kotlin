@@ -23,6 +23,9 @@ class UIdentifier(
         override val psi: PsiElement?,
         override val containingElement: UElement?
 ) : UElement, PsiElementBacked {
+    /**
+     * Returns the identifier name.
+     */
     val name: String
         get() = psi?.text ?: "<error>"
     

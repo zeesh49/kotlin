@@ -92,7 +92,7 @@ fun UElement.tryResolve(): PsiElement? = (this as? UResolvable)?.resolve()
 fun UElement.tryResolveNamed(): PsiNamedElement? = (this as? UResolvable)?.resolve() as? PsiNamedElement
 
 fun UElement.tryResolveUDeclaration(context: UastContext): UDeclaration? {
-    return (this as? UResolvable)?.resolve()?.let { context.convertWithParent(it) as? UDeclaration }
+    return (this as? UResolvable)?.resolve()?.let { context.convertElementWithParent(it, null) as? UDeclaration }
 }
 
 fun UReferenceExpression?.getQualifiedName() = (this?.resolve() as? PsiClass)?.qualifiedName

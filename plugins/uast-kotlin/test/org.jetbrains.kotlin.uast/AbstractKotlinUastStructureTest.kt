@@ -18,10 +18,6 @@ package org.jetbrains.kotlin.uast
 
 import org.jetbrains.kotlin.idea.test.KotlinLightCodeInsightFixtureTestCase
 import org.jetbrains.kotlin.idea.test.KotlinWithJdkAndRuntimeLightProjectDescriptor
-import org.jetbrains.kotlin.test.KotlinTestUtils
-import org.jetbrains.uast.UElement
-import org.jetbrains.uast.visitor.AbstractUastVisitor
-import java.io.File
 
 abstract class AbstractKotlinUastStructureTest : KotlinLightCodeInsightFixtureTestCase() {
     fun doTest() {

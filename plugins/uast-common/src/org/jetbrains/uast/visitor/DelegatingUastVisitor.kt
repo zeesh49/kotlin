@@ -16,7 +16,6 @@
 
 package org.jetbrains.uast.visitor
 
-import com.intellij.psi.PsiVariable
 import org.jetbrains.uast.*
 import org.jetbrains.uast.expressions.UTypeReferenceExpression
 

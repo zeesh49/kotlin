@@ -17,7 +17,6 @@
 package org.jetbrains.uast.kotlin.expressions
 
 import org.jetbrains.kotlin.psi.KtContinueExpression
-import org.jetbrains.uast.kotlin.KotlinAbstractUElement
 import org.jetbrains.uast.UContinueExpression
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.kotlin.KotlinAbstractUExpression

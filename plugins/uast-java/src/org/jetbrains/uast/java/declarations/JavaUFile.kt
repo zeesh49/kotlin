@@ -1,8 +1,6 @@
 package org.jetbrains.uast.java
 
-import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiJavaFile
-import org.jetbrains.uast.UClass
 import org.jetbrains.uast.UFile
 import org.jetbrains.uast.UastLanguagePlugin
 

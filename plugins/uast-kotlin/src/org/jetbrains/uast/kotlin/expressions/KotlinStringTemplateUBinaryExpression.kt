@@ -16,7 +16,6 @@
 
 package org.jetbrains.uast.kotlin
 
-import com.intellij.psi.PsiMethod
 import org.jetbrains.kotlin.psi.KtStringTemplateExpression
 import org.jetbrains.uast.*
 import org.jetbrains.uast.psi.PsiElementBacked

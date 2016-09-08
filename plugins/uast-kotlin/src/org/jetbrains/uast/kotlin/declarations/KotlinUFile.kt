@@ -16,11 +16,11 @@
 
 package org.jetbrains.uast.kotlin
 
-import com.intellij.psi.PsiFile
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.uast.UClass
 import org.jetbrains.uast.UFile
 import org.jetbrains.uast.UastLanguagePlugin
+import org.jetbrains.uast.convert
 
 class KotlinUFile(override val psi: KtFile, override val languagePlugin: UastLanguagePlugin) : UFile {
     override val packageName: String

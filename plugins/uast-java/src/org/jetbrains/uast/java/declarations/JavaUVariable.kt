@@ -105,7 +105,7 @@ open class JavaUEnumConstant(
         get() = psi.argumentList?.expressions?.size ?: 0
 
     override val valueArguments by lz {
-        psi.argumentList?.expressions?.map { languagePlugin.convertExpressionOrEmpty(it, this) } ?: emptyList()
+        psi.argumentList?.expressions?.map { languagePlugin.convertOpt(it, this) ?: UastEmptyExpression } ?: emptyList()
     }
 
     override val returnType: PsiType?

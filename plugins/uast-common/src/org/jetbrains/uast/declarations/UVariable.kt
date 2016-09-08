@@ -1,16 +1,24 @@
 package org.jetbrains.uast
 
 import com.intellij.psi.*
-import org.jetbrains.uast.expressions.UReferenceExpression
 import org.jetbrains.uast.expressions.UTypeReferenceExpression
 import org.jetbrains.uast.internal.acceptList
 import org.jetbrains.uast.visitor.UastVisitor
 
+/**
+ * A variable wrapper to be used in [UastVisitor].
+ */
 interface UVariable : UDeclaration, PsiVariable {
     override val psi: PsiVariable
-    
+
+    /**
+     * Returns the variable initializer or the parameter default value, or null if the variable has not an initializer.
+     */
     val uastInitializer: UExpression?
-    
+
+    /**
+     * Returns variable type reference.
+     */
     val typeReference: UTypeReferenceExpression?
 
     override fun accept(visitor: UastVisitor) {

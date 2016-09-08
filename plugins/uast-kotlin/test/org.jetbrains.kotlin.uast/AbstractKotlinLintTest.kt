@@ -16,7 +16,6 @@
 
 package org.jetbrains.kotlin.uast
 
-import org.jetbrains.android.inspections.klint.AndroidLintInspectionBase
 import org.jetbrains.kotlin.android.KotlinAndroidTestCase
 import org.jetbrains.kotlin.idea.test.ConfigLibraryUtil
 import org.jetbrains.kotlin.test.InTextDirectivesUtils.findStringWithPrefixes

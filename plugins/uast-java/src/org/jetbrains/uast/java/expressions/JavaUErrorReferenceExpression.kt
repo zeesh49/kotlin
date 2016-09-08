@@ -1,6 +1,5 @@
 package org.jetbrains.uast.java
 
-import com.intellij.psi.PsiNamedElement
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UExpression
 import org.jetbrains.uast.expressions.UReferenceExpression

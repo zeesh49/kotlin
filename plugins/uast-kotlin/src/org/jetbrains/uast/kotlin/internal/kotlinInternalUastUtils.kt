@@ -28,7 +28,6 @@ import org.jetbrains.kotlin.KtNodeTypes
 import org.jetbrains.kotlin.asJava.toLightClass
 import org.jetbrains.kotlin.asJava.toLightElements
 import org.jetbrains.kotlin.codegen.signature.BothSignatureWriter
-import org.jetbrains.kotlin.codegen.signature.JvmSignatureWriter
 import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
 import org.jetbrains.kotlin.load.kotlin.TypeMappingMode
 import org.jetbrains.kotlin.psi.*
@@ -37,7 +36,6 @@ import org.jetbrains.kotlin.resolve.DescriptorToSourceUtils
 import org.jetbrains.kotlin.resolve.calls.callUtil.getResolvedCall
 import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.uast.*
-import org.jetbrains.uast.kotlin.psi.UastKotlinPsiVariable
 import java.text.StringCharacterIterator
 
 @Suppress("NOTHING_TO_INLINE")
@@ -94,7 +92,7 @@ internal fun PsiElement.getMaybeLightElement(context: UElement): PsiElement? {
             if (lightElement != null) return lightElement
             
             val languagePlugin = context.getLanguagePlugin()
-            val uElement = languagePlugin.convertWithParent(this)
+            val uElement = languagePlugin.convertElementWithParent(this, null)
             when (uElement) {
                 is UDeclaration -> uElement.psi
                 is UVariableDeclarationsExpression -> uElement.variables.firstOrNull()?.psi

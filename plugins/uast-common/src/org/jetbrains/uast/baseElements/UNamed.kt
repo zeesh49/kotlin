@@ -5,7 +5,7 @@ package org.jetbrains.uast
  */
 interface UNamed {
     /**
-     * Returns the name of this element.
+     * Returns the element name.
      */
     val name: String?
 

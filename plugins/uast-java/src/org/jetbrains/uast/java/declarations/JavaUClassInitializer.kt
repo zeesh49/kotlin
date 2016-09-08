@@ -17,10 +17,7 @@
 package org.jetbrains.uast.java
 
 import com.intellij.psi.PsiClassInitializer
-import org.jetbrains.uast.SimpleUAnnotation
-import org.jetbrains.uast.UClassInitializer
-import org.jetbrains.uast.UElement
-import org.jetbrains.uast.UastLanguagePlugin
+import org.jetbrains.uast.*
 
 class JavaUClassInitializer(
         psi: PsiClassInitializer, 
@@ -32,7 +29,7 @@ class JavaUClassInitializer(
     override val uastNameIdentifier: UElement?
         get() = null
     
-    override val uastBody by lz { languagePlugin.convertExpressionOrEmpty(psi.body, this) }
+    override val uastBody by lz { languagePlugin.convertOpt(psi.body, this) ?: UastEmptyExpression }
     override val uastAnnotations by lz { psi.annotations.map { SimpleUAnnotation(it, languagePlugin, this) } }
 
     override fun equals(other: Any?) = this === other

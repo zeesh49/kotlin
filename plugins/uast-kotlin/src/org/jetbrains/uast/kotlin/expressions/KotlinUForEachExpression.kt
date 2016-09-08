@@ -18,8 +18,8 @@ package org.jetbrains.uast.kotlin
 
 import org.jetbrains.kotlin.idea.KotlinLanguage
 import org.jetbrains.kotlin.psi.KtForExpression
-import org.jetbrains.uast.*
-import org.jetbrains.uast.java.JavaUParameter
+import org.jetbrains.uast.UElement
+import org.jetbrains.uast.UForEachExpression
 import org.jetbrains.uast.kotlin.psi.UastKotlinPsiParameter
 import org.jetbrains.uast.psi.PsiElementBacked
 import org.jetbrains.uast.psi.UastPsiParameterNotResolved

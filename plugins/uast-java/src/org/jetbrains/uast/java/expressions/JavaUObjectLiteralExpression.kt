@@ -17,7 +17,8 @@ package org.jetbrains.uast.java
 
 import com.intellij.psi.PsiNewExpression
 import com.intellij.psi.PsiType
-import org.jetbrains.uast.*
+import org.jetbrains.uast.UElement
+import org.jetbrains.uast.UObjectLiteralExpression
 import org.jetbrains.uast.psi.PsiElementBacked
 
 class JavaUObjectLiteralExpression(
@@ -25,8 +26,6 @@ class JavaUObjectLiteralExpression(
         override val containingElement: UElement?
 ) : JavaAbstractUExpression(), UObjectLiteralExpression, PsiElementBacked {
     override val declaration by lz { JavaUClass.create(psi.anonymousClass!!, getLanguagePlugin(), this) }
-
-    override val methodIdentifier = null
 
     override val classReference by lz {
         psi.classReference?.let { ref ->

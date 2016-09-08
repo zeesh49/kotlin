@@ -20,7 +20,9 @@ import com.intellij.psi.PsiSynchronizedStatement
 import org.jetbrains.uast.UBlockExpression
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.internal.acceptList
-import org.jetbrains.uast.java.*
+import org.jetbrains.uast.java.JavaAbstractUExpression
+import org.jetbrains.uast.java.JavaConverter
+import org.jetbrains.uast.java.lz
 import org.jetbrains.uast.psi.PsiElementBacked
 import org.jetbrains.uast.visitor.UastVisitor
 

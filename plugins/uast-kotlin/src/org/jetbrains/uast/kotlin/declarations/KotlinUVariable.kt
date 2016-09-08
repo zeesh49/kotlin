@@ -22,7 +22,8 @@ import org.jetbrains.kotlin.psi.KtVariableDeclaration
 import org.jetbrains.uast.*
 import org.jetbrains.uast.expressions.UReferenceExpression
 import org.jetbrains.uast.expressions.UTypeReferenceExpression
-import org.jetbrains.uast.java.*
+import org.jetbrains.uast.java.AbstractJavaUVariable
+import org.jetbrains.uast.java.annotations
 import org.jetbrains.uast.kotlin.psi.UastKotlinPsiParameter
 import org.jetbrains.uast.kotlin.psi.UastKotlinPsiVariable
 
@@ -36,7 +37,7 @@ abstract class AbstractKotlinUVariable : AbstractJavaUVariable() {
                 is KtLightElement<*, *> -> (psi.kotlinOrigin as? KtVariableDeclaration)?.initializer
                 else -> null
             } ?: return null
-            return languagePlugin.convertExpressionOrEmpty(initializerExpression, this)
+            return languagePlugin.convertOpt(initializerExpression, this) ?: UastEmptyExpression
         }
 }
 
@@ -115,7 +116,7 @@ open class KotlinUEnumConstant(
         get() = psi.argumentList?.expressions?.size ?: 0
 
     override val valueArguments by lz {
-        psi.argumentList?.expressions?.map { languagePlugin.convertExpressionOrEmpty(it, this) } ?: emptyList()
+        psi.argumentList?.expressions?.map { languagePlugin.convertOpt(it, this) ?: UastEmptyExpression } ?: emptyList()
     }
 
     override val returnType: PsiType?

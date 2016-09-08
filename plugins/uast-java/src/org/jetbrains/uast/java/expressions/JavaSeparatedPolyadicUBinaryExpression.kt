@@ -15,7 +15,6 @@
  */
 package org.jetbrains.uast.java
 
-import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiPolyadicExpression
 import org.jetbrains.uast.UBinaryExpression
 import org.jetbrains.uast.UElement

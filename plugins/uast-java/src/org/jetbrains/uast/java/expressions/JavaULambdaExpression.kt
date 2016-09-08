@@ -18,9 +18,9 @@ package org.jetbrains.uast.java
 import com.intellij.psi.PsiCodeBlock
 import com.intellij.psi.PsiExpression
 import com.intellij.psi.PsiLambdaExpression
-import org.jetbrains.uast.UastEmptyExpression
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.ULambdaExpression
+import org.jetbrains.uast.UastEmptyExpression
 import org.jetbrains.uast.psi.PsiElementBacked
 
 class JavaULambdaExpression(

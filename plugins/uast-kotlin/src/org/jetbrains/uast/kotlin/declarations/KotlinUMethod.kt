@@ -21,9 +21,9 @@ import org.jetbrains.kotlin.asJava.elements.KtLightMethod
 import org.jetbrains.kotlin.asJava.elements.KtLightMethodImpl
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtParameter
-import org.jetbrains.uast.kotlin.lz
 import org.jetbrains.uast.*
 import org.jetbrains.uast.java.JavaUMethod
+import org.jetbrains.uast.kotlin.lz
 
 open class KotlinUMethod(
         psi: KtLightMethod,

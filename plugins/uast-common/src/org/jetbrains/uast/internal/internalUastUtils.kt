@@ -15,8 +15,6 @@
  */
 package org.jetbrains.uast
 
-import com.intellij.psi.PsiAnnotation
-import com.intellij.psi.PsiModifierListOwner
 import com.intellij.psi.PsiType
 
 internal val ERROR_NAME = "<error>"

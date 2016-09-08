@@ -18,6 +18,7 @@ package org.jetbrains.uast.java
 import com.intellij.psi.JavaTokenType
 import com.intellij.psi.PsiPostfixExpression
 import org.jetbrains.uast.UElement
+import org.jetbrains.uast.UIdentifier
 import org.jetbrains.uast.UPostfixExpression
 import org.jetbrains.uast.UastPostfixOperator
 import org.jetbrains.uast.psi.PsiElementBacked
@@ -27,6 +28,11 @@ class JavaUPostfixExpression(
         override val containingElement: UElement?
 ) : JavaAbstractUExpression(), UPostfixExpression, PsiElementBacked {
     override val operand by lz { JavaConverter.convertOrEmpty(psi.operand, this) }
+
+    override val operatorIdentifier: UIdentifier?
+        get() = UIdentifier(psi.operationSign, this)
+
+    override fun resolve() = null
 
     override val operator = when (psi.operationTokenType) {
         JavaTokenType.PLUSPLUS -> UastPostfixOperator.INC

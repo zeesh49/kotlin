@@ -53,7 +53,7 @@ class KotlinUClass private constructor(
                                 get() = containingMethod
                             
                             override val expressions by lz {
-                                initializers.map { languagePlugin.convertExpressionOrEmpty(it.body, this) } 
+                                initializers.map { languagePlugin.convertOpt(it.body, this) ?: UastEmptyExpression } 
                             }
                             
                             override val isUsedAsExpression: Boolean

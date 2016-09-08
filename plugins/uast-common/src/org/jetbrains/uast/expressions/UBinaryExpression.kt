@@ -15,9 +15,7 @@
  */
 package org.jetbrains.uast
 
-import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiMethod
-import org.jetbrains.uast.expressions.UReferenceExpression
 import org.jetbrains.uast.visitor.UastVisitor
 
 /**
@@ -30,18 +28,26 @@ interface UBinaryExpression : UExpression, UResolvable {
     val leftOperand: UExpression
 
     /**
-     * Returns the binary operator.
-     */
-    val operator: UastBinaryOperator
-    
-    val operatorIdentifier: UIdentifier?
-
-    override fun resolve(): PsiMethod?
-
-    /**
      * Returns the right operand.
      */
     val rightOperand: UExpression
+
+    /**
+     * Returns the binary operator.
+     */
+    val operator: UastBinaryOperator
+
+    /**
+     * Returns the operator identifier.
+     */
+    val operatorIdentifier: UIdentifier?
+
+    /**
+     * Resolve the operator method.
+     * 
+     * @return the resolved method, or null if the method can't be resolved, or if the expression is not a method call.
+     */
+    override fun resolve(): PsiMethod?
 
     override fun accept(visitor: UastVisitor) {
         if (visitor.visitBinaryExpression(this)) return

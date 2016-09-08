@@ -17,7 +17,10 @@ package org.jetbrains.uast.java
 
 import com.intellij.psi.PsiSwitchLabelStatement
 import com.intellij.psi.PsiSwitchStatement
-import org.jetbrains.uast.*
+import org.jetbrains.uast.UElement
+import org.jetbrains.uast.UExpression
+import org.jetbrains.uast.USwitchClauseExpression
+import org.jetbrains.uast.USwitchExpression
 import org.jetbrains.uast.psi.PsiElementBacked
 
 class JavaUSwitchExpression(

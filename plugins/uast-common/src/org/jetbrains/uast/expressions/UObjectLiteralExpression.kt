@@ -28,6 +28,9 @@ interface UObjectLiteralExpression : UCallExpression {
      */
     val declaration: UClass
 
+    override val methodIdentifier: UIdentifier?
+        get() = null
+    
     override val kind: UastCallKind
         get() = UastCallKind.CONSTRUCTOR_CALL
 
@@ -44,7 +47,6 @@ interface UObjectLiteralExpression : UCallExpression {
         get() = null
     
     
-
     override fun accept(visitor: UastVisitor) {
         if (visitor.visitObjectLiteralExpression(this)) return
         declaration.accept(visitor)

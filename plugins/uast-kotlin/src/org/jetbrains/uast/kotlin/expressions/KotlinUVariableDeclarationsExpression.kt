@@ -15,8 +15,6 @@
  */
 package org.jetbrains.uast
 
-import com.intellij.psi.PsiVariable
-import org.jetbrains.uast.kotlin.KotlinAbstractUElement
 import org.jetbrains.uast.kotlin.KotlinAbstractUExpression
 
 class KotlinUVariableDeclarationsExpression(

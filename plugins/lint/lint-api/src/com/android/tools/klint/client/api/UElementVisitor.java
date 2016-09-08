@@ -221,7 +221,7 @@ public class UElementVisitor {
                 return;
             }
 
-            UElement uElement = context.getUastContext().convertWithParent(psiFile);
+            UElement uElement = context.getUastContext().convertElementWithParent(psiFile, UFile.class);
             if (!(uElement instanceof UFile)) {
                 // No need to log this; the parser should be reporting
                 // a full warning (such as IssueRegistry#PARSER_ERROR)

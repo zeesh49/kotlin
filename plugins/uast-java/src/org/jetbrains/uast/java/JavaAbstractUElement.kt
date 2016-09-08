@@ -19,9 +19,7 @@ package org.jetbrains.uast.java
 import com.intellij.psi.*
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UExpression
-
 import org.jetbrains.uast.psi.PsiElementBacked
-import java.lang.ref.WeakReference
 
 abstract class JavaAbstractUElement : UElement {
     init {

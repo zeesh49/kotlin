@@ -31,11 +31,22 @@ interface UCallExpression : UExpression, UResolvable {
      * Returns the call kind.
      */
     val kind: UastCallKind
-    
+
+    /**
+     * Returns the called method name, or null if the call is not a method call.
+     * This property should return the actual resolved function name.
+     */
     val methodName: String?
-    
+
+    /**
+     * Returns the expression receiver.
+     * For example, for call `a.b.[c()]` the receiver is `a.b`.
+     */
     val receiver: UExpression?
-    
+
+    /**
+     * Returns the receiver type, or null if the call has not a receiver.
+     */
     val receiverType: PsiType?
 
     /**
@@ -70,9 +81,18 @@ interface UCallExpression : UExpression, UResolvable {
      * Returns the type arguments for the call.
      */
     val typeArguments: List<PsiType>
-    
+
+    /**
+     * Returns the return type of the called function, or null if the call is not a function call.
+     */
     val returnType: PsiType?
-    
+
+    /**
+     * Resolve the called method.
+     * 
+     * @return the [PsiMethod], or null if the method was not resolved. 
+     * Note that the [PsiMethod] is an unwrapped [PsiMethod], not a [UMethod].
+     */
     override fun resolve(): PsiMethod?
 
     override fun accept(visitor: UastVisitor) {

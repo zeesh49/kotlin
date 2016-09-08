@@ -49,17 +49,21 @@ public class JavaLintLanguageExtension extends LintLanguageExtension {
     public int getPriority() {
         return delegate.getPriority();
     }
-
+    
     @Nullable
     @Override
-    public UElement convertElement(Object element, UElement parent) {
-        return delegate.convertElement(element, parent);
+    public UElement convertElement(
+            @Nullable Object element, @Nullable UElement parent, @Nullable Class<? extends UElement> requiredType
+    ) {
+        return delegate.convertElement(element, parent, requiredType);
     }
 
     @Nullable
     @Override
-    public UElement convertWithParent(Object element) {
-        return delegate.convertWithParent(element);
+    public UElement convertElementWithParent(
+            @Nullable Object element, @Nullable Class<? extends UElement> requiredType
+    ) {
+        return delegate.convertElementWithParent(element, requiredType);
     }
 
     @Nullable

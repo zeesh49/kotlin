@@ -32,14 +32,14 @@ import org.jetbrains.uast.visitor.UastVisitor
  *   conditional expression.
  */
 interface USwitchExpression : UExpression {
-    /*
+    /**
         Returns the expression on which the `switch` expression is performed.
      */
     val expression: UExpression?
 
-    /*
+    /**
         Returns the switch body.
-        Body should contain [USwitchClauseExpression] expressions.
+        The body should contain [USwitchClauseExpression] expressions.
      */
     val body: UExpression
 
@@ -51,6 +51,7 @@ interface USwitchExpression : UExpression {
     }
 
     override fun logString() = log("USwitchExpression", expression, body)
+    
     override fun renderString() = buildString {
         val expr = expression?.let { "(" + it.renderString() + ") " } ?: ""
         appendln("switch $expr")

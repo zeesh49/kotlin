@@ -17,8 +17,8 @@
 package org.jetbrains.uast.kotlin
 
 import org.jetbrains.kotlin.psi.*
-import org.jetbrains.uast.kotlin.kinds.KotlinSpecialExpressionKinds
 import org.jetbrains.uast.*
+import org.jetbrains.uast.kotlin.kinds.KotlinSpecialExpressionKinds
 import org.jetbrains.uast.psi.PsiElementBacked
 
 class KotlinUSwitchExpression(

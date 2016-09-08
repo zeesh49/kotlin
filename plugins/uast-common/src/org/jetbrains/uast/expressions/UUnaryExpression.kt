@@ -15,12 +15,32 @@
  */
 package org.jetbrains.uast
 
+import com.intellij.psi.PsiMethod
 import org.jetbrains.uast.internal.log
 import org.jetbrains.uast.visitor.UastVisitor
 
-interface UUnaryExpression : UExpression {
+interface UUnaryExpression : UExpression, UResolvable {
+    /**
+     * Returns the expression operand.
+     */
     val operand: UExpression
+
+    /**
+     * Returns the expression operator.
+     */
     val operator: UastOperator
+
+    /**
+     * Returns the operator identifier.
+     */
+    val operatorIdentifier: UIdentifier?
+
+    /**
+     * Resolve the operator method.
+     *
+     * @return the resolved method, or null if the method can't be resolved, or if the expression is not a method call.
+     */
+    override fun resolve(): PsiMethod?
 
     override fun accept(visitor: UastVisitor) {
         if (visitor.visitUnaryExpression(this)) return

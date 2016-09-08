@@ -19,7 +19,6 @@ import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiClass
 import com.intellij.testFramework.LightCodeInsightTestCase
 import com.intellij.testFramework.LightPlatformTestCase
-import org.jetbrains.uast.java.JavaConverter
 import java.io.File
 
 open class AbstractStructureTest : LightCodeInsightTestCase() {

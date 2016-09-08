@@ -20,6 +20,10 @@ import org.jetbrains.uast.UExpression
 import org.jetbrains.uast.UResolvable
 
 interface UReferenceExpression : UExpression, UResolvable {
+    /**
+     * Returns the resolved name for this reference, or null if the reference can't be resolved.
+     */
     val resolvedName: String?
+    
     override fun logString() = "UReferenceExpression"
 }

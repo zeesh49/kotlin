@@ -17,7 +17,9 @@ package org.jetbrains.uast.java
 
 import com.intellij.psi.PsiNamedElement
 import com.intellij.psi.PsiReferenceExpression
-import org.jetbrains.uast.*
+import org.jetbrains.uast.UElement
+import org.jetbrains.uast.UQualifiedReferenceExpression
+import org.jetbrains.uast.UastQualifiedExpressionAccessType
 import org.jetbrains.uast.psi.PsiElementBacked
 
 class JavaUQualifiedExpression(

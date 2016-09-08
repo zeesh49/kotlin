@@ -16,11 +16,13 @@
 
 package org.jetbrains.uast.kotlin
 
-import org.jetbrains.kotlin.psi.*
-import org.jetbrains.uast.*
-import org.jetbrains.uast.java.JavaUParameter
+import org.jetbrains.kotlin.psi.KtLambdaExpression
+import org.jetbrains.uast.UBlockExpression
+import org.jetbrains.uast.UElement
+import org.jetbrains.uast.ULambdaExpression
 import org.jetbrains.uast.kotlin.psi.UastKotlinPsiParameter
 import org.jetbrains.uast.psi.PsiElementBacked
+import org.jetbrains.uast.withMargin
 
 class KotlinULambdaExpression(
         override val psi: KtLambdaExpression,

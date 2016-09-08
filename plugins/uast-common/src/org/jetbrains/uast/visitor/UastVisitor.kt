@@ -15,9 +15,6 @@
  */
 package org.jetbrains.uast.visitor
 
-import com.intellij.psi.PsiParameter
-import com.intellij.psi.PsiVariable
-import com.sun.org.apache.xpath.internal.operations.Bool
 import org.jetbrains.uast.*
 import org.jetbrains.uast.expressions.UTypeReferenceExpression
 

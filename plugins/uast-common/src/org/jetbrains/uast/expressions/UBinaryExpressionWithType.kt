@@ -17,7 +17,6 @@ package org.jetbrains.uast
 
 
 import com.intellij.psi.PsiType
-import org.jetbrains.uast.expressions.UReferenceExpression
 import org.jetbrains.uast.expressions.UTypeReferenceExpression
 import org.jetbrains.uast.internal.log
 import org.jetbrains.uast.visitor.UastVisitor
@@ -35,7 +34,10 @@ interface UBinaryExpressionWithType : UExpression {
      * Returns the operation kind.
      */
     val operationKind: UastBinaryExpressionWithTypeKind
-    
+
+    /**
+     * Returns the type reference of this expression.
+     */
     val typeReference: UTypeReferenceExpression?
 
     /**

@@ -1,20 +1,6 @@
 package org.jetbrains.uast
 
 import com.intellij.psi.*
-import kotlin.properties.Delegates
-
-/**
- * Interface for the Uast element converter.
- * Each [UastLanguagePlugin] should implement a proper [UastContext],
- *  which translates language-specific AST elements to Uast elements.
- */
-interface UastConverter {
-//    /**
-//     * Convert[element] to the [UElement] without the parent.
-//     * The [UElement.parent] value will be `null`.
-//     */
-//    fun convertWithoutParent(element: Any?): UElement?
-}
 
 abstract class UastLanguagePlugin {
     open lateinit var context: UastContext
@@ -38,24 +24,12 @@ abstract class UastLanguagePlugin {
      */
     abstract val priority: Int
 
-    abstract fun convertElement(element: Any?, parent: UElement?): UElement?
-    
-    inline fun <reified T : UElement> convertOpt(element: Any?, parent: UElement?): T? {
-        return convertElement(element, parent) as? T
-    }
-
-    fun convertExpressionOrEmpty(element: Any?, parent: UElement?): UExpression {
-        return convertElement(element, parent) as? UExpression ?: UastEmptyExpression
-    }
-
-    inline fun <reified T : UElement> convert(element: Any?, parent: UElement?): T {
-        return convertElement(element, parent) as T
-    }
+    abstract fun convertElement(element: Any?, parent: UElement?, requiredType: Class<out UElement>? = null): UElement?
 
     /**
      * Convert [element] to the [UElement] with the given parent.
      */
-    abstract fun convertWithParent(element: Any?): UElement?
+    abstract fun convertElementWithParent(element: Any?, requiredType: Class<out UElement>?): UElement?
 
     abstract fun getMethodCallExpression(
             e: PsiElement, 
@@ -70,16 +44,28 @@ abstract class UastLanguagePlugin {
 
     open fun getMethodBody(e: PsiMethod): UExpression? {
         if (e is UMethod) return e.uastBody
-        return (convertWithParent(e) as? UMethod)?.uastBody
+        return (convertElementWithParent(e, null) as? UMethod)?.uastBody
     }
 
     open fun getInitializerBody(e: PsiClassInitializer): UExpression {
         if (e is UClassInitializer) return e.uastBody
-        return (convertWithParent(e) as? UClassInitializer)?.uastBody ?: UastEmptyExpression
+        return (convertElementWithParent(e, null) as? UClassInitializer)?.uastBody ?: UastEmptyExpression
     }
 
     open fun getInitializerBody(e: PsiVariable): UExpression? {
         if (e is UVariable) return e.uastInitializer
-        return (convertWithParent(e) as? UVariable)?.uastInitializer
+        return (convertElementWithParent(e, null) as? UVariable)?.uastInitializer
     }
+}
+
+inline fun <reified T : UElement> UastLanguagePlugin.convertOpt(element: Any?, parent: UElement?): T? {
+    return convertElement(element, parent) as? T
+}
+
+inline fun <reified T : UElement> UastLanguagePlugin.convert(element: Any?, parent: UElement?): T {
+    return convertElement(element, parent, T::class.java) as T
+}
+
+inline fun <reified T : UElement> UastLanguagePlugin.convertWithParent(element: Any?): T? {
+    return convertElementWithParent(element, T::class.java) as? T
 }

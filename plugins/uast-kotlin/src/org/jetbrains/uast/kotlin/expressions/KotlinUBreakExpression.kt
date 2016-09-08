@@ -17,7 +17,6 @@
 package org.jetbrains.uast.kotlin.expressions
 
 import org.jetbrains.kotlin.psi.KtBreakExpression
-import org.jetbrains.uast.kotlin.KotlinAbstractUElement
 import org.jetbrains.uast.UBreakExpression
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.kotlin.KotlinAbstractUExpression

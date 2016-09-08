@@ -40,6 +40,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiJavaFile;
 import com.intellij.psi.PsiType;
 
+import org.jetbrains.uast.UElement;
 import org.jetbrains.uast.UFile;
 import org.jetbrains.uast.UastContext;
 
@@ -172,7 +173,12 @@ public abstract class JavaParser {
     @NonNull
     public Location getLocation(@NonNull JavaContext context, @NonNull PsiElement element) {
         TextRange range = element.getTextRange();
-        PsiFile containingFile = (((UFile) getUastContext().convertWithParent(element.getContainingFile()))).getPsi();
+        UFile uFile = (UFile) getUastContext().convertElementWithParent(element.getContainingFile(), UFile.class);
+        if (uFile == null) {
+            return Location.NONE;
+        }
+        
+        PsiFile containingFile = uFile.getPsi();
         File file = context.file;
         if (containingFile != context.getUFile().getPsi()) {
             // Reporting an error in a different file.

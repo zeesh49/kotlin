@@ -16,29 +16,29 @@ abstract class UastContext : UastLanguagePlugin() {
     override val priority: Int
         get() = 0
     
-    private inline fun <reified T : UDeclaration> getDeclaration(element: PsiElement): T {
+    private inline fun <reified T : UDeclaration> getDeclaration(element: PsiElement, requiredType: Class<out UElement>?): T {
         for (plugin in sortedPlugins) {
-            (plugin.convertWithParent(element) as? T)?.let { return it }
+            (plugin.convertElementWithParent(element, requiredType) as? T)?.let { return it }
         }
         error("Can't find language plugin for $element")
     }
     
-    fun getMethod(method: PsiMethod): UMethod = getDeclaration(method)
+    fun getMethod(method: PsiMethod): UMethod = getDeclaration(method, UMethod::class.java)
     
-    fun getVariable(variable: PsiVariable): UVariable = getDeclaration(variable)
+    fun getVariable(variable: PsiVariable): UVariable = getDeclaration(variable, UVariable::class.java)
     
-    fun getClass(clazz: PsiClass): UClass = getDeclaration(clazz)
+    fun getClass(clazz: PsiClass): UClass = getDeclaration(clazz, UClass::class.java)
 
-    override fun convertElement(element: Any?, parent: UElement?): UElement? {
+    override fun convertElement(element: Any?, parent: UElement?, requiredType: Class<out UElement>?): UElement? {
         for (plugin in sortedPlugins) {
-            plugin.convertElement(element, parent)?.let { return it }
+            plugin.convertElement(element, parent, requiredType)?.let { return it }
         }
         return null
     }
 
-    override fun convertWithParent(element: Any?): UElement? {
+    override fun convertElementWithParent(element: Any?, requiredType: Class<out UElement>?): UElement? {
         for (plugin in sortedPlugins) {
-            plugin.convertWithParent(element)?.let { return it }
+            plugin.convertElementWithParent(element, requiredType)?.let { return it }
         }
         return null
     }

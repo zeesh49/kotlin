@@ -17,7 +17,8 @@
 package org.jetbrains.uast.kotlin
 
 import org.jetbrains.kotlin.psi.KtCallableReferenceExpression
-import org.jetbrains.uast.*
+import org.jetbrains.uast.UCallableReferenceExpression
+import org.jetbrains.uast.UElement
 import org.jetbrains.uast.psi.PsiElementBacked
 
 class KotlinUCallableReferenceExpression(
