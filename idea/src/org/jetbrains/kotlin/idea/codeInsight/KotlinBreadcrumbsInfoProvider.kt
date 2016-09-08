@@ -144,8 +144,7 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
         }
 
         private fun elseIfPrefix(element: KtIfExpression): String {
-            val isElseIf = element.parent.node.elementType == KtNodeTypes.ELSE
-            return if (isElseIf) "else " else ""
+            return if (element.isElseIf()) "if $elipsis else " else ""
         }
     }
 
@@ -153,16 +152,17 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
         override fun accepts(element: KtContainerNode): Boolean {
             return element.node.elementType == KtNodeTypes.ELSE
                    && (element.parent as KtIfExpression).`else` !is KtIfExpression // filter out "else if"
-
         }
 
         override fun elementInfo(element: KtContainerNode): String {
-            return "else"
+            val ifExpression = element.parent as KtIfExpression
+            val ifInfo = if (ifExpression.isElseIf()) "if" else IfHandler.elementInfo(ifExpression)
+            return "$ifInfo $elipsis else"
         }
 
         override fun elementTooltip(element: KtContainerNode): String {
             val ifExpression = element.parent as KtIfExpression
-            return "else (of '" + IfHandler.elementTooltip(ifExpression) + "')"
+            return "else (of '" + IfHandler.elementTooltip(ifExpression) + "')" //TODO
         }
     }
 
@@ -308,5 +308,7 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
         }
 
         val elipsis = "\u2026"
+
+        fun KtIfExpression.isElseIf() = parent.node.elementType == KtNodeTypes.ELSE
     }
 }
