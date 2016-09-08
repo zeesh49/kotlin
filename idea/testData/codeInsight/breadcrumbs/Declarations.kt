@@ -5,7 +5,7 @@ class Outer {
                 private object SomeObject {
                     fun String.someFun(p: Int, b: Boolean): String {
                         fun localFun() {
-                            doIt(fun (x: Int, y: Char) {
+                            val v = doIt(fun (x: Int, y: Char) {
                                 <caret>
                             })
                         }

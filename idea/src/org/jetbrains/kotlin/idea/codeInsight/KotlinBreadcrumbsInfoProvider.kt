@@ -165,10 +165,17 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
 
     private object DeclarationHandler : ElementHandler<KtDeclaration>(KtDeclaration::class) {
         override fun accepts(element: KtDeclaration): Boolean {
-            return element !is KtProperty
+            if (element is KtProperty) {
+                return element.parent is KtFile || element.parent is KtClassBody // do not show local variables
+            }
+            return true
         }
 
         override fun elementInfo(element: KtDeclaration): String {
+            if (element is KtProperty) {
+                return (if (element.isVar) "var " else "val ") + element.nameAsName?.render() ?: ""
+            }
+
             val description = ElementDescriptionUtil.getElementDescription(element, UsageViewShortNameLocation.INSTANCE)
             val suffix = if (element is KtFunction) "()" else null
             return if (suffix != null) description + suffix else description
@@ -332,8 +339,14 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
     override fun getParent(e: PsiElement): PsiElement? {
         val node = e.node ?: return null
         when (node.elementType) {
-            KtNodeTypes.ELSE, KtNodeTypes.CATCH, KtNodeTypes.FINALLY -> return e.parent.parent
-            else -> return e.parent
+            KtNodeTypes.ELSE,
+            KtNodeTypes.CATCH,
+            KtNodeTypes.FINALLY,
+            KtNodeTypes.PROPERTY_ACCESSOR ->
+                return e.parent.parent
+
+            else ->
+                return e.parent
         }
     }
 
