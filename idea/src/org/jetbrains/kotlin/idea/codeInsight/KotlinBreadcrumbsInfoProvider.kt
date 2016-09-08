@@ -62,7 +62,7 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
                     val callExpression = parent.parent as? KtCallExpression
                     val callName = callExpression?.getCallNameExpression()?.getReferencedName()
                     if (callName != null) {
-                        var argumentText = "(...)"
+                        var argumentText = "($elipsis)"
                         if (callExpression.valueArgumentList != null) {
                             val arguments = callExpression.getValueArgumentsInParentheses()
                             when (arguments.size) {
@@ -71,16 +71,15 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
                                     val argument = arguments.single()
                                     val argumentExpression = argument.getArgumentExpression()
                                     if (!argument.isNamed() && argument.getSpreadElement() == null && argumentExpression != null) {
-                                        argumentText = "(" + argumentExpression.shortText() + ")"
+                                        argumentText = "(" + argumentExpression.shortText(TextKind.INFO) + ")"
                                     }
                                 }
                             }
+                            return "$callName$argumentText {$elipsis}"
                         }
                         else {
-                            argumentText = ""
+                            return "$callName{$elipsis}"
                         }
-
-                        return callName + argumentText + " {...}"
                     }
                 }
 
@@ -88,12 +87,12 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
                     val name = parent.nameAsName
                     if (lambdaExpression == parent.initializer && name != null) {
                         val valOrVar = if (parent.isVar) "var" else "val"
-                        return valOrVar + " " + name.render() + " = {...}"
+                        return valOrVar + " " + name.render() + " = {$elipsis}"
                     }
                 }
             }
 
-            return "{...}"
+            return "{$elipsis}"
         }
 
         //TODO
@@ -124,15 +123,12 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
     ) : ElementHandler<TExpression>(type) {
         protected abstract fun extractExpression(construct: TExpression): KtExpression?
 
-        override fun elementInfo(element: TExpression) = element.buildText(shortText = true)
-        override fun elementTooltip(element: TExpression) = element.buildText(shortText = false)
+        override fun elementInfo(element: TExpression) = element.buildText(TextKind.INFO)
+        override fun elementTooltip(element: TExpression) = element.buildText(TextKind.TOOLTIP)
 
-        protected fun TExpression.buildText(shortText: Boolean): String {
-            val expression = extractExpression(this)
-            if (expression == null || shortText && !expression.isSimple()) {
-                return constructName
-            }
-            return "$constructName (${expression.text})"
+        protected fun TExpression.buildText(kind: TextKind): String {
+            val expression = extractExpression(this) ?: return constructName
+            return "$constructName (${expression.shortText(kind)})"
         }
     }
 
@@ -205,24 +201,47 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
     }
 
     private object WhenEntryHandler : ElementHandler<KtWhenEntry>(KtWhenEntry::class) {
-        override fun elementInfo(element: KtWhenEntry) = element.buildText(shortText = true)
-        override fun elementTooltip(element: KtWhenEntry) = element.buildText(shortText = false)
+        override fun elementInfo(element: KtWhenEntry) = element.buildText(TextKind.INFO)
+        override fun elementTooltip(element: KtWhenEntry) = element.buildText(TextKind.TOOLTIP)
 
-        private fun KtWhenEntry.buildText(shortText: Boolean): String {
+        private fun KtWhenEntry.buildText(kind: TextKind): String {
             if (isElse) {
                 return "else ->"
             }
             else {
-                return conditions.joinToString(separator = ", ") { it.text } + " ->" //TODO
+                val condition = conditions.firstOrNull() ?: return "->"
+                val firstConditionText = when (condition) {
+                    is KtWhenConditionIsPattern -> {
+                        (if (condition.isNegated) "!is" else "is") + " " + (condition.typeReference?.text?.truncateEnd(kind) ?: "")
+                    }
+
+                    is KtWhenConditionInRange -> {
+                        (if (condition.isNegated) "!in" else "in") + " " + (condition.rangeExpression?.text?.truncateEnd(kind) ?: "")
+                    }
+
+                    is KtWhenConditionWithExpression -> {
+                        condition.expression?.text?.truncateStart(kind) ?: ""
+                    }
+
+                    else -> error("Unknown when entry condition type: $condition")
+                }
+
+                if (conditions.size == 1) {
+                    return firstConditionText + " ->"
+                }
+                else {
+                    //TODO: show all conditions for !shortText
+                    return (if (firstConditionText.endsWith(elipsis)) firstConditionText else firstConditionText + ",$elipsis") + " ->"
+                }
             }
         }
     }
 
     private object ForHandler : ElementHandler<KtForExpression>(KtForExpression::class) {
-        override fun elementInfo(element: KtForExpression) = element.buildText(shortText = true)
-        override fun elementTooltip(element: KtForExpression) = element.buildText(shortText = false)
+        override fun elementInfo(element: KtForExpression) = element.buildText(TextKind.INFO)
+        override fun elementTooltip(element: KtForExpression) = element.buildText(TextKind.TOOLTIP)
 
-        private fun KtForExpression.buildText(shortText: Boolean): String {
+        private fun KtForExpression.buildText(kind: TextKind): String {
             return "for" //TODO?
         }
     }
@@ -253,10 +272,38 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
             else -> return e.parent
         }
     }
-}
 
-private fun KtExpression.shortText() = if (this.isSimple()) text else "..."
+    private companion object {
+        enum class TextKind {
+            INFO, TOOLTIP
+        }
 
-private fun KtExpression.isSimple(): Boolean {
-    return this is KtNameReferenceExpression || this is KtConstantExpression //TODO: better criteria?
+        fun KtExpression.shortText(kind: TextKind) = if (this is KtNameReferenceExpression) text else text.truncateEnd(kind)
+
+        fun maxLength(kind: TextKind): Int {
+            return when (kind) {
+                TextKind.INFO -> 16
+                TextKind.TOOLTIP -> 100
+            }
+        }
+
+        //TODO: line breaks
+
+        fun String.orElipsis(kind: TextKind): String {
+            val maxLength = maxLength(kind)
+            return if (length <= maxLength) this else elipsis
+        }
+
+        fun String.truncateEnd(kind: TextKind): String {
+            val maxLength = maxLength(kind)
+            return if (length > maxLength) substring(0, maxLength - elipsis.length) + elipsis else this
+        }
+
+        fun String.truncateStart(kind: TextKind): String {
+            val maxLength = maxLength(kind)
+            return if (length > maxLength) elipsis + substring(length - maxLength - 1) else this
+        }
+
+        val elipsis = "\u2026"
+    }
 }

@@ -59,6 +59,12 @@ public class BreadcrumbsTestGenerated extends AbstractBreadcrumbsTest {
         doTest(fileName);
     }
 
+    @TestMetadata("When.kt")
+    public void testWhen() throws Exception {
+        String fileName = KotlinTestUtils.navigationMetadata("idea/testData/codeInsight/breadcrumbs/When.kt");
+        doTest(fileName);
+    }
+
     @TestMetadata("While.kt")
     public void testWhile() throws Exception {
         String fileName = KotlinTestUtils.navigationMetadata("idea/testData/codeInsight/breadcrumbs/While.kt");

@@ -9,7 +9,16 @@ fun foo() {
 
                 }
                 else if (b) {
+
+                }
+                else if (c) {
                     if (q) {
+
+                    }
+                    else if (qq) {
+
+                    }
+                    else if (qqq) {
 
                     }
                     else {
