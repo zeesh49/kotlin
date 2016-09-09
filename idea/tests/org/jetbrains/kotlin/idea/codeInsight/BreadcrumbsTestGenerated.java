@@ -65,6 +65,18 @@ public class BreadcrumbsTestGenerated extends AbstractBreadcrumbsTest {
         doTest(fileName);
     }
 
+    @TestMetadata("OnIfCondition.kt")
+    public void testOnIfCondition() throws Exception {
+        String fileName = KotlinTestUtils.navigationMetadata("idea/testData/codeInsight/breadcrumbs/OnIfCondition.kt");
+        doTest(fileName);
+    }
+
+    @TestMetadata("OnWhenEntryCondition.kt")
+    public void testOnWhenEntryCondition() throws Exception {
+        String fileName = KotlinTestUtils.navigationMetadata("idea/testData/codeInsight/breadcrumbs/OnWhenEntryCondition.kt");
+        doTest(fileName);
+    }
+
     @TestMetadata("PropertyAccessor.kt")
     public void testPropertyAccessor() throws Exception {
         String fileName = KotlinTestUtils.navigationMetadata("idea/testData/codeInsight/breadcrumbs/PropertyAccessor.kt");

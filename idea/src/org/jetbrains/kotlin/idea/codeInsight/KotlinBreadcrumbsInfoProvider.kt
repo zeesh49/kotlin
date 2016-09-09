@@ -44,7 +44,7 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
             AnonymousFunctionHandler,
             PropertyAccessorHandler,
             DeclarationHandler,
-            IfHandler,
+            IfThenHandler,
             ElseHandler,
             TryHandler,
             CatchHandler,
@@ -128,7 +128,7 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
                         entry.typeReference?.text?.truncateStart(kind)?.let { append(it) }
                         if (superTypeEntries.size > 1) {
                             if (!endsWith(elipsis)) {
-                                append(",${elipsis}")
+                                append(",$elipsis")
                             }
                         }
                     }
@@ -173,7 +173,7 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
 
         override fun elementInfo(element: KtDeclaration): String {
             if (element is KtProperty) {
-                return (if (element.isVar) "var " else "val ") + element.nameAsName?.render() ?: ""
+                return (if (element.isVar) "var " else "val ") + element.nameAsName?.render()
             }
 
             val description = ElementDescriptionUtil.getElementDescription(element, UsageViewShortNameLocation.INSTANCE)
@@ -186,34 +186,40 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
         }
     }
 
-    private abstract class ConstructWithExpressionHandler<TExpression : KtExpression>(
+    private abstract class ConstructWithExpressionHandler<TElement : KtElement>(
             private val constructName: String,
-            type: KClass<TExpression>
-    ) : ElementHandler<TExpression>(type) {
-        protected abstract fun extractExpression(construct: TExpression): KtExpression?
+            type: KClass<TElement>
+    ) : ElementHandler<TElement>(type) {
+        protected abstract fun extractExpression(construct: TElement): KtExpression?
 
-        override fun elementInfo(element: TExpression) = element.buildText(TextKind.INFO)
-        override fun elementTooltip(element: TExpression) = element.buildText(TextKind.TOOLTIP)
+        override fun elementInfo(element: TElement) = element.buildText(TextKind.INFO)
+        override fun elementTooltip(element: TElement) = element.buildText(TextKind.TOOLTIP)
 
-        protected fun TExpression.buildText(kind: TextKind): String {
+        protected fun TElement.buildText(kind: TextKind): String {
             val expression = extractExpression(this) ?: return constructName
             return "$constructName (${expression.shortText(kind)})"
         }
     }
 
-    private object IfHandler : ConstructWithExpressionHandler<KtIfExpression>("if", KtIfExpression::class) {
-        override fun extractExpression(construct: KtIfExpression) = construct.condition
+    private object IfThenHandler : ConstructWithExpressionHandler<KtContainerNode>("if", KtContainerNode::class) {
+        override fun accepts(element: KtContainerNode): Boolean {
+            return element.node.elementType == KtNodeTypes.THEN
+        }
 
-        override fun elementInfo(element: KtIfExpression): String {
+        override fun extractExpression(construct: KtContainerNode): KtExpression? {
+            return (construct.parent as KtIfExpression).condition
+        }
+
+        override fun elementInfo(element: KtContainerNode): String {
             return elseIfPrefix(element) + super.elementInfo(element)
         }
 
-        override fun elementTooltip(element: KtIfExpression): String {
+        override fun elementTooltip(element: KtContainerNode): String {
             return elseIfPrefix(element) + super.elementTooltip(element)
         }
 
-        private fun elseIfPrefix(element: KtIfExpression): String {
-            return if (element.isElseIf()) "if $elipsis else " else ""
+        private fun elseIfPrefix(then: KtContainerNode): String {
+            return if ((then.parent as KtIfExpression).isElseIf()) "if $elipsis else " else ""
         }
     }
 
@@ -225,19 +231,26 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
 
         override fun elementInfo(element: KtContainerNode): String {
             val ifExpression = element.parent as KtIfExpression
-            val ifInfo = if (ifExpression.isElseIf()) "if" else IfHandler.elementInfo(ifExpression)
+            val then = ifExpression.thenNode
+            val ifInfo = if (ifExpression.isElseIf() || then == null) "if" else IfThenHandler.elementInfo(then)
             return "$ifInfo $elipsis else"
         }
 
         override fun elementTooltip(element: KtContainerNode): String {
             val ifExpression = element.parent as KtIfExpression
-            return "else (of '" + IfHandler.elementTooltip(ifExpression) + "')" //TODO
+            val thenNode = ifExpression.thenNode ?: return "else"
+            return "else (of '" + IfThenHandler.elementTooltip(thenNode) + "')" //TODO
         }
+
+        private val KtIfExpression.thenNode: KtContainerNode?
+            get() = children.firstOrNull { it.node.elementType == KtNodeTypes.THEN } as KtContainerNode?
     }
 
-    private object TryHandler : ElementHandler<KtTryExpression>(KtTryExpression::class) {
-        override fun elementInfo(element: KtTryExpression) = "try"
-        override fun elementTooltip(element: KtTryExpression) = "try"
+    private object TryHandler : ElementHandler<KtBlockExpression>(KtBlockExpression::class) {
+        override fun accepts(element: KtBlockExpression) = element.parent is KtTryExpression
+
+        override fun elementInfo(element: KtBlockExpression) = "try"
+        override fun elementTooltip(element: KtBlockExpression) = "try"
     }
 
     private object CatchHandler : ElementHandler<KtCatchClause>(KtCatchClause::class) {
@@ -256,64 +269,74 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
         override fun elementTooltip(element: KtFinallySection) = "finally"
     }
 
-    private object WhileHandler : ConstructWithExpressionHandler<KtWhileExpression>("while", KtWhileExpression::class) {
-        override fun extractExpression(construct: KtWhileExpression) = construct.condition
+    private object WhileHandler : ConstructWithExpressionHandler<KtContainerNode>("while", KtContainerNode::class) {
+        override fun accepts(element: KtContainerNode) = element.bodyOwner() is KtWhileExpression
+        override fun extractExpression(construct: KtContainerNode) = (construct.bodyOwner() as KtWhileExpression).condition
     }
 
-    private object DoWhileHandler : ConstructWithExpressionHandler<KtDoWhileExpression>("do $elipsis while", KtDoWhileExpression::class) {
-        override fun extractExpression(construct: KtDoWhileExpression) = construct.condition
+    private object DoWhileHandler : ConstructWithExpressionHandler<KtContainerNode>("do $elipsis while", KtContainerNode::class) {
+        override fun accepts(element: KtContainerNode) = element.bodyOwner() is KtDoWhileExpression
+        override fun extractExpression(construct: KtContainerNode) = (construct.bodyOwner() as KtDoWhileExpression).condition
     }
 
     private object WhenHandler : ConstructWithExpressionHandler<KtWhenExpression>("when", KtWhenExpression::class) {
         override fun extractExpression(construct: KtWhenExpression) = construct.subjectExpression
     }
 
-    private object WhenEntryHandler : ElementHandler<KtWhenEntry>(KtWhenEntry::class) {
-        override fun elementInfo(element: KtWhenEntry) = element.buildText(TextKind.INFO)
-        override fun elementTooltip(element: KtWhenEntry) = element.buildText(TextKind.TOOLTIP)
+    private object WhenEntryHandler : ElementHandler<KtExpression>(KtExpression::class) {
+        override fun accepts(element: KtExpression) = element.parent is KtWhenEntry
 
-        private fun KtWhenEntry.buildText(kind: TextKind): String {
-            if (isElse) {
-                return "else ->"
-            }
-            else {
-                val condition = conditions.firstOrNull() ?: return "->"
-                val firstConditionText = when (condition) {
-                    is KtWhenConditionIsPattern -> {
-                        (if (condition.isNegated) "!is" else "is") + " " + (condition.typeReference?.text?.truncateEnd(kind) ?: "")
-                    }
+        override fun elementInfo(element: KtExpression) = element.buildText(TextKind.INFO)
+        override fun elementTooltip(element: KtExpression) = element.buildText(TextKind.TOOLTIP)
 
-                    is KtWhenConditionInRange -> {
-                        (if (condition.isNegated) "!in" else "in") + " " + (condition.rangeExpression?.text?.truncateEnd(kind) ?: "")
-                    }
-
-                    is KtWhenConditionWithExpression -> {
-                        condition.expression?.text?.truncateStart(kind) ?: ""
-                    }
-
-                    else -> error("Unknown when entry condition type: $condition")
-                }
-
-                if (conditions.size == 1) {
-                    return firstConditionText + " ->"
+        private fun KtExpression.buildText(kind: TextKind): String {
+            with (parent as KtWhenEntry) {
+                if (isElse) {
+                    return "else ->"
                 }
                 else {
-                    //TODO: show all conditions for !shortText
-                    return (if (firstConditionText.endsWith(elipsis)) firstConditionText else firstConditionText + ",$elipsis") + " ->"
+                    val condition = conditions.firstOrNull() ?: return "->"
+                    val firstConditionText = when (condition) {
+                        is KtWhenConditionIsPattern -> {
+                            (if (condition.isNegated) "!is" else "is") + " " + (condition.typeReference?.text?.truncateEnd(kind) ?: "")
+                        }
+
+                        is KtWhenConditionInRange -> {
+                            (if (condition.isNegated) "!in" else "in") + " " + (condition.rangeExpression?.text?.truncateEnd(kind) ?: "")
+                        }
+
+                        is KtWhenConditionWithExpression -> {
+                            condition.expression?.text?.truncateStart(kind) ?: ""
+                        }
+
+                        else -> error("Unknown when entry condition type: $condition")
+                    }
+
+                    if (conditions.size == 1) {
+                        return firstConditionText + " ->"
+                    }
+                    else {
+                        //TODO: show all conditions for !shortText
+                        return (if (firstConditionText.endsWith(elipsis)) firstConditionText else firstConditionText + ",$elipsis") + " ->"
+                    }
                 }
             }
         }
     }
 
-    private object ForHandler : ElementHandler<KtForExpression>(KtForExpression::class) {
-        override fun elementInfo(element: KtForExpression) = element.buildText(TextKind.INFO)
-        override fun elementTooltip(element: KtForExpression) = element.buildText(TextKind.TOOLTIP)
+    private object ForHandler : ElementHandler<KtContainerNode>(KtContainerNode::class) {
+        override fun accepts(element: KtContainerNode) = element.bodyOwner() is KtForExpression
 
-        private fun KtForExpression.buildText(kind: TextKind): String {
-            val parameterText = loopParameter?.nameAsName?.render() ?: destructuringParameter?.text ?: return "for"
-            val collectionText = loopRange?.text ?: ""
-            val text = (parameterText + " in " + collectionText).truncateEnd(kind)
-            return "for($text)"
+        override fun elementInfo(element: KtContainerNode) = element.buildText(TextKind.INFO)
+        override fun elementTooltip(element: KtContainerNode) = element.buildText(TextKind.TOOLTIP)
+
+        private fun KtContainerNode.buildText(kind: TextKind): String {
+            with (bodyOwner() as KtForExpression) {
+                val parameterText = loopParameter?.nameAsName?.render() ?: destructuringParameter?.text ?: return "for"
+                val collectionText = loopRange?.text ?: ""
+                val text = (parameterText + " in " + collectionText).truncateEnd(kind)
+                return "for($text)"
+            }
         }
     }
 
@@ -339,9 +362,6 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
     override fun getParent(e: PsiElement): PsiElement? {
         val node = e.node ?: return null
         when (node.elementType) {
-            KtNodeTypes.ELSE,
-            KtNodeTypes.CATCH,
-            KtNodeTypes.FINALLY,
             KtNodeTypes.PROPERTY_ACCESSOR ->
                 return e.parent.parent
 
@@ -355,7 +375,9 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
             INFO, TOOLTIP
         }
 
-        fun KtExpression.shortText(kind: TextKind) = if (this is KtNameReferenceExpression) text else text.truncateEnd(kind)
+        fun KtExpression.shortText(kind: TextKind): String {
+            return if (this is KtNameReferenceExpression) text else text.truncateEnd(kind)
+        }
 
         fun maxLength(kind: TextKind): Int {
             return when (kind) {
@@ -384,5 +406,9 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
         val elipsis = "\u2026"
 
         fun KtIfExpression.isElseIf() = parent.node.elementType == KtNodeTypes.ELSE
+
+        fun KtContainerNode.bodyOwner(): KtExpression? {
+            return if (node.elementType == KtNodeTypes.BODY) parent as KtExpression else null
+        }
     }
 }
