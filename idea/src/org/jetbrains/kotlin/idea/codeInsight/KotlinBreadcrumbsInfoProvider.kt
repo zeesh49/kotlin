@@ -183,13 +183,25 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
         }
 
         override fun elementInfo(element: KtDeclaration): String {
-            if (element is KtProperty) {
-                return (if (element.isVar) "var " else "val ") + element.nameAsName?.render()
+            when {
+                element is KtProperty -> {
+                    return (if (element.isVar) "var " else "val ") + element.nameAsName?.render()
+                }
+
+                element is KtObjectDeclaration && element.isCompanion() -> {
+                    return buildString {
+                        append("companion object")
+                        element.nameIdentifier?.let { append(" "); append(it.text) }
+                    }
+                }
+
+                else -> {
+                    val description = ElementDescriptionUtil.getElementDescription(element, UsageViewShortNameLocation.INSTANCE)
+                    val suffix = if (element is KtFunction) "()" else null
+                    return if (suffix != null) description + suffix else description
+                }
             }
 
-            val description = ElementDescriptionUtil.getElementDescription(element, UsageViewShortNameLocation.INSTANCE)
-            val suffix = if (element is KtFunction) "()" else null
-            return if (suffix != null) description + suffix else description
         }
 
         override fun elementTooltip(element: KtDeclaration): String {
