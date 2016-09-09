@@ -20,7 +20,6 @@ import com.intellij.psi.*
 import com.intellij.psi.impl.source.PsiImmediateClassType
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.psi.util.*
-import com.sun.tools.javac.code.Type
 import org.jetbrains.kotlin.java.model.JeElement
 import org.jetbrains.kotlin.java.model.elements.JeClassInitializerExecutableElement
 import org.jetbrains.kotlin.java.model.elements.JeMethodExecutableElement
