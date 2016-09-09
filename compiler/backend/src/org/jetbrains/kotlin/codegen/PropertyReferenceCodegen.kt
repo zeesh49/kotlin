@@ -147,15 +147,7 @@ class PropertyReferenceCodegen(
 
 
     private fun generateMethod(debugString: String, access: Int, method: Method, generate: InstructionAdapter.() -> Unit) {
-        val mv = v.newMethod(JvmDeclarationOrigin.NO_ORIGIN, access, method.name, method.descriptor, null, null)
-
-        if (state.classBuilderMode == ClassBuilderMode.FULL) {
-            val iv = InstructionAdapter(mv)
-            iv.visitCode()
-            iv.generate()
-            iv.areturn(method.returnType)
-            FunctionCodegen.endVisit(mv, debugString, element)
-        }
+        v.generateMethod(debugString, access, method, element, state, generate)
     }
 
     override fun generateKotlinMetadataAnnotation() {
