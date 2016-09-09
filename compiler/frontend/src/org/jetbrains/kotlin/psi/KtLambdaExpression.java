@@ -17,9 +17,6 @@
 package org.jetbrains.kotlin.psi;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.impl.source.tree.LazyParseablePsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.kotlin.KtNodeTypes;
@@ -27,9 +24,9 @@ import org.jetbrains.kotlin.lexer.KtTokens;
 
 import java.util.List;
 
-public class KtLambdaExpression extends LazyParseablePsiElement implements KtExpression {
-    public KtLambdaExpression(CharSequence text) {
-        super(KtNodeTypes.LAMBDA_EXPRESSION, text);
+public class KtLambdaExpression extends KtExpressionImpl {
+    public KtLambdaExpression(@NotNull ASTNode node) {
+        super(node);
     }
 
     @Override
@@ -39,7 +36,7 @@ public class KtLambdaExpression extends LazyParseablePsiElement implements KtExp
 
     @NotNull
     public KtFunctionLiteral getFunctionLiteral() {
-        return findChildByType(KtNodeTypes.FUNCTION_LITERAL).getPsi(KtFunctionLiteral.class);
+        return (KtFunctionLiteral) findChildByType(KtNodeTypes.FUNCTION_LITERAL);
     }
 
     @NotNull
@@ -69,33 +66,5 @@ public class KtLambdaExpression extends LazyParseablePsiElement implements KtExp
     @Nullable
     public ASTNode getRightCurlyBrace() {
         return getFunctionLiteral().getNode().findChildByType(KtTokens.RBRACE);
-    }
-
-    @NotNull
-    @Override
-    public KtFile getContainingKtFile() {
-        PsiFile file = getContainingFile();
-        assert file instanceof KtFile : "KtElement not inside KtFile: " + file + " " + file.getText();
-        return (KtFile) file;
-    }
-
-    @Override
-    public <D> void acceptChildren(@NotNull KtVisitor<Void, D> visitor, D data) {
-        KtPsiUtil.visitChildren(this, visitor, data);
-    }
-
-    @Override
-    public final void accept(@NotNull PsiElementVisitor visitor) {
-        if (visitor instanceof KtVisitor) {
-            accept((KtVisitor) visitor, null);
-        }
-        else {
-            visitor.visitElement(this);
-        }
-    }
-
-    @Override
-    public String toString() {
-        return getNode().getElementType().toString();
     }
 }

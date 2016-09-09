@@ -156,10 +156,6 @@ public class KotlinParsing extends AbstractKotlinParsing {
         marker.done(BLOCK_CODE_FRAGMENT);
     }
 
-    void parseLambdaExpression() {
-        myExpressionParsing.parseFunctionLiteral(/* preferBlock = */ false, /* collapse = */false);
-    }
-
     void parseScript() {
         PsiBuilder.Marker fileMarker = mark();
 
