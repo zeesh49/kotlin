@@ -23,6 +23,7 @@ import com.intellij.usageView.UsageViewShortNameLocation
 import com.intellij.xml.breadcrumbs.BreadcrumbsInfoProvider
 import org.jetbrains.kotlin.KtNodeTypes
 import org.jetbrains.kotlin.idea.KotlinLanguage
+import org.jetbrains.kotlin.idea.intentions.loopToCallChain.unwrapIfLabeled
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.getCallNameExpression
 import org.jetbrains.kotlin.psi.psiUtil.getQualifiedExpressionForSelector
@@ -59,8 +60,11 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
     private object LambdaHandler : ElementHandler<KtFunctionLiteral>(KtFunctionLiteral::class) {
         override fun elementInfo(element: KtFunctionLiteral): String {
             val lambdaExpression = element.parent as KtLambdaExpression
+            val unwrapped = lambdaExpression.unwrapIfLabeled()
+            val label = lambdaExpression.labelText()
+            val lambdaText = "$label{$elipsis}"
 
-            val parent = lambdaExpression.parent
+            val parent = unwrapped.parent
             when (parent) {
                 is KtLambdaArgument -> {
                     val callExpression = parent.parent as? KtCallExpression
@@ -70,37 +74,44 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
                             it.receiverExpression.text.orElipsis(TextKind.INFO) + it.operationSign.value
                         } ?: ""
 
-                        var argumentText = "($elipsis)"
-                        if (callExpression.valueArgumentList != null) {
-                            val arguments = callExpression.getValueArgumentsInParentheses()
-                            when (arguments.size) {
-                                0 -> argumentText = "()"
-                                1 -> {
-                                    val argument = arguments.single()
-                                    val argumentExpression = argument.getArgumentExpression()
-                                    if (!argument.isNamed() && argument.getSpreadElement() == null && argumentExpression != null) {
-                                        argumentText = "(" + argumentExpression.shortText(TextKind.INFO) + ")"
+                        return buildString {
+                            append(receiverText)
+                            append(callName)
+
+                            if (callExpression.valueArgumentList != null) {
+                                var argumentText = "($elipsis)"
+                                val arguments = callExpression.getValueArgumentsInParentheses()
+                                when (arguments.size) {
+                                    0 -> argumentText = "()"
+                                    1 -> {
+                                        val argument = arguments.single()
+                                        val argumentExpression = argument.getArgumentExpression()
+                                        if (!argument.isNamed() && argument.getSpreadElement() == null && argumentExpression != null) {
+                                            argumentText = "(" + argumentExpression.shortText(TextKind.INFO) + ")"
+                                        }
                                     }
                                 }
+                                append(argumentText)
+                                append(" ")
                             }
-                            return "$receiverText$callName$argumentText {$elipsis}"
-                        }
-                        else {
-                            return "$receiverText$callName{$elipsis}"
+                            else {
+                                if (label.isNotEmpty()) append(" ")
+                            }
+                            append(lambdaText)
                         }
                     }
                 }
 
                 is KtProperty -> {
                     val name = parent.nameAsName
-                    if (lambdaExpression == parent.initializer && name != null) {
+                    if (unwrapped == parent.initializer && name != null) {
                         val valOrVar = if (parent.isVar) "var" else "val"
-                        return valOrVar + " " + name.render() + " = {$elipsis}"
+                        return valOrVar + " " + name.render() + " = $lambdaText"
                     }
                 }
             }
 
-            return "{$elipsis}"
+            return lambdaText
         }
 
         //TODO
@@ -190,14 +201,24 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
             private val constructName: String,
             type: KClass<TElement>
     ) : ElementHandler<TElement>(type) {
-        protected abstract fun extractExpression(construct: TElement): KtExpression?
+
+        protected abstract fun extractExpression(element: TElement): KtExpression?
+        protected abstract fun labelOwner(element: TElement): KtExpression?
 
         override fun elementInfo(element: TElement) = element.buildText(TextKind.INFO)
         override fun elementTooltip(element: TElement) = element.buildText(TextKind.TOOLTIP)
 
         protected fun TElement.buildText(kind: TextKind): String {
-            val expression = extractExpression(this) ?: return constructName
-            return "$constructName (${expression.shortText(kind)})"
+            return buildString {
+                append(labelOwner(this@buildText)?.labelText() ?: "")
+                append(constructName)
+                val expression = extractExpression(this@buildText)
+                if (expression != null) {
+                    append(" (")
+                    append(expression.shortText(kind))
+                    append(")")
+                }
+            }
         }
     }
 
@@ -206,9 +227,11 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
             return element.node.elementType == KtNodeTypes.THEN
         }
 
-        override fun extractExpression(construct: KtContainerNode): KtExpression? {
-            return (construct.parent as KtIfExpression).condition
+        override fun extractExpression(element: KtContainerNode): KtExpression? {
+            return (element.parent as KtIfExpression).condition
         }
+
+        override fun labelOwner(element: KtContainerNode) = null
 
         override fun elementInfo(element: KtContainerNode): String {
             return elseIfPrefix(element) + super.elementInfo(element)
@@ -271,16 +294,19 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
 
     private object WhileHandler : ConstructWithExpressionHandler<KtContainerNode>("while", KtContainerNode::class) {
         override fun accepts(element: KtContainerNode) = element.bodyOwner() is KtWhileExpression
-        override fun extractExpression(construct: KtContainerNode) = (construct.bodyOwner() as KtWhileExpression).condition
+        override fun extractExpression(element: KtContainerNode) = (element.bodyOwner() as KtWhileExpression).condition
+        override fun labelOwner(element: KtContainerNode) = element.bodyOwner()
     }
 
     private object DoWhileHandler : ConstructWithExpressionHandler<KtContainerNode>("do $elipsis while", KtContainerNode::class) {
         override fun accepts(element: KtContainerNode) = element.bodyOwner() is KtDoWhileExpression
-        override fun extractExpression(construct: KtContainerNode) = (construct.bodyOwner() as KtDoWhileExpression).condition
+        override fun extractExpression(element: KtContainerNode) = (element.bodyOwner() as KtDoWhileExpression).condition
+        override fun labelOwner(element: KtContainerNode) = element.bodyOwner()
     }
 
     private object WhenHandler : ConstructWithExpressionHandler<KtWhenExpression>("when", KtWhenExpression::class) {
-        override fun extractExpression(construct: KtWhenExpression) = construct.subjectExpression
+        override fun extractExpression(element: KtWhenExpression) = element.subjectExpression
+        override fun labelOwner(element: KtWhenExpression) = null
     }
 
     private object WhenEntryHandler : ElementHandler<KtExpression>(KtExpression::class) {
@@ -335,7 +361,7 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
                 val parameterText = loopParameter?.nameAsName?.render() ?: destructuringParameter?.text ?: return "for"
                 val collectionText = loopRange?.text ?: ""
                 val text = (parameterText + " in " + collectionText).truncateEnd(kind)
-                return "for($text)"
+                return labelText() + "for($text)"
             }
         }
     }
@@ -409,6 +435,16 @@ class KotlinBreadcrumbsInfoProvider : BreadcrumbsInfoProvider() {
 
         fun KtContainerNode.bodyOwner(): KtExpression? {
             return if (node.elementType == KtNodeTypes.BODY) parent as KtExpression else null
+        }
+
+        fun KtExpression.labelText(): String {
+            var result = ""
+            var current = parent
+            while (current is KtLabeledExpression) {
+                result = current.getLabelName() + "@ " + result
+                current = current.parent
+            }
+            return result
         }
     }
 }
