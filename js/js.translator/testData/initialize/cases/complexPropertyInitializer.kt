@@ -11,11 +11,11 @@ class B(selector: Boolean, val y: Int, val x: Int = if (selector) { f(); y } els
 
 fun box(): String {
     val a = A(true, 23)
-    if (a.x != 23) return "fail: wrong initialization order for property default values (1): ${a.x}"
-    if (a.z != 24) return "fail: wrong initialization order for property default values (2): ${a.z}"
+    if (a.x != 23) return "fail: wrong evaluation order for property initializer (1): ${a.x}"
+    if (a.z != 24) return "fail: wrong evaluation order for property initializer (2): ${a.z}"
 
     val b = B(true, 23)
-    if (b.x != 23) return "fail: wrong initialization order for default constructor arguments"
+    if (b.x != 23) return "fail: wrong evaluation order for default constructor arguments"
 
     return "OK"
 }
