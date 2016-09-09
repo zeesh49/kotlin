@@ -18,13 +18,29 @@ package org.jetbrains.kotlin.idea;
 
 import com.intellij.codeInsight.daemon.DaemonAnalyzerTestCase;
 import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess;
+import com.intellij.testFramework.ThreadTracker;
 import org.jetbrains.kotlin.test.KotlinTestUtils;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 abstract public class KotlinDaemonAnalyzerTestCase extends DaemonAnalyzerTestCase {
     @Override
     protected void setUp() throws Exception {
         VfsRootAccess.allowRootAccess(KotlinTestUtils.getHomeDirectory());
         super.setUp();
+
+        printThreadNames();
+    }
+
+    public static void printThreadNames() {
+        Collection<Thread> threads = ThreadTracker.getThreads();
+        Collection<String> names = new ArrayList<String>();
+        for (Thread thread : threads) {
+            names.add(thread.getName());
+        }
+
+        System.out.println(names);
     }
 
     @Override
