@@ -1,0 +1,15 @@
+// "Replace 'try' expression with assignment" "true"
+// WITH_RUNTIME
+
+fun foo() {
+    val x: Int
+    x = try {
+        1
+    } catch (e: RuntimeException) {
+        2
+    } catch (e: Exception) {
+        3
+    } catch (e: Throwable) {
+        4
+    }
+}
